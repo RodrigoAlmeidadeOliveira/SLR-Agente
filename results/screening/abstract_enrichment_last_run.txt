@@ -1,0 +1,18 @@
+SLR PATHCAST — Abstract Enrichment Last Run
+==================================================
+Queue total: 886
+With abstract before run: 147
+With abstract after run: 643
+Recovered in run: 496
+
+Recovered by source step:
+  openalex_doi: 295 (59.48%)
+  openalex_title: 76 (15.32%)
+  core_doi: 61 (12.30%)
+  crossref_title: 30 (6.05%)
+  semanticscholar_doi: 19 (3.83%)
+  core_title: 14 (2.82%)
+  crossref_doi: 1 (0.20%)
+  semanticscholar_title: 0 (0.00%)
+
+CSV detail: results/screening/abstract_enrichment_last_run.csv

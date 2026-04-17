@@ -1,0 +1,26 @@
+[
+  {
+    "batch_id": "msgbatch_01WPWtcmfCmD381ExAd5yLEj",
+    "created_at": "2026-04-12T21:01:59.922098+00:00",
+    "n_papers": 39,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress",
+    "phase": "fulltext"
+  },
+  {
+    "batch_id": "msgbatch_0118tBZ4cKzvEAFGN35fnYSf",
+    "created_at": "2026-04-12T21:10:38.343660+00:00",
+    "n_papers": 108,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress",
+    "phase": "fulltext"
+  },
+  {
+    "batch_id": "msgbatch_01R37QDMb9bSw1snsnADaiZn",
+    "created_at": "2026-04-17T03:11:12.047852+00:00",
+    "n_papers": 495,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress",
+    "phase": "fulltext"
+  }
+]

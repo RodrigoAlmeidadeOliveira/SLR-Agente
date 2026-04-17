@@ -1,0 +1,6 @@
+Studies assessed: 76 (100.0% of included set)
+Studies with score >= 4/8: 71
+Studies with score < 4/8: 5
+Mean QA score: 5.18 (SD = 1.13)
+Median QA score: 5.00 (IQR = 4.00--6.00)
+Total included set considered for QA: 76

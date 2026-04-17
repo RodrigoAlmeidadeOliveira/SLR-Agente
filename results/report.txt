@@ -1,0 +1,154 @@
+======================================================================
+SLR PATHCAST — SEARCH RESULTS REPORT
+Generated: 2026-04-12 15:47:13
+======================================================================
+
+1. OVERVIEW
+----------------------------------------
+   Total raw results:       8,347
+   After deduplication:     5,783
+   Duplicates removed:      2,564
+   Duplication rate:        30.7%
+
+   Primary search corpus only (excludes control set):
+     Raw:                   8,335
+     Unique:                5,781
+
+   Control set only:
+     Raw:                   12
+     Unique:                2
+
+2. RESULTS BY DATABASE
+----------------------------------------
+   acm             raw=   96   unique=   34
+   control         raw=   12   unique=    2
+   ieee            raw=1,386   unique=1,263
+   scopus          raw=2,377   unique=1,852
+   snowball        raw=  595   unique=  575
+   springer        raw=2,884   unique=1,543
+   wos             raw=  997   unique=  514
+
+   Note: source_db='control' is validation-only and should not be counted as a search database.
+
+3. RESULTS BY QUERY
+----------------------------------------
+   [acm] ACM Extra Refs                                    40
+   [acm] ACM Complementar MSR                              32
+   [acm] ACM Principal                                     24
+   [control] Control Papers Bib                                12
+   [ieee] IEEE Manual 01                                   100
+   [ieee] IEEE Manual 02                                   100
+   [ieee] IEEE Manual 03                                   100
+   [ieee] IEEE Manual 04                                    11
+   [ieee] IEEE Manual 05                                   100
+   [ieee] IEEE Manual 06                                   100
+   [ieee] IEEE Manual 07                                   100
+   [ieee] IEEE Manual 08                                   100
+   [ieee] IEEE Manual 09                                   100
+   [ieee] IEEE Manual 10                                   100
+   [ieee] IEEE Manual 11                                   100
+   [ieee] IEEE Manual 12                                   100
+   [ieee] IEEE Manual 13                                   100
+   [ieee] IEEE Manual 14                                   100
+   [ieee] IEEE Manual 15                                     2
+   [ieee] IEEE Manual 16                                    25
+   [ieee] IEEE Manual 17                                    48
+   [scopus] Complementar (MSR → Process Modeling)             48
+   [scopus] Fronteira (Stochastic + PM + SE)                  30
+   [scopus] Markov + Software Testing (focal V6)             498
+   [scopus] Principal                                      1,595
+   [scopus] Process Mining + Simulation Models (focal V9)    200
+   [scopus] Stochastic Petri Net + Remaining Time (focal       6
+   [snowball] snowball:both from 10.4018/irmj.373155           595
+   [springer] process mining + software development            527
+   [springer] workflow mining + software                       300
+   [springer] process mining + software process                167
+   [springer] process mining + software engineering            743
+   [springer] Markov chain + software process                  743
+   [springer] Monte Carlo + software process                    70
+   [springer] mining software repositories + process model     140
+   [springer] stochastic + software process + event log         46
+   [springer] predictive process monitoring + software          16
+   [springer] conformance checking + software development      132
+   [wos] WoS Complementar Stochastic                      338
+   [wos] WoS Fronteira                                      1
+   [wos] WoS Complementar MSR                              26
+   [wos] WoS Principal                                    632
+
+4. PUBLICATION YEAR DISTRIBUTION (unique papers)
+----------------------------------------
+   1990     1  
+   1991     2  #
+   1992     2  #
+   1993     2  #
+   1994    15  #######
+   1995    31  ###############
+   1996    23  ###########
+   1997    27  #############
+   1998    34  #################
+   1999    52  ##########################
+   2000    59  #############################
+   2001    51  #########################
+   2002    83  ########################################
+   2003    76  ######################################
+   2004    87  ########################################
+   2005   110  ########################################
+   2006   179  ########################################
+   2007   150  ########################################
+   2008   178  ########################################
+   2009   185  ########################################
+   2010   217  ########################################
+   2011   230  ########################################
+   2012   227  ########################################
+   2013   263  ########################################
+   2014   249  ########################################
+   2015   265  ########################################
+   2016   241  ########################################
+   2017   269  ########################################
+   2018   294  ########################################
+   2019   254  ########################################
+   2020   297  ########################################
+   2021   299  ########################################
+   2022   323  ########################################
+   2023   289  ########################################
+   2024   319  ########################################
+   2025   288  ########################################
+   2026   112  ########################################
+
+5. DOCUMENT TYPES (unique papers)
+----------------------------------------
+   conference paper           2,491
+   article                    1,579
+   Conference paper             751
+   Chapter                      388
+   Article                      386
+   chapter                       57
+   preprint                      42
+   review                        22
+   book                          18
+   book-chapter                  17
+   dissertation                   9
+   Living reference work entry      9
+   Reference work entry           9
+   note                           1
+   other                          1
+   letter                         1
+   peer-review                    1
+   techreport                     1
+
+6. CONTROL PAPERS VALIDATION
+----------------------------------------
+   ✓ [V1] Cook & Wolf (1998)                   acm
+   ✓ [V2] Rubin et al. (2007)                  scopus
+   ✓ [V3] Poncin et al. (2011)                 ieee
+   ✓ [V4] Caldeira & Cardoso (2019)            ieee
+   ✓ [V5] Lemos et al. (2011)                  ieee
+   ✓ [V6] Whittaker & Thomason (1994)          scopus
+   ✓ [V7] Tax et al. (2017)                    control
+   ✓ [V8] Rogge-Solti & Weske (2015)           scopus
+   ✓ [V9] Rozinat et al. (2009)                control
+   ✓ [V10] Gupta & Sureka (2017)                acm
+
+   Coverage: 10/10  Status: PASS ✓
+
+======================================================================

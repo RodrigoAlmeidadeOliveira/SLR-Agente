@@ -1,0 +1,26 @@
+
+============================================================
+TRIAGEM T/A — SLR PATHCAST
+Gerado em: 2026-04-12 17:13:11
+============================================================
+  Total triado:   2,340
+  Include:          110  (4.7%)
+  Exclude:        1,454  (62.1%)
+  Maybe:            776  (33.2%)
+  Sem decisão:        0
+
+  Critérios de Inclusão acionados:
+    IC1: 186
+    IC2: 124
+    IC3: 54
+    IC4: 59
+
+  Critérios de Exclusão acionados:
+    EC1: 950
+    EC2: 246
+    EC3: 406
+    EC3_not_process_focused: 1
+    EC4: 40
+    IC2_not_applicable: 1
+
+============================================================
