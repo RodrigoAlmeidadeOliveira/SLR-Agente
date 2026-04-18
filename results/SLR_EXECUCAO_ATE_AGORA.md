@@ -1039,4 +1039,211 @@ ou a re-triagem automática.
 
 ---
 
-## 22. Snapshot final desta execução
+## 22. Terceiro ciclo de enriquecimento e re-triagem FT — 2026-04-17
+
+### 22.1. Contexto
+
+Após o estado documentado na seção 21, os 244 papers sem decisão foram
+reanalisados. A re-triagem LLM anterior (`--llm-rescreen`) não encontrou
+candidatos porque:
+
+1. O comando `--export` reconstruía a fila a partir do CSV de triagem T/A
+   (`ta_screening_results.csv`), **sobrescrevendo os abstracts enriquecidos**
+   salvos no CSV FT.
+2. Como resultado, as 495 novas entradas de abstract eram apagadas a cada
+   chamada de `--export`, e o `--llm-rescreen` nunca enxergava os novos abstracts.
+
+### 22.2. Bug corrigido — `pipeline/fulltext.py`
+
+Em `build_ft_queue()`, a reconstrução da fila não herdava o campo `abstract`
+do CSV FT existente. Correção aplicada na linha ~412 do módulo:
+
+```python
+# Herda abstract enriquecido se o TA não tinha
+if not (p.get("abstract") or "").strip():
+    p["abstract"] = ex.get("abstract", "")
+```
+
+Com a correção, os abstracts enriquecidos passam a ser preservados em todos
+os ciclos subsequentes de `--export`.
+
+### 22.3. Segundo ciclo de enriquecimento de abstracts
+
+Após a correção do bug, o enriquecimento em cascata foi re-executado:
+
+**Fase 1 — por DOI:**
+
+| Fonte | Abstracts obtidos |
+| ----- | ----------------- |
+| Semantic Scholar (DOI) | 19 |
+| OpenAlex (DOI) | 295 |
+| CORE (DOI) | 59 |
+| Crossref (DOI) | 1 |
+
+**Fase 2 — por título (fallback):**
+
+| Fonte | Abstracts obtidos |
+| ----- | ----------------- |
+| OpenAlex (título) | 76 |
+| Crossref (título) | 30 |
+| CORE (título) | 15 |
+| Semantic Scholar (título) | 0 |
+
+**Total:** `495` abstracts novos  
+**Cobertura:** `147 → 642` papers com abstract  
+**Ainda sem abstract:** `244`
+
+### 22.4. Diagnóstico dos 244 sem decisão
+
+Após o segundo enriquecimento, ficou evidente que os 244 papers sem decisão
+são majoritariamente os que **nunca tiveram abstract recuperável**. Os 495
+novos abstracts foram para papers que já tinham decisão FT (include/exclude),
+não para os pendentes.
+
+Distribuição dos 244 sem decisão por banda:
+
+| Banda | n | Critério |
+| ----- | - | -------- |
+| B | 3 | `ta_decision=include`, sem abstract |
+| D | 51 | `ta_decision=maybe`, IC identificado, sem abstract |
+| E | 184 | `ta_decision=maybe`, sem IC nem abstract |
+
+### 22.5. Re-triagem LLM dos Band B (`--confirm-includes`)
+
+Os 3 papers Band B têm `ta_decision=include` e não eram capturados pelo
+`--llm-rescreen` padrão (que filtra apenas `maybe`). Usando `--confirm-includes`:
+
+- 1 paper tinha abstract → triado pelo LLM → **include** (confiança: high)
+- 2 papers sem abstract → permanecem pending para revisão manual
+
+### 22.6. Estado após terceiro ciclo LLM
+
+| Decisão | Valor |
+| ------- | ----- |
+| include | **145** |
+| exclude | **502** |
+| pending | 2 |
+| sem decisão | **237** |
+| PROGRESSO | 649 / 886 (73,3%) |
+
+---
+
+## 23. Busca manual dos 51 Band D sem abstract — 2026-04-17
+
+### 23.1. Motivação
+
+Com 145 incluídos e meta de 160–180 estudos primários, os 51 papers Band D
+(IC identificado no T/A, sem abstract) são os candidatos mais promissores
+entre os 237 restantes. Foram geradas duas listas de busca manual:
+
+### 23.2. Artefatos gerados
+
+- `results/final_review/ill_band_d_prioritized.csv` — 51 papers Band D
+  completos, ordenados por `ft_priority_score` decrescente:
+  - 37 com DOI (link `https://doi.org/[DOI]` direto)
+  - 14 sem DOI
+  - Colunas: prioridade, rank_ft, score, ic_match, titulo, autores, ano,
+    periodico_conf, editora, doi, doi_link, fonte_db, tem_doi
+
+- `results/final_review/ill_band_d_sem_doi_busca_manual.csv` — os 14 sem DOI
+  com links de busca automática por título exato:
+  - Coluna `busca_google_scholar` (URL Scholar com título entre aspas)
+  - Coluna `busca_base` (URL BASE com título entre aspas)
+  - Coluna `registro_scopus` (link direto ao registro Scopus, EID disponível
+    para todos os 14)
+  - Coluna `query_manual` (string pronta: Autor (Ano) Título)
+
+### 23.3. Resultados da busca manual dos 14 sem DOI
+
+| Status | n | Itens (prioridade) |
+| ------ | - | ------------------ |
+| PDF obtido | 10 | 1, 2, 3, 4, 5, 6, 7, 8, 10, 12 |
+| Apenas abstract encontrado | 1 | 14 (Tamura 2008) |
+| Não encontrado | 3 | 9 (Kaushik 2015), 11 (QUOVADIS 2010), 13 (El Kharhoutly 2011) |
+
+Observação sobre os não encontrados:
+
+- #9 e #13 são artigos de conferências de nicho sem disponibilidade OA.
+- #11 é um volume de proceedings de workshop ICSE 2010 sem artigo identificável.
+
+### 23.4. Tratamento do Tamura 2008 (abstract apenas)
+
+O paper "Optimal version-upgrade problem based on stochastic differential
+equations for Open Source Software" (Tamura & Yamada, ICQR 2007/2008) foi
+localizado no Scopus (EID `2-s2.0-84906994847`).
+
+O abstract real foi inserido manualmente no CSV FT e o paper foi submetido
+ao LLM para re-triagem:
+
+- **Decisão FT:** `exclude`
+- **Confiança:** medium
+- **Justificativa:** paper propõe modelo de confiabilidade de software via
+  SDEs com foco em OSS reliability engineering; não aborda processo de
+  desenvolvimento de software como domínio principal, não há aplicação a
+  event logs ou forecasting de processo — fora do escopo PATHCAST.
+
+### 23.5. Registro das decisões no CSV FT
+
+Após a busca manual, as decisões foram registradas em
+`results/screening/ft_screening_results.csv`:
+
+| Grupo | n | ft_decision | Racional |
+| ----- | - | ----------- | -------- |
+| PDFs baixados | 10 | `pending` | PDF obtido via busca manual; aguarda leitura full-text |
+| Não recuperados | 3 | `exclude` | Full-text não recuperado após busca manual |
+| Tamura 2008 | 1 | `exclude` | Fora do escopo PATHCAST (ver 23.4) |
+
+---
+
+## 24. Estado consolidado — 2026-04-17 (fim de sessão)
+
+### 24.1. Corpus FT
+
+| Decisão | n |
+| ------- | - |
+| include | **145** |
+| exclude | **506** |
+| pending | **12** |
+| sem decisão | **223** |
+| **PROGRESSO** | **663 / 886 (74,8%)** |
+
+### 24.2. Composição dos 12 pending
+
+Os 12 papers com `ft_decision=pending` aguardam leitura manual do PDF:
+
+- 10 papers Band D sem DOI com PDF obtido por busca manual (seção 23.3)
+- 2 papers Band B (`ta_decision=include`) sem abstract e sem decisão LLM
+
+### 24.3. Composição dos 223 sem decisão
+
+| Subgrupo | n | Caminho recomendado |
+| -------- | - | ------------------- |
+| Band D com DOI (37 papers) | 37 | Busca via acesso institucional / ILL |
+| Band D sem DOI restantes | 0 | Concluído nesta sessão |
+| Band E (ta=maybe, sem abstract) | 184 | "não recuperado" no PRISMA |
+| Band B sem abstract | 2 | Revisão manual com PDF |
+
+### 24.4. Estimativa de estudos primários finais
+
+| Situação | n | Destino esperado |
+| -------- | - | ---------------- |
+| FT include confirmado | 145 | Extração + QA |
+| Pending leitura (12 PDFs) | 12 | ~4–8 novos includes estimados |
+| Band D com DOI (37) | 37 | ~4–6 novos includes estimados |
+| Band E sem abstract (184) | 184 | Maioria: "não recuperado" |
+| **Total estimado de incluídos** | **~153–165** | — |
+
+### 24.5. Próximos passos imediatos
+
+1. **Ler os 12 PDFs pending** e registrar decisão em `ft_screening_results.csv`
+   (colunas `ft_decision`, `ft_rationale`, `ft_screened_by='manual'`).
+2. **Baixar e revisar os 37 Band D com DOI** via acesso institucional — usar
+   `results/final_review/ill_band_d_prioritized.csv` como guia (colunas
+   `doi_link` já formatadas).
+3. **Documentar os 184 Band E** como "full-text não recuperado" no PRISMA
+   após confirmar que não há mais esforço razoável de recuperação.
+4. **Iniciar extração estruturada** para os 145 já incluídos.
+
+---
+
+## 25. Snapshot final desta execução
