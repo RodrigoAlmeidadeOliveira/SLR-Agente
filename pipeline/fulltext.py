@@ -408,6 +408,10 @@ def build_ft_queue(force: bool = False) -> list[dict]:
         p = dict(all_ta[pid])
         ex = existing_ft.get(pid, {})
 
+        # Herda abstract enriquecido se o TA não tinha
+        if not (p.get("abstract") or "").strip():
+            p["abstract"] = ex.get("abstract", "")
+
         # Herda OA URL e decisão FT se já existirem
         p["ft_oa_url"]       = ex.get("ft_oa_url", "")
         p["ft_decision"]     = ex.get("ft_decision", "")

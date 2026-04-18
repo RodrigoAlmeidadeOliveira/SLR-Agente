@@ -22,5 +22,21 @@
     "model": "claude-haiku-4-5-20251001",
     "status": "in_progress",
     "phase": "fulltext"
+  },
+  {
+    "batch_id": "msgbatch_017qjbDfhGH4LthspqEoD7XS",
+    "created_at": "2026-04-17T22:01:32.526646+00:00",
+    "n_papers": 6,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress",
+    "phase": "fulltext"
+  },
+  {
+    "batch_id": "msgbatch_015wxmgye1gHUbCbWaM5ZhLE",
+    "created_at": "2026-04-17T23:53:27.529848+00:00",
+    "n_papers": 1,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress",
+    "phase": "fulltext"
   }
 ]

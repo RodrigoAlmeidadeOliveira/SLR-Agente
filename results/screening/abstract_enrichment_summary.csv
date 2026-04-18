@@ -1,2 +1,12 @@
 ﻿abstract_source,abstract_match_type,count,pct_of_abstracts,pct_of_queue
-preexisting_or_unknown,preexisting_or_unknown,643,100.00,72.57
+openalex,doi_exact,295,45.95,33.30
+preexisting_or_unknown,preexisting_or_unknown,147,22.90,16.59
+openalex,title_exact,63,9.81,7.11
+core,doi_exact,59,9.19,6.66
+crossref,title_fuzzy,29,4.52,3.27
+semanticscholar,doi_exact,19,2.96,2.14
+core,title_exact,14,2.18,1.58
+openalex,title_fuzzy,13,2.02,1.47
+core,title_fuzzy,1,0.16,0.11
+crossref,doi_exact,1,0.16,0.11
+crossref,title_exact,1,0.16,0.11
