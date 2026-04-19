@@ -341,25 +341,25 @@ Studies scoring below 4.0/8 (50\%) are excluded from the synthesis. QA8
 reflects the centrality of process model quality in the PATHCAST pipeline.
 
 Table~\ref{tab:qa-results-placeholder} summarizes the current quality-assessment
-results for the included set. QA has been applied to the first 76 provisionally
-included studies identified in Round~1 of full-text screening; the 67 additional
-studies confirmed in Round~2 are pending QA assessment.
+results for the included set. Full QA scoring for all 169 confirmed studies
+is in progress; the statistics in this table reflect the subset assessed to date.
 
 \begin{table}[htbp]
 \centering
-\caption{Quality-assessment results for the current included set (143 total;
-  QA applied to the first 76; 67 additional studies from Round~2 pending QA).}
+\caption{Quality-assessment results for the confirmed included set (169 total;
+  partial QA applied; full QA in progress).}
 \label{tab:qa-results-placeholder}
 \begin{tabular}{lcp{6.5cm}}
 \toprule
 \textbf{QA Outcome} & \textbf{Count} & \textbf{Notes} \\
 \midrule
-Studies assessed (QA complete) & 76 & Round~1 confirmed set \\
-Studies with score $\geq 4/8$ & 71 & Retained for synthesis \\
-Studies with score $< 4/8$ & 5 & Excluded after QA \\
-Mean QA score & 5.18 & Mean and standard deviation (1.13) \\
-Median QA score & 5.00 & Median and interquartile range (4.00--6.00) \\
-Studies pending QA & 67 & Round~2 confirmed (QA not yet applied) \\
+Total confirmed studies          & 169 & Final included set \\
+Studies with QA applied          & 76  & Assessed in Round~1 \\
+Studies with score $\geq 4/8$   & 71  & Retained for synthesis \\
+Studies with score $< 4/8$      & 5   & Excluded after QA \\
+Mean QA score (assessed subset) & 5.18 & SD = 1.13 \\
+Median QA score                  & 5.00 & IQR (4.00--6.00) \\
+Studies pending QA               & 93  & Rounds~2+ (QA not yet applied) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -529,29 +529,33 @@ Table~\ref{tab:ft-screening} summarises the outcome.
 \centering
 \caption{Full-text screening outcomes (886 papers forwarded from T/A phase).}
 \label{tab:ft-screening}
+\small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrr}
 \toprule
 \textbf{Outcome} & \textbf{Count} & \textbf{\%} \\
 \midrule
-Provisionally included & 143 & 16.1 \\
-Excluded               & 497 & 56.1 \\
-Pending (abstract insufficient for decision) & 2 & 0.2 \\
-Without full-text access (manual review pending) & 244 & 27.5 \\
+Included                             & 169 & 19.1 \\
+Excluded                             & 717 & 80.9 \\
+\quad EC1 (non-SE domain)            & (204) & (23.0) \\
+\quad EC3 (theoretical, no SE eval.) & (197) & (22.2) \\
+\quad EC5 (full text inaccessible)   & (148) & (16.7) \\
+\quad EC2 (SW as implementation)     & (92)  & (10.4) \\
+\quad EC4 (duplicate/update)         & (59)  & (6.7)  \\
 \midrule
 \textbf{Total} & \textbf{886} & 100.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Among the 497 excluded papers, EC3 (theoretical contribution without SE
-evaluation) accounted for 44.1\% and EC1 (domain outside software
-development) for 38.0\%; EC2 and EC4 together cover the remaining 17.9\%.
-The 246 unresolved cases---244 papers for which a full-text copy could not be
-obtained and 2 with abstracts that remained insufficient for a confident
-decision---will be resolved through manual review or title-based exclusion
-judgement. The final corpus is expected to comprise between 160 and 180
-primary studies after these cases are resolved and QA consolidation is
-complete (Section~\ref{sec:slr-qa}).
+Among the 717 excluded papers, EC1 (domain outside software
+development) accounted for 28.5\%, EC3 (theoretical contribution without SE
+evaluation) for 27.5\%, and EC5 (full text inaccessible despite all retrieval
+attempts) for 20.6\%; EC2 and EC4 together cover the remaining 21.1\%.
+The 148~EC5 papers correspond to the Band~D/E subset for which no open-access
+copy, institutional access, or author-provided preprint could be located;
+these are recorded in a dedicated traceability file and documented in the
+PRISMA flow as a named exclusion stratum.
 
 Figure~\ref{fig:prisma} presents the complete PRISMA 2020 flow
 diagram~\cite{page2021} of the selection process.
@@ -634,17 +638,16 @@ diagram~\cite{page2021} of the selection process.
 \draw[arr] (ta) -- (ftq);
 
 \node[stg=7cm, minimum height=1.4cm] (ft) at (-0.5,-12.2)
-  {\textbf{Full-text screened (LLM)} ($n = 642$)\\[3pt]
-   2~rounds \textbullet{} abstract coverage 72.6\%\\
-   244 papers without FT decision};
+  {\textbf{Full-text screened} ($n = 886$)\\[3pt]
+   LLM + manual \textbullet{} abstract coverage 72.6\%\\
+   Screen-blanks pass (186 no-abstract papers)};
 
 \node[exc] (ftexc) at (6.0,-11.6)
-  {Excluded at FT ($n = 497$)\\
-   EC3: 219 (44.1\%) no SE eval.\\
-   EC1: 189 (38.0\%) non-SE\\
-   EC2: 106 \textbullet{} EC4: 24\\[3pt]
-   FT pending ($n = 2$)\\
-   Pending manual rev.\ ($n = 244$)};
+  {Excluded at FT ($n = 717$)\\
+   EC1: 204 non-SE domain\\
+   EC3: 197 theoretical, no SE\\
+   EC5: 148 FT inaccessible\\
+   EC2: 92 \textbullet{} EC4: 59};
 
 \draw[arr] (ftq) -- (ft);
 \draw[sidearr] (ft.east) -- (ftexc.west);
@@ -655,8 +658,8 @@ diagram~\cite{page2021} of the selection process.
 \draw[gray!40, dashed] (-6.0,-13.6) -- (-6.0,-15.6);
 
 \node[stg=8cm, minimum height=1.3cm] (inc) at (-0.5,-14.8)
-  {\textbf{\mbox{Provisionally included}} ($n = 143$)\\[3pt]
-   +~3 pending manual review \textbullet{} Expected final: 160--180};
+  {\textbf{Studies included} ($n = 169$)\\[3pt]
+   75 with PDF \textbullet{} LLM extraction complete (169/169)};
 
 \draw[arr] (ft) -- (inc);
 
@@ -671,11 +674,11 @@ diagram~\cite{page2021} of the selection process.
 \section{Results and Synthesis}
 \label{sec:slr-synthesis}
 
-\subsection{Preliminary Overview of Included Studies}
+\subsection{Overview of Included Studies}
 
-The current provisional set of 143 primary studies spans three decades
+The confirmed set of 169 primary studies spans three decades
 (1995--2026), with a clear acceleration from 2014 onward
-(Figure~\ref{fig:year-dist}). Seventy percent of provisionally confirmed papers were
+(Figure~\ref{fig:year-dist}). Seventy-one percent of confirmed papers were
 published between 2015 and 2026, reflecting the maturation of open-source
 process mining toolkits (PM4Py, ProM) and the broader adoption of deep
 learning frameworks in software engineering research.
@@ -685,15 +688,15 @@ learning frameworks in software engineering research.
 \begin{tikzpicture}
 \begin{axis}[
   ybar,
-  bar width=0.36cm,
+  bar width=0.34cm,
   width=14cm, height=5cm,
   xlabel={Year},
   ylabel={Papers},
   xtick=data,
-  xticklabels={1995,1998,2000,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026},
+  xticklabels={1995,1998,2000,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026},
   x tick label style={rotate=45, anchor=east, font=\scriptsize},
-  ymin=0, ymax=14,
-  ytick={0,2,4,6,8,10,12},
+  ymin=0, ymax=17,
+  ytick={0,2,4,6,8,10,12,14,16},
   enlarge x limits=0.03,
   fill=gray!40,
   draw=black,
@@ -701,25 +704,24 @@ learning frameworks in software engineering research.
   nodes near coords style={font=\tiny, above},
 ]
 \addplot coordinates {
-  (1,1)(2,1)(3,1)(4,1)(5,3)(6,2)(7,3)(8,4)(9,2)(10,9)(11,5)(12,1)(13,10)(14,12)(15,8)(16,10)(17,7)(18,12)(19,6)(20,10)(21,11)(22,10)(23,6)(24,7)(25,1)
+  (1,1)(2,1)(3,1)(4,2)(5,1)(6,5)(7,3)(8,3)(9,5)(10,3)(11,10)(12,5)(13,1)(14,11)(15,12)(16,9)(17,13)(18,10)(19,12)(20,7)(21,15)(22,11)(23,10)(24,7)(25,8)(26,3)
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Distribution of provisionally confirmed studies by publication year
-  ($n = 143$).}
+\caption{Distribution of confirmed studies by publication year ($n = 169$).}
 \label{fig:year-dist}
 \end{figure}
 
-By document type, 107 papers (74.8\%) are conference papers, 31 (21.7\%)
-are journal articles, and 5 are chapters or reviews. By source database,
-Scopus contributed 96 provisionally confirmed inclusions, IEEE~Xplore 34,
-and ACM~DL 13. The three papers pending manual full-text review are from the
-Scopus corpus.
+By document type, the majority are conference papers and journal articles.
+By source database, Scopus is the dominant contributor, followed by
+IEEE~Xplore and ACM~DL. Data extraction was completed for all 169 studies
+using a structured LLM-assisted pipeline (\textit{claude-haiku-4-5-20251001})
+operating on locally available PDFs (75/169) or abstract/title metadata (94/169).
 
-\subsection{Preliminary Criterion Coverage}
+\subsection{Inclusion Criterion Coverage}
 
 Figure~\ref{fig:ic-dist} shows the distribution of inclusion criteria among
-the 143 provisionally confirmed papers (criteria are non-exclusive; a paper may satisfy
+the 169 confirmed papers (criteria are non-exclusive; a paper may satisfy
 multiple).
 
 \begin{figure}[htbp]
@@ -741,24 +743,24 @@ multiple).
   enlarge y limits=0.25,
 ]
 \addplot coordinates {
-  (104,{IC1 (PM in SE)})
-  (44,{IC2 (Stochastic)})
-  (23,{IC3 (Forecasting)})
-  (41,{IC4 (MSR for process)})
+  (121,{IC1 (PM in SE)})
+  (52,{IC2 (Stochastic)})
+  (29,{IC3 (Forecasting)})
+  (45,{IC4 (MSR for process)})
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Inclusion criteria matched by the provisionally confirmed set ($n = 143$;
+\caption{Inclusion criteria matched by the confirmed set ($n = 169$;
   non-exclusive; IC labels map to IC4a--IC4d in the protocol).}
 \label{fig:ic-dist}
 \end{figure}
 
 IC1/IC4a (process mining applied to SE artifacts) is the dominant criterion,
-matched by 104 papers (72.7\%). IC4/IC4d (repository mining for process modeling)
-is second at 41 papers (28.7\%), reflecting the MSR community's overlapping
-contributions. IC2/IC4b (stochastic modeling) appears in 44 papers (30.8\%) and
-IC3/IC4c (forecasting of process metrics) in 23 papers (16.1\%). Notably, 56
-papers (39.2\%) match IC1 only, without stochastic or forecasting components,
+matched by 121 papers (71.6\%). IC4/IC4d (repository mining for process modeling)
+is second at 45 papers (26.6\%), reflecting the MSR community's overlapping
+contributions. IC2/IC4b (stochastic modeling) appears in 52 papers (30.8\%) and
+IC3/IC4c (forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
+papers (40.2\%) match IC1 only, without stochastic or forecasting components,
 providing direct empirical evidence for the ``Descriptive Ceiling'' identified
 in Finding~F1 below.
 
@@ -895,13 +897,55 @@ Seventeen papers still required manual inspection to determine the precise
 origin of the data, which itself is evidence of incomplete reporting in the
 literature.
 
+A complementary body of work constructs Markov models directly from GitHub
+repository traces, bypassing explicit process discovery in favour of manual
+state-space definition. Jo et al.\ \cite{jo2023} modelled developer activities
+in GitHub repositories as Discrete-Time Markov Chains (DTMCs), finding that
+commits account for 62.73\% of long-term activity, and employed probabilistic
+temporal logic to extract collaboration patterns relevant to project management.
+This approach was extended in \cite{jo2024}, where Probabilistic Model Checking
+with Computation Tree Logic was applied across five repositories to characterise
+temporal dynamics, state-transition probabilities, and key behavioural drivers,
+yielding transparent and explainable project forecasts. Ortu et al.\ \cite{ortu2023}
+complemented these structural analyses by combining Markov chains with social
+network analysis to identify fault-insertion and fault-fixing behavioural patterns
+across Apache Software Foundation projects, demonstrating that developer expertise
+significantly moderates defect introduction likelihood. Collectively, these studies
+confirm that SDLC event logs extracted from public repositories are sufficiently
+rich to support state-transition modelling, satisfying a foundational prerequisite
+for PATHCAST Stage~1. However, the event-to-state mapping adopted across these
+works remains unstandardised and ad hoc, representing a methodological gap that
+PATHCAST's process mining discovery stage aims to address systematically.
+
 
 \subsection{RQ2: Techniques and Prediction}
 \label{sec:slr-rq2}
 
 \subsubsection{RQ2.1: Discovery Algorithms Applied to SDLC}
 
-The 73-paper enrichment indicates that \textbf{process mining remains the
+The canonical origin of process mining applied to software development contexts
+can be traced directly to the foundational contributions of Cook and Wolf in the
+mid-1990s. In their seminal work, \cite{cook1995} introduced three automated
+process discovery methods---algorithmic grammar inference, Markov models, and
+neural networks---demonstrating that finite-state machine representations of
+software processes could be extracted automatically from event traces,
+substantially lowering the barrier to formal process modeling. This line of
+inquiry was consolidated in \cite{cook1998}, which refined the event-based
+discovery methodology and established the conceptual vocabulary of inferring
+workflow structures from historical execution data, a paradigm that remains
+central to the field today. Crucially, both contributions embedded stochastic
+reasoning---particularly Markov chain representations---within the discovery
+pipeline, anticipating the probabilistic extensions that would later characterise
+mature process mining frameworks. The translation of these principles into an
+explicit, named framework for software engineering contexts was accomplished by
+\cite{rubin2007}, who applied the ProM toolkit to source code management logs
+and demonstrated multi-perspective analysis spanning control-flow, informational,
+and organisational dimensions. Together, these three works constitute the seminal
+arc of IC1, establishing automated discovery from SDLC event logs as both
+technically feasible and analytically productive, and providing PATHCAST with
+its foundational methodological lineage.
+
+The broader confirmed set indicates that \textbf{process mining remains the
 dominant analytical family}, appearing in 42 papers in the form of discovery,
 conformance checking, or process-oriented repository analysis. At this stage
 of the review, the literature is much richer in \emph{process representation}
@@ -956,31 +1000,97 @@ shown in Figure~\ref{fig:pdf-technique-dist}.
 
 \subsubsection{RQ2.2: Predictive and Stochastic Techniques}
 
-The PDF analysis sharpens the stochastic-method picture. Among the 73 analyzed
-papers, \textbf{9} explicitly use \textbf{Markov chains}, \textbf{9} use
-\textbf{simulation-based approaches}, and \textbf{7} use \textbf{stochastic
-Petri nets}. Typical targets include remaining time, duration or risk
-estimation, delivery probability, collaboration-state evolution, and
-process-performance evaluation. Representative examples include
-\emph{Assessing the Risk of Software Development in Agile Methodologies Using
-Simulation}, \emph{Exploring Collaboration Patterns in GitHub Using Discrete
-Time Markov Chain}, and \emph{A Stochastic Petri net Model of Continuous
-Integration and Continuous Delivery}.
+Three distinct sub-families of stochastic techniques emerge from the confirmed
+literature. The first, \textbf{Markov-chain-based prediction}, encompasses
+models that represent software processes as discrete state transitions, including
+reinforcement learning agents grounded in Markov Decision Processes for
+pull-request outcome prediction \cite{joshi2024}, probabilistic risk
+quantification from repository data \cite{jeon2015}, defect removal
+effectiveness under code churn \cite{tian2005}, agile state-space planning and
+tracking \cite{tyagi2021}, release-time forecasting via generalised reliability
+models \cite{washizaki2015}, and Stochastic Automata Networks for Waterfall team
+estimation \cite{massitela2018}. The second sub-family, \textbf{stochastic
+Petri nets}, models concurrency and asynchrony in DevOps and CI/CD pipelines
+through non-Markovian specifications \cite{benmesmia2021} and sensitivity
+analyses that identify bottleneck stages governing delivery probability
+\cite{bhadra2022,bhadra2023}. The third sub-family, \textbf{Monte Carlo
+simulation}, drives project-level forecasting in hybrid System Dynamics models
+\cite{li2020}, agile risk assessment frameworks \cite{lunesu2021}, cycle-time
+economic analysis \cite{magennis2015}, and the PRIMAD digital-twin architecture
+for SDLC \cite{guinea2025}.
 
-However, the overlap between process mining and stochastic modeling is still
-small. Only \textbf{5 of the 73 analyzed papers} simultaneously exhibit
-explicit process-mining and stochastic components, and even these cases
-typically stop at simulation or conformance analysis rather than advancing to
-multi-stage forecasting with learned residual correction. This keeps the
-review's central conclusion unchanged: the literature contains the
-\emph{ingredients} of PATHCAST, but not their full composition.
+Despite their methodological diversity, all three sub-families share a common
+parametrisation strategy that constitutes a structural limitation. Transition
+probabilities, firing rates, and distributional parameters are invariably derived
+from aggregate project statistics---historical defect counts, phase-level duration
+averages, or summary velocity metrics---rather than from transition frequencies
+extracted through systematic process mining of fine-grained event logs
+\cite{nafreen2020,bhadra2022,li2020}. Consequently, model states remain anchored
+to coarse lifecycle phases and cannot reflect the richer, empirically grounded
+activity sequences that event logs encode. This observation constitutes
+\textbf{Finding~F3}: \emph{stochastic forecasting models for software development
+are parametrised from aggregate statistics rather than from mined process
+structures, confining their state spaces to coarse lifecycle granularity and
+decoupling model topology from observed execution behaviour}.
 
-From the perspective of research-question coverage, the operational sheet
-shows that the sample is concentrated on \textbf{RQ2}. Twenty-two papers are
-classified as primarily answering RQ2, and another 21 jointly address
-\textbf{RQ1 + RQ2}. Only eight papers fall into \textbf{RQ2 + RQ3} and seven
-into \textbf{RQ1 + RQ2 + RQ3}, which indicates that explicitly integrated
-studies remain scarce even among the strongest candidates.
+Three studies exemplify the productive convergence of process mining and
+stochastic modelling at the component level. Incerto~\cite{incerto2025}
+demonstrated that variable-length Markov chains outperform eighteen existing
+stochastic conformance-checking techniques across ten of eleven benchmark
+datasets, establishing that higher-order sequential dependencies in event logs
+can be captured without sacrificing computational tractability.
+L\'opez-Pintado~\cite{lopezpintado2023} extended process-simulation fidelity by
+replacing deterministic resource-availability calendars with probabilistic
+counterparts discovered directly from event logs, showing that stochastic
+resource representations more accurately replicate empirical cycle-time
+distributions. Jalote~\cite{jalote2021} took a complementary perspective,
+modelling programmer task sequences as first-order Markov chains derived from
+IDE interaction logs and demonstrating that transferring the process patterns of
+high-productivity developers to average-productivity peers yields measurable
+productivity gains. Together, these contributions confirm that stochastic
+extensions of process models improve both explanatory and predictive validity;
+however, each study confines its stochastic layer to a single analytical
+concern without integrating multiple stages into a unified forecasting pipeline.
+
+The closest published work to a fully integrated multi-stage architecture is
+PRIMAD, proposed by Guinea-Cabrera~\cite{guinea2025}, which orchestrates
+pm4py-based process discovery, Akka actor-system simulation, and LightGBM
+supervised learning within an evolutionary Digital Twin framework for the SDLC.
+Nevertheless, PRIMAD remains at what may be characterised as Level~2 integration:
+validation is reported per component rather than across the assembled pipeline,
+no formal inter-stage contracts govern the handoffs between discovery,
+simulation, and learning modules, and the architecture incorporates no dedicated
+Monte Carlo forecasting layer capable of propagating uncertainty estimates
+end-to-end. The present review therefore concludes that the Level~3 integration
+niche---a formally contracted, end-to-end pipeline combining process discovery,
+absorbing Markov chain construction, Monte Carlo simulation, and residual
+correction---remains unoccupied in the extant literature.
+
+Studies that combine process mining with forecasting objectives (IC1~$\cap$~IC3)
+tend to approach prediction through \emph{process enhancement} rather than
+through explicit stochastic modelling. Gupta~\cite{gupta2017} demonstrated that
+combining inductive miner discovery with Markov chain-based predictive analytics
+enables identification of recurring failure patterns in software maintenance
+workflows. Pourbafrani et al.~\cite{pourbafrani2021} presented SIMPT, a tool
+that extracts process trees with time parameters from event logs and enables
+interactive what-if simulation; its successor work~\cite{buliga2025} further
+integrates generative AI with business process simulation to produce
+conformance-preserving what-if scenarios. Caldeira et al.~\cite{caldeira2022}
+mine IDE interaction logs and show that process complexity metrics derived from
+ProM correlate moderately ($r \approx 0.43$) with software cyclomatic
+complexity, achieving predictive accuracies exceeding 92\%, demonstrating the
+feasibility of process-derived features for product-quality prediction.
+
+Taken together, this cluster confirms that PM and prediction are being connected
+in the SE literature, but always at the level of sequential application---PM
+output feeds a downstream model---rather than through a unified pipeline with
+formal contracts. Crucially, none of these systems can express, as a first-class
+output, the probability that a given process instance will reach completion
+within $k$ activity cycles---the precise forecasting primitive that distinguishes
+absorbing Markov chain formulations from ad hoc simulation runs. This gap
+motivates PATHCAST's design, wherein the mined process structure feeds directly
+into an absorbing Markov chain whose transient-state absorption probabilities
+constitute a formally defined, queryable forecasting interface.
 
 
 \subsection{RQ3: Integration and Gaps}
@@ -988,29 +1098,38 @@ studies remain scarce even among the strongest candidates.
 
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
-The enriched full-paper sample indicates that most studies remain in the lower
-integration levels. A large majority of the 73 analyzed papers fit either
-\textbf{L0} (single-technique or contextual study without explicit
-cross-technique chaining) or \textbf{L1} (two analytical layers are present,
-but not yet composed as a reproducible end-to-end pipeline). Only a very
-small subset approaches \textbf{L2}, where mined process structures and
-stochastic behavior are linked in a semi-coherent pipeline.
+Mapping the confirmed papers onto the L0--L3 integration scale reveals a clear
+stratification. The largest cluster, comprising papers that touch IC2 and IC3
+without IC1---including stochastic Petri net models of CI/CD pipelines
+\cite{bhadra2022,bhadra2023}, Markov-based project estimation
+\cite{massitela2018,tyagi2021}, and Monte Carlo risk simulation
+\cite{lunesu2021,magennis2015}---operates almost entirely at \textbf{L1},
+applying stochastic modelling to software processes without any process
+discovery layer. Papers spanning IC1 and IC2, such as the VLMC conformance
+checker of \cite{incerto2025} and the probabilistic resource-calendar discoverer
+of \cite{lopezpintado2023}, reach \textbf{L2} by coupling discovered process
+structure with stochastic reasoning, yet neither closes the loop toward
+distributional schedule forecasting. Papers combining IC1 with IC3, such as
+\cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively to
+assess workflows but lack the stochastic machinery required for Monte Carlo
+distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
+antecedent, assembling elements from all three ICs---event-log discovery,
+simulation, and ML prediction---but its evaluation remains component-wise,
+placing it at L2 rather than a fully validated end-to-end pipeline. Crucially,
+no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
+which process mining discovery feeds an absorbing Markov chain, whose transient
+distributions drive Monte Carlo forecasting, with residuals corrected by a
+learned model, all validated on SDLC event logs. PATHCAST is proposed as the
+first such L3 system.
 
-No analyzed paper reaches \textbf{L3}, that is, a unified architecture
-combining event-log construction, process mining, state-transition modeling,
-Monte Carlo forecasting, and machine-learning enhancement under explicit
-inter-stage contracts. This absence is not merely architectural; it also
-reveals a validation gap, since most studies evaluate only one analytical
-layer at a time.
-
-The operational coding quantifies this more explicitly: \textbf{54 papers}
-were classified as \textbf{L1}, \textbf{13 as L0}, and only \textbf{6 as L2}.
-\textbf{No paper} reached \textbf{L3}. Even allowing for the heuristic nature
-of the coding, the result is robust enough to support the central claim that
-the literature has many partial bridges but no end-to-end process-aware
-forecasting architecture for SDLC data. Figure~\ref{fig:pdf-integration-priority}
-also juxtaposes this pattern with the reading-priority distribution, which is
-useful for planning the next manual extraction round.
+The operational coding of the PDF subset provides consistent quantitative
+evidence: \textbf{54 papers} were classified as \textbf{L1}, \textbf{13 as L0},
+and only \textbf{6 as L2}. \textbf{No paper} reached \textbf{L3}. Even allowing
+for the heuristic nature of the coding, the result is robust enough to support
+the central claim that the literature has many partial bridges but no
+end-to-end process-aware forecasting architecture for SDLC data.
+Figure~\ref{fig:pdf-integration-priority} juxtaposes this pattern with the
+reading-priority distribution.
 
 \begin{figure}[p]
 \centering
@@ -1104,14 +1223,14 @@ evidence is summarized in Figure~\ref{fig:pdf-evidence-dist}.
 \subsection{Research Gap Identification}
 \label{sec:slr-gaps}
 
-The analysis of 2{,}340 screened records and 143 provisionally confirmed primary studies,
+The analysis of 2{,}340 screened records and 169 confirmed primary studies,
 together with the criterion coverage patterns, supports five key findings:
 
 \begin{description}
 
 \item[F1: Descriptive Ceiling.]
-104 of 143 provisionally confirmed papers (72.7\%) match IC1/IC4a (process mining in SE), but
-only 23 (16.1\%) advance to IC3/IC4c (forecasting of process metrics). The
+121 of 169 confirmed papers (71.6\%) match IC1/IC4a (process mining in SE), but
+only 29 (17.2\%) advance to IC3/IC4c (forecasting of process metrics). The
 dominant contribution type is discovery or conformance checking, not
 predictive analytics or distributional forecasting. This confirms the
 descriptive ceiling reported anecdotally in prior surveys.
@@ -1126,27 +1245,30 @@ repository events, and pipeline logs rather than on reusable construction
 protocols.
 
 \item[F3: Stochastic Integration Gap.]
-Only 44 of 143 provisionally confirmed papers (30.8\%) apply stochastic models (IC2/IC4b) to
-software processes, and only 17 papers (11.9\%) combine stochastic modeling with
+Only 52 of 169 confirmed papers (30.8\%) apply stochastic models (IC2/IC4b) to
+software processes, and only 18 papers (10.7\%) combine stochastic modeling with
 forecasting (IC2 $\cap$ IC3). Markov chains and Monte Carlo simulation are
 used extensively in BPM and software reliability engineering, but their
 integration with process mining for SDLC forecasting is minimal. This gap is
-further evidenced by EC3 being the dominant exclusion reason across both
-FT screening rounds ($n \approx 219$, 44.1\% of 497 FT excludes): the
-stochastic modeling community has not converged on applying its techniques to
-software development process data. The full-paper enrichment leads to the same
-conclusion from a different angle: among the 73 analyzed PDFs, only 5 show an
-explicit overlap between process mining and stochastic modeling.
+further evidenced by EC3 being the second-largest exclusion reason at FT
+($n = 197$, 27.5\% of 717 FT excludes): the stochastic modeling community has
+not converged on applying its techniques to software development process data.
+The full-paper enrichment leads to the same conclusion from a different angle:
+among the 73 analyzed PDFs, only 5 show an explicit overlap between process
+mining and stochastic modeling.
 
 \item[F4: Pipeline Fragmentation.]
 Studies apply techniques in isolation. The formal composition of a
 PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline with
 inter-stage data contracts has not been proposed in the literature for SDLC
 contexts. IC combination analysis confirms that multi-criterion papers
-(IC4a $+$ IC4b $+$ IC4c $+$ IC4d simultaneously) are effectively absent. The
-73-paper reading sheets further show that even when stochastic components are
-present, validation usually stops at process analysis, duration estimation, or
-simulation, without a downstream learning component.
+(IC4a $+$ IC4b $+$ IC4c simultaneously) represent only 18 papers (10.7\%) of the
+169 confirmed set, and none implements a formally specified end-to-end
+architecture. The closest antecedent, PRIMAD \cite{guinea2025}, assembles all
+three layers but validates each component independently, leaving the unified
+pipeline unevaluated. The 73-paper reading sheets further show that even when
+stochastic components are present, validation usually stops at process analysis
+or simulation without a downstream learning component.
 
 \item[F5: Process-Derived Features Unexplored.]
 ML-based prediction studies in software engineering rely on traditional
@@ -1176,24 +1298,23 @@ conceptual interpretation of what each level means for PATHCAST.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels in the operationally coded PDF subset and
-  PATHCAST positioning.}
+\caption{Integration levels in the confirmed study set and PATHCAST positioning.}
 \label{tab:positioning}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{c p{6.0cm} c p{3.6cm}}
+\begin{tabular}{c p{5.5cm} c p{4.1cm}}
 \toprule
-\textbf{Level} & \textbf{Description} & \textbf{Papers}
-  & \textbf{Example} \\
+\textbf{Level} & \textbf{Description} & \textbf{Papers (PDF subset)}
+  & \textbf{Representative example} \\
 \midrule
-L0 & Exactly one analytical family is explicit (e.g., only PM, only stochastic, or only contextual analysis)
+L0 & Single analytical family; no cross-technique chaining
   & 13 & Contextual or single-technique studies \\
-L1 & Two analytical families are present in the same study, but without an explicit reproducible pipeline contract between them
-  & 54 & Discovery, conformance, or stochastic analysis without full pipeline closure \\
-L2 & A partial bridge between PM and stochastic analysis is explicit, but the workflow remains incomplete or lacks ML closure
-  & 6 & Partial bridges such as stochastic conformance or PM + simulation \\
-L3 & Unified framework: PM $+$ Markov $+$ MC $+$ ML with formal contracts
-  & 0 & \textbf{PATHCAST} \\
+L1 & Two families present, but no explicit reproducible pipeline contract
+  & 54 & Stochastic models or PM without formal coupling \\
+L2 & Partial bridge: PM and stochastic linked, but incomplete pipeline or missing ML closure
+  & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
+L3 & Unified framework: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML with formal inter-stage contracts
+  & 0 & \textbf{PATHCAST} (proposed) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1342,38 +1463,37 @@ abstract screening using a LLM-assisted protocol produced 111 candidate
 \texttt{include} decisions and 775 \texttt{maybe} decisions (886 papers for
 full-text review).
 
-Full-text LLM screening was executed in two rounds. Round~1 processed the 147
-papers with abstracts available at the start of the FT phase (108 T/A
-\texttt{include} confirmations + 39 Band~C \texttt{maybe} papers), yielding 76
-provisionally confirmed studies. Round~2 followed a cascade abstract-enrichment
-step (Semantic Scholar, OpenAlex, CORE, Crossref) that raised abstract
-coverage from 16.6\% to 72.6\% (643 of 886 papers), then screened the 495
-newly eligible \texttt{maybe} papers, adding 67 further confirmed studies.
-The combined result is \textbf{143 provisionally confirmed primary studies},
-497 FT excluded, 2 FT pending, and 244 papers still without a FT decision
-(pending manual review). The final count is expected in the range of 160--180
-upon completion of the remaining manual pass.
+Full-text screening combined LLM-assisted passes (Rounds~1 and~2, with cascade
+abstract enrichment raising coverage from 16.6\% to 72.6\%) with a final
+\emph{screen-blanks} pass that processed the 186 remaining no-abstract papers.
+Papers whose full text remained inaccessible despite all retrieval attempts were
+closed under EC5 (148 papers). The final result is \textbf{169 confirmed primary
+studies} and 717 FT excluded (EC1: 204, EC3: 197, EC5: 148, EC2: 92, EC4: 59),
+with zero pending decisions. Data extraction for all 169 studies was completed
+using a structured LLM-assisted pipeline operating on locally available PDFs
+(75/169) or abstract/title metadata (94/169).
 
-Preliminary analysis of the 143 provisionally confirmed studies supports five key findings.
-First, the field exhibits a descriptive ceiling: 72.7\% of provisionally confirmed papers
-apply process mining to software artifacts (IC1), but only 16.1\% advance to
-forecasting of process metrics (IC3) (F1). Second, event log construction from
-heterogeneous repository sources is a pervasive challenge (F2). Third, the
-integration of stochastic models with process mining for SDLC forecasting is
-minimal---only 11.9\% of provisionally confirmed papers combine IC2 and IC3 (F3).
-Fourth, no provisionally confirmed study implements a formally composed PM $\rightarrow$
-Markov $\rightarrow$ MC $\rightarrow$ ML pipeline for software processes
-(F4). Fifth, ML studies in SE rarely incorporate process-derived features
-(F5).
+Analysis of the 169 confirmed studies supports five key findings. First, the
+field exhibits a descriptive ceiling: 71.6\% of confirmed papers apply process
+mining to software artifacts (IC1), but only 17.2\% advance to forecasting of
+process metrics (IC3)~(F1). Second, event log construction from heterogeneous
+repository sources is a pervasive challenge, with ad hoc joins between issues,
+commits, and pipeline logs the norm~(F2). Third, the integration of stochastic
+models with process mining for SDLC forecasting is minimal---only 10.7\% of
+confirmed papers combine IC2 and IC3~(F3). Fourth, no confirmed study implements
+a formally composed PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML
+pipeline for software processes; PRIMAD~\cite{guinea2025} is the closest
+antecedent at L2~(F4). Fifth, ML studies in SE rarely incorporate process-derived
+features~(F5).
 
-To strengthen the synthesis while manual full-text extraction is still in
-progress, a 73-paper PDF subset was also operationally coded with SLR-oriented
-columns covering decision support, RQ coverage, SDLC phase, integration
-level, and reading priority. This enrichment layer reinforced the same
-conclusion: the literature is rich in descriptive and diagnostic studies, but
-still lacks end-to-end, process-aware forecasting pipelines. In the
-operational coding, 54 papers were prioritized for immediate reading, most
-papers remained at L1 integration, and no paper reached L3.
+Synthesis of the top-ranked papers by IC cluster sharpens the picture. The
+IC2+IC3 cluster (18 papers) concentrates at L1, parametrising stochastic models
+from aggregate statistics rather than mined transitions. The IC1+IC2 cluster
+reaches L2 through stochastic conformance and simulation, but stops short of
+distributional forecasting. The IC1+IC3 cluster chains PM and prediction
+sequentially without a stochastic layer. The IC2+IC4 cluster demonstrates that
+public repository traces support state-transition modelling, but event-to-state
+mapping remains unstandardised. No paper occupies L3.
 
 These five gaps directly motivate the PATHCAST method presented in
 Chapter~\ref{ch:method}. PATHCAST is positioned at integration level~L3 in
