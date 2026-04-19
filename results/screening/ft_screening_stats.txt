@@ -1,7 +1,7 @@
 
 ============================================================
 FULL-TEXT SCREENING — SLR PATHCAST
-Gerado em: 2026-04-17 21:42:34
+Gerado em: 2026-04-19 06:29:37
 ============================================================
   Fila total:        886
     T/A include:     111  (alta confiança)
@@ -13,15 +13,16 @@ Gerado em: 2026-04-17 21:42:34
     Com DOI:         681  (76.9%)
 
   Decisões FT registradas:
-    include:         145
-    exclude:         506
-    pending:          12
-    sem decisão:     223
-    review manual:     0
-    PROGRESSO:       663 / 886  (74.8%)
+    include:         167
+    exclude:         569
+    pending:         150
+    sem decisão:       0
+    review manual:   192
+    PROGRESSO:       886 / 886  (100.0%)
 
   Confiança FT do LLM:
-    high:             6
+    high:            46
+    low:           193
     medium:             2
 
   Por banda de prioridade:

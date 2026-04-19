@@ -792,6 +792,73 @@ def collect_ft_results(batch_id: str, api_key: str, papers: list[dict]) -> int:
     return updated
 
 
+def screen_blank_papers(
+    papers: list[dict],
+    api_key: str,
+    *,
+    poll: bool = False,
+    poll_interval: int = 60,
+    batch_id: Optional[str] = None,
+    dry_run: bool = False,
+    force: bool = False,
+) -> None:
+    """
+    Triagem LLM de todos os papers sem decisão FT (blancos), independente de abstract.
+
+    Alvo: ft_decision vazio (blank).  Usa título + venue + ta_rationale quando
+    não há abstract — o LLM decide com base nos metadados disponíveis.
+    """
+    from colorama import Fore, Style
+
+    if batch_id:
+        print(f"\n{Fore.CYAN}── Coletando resultados (screen-blanks) do batch {batch_id}...{Style.RESET_ALL}")
+        n = collect_ft_results(batch_id, api_key, papers)
+        print(f"  {Fore.GREEN}✓ {n} decisões salvas{Style.RESET_ALL}")
+        _print_ft_stats(papers)
+        return
+
+    candidates = [
+        p for p in papers
+        if not (p.get("ft_decision") or "").strip() or force
+    ]
+
+    if not candidates:
+        print(f"\n{Fore.YELLOW}Nenhum paper sem decisão FT encontrado.{Style.RESET_ALL}")
+        return
+
+    no_abstract = sum(1 for p in candidates if not (p.get("abstract") or "").strip())
+    print(f"\n{Fore.CYAN}── LLM screen-blanks: {len(candidates)} papers "
+          f"({no_abstract} sem abstract — triagem por metadados)...{Style.RESET_ALL}")
+
+    if dry_run:
+        p0 = candidates[0]
+        print(f"\n{Fore.YELLOW}--dry-run — prompt para '{p0['title'][:60]}'::{Style.RESET_ALL}")
+        print(_build_ft_prompt(p0)[:800])
+        return
+
+    batches_sent = []
+    for start in range(0, len(candidates), BATCH_SIZE):
+        chunk = candidates[start : start + BATCH_SIZE]
+        bid = _submit_ft_batch(chunk, api_key)
+        batches_sent.append((bid, chunk))
+        print(f"  {Fore.GREEN}✓ Batch enviado: {bid}  ({len(chunk)} papers){Style.RESET_ALL}")
+
+        if poll:
+            print(f"\n{Fore.CYAN}── Aguardando batch {bid}...{Style.RESET_ALL}")
+            _poll_ft_batch(bid, api_key, poll_interval)
+            collect_ft_results(bid, api_key, papers)
+            print(f"  {Fore.GREEN}✓ Resultados salvos{Style.RESET_ALL}")
+
+    if not poll and batches_sent:
+        print(f"\n{Fore.YELLOW}Batches enviados (sem --poll):{Style.RESET_ALL}")
+        for bid, _ in batches_sent:
+            print(f"  {bid}")
+        print(f"\nPara coletar:\n  python main.py fulltext --collect <batch_id>")
+
+    if poll:
+        _print_ft_stats(papers)
+
+
 def run_llm_rescreen(
     papers: list[dict],
     api_key: str,
@@ -976,6 +1043,7 @@ def run_fulltext(
     enrich_urls: bool = False,
     llm_rescreen: bool = False,
     confirm_includes: bool = False,
+    screen_blanks: bool = False,
     collect: Optional[str] = None,
     stats: bool = False,
     poll: bool = False,
@@ -988,7 +1056,7 @@ def run_fulltext(
     from colorama import Fore, Style
 
     # ── Garante que a fila existe ─────────────────────────────────
-    need_queue = export or enrich_abstracts or enrich_urls or llm_rescreen or bool(collect) or stats
+    need_queue = export or enrich_abstracts or enrich_urls or llm_rescreen or screen_blanks or bool(collect) or stats
     if need_queue:
         if not FT_RESULTS_CSV.exists() or export or force:
             print(f"\n{Fore.CYAN}── Construindo fila priorizada...{Style.RESET_ALL}")
@@ -1017,7 +1085,7 @@ def run_fulltext(
         print(f"  {Fore.GREEN}✓ {n:,} URLs open-access encontradas{Style.RESET_ALL}")
 
     # ── LLM re-triagem ────────────────────────────────────────────
-    if llm_rescreen or collect:
+    if llm_rescreen or (collect and not screen_blanks):
         if not api_key and not dry_run:
             print(f"{Fore.RED}✗ ANTHROPIC_API_KEY não configurada.{Style.RESET_ALL}")
             return
@@ -1029,6 +1097,20 @@ def run_fulltext(
             dry_run=dry_run,
             force=force,
             confirm_includes=confirm_includes,
+        )
+
+    # ── Screen blanks (sem filtro de abstract) ────────────────────
+    if screen_blanks:
+        if not api_key and not dry_run:
+            print(f"{Fore.RED}✗ ANTHROPIC_API_KEY não configurada.{Style.RESET_ALL}")
+            return
+        screen_blank_papers(
+            papers, api_key,
+            poll=poll,
+            poll_interval=poll_interval,
+            batch_id=collect if screen_blanks else None,
+            dry_run=dry_run,
+            force=force,
         )
 
     # ── Estatísticas ──────────────────────────────────────────────

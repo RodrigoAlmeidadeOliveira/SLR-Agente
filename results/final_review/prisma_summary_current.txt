@@ -5,37 +5,38 @@ T/A include in queue: 111
 T/A maybe in queue: 775
 
 Current FT decisions:
-  include: 143
-  exclude: 497
-  pending: 2
-  blank / unresolved: 244
+  include: 169
+  exclude: 717
+  pending: 0
+  blank / unresolved: 0
 
 Priority bands among queue:
   A: 95
   B: 16
-  C: 534
-  D: 51
-  E: 190
+  C: 533
+  D: 54
+  E: 188
 
 PDF availability among pending items already attempted for download:
-  downloaded: 2
+  downloaded: 0
   oa_found: 0
-  manual: 1
+  manual: 0
   not_found: 0
 
 Operational priority groups among unresolved items:
-  1_com_pdf_ou_oa: 9
-  2_com_doi_sem_pdf: 114
-  3_banda_d_sem_doi: 14
-  4_banda_e_sem_doi: 106
-  5_outros_sem_doi: 1
+  1_com_pdf_ou_oa: 0
+  2_com_doi_sem_pdf: 0
+  3_banda_d_sem_doi: 0
+  4_banda_e_sem_doi: 0
+  5_outros_sem_doi: 0
 
 Dominant exclusion criterion among current FT excludes:
-  EC3: 188
-  EC1: 186
-  EC2: 89
-  EC4: 23
-  <missing>: 9
+  EC1: 204
+  EC3: 197
+  EC5: 148
+  EC2: 92
+  EC4: 59
+  <missing>: 15
   EC1 - O domínio é avaliação de confiabilidade de software como produto, não processos de desenvolvimento de software: 1
   EC1 - domínio desviado: confiabilidade de software é processamento/qualidade de produto, não processo de desenvolvimento: 1
 

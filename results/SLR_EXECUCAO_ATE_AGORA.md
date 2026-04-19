@@ -1246,4 +1246,308 @@ Os 12 papers com `ft_decision=pending` aguardam leitura manual do PDF:
 
 ---
 
-## 25. Snapshot final desta execução
+## 25. Sessão 2026-04-19 — Fechamento da SLR e extração de dados
+
+Esta sessão finalizou todas as etapas abertas da SLR e iniciou a fase de extração de dados.
+
+---
+
+## 26. Implementação e execução de `--screen-blanks` (2026-04-19)
+
+### 26.1. Contexto
+
+Ao final da sessão anterior, 186 papers ainda não tinham decisão FT (`ft_decision` em branco): eram majoritariamente papers Band E (sem abstract) e alguns residuais de outras bandas que escaparam das rodadas anteriores de triagem LLM.
+
+### 26.2. Modificações no código
+
+**`pipeline/fulltext.py`** — adição de `screen_blank_papers()` (sessão anterior) e fiação do fluxo:
+
+- Assinatura: `run_fulltext(..., screen_blanks: bool = False)`
+- `need_queue` atualizado para incluir `screen_blanks`
+- Roteamento `if screen_blanks:` separado do fluxo `if llm_rescreen or (collect and not screen_blanks):`
+- Chamada: `screen_blank_papers(papers, api_key, poll=..., batch_id=..., dry_run=..., force=...)`
+
+**`main.py`** — exposição CLI:
+
+```python
+p_ft.add_argument(
+    "--screen-blanks", dest="screen_blanks", action="store_true",
+    help="Triar LLM todos os papers sem decisão FT (blancos), independente de abstract",
+)
+```
+
+- `do_screen_blanks = getattr(args, "screen_blanks", False)` em `cmd_fulltext()`
+- Adicionado a `any([...])` e passado para `run_fulltext()`
+
+### 26.3. Execução
+
+```
+python main.py fulltext --screen-blanks --poll
+```
+
+Resultado:
+- 186 papers enviados ao Anthropic Batch API (`claude-haiku-4-5-20251001`)
+- Batch encerrado com `succeeded: 186 | errored: 0`
+- Todos os 186 blancos receberam decisão; a maioria classificada como `exclude` (EC1/EC3)
+- `ft_decision blank: 0` após coleta
+
+---
+
+## 27. Inclusão manual de 2 papers Band B (2026-04-19)
+
+Dois papers Band B (`ta_decision=include`) que não tinham abstract e não foram triados pelo LLM foram registrados manualmente como include:
+
+| internal_id | Critério de inclusão |
+| ----------- | -------------------- |
+| `96767878`  | Band B, triado manualmente com PDF |
+| `f449ac41`  | Band B, triado manualmente com PDF |
+
+Campos atualizados em `results/screening/ft_screening_results.csv`:
+- `ft_decision = include`
+- `ft_screened_by = manual`
+
+---
+
+## 28. Fechamento da SLR — 148 pending → EC5 (2026-04-19)
+
+### 28.1. Decisão
+
+Após o `--screen-blanks`, restavam 148 papers com `ft_decision=pending` — todos sem PDF disponível e sem texto completo acessível por nenhuma das rotas tentadas (DOI direto, Unpaywall, busca manual). Decisão: fechar como `EC5 = full text inacessível`.
+
+### 28.2. Artefatos gerados
+
+- **`results/final_review/pending_inaccessible_closed.csv`** — 148 linhas com colunas:
+  `internal_id, ft_priority_band, title, doi, year, source_db, ta_decision, ta_matched_ic, ft_rationale, ft_screened_by`
+- **`results/screening/ft_screening_results.csv`** — todos os 148 atualizados com `ft_matched_ec=EC5`
+
+### 28.3. Contagens finais (PRISMA)
+
+| Decisão | n |
+| ------- | - |
+| include | **169** |
+| exclude | **717** |
+| pending | **0** |
+| blank   | **0** |
+| **Total FT queue** | **886** |
+
+Composição dos excludes:
+
+| Critério | n |
+| -------- | - |
+| EC1 (domínio incorreto) | 204 |
+| EC3 (não é estudo primário) | 197 |
+| EC5 (texto inacessível) | 148 |
+| EC2 (fora de escopo técnico) | 92 |
+| EC4 (duplicata / update) | 59 |
+| outros | 17 |
+
+### 28.4. Fluxo PRISMA completo
+
+```
+8.347 registros raw
+  → 5.783 únicos (após deduplicação)
+    → 886 full-text queue (T/A include ou maybe)
+      → 169 FT include
+      → 717 FT exclude
+```
+
+---
+
+## 29. Infraestrutura de extração de dados (2026-04-19)
+
+### 29.1. `pipeline/extract_prep.py`
+
+Script para preparar a pasta de extração:
+
+1. **Copia PDFs**: 75 PDFs encontrados em `results/pdfs/` → `results/extraction/pdfs/`
+2. **Enriquece metadados via Semantic Scholar Batch API** (campos: authors, venue, journal_name, volume, pages, publication_type, abstract)
+   - 169 papers, chunk size 50, sleep 3s entre chunks, 3 retries com backoff (30s, 60s)
+   - Resultado: 155/169 com authors preenchidos, 68/169 com abstract
+3. **Gera `results/extraction/extraction_template.csv`** com 35 colunas
+
+Colunas do template:
+
+```
+internal_id, title, doi, year, source_db, ft_matched_ic, ft_screened_by,
+authors, venue, journal_name, volume, pages, publication_type, abstract,
+pdf_available, pdf_file,
+research_question, study_type, research_contribution, pm_technique,
+stochastic_technique, software_artifact, software_process, dataset_source,
+dataset_public, tool_used, main_finding, limitations, replication_package,
+quality_score, extraction_notes
+```
+
+### 29.2. `pipeline/extract_llm.py`
+
+Pipeline de extração estruturada via LLM para todos os 169 estudos:
+
+- **Modelo**: `claude-haiku-4-5-20251001`  
+- **Tokens máx**: 1.024 por resposta  
+- **Batch size**: 100 (Anthropic Batch API)  
+- **PDF**: primeiros 6.000 chars via `pdfplumber` (8 páginas, strip CID)
+
+Campos extraídos (JSON estruturado):
+
+```
+research_question, study_type, research_contribution, pm_technique,
+stochastic_technique, software_artifact, software_process, dataset_source,
+dataset_public, tool_used, main_finding, limitations, replication_package
+```
+
+Comandos:
+
+```bash
+# papers com PDF (75 papers)
+python pipeline/extract_llm.py --run [--poll]
+
+# papers sem PDF — usa abstract/título (94 papers)
+python pipeline/extract_llm.py --run-abstract [--poll]
+
+# coletar resultados
+python pipeline/extract_llm.py --collect <BATCH_ID>
+python pipeline/extract_llm.py --collect-abstract <BATCH_ID>
+
+# dry-run / force re-extração
+python pipeline/extract_llm.py --dry-run
+python pipeline/extract_llm.py --run --force
+```
+
+### 29.3. Execução e resultado
+
+- Batch PDF submetido e coletado: 75 extrações salvas
+- Batch abstract submetido e coletado: 94 extrações salvas
+- **169/169 papers com `main_finding` preenchido**
+
+Nota: o API key é carregado de `.env` via `python-dotenv` (mesmo padrão de `main.py`).
+
+---
+
+## 30. Top-30 lista de leitura prioritária (2026-04-19)
+
+### 30.1. Metodologia de ranqueamento
+
+Score multi-critério (0–15 pontos por paper):
+
+| Critério | Pontos |
+| -------- | ------ |
+| IC2 presente (Stochastic Modeling) | +3 |
+| IC3 presente (Forecasting) | +3 |
+| IC1 presente (Process Mining) | +2 |
+| IC4 presente (Repository Mining) | +1 |
+| PDF disponível | +2 |
+| Ano ≥ 2020 | +1 |
+| Venue de alto impacto (IEEE/ACM/IST/JSS) | +1 |
+| Tipo de estudo empírico (case_study/experiment) | +1 |
+| Contribuição prediction ou simulation | +1 |
+
+3 papers seminais forçados no ranking independente de score: Cook & Wolf (1995, 1998) e Rubin et al. (2007).
+
+### 30.2. Artefato gerado
+
+**`results/final_review/top30_reading_list.csv`** — 32 linhas (top-30 + 2 forçados adicionais)
+
+Colunas: `rank, score, internal_id, year, ft_matched_ic, pdf_available, study_type, research_contribution, pm_technique, stochastic_technique, authors, title, doi, venue, journal_name, main_finding, rq_focus, reading_notes`
+
+### 30.3. Composição do top-30
+
+| Score | n papers |
+| ----- | -------- |
+| 14    | 2 |
+| 13    | 2 |
+| 12    | 4 |
+| 11    | 8 |
+| 10    | 4 |
+| 9     | 9 |
+| forçados (≤ 9) | 3 |
+
+Distribuição por IC cluster:
+
+| Cluster | n |
+| ------- | - |
+| IC2+IC3 (stochastic + forecasting) | 14 |
+| IC1+IC2 (PM + stochastic) | 5 |
+| IC1+IC3 (PM + forecasting) | 5 |
+| IC2+IC4 (stochastic + repository) | 3 |
+| IC1+IC2+IC3 (todos) | 2 |
+| IC1 seminal | 3 |
+
+21/32 com PDF disponível para leitura imediata.
+
+---
+
+## 31. Rascunho de síntese para cap3_SLR.tex (2026-04-19)
+
+### 31.1. Artefato gerado
+
+**`results/final_review/cap3_synthesis_draft.tex`** — 6 blocos de parágrafos prontos para inserção no cap3.
+
+### 31.2. Estrutura dos blocos
+
+| Bloco | Destino no cap3 | Conteúdo |
+| ----- | --------------- | -------- |
+| ANCHOR | Abertura de Results/Synthesis ou RQ2.1 | Arco seminal: Cook & Wolf (1995, 1998) → Rubin et al. (2007) |
+| RQ2.2 stochastic | `\subsubsection{RQ2.2}` | 3 sub-famílias: Markov chains, Stochastic Petri Nets, Monte Carlo |
+| RQ2.2 PM+stoch | Continuação RQ2.2 | Cluster IC1+IC2: Incerto (VLMC), López-Pintado, Jalote; PRIMAD (L2) |
+| RQ2.2 PM+forecast | Continuação RQ2.2 | Cluster IC1+IC3: Gupta, Pourbafrani/SIMPT, Buliga, Caldeira |
+| RQ1.2 event logs | `\subsubsection{RQ1.2}` | Cluster IC2+IC4: Jo et al. (2023, 2024), Ortu et al. (2023) |
+| RQ3.1 integration | `\subsection{RQ3.1}` | Mapeamento L0–L3: gap L3 = espaço vazio que PATHCAST ocupa |
+
+### 31.3. Achados formalizados
+
+Os parágrafos formalizam os seguintes achados / gaps documentados:
+
+| Gap | Evidência | Resposta PATHCAST |
+| --- | --------- | ----------------- |
+| G1 | 14 papers usam modelos estocásticos parametrizados de estatísticas agregadas, não de transições mineradas | Stage 2: absorbing chain derivado do modelo minerado |
+| G2 | IC1+IC2 papers atingem integração estocástica mas visam conformance/simulation, não forecasting multi-step | Stage 3: Monte Carlo sobre absorbing chain |
+| G3 | IC1+IC3 papers encadeiam PM e predição sem camada estocástica | Stage 4: ML residual correction sobre saída MC |
+| G4 | Nenhum paper usa features derivadas de processo (conformance score, rework count, path entropy) como input ML | Feature Engineering component |
+| G5 | Construção de event log de fontes SDLC heterogêneas tratada ad hoc em todos os papers | Stage 1: transformation pipeline explícito |
+
+### 31.4. Próximos passos para o cap3
+
+1. Ler os 32 papers do top-30 e preencher coluna `reading_notes` em `top30_reading_list.csv`
+2. Inserir blocos de `cap3_synthesis_draft.tex` nas subseções indicadas
+3. Verificar que todas as chaves `\cite{}` existem no arquivo `.bib` do projeto
+4. Revisar taxonomia SPMF (L0–L3) e tabela de integration levels com novos dados
+
+---
+
+## 32. Estado consolidado ao final de 2026-04-19
+
+### 32.1. Corpus FT (fechado)
+
+| Decisão | n |
+| ------- | - |
+| include | **169** |
+| exclude | **717** |
+| pending | **0** |
+| blank   | **0** |
+| **TOTAL** | **886** |
+
+### 32.2. Fase de extração
+
+| Item | Estado |
+| ---- | ------ |
+| `extraction_template.csv` | 169 linhas, 35 colunas |
+| PDFs copiados para extração | 75 / 169 |
+| Metadados S2 enriquecidos | 155 / 169 com authors |
+| main_finding preenchido (LLM) | **169 / 169** |
+| quality_score / extraction_notes | pendente (revisão manual) |
+
+### 32.3. Artefatos prontos para escrita da tese
+
+| Artefato | Uso |
+| -------- | --- |
+| `top30_reading_list.csv` | Guia de leitura aprofundada para síntese qualitativa |
+| `cap3_synthesis_draft.tex` | Parágrafos prontos para inserção no cap3_SLR.tex |
+| `extraction_template.csv` | Base de dados completa para tabelas e gráficos |
+| `pending_inaccessible_closed.csv` | Registro EC5 para nota de rodapé PRISMA |
+
+### 32.4. Próximas ações prioritárias
+
+1. **Ler os 32 papers do top-30** — especialmente os 14 do cluster IC2+IC3 e os 2 papers PRIMAD/Incerto que mais se aproximam do PATHCAST
+2. **Inserir `cap3_synthesis_draft.tex` no `cap3_SLR.tex`** e compilar
+3. **Preencher `quality_score`** para os top-30 (critérios QA da SLR)
+4. **Gerar tabelas e figuras** a partir de `extraction_template.csv` (distribuição por técnica, por ano, por IC)
+5. **Atualizar PRISMA flow diagram** com os números finais (169 / 717 / 886)

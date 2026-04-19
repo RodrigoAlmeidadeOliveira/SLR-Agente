@@ -598,8 +598,9 @@ def cmd_fulltext(args):
     do_llm         = getattr(args, "llm_rescreen", False)
     do_collect     = getattr(args, "collect", None)
     do_stats       = getattr(args, "stats", False)
+    do_screen_blanks = getattr(args, "screen_blanks", False)
 
-    if not any([do_export, do_enrich_abstracts, do_enrich_urls, do_llm, do_collect, do_stats]):
+    if not any([do_export, do_enrich_abstracts, do_enrich_urls, do_llm, do_collect, do_stats, do_screen_blanks]):
         # sem flags → exporta fila + stats (ação padrão útil)
         do_export = True
         do_stats = True
@@ -618,6 +619,7 @@ def cmd_fulltext(args):
         enrich_urls=do_enrich_urls,
         llm_rescreen=do_llm,
         confirm_includes=getattr(args, "confirm_includes", False),
+        screen_blanks=do_screen_blanks,
         collect=do_collect,
         stats=do_stats,
         poll=getattr(args, "poll", False),
@@ -917,6 +919,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_ft.add_argument(
         "--confirm-includes", dest="confirm_includes", action="store_true",
         help="Incluir papers T/A 'include' (com abstract) na re-triagem LLM — segunda opinião",
+    )
+    p_ft.add_argument(
+        "--screen-blanks", dest="screen_blanks", action="store_true",
+        help="Triar LLM todos os papers sem decisão FT (blancos), independente de abstract",
     )
     p_ft.add_argument(
         "--dry-run", dest="dry_run", action="store_true",
