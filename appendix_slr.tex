@@ -1,0 +1,964 @@
+% =============================================================================
+% APPENDICES — Systematic Literature Review: Supplementary Materials
+% Companion to Chapter~\ref{ch:slr}
+%
+% Usage note: include this file AFTER \appendix in the main thesis file:
+%   \appendix
+%   \include{appendix_slr}
+% The \appendix command causes subsequent \chapter{} calls to be labelled
+% as APPENDIX A, B, C, etc. per ABNT NBR 14724.
+% =============================================================================
+
+
+% =============================================================================
+% APPENDIX A — Search Protocol: Search Strings
+% =============================================================================
+\chapter{Search Protocol: Search Strings}
+\label{app:A}
+
+This appendix presents the four search strings executed across the five
+digital libraries during the search phase of the PATHCAST SLR. Each string
+was adapted to the syntax and field conventions of the target database; the
+block structure (P and I) is preserved across all adaptations. Strings S1--S3
+correspond to the principal, complementary (MSR), and frontier (stochastic
+$\wedge$ PM) blocks, respectively; S4 is a supplementary string executed in
+Scopus only, targeting Markov chain models in software testing.
+
+\section{Search String Summary by Database}
+\label{app:slr-strings}
+
+\begin{table}[htbp]
+\centering
+\caption{Search strings by database and field scope.}
+\label{tab:app-strings}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{2.4cm} c p{9.0cm}}
+\toprule
+\textbf{Database} & \textbf{Strings} & \textbf{Field / syntax notes} \\
+\midrule
+Scopus       & S1, S2, S3, S4 & \texttt{TITLE-ABS-KEY(...)};
+                                  \texttt{DOCTYPE(ar OR cp)};
+                                  \texttt{LANGUAGE(english)};
+                                  1994--2026 \\
+IEEE Xplore  & S1 (split)     & All Metadata; Boolean AND of sub-blocks;
+                                  Conference + Journals; 1994--2026 \\
+Web of Science & S1, S2, S3   & Topic \texttt{TS=(...)}; Article, Proceedings;
+                                  English; 1994--2026 \\
+SpringerLink & S1 (simplified)& Title + Abstract; 8 separate exports;
+                                  Chapter + Article; English \\
+ACM DL       & S1, S2         & Abstract; 2 queries; date 1994--2026 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{String S1 — Principal ($\text{P} \wedge \text{I}$)}
+\label{app:slr-s1}
+
+Block P (software engineering context):
+
+\begin{quote}
+\small\ttfamily
+("software engineering" OR "software development" OR "software process"
+OR "software lifecycle" OR "software life cycle" OR "SDLC" OR "development
+lifecycle" OR "development life cycle" OR "DevOps" OR "CI/CD" OR
+"continuous integration" OR "continuous delivery" OR "agile development"
+OR "agile process" OR "issue tracking" OR "bug tracking" OR "version
+control" OR "code review" OR "pull request" OR "software project"
+OR "software repository" OR "software maintenance" OR "software
+evolution")
+\end{quote}
+
+Block I (techniques):
+
+\begin{quote}
+\small\ttfamily
+("process mining" OR "process discovery" OR "conformance checking" OR
+"workflow mining" OR "predictive process monitoring" OR "process prediction"
+OR "remaining time prediction" OR "process forecasting" OR "event log" OR
+"process simulation" OR "Monte Carlo simulation" OR "Markov chain" OR
+"Markov model" OR "stochastic process model" OR "transition probability"
+OR "absorbing chain" OR "lead time prediction" OR "cycle time prediction")
+\end{quote}
+
+\section{String S2 — Complementary (MSR $\rightarrow$ Process Modeling)}
+\label{app:slr-s2}
+
+\begin{quote}
+\small\ttfamily
+("mining software repositories" OR "software repository mining" OR
+"GitHub mining" OR "Jira mining") AND ("process model" OR "Markov" OR
+"Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput"
+OR "transition matrix")
+\end{quote}
+
+\section{String S3 — Frontier (Stochastic $\wedge$ PM $\wedge$ SE)}
+\label{app:slr-s3}
+
+\begin{quote}
+\small\ttfamily
+("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR
+"probabilistic forecast" OR "transition matrix") AND ("process mining" OR
+"event log" OR "workflow mining" OR "process model" OR "business process")
+AND ("software development" OR "software engineering" OR "software process"
+OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline")
+\end{quote}
+
+\section{String S4 — Markov Chain Software Testing (Scopus supplement)}
+\label{app:slr-s4}
+
+\begin{quote}
+\small\ttfamily
+("Markov chain" OR "Markov model" OR "hidden Markov" OR "stochastic automata")
+AND ("software testing" OR "test coverage" OR "software reliability" OR
+"defect prediction" OR "fault prediction")
+\end{quote}
+
+
+% =============================================================================
+% APPENDIX B — LLM Screening Prompts
+% =============================================================================
+\chapter{LLM Screening Prompts}
+\label{app:B}
+
+The review employed \textit{claude-haiku-4-5-20251001} as primary screener in
+two phases: title/abstract (T/A) and full-text (FT). Each phase uses a
+\emph{system prompt} that encodes the scope, criteria, and output schema,
+paired with a per-paper \emph{user prompt} that supplies the bibliographic
+data. All prompts are version-controlled in
+\texttt{config/screening\_criteria.py} in the review repository.
+
+\section{Phase 1: Title/Abstract Screening}
+\label{app:slr-ta-prompt}
+
+\subsection*{System Prompt (T/A Phase)}
+
+\begin{quote}
+\small\ttfamily
+You are an expert in systematic literature review (SLR) in the area of
+process mining and software engineering. Your task is to perform the
+title/abstract (T/A) screening for SLR PATHCAST.
+
+\textbf{SLR PATHCAST scope:}
+Intersection of (1) process mining, (2) stochastic modelling,
+(3) forecasting/prediction, and (4) software development processes.
+Focus: studies that analyse, discover, or predict software process
+characteristics using event logs, repositories, or stochastic models.
+
+\textbf{INCLUSION CRITERIA} (at least ONE must be satisfied to include):
+IC1 -- Process Mining in Software: applies PM (discovery, conformance,
+workflow mining, event log analysis, PPM) to SW artefacts (commits,
+issues, PRs, CI/CD).
+IC2 -- Stochastic Modelling of SW Processes: uses Markov chains, Monte
+Carlo, stochastic Petri nets, or transition matrices to model SW dev
+processes.
+IC3 -- Process Metric Forecasting: predicts lead time, cycle time,
+remaining time, throughput, or defect rates in SW processes using
+data or event logs.
+IC4 -- Repository Mining for Process: mines repositories (GitHub, Jira,
+VCS) to discover or improve SW development process models.
+
+\textbf{EXCLUSION CRITERIA} (any ONE is sufficient to exclude):
+EC1 -- Non-SW domain: applied to healthcare, manufacturing, finance,
+etc., with no link to SW processes.
+EC2 -- SW as tool: "software" is the implementation platform, not the
+process under study.
+EC3 -- Algorithm without SW application: purely theoretical method,
+no evaluation in SW processes.
+EC4 -- Out-of-scope secondary study: survey/SLR not specifically
+addressing PM or stochastic methods in SE.
+
+\textbf{UNCERTAIN CASES (maybe):}
+Relevant title without abstract; generic BPM article with possible SW
+application; ambiguous terminology.
+
+\textbf{STRUCTURED FIELDS} (use only the allowed enums):
+evidence\_tags, software\_context, stochastic\_method,
+forecast\_target, process\_data\_source, confidence.
+
+Respond ONLY with valid JSON, no additional text.
+\end{quote}
+
+\subsection*{User Prompt Template (T/A Phase)}
+
+\begin{quote}
+\small\ttfamily
+Evaluate the paper below for SLR PATHCAST.
+
+\textbf{Title:} \{title\}
+\textbf{Abstract:} \{abstract\}
+\textbf{Venue/Type:} \{venue\} | \{doc\_type\} | \{year\}
+\textbf{Source database:} \{source\_db\}
+\textbf{Abstract origin:} \{abstract\_source\}
+
+Respond with JSON in the exact format:
+\{
+  "decision": "include" | "exclude" | "maybe",
+  "rationale": "<1-2 sentences justifying the decision>",
+  "matched\_ic": ["IC1", "IC2"],
+  "matched\_ec": ["EC1"],
+  "evidence\_tags": ["process\_mining", "forecasting"],
+  "software\_context": "software\_development\_process",
+  "stochastic\_method": "markov\_chain",
+  "forecast\_target": "remaining\_time",
+  "process\_data\_source": "event\_logs",
+  "confidence": "medium"
+\}
+
+Rules:
+- "include" if $\geq$1 IC met and no decisive EC
+- "exclude" if an EC clearly applies, or paper clearly meets no IC
+- "maybe" if genuine doubt (title without abstract, domain ambiguity)
+- matched\_ic and matched\_ec must be [] when not applicable
+\end{quote}
+
+\section{Phase 2: Full-Text Screening}
+\label{app:slr-ft-prompt}
+
+\subsection*{System Prompt (FT Phase)}
+
+The FT system prompt is identical to the T/A system prompt above, with
+three additional instructions that encode the stricter standard of the
+full-text phase:
+
+\begin{quote}
+\small\ttfamily
+THIS IS THE FULL-TEXT PHASE -- apply criteria rigorously:
+- If the abstract clearly confirms $\geq$1 IC with no decisive EC
+  $\rightarrow$ "include"
+- If the abstract clearly confirms no IC applies, or an EC applies
+  $\rightarrow$ "exclude"
+- Use "pending" ONLY if the abstract is genuinely insufficient for
+  a decision (absent or extremely short) AND the title suggests
+  marginal relevance
+
+When in doubt between include and exclude, prefer exclude -- this
+phase requires confidence.
+
+YOU MUST NEVER invent, complete, or infer a missing abstract.
+\end{quote}
+
+\subsection*{User Prompt Template (FT Phase)}
+
+The FT user prompt extends the T/A template with a \textbf{T/A context block}
+that supplies the previous-phase decision, rationale, and matched ICs:
+
+\begin{quote}
+\small\ttfamily
+Evaluate the paper below for SLR PATHCAST -- FULL-TEXT screening (phase 2).
+
+\textbf{Title:} \{title\}
+\textbf{Abstract:} \{abstract\}
+\textbf{Venue/Type:} \{venue\} | \{doc\_type\} | \{year\}
+\textbf{Source database:} \{source\_db\}
+\textbf{Abstract origin:} \{abstract\_source\}
+
+\textbf{T/A phase context:}
+  - Previous decision: \{ta\_decision\}
+  - Previous rationale: \{ta\_rationale\}
+  - ICs identified in phase 1: \{ta\_matched\_ic\}
+
+Re-evaluate rigorously for the full-text phase.
+Respond with JSON in the exact format:
+\{
+  "decision": "include" | "exclude" | "pending",
+  [... same fields as T/A phase ...]
+\}
+\end{quote}
+
+\section{Phase 2b: Screen-Blanks Pass}
+\label{app:slr-blanks-prompt}
+
+A third pass targeted the 186 papers without a decision after both prior
+phases (primarily Band~E papers with no available abstract). The screen-blanks
+pass reuses the same FT system and user prompts, with the abstract field
+populated by the placeholder ``Abstract not available'' and the T/A context
+block showing \texttt{ta\_decision~=~maybe} and
+\texttt{ta\_matched\_ic~=~none}. Papers for which the LLM returned
+\texttt{pending} and whose title analysis suggested low relevance were
+subsequently closed under EC5 (full text inaccessible; $n = 148$).
+
+\section{Model Parameters per Screening Phase}
+\label{app:slr-prompt-params}
+
+Table~\ref{tab:app-prompt-params} summarises the model parameters used
+across all three screening phases and the data extraction step.
+
+\begin{table}[htbp]
+\centering
+\caption{LLM parameters used at each screening phase.}
+\label{tab:app-prompt-params}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l l r r l}
+\toprule
+\textbf{Phase} & \textbf{Model} & \textbf{Max tok.} &
+  \textbf{Batch} & \textbf{API} \\
+\midrule
+T/A screening      & claude-haiku-4-5-20251001 & 512  & 500 & Anthropic Batches \\
+FT screening       & claude-haiku-4-5-20251001 & 512  & 100 & Anthropic Batches \\
+Screen-blanks pass & claude-haiku-4-5-20251001 & 512  & 186 & Anthropic Batches \\
+Data extraction    & claude-haiku-4-5-20251001 & 1024 & 100 & Anthropic Batches \\
+Synthesis (ch.~3)  & claude-sonnet-4-6         & 2048 & --- & Anthropic Messages \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% =============================================================================
+% APPENDIX C — Data Extraction Form
+% =============================================================================
+\chapter{Data Extraction Form}
+\label{app:C}
+
+Data extraction for all 169 included studies was performed with
+\textit{claude-haiku-4-5-20251001} via the Anthropic Batches API. Papers
+with a locally available PDF had their text pre-extracted with
+\texttt{pdfplumber} (first 8 pages, maximum 6,000 characters). Papers
+without a PDF used the enriched abstract from Semantic Scholar.
+The prompt below was submitted once per paper.
+
+\section{Extraction Prompt}
+\label{app:slr-extraction-prompt}
+
+\begin{quote}
+\small\ttfamily
+You are a researcher performing data extraction for SLR PATHCAST on
+Process Mining and Stochastic Modelling in Software Processes.
+
+\textbf{Title:} \{title\}
+\textbf{Authors:} \{authors\}
+\textbf{Year:} \{year\} | \textbf{Venue:} \{venue\}
+\textbf{Inclusion criteria met:} \{ics\}
+\{content\_block\}
+
+Return ONLY a valid JSON object with exactly these fields:
+\{
+  "research\_question": "main research question (1-2 sentences)",
+  "study\_type": "case\_study | experiment | survey | tool |
+                 theoretical | simulation | mixed",
+  "research\_contribution": "discovery | conformance | enhancement |
+       prediction | simulation | framework | hybrid",
+  "pm\_technique": "alpha | inductive\_miner | heuristic |
+       conformance\_checking | social\_network | declarative | other | none",
+  "stochastic\_technique": "markov\_chain | stochastic\_petri\_net |
+       monte\_carlo | system\_dynamics | other | none",
+  "software\_artifact": "commits | issues | ci\_cd | ide\_logs |
+       vcs | jira | github | other | none",
+  "software\_process": "development | testing | maintenance |
+       code\_review | bug\_fixing | deployment | requirements | other",
+  "dataset\_source": "open\_source | industrial | academic |
+                     synthetic | not\_specified",
+  "dataset\_public": "yes | no | partial | not\_mentioned",
+  "tool\_used": "tool names (e.g.\ ProM, pm4py, Disco) or not\_mentioned",
+  "main\_finding": "main result/contribution (2-3 sentences)",
+  "limitations": "reported limitations (1-2 sentences) or not\_mentioned",
+  "replication\_package": "yes | no | partial | not\_mentioned"
+\}
+
+Respond ONLY with JSON, no additional text.
+\end{quote}
+
+\section{Extraction Form Fields}
+\label{app:slr-extraction-fields}
+
+Table~\ref{tab:app-extraction-fields} describes all fields of the structured
+extraction form stored in \texttt{extraction\_template.csv}.
+
+\begin{table}[htbp]
+\centering
+\caption{Data extraction form: all fields in \texttt{extraction\_template.csv}.}
+\label{tab:app-extraction-fields}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{3.2cm} p{4.4cm} p{4.6cm}}
+\toprule
+\textbf{Field} & \textbf{Description} & \textbf{Allowed values / format} \\
+\midrule
+\multicolumn{3}{l}{\textit{Identification}} \\
+\texttt{internal\_id}   & 8-char hash (dedup key)      & --- \\
+\texttt{title}          & Paper title                  & free text \\
+\texttt{doi}            & Digital Object Identifier    & URI \\
+\texttt{year}           & Publication year             & YYYY \\
+\texttt{source\_db}     & Source database              & scopus, ieee, acm, springer, wos, snowball \\
+\texttt{ft\_matched\_ic}& Inclusion criteria met       & IC1$|$IC2$|$IC3$|$IC4 \\
+\texttt{ft\_screened\_by}& Who made FT decision        & llm, manual, llm\_pdf \\
+\midrule
+\multicolumn{3}{l}{\textit{Enriched metadata (Semantic Scholar)}} \\
+\texttt{authors}        & Author list                  & semicolon-separated \\
+\texttt{venue}          & Publication venue            & free text \\
+\texttt{journal\_name}  & Journal/conference name      & free text \\
+\texttt{abstract}       & Paper abstract               & free text \\
+\texttt{pdf\_available} & PDF locally present          & yes / no \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM-extracted fields}} \\
+\texttt{research\_question} & Main RQ               & 1--2 sentences \\
+\texttt{study\_type}        & Study design          & case\_study $|$ experiment $|$ survey $|$ tool $|$ theoretical $|$ simulation $|$ mixed \\
+\texttt{research\_contribution} & Contribution type & discovery $|$ conformance $|$ enhancement $|$ prediction $|$ simulation $|$ framework $|$ hybrid \\
+\texttt{pm\_technique}      & PM algorithm used     & alpha $|$ inductive\_miner $|$ heuristic $|$ conformance\_checking $|$ social\_network $|$ declarative $|$ other $|$ none \\
+\texttt{stochastic\_technique} & Stochastic method  & markov\_chain $|$ stochastic\_petri\_net $|$ monte\_carlo $|$ system\_dynamics $|$ other $|$ none \\
+\texttt{software\_artifact} & Data source           & commits $|$ issues $|$ ci\_cd $|$ ide\_logs $|$ vcs $|$ jira $|$ github $|$ other $|$ none \\
+\texttt{software\_process}  & SDLC phase            & development $|$ testing $|$ maintenance $|$ code\_review $|$ bug\_fixing $|$ deployment $|$ requirements $|$ other \\
+\texttt{dataset\_source}    & Dataset provenance    & open\_source $|$ industrial $|$ academic $|$ synthetic $|$ not\_specified \\
+\texttt{dataset\_public}    & Data availability     & yes $|$ no $|$ partial $|$ not\_mentioned \\
+\texttt{tool\_used}         & Tools/platforms       & free text \\
+\texttt{main\_finding}      & Key result            & 2--3 sentences \\
+\texttt{limitations}        & Study limitations     & 1--2 sentences \\
+\texttt{replication\_package} & Artefacts available & yes $|$ no $|$ partial $|$ not\_mentioned \\
+\midrule
+\multicolumn{3}{l}{\textit{Manual fields (reading phase)}} \\
+\texttt{quality\_score}     & QA checklist score (0--8) & numeric \\
+\texttt{extraction\_notes}  & Free-form reviewer note   & free text \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Structured Output Controlled Vocabulary}
+\label{app:slr-schema}
+
+Table~\ref{tab:app-enum-schema} defines the complete controlled vocabulary
+for the structured fields returned by the LLM at both screening phases.
+These enums are version-controlled in \texttt{config/screening\_criteria.py}
+and were not changed between screening rounds to ensure consistency.
+
+\begin{table}[htbp]
+\centering
+\caption{Controlled vocabulary (enums) for LLM structured output.}
+\label{tab:app-enum-schema}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{3.2cm} p{9.4cm}}
+\toprule
+\textbf{Field} & \textbf{Allowed values} \\
+\midrule
+\texttt{decision} (T/A) &
+  \texttt{include}, \texttt{exclude}, \texttt{maybe} \\
+\texttt{decision} (FT) &
+  \texttt{include}, \texttt{exclude}, \texttt{pending} \\
+\texttt{software\_context} &
+  \texttt{software\_development\_process}, \texttt{repository\_mining},
+  \texttt{ci\_cd}, \texttt{issue\_bug\_workflow}, \texttt{software\_testing},
+  \texttt{requirements\_engineering}, \texttt{software\_project\_management},
+  \texttt{unclear}, \texttt{not\_software\_process} \\
+\texttt{stochastic\_method} &
+  \texttt{none}, \texttt{markov\_chain}, \texttt{hidden\_markov\_model},
+  \texttt{monte\_carlo}, \texttt{stochastic\_petri\_net},
+  \texttt{bayesian\_model}, \texttt{probabilistic\_model},
+  \texttt{simulation}, \texttt{queueing\_model},
+  \texttt{other\_stochastic}, \texttt{unclear} \\
+\texttt{forecast\_target} &
+  \texttt{none}, \texttt{lead\_time}, \texttt{cycle\_time},
+  \texttt{remaining\_time}, \texttt{throughput}, \texttt{defect\_rate},
+  \texttt{build\_outcome}, \texttt{reliability},
+  \texttt{completion\_time}, \texttt{other\_process\_metric},
+  \texttt{unclear} \\
+\texttt{process\_data\_source} &
+  \texttt{none}, \texttt{event\_logs}, \texttt{version\_control},
+  \texttt{issue\_tracker}, \texttt{pull\_requests}, \texttt{ci\_cd\_logs},
+  \texttt{software\_repository\_mixed}, \texttt{synthetic\_data},
+  \texttt{simulated\_process}, \texttt{survey\_or\_secondary},
+  \texttt{unclear} \\
+\texttt{confidence} &
+  \texttt{low}, \texttt{medium}, \texttt{high} \\
+\texttt{evidence\_tags} &
+  \texttt{process\_mining}, \texttt{software\_process},
+  \texttt{repository\_mining}, \texttt{stochastic\_modeling},
+  \texttt{forecasting}, \texttt{event\_log}, \texttt{version\_control},
+  \texttt{issue\_tracking}, \texttt{pull\_requests}, \texttt{ci\_cd},
+  \texttt{markov}, \texttt{hidden\_markov\_model}, \texttt{monte\_carlo},
+  \texttt{stochastic\_petri\_net}, \texttt{bayesian\_model},
+  \texttt{simulation}, \texttt{lead\_time}, \texttt{cycle\_time},
+  \texttt{remaining\_time}, \texttt{throughput}, \texttt{defect\_prediction},
+  \texttt{build\_prediction}, \texttt{reliability},
+  \texttt{insufficient\_abstract}, \texttt{full\_text\_required} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% =============================================================================
+% APPENDIX D — Assessment and Classification Instruments
+% =============================================================================
+\chapter{Assessment and Classification Instruments}
+\label{app:D}
+
+This appendix gathers the instruments used to classify, enrich, and evaluate
+papers throughout the screening and selection process: the priority band
+taxonomy, the abstract enrichment cascade, the quality assessment checklist,
+the control paper set, and the SPMF integration-level taxonomy.
+
+\section{Priority Bands for the Full-Text Review Queue}
+\label{app:slr-bands}
+
+Prior to full-text screening, the 886-paper queue was stratified into five
+priority bands (A--E) to optimise resource allocation. Abstract enrichment
+and LLM screening were applied in band order.
+Table~\ref{tab:app-bands} defines the classification rules.
+
+\begin{table}[htbp]
+\centering
+\caption{Priority band definitions for the full-text review queue.}
+\label{tab:app-bands}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c r p{8.5cm}}
+\toprule
+\textbf{Band} & \textbf{$n$} & \textbf{Classification rule} \\
+\midrule
+A &  95 & T/A decision = \texttt{include} and $\geq$2 distinct ICs matched \\
+B &  20 & T/A decision = \texttt{include} and exactly 1 IC matched \\
+C &  39 & T/A decision = \texttt{maybe} and abstract available \\
+D & 152 & T/A decision = \texttt{maybe}, at least 1 IC signal in title, no abstract \\
+E & 584 & T/A decision = \texttt{maybe}, no IC signal in title, no abstract \\
+\midrule
+\textbf{Total} & \textbf{886} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Band~D papers with a DOI were prioritised for manual PDF retrieval. Band~E
+papers without a DOI and without an abstract were closed as EC5 (full text
+inaccessible) at the end of the screen-blanks pass.
+
+\section{Abstract Enrichment Cascade}
+\label{app:slr-enrichment}
+
+To increase the number of papers assessable by the LLM, a four-source
+cascade was executed prior to full-text screening.
+Algorithm~\ref{alg:enrichment} describes the procedure.
+
+\begin{figure}[htbp]
+\centering
+\small
+\begin{tabular}{l}
+\hline
+\textbf{Algorithm 1} \quad Abstract Enrichment Cascade \\
+\hline
+\textbf{Input:} Paper record $p$ with \texttt{doi} and/or \texttt{title} \\
+\textbf{Output:} Updated $p$ with \texttt{abstract}, \texttt{authors}, \texttt{venue} \\
+\hline
+\textbf{1.} If $p$.\texttt{abstract} is non-empty $\rightarrow$ \textbf{return} $p$ \\
+\textbf{2.} If $p$.\texttt{doi} is present: \\
+\quad\textbf{2a.} Query \textbf{Semantic Scholar} Batch API (\texttt{DOI:\{doi\}}) \\
+\quad\quad If match found: update \texttt{abstract}, \texttt{authors}, \texttt{venue}; \textbf{return} \\
+\quad\textbf{2b.} Query \textbf{OpenAlex} (\texttt{filter=doi:\{doi\}}) \\
+\quad\quad If match found: update \texttt{abstract}; \textbf{return} \\
+\quad\textbf{2c.} Query \textbf{CORE} (\texttt{/search/works?q=doi:\{doi\}}) \\
+\quad\quad If match found: update \texttt{abstract}; \textbf{return} \\
+\quad\textbf{2d.} Query \textbf{Crossref} (\texttt{/works/\{doi\}}) \\
+\quad\quad If abstract present: update; \textbf{return} \\
+\textbf{3.} If $p$.\texttt{doi} is absent: \\
+\quad\textbf{3a.} Query \textbf{Semantic Scholar} by title (fuzzy) \\
+\quad\quad If similarity $\geq 0.85$: update; \textbf{return} \\
+\textbf{4.} Mark $p$.\texttt{abstract\_source} = \texttt{missing\_or\_unverified} \\
+\hline
+\end{tabular}
+\caption{Abstract enrichment cascade applied to all 886 full-text queue papers.}
+\label{alg:enrichment}
+\end{figure}
+
+The cascade raised abstract coverage from 16.6\% (147/886) to 72.6\%
+(643/886) before Round~2 screening. Of the 643 enriched abstracts,
+590 were sourced from Semantic Scholar, 31 from OpenAlex, 13 from CORE,
+and 9 from Crossref or the title-based fallback.
+Table~\ref{tab:app-enrichment-stats} summarises the enrichment outcome
+by priority band.
+
+\begin{table}[htbp]
+\centering
+\caption{Abstract enrichment results by priority band.}
+\label{tab:app-enrichment-stats}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c r r r r}
+\toprule
+\textbf{Band} & \textbf{Papers} & \textbf{With abstract (pre)} &
+  \textbf{Gained} & \textbf{Coverage (post)} \\
+\midrule
+A &  95 & 91 (95.8\%) &   4 &  95 (100.0\%) \\
+B &  20 & 18 (90.0\%) &   2 &  20 (100.0\%) \\
+C &  39 & 39 (100\%)  &   0 &  39 (100.0\%) \\
+D & 152 &  0  (0.0\%) & 118 & 118  (77.6\%) \\
+E & 584 &  0  (0.0\%) & 371 & 371  (63.5\%) \\
+\midrule
+\textbf{Total} & \textbf{886} & \textbf{148 (16.7\%)} &
+  \textbf{495} & \textbf{643 (72.6\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Quality Assessment Checklist}
+\label{app:slr-qa}
+
+The eight-item quality checklist (Table~\ref{tab:app-qa-full}) is applied
+to each included primary study during the manual reading phase. Items
+QA1--QA4 assess methodological rigour; QA5--QA7 assess empirical soundness
+and reproducibility; QA8 specifically targets process model quality reporting,
+which is central to PATHCAST's evaluation strategy. Studies scoring below
+4/8 are excluded from the synthesis.
+
+\begin{table}[htbp]
+\centering
+\caption{Quality assessment checklist with scoring guidance.}
+\label{tab:app-qa-full}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c p{5.5cm} p{5.5cm}}
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Scoring guidance} \\
+\midrule
+QA1 & Are the research objectives clearly stated? &
+  Score 1 if RQs or hypotheses are explicitly enumerated; 0 otherwise. \\
+QA2 & Is the software engineering context described in sufficient detail? &
+  Score 1 if the SDLC phase, artefact type, and process scope are defined. \\
+QA3 & Is the data source (event log or repository) described reproducibly? &
+  Score 1 if dataset origin, collection method, and key statistics are given. \\
+QA4 & Is the PM or stochastic technique formally defined? &
+  Score 1 if algorithm, parameters, and configuration are specified. \\
+QA5 & Are results validated empirically? &
+  Score 1 if validation uses real or semi-real data; 0 for simulation-only. \\
+QA6 & Are threats to validity discussed? &
+  Score 1 if at least internal and external validity are addressed. \\
+QA7 & Is the study reproducible (data and/or code available)? &
+  Score 1 if a replication package or open dataset is linked or described. \\
+QA8 & Are process model quality metrics reported (fitness, precision)? &
+  Score 1 if at least one formal quality metric is quantified. \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total score range}} & 0--8 (threshold: $\geq$4) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Current QA status: 76 of 169 studies assessed (full Round~1 set); mean
+score = 5.18 (SD = 1.13), median = 5.0 (IQR: 4--6); 5 studies scored
+below the threshold and were excluded from the synthesis. The remaining
+93 studies (Rounds~2+) are pending manual QA assessment.
+
+\section{Control Paper Set}
+\label{app:slr-control}
+
+The 12-paper control set was used to validate the search strings before
+execution. Table~\ref{tab:app-control} lists all control papers with their
+IC profile and the source through which each was captured.
+
+\begin{table}[htbp]
+\centering
+\caption{Complete control paper set for search string validation.}
+\label{tab:app-control}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{c p{4.0cm} p{3.8cm} l l}
+\toprule
+\textbf{\#} & \textbf{Paper} & \textbf{Justification} & \textbf{ICs} &
+  \textbf{Captured via} \\
+\midrule
+V1  & Cook \& Wolf (1998)~\cite{cook1998}              & Seminal PM + SE             & IC1, IC2 & ACM \\
+V2  & Rubin et al.\ (2007)~\cite{rubin2007}            & First named PM framework for SW & IC1 & Scopus \\
+V3  & Poncin et al.\ (2011)~\cite{poncin2011}          & PM + MSR intersection       & IC1, IC4 & IEEE \\
+V4  & Caldeira \& Cardoso (2019)                        & PM + SW process assessment  & IC1      & IEEE \\
+V5  & Lemos et al.\ (2011)                              & PM for SW management        & IC1      & IEEE \\
+V6  & Whittaker \& Thomason (1994)~\cite{whittaker1994} & Markov + SW testing (seminal) & IC2    & Scopus \\
+V7  & Tax et al.\ (2017)~\cite{tax2017}                & PPM seminal (BPM baseline)  & IC3      & Control \\
+V8  & Rogge-Solti \& Weske (2015)                       & Stochastic + PM forecasting & IC2, IC3 & Scopus \\
+V9  & Rozinat et al.\ (2009)                            & PM $\rightarrow$ Simulation  & IC1, IC2 & Control \\
+V10 & Gupta (2017)~\cite{gupta2017}                    & PM multi-repository SE      & IC1, IC3 & ACM \\
+V11 & Jalote \& Kamma (2021)~\cite{jalote2021}         & IDE logs + Markov chains    & IC1, IC2 & Scopus \\
+V12 & Ortu et al.\ (2023)~\cite{ortu2023}              & GitHub Markov + SNA         & IC2, IC4 & Scopus \\
+\midrule
+\multicolumn{4}{l}{Capture rate from primary queries alone} & 10/12 (83.3\%) \\
+\multicolumn{4}{l}{Capture rate including snowballing}      & 12/12 (100\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Papers V4, V5, V8, and V9 were not in the initial working set but were
+recovered through snowballing during the FT phase; they are included in
+the final corpus.
+
+\section{SPMF Integration-Level Taxonomy}
+\label{app:slr-spmf}
+
+The \textit{Software Process Mining and Forecasting} (SPMF) taxonomy, used
+throughout Chapter~\ref{ch:slr}, classifies studies along three orthogonal
+dimensions (Table~\ref{tab:app-spmf}).
+
+\begin{table}[htbp]
+\centering
+\caption{SPMF taxonomy: three dimensions with level definitions.}
+\label{tab:app-spmf}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l l p{7.8cm}}
+\toprule
+\textbf{Dimension} & \textbf{Level} & \textbf{Definition} \\
+\midrule
+\multirow{4}{*}{\textbf{Analytical Depth}}
+  & AD1 -- Descriptive  & Discovery of as-is process models; conformance checking \\
+  & AD2 -- Diagnostic   & Bottleneck detection; rework quantification; root-cause analysis \\
+  & AD3 -- Predictive   & Outcome prediction; remaining-time estimation \\
+  & AD4 -- Forecasting  & Distributional forecasts; probabilistic completion estimates \\
+\midrule
+\multirow{5}{*}{\textbf{SDLC Coverage}}
+  & SC-R & Requirements and design \\
+  & SC-D & Development (coding, commits, pull requests) \\
+  & SC-Q & Quality (testing, reviews, defects) \\
+  & SC-C & CI/CD and delivery \\
+  & SC-O & Operations and maintenance \\
+\midrule
+\multirow{4}{*}{\textbf{Technique Integration}}
+  & TI-L0 & Single technique (PM only, ML only, or stochastic only) \\
+  & TI-L1 & Two techniques present in same study without explicit pipeline contract \\
+  & TI-L2 & Partial bridge: two techniques linked, but incomplete or missing ML closure \\
+  & TI-L3 & Unified pipeline: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML
+             with formal inter-stage contracts \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The L0--L3 scale in dimension TI maps to the integration-level coding used
+in Sections~\ref{sec:slr-rq3} and~\ref{app:slr-top30}. PATHCAST is positioned
+at TI-L3, AD4, with SC coverage spanning SC-D, SC-Q, and SC-C.
+
+
+% =============================================================================
+% APPENDIX E — Reading List and Pipeline Artefacts
+% =============================================================================
+\chapter{Reading List and Pipeline Artefacts}
+\label{app:E}
+
+This appendix presents the ranked reading list of 32 primary studies
+selected for in-depth synthesis and documents the scripts and persistent
+artefacts of the review pipeline.
+
+\section{Multi-Criteria Scoring Rubric}
+\label{app:slr-ranking-criteria}
+
+Table~\ref{tab:app-ranking-criteria} presents the 15-point rubric used to
+rank studies. Three seminal papers (Cook 1995, Cook 1998, Rubin 2007) are
+included regardless of score.
+
+\begin{table}[htbp]
+\centering
+\caption{Multi-criteria scoring rubric for the top-32 reading list.}
+\label{tab:app-ranking-criteria}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{7.5cm} c}
+\toprule
+\textbf{Criterion} & \textbf{Points} \\
+\midrule
+IC2 present (stochastic modelling in SE)          & +3 \\
+IC3 present (forecasting of process metrics)      & +3 \\
+IC1 present (process mining in SE)                & +2 \\
+IC4 present (repository mining for process)       & +1 \\
+PDF locally available                             & +2 \\
+Published in 2020 or later                        & +1 \\
+High-impact venue (IEEE/ACM/IST/JSS/IS/TSE)      & +1 \\
+Empirical study type (case\_study or experiment)  & +1 \\
+Contribution type = prediction or simulation      & +1 \\
+\midrule
+\textbf{Maximum score}                            & \textbf{15} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Top-32 Ranked Reading List}
+\label{app:slr-top30}
+
+\begin{table}[p]
+\centering
+\caption{Top-32 reading list with score, IC cluster, and main finding
+  summary. Papers marked $\dagger$ are forced-inclusion seminal works.}
+\label{tab:app-top30}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{c c p{3.8cm} c c p{5.7cm}}
+\toprule
+\textbf{Rank} & \textbf{Pts} & \textbf{Authors (year)} &
+  \textbf{ICs} & \textbf{PDF} & \textbf{Main finding (summary)} \\
+\midrule
+ 1 & 14 & Joshi \& Kahani (2024)~\cite{joshi2024}
+         & IC2,IC3,IC4 & \checkmark
+         & RL/MDP for GitHub PR outcome prediction \\
+ 2 & 14 & Li et al.\ (2020)~\cite{li2020}
+         & IC2,IC3 & \checkmark
+         & Hybrid SD+DES simulation for industrial project forecasting \\
+ 3 & 13 & Guinea-Cabrera et al.\ (2025)~\cite{guinea2025}
+         & IC1,IC2,IC3 & \checkmark
+         & PRIMAD Digital Twin for SDLC (pm4py + Akka + LightGBM), L2 \\
+ 4 & 13 & Ortu et al.\ (2023)~\cite{ortu2023}
+         & IC2,IC4 & \checkmark
+         & Fault-insertion/fixing Markov + SNA in Apache projects \\
+ 5 & 13 & Ben Mesmia et al.\ (2021)~\cite{benmesmia2021}
+         & IC2,IC3 & \checkmark
+         & Non-Markovian SPN for DevOps workflow duration prediction \\
+ 6 & 12 & Buliga et al.\ (2025)~\cite{buliga2025}
+         & IC1,IC3 & \checkmark
+         & Generative AI + business process simulation for what-if \\
+ 7 & 12 & Bhadra et al.\ (2023)~\cite{bhadra2023}
+         & IC2,IC3 & \checkmark
+         & SPN model of CI/CD with reliability sensitivity analysis \\
+ 8 & 12 & Bhadra (2022)~\cite{bhadra2022}
+         & IC2,IC3 & \checkmark
+         & SPN model of CI/CD pipeline delivery probability \\
+ 9 & 12 & Massitela et al.\ (2018)~\cite{massitela2018}
+         & IC2,IC3 & \checkmark
+         & Stochastic Automata Network for Waterfall team estimation \\
+10 & 11 & Incerto et al.\ (2025)~\cite{incerto2025}
+         & IC1,IC2 & \checkmark
+         & VLMC stochastic conformance; outperforms 18 state-of-art techniques \\
+11 & 11 & Jo \& Kwon (2024)~\cite{jo2024}
+         & IC2,IC4 & \checkmark
+         & Probabilistic model checking (CTL) on GitHub repos \\
+12 & 11 & Jo et al.\ (2023)~\cite{jo2023}
+         & IC2,IC4 & \checkmark
+         & DTMC collaboration patterns in GitHub (5 repos) \\
+13 & 11 & L\'opez-Pintado \& Dumas (2023)~\cite{lopezpintado2023}
+         & IC1,IC2 & ---
+         & Probabilistic resource calendars discovered from event logs \\
+14 & 11 & Caldeira et al.\ (2022)~\cite{caldeira2022}
+         & IC1,IC3 & \checkmark
+         & Process complexity $\to$ cyclomatic complexity ($r \approx 0.43$) \\
+15 & 11 & Jalote \& Kamma (2021)~\cite{jalote2021}
+         & IC1,IC2 & \checkmark
+         & Markov chains on IDE logs for programmer productivity \\
+16 & 11 & Lunesu et al.\ (2021)~\cite{lunesu2021}
+         & IC2,IC3 & \checkmark
+         & Monte Carlo risk assessment for agile software development \\
+17 & 11 & Nafreen et al.\ (2020)~\cite{nafreen2020}
+         & IC2,IC3 & ---
+         & SRGM + defect tracking for hybrid reliability forecasting \\
+18 & 11 & Gupta (2017)~\cite{gupta2017}
+         & IC1,IC3,IC4 & ---
+         & Inductive miner + predictive analytics for SW maintenance \\
+19 & 10 & Salmani et al.\ (2022)
+         & IC1,IC3 & \checkmark
+         & Process mining for requirements engineering in MDPs \\
+20 & 10 & Jeon et al.\ (2015)~\cite{jeon2015}
+         & IC2,IC3,IC4 & ---
+         & Markov-based probabilistic risk prediction from repo data \\
+21 & 10 & Tian \& Noore (2005)~\cite{tian2005}
+         & IC2,IC3 & ---
+         & Markov defect-removal modelling under code churn \\
+22 & 10 & Cook \& Wolf (1995)$^\dagger$~\cite{cook1995}
+         & IC1,IC2 & \checkmark
+         & First automated process discovery from event traces \\
+23 &  9 & Pourbafrani et al.\ (2021)~\cite{pourbafrani2021}
+         & IC1,IC3 & \checkmark
+         & SIMPT: process tree + interactive what-if simulation tool \\
+24 &  9 & Tyagi et al.\ (2021)~\cite{tyagi2021}
+         & IC2,IC3 & ---
+         & State-space Markov framework for agile planning and tracking \\
+25 &  9 & Razi et al.\ (2019)
+         & IC1,IC2 & \checkmark
+         & Conformance checking for SDLC process compliance \\
+26 &  9 & Krismayer et al.\ (2019)
+         & IC1,IC4 & \checkmark
+         & Declarative PM for repository-based process monitoring \\
+27 &  9 & Baskoro et al.\ (2019)
+         & IC3,IC4 & ---
+         & ML-based effort prediction from repository data \\
+28 &  9 & (Anon.\ 2017)
+         & IC2,IC3 & ---
+         & Probabilistic defect prediction for software product lines \\
+29 &  9 & Magennis (2015)~\cite{magennis2015}
+         & IC2,IC3 & ---
+         & Monte Carlo cycle-time economic analysis \\
+30 &  9 & Washizaki et al.\ (2015)~\cite{washizaki2015}
+         & IC2,IC3 & ---
+         & GSRM release-time prediction for open-source projects \\
+31 &  9 & Cook \& Wolf (1998)$^\dagger$~\cite{cook1998}
+         & IC1,IC2 & ---
+         & Markov/FSA/NN process discovery from event-based data \\
+32 &  2 & Rubin et al.\ (2007)$^\dagger$~\cite{rubin2007}
+         & IC1 & \checkmark
+         & First named PM framework for SDLC (ProM + SCM logs) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Review Pipeline Scripts}
+\label{app:slr-pipeline}
+
+The review was conducted using a custom Python pipeline (\texttt{pipeline/})
+operating on a structured CSV data store. Table~\ref{tab:app-pipeline}
+documents each script with its function and main invocation command.
+
+\begin{table}[htbp]
+\centering
+\caption{Review pipeline scripts and their roles.}
+\label{tab:app-pipeline}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{4.2cm} p{4.5cm} p{4.0cm}}
+\toprule
+\textbf{Script} & \textbf{Function} & \textbf{Main command} \\
+\midrule
+\texttt{pipeline/dedup.py} &
+  Cross-source deduplication (DOI + fuzzy title) &
+  \texttt{python main.py dedup} \\[2pt]
+\texttt{pipeline/enrich.py} &
+  Abstract enrichment cascade (4 sources) &
+  \texttt{python main.py enrich} \\[2pt]
+\texttt{pipeline/screening.py} &
+  T/A LLM screening via Batches API &
+  \texttt{python main.py screen -{}-run} \\[2pt]
+\texttt{pipeline/fulltext.py} &
+  FT LLM screening + manual review &
+  \texttt{python main.py fulltext -{}-run} \\[2pt]
+\texttt{pipeline/pdf\_downloader.py} &
+  PDF retrieval (Unpaywall, S2, OA) &
+  \texttt{python main.py pdf} \\[2pt]
+\texttt{pipeline/extract\_prep.py} &
+  S2 metadata enrichment + PDF copy &
+  \texttt{python pipeline/} \texttt{extract\_prep.py} \\[2pt]
+\texttt{pipeline/extract\_llm.py} &
+  Structured data extraction (LLM, 169 papers) &
+  \texttt{python pipeline/} \texttt{extract\_llm.py -{}-run} \\[2pt]
+\texttt{pipeline/synth\_llm.py} &
+  Synthesis paragraph generation per IC cluster &
+  \texttt{python pipeline/} \texttt{synth\_llm.py} \\[2pt]
+\texttt{pipeline/finalization.py} &
+  PRISMA snapshot, EC5 closure, artefact export &
+  \texttt{python main.py finalize} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Persistent Artefact Registry}
+\label{app:slr-artefacts}
+
+Table~\ref{tab:app-artefacts} lists the persistent artefacts produced by the
+review, with their role, location, and current state.
+
+\begin{table}[htbp]
+\centering
+\caption{Persistent artefacts of the review.}
+\label{tab:app-artefacts}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{6.5cm} p{3.0cm} p{2.8cm}}
+\toprule
+\textbf{File} & \textbf{Role} & \textbf{State} \\
+\midrule
+\texttt{results/screening/} \texttt{ft\_screening\_results.csv}
+  & 886-paper decision log & Final \\[3pt]
+\texttt{results/extraction/} \texttt{extraction\_template.csv}
+  & 169-paper extraction data & 169/169 \\[3pt]
+\texttt{results/final\_review/} \texttt{included\_studies\_current.csv}
+  & Included study set & 169 rows \\[3pt]
+\texttt{results/final\_review/} \texttt{top30\_reading\_list.csv}
+  & Ranked reading list & 32 rows \\[3pt]
+\texttt{results/final\_review/} \texttt{cap3\_synthesis\_v2.tex}
+  & LLM synthesis paragraphs & For review \\[3pt]
+\texttt{results/final\_review/} \texttt{missing\_references.bib}
+  & BibTeX for 32 missing keys & Ready to merge \\[3pt]
+\texttt{results/final\_review/} \texttt{pending\_inaccessible\_closed.csv}
+  & EC5 closure record & 148 rows \\[3pt]
+\texttt{results/final\_review/} \texttt{prisma\_summary\_current.txt}
+  & PRISMA snapshot & Final \\[3pt]
+\texttt{results/} \texttt{SLR\_EXECUCAO\_ATE\_AGORA.md}
+  & Execution log (all sessions) & Up to date \\
+\bottomrule
+\end{tabular}
+\end{table}
