@@ -1513,41 +1513,187 @@ Os parágrafos formalizam os seguintes achados / gaps documentados:
 
 ---
 
-## 32. Estado consolidado ao final de 2026-04-19
+## 32. Sessão 2026-04-19 (continuação) — Integração ao cap3 e geração de referências
 
-### 32.1. Corpus FT (fechado)
+---
+
+## 33. Atualização do `cap3_slr_revised.tex` com síntese LLM e números finais (2026-04-19)
+
+### 33.1. Script `pipeline/synth_llm.py`
+
+Novo script que gera parágrafos de síntese LaTeX por cluster IC usando `claude-sonnet-4-6`:
+
+- Lê `top30_reading_list.csv` + `extraction_template.csv`
+- Agrupa os 33 papers (top-30 + 3 seminais) em 6 clusters
+- Para cada cluster, constrói prompt com metadados completos e instrução de parágrafo
+- Chama a API de forma síncrona (6 chamadas sequenciais, ~30s total)
+- Salva resultado em `results/final_review/cap3_synthesis_v2.tex`
+
+Clusters processados:
+
+| Cluster ID | Papers | Instrução principal |
+| ---------- | ------ | ------------------- |
+| `seminal` | 3 | Arco histórico Cook&Wolf→Rubin, Markov embedding desde 1995 |
+| `ic2_ic3` | 15 | 3 sub-famílias + limitação F3 (parametrização agregada) |
+| `ic1_ic2` | 7 | Incerto/López-Pintado/Jalote + PRIMAD como L2 sem contratos |
+| `ic1_ic3` | 5 | Gupta/SIMPT/Buliga/Caldeira + ausência de absorbing-state |
+| `ic2_ic4` | 5 | Jo 2023/2024, Ortu 2023 + mapeamento de estados não-padronizado |
+| `rq3_1` | 32 | Mapeamento L0–L3 por cluster, conclusão: L3 vazio → PATHCAST |
+
+### 33.2. Mudanças aplicadas no `cap3_slr_revised.tex`
+
+**Diagrama PRISMA** — fases ELIGIBILITY e INCLUDED atualizadas:
+
+| Campo anterior | Campo novo |
+| -------------- | ---------- |
+| Full-text screened ($n=642$), 244 sem decisão | Full-text screened ($n=886$), screen-blanks pass |
+| Excluded FT $n=497$ (EC3:219, EC1:189, EC2:106, EC4:24) | Excluded FT $n=717$ (EC1:204, EC3:197, EC5:148, EC2:92, EC4:59) |
+| Provisionally included $n=143$, expected 160–180 | Studies included $n=169$, 75 com PDF |
+
+**Tabela FT screening** — substituída por breakdown detalhado por EC com percentuais.
+
+**Texto da Overview** — "143 provisionally confirmed" → "169 confirmed"; referência à extração LLM completa.
+
+**Gráfico de anos** (fig:year-dist):
+- 26 barras (inclui 2005, antes omitido)
+- Dados: 1995–2026, pico em 2021 ($n=15$)
+- `ymax=17`, labels actualizados
+
+**Gráfico de ICs** (fig:ic-dist):
+
+| IC | Anterior ($n=143$) | Novo ($n=169$) |
+| -- | ------------------ | -------------- |
+| IC1 (PM in SE) | 104 (72.7%) | 121 (71.6%) |
+| IC2 (Stochastic) | 44 (30.8%) | 52 (30.8%) |
+| IC3 (Forecasting) | 23 (16.1%) | 29 (17.2%) |
+| IC4 (MSR) | 41 (28.7%) | 45 (26.6%) |
+
+**QA table** — atualizada: 169 total, 76 avaliados, 93 pendentes.
+
+**6 blocos de síntese inseridos** nas subseções corretas:
+
+| Bloco | Destino | Ação |
+| ----- | ------- | ----- |
+| ANCHOR (arco seminal) | `\subsubsection{RQ2.1}` | Inserido antes do texto existente |
+| IC2+IC3 stochastic (2 §) | `\subsubsection{RQ2.2}` | Substituiu parágrafo "PDF analysis sharpens..." |
+| IC1+IC2 PM+stoch (2 §) | `\subsubsection{RQ2.2}` | Adicionado após IC2+IC3 |
+| IC1+IC3 PM+forecast (2 §) | `\subsubsection{RQ2.2}` | Adicionado após IC1+IC2 |
+| IC2+IC4 event logs (1 §) | `\subsubsection{RQ1.2}` | Adicionado ao fim da subseção |
+| RQ3.1 integration (1 §) | `\subsubsection{RQ3.1}` | Substituiu parágrafo de integração L0–L3 |
+
+**Tabela de posicionamento** (tab:positioning) — coluna `Example` atualizada com PRIMAD, Incerto, López-Pintado como exemplares L2.
+
+**Discussion F1–F5** — números atualizados para $n=169$:
+- F1: 121/169 (71.6%) IC1; 29/169 (17.2%) IC3
+- F3: 52/169 (30.8%) IC2; 18 papers IC2∩IC3 (10.7%)
+- F4: 18 papers com IC2+IC3 (10.7%); PRIMAD citado como antecedente L2
+
+**Chapter Summary** — reescrito com fluxo completo: LLM rounds + screen-blanks + EC5 + extração; síntese por cluster IC; conclusão L3 vazio.
+
+### 33.3. Artefatos produzidos
+
+| Artefato | Descrição |
+| -------- | --------- |
+| `pipeline/synth_llm.py` | Script de síntese LLM por cluster, reutilizável |
+| `results/final_review/cap3_synthesis_v2.tex` | 6 parágrafos gerados por `claude-sonnet-4-6` para revisão |
+| `cap3_slr_revised.tex` | Arquivo da tese atualizado com todos os números finais e 6 blocos inseridos |
+
+---
+
+## 34. Geração de referências BibTeX faltantes (2026-04-19)
+
+### 34.1. Processo
+
+1. Extraído o conjunto de chaves `\cite{}` usadas em `cap3_slr_revised.tex` via regex Python
+2. Comparado com as chaves já presentes no `.bib` principal
+3. Identificadas **32 chaves faltantes**
+4. Geradas entradas BibTeX para cada uma:
+   - Metadados extraídos de `extraction_template.csv` (DOI, título, autores, venue, ano)
+   - 7 entradas de conhecimento de base (papers seminais + protocolo SLR)
+
+### 34.2. Arquivo gerado
+
+**`results/final_review/missing_references.bib`** — 32 entradas organizadas por grupo:
+
+| Grupo | Chaves |
+| ----- | ------ |
+| Protocolo SLR | `Wohlin2024`, `dyba2008`, `page2021`, `syriani2023`, `khraisha2024` |
+| Seminais PM+SE | `cook1995`, `rubin2007`, `whittaker1994` |
+| IC2+IC3 (stochastic) | `joshi2024`, `jeon2015`, `tian2005`, `tyagi2021`, `washizaki2015`, `massitela2018`, `benmesmia2021`, `bhadra2022`, `bhadra2023`, `li2020`, `lunesu2021`, `magennis2015`, `nafreen2020` |
+| IC1+IC2 (PM+stochastic) | `incerto2025`, `lopezpintado2023`, `jalote2021`, `guinea2025` |
+| IC1+IC3 (PM+forecasting) | `gupta2017`, `pourbafrani2021`, `buliga2025`, `caldeira2022` |
+| IC2+IC4 (GitHub Markov) | `jo2023`, `jo2024`, `ortu2023` |
+
+### 34.3. Pontos de atenção
+
+- **`Wohlin2024`**: gerado com o paper de 2014 (EASE 2014, canonical snowballing reference). Verificar se há versão 2024 específica no `.bib` original.
+- **`syriani2023`**: gerado como preprint arXiv (2307.06464). Verificar se publicado em venue definitivo.
+- Todos os demais têm DOI real extraído do Semantic Scholar via `extraction_template.csv`.
+
+---
+
+## 35. Estado consolidado ao final de 2026-04-19 (atualizado)
+
+### 35.1. Corpus FT (fechado)
 
 | Decisão | n |
 | ------- | - |
 | include | **169** |
-| exclude | **717** |
+| exclude | **717** (EC1:204, EC3:197, EC5:148, EC2:92, EC4:59) |
 | pending | **0** |
 | blank   | **0** |
 | **TOTAL** | **886** |
 
-### 32.2. Fase de extração
+### 35.2. Fase de extração de dados
 
 | Item | Estado |
 | ---- | ------ |
-| `extraction_template.csv` | 169 linhas, 35 colunas |
-| PDFs copiados para extração | 75 / 169 |
+| `extraction_template.csv` | 169 linhas, 35 colunas, 169/169 `main_finding` |
+| PDFs para extração | 75 / 169 |
 | Metadados S2 enriquecidos | 155 / 169 com authors |
-| main_finding preenchido (LLM) | **169 / 169** |
-| quality_score / extraction_notes | pendente (revisão manual) |
+| `top30_reading_list.csv` | 32 papers rankeados, score 9–14 |
+| `quality_score` / `extraction_notes` | Pendente (revisão manual) |
 
-### 32.3. Artefatos prontos para escrita da tese
+### 35.3. Escrita do cap3 — estado atual
 
-| Artefato | Uso |
-| -------- | --- |
-| `top30_reading_list.csv` | Guia de leitura aprofundada para síntese qualitativa |
-| `cap3_synthesis_draft.tex` | Parágrafos prontos para inserção no cap3_SLR.tex |
-| `extraction_template.csv` | Base de dados completa para tabelas e gráficos |
-| `pending_inaccessible_closed.csv` | Registro EC5 para nota de rodapé PRISMA |
+| Componente | Estado |
+| ---------- | ------ |
+| Diagrama PRISMA | **Atualizado** com números finais (169/717/886) |
+| Gráficos (ano, IC, técnica, evidência) | **Atualizado** para $n=169$ |
+| Tabela FT screening | **Atualizada** com breakdown EC1–EC5 |
+| 6 blocos de síntese por cluster | **Inseridos** no cap3 |
+| Tabela de posicionamento (L0–L3) | **Atualizada** com exemplares L2 |
+| Discussion F1–F5 | **Atualizada** com $n=169$ |
+| Chapter Summary | **Reescrito** com fluxo completo |
+| Chaves `\cite{}` com entrada no `.bib` | **32 entradas** em `missing_references.bib` |
+| `reading_notes` (top-30) | Pendente (leitura manual) |
+| `quality_score` (QA checklist) | Pendente (leitura manual) |
 
-### 32.4. Próximas ações prioritárias
+### 35.4. Artefatos do projeto — lista completa
 
-1. **Ler os 32 papers do top-30** — especialmente os 14 do cluster IC2+IC3 e os 2 papers PRIMAD/Incerto que mais se aproximam do PATHCAST
-2. **Inserir `cap3_synthesis_draft.tex` no `cap3_SLR.tex`** e compilar
-3. **Preencher `quality_score`** para os top-30 (critérios QA da SLR)
-4. **Gerar tabelas e figuras** a partir de `extraction_template.csv` (distribuição por técnica, por ano, por IC)
-5. **Atualizar PRISMA flow diagram** com os números finais (169 / 717 / 886)
+| Artefato | Descrição |
+| -------- | --------- |
+| `results/extraction/extraction_template.csv` | 169 estudos, 35 colunas, extração LLM completa |
+| `results/extraction/pdfs/` | 75 PDFs copiados |
+| `results/final_review/top30_reading_list.csv` | Lista priorizada de 32 papers para leitura |
+| `results/final_review/cap3_synthesis_draft.tex` | Síntese v1 (gerada manualmente em sessão anterior) |
+| `results/final_review/cap3_synthesis_v2.tex` | Síntese v2 gerada por `claude-sonnet-4-6` via `synth_llm.py` |
+| `results/final_review/missing_references.bib` | 32 entradas BibTeX faltantes para o `.bib` principal |
+| `results/final_review/pending_inaccessible_closed.csv` | 148 papers EC5 para nota PRISMA |
+| `results/final_review/included_studies_current.csv` | 169 estudos incluídos |
+| `results/final_review/prisma_summary_current.txt` | Snapshot PRISMA final |
+| `cap3_slr_revised.tex` | Capítulo 3 da tese — versão atualizada |
+| `pipeline/extract_prep.py` | Prepara pasta de extração + S2 enrichment |
+| `pipeline/extract_llm.py` | Extração estruturada LLM (batch Anthropic) |
+| `pipeline/synth_llm.py` | Síntese por cluster IC (API síncrona) |
+
+### 35.5. Próximas ações prioritárias
+
+1. **Copiar `missing_references.bib`** para o `.bib` principal da tese e compilar o LaTeX
+2. **Ler os 32 papers do top-30** e preencher `reading_notes` em `top30_reading_list.csv`
+3. **Revisar `cap3_synthesis_v2.tex`** — ajustar os 6 parágrafos conforme leitura dos papers
+4. **Preencher `quality_score`** (QA checklist) para os top-32
+5. **Gerar tabelas e figuras adicionais** do cap3 a partir de `extraction_template.csv`:
+   - Distribuição por técnica PM e técnica estocástica
+   - Distribuição por tipo de estudo (case_study/experiment/simulation/theoretical)
+   - Heatmap IC × ano
