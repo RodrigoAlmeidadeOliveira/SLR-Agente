@@ -135,6 +135,11 @@ def _s2_enrich(included: list[dict]) -> dict[str, dict]:
 
     enriched: dict[str, dict] = {}
 
+    api_key = os.getenv("S2_API_KEY") or os.getenv("SEMANTIC_SCHOLAR_API_KEY", "")
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["x-api-key"] = api_key
+
     for start in range(0, len(dois), S2_CHUNK):
         chunk = dois[start : start + S2_CHUNK]
         ids = [f"DOI:{doi}" for _, doi in chunk]
@@ -143,6 +148,7 @@ def _s2_enrich(included: list[dict]) -> dict[str, dict]:
                 S2_BATCH_URL,
                 params={"fields": S2_FIELDS},
                 json={"ids": ids},
+                headers=headers,
                 timeout=30,
             )
             if resp.status_code == 200:

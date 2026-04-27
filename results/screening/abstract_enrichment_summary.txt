@@ -1,14 +1,12 @@
 SLR PATHCAST — Abstract Enrichment Summary
 ==================================================
 Queue total: 886
-With abstract: 642
-Without abstract: 244
+With abstract: 648
+Without abstract: 238
 
 By source:
-  openalex: 371 (57.79%)
-  preexisting_or_unknown: 147 (22.90%)
-  core: 74 (11.53%)
-  crossref: 31 (4.83%)
-  semanticscholar: 19 (2.96%)
+  preexisting_or_unknown: 642 (99.07%)
+  core: 5 (0.77%)
+  manual_scopus: 1 (0.15%)
 
 CSV detail: results/screening/abstract_enrichment_summary.csv

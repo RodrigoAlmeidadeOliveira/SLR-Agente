@@ -207,7 +207,7 @@ def enrich_abstracts_with_checkpoints(
 
 def _enrich_s2(doi_index: dict, delay: float) -> int:
     """Preenche abstracts via Semantic Scholar Batch API."""
-    api_key = os.getenv("S2_API_KEY", "")
+    api_key = os.getenv("S2_API_KEY") or os.getenv("SEMANTIC_SCHOLAR_API_KEY", "")
     headers = {"Content-Type": "application/json"}
     if api_key:
         headers["x-api-key"] = api_key
@@ -445,7 +445,7 @@ def _enrich_by_title_cascade(papers: list, delay: float, after_source=None) -> i
 
 
 def _s2_fetch_by_title(title: str, year: Optional[int]) -> tuple[str, str]:
-    api_key = os.getenv("S2_API_KEY", "")
+    api_key = os.getenv("S2_API_KEY") or os.getenv("SEMANTIC_SCHOLAR_API_KEY", "")
     headers = {}
     if api_key:
         headers["x-api-key"] = api_key

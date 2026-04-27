@@ -480,7 +480,7 @@ def download_pdfs(
     from tqdm import tqdm
     from colorama import Fore, Style
 
-    s2_api_key   = os.getenv("S2_API_KEY", "")
+    s2_api_key   = os.getenv("S2_API_KEY") or os.getenv("SEMANTIC_SCHOLAR_API_KEY", "")
     core_api_key = os.getenv("CORE_API_KEY", "").strip()
 
     # Carrega manifesto anterior

@@ -467,7 +467,7 @@ def enrich_oa_urls(papers: list[dict], delay: float = 3.0) -> int:
 
     logger.info(f"[FT/OA] Buscando URLs OA para {len(need):,} papers com DOI...")
 
-    api_key = os.getenv("S2_API_KEY", "")
+    api_key = os.getenv("S2_API_KEY") or os.getenv("SEMANTIC_SCHOLAR_API_KEY", "")
     headers = {"Content-Type": "application/json"}
     if api_key:
         headers["x-api-key"] = api_key
