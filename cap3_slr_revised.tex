@@ -1497,10 +1497,22 @@ geographic and temporal bias. The deferred high-recall auxiliary corpus
 queries; corresponds to the difference between the 5{,}783 unique deduplicated
 records and the 2{,}340-paper operational working set) provides a mechanism
 for expansion if gaps in the confirmed 169-study set are identified. A
-sensitivity-check protocol over a stratified random 200-paper subsample of
-the auxiliary corpus is implemented in
-\texttt{pipeline/sensitivity.py} and is queued for execution in the
-camera-ready cycle.
+sensitivity check over a random 200-paper subsample of the auxiliary corpus
+was executed (\texttt{pipeline/sensitivity.py}) using the same T/A LLM
+screener as the working-set protocol. The result is reported in
+Table~\ref{tab:sensitivity}: 12 of the 200 sampled papers (6.0\%) returned a
+T/A \texttt{include} decision and 59 (29.5\%) returned \texttt{maybe},
+yielding a point-estimated 228 additional candidate includes if the
+auxiliary corpus were screened in full ($\approx 135\%$ of the current
+169-study confirmed set, with an upper bound of 1{,}351 when all
+\texttt{maybe} decisions are treated as potential includes). The auxiliary
+corpus is therefore \emph{not} marginal: a full-corpus screening pass over
+the 3{,}807 deferred records is queued for the camera-ready cycle and is
+expected to expand the confirmed set materially. The 12 sample-stage
+\texttt{include} candidates are recorded in \texttt{results/sensitivity/}
+and constitute an immediate priority for full-text retrieval.
+
+\input{results/sensitivity/sensitivity_report}
 
 A second external-validity exposure concerns the 148 papers closed under
 EC5 (full text inaccessible). To bound the residual recall risk, an

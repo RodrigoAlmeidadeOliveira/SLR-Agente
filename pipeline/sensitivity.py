@@ -41,7 +41,7 @@ REPORT_TEX = OUT_DIR / "sensitivity_report.tex"
 
 MODEL = "claude-haiku-4-5-20251001"
 MAX_TOKENS = 512
-N_WORKERS = 4
+N_WORKERS = 2
 RANDOM_SEED = 20260428
 
 

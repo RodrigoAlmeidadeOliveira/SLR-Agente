@@ -5,15 +5,15 @@ Auxiliary corpus total: 3807
 Working-set confirmed includes: 169
 
 T/A decisions on the sample:
-  include: 0 (0.0%)
-  maybe:   0 (0.0%)
-  exclude: 0 (0.0%)
-  errors:  200
+  include: 12 (6.0%)
+  maybe:   59 (29.5%)
+  exclude: 129 (64.5%)
+  errors:  0
 
-Expected new includes if full auxiliary screened: 0
-Upper bound (treating all maybe as potential include): 0
-Sensitivity ratio (expected_new / current_includes): 0.0%
-Sensitivity ratio (upper bound / current_includes):  0.0%
+Expected new includes if full auxiliary screened: 228
+Upper bound (treating all maybe as potential include): 1351
+Sensitivity ratio (expected_new / current_includes): 135.2%
+Sensitivity ratio (upper bound / current_includes):  799.7%
 
 Interpretation:
-  Auxiliary corpus is unlikely to materially change the F1-F5 evidence base.
+  Auxiliary corpus likely contains a substantive number of additional includes; full screening recommended.

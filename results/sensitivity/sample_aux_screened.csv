@@ -1,0 +1,1812 @@
+internal_id,title,doi,year,source_db,ta_decision,ta_rationale,ta_matched_ic,ta_matched_ec,raw
+6098eec9,Eryn: a multipurpose sampler for Bayesian inference,10.1093/mnras/stad2939,2023,wos,exclude,"O artigo apresenta um método MCMC (Markov Chain Monte Carlo) para inferência Bayesiana em astronomia/física (ondas gravitacionais), não aplicado a processos de software. Atende EC1 (domínio fora de SW) de forma decisiva.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo apresenta um método MCMC (Markov Chain Monte Carlo) para inferência Bayesiana em astronomia/física (ondas gravitacionais), não aplicado a processos de software. Atende EC1 (domínio fora de SW) de forma decisiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"","
+d66358dc,From Source to Target: Leveraging Transfer Learning for Predictive Process Monitoring in Organizations,10.1007/s12599-025-00969-9,2025,springer,maybe,"Título sugere relevância potencial para IC3 (forecasting em processos) e IC1 (process monitoring), mas abstract ausente impede confirmação de escopo em SW. Transfer learning em predictive process monitoring pode ser genérico (BPM, manufatura) ou específico de SW; sem resumo, não há evidência suficiente para inclusão segura.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere relevância potencial para IC3 (forecasting em processos) e IC1 (process monitoring), mas abstract ausente impede confirmação de escopo em SW. Transfer learning em predictive process monitoring pode ser genérico (BPM, manufatura) ou específico de SW; sem resumo, não há evidência suficiente para inclusão segura."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""forecasting"",
+    ""insufficient_abs"
+b44c009d,openTSNE: a modular Python library for t-SNE dimensionality reduction and embedding,10.1101/731877,2019,snowball,exclude,"O paper trata de t-SNE, uma técnica de redução de dimensionalidade para visualização de dados biológicos. Não há qualquer conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios de software. EC1 (domínio fora de SW) e EC3 (algoritmo sem aplicação a processos de SW) são claramente aplicáveis.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de t-SNE, uma técnica de redução de dimensionalidade para visualização de dados biológicos. Não há qualquer conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios de software. EC1 (domínio fora de SW) e EC3 (algoritmo sem aplicação a processos de SW) são claramente aplicáveis."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [],
+"
+c5fe80d8,Software Process Automation in Perspective,10.1007/978-3-642-79252-6_1,1995,springer,maybe,"O título sugere relevância ao domínio de automação de processos de software, mas o abstract está ausente. Sem conteúdo do resumo, não é possível verificar se o paper atende critérios específicos de process mining, modelagem estocástica, forecasting ou mineração de repositórios. A data (1995) e tipo (chapter) indicam possível trabalho perspectivo/survey, que poderia ser EC4 se não tratar PM ou esto",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere relevância ao domínio de automação de processos de software, mas o abstract está ausente. Sem conteúdo do resumo, não é possível verificar se o paper atende critérios específicos de process mining, modelagem estocástica, forecasting ou mineração de repositórios. A data (1995) e tipo (chapter) indicam possível trabalho perspectivo/survey, que poderia ser EC4 se não tratar PM ou estocástico em SE."",
+  ""matched_ic"": [],
+  ""matched_ec"""
+8c7768a3,Time pressure in software engineering: A systematic review,10.1016/j.infsof.2020.106257,2020,wos,exclude,"Embora trate processos de desenvolvimento de software, o paper é uma revisão secundária (SLR) sobre time pressure em SE, não aplicando process mining, modelagem estocástica ou forecasting de métricas de processo. Enquadra-se em EC4 (revisão secundária fora do escopo específico de PM/estocástico em processos de SW).",,EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Embora trate processos de desenvolvimento de software, o paper é uma revisão secundária (SLR) sobre time pressure em SE, não aplicando process mining, modelagem estocástica ou forecasting de métricas de processo. Enquadra-se em EC4 (revisão secundária fora do escopo específico de PM/estocástico em processos de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""software_develop"
+bd7d524f,Algorithm for Weighted Hasse Diagram and Its Application,10.1109/CISE.2010.5677073,2010,ieee,exclude,"O artigo trata de algoritmos de teoria dos grafos (diagramas de Hasse ponderados) e métodos de Monte Carlo Markov Chain para ranking, mas não há evidência de aplicação a processos de desenvolvimento de software, repositórios de código, event logs de SW, ou qualquer contexto de engenharia de software. É um trabalho puramente teórico/matemático sem vinculação ao escopo da SLR PATHCAST.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de algoritmos de teoria dos grafos (diagramas de Hasse ponderados) e métodos de Monte Carlo Markov Chain para ranking, mas não há evidência de aplicação a processos de desenvolvimento de software, repositórios de código, event logs de SW, ou qualquer contexto de engenharia de software. É um trabalho puramente teórico/matemático sem vinculação ao escopo da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC2"",
+    ""EC3""
+ "
+5c4c0e7f,Studying Developer Build Issues and Debugger Usage via Timeline Analysis in Visual Studio IDE,,2018,ieee,include,O paper atende IC1 (process mining aplicado a artefatos de SW via análise de event logs do IDE) e IC3 (forecasting de métrica de processo - throughput de desenvolvedor). Utiliza timeline analysis em event logs do Visual Studio para descobrir padrões de processo de desenvolvimento. Nenhum EC decisivo se aplica.,IC1|IC3,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper atende IC1 (process mining aplicado a artefatos de SW via análise de event logs do IDE) e IC3 (forecasting de métrica de processo - throughput de desenvolvedor). Utiliza timeline analysis em event logs do Visual Studio para descobrir padrões de processo de desenvolvimento. Nenhum EC decisivo se aplica."",
+  ""matched_ic"": [""IC1"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""event_log"",
+    ""software_process"","
+c5e9fca4,Comparative analysis of meta-analysis methods: When to use which?,10.1049/ic.2011.0005,2011,ieee,exclude,"O artigo é sobre meta-análise de métodos estatísticos para síntese de resultados em revisões sistemáticas de engenharia de software, não sobre process mining, modelagem estocástica de processos de desenvolvimento de software, forecasting de métricas de processo, ou mineração de repositórios para descoberta/melhoria de processos. Apesar de usar simulação Monte Carlo, não aplica essas técnicas à aná",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo é sobre meta-análise de métodos estatísticos para síntese de resultados em revisões sistemáticas de engenharia de software, não sobre process mining, modelagem estocástica de processos de desenvolvimento de software, forecasting de métricas de processo, ou mineração de repositórios para descoberta/melhoria de processos. Apesar de usar simulação Monte Carlo, não aplica essas técnicas à análise, descoberta ou predição de processos de SW b"
+416ad2be,"Dynamic, Extensible and Context-Aware Exception Handling for Workflows",10.1007/978-3-540-76848-7_8,2007,springer,exclude,"O título refere-se a tratamento de exceções em workflows, um tema de BPM genérico. Sem abstract disponível e sem evidência no título de aplicação a processos de software ou uso de process mining/modelagem estocástica/forecasting, não há base suficiente para inclusão. A ausência de abstract impede avaliação confiável contra critérios de inclusão.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a tratamento de exceções em workflows, um tema de BPM genérico. Sem abstract disponível e sem evidência no título de aplicação a processos de software ou uso de process mining/modelagem estocástica/forecasting, não há base suficiente para inclusão. A ausência de abstract impede avaliação confiável contra critérios de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""softw"
+268aaf70,ProEva: Runtime Proactive Performance Evaluation Based on Continuous-Time Markov Chains,10.1109/ICSE.2017.51,2017,ieee,exclude,"O paper propõe uma técnica de model checking com CTMCs para prever degradação de performance em sistemas de software em tempo de execução, mas não aborda descoberta de processos, mineração de repositórios ou análise de event logs de processos de desenvolvimento. O foco é em monitoramento e previsão de QoS de sistemas em execução, não em processos de SW (IC1-4 não são atendidos). EC2 se aplica: 'so",,EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper propõe uma técnica de model checking com CTMCs para prever degradação de performance em sistemas de software em tempo de execução, mas não aborda descoberta de processos, mineração de repositórios ou análise de event logs de processos de desenvolvimento. O foco é em monitoramento e previsão de QoS de sistemas em execução, não em processos de SW (IC1-4 não são atendidos). EC2 se aplica: 'software' é a ferramenta/sistema sendo monitorado, "
+2f6314f8,Automated Business Process Management,10.1007/978-3-319-32689-4_22,2016,springer,maybe,"O título 'Automated Business Process Management' é genericamente relevante a BPM, mas sem abstract não há evidência clara de aplicação a processos de software. A ausência de resumo impede confirmação de atendimento aos critérios de inclusão (IC1-IC4) e necessita análise de texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título 'Automated Business Process Management' é genericamente relevante a BPM, mas sem abstract não há evidência clara de aplicação a processos de software. A ausência de resumo impede confirmação de atendimento aos critérios de inclusão (IC1-IC4) e necessita análise de texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_meth"
+b15d458a,Comprehensive Resilience Assessment of Distribution Network In Extreme Weather,10.1109/CIEEC60922.2024.10583051,2024,ieee,exclude,"O artigo trata de resiliência de redes de distribuição elétrica em condições climáticas extremas, não abordando processos de desenvolvimento de software. Aplica-se EC1 (domínio fora de SW): setor de energia/infraestrutura crítica, sem qualquer conexão com SW ou seus processos.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de resiliência de redes de distribuição elétrica em condições climáticas extremas, não abordando processos de desenvolvimento de software. Aplica-se EC1 (domínio fora de SW): setor de energia/infraestrutura crítica, sem qualquer conexão com SW ou seus processos."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""mont"
+15ec97c7,"Stochastic Optimization Model for Short-term Planning of Tanker Water
+Supply Systems in Urban Areas",10.1016/j.ifacol.2022.07.487,2022,wos,exclude,"O artigo trata de otimização estocástica em sistemas de distribuição de água em áreas urbanas, domínio completamente fora de engenharia de software e processos de desenvolvimento. EC1 (domínio fora de SW) é claramente aplicável.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de otimização estocástica em sistemas de distribuição de água em áreas urbanas, domínio completamente fora de engenharia de software e processos de desenvolvimento. EC1 (domínio fora de SW) é claramente aplicável."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""c"
+20d45ac6,Measuring the Compliance of Processes with Reference Models,10.1007/978-3-642-05148-7_8,2009,springer,maybe,"Título sugere relevância a conformance checking (IC1 potencial), mas ausência total de abstract impede avaliação confiável do escopo. Pode tratar BPM genérico sem aplicação a processos de SW, ou ser aplicável a SW. Requer full text para decisão.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere relevância a conformance checking (IC1 potencial), mas ausência total de abstract impede avaliação confiável do escopo. Pode tratar BPM genérico sem aplicação a processos de SW, ou ser aplicável a SW. Requer full text para decisão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  "
+ab98eb2e,Monitoring Service Systems from a Language-Action Perspective,10.1109/tsc.2010.41,2010,snowball,exclude,"O artigo trata de monitoramento de serviços e processos de negócio em nível genérico (language-action perspective, commitments, policies), sem evidência de aplicação específica a processos de desenvolvimento de software, mineração de repositórios, ou modelagem estocástica de SW. O foco em service systems abertos não atende aos critérios de intersecção com process mining em SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de monitoramento de serviços e processos de negócio em nível genérico (language-action perspective, commitments, policies), sem evidência de aplicação específica a processos de desenvolvimento de software, mineração de repositórios, ou modelagem estocástica de SW. O foco em service systems abertos não atende aos critérios de intersecção com process mining em SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],"
+a18bdf86,"Instrumental and Astrophysical Performances of SuperAGILE
+on-board AGILE gamma-ray mission",10.1117/12.409122,2000,wos,exclude,"Artigo sobre instrumentação de astronomia de raios-X/gama (missão AGILE). Não trata de processos de software, process mining, modelagem estocástica de processos de desenvolvimento ou forecasting de métricas de SW. Domínio claramente fora do escopo (astrofísica instrumental).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo sobre instrumentação de astronomia de raios-X/gama (missão AGILE). Não trata de processos de software, process mining, modelagem estocástica de processos de desenvolvimento ou forecasting de métricas de SW. Domínio claramente fora do escopo (astrofísica instrumental)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""for"
+464fd985,Language usage analysis for EMF metamodels on GitHub,10.1007/s10664-023-10368-x,2024,wos,exclude,"O paper analisa o uso de construtos de linguagem em metamodelos EMF no GitHub, mas não trata de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/previsão de processos de SW. É um estudo de linguagem, não de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper analisa o uso de construtos de linguagem em metamodelos EMF no GitHub, mas não trata de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/previsão de processos de SW. É um estudo de linguagem, não de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""repository_mining""
+  ],
+  ""software_context"": ""not_software_"
+dc44be7d,Proposals for Future BPM Research Directions,10.1007/978-3-319-08222-6_1,2014,springer,maybe,"Título genérico sobre direções futuras em BPM sem abstract disponível. Impossível determinar se aborda process mining, modelagem estocástica ou forecasting em contexto de software development processes sem texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título genérico sobre direções futuras em BPM sem abstract disponível. Impossível determinar se aborda process mining, modelagem estocástica ou forecasting em contexto de software development processes sem texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""unclear"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"""
+7bd50666,FUNSOFT nets: a Petri-net based software process modeling language,10.1109/iwssd.1991.213063,2002,snowball,maybe,"O artigo aborda modelagem de processos de software usando Petri nets (FUNSOFT nets), o que potencialmente atende IC2 (modelagem estocástica em processos de SW). Contudo, o abstract é brevíssimo e não menciona explicitamente: (1) se há análise de dados reais de processos de SW, (2) se há componente estocástica além da estrutura Petri net, ou (3) se há aplicação a artefatos concretos de software (lo",IC2,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O artigo aborda modelagem de processos de software usando Petri nets (FUNSOFT nets), o que potencialmente atende IC2 (modelagem estocástica em processos de SW). Contudo, o abstract é brevíssimo e não menciona explicitamente: (1) se há análise de dados reais de processos de SW, (2) se há componente estocástica além da estrutura Petri net, ou (3) se há aplicação a artefatos concretos de software (logs, repositórios). A ausência de verificação direta"
+51737bad,Assessing Security to Compare Architecture Alternatives of Component-Based Systems,10.1109/QRS.2015.24,2015,ieee,exclude,"O artigo trata de avaliação de segurança em arquiteturas de componentes usando modelagem estocástica, mas não aborda processo de desenvolvimento de software, mineração de repositórios, event logs ou forecasting de métricas de processo. Foca em qualidade arquitetural estática, não em análise ou predição de processos de SW.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de avaliação de segurança em arquiteturas de componentes usando modelagem estocástica, mas não aborda processo de desenvolvimento de software, mineração de repositórios, event logs ou forecasting de métricas de processo. Foca em qualidade arquitetural estática, não em análise ou predição de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""stochastic_modeling""
+  ],
+  ""software_contex"
+c2659f3a,A Framework for the Construction and Tailoring of Engineering Development Process Models,10.1109/tem.2021.3132699,2022,snowball,exclude,"O artigo aborda construção e adaptação de modelos de processo para projetos de engenharia, mas não envolve process mining, modelagem estocástica, forecasting de métricas ou mineração de repositórios. É um framework conceitual de gestão de processo, não uma aplicação empírica de técnicas de análise de processo baseada em dados.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aborda construção e adaptação de modelos de processo para projetos de engenharia, mas não envolve process mining, modelagem estocástica, forecasting de métricas ou mineração de repositórios. É um framework conceitual de gestão de processo, não uma aplicação empírica de técnicas de análise de processo baseada em dados."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""software_project_ma"
+1ed4d48b,Unlocking learner engagement and performance: A multidimensional approach to mapping learners to learning cohorts,10.1007/s10639-024-12782-0,2024,springer,exclude,"Título e domínio indicam contexto educacional (learner engagement, learning cohorts), sem evidência de processo de software, process mining ou modelagem estocástica de desenvolvimento de SW. Abstract ausente impede confirmação, mas o título não sugere relevância ao escopo PATHCAST.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título e domínio indicam contexto educacional (learner engagement, learning cohorts), sem evidência de processo de software, process mining ou modelagem estocástica de desenvolvimento de SW. Abstract ausente impede confirmação, mas o título não sugere relevância ao escopo PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"""
+40009ea6,The state of adoption and the challenges of systematic variability management in industry,10.1007/s10664-019-09787-6,2020,springer,maybe,"Título refere-se a gestão de variabilidade em software (possível relevância a processos de SW), mas sem abstract disponível é impossível confirmar se aborda process mining, modelagem estocástica, forecasting ou mineração de repositórios. Requer leitura de full text para classificação definitiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título refere-se a gestão de variabilidade em software (possível relevância a processos de SW), mas sem abstract disponível é impossível confirmar se aborda process mining, modelagem estocástica, forecasting ou mineração de repositórios. Requer leitura de full text para classificação definitiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochast"
+083f2b59,Ising-Model Optimizer with Parallel-Trial Bit-Sieve Engine,10.1007/978-3-319-61566-0_39,2018,springer,exclude,"O título refere-se a um otimizador baseado em modelo Ising com engine paralela, sem indicação de aplicação a processos de software ou process mining. Sem abstract disponível, não há evidência de relevância ao escopo PATHCAST (process mining, modelagem estocástica ou forecasting em processos de SW).",,EC3|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a um otimizador baseado em modelo Ising com engine paralela, sem indicação de aplicação a processos de software ou process mining. Sem abstract disponível, não há evidência de relevância ao escopo PATHCAST (process mining, modelagem estocástica ou forecasting em processos de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3"", ""EC2""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""ot"
+870f5d96,Promote-pl,10.1145/3382025.3414970,2020,snowball,exclude,"O paper apresenta um modelo de processo conceitual para engenharia de linhas de produtos de software, sem análise de event logs, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. É um trabalho prescritivo/normativo, não empírico sobre dados de processos reais.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper apresenta um modelo de processo conceitual para engenharia de linhas de produtos de software, sem análise de event logs, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. É um trabalho prescritivo/normativo, não empírico sobre dados de processos reais."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""software_process""],
+  ""software_context"": ""software_development_process"",
+  ""stoc"
+b831ecc6,Research on Web Data Mining and Its Application in Electronic Commerce,10.1109/CISE.2009.5363366,2009,ieee,exclude,"O artigo trata de web data mining e e-commerce, domínios fora do escopo de processos de software. Não há evidência de aplicação a process mining em artefatos de SW, modelagem estocástica de processos de desenvolvimento, forecasting de métricas de processo de SW, ou mineração de repositórios de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de web data mining e e-commerce, domínios fora do escopo de processos de software. Não há evidência de aplicação a process mining em artefatos de SW, modelagem estocástica de processos de desenvolvimento, forecasting de métricas de processo de SW, ou mineração de repositórios de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"
+ad3d7613,The Process of Business Process Management,10.1007/978-3-642-45103-4_15,2015,springer,maybe,"Título genérico de BPM sem abstract disponível. Impossível determinar se aborda process mining, modelagem estocástica ou forecasting em processos de SW especificamente, ou se é apenas handbook genérico sobre BPM.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título genérico de BPM sem abstract disponível. Impossível determinar se aborda process mining, modelagem estocástica ou forecasting em processos de SW especificamente, ou se é apenas handbook genérico sobre BPM."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  "
+e4087bbe,Does This Make Sense? Machine Learning-Based Detection of&#xa0;Semantic Anomalies in&#xa0;Business Processes,10.1007/978-3-031-41620-0_10,2023,springer,maybe,"Título sugere aplicação de ML a detecção de anomalias em processos de negócio, potencialmente relevante a process mining em SW. Porém, abstract ausente e impossível confirmar: (1) se o domínio é SW ou genérico de BPM; (2) se utiliza event logs ou process mining; (3) se a análise é de processos de desenvolvimento de software. Venue BPM pode abranger ambos contextos.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere aplicação de ML a detecção de anomalias em processos de negócio, potencialmente relevante a process mining em SW. Porém, abstract ausente e impossível confirmar: (1) se o domínio é SW ou genérico de BPM; (2) se utiliza event logs ou process mining; (3) se a análise é de processos de desenvolvimento de software. Venue BPM pode abranger ambos contextos."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"""
+da9d41da,Integrated Declarative Process and Decision Discovery of the Emergency Care Process,10.1007/s10796-020-10078-5,2020,springer,exclude,"O artigo trata de descoberta de processos em contexto de cuidados de emergência (healthcare), não de processos de desenvolvimento de software. Sem abstract disponível, a evidência de título aponta claramente para domínio médico, não SE, caracterizando EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de descoberta de processos em contexto de cuidados de emergência (healthcare), não de processos de desenvolvimento de software. Sem abstract disponível, a evidência de título aponta claramente para domínio médico, não SE, caracterizando EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_"
+20215571,Enhanced BiGAN for multi-task learning in business process prediction: next activity and timestamp prediction tasks,10.1007/s10586-025-05733-y,2025,springer,maybe,"O título sugere aplicação em business process prediction com forecasting de atividades e timestamps, potencialmente alinhado a IC3 e IC2. Contudo, sem abstract disponível, não é possível confirmar se o domínio é processos de software (IC4 não claramente evidenciado) ou BPM genérico. Abstract ausente impede avaliação robusta de exclusões (EC1 sobre domínio) e inclusões.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere aplicação em business process prediction com forecasting de atividades e timestamps, potencialmente alinhado a IC3 e IC2. Contudo, sem abstract disponível, não é possível confirmar se o domínio é processos de software (IC4 não claramente evidenciado) ou BPM genérico. Abstract ausente impede avaliação robusta de exclusões (EC1 sobre domínio) e inclusões."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_min"
+5c43edc7,"Identifying key success factors for Globally Distributed Software
+Development project using simulation: A case study",,2008,wos,include,"O paper apresenta um modelo de simulação para processos de desenvolvimento de software distribuído globalmente (GSD), analisando fatores de sucesso através de simulação e análise de sensibilidade. Atende IC2 (modelagem estocástica de processos de SW) e IC4 (análise de processos de desenvolvimento de software), sem evidência clara de exclusão.",IC2|IC4,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper apresenta um modelo de simulação para processos de desenvolvimento de software distribuído globalmente (GSD), analisando fatores de sucesso através de simulação e análise de sensibilidade. Atende IC2 (modelagem estocástica de processos de SW) e IC4 (análise de processos de desenvolvimento de software), sem evidência clara de exclusão."",
+  ""matched_ic"": [""IC2"", ""IC4""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""stochastic_modeling"",
+  "
+ee760ea2,Semantic Web Service Coordination,10.1007/978-3-7643-8575-0_4,2008,springer,maybe,"Título sugere coordenação de serviços Web semânticos, domínio potencialmente fora de processos de SW. Abstract ausente impede verificação de relevância a process mining, modelagem estocástica ou forecasting em desenvolvimento de software. Necessário acesso ao texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere coordenação de serviços Web semânticos, domínio potencialmente fora de processos de SW. Abstract ausente impede verificação de relevância a process mining, modelagem estocástica ou forecasting em desenvolvimento de software. Necessário acesso ao texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"
+f0d56208,Cone Codebook for Limited Feedback Beamforming over Correlated MIMO Channels,10.1109/VTCSpring.2013.6692487,2013,ieee,exclude,"O paper trata de engenharia de comunicações (beamforming em canais MIMO), não de processos de software ou process mining. Embora use Markov e Monte Carlo, estas são técnicas genéricas em telecomunicações, sem qualquer ligação a desenvolvimento de software, event logs, repositórios ou processos de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de engenharia de comunicações (beamforming em canais MIMO), não de processos de software ou process mining. Embora use Markov e Monte Carlo, estas são técnicas genéricas em telecomunicações, sem qualquer ligação a desenvolvimento de software, event logs, repositórios ou processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""markov"", ""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stoch"
+9159dcab,Polled Digital Cell Sorter (p-DCS): Automatic identification of hematological cell types from single cell RNA-sequencing clusters,10.1186/s12859-019-2951-x,2019,snowball,exclude,"O artigo trata de bioinformática e análise de dados de sequenciamento de RNA de célula única (scRNA-seq) para identificação de tipos celulares em amostras de medula óssea. Não há qualquer conexão com processos de software, engenharia de software, process mining, ou modelagem estocástica de processos de desenvolvimento de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de bioinformática e análise de dados de sequenciamento de RNA de célula única (scRNA-seq) para identificação de tipos celulares em amostras de medula óssea. Não há qualquer conexão com processos de software, engenharia de software, process mining, ou modelagem estocástica de processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+"
+431519ad,A systematic literature review of service choreography adaptation,10.1007/s11761-012-0125-z,2012,springer,exclude,"Sem abstract disponível, o título sugere foco em adaptação de coreografia de serviços (SOA/web services), não em process mining, modelagem estocástica ou forecasting de processos de desenvolvimento de software. Não há evidência de que trate processos de SW ou dados de event logs.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Sem abstract disponível, o título sugere foco em adaptação de coreografia de serviços (SOA/web services), não em process mining, modelagem estocástica ou forecasting de processos de desenvolvimento de software. Não há evidência de que trate processos de SW ou dados de event logs."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"":"
+f3f52e15,Stochastic Modeling of Star Formation Histories. III. Constraints from Physically Motivated Gaussian Processes,10.3847/1538-4357/acff64,2024,snowball,exclude,"O artigo trata de modelagem estocástica de formação estelar em galáxias (astrofísica), não de processos de desenvolvimento de software. Não há qualquer conexão com engenharia de software, process mining em artefatos de SW, ou processos de desenvolvimento.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de modelagem estocástica de formação estelar em galáxias (astrofísica), não de processos de desenvolvimento de software. Não há qualquer conexão com engenharia de software, process mining em artefatos de SW, ou processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_s"
+51225935,"SCONNA: A Stochastic Computing Based Optical Accelerator for Ultra-Fast, Energy-Efficient Inference of Integer-Quantized CNNs",10.1109/ipdps54959.2023.00061,2023,snowball,exclude,"O artigo trata de aceleração de hardware para redes neurais convolutas (CNNs) usando computação estocástica em ressonadores ópticos. Não há conexão com process mining, modelagem de processos de software, ou forecasting de métricas de processos de desenvolvimento de SW. O domínio é de aceleração de hardware/inferência de IA, não de engenharia de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de aceleração de hardware para redes neurais convolutas (CNNs) usando computação estocástica em ressonadores ópticos. Não há conexão com process mining, modelagem de processos de software, ou forecasting de métricas de processos de desenvolvimento de SW. O domínio é de aceleração de hardware/inferência de IA, não de engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  """
+5c38eab2,Generating Requirements Out of Thin Air: Towards Automated Feature Identification for New Apps,10.1109/REW.2019.00040,2019,ieee,exclude,"O artigo foca em elicitação de requisitos via mineração de app stores para identificar features em novas aplicações. Não aborda process mining em artefatos de SW, modelagem estocástica de processos, forecasting de métricas de processo, ou mineração de repositórios para descoberta/melhoria de modelos de processo de desenvolvimento. Trata-se de requirements engineering, não de análise de processos d",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo foca em elicitação de requisitos via mineração de app stores para identificar features em novas aplicações. Não aborda process mining em artefatos de SW, modelagem estocástica de processos, forecasting de métricas de processo, ou mineração de repositórios para descoberta/melhoria de modelos de processo de desenvolvimento. Trata-se de requirements engineering, não de análise de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+   "
+8f68388f,JUSTGen: Effective Test Generation for Unspecified JNI Behaviors on JVMs,10.1109/ICSE43902.2021.00151,2021,ieee,exclude,"O paper foca em teste de software (JNI test generation) e validação de comportamentos de interface, não em process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. Não atende nenhum dos critérios de inclusão IC1–IC4.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper foca em teste de software (JNI test generation) e validação de comportamentos de interface, não em process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. Não atende nenhum dos critérios de inclusão IC1–IC4."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC2"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""software_testing"",
+  ""stochastic_method"": ""none"",
+  """
+5b859827,A Toolchain for&#xa0;Checking Domain- and&#xa0;Model-Driven Properties of&#xa0;Jolie Microservices,10.1007/978-981-96-0808-9_13,2025,springer,exclude,"O artigo trata de verificação formal de propriedades em microsserviços Jolie, não abordando process mining, modelagem estocástica, forecasting ou mineração de repositórios. Sem abstract disponível e com título indicando foco em domain-driven properties e model checking, não há evidência de alinhamento com nenhum critério de inclusão (IC1-IC4).",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de verificação formal de propriedades em microsserviços Jolie, não abordando process mining, modelagem estocástica, forecasting ou mineração de repositórios. Sem abstract disponível e com título indicando foco em domain-driven properties e model checking, não há evidência de alinhamento com nenhum critério de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""no"
+0b2ae953,"Simulation as a Dynamic Tool to Reorganize Pediatric Emergency
+Department Resuscitation During the Coronavirus Disease 2019 Pandemic
+and Beyond",10.1097/PEC.0000000000002384,2021,wos,exclude,"O artigo trata de simulação de processos em um departamento de emergência pediátrica durante a pandemia de COVID-19, focando em reorganização de fluxo de pacientes e segurança de profissionais de saúde. Não há conexão com processos de desenvolvimento de software, process mining em artefatos de SW, modelagem estocástica de processos de desenvolvimento, ou forecasting de métricas de processos de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de simulação de processos em um departamento de emergência pediátrica durante a pandemia de COVID-19, focando em reorganização de fluxo de pacientes e segurança de profissionais de saúde. Não há conexão com processos de desenvolvimento de software, process mining em artefatos de SW, modelagem estocástica de processos de desenvolvimento, ou forecasting de métricas de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"
+4c9087bc,Radiation Exposure in the Lower Atmosphere during Different Periods of Solar Activity,10.3390/atmos13020166,2022,snowball,exclude,"O artigo trata de dosimetria de radiação em aviação comercial usando simulações Monte Carlo em física atmosférica. Não há relação com process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de desenvolvimento de SW ou mineração de repositórios de software. EC1 claramente aplicável: domínio fora de software (física/aviação).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de dosimetria de radiação em aviação comercial usando simulações Monte Carlo em física atmosférica. Não há relação com process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de desenvolvimento de SW ou mineração de repositórios de software. EC1 claramente aplicável: domínio fora de software (física/aviação)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""softwa"
+0b407a90,Service Engineering,10.1007/978-3-642-17599-2_8,2010,springer,maybe,"Título genérico 'Service Engineering' sem abstract disponível. Impossível confirmar se trata processos de software ou domínios fora do escopo (serviços genéricos, manufatura de serviços). Capítulo de livro de 2010 sem evidências textuais de process mining, modelagem estocástica ou forecasting em SW.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título genérico 'Service Engineering' sem abstract disponível. Impossível confirmar se trata processos de software ou domínios fora do escopo (serviços genéricos, manufatura de serviços). Capítulo de livro de 2010 sem evidências textuais de process mining, modelagem estocástica ou forecasting em SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stoc"
+8e79c53f,Integration of Software Process Assessment and Modeling,10.1109/picmet.2007.4349583,2007,snowball,exclude,"O artigo trata de integração entre modelagem de processo descritiva e avaliação de processo (CMMI/SPICE), mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em melhoria de processo através de avaliação normativa sem aplicação dos componentes técnicos da SLR PATHCAST.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de integração entre modelagem de processo descritiva e avaliação de processo (CMMI/SPICE), mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em melhoria de processo através de avaliação normativa sem aplicação dos componentes técnicos da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""software_devel"
+930cd72c,Model-Driven Engineering of Process-Aware Information Systems,10.1007/s42979-022-01334-3,2022,snowball,exclude,"O paper trata de engenharia de software dirigida por modelos (MDE) para sistemas process-aware, focando em geração de código e composição de linguagens de domínio específico. Não há evidência de process mining, modelagem estocástica, forecasting de métricas de processo ou análise de event logs reais de processos de SW. O 'process modeling' aqui é design/especificação, não descoberta ou previsão de",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de engenharia de software dirigida por modelos (MDE) para sistemas process-aware, focando em geração de código e composição de linguagens de domínio específico. Não há evidência de process mining, modelagem estocástica, forecasting de métricas de processo ou análise de event logs reais de processos de SW. O 'process modeling' aqui é design/especificação, não descoberta ou previsão de processos a partir de dados."",
+  ""matched_ic"": ["
+7c0240ac,"On Compatibility and Empirical Manifestation of Lean, Agile, and Service-Oriented Performers",10.1007/978-3-031-14988-7_8,2023,springer,maybe,"Título sugere foco em modelos organizacionais (Lean, Agile, SOA) potencialmente relevantes a processos de SW, mas abstract ausente impede avaliação confiável de atendimento aos critérios de inclusão (IC1-IC4). Capítulo de livro sobre Industry 4.0 pode estar fora do escopo de SW.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere foco em modelos organizacionais (Lean, Agile, SOA) potencialmente relevantes a processos de SW, mas abstract ausente impede avaliação confiável de atendimento aos critérios de inclusão (IC1-IC4). Capítulo de livro sobre Industry 4.0 pode estar fora do escopo de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"""
+dded5098,"Diversity in UML Modeling Explained: Observations, Classifications and Theorizations",10.1007/978-3-319-73117-9_4,2018,springer,exclude,"O título refere-se a diversidade em modelagem UML, que é uma investigação sobre notações e práticas de modelagem, não sobre process mining, modelagem estocástica, forecasting de processos de SW ou mineração de repositórios. Sem abstract, não há evidência de que o artigo aborde qualquer um dos critérios de inclusão (IC1-IC4).",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a diversidade em modelagem UML, que é uma investigação sobre notações e práticas de modelagem, não sobre process mining, modelagem estocástica, forecasting de processos de SW ou mineração de repositórios. Sem abstract, não há evidência de que o artigo aborde qualquer um dos critérios de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""unclear"",
+  ""stochastic_metho"
+32e7d8dc,Bârun: A Scripting Language for CoreASM,10.1007/978-3-642-11811-1_5,2010,springer,exclude,"Artigo sobre uma linguagem de scripting (Bârun) para CoreASM, focado em implementação de linguagem de programação e especificação formal. Sem abstract disponível e título indica domínio puramente de linguagens formais/engenharia de compiladores, não relacionado a process mining, modelagem estocástica de processos de SW ou forecasting de métricas de processo.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo sobre uma linguagem de scripting (Bârun) para CoreASM, focado em implementação de linguagem de programação e especificação formal. Sem abstract disponível e título indica domínio puramente de linguagens formais/engenharia de compiladores, não relacionado a process mining, modelagem estocástica de processos de SW ou forecasting de métricas de processo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC2"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [],"
+39b81ddf,Research Areas in Big Data Analytics Studies,10.1007/978-3-319-70377-0_54,2018,springer,exclude,"O título sugere um survey genérico em Big Data Analytics sem menção explícita a process mining, modelagem estocástica ou processos de software. Sem abstract disponível e com venue fora do escopo típico de SE/PM (Economy, Finance and Business), não há evidência suficiente de atendimento a nenhum critério de inclusão.",,EC1|EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título sugere um survey genérico em Big Data Analytics sem menção explícita a process mining, modelagem estocástica ou processos de software. Sem abstract disponível e com venue fora do escopo típico de SE/PM (Economy, Finance and Business), não há evidência suficiente de atendimento a nenhum critério de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC4""],
+  ""evidence_tags"": [],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"""
+44fa3147,Improving Shop Floor-Near Production Management Through Data-Driven Insights,10.1007/978-3-031-44497-5_16,2024,springer,exclude,"O título indica foco em 'shop floor' e 'production management' (manufatura/produção industrial), não processos de desenvolvimento de software. Sem abstract disponível, não há evidência que justifique inclusão em domínio de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica foco em 'shop floor' e 'production management' (manufatura/produção industrial), não processos de desenvolvimento de software. Sem abstract disponível, não há evidência que justifique inclusão em domínio de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"
+f12c7520,A Multi-criteria Approach for Team Recommendation,10.1007/978-3-319-58457-7_28,2017,wos,exclude,"O artigo trata de recomendação de equipes em processos de negócio (BPM genérico) com foco em alocação dinâmica de recursos. Embora mencione 'software development process' como caso de teste, não aplica process mining, modelagem estocástica, ou forecasting de métricas de processo de SW; trata alocação de recursos, não descoberta/análise de processos. Não atende nenhum critério de inclusão específic",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de recomendação de equipes em processos de negócio (BPM genérico) com foco em alocação dinâmica de recursos. Embora mencione 'software development process' como caso de teste, não aplica process mining, modelagem estocástica, ou forecasting de métricas de processo de SW; trata alocação de recursos, não descoberta/análise de processos. Não atende nenhum critério de inclusão específico da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""match"
+dc91d252,The integral mass model - TIMM,,2001,wos,exclude,"O artigo trata de modelagem e simulação Monte Carlo de um instrumento de física de partículas (INTEGRAL), não de processos de software. Embora use simulação estocástica, não há qualquer nexo com descoberta, modelagem ou previsão de processos de desenvolvimento de software.",,EC1|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de modelagem e simulação Monte Carlo de um instrumento de física de partículas (INTEGRAL), não de processos de software. Embora use simulação estocástica, não há qualquer nexo com descoberta, modelagem ou previsão de processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""monte_carlo"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""m"
+efe8c66d,E-Cosmic: A Business Process Model Based Functional Size Estimation Approach,10.1109/seaa.2011.60,2011,snowball,exclude,"O paper trata de estimativa de tamanho funcional de software (COSMIC FSM) baseada em modelos de processo de negócio, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios de software. É um trabalho de engenharia de software, mas fora do escopo específico da SLR PATHCAST.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de estimativa de tamanho funcional de software (COSMIC FSM) baseada em modelos de processo de negócio, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios de software. É um trabalho de engenharia de software, mas fora do escopo específico da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""software_project_m"
+bf29e95e,"Capturing information system's requirement using business process
+simulation",,2003,wos,exclude,"O paper trata de Business Process Simulation (BPS) para captura de requisitos não-funcionais em sistemas de informação, mas não aborda process mining, modelagem estocástica para processos de SW, forecasting de métricas de processo ou mineração de repositórios. O foco é em engenharia de requisitos, não em análise ou predição de processos de desenvolvimento de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de Business Process Simulation (BPS) para captura de requisitos não-funcionais em sistemas de informação, mas não aborda process mining, modelagem estocástica para processos de SW, forecasting de métricas de processo ou mineração de repositórios. O foco é em engenharia de requisitos, não em análise ou predição de processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_"
+0b2782b1,An empirical study on SW metrics for embedded system,,2006,wos,exclude,"O artigo trata de definição e coleta de métricas de software para sistemas embarcados usando GQM, sem abordar process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em métricas estáticas, não em análise ou predição de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de definição e coleta de métricas de software para sistemas embarcados usando GQM, sem abordar process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em métricas estáticas, não em análise ou predição de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""software_project_management"",
+  ""stochastic_method"": "
+d428a409,Web News Mining Using New Features: A Comparative Study,10.1109/ACCESS.2018.2890088,2019,ieee,exclude,"O artigo trata de mineração de dados de notícias web usando técnicas de machine learning (k-NN, decision tree, LSTM), sem qualquer relação com process mining, modelagem estocástica de processos de software, ou forecasting de métricas de processos de desenvolvimento. O domínio é web news mining, não processos de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de mineração de dados de notícias web usando técnicas de machine learning (k-NN, decision tree, LSTM), sem qualquer relação com process mining, modelagem estocástica de processos de software, ou forecasting de métricas de processos de desenvolvimento. O domínio é web news mining, não processos de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  """
+1816f514,Behavioral consistency checking between requirements and implementations,10.1007/s11859-014-1042-0,2014,springer,maybe,"Título sugere verificação de conformidade entre requisitos e implementação (potencialmente relevante a processo de SW), mas abstract ausente impede avaliação confiável de relevância a process mining, modelagem estocástica ou forecasting. Requer acesso ao texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere verificação de conformidade entre requisitos e implementação (potencialmente relevante a processo de SW), mas abstract ausente impede avaliação confiável de relevância a process mining, modelagem estocástica ou forecasting. Requer acesso ao texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""for"
+967bb1a9,Investigation of Performed User Activities in Overall Context with IT Analytical Framework,10.1007/978-3-642-30359-3_25,2012,springer,maybe,"Título sugere análise de atividades de usuário em contexto IT, mas sem resumo disponível é impossível confirmar se aborda process mining, modelagem estocástica ou forecasting em processos de software. Possível relevância marginal em IT analytics, mas EC2 (software como ferramenta) é incerto sem mais informação.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere análise de atividades de usuário em contexto IT, mas sem resumo disponível é impossível confirmar se aborda process mining, modelagem estocástica ou forecasting em processos de software. Possível relevância marginal em IT analytics, mas EC2 (software como ferramenta) é incerto sem mais informação."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""stochastic_met"
+927817d5,"Evaluation of simulation-assisted value stream mapping for software
+product development: Two industrial cases",10.1016/j.infsof.2015.08.005,2015,wos,include,O paper combina value stream mapping com simulação de processos de software para modelar e prever lead time em desenvolvimento de produto. Atende IC2 (modelagem estocástica de processos de SW via simulação) e IC3 (forecasting de lead time). Nenhum EC se aplica decisivamente.,IC2|IC3,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper combina value stream mapping com simulação de processos de software para modelar e prever lead time em desenvolvimento de produto. Atende IC2 (modelagem estocástica de processos de SW via simulação) e IC3 (forecasting de lead time). Nenhum EC se aplica decisivamente."",
+  ""matched_ic"": [""IC2"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""software_process"",
+    ""stochastic_modeling"",
+    ""simulation"",
+    ""lead_time"",
+    ""forecas"
+58bdebf8,Dependencies between data decisions,,2006,wos,exclude,"O paper trata de decisões sobre aspectos de dados em processos de software inter-organizacionais, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em governança de dados e coordenação, sem análise de event logs ou predição de características de processo.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de decisões sobre aspectos de dados em processos de software inter-organizacionais, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Foca em governança de dados e coordenação, sem análise de event logs ou predição de características de processo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""so"
+f54fd8bd,A framework for formal automated analysis of simulation experiments using probabilistic model checking,10.1109/WSC.2017.8247876,2017,ieee,exclude,"O paper aborda verificação formal de experimentos de simulação genéricos usando model checking probabilístico e Markov Chains abstratas. Não há evidência de aplicação a processos de desenvolvimento de software, repositórios de SW, ou artefatos de software (logs, commits, issues, CI/CD). O domínio é simulação científica geral, não engenharia de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aborda verificação formal de experimentos de simulação genéricos usando model checking probabilístico e Markov Chains abstratas. Não há evidência de aplicação a processos de desenvolvimento de software, repositórios de SW, ou artefatos de software (logs, commits, issues, CI/CD). O domínio é simulação científica geral, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""m"
+3c6f392f,Active learning for automatic classification of software behavior,10.1145/1007512.1007539,2004,snowball,exclude,"O paper trata de classificação automática de comportamento de programas usando Markov models e active learning, mas foca em análise de execuções individuais e teste de software, não em modelagem ou predição de processos de desenvolvimento de software (ciclo de vida, pipeline, workflow). Não há evidência de aplicação a process mining em SW, forecasting de métricas de processo, ou mineração de repos",,EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de classificação automática de comportamento de programas usando Markov models e active learning, mas foca em análise de execuções individuais e teste de software, não em modelagem ou predição de processos de desenvolvimento de software (ciclo de vida, pipeline, workflow). Não há evidência de aplicação a process mining em SW, forecasting de métricas de processo, ou mineração de repositórios de desenvolvimento."",
+  ""matched_ic"": [],"
+2fc65898,Special Issue on New Paradigms of Software Production and Deployment,10.1007/s42979-022-01029-9,2022,springer,maybe,"Trata-se de um editorial/special issue sobre novos paradigmas de produção e deployment de software. Sem abstract disponível, não é possível confirmar se o conteúdo aborda process mining, modelagem estocástica ou forecasting em processos de SW. O título sugere relevância potencial, mas é insuficiente para decisão definitiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Trata-se de um editorial/special issue sobre novos paradigmas de produção e deployment de software. Sem abstract disponível, não é possível confirmar se o conteúdo aborda process mining, modelagem estocástica ou forecasting em processos de SW. O título sugere relevância potencial, mas é insuficiente para decisão definitiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  """
+7aea486e,Intelligent software support of the SCRUM process,10.3233/978-1-61499-472-5-408,2014,wos,maybe,"O título sugere suporte ao processo SCRUM com modelagem e simulação, potencialmente relevante para IC2 (modelagem estocástica) e IC3 (forecasting). Porém, o abstract está marcado como 'missing_or_unverified', e o texto disponível é genérico demais para confirmar aplicação real a event logs ou repositórios de software. Requer verificação em texto completo.",IC2|IC3,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere suporte ao processo SCRUM com modelagem e simulação, potencialmente relevante para IC2 (modelagem estocástica) e IC3 (forecasting). Porém, o abstract está marcado como 'missing_or_unverified', e o texto disponível é genérico demais para confirmar aplicação real a event logs ou repositórios de software. Requer verificação em texto completo."",
+  ""matched_ic"": [""IC2"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""software_process"","
+722f24a5,Opinion Diffusion in Two-Layer Interconnected Networks,10.1109/TCSI.2021.3093537,2021,ieee,exclude,"O paper trata de difusão de opiniões em redes sociais multicamadas, sem qualquer conexão com processos de software, process mining, ou modelagem estocástica de desenvolvimento de SW. Claramente não atende nenhum critério de inclusão (IC1-IC4).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de difusão de opiniões em redes sociais multicamadas, sem qualquer conexão com processos de software, process mining, ou modelagem estocástica de desenvolvimento de SW. Claramente não atende nenhum critério de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_sourc"
+46fcacf4,Analytical analysis of STAP algorithms for cases with mismatched steering and clutter statistics,10.1109/NRC.1999.767339,1999,ieee,exclude,"O paper trata de algoritmos adaptativos de processamento de radar (STAP) em ambiente não-homogêneo, sem qualquer conexão com processos de desenvolvimento de software, mineração de repositórios, ou modelagem estocástica aplicada a engenharia de software. Claramente fora do escopo de SLR em process mining e SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de algoritmos adaptativos de processamento de radar (STAP) em ambiente não-homogêneo, sem qualquer conexão com processos de desenvolvimento de software, mineração de repositórios, ou modelagem estocástica aplicada a engenharia de software. Claramente fora do escopo de SLR em process mining e SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stocha"
+2c2fe4e3,A Bird's Eye View on Requirements Engineering and Machine Learning,10.1109/APSEC.2018.00015,2018,ieee,exclude,"O artigo é uma survey sobre Machine Learning aplicado a Requirements Engineering, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios para descoberta/predição de processos de SW. Foca em automação de tarefas de RE (elicitação, análise, validação) via ML, sem conexão com os tópicos nucleares da SLR PATHCAST.",,EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo é uma survey sobre Machine Learning aplicado a Requirements Engineering, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios para descoberta/predição de processos de SW. Foca em automação de tarefas de RE (elicitação, análise, validação) via ML, sem conexão com os tópicos nucleares da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [],
+  "
+110007c8,"Validation of Diesel Fraction Content in Heavy Oils Measured by High
+Temperature Simulated Distillation and Physical Vacuum Distillation by
+Performance of Commercial Distillation Test and Process Simulation",10.3390/app122211824,2022,wos,exclude,"O artigo trata de validação de métodos analíticos para caracterização de frações de óleo diesel em processos de refino de petróleo. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de SW ou forecasting em engenharia de software. EC1 (domínio fora de SW) é aplicável.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de validação de métodos analíticos para caracterização de frações de óleo diesel em processos de refino de petróleo. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de SW ou forecasting em engenharia de software. EC1 (domínio fora de SW) é aplicável."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stoc"
+b91f4eef,Data Quality for Enterprise AI,10.1007/978-3-032-01940-0_4,2025,springer,exclude,"Abstract ausente e título genérico sobre qualidade de dados em AI empresarial não fornece evidência suficiente de relevância ao escopo PATHCAST (process mining, modelagem estocástica, forecasting em processos de SW). Sem resumo, não é possível verificar se trata processos de desenvolvimento de software ou applica-se exclusivamente a dados empresariais genéricos (EC1).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Abstract ausente e título genérico sobre qualidade de dados em AI empresarial não fornece evidência suficiente de relevância ao escopo PATHCAST (process mining, modelagem estocástica, forecasting em processos de SW). Sem resumo, não é possível verificar se trata processos de desenvolvimento de software ou applica-se exclusivamente a dados empresariais genéricos (EC1)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""softw"
+4f482c20,Effective Multiplatform Advertising Policy,10.1109/TSMC.2021.3096008,2022,ieee,exclude,"O artigo trata de otimização de políticas de publicidade em múltiplas plataformas de mídia, sem qualquer relação com processos de desenvolvimento de software, engenharia de software ou mineração de repositórios. Não há conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo de SW ou análise de event logs de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de otimização de políticas de publicidade em múltiplas plataformas de mídia, sem qualquer relação com processos de desenvolvimento de software, engenharia de software ou mineração de repositórios. Não há conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo de SW ou análise de event logs de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""softwar"
+9d6e9e80,Customized predictive models for process improvement projects,,2008,wos,maybe,"O artigo trata de modelagem preditiva e quantitativa de processos de software para melhorias, com uso de aritmética intervalar para incerteza paramétrica. Porém, o abstract não menciona explicitamente process mining, event logs, ou dados de repositório, apenas 'customized models' e CMMI. A ausência de abstract verificado e a falta de detalhes sobre fonte de dados (event logs vs. expertise) impedem",IC2,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O artigo trata de modelagem preditiva e quantitativa de processos de software para melhorias, com uso de aritmética intervalar para incerteza paramétrica. Porém, o abstract não menciona explicitamente process mining, event logs, ou dados de repositório, apenas 'customized models' e CMMI. A ausência de abstract verificado e a falta de detalhes sobre fonte de dados (event logs vs. expertise) impedem decisão definitiva."",
+  ""matched_ic"": [""IC2""],
+  """
+050ea6f9,Network User Behavior Authentication Based on Hidden Markov Model,10.1109/ICICSE52190.2021.9404100,2021,ieee,exclude,"O artigo aplica Hidden Markov Model a autenticação e comportamento de usuários em redes de computadores (domínio de segurança), não a processos de desenvolvimento de software. Não há evidência de aplicação a process mining em SW, modelagem de processos de desenvolvimento, ou forecasting de métricas de processo de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aplica Hidden Markov Model a autenticação e comportamento de usuários em redes de computadores (domínio de segurança), não a processos de desenvolvimento de software. Não há evidência de aplicação a process mining em SW, modelagem de processos de desenvolvimento, ou forecasting de métricas de processo de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""hidden_markov_model""],
+  ""software_context"": ""not_softwa"
+141fbdc5,Robustness Estimation and Optimisation for Semantic Web Service Composition With Stochastic Service Failures,10.1109/TETCI.2020.3027870,2022,ieee,exclude,"O artigo trata de composição de web services em SOA com otimização de QoS e robustez a falhas estocásticas, mas não aborda process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios de desenvolvimento. É um problema de engenharia de serviços web, não de análise ou previsão de processos de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de composição de web services em SOA com otimização de QoS e robustez a falhas estocásticas, mas não aborda process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios de desenvolvimento. É um problema de engenharia de serviços web, não de análise ou previsão de processos de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": "
+2dac1053,Informative Feedback and Explainable AI-Based Recommendations to Support Students’ Self-regulation,10.1007/s10758-023-09650-0,2023,springer,exclude,"O título refere-se a feedback educacional e IA explicável para auto-regulação de estudantes, domínio claramente fora de processos de software (EC1). Sem abstract disponível e sem evidência no título de que trate process mining, modelagem estocástica ou forecasting em processos de desenvolvimento de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a feedback educacional e IA explicável para auto-regulação de estudantes, domínio claramente fora de processos de software (EC1). Sem abstract disponível e sem evidência no título de que trate process mining, modelagem estocástica ou forecasting em processos de desenvolvimento de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"""
+7551705e,Mining the Role-Oriented Process Models Based on Genetic Algorithm,10.1007/978-3-642-30976-2_48,2012,springer,maybe,"Título sugere process mining (descoberta de modelos de processo orientados a papéis) com aplicação de algoritmo genético, potencialmente relevante para IC1. Porém, sem abstract, é impossível confirmar se aplica-se a processos de software ou a domínios genéricos de BPM. Classificação incerta requer análise de texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere process mining (descoberta de modelos de processo orientados a papéis) com aplicação de algoritmo genético, potencialmente relevante para IC1. Porém, sem abstract, é impossível confirmar se aplica-se a processos de software ou a domínios genéricos de BPM. Classificação incerta requer análise de texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""insufficient_abstract"",
+    ""full_t"
+cfbef499,The <i>Swift</i> X-Ray Telescope,10.1007/s11214-005-5097-2,2005,springer,exclude,"O artigo trata de astronomia/astrofísica (telescópio de raios X da missão Swift), completamente fora do domínio de engenharia de software e process mining. Claramente atende EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de astronomia/astrofísica (telescópio de raios X da missão Swift), completamente fora do domínio de engenharia de software e process mining. Claramente atende EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+ff16bf34,Towards an Empirical Evaluation of Imperative and Declarative Process Mining,10.1007/978-3-030-01391-2_24,2018,springer,maybe,"Título indica claramente foco em process mining (imperative vs. declarative), potencialmente atendendo IC1. Porém, abstract ausente impede confirmação de aplicação específica a processos de software ou presença de modelagem estocástica/forecasting. Preferência por 'maybe' dado que há evidência inequívoca de relevância temática, mas sem confirmação do escopo exato.",IC1,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título indica claramente foco em process mining (imperative vs. declarative), potencialmente atendendo IC1. Porém, abstract ausente impede confirmação de aplicação específica a processos de software ou presença de modelagem estocástica/forecasting. Preferência por 'maybe' dado que há evidência inequívoca de relevância temática, mas sem confirmação do escopo exato."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"","
+07734b16,Finite-time boundedness and extended passive analysis for fuzzy Markov jump systems with saturation,10.23919/iccas55662.2022.10003746,2022,snowball,exclude,"O artigo trata de teoria de controle para sistemas fuzzy Markov jump com saturação de atuadores, sem qualquer conexão com processos de engenharia de software, mineração de repositórios, event logs de SW ou forecasting de métricas de desenvolvimento. O domínio é claramente controle automático/engenharia de controle, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de teoria de controle para sistemas fuzzy Markov jump com saturação de atuadores, sem qualquer conexão com processos de engenharia de software, mineração de repositórios, event logs de SW ou forecasting de métricas de desenvolvimento. O domínio é claramente controle automático/engenharia de controle, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_softwar"
+e54ddce6,An exploratory semantic analysis of logging questions,10.1002/smr.2361,2021,wos,exclude,"O artigo realiza análise semântica de questões sobre logging em Q&A websites usando LDA, abordando problemas de logging em software. Porém, não atende nenhum dos critérios de inclusão: não aplica process mining a artefatos de SW, não usa modelagem estocástica para processos de desenvolvimento, não faz forecasting de métricas de processo, e não minera repositórios para descobrir/modelar processos d",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo realiza análise semântica de questões sobre logging em Q&A websites usando LDA, abordando problemas de logging em software. Porém, não atende nenhum dos critérios de inclusão: não aplica process mining a artefatos de SW, não usa modelagem estocástica para processos de desenvolvimento, não faz forecasting de métricas de processo, e não minera repositórios para descobrir/modelar processos de SW. É um estudo de tendências e categorização d"
+94449dd6,MCMC Algorithms at the Service of Exo-planet Hunters,,2019,wos,exclude,"O artigo trata de algoritmos MCMC aplicados a pesquisa de exoplanetas, não a processos de desenvolvimento de software. Embora use modelagem estocástica (MCMC), não há qualquer conexão com engenharia de software, process mining ou processos de desenvolvimento de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de algoritmos MCMC aplicados a pesquisa de exoplanetas, não a processos de desenvolvimento de software. Embora use modelagem estocástica (MCMC), não há qualquer conexão com engenharia de software, process mining ou processos de desenvolvimento de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""forecast_target"": ""none"",
+"
+c40e7657,Towards robust electronic health record systems: integrating formal verification and process modeling techniques,10.1186/s12874-025-02637-8,2025,springer,exclude,"O paper trata de sistemas de registros eletrônicos de saúde (EHR), domínio claramente fora de engenharia de software. Embora mencione 'process modeling' e 'formal verification', o contexto é saúde, não desenvolvimento de software, caracterizando EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de sistemas de registros eletrônicos de saúde (EHR), domínio claramente fora de engenharia de software. Embora mencione 'process modeling' e 'formal verification', o contexto é saúde, não desenvolvimento de software, caracterizando EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+ "
+d61366c0,Classification based on constrained progressive Sequential Pattern mining: A proposed model,10.1109/ICODSE.2016.7936105,2016,ieee,exclude,"O artigo propõe um método de mineração de padrões sequenciais (Sequential Pattern Mining) para classificação genérica de dados. Não há evidência de aplicação a processos de software, event logs de desenvolvimento, repositórios de código ou qualquer artefato de engenharia de software. O domínio é data mining genérico sem contexto de SE.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo propõe um método de mineração de padrões sequenciais (Sequential Pattern Mining) para classificação genérica de dados. Não há evidência de aplicação a processos de software, event logs de desenvolvimento, repositórios de código ou qualquer artefato de engenharia de software. O domínio é data mining genérico sem contexto de SE."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": "
+a45ff6bf,A Performance Engineering Tool for Tiered Software Systems,10.1109/COMPSAC.2006.15,2006,ieee,exclude,"O paper trata de engenharia de performance e tuning de sistemas em arquitetura em camadas, focando em previsão de atributos de performance (carga, latência, throughput). Embora aborde previsão/forecasting, não há evidência de process mining, modelagem estocástica de processos de desenvolvimento de software, ou mineração de repositórios. O foco é em performance de sistemas arquiteturais, não em pro",,EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de engenharia de performance e tuning de sistemas em arquitetura em camadas, focando em previsão de atributos de performance (carga, latência, throughput). Embora aborde previsão/forecasting, não há evidência de process mining, modelagem estocástica de processos de desenvolvimento de software, ou mineração de repositórios. O foco é em performance de sistemas arquiteturais, não em processos de desenvolvimento de SW (EC2: software co"
+c0be9d2c,Social Interaction Analysis for Team Collaboration,10.1007/978-1-4939-7131-2_257,2018,springer,maybe,"Título sugere análise de colaboração em equipe, potencialmente relevante a processos de SW, mas resumo ausente impede avaliação confiável do escopo, metodologia e aplicação específica. Referência em enciclopédia pode ser genérica ou focada apenas em redes sociais abstratas, sem ligação a process mining ou processos de desenvolvimento de software.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere análise de colaboração em equipe, potencialmente relevante a processos de SW, mas resumo ausente impede avaliação confiável do escopo, metodologia e aplicação específica. Referência em enciclopédia pode ser genérica ou focada apenas em redes sociais abstratas, sem ligação a process mining ou processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract"",
+    ""full_"
+a61d254c,A Framework for Mining Stochastic Model of Business Process in Mobile Environments,10.1007/978-3-642-04205-8_29,2009,springer,maybe,"O título sugere forte alinhamento com process mining e modelagem estocástica em processos de negócio, potencialmente incluindo SW. No entanto, sem abstract disponível e com contexto de ""Mobile Environments"" em 2009, a relevância para processos de SW e a aplicação prática permanecem incertas. Requer leitura do texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere forte alinhamento com process mining e modelagem estocástica em processos de negócio, potencialmente incluindo SW. No entanto, sem abstract disponível e com contexto de \""Mobile Environments\"" em 2009, a relevância para processos de SW e a aplicação prática permanecem incertas. Requer leitura do texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""stochastic_modeling"", ""insufficient_abstr"
+c0ef1a3e,Aspect based reverse engineering process,10.1109/NUICONE.2012.6493175,2012,ieee,exclude,"O paper trata de aspect mining e reverse engineering de sistemas legados, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios para descoberta de processos de SW. Aplica-se EC3: método de engenharia de software sem avaliação em contexto de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de aspect mining e reverse engineering de sistemas legados, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios para descoberta de processos de SW. Aplica-se EC3: método de engenharia de software sem avaliação em contexto de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_proces"
+b21f7a67,Towards Automated Enterprise Architecture Documentation: Data Quality Aspects of SAP PI,10.1007/978-3-642-32741-4_10,2013,springer,exclude,"O título refere-se a documentação automatizada de arquitetura empresarial e qualidade de dados em SAP PI (ferramenta de integração). Sem abstract, não há evidência de que o trabalho aborda process mining, modelagem estocástica ou forecasting em processos de software. SAP PI é ferramenta de middleware, não artefato de processo de desenvolvimento de SW.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a documentação automatizada de arquitetura empresarial e qualidade de dados em SAP PI (ferramenta de integração). Sem abstract, não há evidência de que o trabalho aborda process mining, modelagem estocástica ou forecasting em processos de software. SAP PI é ferramenta de middleware, não artefato de processo de desenvolvimento de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2"", ""EC3""],
+  ""evidence_tags"": [],
+  ""software_contex"
+b9c500b1,Analysis of Social Networks Extracted from Log Files,10.1007/978-1-4419-7142-5_6,2010,springer,maybe,"Título sugere análise de redes sociais extraídas de logs, potencialmente relevante para IC1 (process mining em SW), mas ausência completa de abstract impede confirmação de que o contexto é desenvolvimento de software e não apenas redes sociais genéricas.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere análise de redes sociais extraídas de logs, potencialmente relevante para IC1 (process mining em SW), mas ausência completa de abstract impede confirmação de que o contexto é desenvolvimento de software e não apenas redes sociais genéricas."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""event_log"",
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": """
+fbc469cf,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,10.1109/ESEM.2017.23,2017,ieee,include,"O artigo aborda predição de build outcome em CI usando dados de repositório (TravisTorrent) e modificações de código, atendendo IC3 (forecasting de build outcome como métrica de processo) e IC4 (mineração de repositórios para melhorar previsões de processo de SW). A exclusão EC2 não se aplica pois o foco é no processo de CI, não no software como ferramenta.",IC3|IC4,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O artigo aborda predição de build outcome em CI usando dados de repositório (TravisTorrent) e modificações de código, atendendo IC3 (forecasting de build outcome como métrica de processo) e IC4 (mineração de repositórios para melhorar previsões de processo de SW). A exclusão EC2 não se aplica pois o foco é no processo de CI, não no software como ferramenta."",
+  ""matched_ic"": [""IC3"", ""IC4""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""forecasting"", "
+d17b5077,Measuring Complexity of&#xa0;Bot Models in&#xa0;Robotic Process Automation,10.1007/978-3-031-70445-1_10,2024,springer,exclude,"O artigo trata de Robotic Process Automation (RPA) e complexidade de modelos de bots, não de processos de desenvolvimento de software. RPA é um domínio de automação de processos de negócios genéricos, e não há evidência de que aborde software development process, mining de repositórios ou modelagem estocástica de processos de SW.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de Robotic Process Automation (RPA) e complexidade de modelos de bots, não de processos de desenvolvimento de software. RPA é um domínio de automação de processos de negócios genéricos, e não há evidência de que aborde software development process, mining de repositórios ou modelagem estocástica de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+ "
+bab4c035,Monitoring Business Constraints with Linear Temporal Logic: An Approach Based on Colored Automata,10.1007/978-3-642-23059-2_13,2011,springer,maybe,"O título sugere monitoramento de processos de negócio com LTL e autômatos coloridos, o que poderia ser relevante para BPM. Porém, sem abstract disponível, não é possível confirmar se aplica-se especificamente a processos de SW ou se é genérico de BPM. A ausência de resumo impede avaliação confiável contra critérios de inclusão.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere monitoramento de processos de negócio com LTL e autômatos coloridos, o que poderia ser relevante para BPM. Porém, sem abstract disponível, não é possível confirmar se aplica-se especificamente a processos de SW ou se é genérico de BPM. A ausência de resumo impede avaliação confiável contra critérios de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract""
+  ],
+  ""software_context"": ""un"
+c4dcb94f,Reverse Engineered Formal Models for GUI Testing,10.1007/978-3-540-79707-4_16,2008,springer,exclude,"Sem abstract disponível e título sugere foco em teste de GUI via engenharia reversa de modelos formais, não em process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. O escopo é testing, não análise/predição de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Sem abstract disponível e título sugere foco em teste de GUI via engenharia reversa de modelos formais, não em process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. O escopo é testing, não análise/predição de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""software_testing"",
+  ""st"
+f8cac779,Detecting and Characterizing Developer Behavior Following Opportunistic Reuse of Code Snippets from the Web,,2018,ieee,exclude,"O artigo estuda comportamento de desenvolvedores durante reutilização oportunística de código via análise de micro-interações no IDE, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios conforme definido nos critérios de inclusão. Trata-se de análise comportamental, não de descoberta ou predição de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo estuda comportamento de desenvolvedores durante reutilização oportunística de código via análise de micro-interações no IDE, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios conforme definido nos critérios de inclusão. Trata-se de análise comportamental, não de descoberta ou predição de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  "
+382e70e6,Decision making among alternative routes for UAVs in dynamic environments,10.1109/EFTA.2007.4416892,2007,ieee,exclude,"O artigo trata exclusivamente de otimização de trajetórias para UAVs em ambientes dinâmicos, utilizando MILP e algoritmo A*. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW ou forecasting de métricas de SW. Claramente fora do escopo da SLR PATHCAST.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata exclusivamente de otimização de trajetórias para UAVs em ambientes dinâmicos, utilizando MILP e algoritmo A*. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW ou forecasting de métricas de SW. Claramente fora do escopo da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_proces"
+1ad5c0af,"Quantification of Software Code Coverage Using Artificial Bee Colony
+Optimization Based on Markov Approach",10.1007/s13369-017-2554-7,2017,wos,exclude,"O paper foca em otimização de cobertura de código e geração de casos de teste usando Markov chains e ABC, mas não aborda processo de desenvolvimento de software, modelagem de processos, forecasting de métricas de processo ou mineração de repositórios. A aplicação de Markov é técnica (probabilidades de transição em fluxo de controle), não para modelagem estocástica de processos de SW. Não atende ne",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper foca em otimização de cobertura de código e geração de casos de teste usando Markov chains e ABC, mas não aborda processo de desenvolvimento de software, modelagem de processos, forecasting de métricas de processo ou mineração de repositórios. A aplicação de Markov é técnica (probabilidades de transição em fluxo de controle), não para modelagem estocástica de processos de SW. Não atende nenhum dos critérios de inclusão (IC1-IC4)."",
+  ""ma"
+43b0bc84,Agile business process management,10.1108/bpmj-12-2018-0347,2019,snowball,exclude,"Este é um SLR secundário sobre agile BPM genérico. Embora mencione process mining como tecnologia emergente, o foco do paper é em frameworks conceituais de BPM ágil, não em aplicação de process mining, modelagem estocástica ou forecasting em processos de software. Não há evidência de que o estudo investigue especificamente processos de desenvolvimento de SW (commits, issues, CI/CD) ou métricas de ",,EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Este é um SLR secundário sobre agile BPM genérico. Embora mencione process mining como tecnologia emergente, o foco do paper é em frameworks conceituais de BPM ágil, não em aplicação de process mining, modelagem estocástica ou forecasting em processos de software. Não há evidência de que o estudo investigue especificamente processos de desenvolvimento de SW (commits, issues, CI/CD) ou métricas de processo de software."",
+  ""matched_ic"": [],
+  ""ma"
+45e0fb9f,"Multi-objective Optimisation of Online Distributed Software Update for
+DevOps in Clouds",10.1145/3338851,2019,wos,exclude,"O artigo aborda otimização de rolling upgrades em clouds com objetivo de minimizar tempo de conclusão, degradação de disponibilidade e custo. Embora use modelagem estocástica, não atende aos critérios de inclusão: não aplica process mining a artefatos de SW, não modela processos de desenvolvimento de software (é infraestrutura/DevOps genérica), não faz forecasting de métricas de processo de SW, e ",,EC1|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aborda otimização de rolling upgrades em clouds com objetivo de minimizar tempo de conclusão, degradação de disponibilidade e custo. Embora use modelagem estocástica, não atende aos critérios de inclusão: não aplica process mining a artefatos de SW, não modela processos de desenvolvimento de software (é infraestrutura/DevOps genérica), não faz forecasting de métricas de processo de SW, e não minera repositórios. Aplica-se EC2 (SW como f"
+aad7e698,Strategic Agility and Product Development in Emerging Markets: The Role of Employee Resilience and Self-Efficacy as Microfoundations,10.1109/TEM.2023.3333218,2024,ieee,exclude,"O artigo trata de gestão estratégica, agilidade e desenvolvimento de produtos em mercados emergentes, com foco em capabilities individuais (resiliência e auto-eficácia de funcionários). Não aborda process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de SW, ou mineração de repositórios. O contexto é puramente organizacional/comportamental, não de engen",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de gestão estratégica, agilidade e desenvolvimento de produtos em mercados emergentes, com foco em capabilities individuais (resiliência e auto-eficácia de funcionários). Não aborda process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de SW, ou mineração de repositórios. O contexto é puramente organizacional/comportamental, não de engenharia de software ou análise de processos de dese"
+f057a988,Enterprise Risk Data Management (A Subset of Enterprise Data Management),10.1007/978-1-4842-7440-8_7,2022,springer,exclude,"O título refere-se a 'Enterprise Risk Data Management', um domínio de gestão de risco empresarial e retorno financeiro, sem evidência de conexão com processos de desenvolvimento de software. Mesmo com abstract ausente, a terminologia e contexto (enterprise risk-adjusted return management) indicam claramente domínio fora de SW (EC1).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a 'Enterprise Risk Data Management', um domínio de gestão de risco empresarial e retorno financeiro, sem evidência de conexão com processos de desenvolvimento de software. Mesmo com abstract ausente, a terminologia e contexto (enterprise risk-adjusted return management) indicam claramente domínio fora de SW (EC1)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_"
+e74d922d,"How to conceptualize, represent, and analyze log&#xa0;data from technology-based assessments? A generic framework and an application to questionnaire items",10.1007/s41237-018-0063-y,2018,springer,exclude,"O título indica foco em análise de dados de log de avaliações baseadas em tecnologia (technology-based assessments) e itens de questionário, não em processos de software. Sem abstract disponível e com contexto claramente fora do domínio de engenharia de software, não há evidência de atendimento a nenhum critério de inclusão (IC1-IC4).",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica foco em análise de dados de log de avaliações baseadas em tecnologia (technology-based assessments) e itens de questionário, não em processos de software. Sem abstract disponível e com contexto claramente fora do domínio de engenharia de software, não há evidência de atendimento a nenhum critério de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""insufficient_abstrac"
+69f0ccb9,Transferring advanced physics research tools to education: how to teach simulation tools used in radiation physics research to university students,,2010,snowball,exclude,"O artigo trata de ensino de ferramentas de simulação Monte Carlo (Geant4) em física de radiação, não de process mining, modelagem estocástica de processos de software, ou forecasting em contextos de desenvolvimento de SW. Embora mencione 'software development methods' como objetivo educacional, o foco é em educação em física, não em análise ou predição de processos de SW.",,EC1|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de ensino de ferramentas de simulação Monte Carlo (Geant4) em física de radiação, não de process mining, modelagem estocástica de processos de software, ou forecasting em contextos de desenvolvimento de SW. Embora mencione 'software development methods' como objetivo educacional, o foco é em educação em física, não em análise ou predição de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": ["
+0e8d101e,Digitizing the Txalaparta: Computer-Based Study of a Traditional Practice,10.1162/comj_a_00522,2020,ieee,exclude,"O artigo trata de implementação de software para análise de uma prática musical tradicional basca (txalaparta), não de processos de desenvolvimento de software. Não há evidência de aplicação de process mining, modelagem estocástica ou forecasting a artefatos ou processos de engenharia de software.",,EC1|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de implementação de software para análise de uma prática musical tradicional basca (txalaparta), não de processos de desenvolvimento de software. Não há evidência de aplicação de process mining, modelagem estocástica ou forecasting a artefatos ou processos de engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC2""
+  ],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_m"
+5ddd1244,Quality aware software product line engineering,10.1007/BF03192552,2008,springer,maybe,"Título sugere engenharia de linhas de produtos de software com foco em qualidade, potencialmente relevante a processos de SW, mas abstract ausente impossibilita avaliação confiável de critérios de inclusão (process mining, modelagem estocástica, forecasting) e exclusão.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere engenharia de linhas de produtos de software com foco em qualidade, potencialmente relevante a processos de SW, mas abstract ausente impossibilita avaliação confiável de critérios de inclusão (process mining, modelagem estocástica, forecasting) e exclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""for"
+c8cc80be,Reinforcement learning and digital twin-driven optimization of production scheduling with the digital model playground,10.1007/s43926-024-00087-0,2024,springer,exclude,"O artigo trata de otimização de scheduling de produção em manufatura usando reinforcement learning e digital twins. Não há evidência de que o domínio seja processos de desenvolvimento de software; o contexto é production scheduling em IoT/manufatura, enquadrando-se em EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de otimização de scheduling de produção em manufatura usando reinforcement learning e digital twins. Não há evidência de que o domínio seja processos de desenvolvimento de software; o contexto é production scheduling em IoT/manufatura, enquadrando-se em EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_m"
+7a046f19,Rule-Based Detection of Process Conformance Violations in Application Lifecycle Management,10.1007/978-3-642-31199-4_4,2012,springer,maybe,"Título sugere conformance checking em ALM (claramente relacionado a process mining), mas abstract ausente impede confirmação de escopo específico. Pode ser genérico de BPM ou focar em processos de SW; sem resumo, não há como validar critérios de inclusão com confiança.",IC1,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere conformance checking em ALM (claramente relacionado a process mining), mas abstract ausente impede confirmação de escopo específico. Pode ser genérico de BPM ou focar em processos de SW; sem resumo, não há como validar critérios de inclusão com confiança."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""software_development_proc"
+3b614f91,"Simulation of software maintenance process, with and without a
+work-in-process limit",10.1002/smr.1599,2013,wos,include,O artigo atende IC2 e IC3: utiliza simulação (modelagem estocástica) para modelar processos de manutenção de software e prevê métricas de processo (lead time/tempo médio de conclusão) usando dados reais de repositórios de software. Não há exclusão clara por EC.,IC2|IC3,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O artigo atende IC2 e IC3: utiliza simulação (modelagem estocástica) para modelar processos de manutenção de software e prevê métricas de processo (lead time/tempo médio de conclusão) usando dados reais de repositórios de software. Não há exclusão clara por EC."",
+  ""matched_ic"": [""IC2"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""simulation"", ""software_process"", ""repository_mining"", ""lead_time"", ""stochastic_modeling""],
+  ""software_context"":"
+2a336ccc,Kashvi: Process Mining Software Repositories.,,2014,snowball,maybe,"Título fortemente sugestivo de process mining em repositórios de software (alinha-se a IC1 e IC4), mas abstract ausente impede confirmação de escopo, metodologia e foco real do estudo. Requer full text para decisão final.",IC1|IC4,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título fortemente sugestivo de process mining em repositórios de software (alinha-se a IC1 e IC4), mas abstract ausente impede confirmação de escopo, metodologia e foco real do estudo. Requer full text para decisão final."",
+  ""matched_ic"": [""IC1"", ""IC4""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""repository_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""repository_mining"",
+  ""stochastic_method"": ""n"
+39b2cc4b,Delta Analysis: A Hybrid Quantitative Approach for Measuring Discrepancies between Business Process Models,10.1007/978-3-642-21219-2_38,2011,springer,maybe,"O título sugere foco em análise de discrepâncias entre modelos de processo de negócio (BPM genérico), mas sem abstract disponível não é possível confirmar se há aplicação específica a processos de desenvolvimento de software ou se atende aos critérios de inclusão da SLR PATHCAST. A data (2011) e venue (Hybrid AI Systems) não esclarecem o contexto de software.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere foco em análise de discrepâncias entre modelos de processo de negócio (BPM genérico), mas sem abstract disponível não é possível confirmar se há aplicação específica a processos de desenvolvimento de software ou se atende aos critérios de inclusão da SLR PATHCAST. A data (2011) e venue (Hybrid AI Systems) não esclarecem o contexto de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""f"
+1cc8eaaf,Timely Status Update in Relay-Assisted Cooperative Communications,10.1109/TVT.2023.3290164,2023,ieee,exclude,"O artigo trata de age of information (AoI) em sistemas de comunicação cooperativa com relés, usando cadeias de Markov para análise teórica. Não há qualquer conexão com processos de software, mineração de repositórios, ou desenvolvimento de software. O domínio é telecomunicações/comunicação, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de age of information (AoI) em sistemas de comunicação cooperativa com relés, usando cadeias de Markov para análise teórica. Não há qualquer conexão com processos de software, mineração de repositórios, ou desenvolvimento de software. O domínio é telecomunicações/comunicação, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic"
+deabe8ae,Dynamic and&#xa0;Static Feature-Aware Microservices Decomposition via&#xa0;Graph Neural Networks,10.1007/978-3-031-40283-8_14,2023,springer,exclude,"Título focado em decomposição de microsserviços via redes neurais gráficas, sem evidência de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Domínio de arquitetura de software, não análise de processos de desenvolvimento. Abstract ausente impede confirmação, mas título não sugere intersecção com escopo PATHCAST.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título focado em decomposição de microsserviços via redes neurais gráficas, sem evidência de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios. Domínio de arquitetura de software, não análise de processos de desenvolvimento. Abstract ausente impede confirmação, mas título não sugere intersecção com escopo PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""softw"
+f77b53fa,Extracting Connection Types in Process Models Discovered by Using From-to Chart Based Approach,10.1007/978-3-642-21332-8_9,2011,springer,maybe,"Título sugere process mining (descoberta de modelos via from-to charts), potencialmente relevante para IC1, mas abstract ausente impede avaliação conclusiva sobre aplicação a processos de SW.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere process mining (descoberta de modelos via from-to charts), potencialmente relevante para IC1, mas abstract ausente impede avaliação conclusiva sobre aplicação a processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""unclear"",
+  "
+747fc068,"A project management approach to using simulation for cost estimation on
+large, complex software development projects",10.1080/10429247.2007.11431746,2007,wos,maybe,"O paper trata de simulação de processos de desenvolvimento de software para estimativa de custos e cronograma, alinhado com IC2 e IC3. Porém, o abstract está ausente/não verificado, e faltam detalhes sobre o método estocástico específico, modelo de evento (event logs) e validação em dados reais versus simulação pura.",IC2|IC3,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O paper trata de simulação de processos de desenvolvimento de software para estimativa de custos e cronograma, alinhado com IC2 e IC3. Porém, o abstract está ausente/não verificado, e faltam detalhes sobre o método estocástico específico, modelo de evento (event logs) e validação em dados reais versus simulação pura."",
+  ""matched_ic"": [""IC2"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""software_process"",
+    ""simulation"",
+    ""stochastic"
+475ebb82,Enabling Process Innovation via Deviance Mining and Predictive Monitoring,10.1007/978-3-319-14430-6_10,2015,springer,maybe,"Título sugere potencial relevância a process mining (deviance mining) e predictive monitoring em processos, mas sem abstract disponível não é possível confirmar se o contexto é software ou domínio genérico de BPM. Requer acesso ao texto completo para decisão final.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere potencial relevância a process mining (deviance mining) e predictive monitoring em processos, mas sem abstract disponível não é possível confirmar se o contexto é software ou domínio genérico de BPM. Requer acesso ao texto completo para decisão final."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""forecasting"",
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_context"": "
+3c05b471,The software aging and rejuvenation repository: Http://openscience.us/repo/software-aging/,10.1109/ISSREW.2015.7392054,2015,ieee,exclude,"O paper apresenta um repositório de artefatos para pesquisa em Software Aging and Rejuvenation (SAR), mas não aplica process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/melhoria de processos de desenvolvimento de SW. Trata-se de um artigo sobre infraestrutura de pesquisa, não de aplicação de técnicas ao escopo PATHCAST.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper apresenta um repositório de artefatos para pesquisa em Software Aging and Rejuvenation (SAR), mas não aplica process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/melhoria de processos de desenvolvimento de SW. Trata-se de um artigo sobre infraestrutura de pesquisa, não de aplicação de técnicas ao escopo PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""e"
+7161224e,Process Mining for Reliability Modeling of Manufacturing Systems with Limited Data Availability,10.1109/IOTSMS53705.2021.9704921,2021,ieee,exclude,"O artigo aplica process mining a sistemas de manufatura (ambiente de produção de drones), não a processos de desenvolvimento de software. Atende EC1 (domínio fora de SW) de forma inequívoca.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aplica process mining a sistemas de manufatura (ambiente de produção de drones), não a processos de desenvolvimento de software. Atende EC1 (domínio fora de SW) de forma inequívoca."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""process_mining"", ""simulation"", ""reliability""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""simulation"",
+  ""forecast_target"": ""reliability"",
+  ""process_data_source"":"
+9920a109,Business Process Mining for Internal Fraud Risk Reduction: Results of a Case Study,,2008,snowball,exclude,"O artigo aplica process mining a processos de fraude corporativa interna (domínio financeiro/compliance), não a processos de desenvolvimento de software. Atende IC1 (process mining com event logs), mas EC1 (domínio fora de SW) é decisivo.",IC1,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aplica process mining a processos de fraude corporativa interna (domínio financeiro/compliance), não a processos de desenvolvimento de software. Atende IC1 (process mining com event logs), mas EC1 (domínio fora de SW) é decisivo."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""process_mining"", ""event_log""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+"
+1c7727af,A Novel Precoding and Impulsive Noise Mitigation Scheme for MIMO Power Line Communication Systems,10.1109/JSYST.2018.2880962,2019,ieee,exclude,"O artigo trata de sistemas de comunicação por linha de potência (PLC) e não aborda processos de software, process mining, modelagem estocástica de processos de desenvolvimento de software ou forecasting de métricas de processo de SW. O domínio é telecomunicações/infraestrutura de rede, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de sistemas de comunicação por linha de potência (PLC) e não aborda processos de software, process mining, modelagem estocástica de processos de desenvolvimento de software ou forecasting de métricas de processo de SW. O domínio é telecomunicações/infraestrutura de rede, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_meth"
+c5cba902,Detecting Semantic Code Clones by Building AST-based Markov Chains Model,10.1145/3551349.3560426,2022,wos,exclude,"Embora o paper use Markov chains (método estocástico), aplica-o a detecção de clones de código, não a modelagem ou forecasting de processos de desenvolvimento de software. O foco é em análise estática de código (AST), não em event logs, repositórios ou características de processo de SW.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Embora o paper use Markov chains (método estocástico), aplica-o a detecção de clones de código, não a modelagem ou forecasting de processos de desenvolvimento de software. O foco é em análise estática de código (AST), não em event logs, repositórios ou características de processo de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""markov""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"""
+4eb711b5,Research on Optimization Model of Supply Chain Robot Task Allocation Based on Genetic Algorithm and Software Practice,10.1109/ICDSCA67083.2025.11350243,2025,ieee,exclude,"O artigo trata otimização de alocação de tarefas em robôs de cadeia de suprimentos usando algoritmos genéticos e PSO. Não há evidência de aplicação a processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW, ou forecasting de métricas de processo de SW. O domínio é manufatura/logística, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata otimização de alocação de tarefas em robôs de cadeia de suprimentos usando algoritmos genéticos e PSO. Não há evidência de aplicação a processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW, ou forecasting de métricas de processo de SW. O domínio é manufatura/logística, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1""
+  ],
+  ""evidence_tags"": [],
+  ""software_c"
+e8b038dd,Using Event Logs for Local Correction of Process Models,10.3103/S0146411617070306,2017,springer,maybe,"Título sugere process mining (correção de modelos usando event logs), potencialmente relevante a IC1, mas abstract ausente impede avaliação confiável do escopo (pode ser BPM genérico ou SW-específico). Venue (Automatic Control and Computer Sciences) é ambígua quanto a domínio de aplicação.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere process mining (correção de modelos usando event logs), potencialmente relevante a IC1, mas abstract ausente impede avaliação confiável do escopo (pode ser BPM genérico ou SW-específico). Venue (Automatic Control and Computer Sciences) é ambígua quanto a domínio de aplicação."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""event_log"",
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],"
+b95ec0b1,Impact of unrealistic worst case modeling on the performance of VLSI circuits in deep submicron CMOS technologies,10.1109/66.806116,1999,ieee,exclude,"O artigo trata de variabilidade em circuitos VLSI e tecnologias CMOS, um domínio de engenharia de hardware/manufatura de semicondutores. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW, ou forecasting em contexto de engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de variabilidade em circuitos VLSI e tecnologias CMOS, um domínio de engenharia de hardware/manufatura de semicondutores. Não há qualquer conexão com processos de desenvolvimento de software, process mining, modelagem estocástica de processos de SW, ou forecasting em contexto de engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_"
+537acd6a,Kahn Process Networks and a Reactive Extension,10.1007/978-3-319-91734-4_24,2019,springer,exclude,"O título refere-se a Kahn Process Networks, um modelo computacional teórico de processamento de sinais, sem evidência de aplicação a processos de software ou engenharia de software. Ausência de abstract impede verificação de relevância, mas o contexto (handbook de sistemas de processamento de sinais) e terminologia indicam domínio fora de SE. Atende EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a Kahn Process Networks, um modelo computacional teórico de processamento de sinais, sem evidência de aplicação a processos de software ou engenharia de software. Ausência de abstract impede verificação de relevância, mas o contexto (handbook de sistemas de processamento de sinais) e terminologia indicam domínio fora de SE. Atende EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+ "
+b402d592,Mining program workflow from interleaved traces,10.1145/1835804.1835883,2010,snowball,include,"O paper propõe um algoritmo de process mining para descobrir workflows de programas a partir de event traces, atendendo claramente IC1 (process mining aplicado a artefatos de SW—event logs de execução). Embora focado em descoberta de workflows e não em forecasting, aplica técnicas de workflow mining a dados de eventos de sistemas de software.",IC1,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper propõe um algoritmo de process mining para descobrir workflows de programas a partir de event traces, atendendo claramente IC1 (process mining aplicado a artefatos de SW—event logs de execução). Embora focado em descoberta de workflows e não em forecasting, aplica técnicas de workflow mining a dados de eventos de sistemas de software."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""event_log"
+6e4114dc,"Using empirical knowledge from, replicated experiments for software
+process simulation:: A practical example",10.1109/ISESE.2003.1237961,2003,wos,include,"O paper atende IC2 ao usar simulação (técnica estocástica) para modelar um processo de software (inspeção de requisitos), calibrado com dados empíricos de experimentos. A avaliação do impacto no desenvolvimento de software e suporte à decisão de processos caracterizam claramente um estudo sobre modelagem estocástica em processos de SW.",IC2,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper atende IC2 ao usar simulação (técnica estocástica) para modelar um processo de software (inspeção de requisitos), calibrado com dados empíricos de experimentos. A avaliação do impacto no desenvolvimento de software e suporte à decisão de processos caracterizam claramente um estudo sobre modelagem estocástica em processos de SW."",
+  ""matched_ic"": [""IC2""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""stochastic_modeling"",
+    ""simulation"""
+4a3ba436,MIRD Pamphlet No. 21: A Generalized Schema for Radiopharmaceutical Dosimetry—Standardization of Nomenclature,10.2967/jnumed.108.056036,2009,snowball,exclude,"Paper sobre dosimetria radiofarmacêutica e proteção radiológica em medicina nuclear. Não aborda process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de SW, ou mineração de repositórios de desenvolvimento. Domínio claramente fora de engenharia de software (EC1 - saúde/medicina).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Paper sobre dosimetria radiofarmacêutica e proteção radiológica em medicina nuclear. Não aborda process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de SW, ou mineração de repositórios de desenvolvimento. Domínio claramente fora de engenharia de software (EC1 - saúde/medicina)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stoc"
+c2f3e2a3,Business Process Deviance Mining,10.1007/978-3-319-63962-8_100-1,2018,springer,maybe,"O título 'Business Process Deviance Mining' sugere forte alinhamento com process mining (IC1), mas sem abstract disponível não é possível confirmar se se aplica especificamente a processos de software ou se é genérico de BPM. A entrada em encyclopedia indica conteúdo descritivo/tutorial que pode ou não abordar domínio de SE.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título 'Business Process Deviance Mining' sugere forte alinhamento com process mining (IC1), mas sem abstract disponível não é possível confirmar se se aplica especificamente a processos de software ou se é genérico de BPM. A entrada em encyclopedia indica conteúdo descritivo/tutorial que pode ou não abordar domínio de SE."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""insufficient_abstract"",
+    ""full_"
+055f22f4,Blockchain technology and software engineering practices: a systematic review of literature using topic modelling approach,10.1007/s13198-022-01823-x,2023,springer,exclude,"O título sugere revisão sistemática sobre blockchain e práticas de engenharia de software, mas sem abstract disponível não há evidência de alinhamento com o escopo PATHCAST (process mining, modelagem estocástica, forecasting em processos de SW). Aplicação de topic modelling a blockchain é improvável de atender critérios IC1-IC4.",,EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título sugere revisão sistemática sobre blockchain e práticas de engenharia de software, mas sem abstract disponível não há evidência de alinhamento com o escopo PATHCAST (process mining, modelagem estocástica, forecasting em processos de SW). Aplicação de topic modelling a blockchain é improvável de atender critérios IC1-IC4."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""un"
+0b80469e,A Review of Prominent Work on Agile Processes Software Process Improvement and Process Tailoring Practices,10.1007/978-3-642-22203-0_49,2011,springer,maybe,"Título sugere revisão sobre processos ágeis e melhoria de processos de SW, potencialmente relevante para IC4 (mineração e melhoria de modelos de processo). Porém, abstract ausente impede confirmação de escopo específico (process mining, modelagem estocástica, forecasting). Classificação como secondary review (SLR/survey) requer verificação de EC4.",,EC4,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere revisão sobre processos ágeis e melhoria de processos de SW, potencialmente relevante para IC4 (mineração e melhoria de modelos de processo). Porém, abstract ausente impede confirmação de escopo específico (process mining, modelagem estocástica, forecasting). Classificação como secondary review (SLR/survey) requer verificação de EC4."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_tex"
+a26385f8,"Non-distracting, Continuous Collection of Software Development Process Data",10.1007/978-3-319-64161-4_13,2018,springer,maybe,"O título sugere relevância potencial para coleta de dados de processos de desenvolvimento de SW (IC4 – mineração de repositórios/process data), mas a ausência de abstract impede avaliação confiável do escopo, métodos e aplicabilidade exata aos critérios de inclusão. Recomenda-se análise de texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere relevância potencial para coleta de dados de processos de desenvolvimento de SW (IC4 – mineração de repositórios/process data), mas a ausência de abstract impede avaliação confiável do escopo, métodos e aplicabilidade exata aos critérios de inclusão. Recomenda-se análise de texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""software_process"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_co"
+17fb91ea,ARA-RCIV: Identifying Reliability-Critical Input Vectors of Logic Circuits Based on the Association Rules Analysis Approach,10.1109/TCAD.2024.3372461,2024,ieee,exclude,"O artigo trata de confiabilidade de circuitos lógicos (hardware), não de processos de desenvolvimento de software. A aplicação de Monte Carlo é em contexto de engenharia de circuitos, não em process mining ou modelagem de processos de SW. Nenhum critério de inclusão (IC1-IC4) é atendido.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de confiabilidade de circuitos lógicos (hardware), não de processos de desenvolvimento de software. A aplicação de Monte Carlo é em contexto de engenharia de circuitos, não em process mining ou modelagem de processos de SW. Nenhum critério de inclusão (IC1-IC4) é atendido."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_c"
+a46e9b0b,"OpenWorkFlow-Development of an open-source synthesis-platform for safety
+investigations in the site selection process",10.1007/s00767-024-00566-9,2024,wos,exclude,"O paper descreve uma plataforma de simulação para investigações de segurança em seleção de sítios para depósito de resíduos nucleares. Não trata de processos de desenvolvimento de software, nem aplica process mining, modelagem estocástica ou forecasting a artefatos ou processos de SW. O domínio é geotécnico/nuclear, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper descreve uma plataforma de simulação para investigações de segurança em seleção de sítios para depósito de resíduos nucleares. Não trata de processos de desenvolvimento de software, nem aplica process mining, modelagem estocástica ou forecasting a artefatos ou processos de SW. O domínio é geotécnico/nuclear, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_softwa"
+df095a82,Finding Suitable Activity Clusters for Decomposed Process Discovery,10.1007/978-3-319-27243-6_2,2015,springer,maybe,"Título fortemente relevante para process mining (descoberta de processos), mas abstract ausente impede confirmação de aplicação a SW. Não há evidência clara de exclusão, mas também não há confirmação de inclusão em contexto de desenvolvimento de software.",IC1,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título fortemente relevante para process mining (descoberta de processos), mas abstract ausente impede confirmação de aplicação a SW. Não há evidência clara de exclusão, mas também não há confirmação de inclusão em contexto de desenvolvimento de software."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"""
+2c9cc853,MAC Protocol Design for Spectrum-agile Wireless Networks: Stochastic Control Approach,10.1109/dyspan.2007.65,2007,snowball,exclude,"O artigo trata de protocolos de controle de acesso ao meio (MAC) em redes sem fio, não de processos de desenvolvimento de software. Não há evidência de aplicação a process mining, modelagem estocástica de processos de SW, ou forecasting em processos de desenvolvimento.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de protocolos de controle de acesso ao meio (MAC) em redes sem fio, não de processos de desenvolvimento de software. Não há evidência de aplicação a process mining, modelagem estocástica de processos de SW, ou forecasting em processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  """
+4bdad231,"Supporting method engineering with a low-code approach: the <Emphasis FontCategory=""NonProportional"">LOMET</Emphasis>&#xa0; tool",10.1007/s10270-024-01203-y,2024,springer,exclude,"Título refere-se a uma ferramenta de low-code para engenharia de métodos (LOMET), sem qualquer indicação de process mining, modelagem estocástica, forecasting ou análise de processos de software em event logs. Abstract ausente impede verificação, mas o escopo aparenta ser desenvolvimento de ferramentas/métodos, não análise de processos de SW.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título refere-se a uma ferramenta de low-code para engenharia de métodos (LOMET), sem qualquer indicação de process mining, modelagem estocástica, forecasting ou análise de processos de software em event logs. Abstract ausente impede verificação, mas o escopo aparenta ser desenvolvimento de ferramentas/métodos, não análise de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC2"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""insufficient"
+deb7c18c,Applying modeling & simulation to the software testing process: one test oracle solution,,2005,snowball,maybe,"O artigo discute simulação estocástica aplicada ao teste de software e menciona melhorias de processo, mas o abstract é vago sobre process mining específico, modelagem estocástica detalhada ou forecasting de métricas de processo. A fonte do abstract é 'missing_or_unverified', limitando confiança na avaliação completa.",IC2,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O artigo discute simulação estocástica aplicada ao teste de software e menciona melhorias de processo, mas o abstract é vago sobre process mining específico, modelagem estocástica detalhada ou forecasting de métricas de processo. A fonte do abstract é 'missing_or_unverified', limitando confiança na avaliação completa."",
+  ""matched_ic"": [
+    ""IC2""
+  ],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""stochastic_modeling"",
+    ""simulation"",
+    ""softw"
+7d39897f,A modeling framework to implement preemption policies in non-Markovian SPNs,10.1109/32.825765,2000,ieee,exclude,"O artigo trata de modelagem matemática e análise de desempenho de Petri Nets estocásticas de forma genérica e teórica, sem aplicação demonstrada a processos de desenvolvimento de software. Não há evidência de contexto de SW (repositórios, commits, CI/CD, issues) ou de análise/descoberta de processos reais de desenvolvimento.",,EC3|EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de modelagem matemática e análise de desempenho de Petri Nets estocásticas de forma genérica e teórica, sem aplicação demonstrada a processos de desenvolvimento de software. Não há evidência de contexto de SW (repositórios, commits, CI/CD, issues) ou de análise/descoberta de processos reais de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3"",
+    ""EC1""
+  ],
+  ""evidence_tags"": [
+    ""stochastic_petri_net"",
+    ""in"
+d13f2b35,Modelling of Logistic Resources Allocating by Markov Process,10.1109/IS3C.2014.307,2014,ieee,exclude,"O artigo trata de alocação de recursos logísticos e manutenção de sistemas em larga escala (domínio de logística/manufatura), não de processos de desenvolvimento de software. Embora use Markov Chain, não há evidência de aplicação a processos de SW, repositórios, ou artefatos de desenvolvimento de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de alocação de recursos logísticos e manutenção de sistemas em larga escala (domínio de logística/manufatura), não de processos de desenvolvimento de software. Embora use Markov Chain, não há evidência de aplicação a processos de SW, repositórios, ou artefatos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""markov""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_met"
+9891be3f,Automated user interface engineering with a pattern reflecting programming language,10.1007/s10515-006-7740-x,2006,springer,exclude,"Título indica foco em engenharia de interface de usuário (UI engineering) com padrões de linguagem de programação. Sem abstract disponível, mas não há evidência de que o paper trate process mining, modelagem estocástica, forecasting de processos de SW ou mineração de repositórios. A temática (UI automation com padrões) não se enquadra no escopo de PATHCAST.",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título indica foco em engenharia de interface de usuário (UI engineering) com padrões de linguagem de programação. Sem abstract disponível, mas não há evidência de que o paper trate process mining, modelagem estocástica, forecasting de processos de SW ou mineração de repositórios. A temática (UI automation com padrões) não se enquadra no escopo de PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC2"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+  "
+f355b00c,Modeling Component Erroneous Behavior and Error Propagation for Dependability Analysis,10.1007/978-3-642-38911-5_8,2013,springer,exclude,"O título sugere modelagem de comportamento de erros em componentes para análise de confiabilidade (dependability), mas sem abstract disponível não é possível confirmar aplicação a processos de software. O foco aparenta ser engenharia de confiabilidade de sistemas, não process mining ou forecasting de processos de desenvolvimento de SW. Ausência de abstract combinada com indicadores de domínio gené",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título sugere modelagem de comportamento de erros em componentes para análise de confiabilidade (dependability), mas sem abstract disponível não é possível confirmar aplicação a processos de software. O foco aparenta ser engenharia de confiabilidade de sistemas, não process mining ou forecasting de processos de desenvolvimento de SW. Ausência de abstract combinada com indicadores de domínio genérico (não específico a SW process) leva à exclusã"
+9a107659,Applications of Process-Informed Optimal Compensation,10.1007/978-3-031-91631-1_7,2025,springer,exclude,"Título refere-se a 'Smart Manufacturing' (domínio de manufatura), não processos de software. Sem abstract disponível, não há evidência de aplicação a SW. EC1 (domínio fora de SW) se aplica com alta probabilidade.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título refere-se a 'Smart Manufacturing' (domínio de manufatura), não processos de software. Sem abstract disponível, não há evidência de aplicação a SW. EC1 (domínio fora de SW) se aplica com alta probabilidade."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+``"
+63eacbed,"Toward objective software process information: experiences from a case
+study",10.1007/s11219-010-9105-8,2011,wos,include,"O paper descreve explicitamente aplicação de process mining a processos de software (CCB process), atendendo IC1. Demonstra extração de modelos de processo a partir de dados reais de projetos de desenvolvimento de software, alinhado ao escopo PATHCAST.",IC1,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper descreve explicitamente aplicação de process mining a processos de software (CCB process), atendendo IC1. Demonstra extração de modelos de processo a partir de dados reais de projetos de desenvolvimento de software, alinhado ao escopo PATHCAST."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""software_process"",
+    ""event_log""
+  ],
+  ""software_context"": ""software_development_process"",
+  ""stoc"
+e213431f,Deep Reinforcement Learning Guided Decision Tree Learning For Program Synthesis,10.1109/SANER56733.2023.00112,2023,ieee,exclude,"O artigo trata de síntese de programas usando aprendizado por reforço e árvores de decisão, não de process mining, modelagem estocástica de processos de desenvolvimento de software, forecasting de métricas de processo, ou mineração de repositórios. Embora use Markov Decision Process, não há aplicação a artefatos de software (commits, issues, CI/CD) ou processos de desenvolvimento. O 'software' aqu",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de síntese de programas usando aprendizado por reforço e árvores de decisão, não de process mining, modelagem estocástica de processos de desenvolvimento de software, forecasting de métricas de processo, ou mineração de repositórios. Embora use Markov Decision Process, não há aplicação a artefatos de software (commits, issues, CI/CD) ou processos de desenvolvimento. O 'software' aqui é o objeto sintetizado (programa), não o proces"
+c60b89d3,BAB Framework – Towards an Extensible Software Platform for AI-Augmented Process Aware Business Information Systems,10.1007/978-3-031-71419-1_18,2024,springer,maybe,"Título sugere framework para sistemas de informação de processos com IA, potencialmente relevante a process mining e process-aware systems, mas abstract ausente impede avaliação conclusiva. Necessário acesso ao texto completo para confirmar se trata processos de software ou apenas BPM genérico.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere framework para sistemas de informação de processos com IA, potencialmente relevante a process mining e process-aware systems, mas abstract ausente impede avaliação conclusiva. Necessário acesso ao texto completo para confirmar se trata processos de software ou apenas BPM genérico."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochasti"
+195fc1af,Model Checking Timed and Stochastic Properties with CSL^TA,10.1109/TSE.2008.108,2009,ieee,exclude,"O artigo apresenta uma lógica estocástica (CSL^TA) e algoritmos de model checking para cadeias de Markov, mas não aplica essas técnicas a processos de desenvolvimento de software, repositórios de software ou artefatos de engenharia de software. É contribuição teórica em verificação formal, fora do escopo de process mining e engenharia de software.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo apresenta uma lógica estocástica (CSL^TA) e algoritmos de model checking para cadeias de Markov, mas não aplica essas técnicas a processos de desenvolvimento de software, repositórios de software ou artefatos de engenharia de software. É contribuição teórica em verificação formal, fora do escopo de process mining e engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""markov"",
+    ""stoc"
+358643b2,"On the Fragmentation of Process Information: Challenges, Solutions, and Outlook",10.1007/978-3-319-19237-6_1,2015,springer,maybe,"O título sugere relevância potencial para process mining (fragmentação de informações de processo), mas a ausência do abstract impede avaliação confiável contra critérios de inclusão. A venue (BPMN/modeling) é consistente com o escopo, mas sem resumo não é possível confirmar aplicação a processos de software ou presença de modelagem estocástica/forecasting.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere relevância potencial para process mining (fragmentação de informações de processo), mas a ausência do abstract impede avaliação confiável contra critérios de inclusão. A venue (BPMN/modeling) é consistente com o escopo, mas sem resumo não é possível confirmar aplicação a processos de software ou presença de modelagem estocástica/forecasting."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficie"
+f06ebc31,A model of the software development process using both continuous and discrete models,10.1002/1099-1670(200006/09)5:2/3<147::aid-spip122>3.0.co;2-t,2000,snowball,include,"O artigo apresenta modelagem de processo de software combinando discrete event modeling com system dynamics, atendendo IC2 (modelagem estocástica/contínua de processos de SW). Demonstra aplicação a exemplo real (ISPW6) e é relevante para análise e simulação de processos de desenvolvimento de software.",IC2,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O artigo apresenta modelagem de processo de software combinando discrete event modeling com system dynamics, atendendo IC2 (modelagem estocástica/contínua de processos de SW). Demonstra aplicação a exemplo real (ISPW6) e é relevante para análise e simulação de processos de desenvolvimento de software."",
+  ""matched_ic"": [""IC2""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""software_process"",
+    ""stochastic_modeling"",
+    ""simulation"",
+    ""disc"
+61106fb2,A Recommender System for Linear Satellite TV: Is It Possible?,10.1109/ICCAIS48893.2020.9096718,2020,ieee,exclude,"O artigo trata de sistemas de recomendação para TV por satélite, domínio completamente fora do escopo de engenharia de software e process mining. Não há qualquer relação com processos de desenvolvimento de software, mineração de repositórios, modelagem estocástica de processos de SW ou previsão de métricas de processo de desenvolvimento.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de sistemas de recomendação para TV por satélite, domínio completamente fora do escopo de engenharia de software e process mining. Não há qualquer relação com processos de desenvolvimento de software, mineração de repositórios, modelagem estocástica de processos de SW ou previsão de métricas de processo de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_pro"
+820dde5e,Adaptive Independent Subspace Analysis of Brain Magnetic Resonance Imaging Data,10.1109/ACCESS.2019.2893496,2019,ieee,exclude,"Artigo sobre processamento de imagens MRI para diagnóstico médico (autism spectrum disorder). Não há relação com processos de software, process mining, ou modelagem estocástica de desenvolvimento de SW. Domínio claramente fora do escopo (EC1).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo sobre processamento de imagens MRI para diagnóstico médico (autism spectrum disorder). Não há relação com processos de software, process mining, ou modelagem estocástica de desenvolvimento de SW. Domínio claramente fora do escopo (EC1)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""non"
+10d82ab8,Process Mining in Trusted Execution Environments: Towards Hardware Guarantees for Trust-Aware Inter-organizational Process Analysis,10.1007/978-3-030-98581-3_27,2022,springer,maybe,"O título sugere aplicação de process mining (potencial IC1), mas o abstract está ausente e não é possível confirmar se o foco é em processos de software ou em hardware/segurança. A menção a 'inter-organizational process analysis' pode indicar contexto genérico de BPM, não necessariamente SW. Requer full text para decisão definitiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere aplicação de process mining (potencial IC1), mas o abstract está ausente e não é possível confirmar se o foco é em processos de software ou em hardware/segurança. A menção a 'inter-organizational process analysis' pode indicar contexto genérico de BPM, não necessariamente SW. Requer full text para decisão definitiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""insufficient_abstract"",
+  "
+472e7acc,Enterprise Information Management Systems Development: Two Cases of Mining for Process Conformance,10.1016/j.jjimei.2022.100141,2023,acm,maybe,"Título sugere aplicação de process mining ('mining for process conformance') em sistemas de informação empresarial, potencialmente relevante para IC1. Porém, abstract ausente impede confirmação de: (a) se foco é em processos de software específicos ou sistemas empresariais genéricos, (b) se 'Enterprise Information Management Systems' inclui desenvolvimento de SW ou apenas gestão de dados, e (c) se",IC1,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere aplicação de process mining ('mining for process conformance') em sistemas de informação empresarial, potencialmente relevante para IC1. Porém, abstract ausente impede confirmação de: (a) se foco é em processos de software específicos ou sistemas empresariais genéricos, (b) se 'Enterprise Information Management Systems' inclui desenvolvimento de SW ou apenas gestão de dados, e (c) se há aplicação real de conformance checking em artef"
+54c16938,Process Mining: Extending α-Algorithm to Mine Duplicate Tasks in Process Logs,10.1007/978-3-540-72909-9_43,2007,springer,maybe,"Título indica claramente process mining (α-algorithm) aplicado a process logs, sugerindo IC1. Porém, o abstract ausente impede confirmação se o domínio é SW ou genérico (BPM). Sem resumo, não é possível verificar se trata de processos de SW ou apenas de BPM abstracto.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título indica claramente process mining (α-algorithm) aplicado a process logs, sugerindo IC1. Porém, o abstract ausente impede confirmação se o domínio é SW ou genérico (BPM). Sem resumo, não é possível verificar se trata de processos de SW ou apenas de BPM abstracto."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"""
+982c164b,Patch Reviewer Recommendation in OSS Projects,10.1109/APSEC.2013.103,2013,ieee,exclude,"O trabalho foca em recomendação de revisores via grafo de similaridade de desenvolvedores, não em process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/melhoria de modelos de processo de SW. Trata-se de um problema de ranking/matching de recursos humanos, não de análise ou previsão de características de processos.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O trabalho foca em recomendação de revisores via grafo de similaridade de desenvolvedores, não em process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/melhoria de modelos de processo de SW. Trata-se de um problema de ranking/matching de recursos humanos, não de análise ou previsão de características de processos."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": ["
+62acf4a9,A Rule-Based Approach for Process Discovery: Dealing with Noise and Imbalance in Process Logs,10.1007/s10618-005-0029-z,2006,springer,maybe,"O título indica claramente relevância para process discovery em event logs (IC1), mas a ausência de abstract verificado impede confirmação robusta do escopo, domínio de aplicação (SW vs. genérico BPM) e eventual enquadramento em EC1 ou EC3.",IC1,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título indica claramente relevância para process discovery em event logs (IC1), mas a ausência de abstract verificado impede confirmação robusta do escopo, domínio de aplicação (SW vs. genérico BPM) e eventual enquadramento em EC1 ou EC3."",
+  ""matched_ic"": [""IC1""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""event_log"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+"
+9c43c63e,Navigation Dynamics as a Biometrics for Authentication,10.1007/978-3-540-74827-4_105,2007,springer,exclude,"O título refere-se a 'Navigation Dynamics as Biometrics for Authentication', que claramente trata de autenticação e segurança, não de process mining, modelagem estocástica ou forecasting de processos de software. Sem abstract disponível, não há evidência de relevância ao escopo PATHCAST.",,EC1|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a 'Navigation Dynamics as Biometrics for Authentication', que claramente trata de autenticação e segurança, não de process mining, modelagem estocástica ou forecasting de processos de software. Sem abstract disponível, não há evidência de relevância ao escopo PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""for"
+a19504a3,Multidimensional context modeling applied to non-functional analysis of software,10.1007/s10270-017-0645-2,2017,snowball,exclude,"O artigo trata de modelagem de contexto e análise não-funcional de software, com aplicação em eHealth. Embora mencione 'análise estocástica de evolução de contexto', não aborda process mining, forecasting de métricas de processo de SW, ou modelagem estocástica de processos de desenvolvimento. O foco é em contexto de execução e qualidade de serviço, não em processos de SW (IC1-IC4 não atendidos).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de modelagem de contexto e análise não-funcional de software, com aplicação em eHealth. Embora mencione 'análise estocástica de evolução de contexto', não aborda process mining, forecasting de métricas de processo de SW, ou modelagem estocástica de processos de desenvolvimento. O foco é em contexto de execução e qualidade de serviço, não em processos de SW (IC1-IC4 não atendidos)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1""
+"
+d852c507,Decomposing Process Mining Problems Using Passages,10.1007/978-3-642-31131-4_5,2012,springer,maybe,"Título claramente relacionado a process mining e Petri nets (núcleo técnico relevante), mas abstract ausente impede confirmação de aplicação específica a processos de software. Contexto de BPM genérico requer full text para determinar se inclui SW.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título claramente relacionado a process mining e Petri nets (núcleo técnico relevante), mas abstract ausente impede confirmação de aplicação específica a processos de software. Contexto de BPM genérico requer full text para determinar se inclui SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""n"
+1b57144c,Causal Relation Detection for Activities from Heterogeneous Sources,10.1007/978-3-642-27997-3_31,2012,springer,maybe,"Título sugere análise de relações causais entre atividades de fontes heterogêneas, potencialmente relevante para process mining, mas ausência de abstract impossibilita confirmação de aplicação a processos de software ou atendimento aos critérios de inclusão. Requer acesso ao texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere análise de relações causais entre atividades de fontes heterogêneas, potencialmente relevante para process mining, mas ausência de abstract impossibilita confirmação de aplicação a processos de software ou atendimento aos critérios de inclusão. Requer acesso ao texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_me"
+d5718074,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,2023,ieee,include,"O paper atende claramente IC1 (process mining aplicado a artefatos de SW, especificamente Jira issues) e IC4 (mineração de repositórios para descobrir modelos de processo de desenvolvimento de software). Não há critérios de exclusão decisivos: o domínio é explicitamente SW, o processo é o foco principal, e a aplicação é prática em caso real.",IC1|IC4,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper atende claramente IC1 (process mining aplicado a artefatos de SW, especificamente Jira issues) e IC4 (mineração de repositórios para descobrir modelos de processo de desenvolvimento de software). Não há critérios de exclusão decisivos: o domínio é explicitamente SW, o processo é o foco principal, e a aplicação é prática em caso real."",
+  ""matched_ic"": [""IC1"", ""IC4""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""sof"
+79da8cb7,Ontological and Methodological Barriers to the Incorporation of Event Data in Psychometric Models,10.1007/978-3-030-74772-5_33,2021,springer,exclude,"O paper trata de barreiras metodológicas à incorporação de event data em modelos psicométricos, não de process mining ou modelagem estocástica de processos de software. O domínio é psicometria/psicologia quantitativa, fora do escopo de engenharia de software (EC1).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de barreiras metodológicas à incorporação de event data em modelos psicométricos, não de process mining ou modelagem estocástica de processos de software. O domínio é psicometria/psicologia quantitativa, fora do escopo de engenharia de software (EC1)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""proc"
+c94fc209,"Software project management using PROMPT: A hybrid metrics, modeling and
+utility framework",10.1016/j.infsof.2005.09.004,2005,wos,include,O artigo apresenta um framework (PROMPT) que integra métricas com modelos de simulação do processo de desenvolvimento de software para suportar predições de desempenho do projeto e avaliação de decisões gerenciais. Atende IC2 (modelagem estocástica via simulation models) e IC3 (forecasting de métricas de processo como performance predictions).,IC2|IC3,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O artigo apresenta um framework (PROMPT) que integra métricas com modelos de simulação do processo de desenvolvimento de software para suportar predições de desempenho do projeto e avaliação de decisões gerenciais. Atende IC2 (modelagem estocástica via simulation models) e IC3 (forecasting de métricas de processo como performance predictions)."",
+  ""matched_ic"": [""IC2"", ""IC3""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""software_process"",
+    "
+eea72ff3,MarCaSPiS: a Markovian Extension of a Calculus for Services,10.1016/j.entcs.2009.07.071,2009,snowball,exclude,"O artigo apresenta uma extensão teórica (MarCaSPiS) de um cálculo de processos com semântica estocástica, mas não aplica a técnica a artefatos ou processos de desenvolvimento de software reais. É um trabalho puramente teórico de process algebra sem avaliação ou aplicação a processos de SW, não atendendo aos critérios de inclusão (IC1-IC4).",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo apresenta uma extensão teórica (MarCaSPiS) de um cálculo de processos com semântica estocástica, mas não aplica a técnica a artefatos ou processos de desenvolvimento de software reais. É um trabalho puramente teórico de process algebra sem avaliação ou aplicação a processos de SW, não atendendo aos critérios de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [
+    ""markov"",
+    ""stochastic_m"
+ec00a495,Service Retrieval for Service-Oriented Business Process Modeling,10.1007/978-3-642-54092-9_11,2013,springer,maybe,"Título sugere modelagem de processos de negócio com serviços, potencialmente relevante a BPM, mas sem abstract disponível não é possível confirmar se aborda process mining, modelagem estocástica ou forecasting em contexto de SW. Requer verificação de full text.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere modelagem de processos de negócio com serviços, potencialmente relevante a BPM, mas sem abstract disponível não é possível confirmar se aborda process mining, modelagem estocástica ou forecasting em contexto de SW. Requer verificação de full text."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_tar"
+4ea1b478,A Systematic Comparison of&#xa0;Case Management Languages,10.1007/978-3-031-25383-6_19,2023,springer,maybe,"O título sugere um estudo comparativo de linguagens de gerenciamento de casos (BPM), potencialmente relevante para processos de SW, mas sem abstract disponível é impossível confirmar se trata processos de desenvolvimento de software ou apenas BPM genérico. Requer acesso ao texto completo para decisão definitiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere um estudo comparativo de linguagens de gerenciamento de casos (BPM), potencialmente relevante para processos de SW, mas sem abstract disponível é impossível confirmar se trata processos de desenvolvimento de software ou apenas BPM genérico. Requer acesso ao texto completo para decisão definitiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_con"
+0137598c,Understanding Spaghetti Models with Sequence Clustering for ProM,10.1007/978-3-642-12186-9_10,2010,springer,maybe,"Título indica aplicação de process mining (ProM, sequence clustering) a modelos de processo, potencialmente relevante para IC1. Porém, abstract ausente impede confirmação de aplicação a processos de SW e atendimento seguro aos critérios de inclusão.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título indica aplicação de process mining (ProM, sequence clustering) a modelos de processo, potencialmente relevante para IC1. Porém, abstract ausente impede confirmação de aplicação a processos de SW e atendimento seguro aos critérios de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""process_mining"",
+    ""insufficient_abstract"",
+    ""full_text_required""
+  ],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": """
+1fca67bc,Translating Artifact-Based Business Process Model to BPEL,10.1007/978-3-642-23324-1_78,2011,springer,maybe,"O título sugere um trabalho sobre modelagem de processos de negócio (BPEL, artefatos), potencialmente relevante para BPM genérico, mas sem abstract disponível não é possível confirmar se trata processos de SW ou se tem conexão com process mining, estocástico ou forecasting conforme escopo PATHCAST. Recomenda-se análise de full text.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere um trabalho sobre modelagem de processos de negócio (BPEL, artefatos), potencialmente relevante para BPM genérico, mas sem abstract disponível não é possível confirmar se trata processos de SW ou se tem conexão com process mining, estocástico ou forecasting conforme escopo PATHCAST. Recomenda-se análise de full text."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""insufficient_abstract"",
+    ""full_text_required"""
+4bc4b07e,What do Developers want? An Advisor approach for Developer Priorities,10.1109/CHASE.2017.14,2017,wos,exclude,"O paper foca em um framework de recomendação (Smart Advisor) para auxiliar desenvolvedores na priorização de insights e respostas a perguntas. Não trata de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descobrir/modelar processos de desenvolvimento de software. É um trabalho sobre inteligência aumentada e interface conversacional, não ",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper foca em um framework de recomendação (Smart Advisor) para auxiliar desenvolvedores na priorização de insights e respostas a perguntas. Não trata de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descobrir/modelar processos de desenvolvimento de software. É um trabalho sobre inteligência aumentada e interface conversacional, não sobre análise ou predição de processos de SW."",
+ "
+f83cb711,ReflexML: UML-Based Architecture-to-Code Traceability and Consistency Checking,10.1007/978-3-642-23798-0_37,2011,springer,exclude,"O título refere-se a rastreabilidade e verificação de consistência entre arquitetura UML e código, que é um problema de engenharia de software voltado para artefatos estáticos, não para modelagem ou previsão de processos de desenvolvimento. Sem abstract disponível e com base no título, não há indicação de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de re",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a rastreabilidade e verificação de consistência entre arquitetura UML e código, que é um problema de engenharia de software voltado para artefatos estáticos, não para modelagem ou previsão de processos de desenvolvimento. Sem abstract disponível e com base no título, não há indicação de process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/análise de processos d"
+b326d100,Anti-pattern Mutations and Fault-proneness,10.1109/QSIC.2014.45,2014,wos,exclude,"O artigo estuda evolução de anti-padrões e sua relação com fault-proneness em sistemas de software, mas não aplica process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descobrir/modelar processos de desenvolvimento. O foco é em qualidade de código e detecção de defeitos, não em processos de SW.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo estuda evolução de anti-padrões e sua relação com fault-proneness em sistemas de software, mas não aplica process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descobrir/modelar processos de desenvolvimento. O foco é em qualidade de código e detecção de defeitos, não em processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""software_process""],
+  ""softwa"
+8af375c6,A Reliability-Critical Path Identifying Method With Local and Global Adjacency Probability Matrix in Combinational Circuits,10.1109/TC.2023.3323772,2024,ieee,exclude,"O artigo trata de identificação de caminhos críticos de confiabilidade em circuitos combinacionais (hardware), não de processos de software. Não há nenhuma conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo de desenvolvimento de software, ou mineração de repositórios de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de identificação de caminhos críticos de confiabilidade em circuitos combinacionais (hardware), não de processos de software. Não há nenhuma conexão com process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo de desenvolvimento de software, ou mineração de repositórios de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"
+7fb0495c,Elaborating Analysis Models with Tool Support,10.1007/978-3-642-23768-3_70,2011,springer,maybe,"Título sugere ferramenta para modelagem de análise, mas sem abstract não há evidência clara de aplicação a processos de SW, process mining ou modelagem estocástica. Pode ser sobre HCI/UML genérico ou análise de requisitos sem foco em process mining.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere ferramenta para modelagem de análise, mas sem abstract não há evidência clara de aplicação a processos de SW, process mining ou modelagem estocástica. Pode ser sobre HCI/UML genérico ou análise de requisitos sem foco em process mining."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"""
+c8617d1d,How are LLMs Used for&#xa0;Conceptual Modeling? An Exploratory Study on&#xa0;Interaction Behavior and&#xa0;User Perception,10.1007/978-3-031-75872-0_14,2025,springer,exclude,"Artigo sobre uso de LLMs em modelagem conceitual. Sem abstract disponível e título não indica aplicação a process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. O escopo está fora da intersecção PATHCAST (process mining + estocástico + forecasting + processo de SW).",,EC3|EC2,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo sobre uso de LLMs em modelagem conceitual. Sem abstract disponível e título não indica aplicação a process mining, modelagem estocástica de processos de SW, forecasting de métricas de processo ou mineração de repositórios. O escopo está fora da intersecção PATHCAST (process mining + estocástico + forecasting + processo de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3"", ""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_c"
+652808b0,Splitting Algorithm for Cases with Single Detection from Sonar Data for Two Tracks,10.1109/SIU.2006.1659705,2006,ieee,exclude,"Artigo trata de processamento de sinais de sonar e rastreamento de alvos (sonar tracking), domínio completamente fora de engenharia de software e processos de desenvolvimento. Nenhum dos critérios de inclusão (IC1-IC4) é atendido.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo trata de processamento de sinais de sonar e rastreamento de alvos (sonar tracking), domínio completamente fora de engenharia de software e processos de desenvolvimento. Nenhum dos critérios de inclusão (IC1-IC4) é atendido."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""monte_carlo"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""forecast_target"": ""none"",
+  ""proce"
+f5e74e05,Efficient GitHub Crawling Using the GraphQL API,10.1007/978-3-031-10548-7_48,2022,wos,exclude,"O paper descreve um sistema de engenharia de software (Prometheus) para crawling e armazenamento de dados do GitHub usando GraphQL API. Embora trate de repositórios de software, não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou descoberta de padrões em processos de desenvolvimento. É primariamente uma ferramenta de infraestrutura/coleta de dados, não uma aná",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper descreve um sistema de engenharia de software (Prometheus) para crawling e armazenamento de dados do GitHub usando GraphQL API. Embora trate de repositórios de software, não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou descoberta de padrões em processos de desenvolvimento. É primariamente uma ferramenta de infraestrutura/coleta de dados, não uma análise ou modelagem de processos."",
+  ""matched_ic"":"
+d2e06af8,An in‐depth benchmark framework for evaluating single cell RNA‐seq dropout imputation methods and the development of an improved algorithm afMF,10.1002/ctm2.70283,2025,snowball,exclude,"O artigo trata exclusivamente de bioinformática (imputação de dados de single-cell RNA-seq), com foco em algoritmos de processamento de dados genômicos. Não há qualquer conexão com processos de desenvolvimento de software, process mining, ou modelagem estocástica de processos de SW. Atende claramente EC1 (domínio fora de SW: biologia/genômica).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata exclusivamente de bioinformática (imputação de dados de single-cell RNA-seq), com foco em algoritmos de processamento de dados genômicos. Não há qualquer conexão com processos de desenvolvimento de software, process mining, ou modelagem estocástica de processos de SW. Atende claramente EC1 (domínio fora de SW: biologia/genômica)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_softw"
+ae2afe48,Enabling Performance Modeling for the Masses: Initial Experiences,10.1007/978-3-030-01042-3_7,2018,springer,maybe,"O título sugere modelagem de desempenho, potencialmente relevante para processos de software, mas sem abstract disponível não é possível confirmar se aborda process mining, modelagem estocástica ou forecasting em contexto de desenvolvimento de software. A falta de informação impede decisão inclusiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere modelagem de desempenho, potencialmente relevante para processos de software, mas sem abstract disponível não é possível confirmar se aborda process mining, modelagem estocástica ou forecasting em contexto de desenvolvimento de software. A falta de informação impede decisão inclusiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""sto"
+af83a56c,An Experience on Applying Process Mining Techniques to the Tuscan Port Community System,10.1007/978-3-319-27033-3_4,2016,springer,maybe,"O título indica aplicação de process mining a um sistema portuário, mas sem abstract disponível não é possível confirmar se o foco está em processos de software ou em processos portuários genéricos. Risco de EC1 (domínio fora de SW) não pode ser descartado.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título indica aplicação de process mining a um sistema portuário, mas sem abstract disponível não é possível confirmar se o foco está em processos de software ou em processos portuários genéricos. Risco de EC1 (domínio fora de SW) não pode ser descartado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""process_mining"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+ "
+27364d0b,Exploration strategies for balancing efficiency and comprehensibility in model checking with ant colony optimization,10.1080/24751839.2022.2047470,2022,snowball,exclude,"O artigo trata de model checking com otimização por colônia de formigas para verificação formal de sistemas de software, não abordando process mining, modelagem estocástica de processos de desenvolvimento de SW, forecasting de métricas de processo, ou mineração de repositórios. O foco é em verificação de especificações e busca heurística, não em análise ou predição de processos de desenvolvimento ",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de model checking com otimização por colônia de formigas para verificação formal de sistemas de software, não abordando process mining, modelagem estocástica de processos de desenvolvimento de SW, forecasting de métricas de processo, ou mineração de repositórios. O foco é em verificação de especificações e busca heurística, não em análise ou predição de processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"""
+1a586f14,A nonlinear analytical model for the quantized LMS algorithm-the arbitrary step size case,10.1109/78.502330,1996,ieee,exclude,"O paper trata de processamento de sinais e algoritmos de filtragem adaptativa (LMS com quantização), sem qualquer conexão com processos de software, process mining, ou engenharia de software. Domínio claramente fora do escopo (EC1).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de processamento de sinais e algoritmos de filtragem adaptativa (LMS com quantização), sem qualquer conexão com processos de software, process mining, ou engenharia de software. Domínio claramente fora do escopo (EC1)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""conf"
+25639299,Constraining the Implementation Through Architectural Security Rules: An Expert Study,10.1007/978-3-030-35333-9_15,2019,springer,exclude,"Título refere-se a regras de segurança arquitetural e conformidade, não a process mining, modelagem estocástica, forecasting de processos ou mineração de repositórios. Sem abstract disponível e evidência de que o foco seja processo de SW (em vez de arquitetura/segurança de software).",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título refere-se a regras de segurança arquitetural e conformidade, não a process mining, modelagem estocástica, forecasting de processos ou mineração de repositórios. Sem abstract disponível e evidência de que o foco seja processo de SW (em vez de arquitetura/segurança de software)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_targe"
+5d6e0628,Generative AI,10.1007/s12599-023-00834-7,2023,springer,exclude,"Título genérico 'Generative AI' sem abstract disponível não permite verificação de qualquer critério de inclusão. Sem informação sobre aplicação a processos de software, modelagem estocástica ou forecasting, não há base para inclusão mesmo com benefício da dúvida.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título genérico 'Generative AI' sem abstract disponível não permite verificação de qualquer critério de inclusão. Sem informação sobre aplicação a processos de software, modelagem estocástica ou forecasting, não há base para inclusão mesmo com benefício da dúvida."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""unclear"",
+  ""forecast_target"": ""un"
+86920afa,"Towards a Bayesian Decision Model for Release Planning in Incremental
+Development",10.1109/RE.2017.32,2017,wos,maybe,"O paper aborda modelagem estocástica (Bayesian, Monte Carlo) em contexto de planejamento de release em desenvolvimento incremental de software, o que alinha potencialmente com IC2. Porém, o abstract não menciona event logs, repository mining ou análise de processos reais, focando em decisão e otimização; falta clareza sobre se modela processos de SW observados ou apenas planejamento teórico.",IC2,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O paper aborda modelagem estocástica (Bayesian, Monte Carlo) em contexto de planejamento de release em desenvolvimento incremental de software, o que alinha potencialmente com IC2. Porém, o abstract não menciona event logs, repository mining ou análise de processos reais, focando em decisão e otimização; falta clareza sobre se modela processos de SW observados ou apenas planejamento teórico."",
+  ""matched_ic"": [""IC2""],
+  ""matched_ec"": [],
+  ""eviden"
+51a04cc3,A Conversational Digital Assistant for Intelligent Process Automation,10.1007/978-3-030-58779-6_6,2020,springer,maybe,"Título sugere automação de processos com IA, potencialmente relevante a BPM; porém, abstract ausente impossibilita confirmação de escopo (SW vs. genérico), aplicação a processos de desenvolvimento de SW, ou presença de process mining/modelagem estocástica. Contexto de BPM e RPA confere alguma relevância, mas requer full text para decisão definitiva.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere automação de processos com IA, potencialmente relevante a BPM; porém, abstract ausente impossibilita confirmação de escopo (SW vs. genérico), aplicação a processos de desenvolvimento de SW, ou presença de process mining/modelagem estocástica. Contexto de BPM e RPA confere alguma relevância, mas requer full text para decisão definitiva."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_r"
+88d49c85,"Understanding ""why"" in software process modelling, analysis, and design",10.1109/icse.1994.296775,2002,snowball,exclude,"O artigo trata de modelagem conceitual de processos de software usando Telos para capturar estruturas intencionais e dependências entre atores. Não há evidência de process mining (descoberta de event logs), modelagem estocástica (Markov, Monte Carlo, Petri nets), forecasting de métricas de processo, ou mineração de repositórios. É um trabalho de engenharia de requisitos/modelagem conceitual, não d",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de modelagem conceitual de processos de software usando Telos para capturar estruturas intencionais e dependências entre atores. Não há evidência de process mining (descoberta de event logs), modelagem estocástica (Markov, Monte Carlo, Petri nets), forecasting de métricas de processo, ou mineração de repositórios. É um trabalho de engenharia de requisitos/modelagem conceitual, não de análise de dados de processos de SW."",
+  ""match"
+7cb8d3f6,Real-Life Applications of DEMO,10.1007/978-3-030-38854-6_19,2020,wos,maybe,"O resumo menciona 'Getting firm grip on software development' como uma das 8 aplicações do DEMO, sugerindo potencial relevância para processos de SW. Contudo, o abstract é genérico e não fornece detalhes suficientes sobre a natureza da aplicação (se envolve process mining, modelagem estocástica, forecasting ou mineração de repositórios). O contexto amplo (enterprise ontology, enterprise transforma",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O resumo menciona 'Getting firm grip on software development' como uma das 8 aplicações do DEMO, sugerindo potencial relevância para processos de SW. Contudo, o abstract é genérico e não fornece detalhes suficientes sobre a natureza da aplicação (se envolve process mining, modelagem estocástica, forecasting ou mineração de repositórios). O contexto amplo (enterprise ontology, enterprise transformation, document archives, cargo decisions) e a falta"
+66cd645f,Creating a code inspection model for simulation-based decision support,,2003,snowball,maybe,"O paper desenvolve um modelo de simulação de eventos discretos para processos de inspeção de código em desenvolvimento de software, alinhado com IC2 (modelagem estocástica). Porém, a ausência de abstract verificável e a falta de clareza sobre uso de event logs reais ou repositórios de software impedem conclusão segura de inclusão.",IC2,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O paper desenvolve um modelo de simulação de eventos discretos para processos de inspeção de código em desenvolvimento de software, alinhado com IC2 (modelagem estocástica). Porém, a ausência de abstract verificável e a falta de clareza sobre uso de event logs reais ou repositórios de software impedem conclusão segura de inclusão."",
+  ""matched_ic"": [
+    ""IC2""
+  ],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""stochastic_modeling"",
+    ""simulation"
+30014548,Modeling the Failure Pathology of Software Components,10.1109/QoSA.2016.15,2016,ieee,exclude,"O paper modela comportamento de falha de componentes de software usando estados de erro e propagação, mas não aborda process mining, modelagem estocástica de processos de desenvolvimento, forecasting de métricas de processo, ou mineração de repositórios. É um trabalho de confiabilidade e arquitetura de software, não de análise de processos de desenvolvimento.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper modela comportamento de falha de componentes de software usando estados de erro e propagação, mas não aborda process mining, modelagem estocástica de processos de desenvolvimento, forecasting de métricas de processo, ou mineração de repositórios. É um trabalho de confiabilidade e arquitetura de software, não de análise de processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3""],
+  ""evidence_tags"": [""reliability""],
+  ""s"
+a317544f,Autoclassify Software Defects Using Orthogonal Defect Classification,10.1007/978-3-031-10548-7_23,2022,wos,exclude,"O artigo trata de classificação automática de defeitos usando técnicas de machine learning (SVM, RFC), não abordando process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/análise de processos de SW. A predição de categoria de impacto de defeitos não se alinha com os critérios de inclusão da SLR PATHCAST.",,EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de classificação automática de defeitos usando técnicas de machine learning (SVM, RFC), não abordando process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/análise de processos de SW. A predição de categoria de impacto de defeitos não se alinha com os critérios de inclusão da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC3""
+  ],
+  ""evidence_tags"": [],"
+93876214,Background: Software Quality and Reliability Prediction,10.1007/978-81-322-1176-1_2,2013,springer,maybe,"Título sugere relevância potencial para forecasting em software (IC3), mas ausência completa de abstract impede avaliação confiável do escopo, método e aplicação em processos de SW. Requer acesso ao texto completo.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere relevância potencial para forecasting em software (IC3), mas ausência completa de abstract impede avaliação confiável do escopo, método e aplicação em processos de SW. Requer acesso ao texto completo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""forecasting"", ""reliability"", ""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""unclear"",
+  ""forecast_target"": ""reliabi"
+03654165,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,2021,wos,include,"O paper atende IC2 (modelagem estocástica em processos de SW) ao usar Markov chains para modelar task processes de programadores, e também aborda IC1 implicitamente ao analisar processos de desenvolvimento através de event-like data (capturas de tela). Estuda processos de SW reais em organização CMMI, sem exclusões decisivas.",IC2,,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O paper atende IC2 (modelagem estocástica em processos de SW) ao usar Markov chains para modelar task processes de programadores, e também aborda IC1 implicitamente ao analisar processos de desenvolvimento através de event-like data (capturas de tela). Estuda processos de SW reais em organização CMMI, sem exclusões decisivas."",
+  ""matched_ic"": [""IC2""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [
+    ""software_process"",
+    ""stochastic_modeling"",
+  "
+d43b2a98,Active distribution network planning based on active management,10.1109/CICED.2014.6991909,2014,ieee,exclude,"O paper trata de planejamento de redes de distribuição elétrica ativa, não de processos de desenvolvimento de software. Apesar de mencionar modelagem estocástica (incertezas de carga e saída de DG), não há qualquer conexão com engenharia de software, repositórios, event logs de SW ou processos de desenvolvimento.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de planejamento de redes de distribuição elétrica ativa, não de processos de desenvolvimento de software. Apesar de mencionar modelagem estocástica (incertezas de carga e saída de DG), não há qualquer conexão com engenharia de software, repositórios, event logs de SW ou processos de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_meth"
+70d018e0,Business Process Analysis Method Based on Petri Nets,10.1109/ICISCE.2017.55,2017,ieee,exclude,"O artigo trata de análise de processos de negócio genéricos usando Petri nets estocásticas, sem evidência explícita de aplicação a processos de desenvolvimento de software. Não há menção a artefatos de SW (commits, issues, PRs, logs de repositório) ou contexto de engenharia de software no título ou resumo.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de análise de processos de negócio genéricos usando Petri nets estocásticas, sem evidência explícita de aplicação a processos de desenvolvimento de software. Não há menção a artefatos de SW (commits, issues, PRs, logs de repositório) ou contexto de engenharia de software no título ou resumo."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""stochastic_petri_net""],
+  ""software_context"": ""not_software_process"",
+  """
+aefea166,Simulation case studies in the print/finish industry,10.1109/WSC.1998.746021,1998,ieee,exclude,"O artigo aborda simulação de processos na indústria de impressão/acabamento, não em engenharia de software. Claramente fora do escopo de processos de desenvolvimento de SW, atendendo ao critério EC1 (domínio fora de SW sem link a SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo aborda simulação de processos na indústria de impressão/acabamento, não em engenharia de software. Claramente fora do escopo de processos de desenvolvimento de SW, atendendo ao critério EC1 (domínio fora de SW sem link a SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""simulation"",
+  ""forecast_target"": ""throughput"",
+  ""process_dat"
+4e18ea1c,Innovation by Applied Mathematics,10.1007/978-1-4614-3858-8_475,2013,springer,exclude,"Artigo de referência genérico sobre inovação em matemática aplicada, sem abstract disponível e nenhuma evidência de conexão com process mining, modelagem estocástica de processos de SW, ou forecasting em desenvolvimento de software. Título vago não permite inferir escopo específico em engenharia de software.",,EC3|EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Artigo de referência genérico sobre inovação em matemática aplicada, sem abstract disponível e nenhuma evidência de conexão com process mining, modelagem estocástica de processos de SW, ou forecasting em desenvolvimento de software. Título vago não permite inferir escopo específico em engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3"", ""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""sto"
+a3886f88,Incentive Assignment in Hybrid Consensus Blockchain Systems in Pervasive Edge Environments,10.1109/TC.2021.3122891,2022,ieee,exclude,"O artigo trata de sistemas blockchain em ambientes edge computing, focando em consenso híbrido (PoW/PoS) e atribuição de incentivos a mineradores. Não há relação com process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de desenvolvimento, ou mineração de repositórios de software. O domínio é blockchain/edge computing, não engenharia de software.",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de sistemas blockchain em ambientes edge computing, focando em consenso híbrido (PoW/PoS) e atribuição de incentivos a mineradores. Não há relação com process mining, modelagem estocástica de processos de software, forecasting de métricas de processo de desenvolvimento, ou mineração de repositórios de software. O domínio é blockchain/edge computing, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evid"
+82b3b7c7,Future research issues in IT and tourism,10.1007/s40558-014-0021-9,2015,springer,exclude,"O título indica foco em turismo e tecnologia da informação, domínio fora de engenharia de software. Sem abstract disponível, não há evidência de relevância para process mining, modelagem estocástica ou forecasting em processos de desenvolvimento de software. Atende EC1 (domínio fora de SW).",,EC1,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica foco em turismo e tecnologia da informação, domínio fora de engenharia de software. Sem abstract disponível, não há evidência de relevância para process mining, modelagem estocástica ou forecasting em processos de desenvolvimento de software. Atende EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecas"
+726b6700,Managing Regulatory Compliance in Business Processes,10.1007/978-3-642-01982-1_8,2010,springer,exclude,"Título sugere foco em conformidade regulatória em processos de negócio genéricos (não necessariamente software). Sem abstract disponível e sendo capítulo de handbook de 2010, não há evidência suficiente de aplicação a processos de desenvolvimento de software ou mineração de repositórios de SW. Não atende aos critérios de inclusão (IC1-IC4).",,EC1|EC4,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título sugere foco em conformidade regulatória em processos de negócio genéricos (não necessariamente software). Sem abstract disponível e sendo capítulo de handbook de 2010, não há evidência suficiente de aplicação a processos de desenvolvimento de software ou mineração de repositórios de SW. Não atende aos critérios de inclusão (IC1-IC4)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC4""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_so"
+eb0d6473,AocML: A Domain-Specific Language for Model-Driven Development of Activity-Oriented Context-Aware Applications,10.1007/s11390-018-1865-9,2018,springer,exclude,"Título refere-se a DSL para desenvolvimento de aplicações context-aware, sem evidência no título de process mining, modelagem estocástica de processos de SW ou forecasting. Abstract ausente impede confirmação de relevância ao escopo PATHCAST (intersecção entre PM, estocástico, forecasting e SW processes). Aplicação aparenta ser em sistemas adaptativos, não em análise/predição de processos de desen",,EC2|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""Título refere-se a DSL para desenvolvimento de aplicações context-aware, sem evidência no título de process mining, modelagem estocástica de processos de SW ou forecasting. Abstract ausente impede confirmação de relevância ao escopo PATHCAST (intersecção entre PM, estocástico, forecasting e SW processes). Aplicação aparenta ser em sistemas adaptativos, não em análise/predição de processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  """
+82d3b8dd,Grid Workflow Based on Performance Evaluation,10.1007/978-3-540-24679-4_131,2004,springer,maybe,"O título sugere workflows em grid computing com foco em avaliação de desempenho, potencialmente relevante a processos. Contudo, sem abstract não é possível confirmar se trata processos de software, aplica process mining, ou atende aos critérios de inclusão. Classificado como 'maybe' por falta de informação suficiente e possível relevância marginal.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""O título sugere workflows em grid computing com foco em avaliação de desempenho, potencialmente relevante a processos. Contudo, sem abstract não é possível confirmar se trata processos de software, aplica process mining, ou atende aos critérios de inclusão. Classificado como 'maybe' por falta de informação suficiente e possível relevância marginal."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_re"
+d1e89fa2,Managing Related Models in Vehicle Control Software Development,10.1007/978-3-642-33666-9_25,2012,springer,maybe,"Título sugere engenharia de software (Vehicle Control Software Development), mas abstract ausente impede confirmação de relevância aos critérios de process mining, modelagem estocástica ou forecasting. Pode tratar de model-driven engineering sem foco em processos de desenvolvimento ou event logs.",,,"```json
+{
+  ""decision"": ""maybe"",
+  ""rationale"": ""Título sugere engenharia de software (Vehicle Control Software Development), mas abstract ausente impede confirmação de relevância aos critérios de process mining, modelagem estocástica ou forecasting. Pode tratar de model-driven engineering sem foco em processos de desenvolvimento ou event logs."",
+  ""matched_ic"": [],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""insufficient_abstract"", ""full_text_required""],
+  ""software_context"": ""unclear"",
+  ""stochas"
+104f4536,Distributed management for software maintenance in a wide-area railway system,10.1109/ISADS.1997.590635,1997,ieee,exclude,"O artigo trata de gestão de manutenção de software em sistema ferroviário real, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios de SW. Foca em engenharia de sistemas distribuídos e confiabilidade, não na análise ou predição de processos de desenvolvimento/operação de software.",,EC1|EC3,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de gestão de manutenção de software em sistema ferroviário real, mas não aborda process mining, modelagem estocástica, forecasting de métricas de processo, ou mineração de repositórios de SW. Foca em engenharia de sistemas distribuídos e confiabilidade, não na análise ou predição de processos de desenvolvimento/operação de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [
+    ""EC1"",
+    ""EC3""
+  ],
+  ""evidence_tags"": [],
+  ""softwar"
