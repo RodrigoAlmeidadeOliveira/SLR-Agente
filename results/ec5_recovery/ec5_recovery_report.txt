@@ -1,0 +1,20 @@
+SLR PATHCAST — EC5 (full-text inaccessible) Recovery Attempt
+============================================================
+EC5 papers re-checked: 148
+Recovered (at least one OA URL found): 27 (18.2%)
+Still inaccessible: 121 (81.8%)
+
+By source (non-exclusive; a paper may be found in multiple sources):
+  unpaywall: 6 (4.1%)
+  semantic_scholar: 6 (4.1%)
+  openalex: 6 (4.1%)
+  core: 20 (13.5%)
+
+Methodology:
+  Each EC5 paper was queried against four open-access discovery APIs
+  (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE). A paper is
+  marked as recovered if any source returns an OA URL.
+
+Note: recovery here means an OA URL was *discovered*. Actual download
+  and full-text screening of recovered URLs is the next step before
+  these papers can re-enter the included set.

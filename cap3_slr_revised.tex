@@ -1493,8 +1493,26 @@ The review is limited to English-language peer-reviewed publications,
 potentially excluding relevant work in other languages or grey literature.
 The broad time span (1994--2026) and five-database coverage mitigate
 geographic and temporal bias. The deferred high-recall auxiliary corpus
-(3{,}441 records from SpringerLink, WoS, Snowball) provides a mechanism for
-expansion if gaps in the confirmed 169-study set are identified.
+(3{,}807 records from SpringerLink, WoS, Snowball, and other low-precision
+queries; corresponds to the difference between the 5{,}783 unique deduplicated
+records and the 2{,}340-paper operational working set) provides a mechanism
+for expansion if gaps in the confirmed 169-study set are identified. A
+sensitivity-check protocol over a stratified random 200-paper subsample of
+the auxiliary corpus is implemented in
+\texttt{pipeline/sensitivity.py} and is queued for execution in the
+camera-ready cycle.
+
+A second external-validity exposure concerns the 148 papers closed under
+EC5 (full text inaccessible). To bound the residual recall risk, an
+automated open-access (OA) recovery pass was executed against four public
+discovery services (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE).
+The result is summarised in Table~\ref{tab:ec5-recovery}: 27 of the 148 EC5
+papers (18.2\%) returned at least one OA URL during the recovery pass and
+will be re-screened in the camera-ready cycle; the remaining 121 papers
+(81.8\%) remain inaccessible and continue to be reported under EC5 in the
+PRISMA flow.
+
+\input{results/ec5_recovery/ec5_recovery_report}
 
 \subsection{Conclusion Validity}
 
