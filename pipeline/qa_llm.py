@@ -442,12 +442,26 @@ def format_summary_latex(s: dict) -> str:
     def f(v):
         return "TBD" if (v is None or (isinstance(v, float) and math.isnan(v))) else f"{v:.2f}"
 
-    return "\n".join([
+    rows = [
         f"Studies assessed & {s['studies_assessed']} & Absolute count and {s['studies_assessed_pct']:.1f}\\% of included set \\\\",
         f"Studies with score $\\geq 4/8$ & {s['score_gte_4']} & Retained for synthesis \\\\",
         f"Studies with score $< 4/8$ & {s['score_lt_4']} & Excluded after QA \\\\",
         f"Mean QA score & {f(s['mean'])} & Mean and standard deviation ({f(s['std'])}) \\\\",
         f"Median QA score & {f(s['median'])} & Median and interquartile range ({f(s['q1'])}--{f(s['q3'])}) \\\\",
+    ]
+    return "\n".join([
+        "\\begin{table}[htbp]",
+        "\\centering",
+        f"\\caption{{Quality-assessment results for the confirmed included set ($n = {s['total_included_set']}$; full QA applied). Auto-generated from \\texttt{{pipeline/qa\\_llm.py}}.}}",
+        "\\label{tab:qa-results}",
+        "\\begin{tabular}{lcp{6.5cm}}",
+        "\\toprule",
+        "\\textbf{QA Outcome} & \\textbf{Count} & \\textbf{Notes} \\\\",
+        "\\midrule",
+        *rows,
+        "\\bottomrule",
+        "\\end{tabular}",
+        "\\end{table}",
     ])
 
 
