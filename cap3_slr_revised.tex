@@ -551,9 +551,10 @@ Excluded                             & 717 & 80.9 \\
 \smallskip
 \footnotesize\textit{Note:} EC counts are non-exclusive --- a single paper may
 trigger multiple ECs when more than one applies (e.g., a non-SE-domain paper
-whose contribution is purely theoretical). The sum of per-EC counts therefore
-exceeds the 717 excluded papers; the percentages above are with respect to the
-886-paper FT queue.
+whose contribution is purely theoretical). The sum of per-EC counts is
+$229+205+148+110+60 = 752$, which exceeds the 717 excluded papers by 35
+(corresponding to papers triggering more than one EC). The percentages above
+are with respect to the 886-paper FT queue.
 \end{table}
 
 Among the 717 excluded papers, EC3 (algorithmic or theoretical contribution
@@ -788,8 +789,10 @@ same terminology as the search strings but apply techniques to organizational
 processes unrelated to SDLC. EC5 (full text inaccessible, $n=148$) closes the
 group of large strata, followed by EC2 (software as implementation platform
 rather than analyzed process, $n=110$) and EC4 (out-of-scope secondary study,
-$n=60$). EC counts are non-exclusive: a single paper may trigger more than
-one EC. The dominance of EC3 and EC1 directly supports Findings F3 and F4
+$n=60$). EC counts are non-exclusive: the sum of per-EC counts
+($229+205+148+110+60 = 752$) exceeds the 717 excluded papers by 35,
+corresponding to papers that triggered more than one EC simultaneously. The
+dominance of EC3 and EC1 directly supports Findings F3 and F4
 below: process mining and stochastic methods are widely studied in the
 abstract or in non-SE domains, but their application to SDLC processes
 remains comparatively narrow.
@@ -932,7 +935,7 @@ substantially lowering the barrier to formal process modeling. This line of
 inquiry was consolidated in \cite{cook1998}, which refined the event-based
 discovery methodology and established the conceptual vocabulary of inferring
 workflow structures from historical execution data, a paradigm that remains
-central to the field today. Crucially, both contributions embedded stochastic
+central to the field today. Notably, both contributions embedded stochastic
 reasoning---particularly Markov chain representations---within the discovery
 pipeline, anticipating the probabilistic extensions that would later characterise
 mature process mining frameworks. The translation of these principles into an
@@ -1086,7 +1089,7 @@ feasibility of process-derived features for product-quality prediction.
 Taken together, this cluster confirms that PM and prediction are being connected
 in the SE literature, but always at the level of sequential application---PM
 output feeds a downstream model---rather than through a unified pipeline with
-formal contracts. Crucially, none of these systems can express, as a first-class
+formal contracts. Notably, none of these systems can express, as a first-class
 output, the probability that a given process instance will reach completion
 within $k$ activity cycles---the precise forecasting primitive that distinguishes
 absorbing Markov chain formulations from ad hoc simulation runs. This gap
@@ -1117,7 +1120,7 @@ assess workflows but lack the stochastic machinery required for Monte Carlo
 distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
 antecedent, assembling elements from all three ICs---event-log discovery,
 simulation, and ML prediction---but its evaluation remains component-wise,
-placing it at L2 rather than a fully validated end-to-end pipeline. Crucially,
+placing it at L2 rather than a fully validated end-to-end pipeline. Notably,
 no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
 which process mining discovery feeds an absorbing Markov chain, whose transient
 distributions drive Monte Carlo forecasting, with residuals corrected by a
@@ -1260,8 +1263,8 @@ use stochastic Petri nets, and 8 (4.7\%) use system dynamics. Only 18 papers
 only 10 papers (5.9\%) combine stochastic modeling with process mining (IC1
 $\cap$ IC2). Markov chains and Monte Carlo simulation are used extensively in
 BPM and software reliability engineering, but their integration with process
-mining for SDLC forecasting is minimal. EC3 being the second-largest
-exclusion reason at FT ($n = 197$, 27.5\% of 717 FT excludes) reinforces the
+mining for SDLC forecasting is minimal. EC3 being the largest
+exclusion reason at FT ($n = 229$, 25.8\% of the 886-paper FT queue) reinforces the
 point: the stochastic modeling community has not converged on applying its
 techniques to software development process data.
 
@@ -1419,10 +1422,9 @@ paper recovery provides empirical evidence of high recall.
 
 \subsection{Internal Validity}
 
-To further strengthen the reliability of the screening process, a human spot-check of rating disagreements is planned. A sample of approximately 50 papers where the two primary reviewers disagreed on the final decision (include/exclude) will be analyzed by a third senior researcher to identify the root cause of the disagreement (e.g., criteria ambiguity, reviewer error). The findings from this analysis will be incorporated into the camera-ready version of this work to provide a qualitative assessment of reviewer alignment.
-
 LLM-based screening introduces the risk of systematic decision bias. This
-threat is addressed by four mechanisms.
+threat is addressed by five mechanisms (the first four already executed; the
+fifth planned for the camera-ready version).
 
 (i)~\textbf{Structured outputs}. All screening responses use a strict JSON
 schema, enabling post-hoc analysis of decision patterns and rationale
@@ -1475,6 +1477,15 @@ SLRs. False-positives are caught at the FT phase before any synthesis claim
 is made and therefore do not affect the F1--F5 evidence base. The Round~2
 screening reprocessed 495 \texttt{maybe} papers with enriched abstracts and
 brought the confirmed set to its final value of 169.
+
+(v)~\textbf{Human spot-check on disagreements (planned for camera-ready)}.
+Approximately 50 papers where the LLM screener (Haiku 4.5) and the LLM
+verifier (Sonnet 4.6) disagreed on the binary include/exclude outcome will
+be re-rated by a senior human researcher to identify the root cause of each
+disagreement (criteria ambiguity, abstract insufficiency, scope drift). The
+resulting qualitative assessment of LLM-vs-human alignment will be
+incorporated in the camera-ready version, complementing the cross-model
+$\kappa$ evidence reported above.
 
 \subsection{External Validity}
 

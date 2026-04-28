@@ -348,7 +348,7 @@ def compute() -> None:
 
         tex_rows.append(
             f"{stage.upper()} & {n_valid} & {agree_pct:.1f}\\% & {info['pe']*100:.1f}\\% & "
-            f"{k:.3f} & {k_b:.3f} & {_interpret(k_b)} \\\\"
+            f"{k:.3f} ({_interpret(k)}) & {k_b:.3f} ({_interpret(k_b)}) \\\\"
         )
 
     lines.append("")
@@ -360,11 +360,11 @@ def compute() -> None:
 
     tex = ["\\begin{table}[htbp]",
            "\\centering",
-           "\\caption{Inter-rater agreement (Cohen's $\\kappa$) between primary screener (claude-haiku-4-5) and verifier (claude-sonnet-4-6) on a stratified random 20\\% sample.}",
+           "\\caption{Inter-rater agreement (Cohen's $\\kappa$) between primary screener (claude-haiku-4-5) and verifier (claude-sonnet-4-6) on a stratified random 20\\% sample. Interpretation thresholds follow Landis and Koch (1977)~\\cite{landiskoch1977}.}",
            "\\label{tab:kappa-results}",
-           "\\begin{tabular}{lcccccc}",
+           "\\begin{tabular}{lccccc}",
            "\\toprule",
-           "Stage & $N$ & $P_o$ & $P_e$ & $\\kappa_{\\text{multi}}$ & $\\kappa_{\\text{binary}}$ & Interpretation (binary) \\\\",
+           "Stage & $N$ & $P_o$ & $P_e$ & $\\kappa_{\\text{multi}}$ (interpretation) & $\\kappa_{\\text{binary}}$ (interpretation) \\\\",
            "\\midrule",
            *tex_rows,
            "\\bottomrule",
