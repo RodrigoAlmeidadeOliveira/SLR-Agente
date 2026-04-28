@@ -1,0 +1,37 @@
+SLR PATHCAST — Inter-rater Agreement Report
+============================================================
+Primary screener:  claude-haiku-4-5-20251001
+Verifier (rater 2): claude-sonnet-4-6
+Sample rate: 20% stratified random (seed=20260428)
+
+[TA] n=420/468
+  Cohen's kappa (multi-class): 0.641 (substantial)
+  Observed agreement (Po): 82.1%
+  Expected by chance (Pe): 50.2%
+  Categories: ['exclude', 'include', 'maybe']
+  Confusion matrix (rows=primary, cols=verifier):
+     exclud  includ   maybe
+    exclud     233       0      58
+    includ       3      12       7
+    maybe       7       0     100
+  Cohen's kappa (binary include/not-include): 0.695 (substantial)
+    Po (binary)=97.6%, Pe (binary)=92.2%
+
+[FT] n=177/177
+  Cohen's kappa (multi-class): 0.479 (moderate)
+  Observed agreement (Po): 76.3%
+  Expected by chance (Pe): 54.5%
+  Categories: ['exclude', 'include', 'pending']
+  Confusion matrix (rows=primary, cols=verifier):
+     exclud  includ  pendin
+    exclud     109       9      25
+    includ       2      26       6
+    pendin       0       0       0
+  Cohen's kappa (binary include/not-include): 0.694 (substantial)
+    Po (binary)=90.4%, Pe (binary)=68.6%
+
+
+Interpretation thresholds (Landis & Koch 1977):
+  <0.00 poor | 0-0.20 slight | 0.21-0.40 fair | 0.41-0.60 moderate | 0.61-0.80 substantial | >0.80 almost perfect
+
+Target: kappa >= 0.61 (substantial). See cap3 Section 'LLM-Assisted Screening Methodology'.

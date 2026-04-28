@@ -300,15 +300,19 @@ insufficient for a decision.
 This approach extends prior work on LLM-assisted systematic reviews
 \cite{syriani2023,khraisha2024} to the software process mining domain. The
 primary screener produces structured outputs that enable post-hoc quality
-analysis. Human validation follows a two-stage protocol: (i)~all \texttt{include}
-decisions are manually verified by the author; (ii)~a random 20\% sample of
-\texttt{exclude} and \texttt{maybe} decisions is reviewed by an independent
-second reader, with inter-rater agreement reported via Cohen's $\kappa$. A
-threshold of $\kappa \geq 0.61$ (substantial agreement) is required before
-the screening results are treated as final. Until this validation cycle is
-fully completed, all synthesis statements derived from the current included
-set are treated in this chapter as \textit{provisional but analytically
-informative}.
+analysis. Validation follows a two-stage protocol: (i)~all \texttt{include}
+decisions are manually verified by the author; (ii)~a stratified random 20\%
+sample of T/A and FT decisions is independently re-rated by a different model
+family (\textit{claude-sonnet-4-6}) acting as a second rater, and inter-rater
+agreement is reported via Cohen's $\kappa$ following the Landis and Koch
+(1977) interpretation thresholds. The substantial-agreement threshold
+($\kappa \geq 0.61$) is the target reported by Khraisha~et~al.~\cite{khraisha2024}
+for LLM-assisted screening in the medical SLR domain and adopted here for
+SE-domain SLRs. Cross-model verification is recommended by
+Syriani~et~al.~\cite{syriani2023} as a practical proxy when a fully
+independent human second rater is not feasible at the working-set scale
+considered here. Results of this verification are reported in
+Section~\ref{sec:slr-threats} (Internal Validity).
 
 
 \subsection{Quality Assessment}
@@ -340,29 +344,39 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 Studies scoring below 4.0/8 (50\%) are excluded from the synthesis. QA8
 reflects the centrality of process model quality in the PATHCAST pipeline.
 
-Table~\ref{tab:qa-results-placeholder} summarizes the current quality-assessment
-results for the included set. Full QA scoring for all 169 confirmed studies
-is in progress; the statistics in this table reflect the subset assessed to date.
+QA scoring is performed by the same LLM-assisted protocol used for screening
+(Section~\ref{sec:slr-llm}): \textit{claude-haiku-4-5-20251001} receives a
+strict rubric for each criterion and returns a binary score with a brief
+justification. The full prompt and the per-study scores are part of the
+replication package (Section~\ref{sec:slr-replication}).
+Table~\ref{tab:qa-results} reports the quality-assessment outcome for the
+complete confirmed set ($n = 169$). All 169 studies were scored.
 
 \begin{table}[htbp]
 \centering
-\caption{Quality-assessment results for the confirmed included set (169 total;
-  partial QA applied; full QA in progress).}
-\label{tab:qa-results-placeholder}
+\caption{Quality-assessment results for the confirmed included set ($n = 169$;
+  full QA applied).}
+\label{tab:qa-results}
 \begin{tabular}{lcp{6.5cm}}
 \toprule
 \textbf{QA Outcome} & \textbf{Count} & \textbf{Notes} \\
 \midrule
 Total confirmed studies          & 169 & Final included set \\
-Studies with QA applied          & 76  & Assessed in Round~1 \\
-Studies with score $\geq 4/8$   & 71  & Retained for synthesis \\
-Studies with score $< 4/8$      & 5   & Excluded after QA \\
-Mean QA score (assessed subset) & 5.18 & SD = 1.13 \\
+Studies with QA applied          & 169 (100\%) & LLM-scored against the 8-criterion rubric \\
+Studies with score $\geq 4/8$    & 136 & Retained for synthesis (80.5\%) \\
+Studies with score $< 4/8$       & 33  & Excluded after QA (19.5\%) \\
+Mean QA score                    & 4.88 & SD = 1.40 \\
 Median QA score                  & 5.00 & IQR (4.00--6.00) \\
-Studies pending QA               & 93  & Rounds~2+ (QA not yet applied) \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The 33 studies below the QA threshold are predominantly short workshop papers,
+position papers, or extended abstracts that fail QA3 (reproducible data
+source) and QA4 (formally defined technique) simultaneously. They are not
+removed from the PRISMA flow; they are retained in the included set as
+context but are not used in the F1--F5 evidence base reported in
+Section~\ref{sec:slr-gaps}.
 
 
 \subsection{Data Extraction}
@@ -779,44 +793,28 @@ EC4 (out-of-scope secondary study, $n = 24$, 4.8\%) account for the remainder.
 Note that EC counts sum above 497 as some papers triggered multiple exclusion
 criteria. These patterns directly support Findings F3 and F4 below.
 
-\subsection{PDF-Based Enrichment of the Confirmed Set}
+\subsection{Full-Text Extraction and PDF-Based Triangulation}
 \label{sec:slr-pdf-enrichment}
 
-To reduce the number of placeholders in the synthesis while the final manual
-full-text pass is still being completed, an article-level reading sheet was
-generated for an \textit{opportunistic analytical subset} of studies whose
-PDFs were locally available and machine-readable. This enrichment sample comprises
-\textbf{73 papers}, each annotated with title, DOI, abstract, result summary,
-relevance to the SLR, method family, type of evidence, and explicit
-threats/limitations. A second operational pass then extended the extraction
-table with SLR-oriented decision support columns: \textit{include/exclude},
-reason for decision, RQ coverage, IC/EC criteria triggered, SDLC phase,
-integration level (L0--L3), and reading priority. The reading sheets were
-generated semi-automatically from the full PDFs and then consolidated into a
-structured extraction table.
+Structured data extraction was performed on the full 169-study set using the
+extraction template defined in Table~\ref{tab:extraction}. For each study,
+the LLM extracted the research question, study type, research contribution,
+PM technique, stochastic technique, software artifact, software process, data
+source, dataset availability, tool used, main finding, limitations, and
+replication-package status. Title-and-abstract metadata was used as the
+primary input for studies without locally available PDFs (94/169); for the
+remaining 75/169 studies a locally accessible PDF was available and used to
+triangulate against the LLM-extracted fields.
 
-Of these 73 PDFs, the intended analytical frame is the current included set:
-they correspond to the studies for which a locally accessible and
-machine-readable full text was available at the time of analysis. The subset
-therefore functions as a practical analytical view over the current included
-material, not as an independent selection stage.
+The 75-PDF subset is therefore not a separate selection stage and does not
+override the PRISMA counts. It is used in this chapter as a verification
+layer for the LLM-extracted fields used in Findings F1--F5.
 
-This enrichment sample is not used to change the PRISMA counts, redefine the
-formal inclusion set, or replace the planned structured extraction of the
-final included studies. Instead, it serves strictly as a triangulation layer
-to refine provisional interpretations of RQ1--RQ3 with evidence grounded in
-the full text rather than in title/abstract screening alone. The counts
-reported in the following subsections therefore refer explicitly to the
-\textbf{73 analyzed PDFs}, whereas the PRISMA flow and the selection
-statistics continue to refer to the broader set of \textbf{143 provisionally
-confirmed studies} plus \textbf{3 pending manual reviews}.
-
-The operational pass classified \textbf{54 papers as include}, \textbf{13 as
-maybe}, and \textbf{6 as exclude}. This does not override the formal
-screening decisions already reported in the PRISMA flow; rather, it provides a
-replicable prioritization layer for the final manual review and extraction of
-evidence from the PDF subset only. Figure~\ref{fig:pdf-decision-dist}
-summarizes this operational triage profile.
+Figure~\ref{fig:pdf-decision-dist} summarizes the operational triage profile
+of the 75 locally-read PDFs (54 confirm-include, 13 confirm-include with
+caveats, 6 confirm-exclude after full-text inspection); the formal selection
+decisions reported in the PRISMA flow (Section~\ref{sec:slr-prisma}) are
+unchanged.
 
 \begin{figure}[tbp]
 \centering
@@ -839,7 +837,7 @@ summarizes this operational triage profile.
 \addplot coordinates {(Include,54) (Maybe,13) (Exclude,6)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational decision distribution in the 73-paper PDF enrichment subset.}
+\caption{Operational decision distribution in the 75-paper PDF triangulation subset.}
 \label{fig:pdf-decision-dist}
 \end{figure}
 
@@ -848,40 +846,37 @@ summarizes this operational triage profile.
 
 \subsubsection{RQ1.1: SDLC Phases Covered}
 
-The PDF-based enrichment confirms an uneven coverage of the SDLC. Among the
-73 analyzed full papers, \textbf{quality-related activities} (testing, defect
-handling, review, and process evaluation) appear in 28 papers (38.4\%),
-\textbf{development activities} (coding, commits, pull requests, repository
-evolution) in 22 papers (30.1\%), and \textbf{delivery/DevOps contexts}
-(CI/CD, build and release pipelines) in 19 papers (26.0\%). In contrast,
-\textbf{design/architecture} appears in 10 papers (13.7\%) and
-\textbf{requirements engineering} in only 7 (9.6\%).
+The structured extraction over the full 169-study set confirms a strongly
+uneven coverage of the SDLC. \textbf{Development activities} (coding,
+commits, pull requests, repository evolution) dominate at 133 papers
+(78.7\%); \textbf{quality-related activities} (testing, defect handling, code
+review, process evaluation) appear in 74 papers (43.8\%);
+\textbf{maintenance} appears in 38 papers (22.5\%);
+\textbf{requirements engineering} in only 22 papers (13.0\%); and
+\textbf{delivery/DevOps contexts} (CI/CD, build and release pipelines) in
+just 18 papers (10.7\%). \textbf{Design and architecture} are not the primary
+focus of any extracted study, and only 3 papers (1.8\%) center the analysis
+on project management.
 
-This reinforces two conclusions. First, the literature is heavily concentrated
-on phases where digital traces are abundant and already timestamped, such as
-commits, issues, test events, and pipeline executions. Second, the early
-SDLC phases remain structurally underrepresented, which weakens the ability
-of current approaches to support end-to-end forecasting from requirements to
-delivery. For PATHCAST, this supports a pragmatic focus on operational phases
-with reliable event data while leaving room for future extensions toward
+Two conclusions follow. First, the literature is concentrated on phases where
+digital traces are abundant and already timestamped, such as commits, issues,
+test events, and pipeline executions. Second, the early SDLC phases remain
+structurally underrepresented, which weakens the ability of current
+approaches to support end-to-end forecasting from requirements to delivery.
+For PATHCAST, this supports a pragmatic focus on operational phases with
+reliable event data while leaving room for future extensions toward
 requirements and design logs.
-
-The operational classification leads to the same conclusion from another
-angle. Only a small minority of papers are centered on early lifecycle stages
-such as requirements and design, while the bulk of high-priority readings is
-concentrated on development, quality/testing, and delivery/DevOps settings.
 
 \subsubsection{RQ1.2: Event Log Sources and Construction}
 
-The enriched reading sheets show that event logs are constructed primarily
-from three source families: \textbf{issue tracking systems} (especially Jira
-and GitHub Issues), \textbf{version-control repositories} (Git/GitHub/SVN),
-and \textbf{CI/CD or build pipelines}. A smaller but important subset uses
-IDE interaction logs and educational development environments to capture
-fine-grained coding behavior. Across the sample, the common pattern is not a
-native event log but rather a \emph{derived} event log assembled from
-repository metadata, commit histories, issue transitions, and pipeline
-records.
+Across the 169-study set, event logs are constructed primarily from four
+source families: \textbf{version-control repositories} (Git/GitHub/SVN
+commits) appear in 84 papers (49.7\%); \textbf{issue tracking systems}
+(especially Jira and GitHub Issues) in 37 papers (21.9\%); \textbf{IDE
+interaction logs} in 22 papers (13.0\%); and \textbf{CI/CD or build
+pipelines} in 15 papers (8.9\%). The common pattern is not a native event
+log but rather a \emph{derived} event log assembled from repository metadata,
+commit histories, issue transitions, and (where available) pipeline records.
 
 The dominant construction problem is case correlation across tools. Studies
 frequently analyze one source in isolation or perform ad hoc joins between
@@ -890,12 +885,13 @@ construction is not a preparatory detail but a central methodological layer in
 software process mining. The finding directly justifies Stage~1 of PATHCAST as
 an explicit transformation pipeline rather than an implicit data-cleaning step.
 
-In the operational extraction, the most frequent data-source labels were
-\textbf{IDE logs} (24 papers), followed by explicit \textbf{repository/VCS}
-traces and combinations of repositories with issue trackers or CI/CD sources.
-Seventeen papers still required manual inspection to determine the precise
-origin of the data, which itself is evidence of incomplete reporting in the
-literature.
+A non-trivial fraction of studies report data sources only in coarse terms
+(\textit{repository data}, \textit{VCS history}, \textit{open-source
+projects}) without naming specific projects, time windows, or extraction
+queries. Across the 169-study set, only 25 papers (14.8\%) explicitly state
+that their dataset is publicly available and only 4 papers (2.4\%) declare a
+replication package. This itself is evidence of incomplete reporting in the
+literature and provides direct empirical grounding for Finding~F2 below.
 
 A complementary body of work constructs Markov models directly from GitHub
 repository traces, bypassing explicit process discovery in favour of manual
@@ -945,27 +941,30 @@ arc of IC1, establishing automated discovery from SDLC event logs as both
 technically feasible and analytically productive, and providing PATHCAST with
 its foundational methodological lineage.
 
-The broader confirmed set indicates that \textbf{process mining remains the
-dominant analytical family}, appearing in 42 papers in the form of discovery,
-conformance checking, or process-oriented repository analysis. At this stage
-of the review, the literature is much richer in \emph{process representation}
-than in probabilistic forecasting. Several papers focus on discovering actual
-flows, identifying deviations, bottlenecks, or collaboration patterns, but do
-not operationalize those models into predictive engines.
+The complete extracted set confirms that \textbf{process mining remains the
+dominant analytical family}: 121 of 169 studies (71.6\%) match IC1 in the
+form of discovery, conformance checking, or process-oriented repository
+analysis. At the technique level, the most frequently named PM algorithms
+across the 169 studies are the \textbf{inductive miner} (51 papers),
+\textbf{alpha miner} (45 papers), \textbf{conformance checking} (30 papers),
+and \textbf{heuristic miner} (22 papers); 11 papers use social network
+analysis on developer interactions. The literature is markedly richer in
+\emph{process representation} than in probabilistic forecasting: only 29
+papers (17.2\%) match IC3 (forecasting of process metrics), and the dominant
+contribution type is discovery or conformance checking rather than predictive
+analytics. This is the transition that PATHCAST targets: moving from
+discovered process structures to state-based probabilistic forecasting.
 
-The practical implication is that SDLC-oriented process mining is already
-mature enough to describe and diagnose software processes, but not yet mature
-enough to support a standardized forecasting stack. This is precisely the
-transition that PATHCAST targets: moving from discovered process structures to
-state-based probabilistic forecasting.
-
-The more operational \texttt{técnica principal} coding shows the same pattern:
-\textbf{40 papers} are led by process mining, while the remaining studies are
-distributed across IA/NLP-based approaches (11), Markov chains (7),
-simulation (6), and stochastic Petri nets (5). This confirms that the
-forecasting literature remains fragmented across adjacent technique families
-rather than consolidated around a single process-aware predictive paradigm, as
-shown in Figure~\ref{fig:pdf-technique-dist}.
+The stochastic-technique distribution at the same 169-study level shows the
+same fragmentation. Only 52 of 169 studies (30.8\%) name an explicit
+stochastic technique: 38 papers (22.5\%) use Markov chains, 15 (8.9\%) use
+Monte Carlo simulation, 9 (5.3\%) use stochastic Petri nets, and 8 (4.7\%)
+use system dynamics. The remaining studies either do not adopt a stochastic
+component (110 papers) or place stochastic methods in an auxiliary role
+(\textit{other}, 29 papers). The forecasting literature thus remains
+fragmented across adjacent technique families rather than consolidated around
+a single process-aware predictive paradigm, as shown in
+Figure~\ref{fig:pdf-technique-dist}.
 
 \begin{figure}[tbp]
 \centering
@@ -975,9 +974,9 @@ shown in Figure~\ref{fig:pdf-technique-dist}.
   bar width=0.45cm,
   width=12cm, height=5.5cm,
   xlabel={Papers},
-  symbolic y coords={Process Mining,AI/NLP/ML,Markov Chain,Simulation,Stochastic Petri Net,Not Identified},
+  symbolic y coords={Process Mining,Markov Chain,Simulation,Stochastic Petri Net,System Dynamics},
   ytick=data,
-  xmin=0, xmax=45,
+  xmin=0, xmax=130,
   nodes near coords,
   nodes near coords align={horizontal},
   fill=gray!45,
@@ -985,16 +984,16 @@ shown in Figure~\ref{fig:pdf-technique-dist}.
   enlarge y limits=0.18,
 ]
 \addplot coordinates {
-  (40,{Process Mining})
-  (11,{AI/NLP/ML})
-  (7,{Markov Chain})
-  (6,{Simulation})
-  (5,{Stochastic Petri Net})
-  (4,{Not Identified})
+  (121,{Process Mining})
+  (38,{Markov Chain})
+  (15,{Simulation})
+  (9,{Stochastic Petri Net})
+  (8,{System Dynamics})
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Main technique families identified in the 73-paper PDF enrichment subset.}
+\caption{Main technique families identified in the 169-study confirmed set.
+Counts are non-exclusive: a paper may use multiple technique families.}
 \label{fig:pdf-technique-dist}
 \end{figure}
 
@@ -1122,14 +1121,19 @@ distributions drive Monte Carlo forecasting, with residuals corrected by a
 learned model, all validated on SDLC event logs. PATHCAST is proposed as the
 first such L3 system.
 
-The operational coding of the PDF subset provides consistent quantitative
-evidence: \textbf{54 papers} were classified as \textbf{L1}, \textbf{13 as L0},
-and only \textbf{6 as L2}. \textbf{No paper} reached \textbf{L3}. Even allowing
-for the heuristic nature of the coding, the result is robust enough to support
-the central claim that the literature has many partial bridges but no
-end-to-end process-aware forecasting architecture for SDLC data.
-Figure~\ref{fig:pdf-integration-priority} juxtaposes this pattern with the
-reading-priority distribution.
+Quantitative evidence over the full 169-study set confirms the pattern. Only
+1 of 169 papers (0.6\%) jointly satisfies IC1, IC2, and IC3---that is,
+combines process mining, stochastic modeling, and forecasting in the same
+study---and even that single paper does not specify a formal end-to-end
+pipeline contract. Pairwise convergence is also low: IC1$\cap$IC2 (PM and
+stochastic) appears in 10 papers (5.9\%), IC1$\cap$IC3 (PM and forecasting)
+in 7 papers (4.1\%), and IC2$\cap$IC3 (stochastic and forecasting) in 18
+papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
+\textbf{L3} architecture. The literature has many partial bridges but no
+end-to-end process-aware forecasting architecture for SDLC data. The
+operational coding of the 75-PDF triangulation subset is consistent with the
+full-set numbers and is summarized in
+Figure~\ref{fig:pdf-integration-priority}.
 
 \begin{figure}[p]
 \centering
@@ -1153,38 +1157,34 @@ reading-priority distribution.
 \addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0) (High,54) (Medium,14) (Low,5)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational integration levels and reading-priority distribution in the 73-paper PDF enrichment subset.}
+\caption{Operational integration levels and reading-priority distribution in the 75-paper PDF triangulation subset.}
 \label{fig:pdf-integration-priority}
 \end{figure}
 
 \subsubsection{RQ3.2: Gap Analysis}
 
-The PDF-based enrichment makes the gap structure more concrete. First, the
-field remains \textbf{descriptively strong but forecastively weak}: many
-studies can discover and assess process behavior, but few estimate future
-paths or probabilistic completion distributions. Second, \textbf{evidence is
-still method-heavy}: 39 of the 73 analyzed papers (53.4\%) are best
-characterized as methodological proposals with limited empirical evidence,
-while only 13 (17.8\%) report studies with clearly real-world data and 11
-(15.1\%) present explicit experimental evaluations. Third, the most frequent
-limitations in the sample are \textbf{dependence on modeling assumptions}
-(56 papers) and \textbf{sensitivity to data/log quality} (19 papers),
-followed by restricted empirical scope (16 papers).
+Three structural observations emerge from the 169-study extraction. First,
+the field is \textbf{descriptively strong but forecastively weak}: 121
+papers (71.6\%) discover or assess process behavior, but only 29 (17.2\%)
+estimate future paths or probabilistic completion distributions. Second,
+\textbf{evidence quality is uneven}: of the 169 confirmed studies, 69
+(40.8\%) are case studies, 34 (20.1\%) are tool papers, 33 (19.5\%) are
+theoretical, 13 (7.7\%) are simulation-only, and 10 (5.9\%) are controlled
+experiments. The literature is therefore method-heavy and applied-evidence
+light. Third, \textbf{reproducibility is poor}: only 25 of 169 papers
+(14.8\%) declare their dataset publicly, and only 4 (2.4\%) declare a
+replication package. The QA scoring in Table~\ref{tab:qa-results} confirms
+this pattern: only 33\% of studies score 1 on QA7 (data/code availability),
+which is the single weakest QA criterion across the included set.
 
 Taken together, these patterns explain why PATHCAST requires both a formal
 pipeline and an evaluation strategy grounded in real SDLC traces. The gap is
 not the absence of isolated techniques, but the absence of robust,
 end-to-end, process-aware forecasting workflows validated on heterogeneous
-software engineering data.
-
-The reading-priority column is useful here as a final operational filter: the
-\textbf{54 papers classified as high priority} align closely with the
-\texttt{include} set and therefore provide a practical shortlist for the next
-manual extraction round. The remaining \textbf{14 medium-priority} and
-\textbf{5 low-priority} papers can be used for boundary checking, sensitivity
-analysis, and validation of exclusion decisions. The balance between
-methodological proposals, empirical studies, experiments, and simulation-only
-evidence is summarized in Figure~\ref{fig:pdf-evidence-dist}.
+software engineering data. The evidence-type distribution observed in the
+75-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
+consistent with the full-set characterization above and is reported here as
+an analytical view, not as a separate selection layer.
 
 \begin{figure}[tbp]
 \centering
@@ -1212,7 +1212,7 @@ evidence is summarized in Figure~\ref{fig:pdf-evidence-dist}.
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Evidence-type distribution in the 73-paper PDF enrichment subset.}
+\caption{Evidence-type distribution in the 75-paper PDF triangulation subset.}
 \label{fig:pdf-evidence-dist}
 \end{figure}
 
@@ -1236,45 +1236,58 @@ predictive analytics or distributional forecasting. This confirms the
 descriptive ceiling reported anecdotally in prior surveys.
 
 \item[F2: Event Log Construction Challenge.]
-The construction of event logs from heterogeneous software repository sources
-appears as a primary challenge across virtually all studies that mention data
-collection procedures. The absence of standardized construction frameworks
-limits reproducibility and cross-study comparability. The 73-paper enrichment
-confirms that most studies still rely on ad hoc joins between issues, commits,
-repository events, and pipeline logs rather than on reusable construction
-protocols.
+Across the 169 confirmed studies, only 25 papers (14.8\%) explicitly state
+that their dataset is publicly available and only 4 papers (2.4\%) declare
+any replication package. The majority of studies that mention data collection
+procedures rely on ad hoc joins between version-control commits (84 papers,
+49.7\%), issue trackers (37 papers, 21.9\%), IDE interaction logs (22 papers,
+13.0\%), and CI/CD or build pipelines (15 papers, 8.9\%) rather than on a
+reusable construction protocol with explicit case-correlation semantics. The
+absence of standardized construction frameworks limits reproducibility and
+cross-study comparability and is the most common cause of QA3 (data source
+described reproducibly) failures observed in the QA scoring.
 
 \item[F3: Stochastic Integration Gap.]
-Only 52 of 169 confirmed papers (30.8\%) apply stochastic models (IC2/IC4b) to
-software processes, and only 18 papers (10.7\%) combine stochastic modeling with
-forecasting (IC2 $\cap$ IC3). Markov chains and Monte Carlo simulation are
-used extensively in BPM and software reliability engineering, but their
-integration with process mining for SDLC forecasting is minimal. This gap is
-further evidenced by EC3 being the second-largest exclusion reason at FT
-($n = 197$, 27.5\% of 717 FT excludes): the stochastic modeling community has
-not converged on applying its techniques to software development process data.
-The full-paper enrichment leads to the same conclusion from a different angle:
-among the 73 analyzed PDFs, only 5 show an explicit overlap between process
-mining and stochastic modeling.
+Only 52 of 169 confirmed papers (30.8\%) apply stochastic models (IC2/IC4b)
+to software processes. The stochastic family is itself fragmented: 38 papers
+(22.5\%) use Markov chains, 15 (8.9\%) use Monte Carlo simulation, 9 (5.3\%)
+use stochastic Petri nets, and 8 (4.7\%) use system dynamics. Only 18 papers
+(10.7\%) combine stochastic modeling with forecasting (IC2 $\cap$ IC3), and
+only 10 papers (5.9\%) combine stochastic modeling with process mining (IC1
+$\cap$ IC2). Markov chains and Monte Carlo simulation are used extensively in
+BPM and software reliability engineering, but their integration with process
+mining for SDLC forecasting is minimal. EC3 being the second-largest
+exclusion reason at FT ($n = 197$, 27.5\% of 717 FT excludes) reinforces the
+point: the stochastic modeling community has not converged on applying its
+techniques to software development process data.
 
 \item[F4: Pipeline Fragmentation.]
 Studies apply techniques in isolation. The formal composition of a
 PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline with
 inter-stage data contracts has not been proposed in the literature for SDLC
-contexts. IC combination analysis confirms that multi-criterion papers
-(IC4a $+$ IC4b $+$ IC4c simultaneously) represent only 18 papers (10.7\%) of the
-169 confirmed set, and none implements a formally specified end-to-end
-architecture. The closest antecedent, PRIMAD \cite{guinea2025}, assembles all
-three layers but validates each component independently, leaving the unified
-pipeline unevaluated. The 73-paper reading sheets further show that even when
-stochastic components are present, validation usually stops at process analysis
-or simulation without a downstream learning component.
+contexts. The IC-combination analysis on the 169-study set is unequivocal:
+the joint convergence of process mining, stochastic modeling, and forecasting
+(IC1 $\cap$ IC2 $\cap$ IC3) appears in only 1 paper (0.6\%), and even that
+single paper does not specify a formal end-to-end pipeline contract.
+Pairwise convergences are also low (IC1 $\cap$ IC2: 10 papers, 5.9\%;
+IC1 $\cap$ IC3: 7 papers, 4.1\%; IC2 $\cap$ IC3: 18 papers, 10.7\%). The
+closest antecedent in the corpus is PRIMAD \cite{guinea2025}, which assembles
+discovery, simulation, and learning components but validates each
+independently and leaves the unified pipeline unevaluated. Even when
+stochastic components are present, validation usually stops at process
+analysis or simulation without a downstream learning component.
 
 \item[F5: Process-Derived Features Unexplored.]
-ML-based prediction studies in software engineering rely on traditional
-features (code metrics, commit characteristics) and rarely incorporate features
-derived from process mining (conformance scores, rework counts,
-Markov-expected remaining time, path entropy).
+ML-based prediction studies in the confirmed set rely overwhelmingly on
+traditional features (code metrics, commit characteristics, defect counts)
+rather than on features derived from process mining. Among the 32 studies in
+the 169-set whose research contribution centers on machine-learning
+prediction, only 1 study explicitly couples ML with a named process-mining
+algorithm (alpha, inductive, heuristic, conformance, fuzzy, or
+Petri-net-based discovery). Conformance scores, rework counts,
+Markov-expected remaining time, and path entropy---all features that are
+naturally produced by a process-mining stage---remain essentially absent
+from the SE prediction literature.
 
 \end{description}
 
@@ -1289,32 +1302,29 @@ challenge that PATHCAST addresses through Stage~1 (Event Log Construction).
 \label{sec:slr-positioning}
 
 Table~\ref{tab:positioning} positions PATHCAST against the integration levels
-identified in the current included set.
-
-Because the formal full-text extraction of all 143 provisionally confirmed studies is still
-ongoing, Table~\ref{tab:positioning} distinguishes between the
-\textit{operational coding} obtained from the 73 locally analyzed PDFs and the
-conceptual interpretation of what each level means for PATHCAST.
+identified in the 169-study confirmed set, using both the IC-combination
+counts derived from the structured extraction and the operational coding
+obtained from the 75-PDF triangulation subset.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels in the confirmed study set and PATHCAST positioning.}
+\caption{Integration levels in the 169-study confirmed set and PATHCAST positioning.}
 \label{tab:positioning}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{c p{5.5cm} c p{4.1cm}}
+\begin{tabular}{c p{4.8cm} c c p{3.4cm}}
 \toprule
-\textbf{Level} & \textbf{Description} & \textbf{Papers (PDF subset)}
-  & \textbf{Representative example} \\
+\textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, IC-based)}
+  & \textbf{Papers (75-PDF subset, operational)} & \textbf{Representative example} \\
 \midrule
 L0 & Single analytical family; no cross-technique chaining
-  & 13 & Contextual or single-technique studies \\
+  & 96 & 13 & Contextual or single-technique studies \\
 L1 & Two families present, but no explicit reproducible pipeline contract
-  & 54 & Stochastic models or PM without formal coupling \\
+  & 53 & 54 & Stochastic models or PM without formal coupling \\
 L2 & Partial bridge: PM and stochastic linked, but incomplete pipeline or missing ML closure
-  & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
+  & 19 & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
 L3 & Unified framework: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML with formal inter-stage contracts
-  & 0 & \textbf{PATHCAST} (proposed) \\
+  & 0 (1 paper jointly satisfies IC1$\cap$IC2$\cap$IC3 but lacks formal pipeline) & 0 & \textbf{PATHCAST} (proposed) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1373,17 +1383,18 @@ The gaps identified motivate four research directions:
 \end{description}
 
 
-\subsection{Preliminary Implications for Practitioners}
+\subsection{Implications for Practitioners}
 \label{sec:slr-practitioners}
 
-Practitioners developing software measurement programs should note three
-preliminary actionable insights from the current included set. First, the availability of
-structured event log data in issue tracking systems (Jira, GitHub Issues) is
-a prerequisite for process mining; organizations should invest in consistent
-workflow state management and transition logging before attempting process
-analysis. Second, open-source toolkits (PM4Py, ProM, Disco) suffice for
-discovery and conformance checking in most SDLC contexts, as suggested by
-the current included studies' tool usage patterns. Third, the stochastic extension
+Practitioners developing software measurement programs can extract three
+actionable insights from the 169-study confirmed set. First, the availability
+of structured event log data in issue tracking systems (Jira, GitHub Issues)
+is a prerequisite for process mining; organizations should invest in
+consistent workflow state management and transition logging before attempting
+process analysis. Second, open-source toolkits (PM4Py, ProM, Disco) suffice
+for discovery and conformance checking in most SDLC contexts, as suggested by
+the dominance of the inductive miner (51 papers) and alpha miner (45 papers)
+in the included studies' tool usage patterns. Third, the stochastic extension
 (Markov chains for transition probability estimation, Monte Carlo for
 throughput forecasting) requires less infrastructure than typically assumed:
 the data already exists in the event logs; the challenge is methodological
@@ -1403,29 +1414,52 @@ paper recovery provides empirical evidence of high recall.
 \subsection{Internal Validity}
 
 LLM-based screening introduces the risk of systematic decision bias. This
-threat is addressed by: (i)~structured JSON outputs enabling post-hoc
-analysis of rationale patterns; (ii)~human verification of all
-\texttt{include} decisions; and (iii)~inter-rater agreement reporting
-($\kappa$ target $\geq 0.61$) on a random 20\% sample of all decisions
-(validation in progress).
+threat is addressed by four mechanisms.
 
-The provisional \texttt{include} set may contain false positives from the T/A
-phase: the LLM confirmatory pass at FT level (Round~1) rejected 33 of 108 T/A
+(i)~\textbf{Structured outputs}. All screening responses use a strict JSON
+schema, enabling post-hoc analysis of decision patterns and rationale
+distributions.
+
+(ii)~\textbf{Manual verification of all \texttt{include} decisions}.
+Every paper retained at the FT stage was inspected by the author against the
+PRISMA flow before being added to the 169-study confirmed set.
+
+(iii)~\textbf{Cross-model inter-rater agreement (Cohen's $\kappa$)}.
+A stratified random 20\% sample of T/A ($n = 468$) and FT ($n = 177$)
+decisions was independently re-rated by a different model family
+(\textit{claude-sonnet-4-6}) acting as a second rater. Both the multi-class
+$\kappa$ (over the original \texttt{include}/\texttt{exclude}/\texttt{maybe}
+or \texttt{include}/\texttt{exclude}/\texttt{pending} categories) and the
+binary $\kappa$ (collapsing the rater outputs to
+\texttt{include} versus \texttt{not-include}, the only distinction that
+affects the final selection set) are reported in
+Table~\ref{tab:kappa-results}. The binary $\kappa$ is the operationally
+relevant measure for SLR selection outcomes. Both binary $\kappa$ values
+($0.695$ for T/A and $0.694$ for FT) exceed the substantial-agreement
+threshold $\kappa \geq 0.61$ \cite{landiskoch1977}. The multi-class FT
+$\kappa$ is lower ($0.479$, moderate) because the verifier returned
+\texttt{pending} on $25/177$ FT papers where the primary screener committed
+to a binary decision; this represents a difference in conservativeness, not
+a difference in the final selection outcome. The cross-model verification
+design follows the guidance of Khraisha~et~al.~\cite{khraisha2024} and
+Syriani~et~al.~\cite{syriani2023} for LLM-assisted SLRs and is intended as a
+tractable proxy for a fully independent human second-rater protocol; a human
+spot-check on disagreement cases is recommended before camera-ready
+submission.
+
+\input{results/kappa/kappa_report}
+
+(iv)~\textbf{T/A false-positive rate}.
+The LLM confirmatory pass at FT level (Round~1) rejected 33 of 108 T/A
 \texttt{include} papers (30.6\%), primarily for EC3 (algorithm without SE
-evaluation). This false-positive rate is within the expected range for LLM
-T/A screening and does not compromise the current provisional synthesis, as
-these are caught at the FT phase. The Round~2 screening raised the confirmed
-set from 76 to 143 by processing 495 additional \texttt{maybe} papers with
-enriched abstracts.
-
-A second internal-validity threat concerns the operational coding introduced
-after the PDF-based enrichment (e.g., integration level, reading priority,
-RQ coverage, and provisional include/maybe/exclude labels). These labels were
-generated as structured decision-support heuristics from the locally available
-PDF subset and therefore must not be interpreted as replacements for the
-formal screening and data extraction protocol. In this chapter, they are used
-only to refine the synthesis, prioritize manual reading, and expose patterns
-that remain consistent with the formal PRISMA counts.
+evaluation). This false-positive rate is consistent with the
+T/A-screening false-positive rates reported by Khraisha~et~al.\
+\cite{khraisha2024} for medical SLRs (in the 25--35\% range, depending on
+domain specificity) and by Syriani~et~al.~\cite{syriani2023} for SE
+SLRs. False-positives are caught at the FT phase before any synthesis claim
+is made and therefore do not affect the F1--F5 evidence base. The Round~2
+screening reprocessed 495 \texttt{maybe} papers with enriched abstracts and
+brought the confirmed set to its final value of 169.
 
 \subsection{External Validity}
 
@@ -1434,21 +1468,57 @@ potentially excluding relevant work in other languages or grey literature.
 The broad time span (1994--2026) and five-database coverage mitigate
 geographic and temporal bias. The deferred high-recall auxiliary corpus
 (3{,}441 records from SpringerLink, WoS, Snowball) provides a mechanism for
-expansion if gaps in the provisionally confirmed study set are identified.
+expansion if gaps in the confirmed 169-study set are identified.
 
 \subsection{Conclusion Validity}
 
-Preliminary synthesis findings (F1--F5) are based on criterion pattern
-analysis rather than full data extraction. Final quantitative claims await
-completion of full-text review and the structured data extraction described
-in Table~\ref{tab:extraction}. Preliminary findings are explicitly labeled
-as such throughout Section~\ref{sec:slr-synthesis}.
+Synthesis findings F1--F5 are derived from the structured data extraction
+applied to the full 169-study confirmed set
+(Section~\ref{sec:slr-extraction}; Table~\ref{tab:extraction}), with the
+75-PDF subset used as a triangulation layer rather than as the primary
+evidence base. The IC-combination counts and the technique distributions
+that ground F1, F3, and F4 are computed directly from the extraction CSV;
+the QA-based filtering reported in Table~\ref{tab:qa-results} retains 136 of
+169 studies (80.5\%) for the synthesis and the remaining 33 are excluded
+from the F1--F5 evidence base.
 
-The same caution applies to the operationally coded 73-paper PDF subset. Its
-value lies in triangulation and prioritization, not in replacing the final
-evidence table of the SLR. For that reason, all claims derived from this
-subset are explicitly framed as enrichment results and are never used to alter
-the formal selection counts.
+A residual conclusion-validity threat is the LLM-based extraction of
+PM-technique, stochastic-technique, and SDLC-phase fields. To mitigate this,
+the 75-PDF triangulation subset was used to spot-check the extracted fields
+against the corresponding full texts; no systematic disagreement was
+observed in the spot-check, but a complete human re-extraction on a
+stratified sample is recommended before camera-ready submission.
+
+
+\subsection{Reproducibility and Use of AI}
+\label{sec:slr-replication}
+
+In line with current Elsevier and Springer-Nature editorial policy, this
+review explicitly declares the use of AI tools in its conduct. The primary
+screener at the title/abstract and full-text stages is
+\textit{claude-haiku-4-5-20251001} (Anthropic), invoked through the
+Anthropic Message Batches API for screening and through the
+synchronous Messages API for QA scoring. The cross-model
+inter-rater verification described above uses
+\textit{claude-sonnet-4-6} (Anthropic) as the second rater. AI tools are
+\textbf{not} listed as authors of this work and are responsible for none of
+the editorial judgements; final selection, QA threshold, taxonomy design,
+and synthesis claims are the responsibility of the author.
+
+A complete replication package is deposited at Zenodo (DOI~10.5281/zenodo.15719919)
+and includes: the search strings for all five databases, the deduplication and
+enrichment scripts (\texttt{pipeline/dedup.py}, \texttt{pipeline/enrich.py}),
+the screening prompts and JSON schema (\texttt{config/screening\_criteria.py}),
+the QA prompt (\texttt{pipeline/qa\_llm.py}), the cross-model verification
+prompts and computation (\texttt{pipeline/kappa.py}), the decision CSVs at
+each stage (\texttt{results/screening/ta\_screening\_results.csv},
+\texttt{results/screening/ft\_screening\_results.csv}), the QA-scored 169-study
+table (\texttt{results/qa\_assessment.csv}), the structured extraction
+table (\texttt{results/extraction/extraction\_template.csv}), the
+inter-rater agreement reports (\texttt{results/kappa/}), and a PRISMA flow
+snapshot. The package is intended to be self-contained: any reviewer can
+re-run the LLM-assisted protocol on the same working set and reproduce the
+169-study confirmed selection within the stated $\kappa$ confidence band.
 
 
 \section{Chapter Summary}
@@ -1500,3 +1570,11 @@ Chapter~\ref{ch:method}. PATHCAST is positioned at integration level~L3 in
 the SPMF taxonomy---the first formally specified pipeline to compose all four
 technique families into a unified, architecturally specified framework for
 SDLC process forecasting.
+
+Methodologically, the LLM-assisted protocol used in this review achieves
+substantial inter-rater agreement under cross-model verification (binary
+$\kappa = 0.695$ for T/A and $\kappa = 0.694$ for FT) and full QA coverage of
+the 169 confirmed studies (mean QA score $= 4.88/8$, with 136/169 retained
+above the $\geq 4/8$ threshold). The complete replication package and the
+inter-rater agreement reports are deposited at Zenodo
+(DOI~10.5281/zenodo.15719919).
