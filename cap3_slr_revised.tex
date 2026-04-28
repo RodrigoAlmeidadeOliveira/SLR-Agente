@@ -222,8 +222,11 @@ The inclusion criteria are organized in two tiers. Formal criteria
 database search configuration. Content criteria (IC4a--IC4d) require that the
 study's research contribution addresses at least one of four specific
 technique-domain intersections; they are applied during title/abstract and
-full-text screening. Exclusion criteria (EC1--EC6) are applied cumulatively
-across both screening phases.
+full-text screening. Exclusion criteria (EC1--EC5) are applied cumulatively
+across both screening phases. Criteria EC1--EC4 are evaluated by the
+LLM-assisted screener; EC5 (full text inaccessible) is applied
+programmatically after the inter-library-loan recovery pass for Band~D/E
+papers fails to retrieve a copy.
 
 \begin{table}[htbp]
 \centering
@@ -252,7 +255,7 @@ across both screening phases.
 & IC4d & Mines software repositories (GitHub, Jira, VCS, CI/CD platforms) to
           discover, analyze, or improve software process models. \\
 \midrule
-\multirow{6}{*}{Exclusion}
+\multirow{5}{*}{Exclusion}
 & EC1  & Application domain is exclusively outside software development
           (healthcare, manufacturing, supply chain) without demonstrated
           relevance to SDLC processes. \\
@@ -262,8 +265,9 @@ across both screening phases.
           evaluation in a software development context. \\
 & EC4  & Secondary study (SLR, mapping study, survey) not specifically
           addressing PM or stochastic methods in software engineering. \\
-& EC5  & Duplicate study (the most complete version is retained). \\
-& EC6  & Full text inaccessible. \\
+& EC5  & Full text inaccessible despite all retrieval attempts (open access,
+          institutional, ILL, author-provided preprint). Applied programmatically
+          after Band~D/E recovery. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -282,7 +286,7 @@ systematic, reproducible screening decisions with traceable rationale, the
 title/abstract screening phase employs a language model as the primary
 screener. Specifically, \textit{claude-haiku-4-5-20251001} is used via the
 Anthropic Message Batches API, with a structured prompt encoding the IC4a--IC4d
-and EC1--EC4 criteria, the PATHCAST scope description, and decision rules for
+and EC1--EC4 criteria (EC5 is applied programmatically post-screening), the PATHCAST scope description, and decision rules for
 the three-class output: \texttt{include}, \texttt{exclude}, or \texttt{maybe}.
 
 The screening prompt instructs the model to (i)~identify which ICs are
@@ -534,25 +538,34 @@ Table~\ref{tab:ft-screening} summarises the outcome.
 \midrule
 Included                             & 169 & 19.1 \\
 Excluded                             & 717 & 80.9 \\
-\quad EC1 (non-SE domain)            & (204) & (23.0) \\
-\quad EC3 (theoretical, no SE eval.) & (197) & (22.2) \\
+\quad EC3 (algorithmic, no SE eval.) & (229) & (25.8) \\
+\quad EC1 (non-SE domain)            & (205) & (23.1) \\
 \quad EC5 (full text inaccessible)   & (148) & (16.7) \\
-\quad EC2 (SW as implementation)     & (92)  & (10.4) \\
-\quad EC4 (duplicate/update)         & (59)  & (6.7)  \\
+\quad EC2 (SW as implementation)     & (110) & (12.4) \\
+\quad EC4 (out-of-scope secondary)   & (60)  & (6.8)  \\
 \midrule
 \textbf{Total} & \textbf{886} & 100.0 \\
 \bottomrule
 \end{tabular}
+
+\smallskip
+\footnotesize\textit{Note:} EC counts are non-exclusive --- a single paper may
+trigger multiple ECs when more than one applies (e.g., a non-SE-domain paper
+whose contribution is purely theoretical). The sum of per-EC counts therefore
+exceeds the 717 excluded papers; the percentages above are with respect to the
+886-paper FT queue.
 \end{table}
 
-Among the 717 excluded papers, EC1 (domain outside software
-development) accounted for 28.5\%, EC3 (theoretical contribution without SE
-evaluation) for 27.5\%, and EC5 (full text inaccessible despite all retrieval
-attempts) for 20.6\%; EC2 and EC4 together cover the remaining 21.1\%.
-The 148~EC5 papers correspond to the Band~D/E subset for which no open-access
-copy, institutional access, or author-provided preprint could be located;
-these are recorded in a dedicated traceability file and documented in the
-PRISMA flow as a named exclusion stratum.
+Among the 717 excluded papers, EC3 (algorithmic or theoretical contribution
+without SE evaluation, $n=229$) and EC1 (domain outside software development,
+$n=205$) jointly account for the largest share of FT-stage exclusions. EC5
+(full text inaccessible despite all retrieval attempts, $n=148$) corresponds
+to the Band~D/E subset for which no open-access copy, institutional access,
+or author-provided preprint could be located; these are recorded in a
+dedicated traceability file and documented in the PRISMA flow as a named
+exclusion stratum. EC2 (software as implementation platform rather than
+analyzed process, $n=110$) and EC4 (out-of-scope secondary studies, $n=60$)
+account for the remainder.
 
 Figure~\ref{fig:prisma} presents the complete PRISMA 2020 flow
 diagram~\cite{page2021} of the selection process.
@@ -636,15 +649,15 @@ diagram~\cite{page2021} of the selection process.
 
 \node[stg=7cm, minimum height=1.4cm] (ft) at (-0.5,-12.2)
   {\textbf{Full-text screened} ($n = 886$)\\[3pt]
-   LLM + manual \textbullet{} abstract coverage 72.6\%\\
-   Screen-blanks pass (186 no-abstract papers)};
+   LLM + manual \textbullet{} abstract coverage 72.6\% after enrichment\\
+   Screen-blanks pass (186 FT-undecided papers)};
 
 \node[exc] (ftexc) at (6.0,-11.6)
   {Excluded at FT ($n = 717$)\\
-   EC1: 204 non-SE domain\\
-   EC3: 197 theoretical, no SE\\
+   EC3: 229 theoretical, no SE\\
+   EC1: 205 non-SE domain\\
    EC5: 148 FT inaccessible\\
-   EC2: 92 \textbullet{} EC4: 59};
+   EC2: 110 \textbullet{} EC4: 60};
 
 \draw[arr] (ftq) -- (ft);
 \draw[sidearr] (ft.east) -- (ftexc.west);
@@ -713,7 +726,8 @@ By document type, the majority are conference papers and journal articles.
 By source database, Scopus is the dominant contributor, followed by
 IEEE~Xplore and ACM~DL. Data extraction was completed for all 169 studies
 using a structured LLM-assisted pipeline (\textit{claude-haiku-4-5-20251001})
-operating on locally available PDFs (75/169) or abstract/title metadata (94/169).
+operating on locally available PDFs (75/169, of which 73 were operationally
+coded in the triangulation subset) or abstract/title metadata (94/169).
 
 \subsection{Inclusion Criterion Coverage}
 
@@ -763,18 +777,22 @@ in Finding~F1 below.
 
 \subsection{Prevalent Exclusion Patterns}
 
-Among the 497 FT-excluded papers, the dominant exclusion reason is EC3
-(theoretical algorithm contributions without SE evaluation, $n \approx 219$,
-44.1\%), indicating a substantial body of process mining and stochastic
-modeling research that has not been empirically applied to software engineering
-contexts. EC1 (domain exclusively outside software development, $n \approx 189$,
-38.0\%), primarily generic business process management (BPM) studies that use
-the same terminology as the search strings but apply techniques to
-organizational processes unrelated to SDLC, is the second-largest reason. EC2
-(software as implementation tool, not studied process, $n = 106$, 21.3\%) and
-EC4 (out-of-scope secondary study, $n = 24$, 4.8\%) account for the remainder.
-Note that EC counts sum above 497 as some papers triggered multiple exclusion
-criteria. These patterns directly support Findings F3 and F4 below.
+Among the 717 FT-excluded papers (Table~\ref{tab:ft-screening}), the largest
+exclusion reason is EC3 (algorithmic or theoretical contribution without
+software-engineering evaluation, $n=229$), indicating a substantial body of
+process mining and stochastic modeling research that has not been empirically
+applied to software engineering contexts. EC1 (domain exclusively outside
+software development, $n=205$) is the second-largest reason and consists
+primarily of generic business process management (BPM) studies that use the
+same terminology as the search strings but apply techniques to organizational
+processes unrelated to SDLC. EC5 (full text inaccessible, $n=148$) closes the
+group of large strata, followed by EC2 (software as implementation platform
+rather than analyzed process, $n=110$) and EC4 (out-of-scope secondary study,
+$n=60$). EC counts are non-exclusive: a single paper may trigger more than
+one EC. The dominance of EC3 and EC1 directly supports Findings F3 and F4
+below: process mining and stochastic methods are widely studied in the
+abstract or in non-SE domains, but their application to SDLC processes
+remains comparatively narrow.
 
 \subsection{Full-Text Extraction and PDF-Based Triangulation}
 \label{sec:slr-pdf-enrichment}
@@ -787,14 +805,16 @@ source, dataset availability, tool used, main finding, limitations, and
 replication-package status. Title-and-abstract metadata was used as the
 primary input for studies without locally available PDFs (94/169); for the
 remaining 75/169 studies a locally accessible PDF was available and used to
-triangulate against the LLM-extracted fields.
+triangulate against the LLM-extracted fields. Of these 75 PDFs, 73 were
+fully coded in the operational triangulation spreadsheet used for the
+figures and positioning tables below.
 
-The 75-PDF subset is therefore not a separate selection stage and does not
-override the PRISMA counts. It is used in this chapter as a verification
-layer for the LLM-extracted fields used in Findings F1--F5.
+The 73-paper PDF triangulation subset is therefore not a separate selection
+stage and does not override the PRISMA counts. It is used in this chapter as
+a verification layer for the LLM-extracted fields used in Findings F1--F5.
 
 Figure~\ref{fig:pdf-decision-dist} summarizes the operational triage profile
-of the 75 locally-read PDFs (54 confirm-include, 13 confirm-include with
+of the 73 coded PDFs (54 confirm-include, 13 confirm-include with
 caveats, 6 confirm-exclude after full-text inspection); the formal selection
 decisions reported in the PRISMA flow (Section~\ref{sec:slr-prisma}) are
 unchanged.
@@ -820,7 +840,7 @@ unchanged.
 \addplot coordinates {(Include,54) (Maybe,13) (Exclude,6)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational decision distribution in the 75-paper PDF triangulation subset.}
+\caption{Operational decision distribution in the 73-paper PDF triangulation subset.}
 \label{fig:pdf-decision-dist}
 \end{figure}
 
@@ -1114,7 +1134,7 @@ in 7 papers (4.1\%), and IC2$\cap$IC3 (stochastic and forecasting) in 18
 papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
 \textbf{L3} architecture. The literature has many partial bridges but no
 end-to-end process-aware forecasting architecture for SDLC data. The
-operational coding of the 75-PDF triangulation subset is consistent with the
+operational coding of the 73-PDF triangulation subset is consistent with the
 full-set numbers and is summarized in
 Figure~\ref{fig:pdf-integration-priority}.
 
@@ -1140,7 +1160,7 @@ Figure~\ref{fig:pdf-integration-priority}.
 \addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0) (High,54) (Medium,14) (Low,5)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational integration levels and reading-priority distribution in the 75-paper PDF triangulation subset.}
+\caption{Operational integration levels and reading-priority distribution in the 73-paper PDF triangulation subset.}
 \label{fig:pdf-integration-priority}
 \end{figure}
 
@@ -1152,9 +1172,10 @@ papers (71.6\%) discover or assess process behavior, but only 29 (17.2\%)
 estimate future paths or probabilistic completion distributions. Second,
 \textbf{evidence quality is uneven}: of the 169 confirmed studies, 69
 (40.8\%) are case studies, 34 (20.1\%) are tool papers, 33 (19.5\%) are
-theoretical, 13 (7.7\%) are simulation-only, and 10 (5.9\%) are controlled
-experiments. The literature is therefore method-heavy and applied-evidence
-light. Third, \textbf{reproducibility is poor}: only 25 of 169 papers
+theoretical, 13 (7.7\%) are simulation-only, 10 (5.9\%) are controlled
+experiments, 5 (3.0\%) are surveys, and 5 (3.0\%) fall in residual
+categories (mixed, framework, exploratory; sum: $69+34+33+13+10+5+5 = 169$).
+The literature is therefore method-heavy and applied-evidence light. Third, \textbf{reproducibility is poor}: only 25 of 169 papers
 (14.8\%) declare their dataset publicly, and only 4 (2.4\%) declare a
 replication package. The QA scoring in Table~\ref{tab:qa-results} confirms
 this pattern: only 33\% of studies score 1 on QA7 (data/code availability),
@@ -1165,7 +1186,7 @@ pipeline and an evaluation strategy grounded in real SDLC traces. The gap is
 not the absence of isolated techniques, but the absence of robust,
 end-to-end, process-aware forecasting workflows validated on heterogeneous
 software engineering data. The evidence-type distribution observed in the
-75-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
+73-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
 consistent with the full-set characterization above and is reported here as
 an analytical view, not as a separate selection layer.
 
@@ -1195,7 +1216,7 @@ an analytical view, not as a separate selection layer.
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Evidence-type distribution in the 75-paper PDF triangulation subset.}
+\caption{Evidence-type distribution in the 73-paper PDF triangulation subset.}
 \label{fig:pdf-evidence-dist}
 \end{figure}
 
@@ -1287,7 +1308,7 @@ challenge that PATHCAST addresses through Stage~1 (Event Log Construction).
 Table~\ref{tab:positioning} positions PATHCAST against the integration levels
 identified in the 169-study confirmed set, using both the IC-combination
 counts derived from the structured extraction and the operational coding
-obtained from the 75-PDF triangulation subset.
+obtained from the 73-PDF triangulation subset.
 
 \begin{table}[htbp]
 \centering
@@ -1298,16 +1319,18 @@ obtained from the 75-PDF triangulation subset.
 \begin{tabular}{c p{4.8cm} c c p{3.4cm}}
 \toprule
 \textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, IC-based)}
-  & \textbf{Papers (75-PDF subset, operational)} & \textbf{Representative example} \\
+  & \textbf{Papers (73-PDF subset, operational)} & \textbf{Representative example} \\
 \midrule
-L0 & Single analytical family; no cross-technique chaining
-  & 96 & 13 & Contextual or single-technique studies \\
-L1 & Two families present, but no explicit reproducible pipeline contract
-  & 53 & 54 & Stochastic models or PM without formal coupling \\
-L2 & Partial bridge: PM and stochastic linked, but incomplete pipeline or missing ML closure
-  & 19 & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
-L3 & Unified framework: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML with formal inter-stage contracts
-  & 0 (1 paper jointly satisfies IC1$\cap$IC2$\cap$IC3 but lacks formal pipeline) & 0 & \textbf{PATHCAST} (proposed) \\
+L0 & Single analytical family ($\leq$1 IC matched); no cross-technique chaining
+  & 95 & 13 & Contextual or single-technique studies \\
+L1 & Two ICs matched; two families present, but no explicit reproducible pipeline contract
+  & 70 & 54 & Stochastic models or PM without formal coupling \\
+L2 & Three ICs matched; partial bridge linking PM, stochastic, and forecasting, but incomplete pipeline or missing ML closure
+  & 4 & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
+L3 & Four ICs matched; unified framework: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML with formal inter-stage contracts
+  & 0 & 0 & \textbf{PATHCAST} (proposed) \\
+\midrule
+\textbf{Total} & --- & \textbf{169} & \textbf{73} & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1396,6 +1419,8 @@ paper recovery provides empirical evidence of high recall.
 
 \subsection{Internal Validity}
 
+To further strengthen the reliability of the screening process, a human spot-check of rating disagreements is planned. A sample of approximately 50 papers where the two primary reviewers disagreed on the final decision (include/exclude) will be analyzed by a third senior researcher to identify the root cause of the disagreement (e.g., criteria ambiguity, reviewer error). The findings from this analysis will be incorporated into the camera-ready version of this work to provide a qualitative assessment of reviewer alignment.
+
 LLM-based screening introduces the risk of systematic decision bias. This
 threat is addressed by four mechanisms.
 
@@ -1408,9 +1433,16 @@ Every paper retained at the FT stage was inspected by the author against the
 PRISMA flow before being added to the 169-study confirmed set.
 
 (iii)~\textbf{Cross-model inter-rater agreement (Cohen's $\kappa$)}.
-A stratified random 20\% sample of T/A ($n = 468$) and FT ($n = 177$)
-decisions was independently re-rated by a different model family
-(\textit{claude-sonnet-4-6}) acting as a second rater. Both the multi-class
+A stratified random 20\% sample of T/A ($n_{\text{theoretical}} = 468$ from
+the 2{,}340-paper working set) and FT ($n_{\text{theoretical}} = 177$ from
+the 886-paper FT queue) decisions was independently re-rated by a different
+model family (\textit{claude-sonnet-4-6}) acting as a second rater. Of the
+468 T/A papers in the sample, 420 produced a parseable decision from the
+verifier and entered the agreement computation; the remaining 48 papers
+returned a non-parseable response (typically because the abstract was
+absent, leading the verifier to refuse a categorical answer) and were
+excluded from the $\kappa$ calculation as missing-at-random. All 177 FT
+sample papers produced a parseable decision. Both the multi-class
 $\kappa$ (over the original \texttt{include}/\texttt{exclude}/\texttt{maybe}
 or \texttt{include}/\texttt{exclude}/\texttt{pending} categories) and the
 binary $\kappa$ (collapsing the rater outputs to
@@ -1458,7 +1490,7 @@ expansion if gaps in the confirmed 169-study set are identified.
 Synthesis findings F1--F5 are derived from the structured data extraction
 applied to the full 169-study confirmed set
 (Section~\ref{sec:slr-extraction}; Table~\ref{tab:extraction}), with the
-75-PDF subset used as a triangulation layer rather than as the primary
+73-PDF subset used as a triangulation layer rather than as the primary
 evidence base. The IC-combination counts and the technique distributions
 that ground F1, F3, and F4 are computed directly from the extraction CSV;
 the QA-based filtering reported in Table~\ref{tab:qa-results} retains 136 of
@@ -1467,7 +1499,7 @@ from the F1--F5 evidence base.
 
 A residual conclusion-validity threat is the LLM-based extraction of
 PM-technique, stochastic-technique, and SDLC-phase fields. To mitigate this,
-the 75-PDF triangulation subset was used to spot-check the extracted fields
+the 73-PDF triangulation subset was used to spot-check the extracted fields
 against the corresponding full texts; no systematic disagreement was
 observed in the spot-check, but a complete human re-extraction on a
 stratified sample is recommended before camera-ready submission.
@@ -1517,14 +1549,17 @@ abstract screening using a LLM-assisted protocol produced 111 candidate
 full-text review).
 
 Full-text screening combined LLM-assisted passes (Rounds~1 and~2, with cascade
-abstract enrichment raising coverage from 16.6\% to 72.6\%) with a final
-\emph{screen-blanks} pass that processed the 186 remaining no-abstract papers.
-Papers whose full text remained inaccessible despite all retrieval attempts were
-closed under EC5 (148 papers). The final result is \textbf{169 confirmed primary
-studies} and 717 FT excluded (EC1: 204, EC3: 197, EC5: 148, EC2: 92, EC4: 59),
-with zero pending decisions. Data extraction for all 169 studies was completed
-using a structured LLM-assisted pipeline operating on locally available PDFs
-(75/169) or abstract/title metadata (94/169).
+abstract enrichment raising coverage from 16.6\% to 72.6\%, i.e., 643/886
+papers) with a final \emph{screen-blanks} pass that processed the 186 papers
+that still lacked an FT decision after the earlier rounds. In the final
+screening artifact, 238/886 papers still lack an abstract field, but all have
+a recorded FT decision. Papers whose full text remained inaccessible despite
+all retrieval attempts were closed under EC5 (148 papers). The final result is
+\textbf{169 confirmed primary studies} and 717 FT excluded (EC3: 229, EC1: 205,
+EC5: 148, EC2: 110, EC4: 60), with zero pending decisions. Data extraction
+for all 169 studies was completed using a structured LLM-assisted pipeline
+operating on locally available PDFs (75/169, with 73 operationally coded in
+the triangulation subset) or abstract/title metadata (94/169).
 
 Analysis of the 169 confirmed studies supports five key findings. First, the
 field exhibits a descriptive ceiling: 71.6\% of confirmed papers apply process
