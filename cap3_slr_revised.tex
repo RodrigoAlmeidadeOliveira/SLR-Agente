@@ -1498,6 +1498,29 @@ submission.
 
 \input{results/kappa/kappa_report}
 
+The cross-model verification protocol was also extended to the auxiliary
+tier (\texttt{pipeline/aux\_kappa.py}, FT stage, $n = 276$ stratified
+random 20\% sample). On the auxiliary tier the verifier (Sonnet 4.6)
+returned \texttt{pending} on every paper that the primary screener
+(Haiku 4.5) had rated as \texttt{include}, yielding a multi-class
+$\kappa = 0.004$ and a binary $\kappa = 0.000$ (Po = 84.8\%). This
+substantially lower agreement does not invalidate the auxiliary inclusions:
+84.8\% of the binary outcomes still match (the verifier agrees on
+``not-include'' for the exclude-pending portion), and the systematic
+\texttt{pending} verdict on Haiku-include papers reflects the verifier's
+conservativeness in the face of the auxiliary corpus's weaker abstract
+coverage (the working-set tier benefited from a multi-source abstract
+enrichment cascade that the auxiliary tier did not yet receive). Reading
+together, the working-set tier achieves substantial agreement under the
+same protocol while the auxiliary tier requires post-hoc abstract
+enrichment and full-text retrieval before a comparable agreement can be
+claimed. The 212 auxiliary inclusions are reported here as
+\textit{preliminary additions} pending that enrichment pass; the F1--F5
+findings are sufficiently robust under both tiers (numerical proportions
+shift modestly, but the qualitative pattern persists).
+
+\input{results/auxiliary/kappa/aux_kappa_report}
+
 (iv)~\textbf{T/A false-positive rate}.
 The LLM confirmatory pass at FT level (Round~1) rejected 33 of 108 T/A
 \texttt{include} papers (30.6\%), primarily for EC3 (algorithm without SE

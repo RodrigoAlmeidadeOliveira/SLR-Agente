@@ -1,0 +1,12 @@
+SLR PATHCAST — Auxiliary-Tier Inter-rater Agreement
+============================================================
+Primary: claude-haiku-4-5-20251001 | Verifier: claude-sonnet-4-6
+Sample rate: 20% (seed=20260429)
+
+[ta] missing
+[FT] n=276/276
+  multi-class: kappa=0.004 (slight), Po=54.3%, Pe=54.2%
+  binary:      kappa=0.000 (slight), Po=84.8%, Pe=84.8%
+  CM categories: ['exclude', 'include', 'pending']
+
+Target: kappa >= 0.61 (substantial; Landis \& Koch 1977)
