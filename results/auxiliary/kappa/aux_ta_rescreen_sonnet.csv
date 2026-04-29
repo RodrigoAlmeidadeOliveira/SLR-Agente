@@ -1,0 +1,474 @@
+row_idx,internal_id,title,ta_decision_primary,ta_decision_verifier,verifier_model,raw
+1,808e8ac2,Architecture Enforcement Concerns and Activities - An Expert Study,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica um estudo sobre enforcement de arquitetura de software, sem qualquer sinal de process mining, modelagem estocástica, forecasting ou mineração de repositórios. O tema central parece ser prática de arquitetura de SW (EC2/EC4), não o processo de desenvolvimento analisado via event logs ou modelos estocásticos."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": "
+0,59e1b494,Phylogenetic Analysis of Reticulate Software Evolution,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica filogenia computacional (biologia molecular) para analisar evolução de versões de software via diferenciação de árvores sintáticas abstratas, não utilizando process mining, modelagem estocástica, forecasting de métricas de processo ou mineração de repositórios para descoberta/melhoria de processos de desenvolvimento de software. O 'software' aqui é o objeto de estudo evolutivo (código-fonte), não o processo de desenvolvimento sendo minerado ou previsto."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2"", ""EC3""],
+  ""evidence_tags"": [""v"
+3,a26c7f77,Learning Scatter Artifact Correction in Cone-Beam X-Ray CT Using Incomplete Projections with Beam Hole Array,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se claramente a correção de artefatos de dispersão em tomografia computadorizada de raios X (CT), domínio de imagens médicas, sem qualquer relação com process mining, modelagem estocástica de processos de SW ou repositórios de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+2,a3927884,Enhancing version control with domain-specific semantics,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de controle de versão e edição colaborativa de modelos em ambientes MDE/DSML, usando VCS para serialização e merge de modelos. O foco é em 'software' como ferramenta/plataforma, não na mineração ou análise do processo de desenvolvimento de software; não há process mining, modelagem estocástica, forecasting ou mineração de repositórios para descoberta de processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""version_control""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"""
+4,e6734171,"Distribution Transformer's Loss of Life Considering Residential Prosumers Owning Solar Shingles, High-Power Fast Chargers and Second-Generation Battery Energy Storage",exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata do envelhecimento de transformadores de distribuição elétrica no contexto de veículos elétricos e energia solar residencial, sem qualquer relação com processos de desenvolvimento de software, mineração de repositórios ou process mining."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""probabilistic_model"",
+  ""forecast_target"": ""reliability"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+5,87482f5a,"Leveraging LLM-based data augmentation for automatic classification of
+recurring tasks in software development projects",exclude,include,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""include"",
+  ""rationale"": ""O estudo usa issue tracking systems para classificar tarefas de projetos de software, aplicando ML sobre dados de repositórios de projetos industriais (IC4), e aborda planejamento de recursos e simulação de processos de SW (IC2/IC3 marginalmente). O foco é na categorização automatizada de tarefas de processos de desenvolvimento de software a partir de dados de ITS, atendendo IC4."",
+  ""matched_ic"": [""IC4""],
+  ""matched_ec"": [],
+  ""evidence_tags"": [""software_process"", ""issue_tracking"", ""forecasting"", ""repository_mining""],
+  ""software_context"": ""i"
+6,b55c5db2,Combining Risk Analysis and Security Testing,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título 'Combining Risk Analysis and Security Testing' não apresenta indicadores de process mining, modelagem estocástica de processos de SW ou forecasting de métricas de processo; o foco aparente é em segurança/testes, sem evidência de atendimento a nenhum IC. A ausência de abstract impede reavaliação, mas o título é suficientemente claro para excluir."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""software_testing"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"
+7,1c4606b9,PCGD: Principal components-based great deluge method for solving CNOP,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de meteorologia/oceanografia (CNOP para previsão climática no modelo Zebiak-Cane), sem qualquer relação com processos de desenvolvimento de software ou mineração de repositórios. Nenhum critério de inclusão da SLR PATHCAST é atendido."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""other_stochastic"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+8,d2972d40,Synthesis and Implementation of Distributed Supervisory Controllers with Communication Delays,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de controle supervisório distribuído para sistemas de eventos discretos industriais/de controle, sem qualquer relação com processos de desenvolvimento de software, mineração de repositórios ou forecasting de métricas de processo de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+9,c3463d1c,Runtime Verification for Generic Classes with ConGu 2,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica foco em verificação de runtime para classes genéricas com uma ferramenta específica (ConGu 2), o que se enquadra em software como ferramenta/implementação, sem relação com process mining, modelagem estocástica ou forecasting de processos de SW. A ausência de abstract não oferece evidência de relevância para o escopo PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""pro"
+10,da02d8ce,Model Checking PBFT Consensus Mechanism in Healthcare Blockchain Network,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica CTMC para modelar o desempenho de redes blockchain no contexto de saúde (healthcare), não em processos de desenvolvimento de software. O domínio é claramente fora do escopo da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""stochastic_modeling"", ""markov"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""simulated_process"",
+  ""confidence"": ""high""
+}
+```"
+12,e5ce99f3,Research on visualization techniques in data mining,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de técnicas de visualização em data mining de forma genérica, sem relação com process mining, processos de desenvolvimento de software ou modelagem estocástica. Nenhum critério de inclusão é atendido e o foco é em visualização de dados, não em processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2"", ""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+11,a287b44a,Related Work,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título 'Related Work' não identifica um paper independente, sendo provavelmente uma seção de capítulo ou livro, sem abstract disponível e sem qualquer evidência de atender aos critérios de inclusão da SLR."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""low""
+}
+```"
+14,c053252a,Hydrological Response to Climate and Land Use Changes in the Dry–Warm Valley of the Upper Yangtze River,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de processos hidrológicos e mudanças climáticas/uso do solo em bacia hidrográfica, sem qualquer relação com processos de desenvolvimento de software. O domínio é claramente hidrologia/geociências, não engenharia de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""markov""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+13,a019b2cb,Dynamic Property Preservation in AIoT: A Machine Learning Approach for Data-Efficient Model Transformation,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica Markov chains para preservação de propriedades em transformações de modelos no domínio AIoT (model-driven development), onde o 'software' é ferramenta/implementação e não o processo de desenvolvimento em si sendo estudado. Não há aplicação a event logs, repositórios ou processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2"", ""EC3""],
+  ""evidence_tags"": [""markov"", ""reliability"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""n"
+15,91e32835,Exploring How Students Test Models in Conceptual Modelling,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O estudo aplica process mining a logs de interação de estudantes com uma ferramenta de simulação de modelos conceituais em contexto educacional, não a processos de desenvolvimento de software. O 'software' aqui é ferramenta/objeto de estudo educacional, não o processo de SW sendo analisado (EC2)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""process_mining"", ""event_log"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""event_"
+16,48c28972,Solving Enterprise Solution Complexity in SCM Domain through Business Process Agility,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de agilidade em processos de negócio no domínio de Supply Chain Management (SCM), não envolvendo process mining, modelagem estocástica, forecasting ou mineração de repositórios de software. O 'software' mencionado é ferramenta/sistema, não o processo de desenvolvimento sendo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+17,095a1c22,Accelerated Bayesian inference using deep learning,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de inferência Bayesiana acelerada usando redes neurais para problemas de astronomia e cosmologia (dados Planck), sem qualquer relação com processos de desenvolvimento de software. Atende EC1 (domínio fora de SW) e EC3 (método teórico sem aplicação a processos de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [""markov"", ""monte_carlo"", ""bayesian_model""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  "
+18,704afe26,AoI Analysis for Automatic Repeat-Request in Vehicular Cooperative Perception Networks,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de redes veiculares cooperativas para percepção autônoma, usando cadeias de Markov para modelar transmissão de pacotes ARQ — domínio de redes de comunicação, sem qualquer relação com processos de desenvolvimento de software."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""markov"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+19,88abd688,Introduction,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título 'Introduction' é genérico e não fornece nenhuma evidência de relevância para o escopo da SLR PATHCAST. Sem abstract disponível e sem informações suficientes para inferir atendimento a qualquer critério de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""unclear"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""low""
+}
+```"
+20,b2c582c7,Evolution of BPMN Models through e-VOL BPMN,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata da evolução manual de modelos BPMN durante manutenção de software, sem aplicar process mining, modelagem estocástica, forecasting ou mineração de repositórios. O 'software' é o objeto mantido, não o processo sendo analisado com técnicas de PM/stochastic."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""software_process""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+21,76e06773,Run-time efficient probabilistic model checking,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica Markov Chains e model checking probabilístico para verificação de requisitos de confiabilidade em sistemas de software em tempo de execução, mas 'software' é tratado como o sistema sendo monitorado (EC2), não como o processo de desenvolvimento sendo estudado. Não há relação com process mining, repositórios, event logs de SW development, ou forecasting de métricas de processo de desenvolvimento."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""markov"", ""reliability"", ""stochastic_modeling""],
+  ""software_context"""
+22,0dcc9105,Nonfragile Dissipative Fuzzy PID Control With Mixed Fading Measurements,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de controle fuzzy PID para sistemas não lineares em canais de comunicação com fading, sem qualquer relação com processos de desenvolvimento de software, mineração de repositórios ou event logs de SW. Aplica-se claramente EC1 (domínio fora de SW) e EC3 (método estocástico sem aplicação a processos de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [""stochastic_modeling"", ""markov""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""pro"
+23,5da83bd7,Security modeling and analysis of a self-cleansing intrusion tolerance technique,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica semi-Markov a um sistema de tolerância a intrusões (segurança de sistemas computacionais), não a processos de desenvolvimento de software. O software é o sistema sendo protegido (EC2/EC1), não o processo sendo minerado ou modelado no contexto de SE."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""stochastic_modeling"", ""markov"", ""reliability""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""reliability"",
+  ""process_data_source"": ""none"",
+  ""conf"
+24,0d1a207b,Duality between source coding and channel coding and its extension to the side information case,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de teoria da informação (codificação de fonte e canal com informação lateral), sem qualquer relação com process mining, processos de desenvolvimento de software ou modelagem estocástica de processos de SW. Nenhum critério de inclusão da SLR PATHCAST é atendido."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC3""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+25,a5768a6f,A Collaboration and Productiveness Analysis of the BPM Community,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica uma análise de colaboração e produtividade da comunidade BPM (Business Process Management), sem relação com process mining em software, modelagem estocástica ou forecasting de processos de desenvolvimento de SW. Trata-se provavelmente de uma análise bibliométrica ou de rede social da comunidade científica de BPM, não atendendo nenhum critério de inclusão."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC4""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""fo"
+26,db839e68,fkPT: constraining scale-dependent modified gravity with the full-shape galaxy power spectrum,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de cosmologia/física (modificação da gravidade, espectro de potência de galáxias, perturbation theory para modelos cosmológicos), sem qualquer relação com processos de desenvolvimento de software, process mining ou modelagem de processos de SW. Embora mencione Markov Chain Monte Carlo, é em contexto puramente astrofísico."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""monte_carlo""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""monte_carlo"",
+  ""forecast_target"": ""none"",
+  ""proce"
+28,8a213754,Toward Better Structure and Constraint to Mine Negative Sequential Patterns,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de mineração de padrões sequenciais negativos aplicada a dados de saúde, sem qualquer relação com processos de desenvolvimento de software. O software é utilizado como ferramenta/método, não como processo sendo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+27,1fe42dce,Two Stage Particle Filter for Nonlinear Bayesian Estimation,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de filtro de partículas para estimação Bayesiana não-linear em contextos gerais, sem qualquer relação com processos de desenvolvimento de software, mineração de repositórios ou event logs de SW. Aplica-se EC3 (método puramente algorítmico sem aplicação a processos de SW) e EC2 (software como ferramenta de simulação, não como processo estudado)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC3"", ""EC2""],
+  ""evidence_tags"": [""monte_carlo"", ""bayesian_model"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"
+30,266b1b43,Supply Chain Risk Propagation Model Based on Double-Layer Dynamic Evolution Network,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de propagação de riscos em cadeias de suprimentos, um domínio completamente fora do escopo de processos de desenvolvimento de software. Embora use Micro-Markov Chain, a aplicação é em supply chain, não em processos de SW."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [""markov"", ""simulation"", ""stochastic_modeling""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+29,0061597c,Complier-Directed Parallelization of a Multilevel Solver Algorithm for EDP,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O artigo trata de paralelização de algoritmos numéricos (ML solver) para resolução de Cadeias de Markov em contexto de processamento de dados eletrônicos (EDP Accounting), não envolvendo process mining nem análise de processos de desenvolvimento de software. O 'software' é apenas o contexto computacional da solução, não o processo sendo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2"", ""EC3""],
+  ""evidence_tags"": [""markov""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""markov_chain"",
+  ""forecast_target"": ""n"
+32,87bd1c19,Using OWL ontologies for adaptive patient information modelling and preoperative clinical decision support,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica claramente aplicação em domínio de saúde (modelagem de informação de pacientes e suporte a decisão clínica pré-operatória), sem qualquer relação com processos de desenvolvimento de software. Aplica-se EC1 (domínio fora de SW)."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1""],
+  ""evidence_tags"": [],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+31,6c7828aa,"Towards seamless service migration in network re-optimization for
+optically interconnected datacenters",exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de otimização de redes em datacenters (serviços de rede/cloud), sem qualquer relação com processos de desenvolvimento de software, mineração de repositórios ou modelagem estocástica de SW. O 'software' aqui é apenas ferramenta (ILP/simulação), não o processo sendo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""high""
+}
+```"
+34,f93eddb1,Organizing Committee,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper aplica modelagem estocástica (StoCharts/UML statecharts) a um sistema de controle ferroviário de segurança crítica (European Train Control System), não a processos de desenvolvimento de software. O software é apenas ferramenta/artefato do sistema modelado, não o processo de SW sendo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""stochastic_modeling"", ""simulation""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""probabilistic_model"",
+  ""forecast_target"": ""none"",
+  ""process_dat"
+33,75ef9f2d,Assessing the Suitability of Semi-Supervised Learning Datasets using Item Response Theory,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper trata de avaliação de datasets para algoritmos de semi-supervised learning usando Item Response Theory, sem qualquer relação com process mining, processos de desenvolvimento de software, modelagem estocástica de processos ou mineração de repositórios. O software é usado como ferramenta, não como processo estudado."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2"", ""EC3""],
+  ""evidence_tags"": [""bayesian_model""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""bayesian_model"",
+  ""forecast_target"": ""none"",
+  ""process_data_"
+35,3596376f,Learning Analytics Framework for Analysing Regulation in Collaborative Learning (FARCL),exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título indica foco em análise de aprendizagem colaborativa (learning analytics) em contexto educacional, sem qualquer relação com process mining, modelagem estocástica ou processos de desenvolvimento de software. Nenhum critério de inclusão é atendido."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""unclear"",
+  ""confidence"": ""high""
+}
+```"
+36,ae735da2,Architecture Reasoning for Supporting Product Line Evolution: An Example on Security,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título refere-se a raciocínio arquitetural para evolução de linha de produto com foco em segurança, sem indicação de process mining, modelagem estocástica ou forecasting de processos de SW. Mesmo sem abstract, o tema claramente não se enquadra em nenhum IC da SLR PATHCAST."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""medium""
+}
+```"
+38,76964ac3,The Five Elements of AI to Leverage Data and Dominate Your Industry,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O título sugere um livro/artigo de negócios sobre IA de forma genérica, sem relação com process mining, modelagem estocástica ou processos de desenvolvimento de software. Nenhum IC é atendido e o domínio parece ser fora do escopo da SLR."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC1"", ""EC2""],
+  ""evidence_tags"": [""insufficient_abstract""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic_method"": ""none"",
+  ""forecast_target"": ""none"",
+  ""process_data_source"": ""none"",
+  ""confidence"": ""medium""
+}
+```"
+37,9f34ef8b,Design level quality analysis using fuzzy UML models and weighted complex networks,exclude,exclude,claude-sonnet-4-6,"```json
+{
+  ""decision"": ""exclude"",
+  ""rationale"": ""O paper foca em análise de qualidade de arquitetura de software usando redes complexas e modelos fuzzy UML, tratando o software como objeto de análise estrutural (métricas de manutenibilidade e confiabilidade estáticas), sem envolver process mining, event logs, modelagem estocástica de processos ou forecasting de métricas de processo. O 'software' aqui é produto, não processo sendo minerado ou previsto."",
+  ""matched_ic"": [],
+  ""matched_ec"": [""EC2""],
+  ""evidence_tags"": [""reliability""],
+  ""software_context"": ""not_software_process"",
+  ""stochastic"
