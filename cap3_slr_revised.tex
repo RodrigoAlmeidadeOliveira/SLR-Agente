@@ -1577,10 +1577,14 @@ and (ii)~the 212-study auxiliary-tier extraction performed via abstract
 only (\texttt{pipeline/auxiliary\_extraction.py}). Both extractions feed
 the IC-combination counts and the technique distributions reported under
 F1--F5. The QA-based filtering reported in Table~\ref{tab:qa-results}
-retains 136 of the 169 working-set studies (80.5\%); QA scoring of the
-212-study auxiliary tier is queued for the camera-ready cycle and is
-expected to yield a comparable retention rate based on the descriptive
-similarity of the two corpora.
+retains 136 of the 169 working-set studies (80.5\%); QA scoring was
+subsequently extended to the auxiliary tier
+(\texttt{pipeline/aux\_qa.py}), retaining 179 of 212 (84.4\%, mean
+$5.09 \pm 1.43$). The combined 381-study set therefore retains 315 papers
+($82.7\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold; full
+combined-QA results are reported in Table~\ref{tab:qa-combined}.
+
+\input{results/auxiliary/aux_qa_summary}
 
 A residual conclusion-validity threat is the LLM-based extraction of
 PM-technique, stochastic-technique, and SDLC-phase fields. To mitigate this,

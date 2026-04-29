@@ -1,0 +1,7 @@
+SLR PATHCAST — Combined QA (working-set + auxiliary)
+============================================================
+Working-set (169): mean 4.88 SD 1.40 | pass 136 fail 33
+Auxiliary (212):  mean 5.09 SD 1.43 | pass 179 fail 33
+Combined (381): mean 5.00 SD 1.42 | pass 315 fail 66
+
+Combined retention rate: 82.7% (>= 4/8 threshold)
