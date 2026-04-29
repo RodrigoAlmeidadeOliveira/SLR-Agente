@@ -1,0 +1,7 @@
+SLR PATHCAST — Auxiliary PDF Download Summary
+============================================================
+Targets attempted: 239
+Downloaded: 49 (20.5%)
+Failed:    190 (79.5%)
+
+Files in: results/auxiliary/pdfs

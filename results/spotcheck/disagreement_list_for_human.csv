@@ -1,0 +1,90 @@
+﻿stage,internal_id,title,doi,primary_decision,verifier_decision,binary_disagreement,human_decision,root_cause,human_notes
+ws_FT,,Application of process mining in project management context: An exploratory case study in software development projects,,include,pending,include vs not_include,,,
+ws_FT,,A CSP-Theoretic framework of checking conformance of business processes,10.1109/APSEC.2012.110,include,exclude,include vs not_include,,,
+ws_FT,,Supporting software evolution actions with process mining,,include,exclude,include vs not_include,,,
+ws_FT,,"Experiences in discovering, modeling, and reenacting open source software development processes",10.1007/11608035_36,include,pending,include vs not_include,,,
+ws_FT,,Monitoring a CI/CD Workflow Using Process Mining,10.1007/s42979-021-00830-2,include,pending,include vs not_include,,,
+ws_FT,,Continuous software monitoring backed by process mining: a systematic literature review,10.1007/s41060-025-01000-w,include,pending,include vs not_include,,,
+ws_FT,,The economic impact of software process variations,10.1007/978-3-540-72426-1_22,include,pending,include vs not_include,,,
+ws_FT,,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,include,pending,include vs not_include,,,
+ws_FT,,A note on two-stage software testing by two teams,10.1007/978-3-642-27207-3_35,exclude,include,not_include vs include,,,
+ws_FT,,Modeling and predicting software failure costs,10.1109/COMPSAC.2009.195,exclude,include,not_include vs include,,,
+ws_FT,,An Empirical Analysis of Build Failures in the Continuous Integration Workflows of Java-Based Open-Source Software,10.1109/MSR.2017.54,exclude,include,not_include vs include,,,
+ws_FT,,A general modeling and analysis framework for software fault detection and correction process,10.1002/stvr.1600,exclude,include,not_include vs include,,,
+ws_FT,,A business process simulation method supporting resource evolution,10.1145/2600821.2600827,exclude,include,not_include vs include,,,
+ws_FT,,Model-based scheduling analysis for software projects,10.1109/COMPSACW.2011.57,exclude,include,not_include vs include,,,
+ws_FT,,Cutting the software building efforts in continuous integration by semi-supervised online AUC optimization,10.24963/ijcai.2018/399,exclude,include,not_include vs include,,,
+ws_FT,,Effects of architecture and technical development process on micro-process,10.1007/978-3-540-72426-1_5,exclude,include,not_include vs include,,,
+ws_FT,,Better reasoning about software engineering activities,10.1109/ASE.2001.989836,exclude,include,not_include vs include,,,
+aux_FT,4fd2327e,"Comparing pre-commit reviews and post-commit reviews using process
+simulation",,include,pending,include vs not_include,,,
+aux_FT,ac05d867,Software Process Dynamics,,include,pending,include vs not_include,,,
+aux_FT,03fb6812,"Analyzing Side-Tracking of Developers Using Object-Centric Process
+Mining",,include,pending,include vs not_include,,,
+aux_FT,9662854d,Mining Software Repositories for Predictive Modelling of Defects in SDN Controller,,include,pending,include vs not_include,,,
+aux_FT,73df5473,"Using a Systematic Literature Review to Strengthen the Evidence
+Supporting a Simulation Model of Distributed Software Projects",,include,pending,include vs not_include,,,
+aux_FT,ec94ba4d,Spiral lifecycle increment modeling for new hybrid processes,,include,pending,include vs not_include,,,
+aux_FT,b61ea92e,Assessing Software Quality Using the Markov Decision Processes,,include,pending,include vs not_include,,,
+aux_FT,4cb686b6,Investigating the Significance of the Bellwether Effect to Improve Software Effort Prediction: Further Empirical Study,,include,exclude,include vs not_include,,,
+aux_FT,0b759736,"A method for modeling and evaluating software maintenance process
+performances",,include,pending,include vs not_include,,,
+aux_FT,3f8fd941,"Using software process simulation to assist software development
+organizations in making good enough quality decisions",,include,pending,include vs not_include,,,
+aux_FT,835c31bf,Rate-Based Queueing Simulation Model of Open Source Software Debugging Activities,,include,pending,include vs not_include,,,
+aux_FT,23ec55bd,SHARING LIMITED RESOURCES IN SOFTWARE PROCESS SIMULATIONS,,include,pending,include vs not_include,,,
+aux_FT,3cc91643,"Probabilistic Approach to Predicting Risk in Software Projects Using
+Software Repository Data",,include,pending,include vs not_include,,,
+aux_FT,6e4114dc,"Using empirical knowledge from, replicated experiments for software
+process simulation:: A practical example",,include,pending,include vs not_include,,,
+aux_FT,839b7aab,"Experiences in discovering, modeling, and reenacting open source
+software development processes",,include,pending,include vs not_include,,,
+aux_FT,ad4f84a7,Simulation-based risk reduction for planning inspections,,include,pending,include vs not_include,,,
+aux_FT,03654165,Studying Task Processes for Improving Programmer Productivity,,include,pending,include vs not_include,,,
+aux_FT,1c2611b3,Linking software process modeling with Markov decision theory,,include,pending,include vs not_include,,,
+aux_FT,c7ed395a,"A procedure to detect problems of processes in software development
+projects using Bayesian networks",,include,pending,include vs not_include,,,
+aux_FT,f2c6bd74,GHALogs: Large-Scale Dataset of GitHub Actions Runs,,include,pending,include vs not_include,,,
+aux_FT,537bbfd0,Process-Driven Incremental Effort Estimation,,include,pending,include vs not_include,,,
+aux_FT,98edc5c2,"Prioritizing code review requests to improve review efficiency: a
+simulation study",,include,pending,include vs not_include,,,
+aux_FT,747fc068,"A project management approach to using simulation for cost estimation on
+large, complex software development projects",,include,pending,include vs not_include,,,
+aux_FT,6394fe12,"Predicting the Unpredictable: Using Monte Carlo Simulation to Predict
+Project Completion Date",,include,pending,include vs not_include,,,
+aux_FT,3c0dd1ad,"RVSim: A simulation approach to predict the impact of requirements
+volatility on software project plans",,include,pending,include vs not_include,,,
+aux_FT,66d00b19,Software process simulation modeling: Why? What? How?,,include,pending,include vs not_include,,,
+aux_FT,f33d3c89,Software maintenance process analysis using discrete-event simulation,,include,pending,include vs not_include,,,
+aux_FT,24e9c63d,Monte carlo simulation based estimations: Case from a global outsourcing company,,include,pending,include vs not_include,,,
+aux_FT,58996946,A comprehensive simulation study on optimal scheduling for software projects,,include,pending,include vs not_include,,,
+aux_FT,3b614f91,"Simulation of software maintenance process, with and without a
+work-in-process limit",,include,pending,include vs not_include,,,
+aux_FT,57d2445c,"A Discrete Event Simulation Model to Evaluate Changes to a Software
+Project Delivery Process",,include,pending,include vs not_include,,,
+aux_FT,f06ebc31,A model of the software development process using both continuous and discrete models,,include,pending,include vs not_include,,,
+aux_FT,39e47477,"Exploring bottlenecks in market-driven requirements management processes
+with discrete event simulation",,include,pending,include vs not_include,,,
+aux_FT,1e2799d8,"An Exploratory Study on Usage of Process Mining in Agile Software
+Development",,include,pending,include vs not_include,,,
+aux_FT,afd1b7aa,Software process simulation for reliability management,,include,pending,include vs not_include,,,
+aux_FT,0222b592,Mining Logs to Model the Use of a System,,include,pending,include vs not_include,,,
+aux_FT,8a7996cf,"Predicting bug-fixing time: A replication study using an open source
+software project",,include,pending,include vs not_include,,,
+aux_FT,76276f2e,"Modeling distributed software defect removal effectiveness in the
+presence of code churn",,include,pending,include vs not_include,,,
+aux_FT,008caf63,Simulation of the defect removal process with queuing theory,,include,pending,include vs not_include,,,
+aux_FT,ffa8885e,Експериментальні дослідження процесів налагодження комп'ютерних програм студентами з використанням Process Mining,,include,pending,include vs not_include,,,
+aux_FT,b940a63a,"Understanding Student Interactions in Capstone Courses to Improve
+Learning Experiences",,include,exclude,include vs not_include,,,
+aux_FT,a86b1042,Profiling Software Developers with Process Mining and N-Gram Language Models,,include,pending,include vs not_include,,,
+ws_TA,253d2a93,Process Mining for IS Project Management: A Systematic Literature Review,10.4018/IRMJ.373155,include,maybe,include vs not_include,,,
+ws_TA,f64a5949,Quantitative evaluation of software component behavior discovery approach,10.1587/transinf.2020MPL0001,include,maybe,include vs not_include,,,
+ws_TA,e3d29a38,SIMPT: Process Improvement Using Interactive Simulation of Time-Aware Process Trees,10.1007/978-3-030-75018-3_40,include,exclude,include vs not_include,,,
+ws_TA,6f007eeb,Investigating the significance of bellwether effect to improve software effort estimation,10.1109/QRS.2017.44,include,maybe,include vs not_include,,,
+ws_TA,23158268,Learning Colored Petri Nets Using Object-Centric Event Data (OCED2CPN),10.1109/CiSt56084.2023.10410001,include,exclude,include vs not_include,,,
+ws_TA,91c9dfa1,Towards a Taxonomy of Bug Tracking Process Smells: A Quantitative Analysis,10.1109/SEAA53835.2021.00026,include,maybe,include vs not_include,,,
+ws_TA,fbd20bfb,The evolutionary composition of desirable execution traces from event logs,10.1016/j.future.2019.03.037,include,exclude,include vs not_include,,,
+ws_TA,f7a54d4c,Architecting software monitors for control-flow anomaly detection through large language models and conformance checking,10.1016/j.infsof.2026.108133,include,maybe,include vs not_include,,,
+ws_TA,03b0c494,Stochastic conformance checking based on variable-length Markov chains,10.1016/j.is.2025.102561,include,maybe,include vs not_include,,,
+ws_TA,b1fa96d6,Mining Treatment-Outcome Constructs from Sequential Software Engineering Data,10.1109/TSE.2019.2892956,include,maybe,include vs not_include,,,

@@ -1540,7 +1540,10 @@ be re-rated by a senior human researcher to identify the root cause of each
 disagreement (criteria ambiguity, abstract insufficiency, scope drift). The
 resulting qualitative assessment of LLM-vs-human alignment will be
 incorporated in the camera-ready version, complementing the cross-model
-$\kappa$ evidence reported above.
+$\kappa$ evidence reported above. A pre-built disagreement list is
+deposited at \texttt{results/spotcheck/disagreement\_list\_for\_human.csv}
+(69 disagreements across the working-set T/A, working-set FT, and
+auxiliary FT $\kappa$ samples) and is ready for human review.
 
 \subsection{External Validity}
 
@@ -1553,7 +1556,7 @@ queries; corresponds to the difference between the 5{,}783 unique deduplicated
 records and the 2{,}340-paper operational working set) provides a mechanism
 for expansion if gaps in the confirmed 169-study set are identified.
 
-A two-stage sensitivity check was executed against the auxiliary corpus.
+A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM
 protocol used for the working set
 (\texttt{pipeline/sensitivity.py}); 12 of 200 (6.0\%) returned a T/A
@@ -1567,26 +1570,41 @@ T/A and FT screening pass} over all 3{,}807 auxiliary papers, executed via
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
 screening as \texttt{include}. Combined with the 169 working-set
-confirmations, the SLR therefore covers a \textbf{combined confirmed set of
-381 primary studies}. The 880 papers that received an FT \texttt{pending}
-verdict in the auxiliary pass (insufficient abstract for a binary
-include/exclude decision) are queued for full-text retrieval in the
-camera-ready cycle, analogously to the Band~D/E processing of the original
-working set.
+confirmations, the SLR therefore covers a confirmed set of 381 primary
+studies after the first auxiliary FT pass.
+
+The protocol then proceeded to a third stage: a multi-source abstract
+enrichment cascade (Semantic Scholar, OpenAlex, CORE, Crossref) was applied
+to the 880 auxiliary FT-\texttt{pending} papers
+(\texttt{pipeline/aux\_enrich.py}), recovering an abstract for 285 papers
+(32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
+papers (\texttt{pipeline/aux\_reft.py}), confirming 23 additional includes,
+246 excludes, and 16 still-pending. The combined confirmed set therefore
+becomes \textbf{404 primary studies} ($169_{\text{ws}} + 212_{\text{aux1}} +
+23_{\text{aux2}}$). The remaining 595 papers without abstract after
+enrichment, plus the 16 still-pending from the re-FT, are queued for
+manual full-text retrieval in the camera-ready cycle (analogously to the
+EC5 stratum of the working-set tier).
 
 \input{results/sensitivity/sensitivity_report}
 
 \input{results/auxiliary/aux_ft_summary}
+
+\input{results/auxiliary/aux_reft_summary}
 
 A second external-validity exposure concerns the 148 papers closed under
 EC5 (full text inaccessible). To bound the residual recall risk, an
 automated open-access (OA) recovery pass was executed against four public
 discovery services (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE).
 The result is summarised in Table~\ref{tab:ec5-recovery}: 27 of the 148 EC5
-papers (18.2\%) returned at least one OA URL during the recovery pass and
-will be re-screened in the camera-ready cycle; the remaining 121 papers
-(81.8\%) remain inaccessible and continue to be reported under EC5 in the
-PRISMA flow.
+papers (18.2\%) returned at least one OA URL during the recovery pass; of
+those, 17 PDFs were successfully downloaded (\texttt{pipeline/aux\_pdf\_\allowbreak download.py}, scope \texttt{ec5}), corresponding to 11.5\% of the
+148-paper EC5 stratum recovered into the read-set. The remaining 121
+papers (81.8\%) remain inaccessible and continue to be reported under EC5
+in the PRISMA flow. A parallel OA-download pass over the 212 auxiliary
+includes recovered 49 PDFs (20.5\% of 212; the lower yield reflects the
+publisher-paywall mix of the auxiliary corpus and is documented in
+\texttt{results/auxiliary/aux\_pdf\_summary.txt}).
 
 \input{results/ec5_recovery/ec5_recovery_report}
 

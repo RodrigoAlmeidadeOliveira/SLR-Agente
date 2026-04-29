@@ -1,0 +1,323 @@
+internal_id,title,doi,year,source_db,pdf_status,pdf_source,pdf_file,oa_url,error
+e69d723f,Process mining can be applied to software too!,10.1145/2652524.2652583,,ec5_recovered,oa_found,ft_oa_url,,http://wwwis.win.tue.nl/%7Ewvdaalst/old/publications/p779.pdf,URL found but download failed (may require auth)
+8c42d0fe,Agile Development with Software Process Mining,10.1145/2600821.2600842,,ec5_recovered,downloaded,ft_oa_url,8c42d0fe_agile_development_with_software_process_mining.pdf,https://core.ac.uk/download/227044250.pdf,
+44d6a32e,An Approach Based on Process Mining Techniques to Support Software Development,10.1007/978-3-031-08246-7_2,,ec5_recovered,downloaded,ft_oa_url,44d6a32e_an_approach_based_on_process_mining_techniques_to.pdf,https://core.ac.uk/download/228178013.pdf,
+6778e0d5,Analyzing Side-Tracking of Developers Using Object-Centric Process Mining,10.1007/978-3-031-96841-9_2,,ec5_recovered,downloaded,ft_oa_url,6778e0d5_analyzing_side_tracking_of_developers_using_object.pdf,https://core.ac.uk/download/9033674.pdf,
+1303e41e,Scheduling quality related activities in incremental software development projects based on Monte Carlo simulation,10.3923/itj.2012.751.759,,ec5_recovered,oa_found,ft_oa_url,,https://scialert.net/qredirect.php?doi=itj.2012.751.759&linkid=pdf,URL found but download failed (may require auth)
+5c0f6282,Concept drift detection and localization framework based on behavior replacement,10.1007/s10489-022-04341-2,,ec5_recovered,downloaded,ft_oa_url,5c0f6282_concept_drift_detection_and_localization_framework.pdf,https://core.ac.uk/download/29138111.pdf,
+6ef49a7b,Extracting high-level activities from low-level program execution logs,10.1007/s10515-024-00441-0,,ec5_recovered,downloaded,ft_oa_url,6ef49a7b_extracting_high_level_activities_from_low_level_pr.pdf,https://core.ac.uk/download/577015151.pdf,
+a909cbd7,Hidden Markov Model Approach for Software Reliability Estimation with Logic Error,10.1007/s11633-019-1214-7,,ec5_recovered,oa_found,ft_oa_url,,https://core.ac.uk/download/151156661.pdf,URL found but download failed (may require auth)
+d6bdf278,"Interactive creation, visualization, and exploration of process model collections",10.1007/s10270-025-01346-6,,ec5_recovered,downloaded,ft_oa_url,d6bdf278_interactive_creation_visualization_and_exploration.pdf,https://core.ac.uk/download/12175074.pdf,
+9f28655a,Linear and non-linear bayesian regression methods for software fault prediction,10.1007/s13198-021-01582-1,,ec5_recovered,oa_found,ft_oa_url,,https://core.ac.uk/download/30311032.pdf,URL found but download failed (may require auth)
+284e1145,The use of knapsack 0/1 in prioritizing software requirements and Markov chain to predict software success,10.1007/s41870-023-01476-4,,ec5_recovered,downloaded,ft_oa_url,284e1145_the_use_of_knapsack_01_in_prioritizing_software_re.pdf,https://core.ac.uk/download/43251904.pdf,
+d85e3fdf,Introduction to integration of the process mining to the knowledge framework for software processes,10.1007/978-3-319-29504-6_4,,ec5_recovered,downloaded,ft_oa_url,d85e3fdf_introduction_to_integration_of_the_process_mining.pdf,https://core.ac.uk/download/9023194.pdf,
+6f5e6f89,Agile estimation with monte carlo simulation,10.1007/978-3-540-68255-4_17,,ec5_recovered,downloaded,ft_oa_url,6f5e6f89_agile_estimation_with_monte_carlo_simulation.pdf,https://core.ac.uk/download/79821856.pdf,
+9ae84d72,Analyzing the effect of imperfect debugging on software fault detection and correction processes via a simulation framew,10.1016/j.mcm.2011.07.033,,ec5_recovered,oa_found,ft_oa_url,,https://doi.org/10.1016/j.mcm.2011.07.033,URL found but download failed (may require auth)
+92fa0290,Development of a Tool for Extracting and Analyzing Software Development Process Models,10.1007/978-3-030-95120-7_23,,ec5_recovered,oa_found,ft_oa_url,,https://core.ac.uk/download/153564718.pdf,URL found but download failed (may require auth)
+6d28c56a,Measuring the Effectiveness of Software Code Review Comments,10.1007/978-981-15-6634-9_23,,ec5_recovered,oa_found,ft_oa_url,,https://core.ac.uk/download/pdf/6117454.pdf,URL found but download failed (may require auth)
+692e8e20,Towards a Comprehensive Evaluation of Decision Rules and Decision Mining Algorithms Beyond Accuracy,10.1007/978-3-031-61057-8_24,,ec5_recovered,oa_found,ft_oa_url,,https://mediatum.ub.tum.de/1755427,URL found but download failed (may require auth)
+0053b0e2,An in-depth study of the promises and perils of mining GitHub,10.1007/s10664-015-9393-5,,ec5_recovered,oa_found,ft_oa_url,,https://hdl.handle.net/2292/30996,URL found but download failed (may require auth)
+053794a6,A Markov chain model for predicting the reliability of multi-build software,10.1016/s0950-5849(00)00122-1,,ec5_recovered,downloaded,ft_oa_url,053794a6_a_markov_chain_model_for_predicting_the_reliabilit.pdf,https://core.ac.uk/download/9702207.pdf,
+898e9953,A collection of java class libraries for stochastic modeling and simulation,10.1007/3-540-46043-8_105,,ec5_recovered,downloaded,ft_oa_url,898e9953_a_collection_of_java_class_libraries_for_stochasti.pdf,https://link.springer.com/content/pdf/10.1007%2F3-540-46043-8_105.pdf,
+414e1286,Metamodelling and conformance checking with PVS,10.1007/3-540-45314-8_2,,ec5_recovered,downloaded,ft_oa_url,414e1286_metamodelling_and_conformance_checking_with_pvs.pdf,https://link.springer.com/content/pdf/10.1007%2F3-540-45314-8_2.pdf,
+d3b31579,PReMo: An analyzer for probabilistic recursive models,10.1007/978-3-540-71209-1_7,,ec5_recovered,downloaded,ft_oa_url,d3b31579_premo_an_analyzer_for_probabilistic_recursive_mode.pdf,https://link.springer.com/content/pdf/10.1007%2F978-3-540-71209-1_7.pdf,
+0f5a8ea4,Fourth Annual Workshop on Data-Driven Knowledge Mobilization,nan,,ec5_recovered,downloaded,ft_oa_url,0f5a8ea4_fourth_annual_workshop_on_data_driven_knowledge_mo.pdf,https://core.ac.uk/download/80511057.pdf,
+2b9f3ef6,"8th International Conference on Software Quality Days, SWQD 2016",nan,,ec5_recovered,downloaded,ft_oa_url,2b9f3ef6_8th_international_conference_on_software_quality_d.pdf,https://core.ac.uk/download/553170610.pdf,
+b29c96c9,"4th International Conference on Fundamental Approaches to Software Engineering, FASE 2001 Held as Part of the Joint Euro",nan,,ec5_recovered,downloaded,ft_oa_url,b29c96c9_4th_international_conference_on_fundamental_approa.pdf,https://core.ac.uk/download/49369652.pdf,
+e41a5f30,"2014 International Conference on Software and Systems Process, ICSSP 2014 - Proceedings",nan,,ec5_recovered,downloaded,ft_oa_url,e41a5f30_2014_international_conference_on_software_and_syst.pdf,https://core.ac.uk/download/187440345.pdf,
+8893aff3,Evaluation of prediction intervals for the future reliability of a software package,nan,,ec5_recovered,oa_found,ft_oa_url,,https://core.ac.uk/download/pdf/6340270.pdf,URL found but download failed (may require auth)
+d5718074,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,,aux_include,downloaded,unpaywall,d5718074_process_mining_from_jira_issues_at_a_large_company.pdf,https://pure.tue.nl/ws/files/314500144/Coremans2023ProcessMiningTFS.pdf,
+0ffa4684,Egidio: A non-invasive approach for synthesizing organizational models,10.1109/ICSE.2012.6227062,,aux_include,manual,—,,,No OA URL found
+b5b3cb90,Software Process Analysis Methodology – A Methodology Based on Lessons Learned in Embracing Legacy Software,10.1109/ICSME.2018.00076,,aux_include,manual,—,,,No OA URL found
+9a4decc9,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,,aux_include,manual,—,,,No OA URL found
+ffef36df,Using Constraint Mining to Analyze Software Development Processes,10.1109/ICSSP.2019.00021,,aux_include,downloaded,unpaywall,ffef36df_using_constraint_mining_to_analyze_software_develo.pdf,https://epub.jku.at/obvulioa/content/titleinfo/5653041/full.pdf,
+852d4b6a,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models Generated by Mining Event-Log D,10.1109/COMPSAC.2016.64,,aux_include,downloaded,openalex_title,852d4b6a_anvaya_an_algorithm_and_case_study_on_improving_th.pdf,https://arxiv.org/pdf/1511.07023,
+e1f3598f,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,,aux_include,manual,—,,,No OA URL found
+dca49e04,Business activity monitoring solution to detect deviations in business process execution,10.1109/SACI.2015.7208243,,aux_include,manual,—,,,No OA URL found
+d0e040e1,Mining Handover Process in Open Source Development: An Exploratory Study,10.1109/APSEC.2017.44,,aux_include,manual,—,,,No OA URL found
+a076177d,Understanding What Software Engineers Are Working on The Work-Item Prediction Challenge,10.1145/3387904.3389294,,aux_include,downloaded,openalex_title,a076177d_understanding_what_software_engineers_are_working.pdf,https://arxiv.org/pdf/2004.06174,
+0222b592,Mining Logs to Model the Use of a System,10.1109/ESEM.2017.47,,aux_include,manual,—,,,No OA URL found
+ef76ffc3,An Experience Report on Applying Passive Learning in a Large-Scale Payment Company,10.1109/ICSME.2017.71,,aux_include,downloaded,s2,ef76ffc3_an_experience_report_on_applying_passive_learning.pdf,https://repository.tudelft.nl/file/File_501ac5a9-0378-4bb8-8e13-57a8f9260a40,
+24e9c63d,Monte carlo simulation based estimations: Case from a global outsourcing company,10.1109/ITMC.2011.5996034,,aux_include,manual,—,,,No OA URL found
+62936834,Software process deviation threshold analysis by system dynamics,10.1109/ICIME.2010.5477522,,aux_include,manual,—,,,No OA URL found
+835c31bf,Rate-Based Queueing Simulation Model of Open Source Software Debugging Activities,10.1109/TSE.2014.2354032,,aux_include,manual,—,,,No OA URL found
+1941da25,The Economic Impact of Software Development Process Choice -- Cycle-Time Analysis and Monte Carlo Simulation Results,10.1109/HICSS.2015.599,,aux_include,manual,—,,,No OA URL found
+f33d3c89,Software maintenance process analysis using discrete-event simulation,10.1109/CSMR.2001.914986,,aux_include,manual,—,,,No OA URL found
+78969f65,Decision support for using software inspections,10.1109/SEW.2003.1270720,,aux_include,manual,—,,,No OA URL found
+aa97e968,A method for stochastic modeling the software development process in constrained resource environments,10.1109/SIEDS.2008.4559698,,aux_include,manual,—,,,No OA URL found
+df1bee14,"The Why, When, What, and How About Predictive Continuous Integration: A Simulation-Based Investigation",10.1109/TSE.2023.3330510,,aux_include,manual,—,,,No OA URL found
+e45c53bb,Evaluating Learning-to-Rank Models for Prioritizing Code Review Requests using Process Simulation,10.1109/SANER56733.2023.00050,,aux_include,oa_found,unpaywall,,https://www.zora.uzh.ch/id/eprint/257174/1/saner2023.pdf,URL found but download failed (may require auth)
+0c10d633,Risk-Based Intelligent Software Release Planning,10.1109/UIC-ATC.2012.109,,aux_include,manual,—,,,No OA URL found
+dd998c10,Evaluating the Effectiveness of Software Development Processes Based on Probabilistic Causal Models,10.1109/SUMMA53307.2021.9632118,,aux_include,manual,—,,,No OA URL found
+98786988,High Productivity Programmers Use Effective Task Processes in Unit-Testing,10.1109/APSEC.2015.31,,aux_include,manual,—,,,No OA URL found
+2de8a9af,Handling Estimation Uncertainty with Bootstrapping: Empirical Evaluation in the Context of Hybrid Prediction Methods,10.1109/ESEM.2011.33,,aux_include,manual,—,,,No OA URL found
+66a32124,Predicting defect numbers based on defect state transition models,10.1145/2372251.2372287,,aux_include,manual,—,,,No OA URL found
+008caf63,Simulation of the defect removal process with queuing theory,10.1109/ESEM.2009.5316005,,aux_include,manual,—,,,No OA URL found
+537bbfd0,Process-Driven Incremental Effort Estimation,10.1109/ICSSP.2019.00030,,aux_include,manual,—,,,No OA URL found
+4cb686b6,Investigating the Significance of the Bellwether Effect to Improve Software Effort Prediction: Further Empirical Study,10.1109/TR.2018.2839718,,aux_include,downloaded,unpaywall,4cb686b6_investigating_the_significance_of_the_bellwether_e.pdf,https://arxiv.org/pdf/2105.07366,
+b2c57fd3,Modeling Software Testing Process Using HTCPN,10.1109/FCST.2009.53,,aux_include,manual,—,,,No OA URL found
+9870248b,Using Simulation to Evaluate the Impact of New Requirements Analysis Tools,10.1109/PICMET.2007.4349581,,aux_include,manual,—,,,No OA URL found
+47ed5bf0,Generalizing evolutionary coupling with stochastic dependencies,10.1109/ASE.2011.6100065,,aux_include,manual,—,,,No OA URL found
+70af8211,A Process Optimization Method Based on Process Performance Models,10.1109/ICMSS.2009.5303022,,aux_include,manual,—,,,No OA URL found
+1145c10d,Cost-Effective Build Outcome Prediction Using Cascaded Classifiers,10.1109/MSR.2017.26,,aux_include,manual,—,,,No OA URL found
+fbc469cf,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,10.1109/ESEM.2017.23,,aux_include,manual,—,,,No OA URL found
+35e35d46,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,,aux_include,manual,—,,,No OA URL found
+eefc7305,Interactive Exploration of Developer Interaction Traces using a Hidden Markov Model,nan,,aux_include,manual,—,,,No OA URL found
+9662854d,Mining Software Repositories for Predictive Modelling of Defects in SDN Controller,nan,,aux_include,downloaded,openalex_title,9662854d_mining_software_repositories_for_predictive_modell.pdf,http://mediatum.ub.tum.de/doc/1469844/document.pdf,
+160fface,On the Differences between Unit and Integration Testing in the TravisTorrent Dataset,10.1109/MSR.2017.25,,aux_include,manual,—,,,No OA URL found
+5c4c0e7f,Studying Developer Build Issues and Debugger Usage via Timeline Analysis in Visual Studio IDE,nan,,aux_include,manual,—,,,No OA URL found
+d4601a2f,Issue handling performance in proprietary software projects,10.1109/MSR.2012.6224282,,aux_include,downloaded,s2,d4601a2f_issue_handling_performance_in_proprietary_software.pdf,https://repository.ubn.ru.nl//bitstream/handle/2066/103461/103461.pdf,
+f2c6bd74,GHALogs: Large-Scale Dataset of GitHub Actions Runs,10.1109/MSR66628.2025.00104,,aux_include,manual,—,,,No OA URL found
+ab99a53e,Data mining for software process discovery in open source software development communities,10.1049/ic:20040484,,aux_include,downloaded,s2,ab99a53e_data_mining_for_software_process_discovery_in_open.pdf,http://www.ics.uci.edu/~wscacchi/Papers/New/Jensen-Scacchi-MSR04.pdf,
+48e69187,Activity mining for discovering software process models,nan,,aux_include,manual,—,,,No OA URL found
+6d68591e,Process discovery and validation through event-data analysis,nan,,aux_include,oa_found,openalex_title,,https://scholar.colorado.edu/downloads/zp38wd47m,URL found but download failed (may require auth)
+99736057,Control-Flow based Anomaly Detection in the Bug-Fixing Process of Open-Source Projects,10.1145/3385032.3385038,,aux_include,manual,—,,,No OA URL found
+eb526806,Software process validation,10.1145/304399.304401,,aux_include,oa_found,unpaywall,,https://dl.acm.org/doi/pdf/10.1145/304399.304401,URL found but download failed (may require auth)
+d5aff523,"Do as I Do, Not as I Say: Do Contribution Guidelines Match the GitHub Contribution Process?",10.1109/icsme.2019.00043,,aux_include,oa_found,s2,,https://repository.tudelft.nl/islandora/object/uuid%3Aaedcd0ea-32ce-4ad4-b641-4133ab1c36f0/datastream/OBJ/download,URL found but download failed (may require auth)
+4cff6b4d,Kashvi: a framework for software process intelligence,nan,,aux_include,manual,—,,,No OA URL found
+64c03c8d,Assessing staffing needs for a software maintenance project through queuing simulation,10.1109/tse.2004.1265735,,aux_include,manual,—,,,No OA URL found
+140e67e6,Macrosimulation Model of Software Development Process,10.1016/j.procs.2023.10.061,,aux_include,oa_found,unpaywall,,https://doi.org/10.1016/j.procs.2023.10.061,URL found but download failed (may require auth)
+d96a3161,Are developers complying with the process,10.1145/1852786.1852805,,aux_include,manual,—,,,No OA URL found
+8e0eec4d,Evaluating the impact of test-first programming and pair programming through software process simulation,10.1002/spip.286,,aux_include,manual,—,,,No OA URL found
+f06ebc31,A model of the software development process using both continuous and discrete models,10.1002/1099-1670(200006/09)5:2/3<147::aid-spip122>3.0.co;2-t,,aux_include,manual,—,,,No OA URL found
+ac05d867,Software Process Dynamics,10.1002/9780470192719,,aux_include,manual,—,,,No OA URL found
+3ad9cd69,Increase Return on Investment of Software Development Life Cycle by Managing the Risk - A Case Study,nan,,aux_include,manual,—,,,No OA URL found
+5b51a065,SIMULATION-BASED SOFTWARE PROCESS MODELING AND EVALUATION,10.1142/9789812775245_0012,,aux_include,manual,—,,,No OA URL found
+b68e0602,An Exploration of Learning Processes as Process Maps in FLOSS Repositories,10.48550/arxiv.2307.07841,,aux_include,downloaded,s2,b68e0602_an_exploration_of_learning_processes_as_process_ma.pdf,https://arxiv.org/pdf/2307.07841,
+3d379233,Comparison of software repositories for their usability in software process reconstruction,10.1109/rcis.2015.7128890,,aux_include,manual,—,,,No OA URL found
+4dc479a6,The Discovery of the Implemented Software Engineering Process Using Process Mining Techniques,10.14569/ijacsa.2016.070239,,aux_include,downloaded,unpaywall,4dc479a6_the_discovery_of_the_implemented_software_engineer.pdf,http://thesai.org/Downloads/Volume7No2/Paper_39-The_Discovery_of_the_Implemented_Software_Engineering_Process.pdf,
+b61ea92e,Assessing Software Quality Using the Markov Decision Processes,10.1002/hfm.20355,,aux_include,manual,—,,,No OA URL found
+883e1702,A discrete simulation model for assessing software project scheduling policies,10.1002/spip.160,,aux_include,manual,—,,,No OA URL found
+8888cfdc,A study on optimal scheduling for software projects,10.1002/spip.254,,aux_include,manual,—,,,No OA URL found
+2fbf6d36,Computing Optimal Scheduling Policies for Software Projects,10.1109/apsec.2004.39,,aux_include,manual,—,,,No OA URL found
+dbcd2435,On the Potential of Process Simulation in Software Project Schedule Optimization,10.1109/compsac.2005.115,,aux_include,manual,—,,,No OA URL found
+58996946,A comprehensive simulation study on optimal scheduling for software projects,10.1049/ic:20040457,,aux_include,manual,—,,,No OA URL found
+6464a4f1,Method for Building UML Activity Diagrams from Event Logs,10.15514/ispras-2019-31(4)-9,,aux_include,downloaded,unpaywall,6464a4f1_method_for_building_uml_activity_diagrams_from_eve.pdf,https://ispranproceedings.elpub.ru/jour/article/download/1200/963,
+0ef6a5b4,Bayesian Network Based XP Process Modelling,10.5121/ijsea.2010.1301,,aux_include,downloaded,unpaywall,0ef6a5b4_bayesian_network_based_xp_process_modelling.pdf,https://doi.org/10.5121/ijsea.2010.1301,
+bbc13de4,Process mining application in software process assessment,10.6100/ir739990,,aux_include,oa_found,openalex_title,,https://research.tue.nl/nl/publications/ddfbafd3-8a2e-4de1-9722-6743b34e5356,URL found but download failed (may require auth)
+b5b1402b,Planning and improving global software development process using simulation,10.1145/1138506.1138510,,aux_include,downloaded,s2,b5b1402b_planning_and_improving_global_software_development.pdf,http://seal.ece.ubc.ca/gsd2006/slides/papers/GSD13-Setamanit.pdf,
+3cc5a1cb,Coordinate metrics and process model to manage software project risk,10.1109/iemc.2004.1407505,,aux_include,manual,—,,,No OA URL found
+f5151d89,Agent-based simulation of the software development process: A case study at AVL,10.1109/wsc.2012.6465117,,aux_include,downloaded,s2,f5151d89_agent_based_simulation_of_the_software_development.pdf,http://www.informs-sim.org/wsc12papers/includes/files/con455.pdf,
+557b4102,Scheduling software projects to minimize the development time and cost with a given staff,10.1109/apsec.2001.991476,,aux_include,manual,—,,,No OA URL found
+1c2611b3,Linking software process modeling with Markov decision theory,10.1109/cmpsac.2004.1342699,,aux_include,manual,—,,,No OA URL found
+fde0a3b4,Process Mining Model Quality in Software Development Case Studies,10.30844/akwi_2022_9,,aux_include,oa_found,unpaywall,,https://library.gito.de/wp-content/uploads/2022/09/AKWI_2022_09_Schmolke.pdf,URL found but download failed (may require auth)
+e941deda,Process Mining Model Quality in Software Development Case Studies: An Analysis,10.30844/akwi_2022_09,,aux_include,manual,—,,,No OA URL found
+61e62f9d,Process Mining bei hybriden Vorgehensmodellen zur Umsetzung von Unternehmenssoftware,10.1007/s00287-021-01359-7,,aux_include,downloaded,unpaywall,61e62f9d_process_mining_bei_hybriden_vorgehensmodellen_zur.pdf,https://link.springer.com/content/pdf/10.1007/s00287-021-01359-7.pdf,
+a88acaff,Process Mining Applied in a Software Project Development with SCRUM and ProM,10.24018/ejeng.2023.8.5.3089,,aux_include,oa_found,unpaywall,,https://www.ej-eng.org/index.php/ejeng/article/download/3089/1429,URL found but download failed (may require auth)
+ffa8885e,Експериментальні дослідження процесів налагодження комп'ютерних програм студентами з використанням Process Mining,10.35546/kntu2078-4481.2021.3.9,,aux_include,downloaded,unpaywall,ffa8885e_process_mining.pdf,https://ojs.kntu.net.ua/index.php/visnyk/article/download/178/223,
+14ee5dda,Supporting software evolution actions with process mining,10.5753/cibse.2023.24692,,aux_include,downloaded,unpaywall,14ee5dda_supporting_software_evolution_actions_with_process.pdf,https://sol.sbc.org.br/index.php/cibse/article/download/24692/24513,
+aa3ce899,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models generated by Mining Event-Log D,10.48550/arxiv.1511.07023,,aux_include,downloaded,openalex_title,aa3ce899_anvaya_an_algorithm_and_case_study_on_improving_th.pdf,https://arxiv.org/pdf/1511.07023,
+94e88f90,A Point Process Approach of Bug Fixing Analysis in Open Source Software Projects,10.1109/qrs.2019.00024,,aux_include,manual,—,,,No OA URL found
+a86b1042,Profiling Software Developers with Process Mining and N-Gram Language Models,10.48550/arxiv.2101.06733,,aux_include,downloaded,openalex_title,a86b1042_profiling_software_developers_with_process_mining.pdf,https://arxiv.org/pdf/2101.06733,
+bc54c3b6,Information Systems Security Risk,10.4018/978-1-5225-2703-9.ch005,,aux_include,oa_found,openalex_title,,http://hdl.handle.net/1808/10994,URL found but download failed (may require auth)
+667f1705,ADPTriage: Approximate Dynamic Programming for Bug Triage,10.1109/tse.2023.3307243,,aux_include,downloaded,s2,667f1705_adptriage_approximate_dynamic_programming_for_bug.pdf,http://arxiv.org/pdf/2211.00872,
+2f713568,Partially observable Markov Decision Process to prioritize software defects,10.32920/ryerson.14638470.v1,,aux_include,oa_found,unpaywall,,https://rshare.library.ryerson.ca/articles/thesis/Partially_observable_Markov_Decision_Process_to_prioritize_software_defects/14638470/1/files/28348812.pdf,URL found but download failed (may require auth)
+a3c061ae,Simulation-Based Management for Software Dynamic Testing Processes,nan,,aux_include,manual,—,,,No OA URL found
+20e0d51e,A benchmarking study on process model forecasting: univariate vs. multivariate approaches,10.1007/s44311-025-00031-7,,aux_include,downloaded,unpaywall,20e0d51e_a_benchmarking_study_on_process_model_forecasting.pdf,https://link.springer.com/content/pdf/10.1007/s44311-025-00031-7.pdf,
+e12fff7c,"Process Mining for Process Conformance Checking in an OSS Project: An
+Empirical Research",10.1007/978-3-319-92375-8_7,,aux_include,oa_found,unpaywall,,https://inria.hal.science/hal-01875499,URL found but download failed (may require auth)
+1e2799d8,"An Exploratory Study on Usage of Process Mining in Agile Software
+Development",10.1007/978-3-319-67383-7_14,,aux_include,oa_found,unpaywall,,https://hdl.handle.net/11147/6664,URL found but download failed (may require auth)
+24624e32,"Architecting software monitors for control-flow anomaly detection
+through large language models and conformance checking",10.1016/j.infsof.2026.108133,,aux_include,oa_found,unpaywall,,https://doi.org/10.1016/j.infsof.2026.108133,URL found but download failed (may require auth)
+6394fe12,"Predicting the Unpredictable: Using Monte Carlo Simulation to Predict
+Project Completion Date",10.1007/978-3-319-55907-0_11,,aux_include,manual,—,,,No OA URL found
+c077d9a4,"Automated Business Process Discovery from Unstructured Natural-Language
+Documents",10.1007/978-3-030-66498-5_18,,aux_include,manual,—,,,No OA URL found
+c8ea828e,Applied process mining in software development Case Study,nan,,aux_include,manual,—,,,No OA URL found
+ce1c9294,"``Bottleneck Analysis in Software Development: A Case Study Using
+Process Mining″",10.1007/978-3-032-03708-4_22,,aux_include,manual,—,,,No OA URL found
+340c0c24,"Research on Software Project Schedule Management Method based on Monte
+Carlo Simulation",nan,,aux_include,manual,—,,,No OA URL found
+a756ae65,"Continuous software monitoring backed by process mining: a systematic
+literature review",10.1007/s41060-025-01000-w,,aux_include,manual,—,,,No OA URL found
+eea29299,"Supporting Rule-Based Process Mining by User-Guided Discovery of
+Resource-Aware Frequent Patterns",10.1007/978-3-319-22885-3_10,,aux_include,manual,—,,,No OA URL found
+697eb5d3,"Mapping Process Mining Techniques to Agile Software Development
+Perspectives",10.5220/0011850500003464,,aux_include,oa_found,unpaywall,,https://doi.org/10.5220/0011850500003464,URL found but download failed (may require auth)
+d49eb731,Process mining for agile software process assessment and improvement,10.1016/j.infsof.2025.107680,,aux_include,oa_found,openalex_title,,http://dx.doi.org/10.2139/ssrn.4798299,URL found but download failed (may require auth)
+1f427503,"Nirikshan: Mining Bug Report History for Discovering Process Maps,
+Inefficiencies and Inconsistencies",10.1145/2590748.2590749,,aux_include,manual,—,,,No OA URL found
+82fd1b28,"Identifying Possible Improvements of Software Development Life Cycle
+(SDLC) Process of a Bank by Using Process Mining",10.1142/S0218194022400010,,aux_include,manual,—,,,No OA URL found
+26582491,Software safety assessment based on a subordinated Markov chain,10.1007/s13198-011-0034-0,,aux_include,manual,—,,,No OA URL found
+ab39dd98,Kanban and process mining in the task management,10.1145/3275245.3275286,,aux_include,manual,—,,,No OA URL found
+2349bd7b,"Process mining software engineering practices: A case study for
+deployment pipelines",10.1016/j.infsof.2023.107392,,aux_include,oa_found,unpaywall,,https://doi.org/10.1016/j.infsof.2023.107392,URL found but download failed (may require auth)
+4e79ecd7,"Application of Constructive Modeling and Process Mining Approaches to
+the Study of Source Code Development in Software E",10.24138/jcomss-2021-0046,,aux_include,downloaded,unpaywall,4e79ecd7_application_of_constructive_modeling_and_process_m.pdf,https://jcoms.fesb.unist.hr/pdfs/v17n4_2021-0046_shynkarenko.pdf,
+1852bb61,"Exploring Collaboration Patterns in GitHub using Discrete Time Markov
+Chain",10.1109/APSEC60848.2023.00090,,aux_include,manual,—,,,No OA URL found
+264a3d07,Applying process mining techniques in software process appraisals,10.1016/j.infsof.2017.01.004,,aux_include,manual,—,,,No OA URL found
+3665efbb,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,,aux_include,oa_found,unpaywall,,https://www.mdpi.com/2076-3417/14/4/1402/pdf?version=1707386701,URL found but download failed (may require auth)
+03fb6812,"Analyzing Side-Tracking of Developers Using Object-Centric Process
+Mining",10.1007/978-3-031-96841-9_2,,aux_include,manual,—,,,No OA URL found
+b5eb7e3b,Empirical analysis in software process simulation modeling,10.1016/S0164-1212(00)00006-6,,aux_include,manual,—,,,No OA URL found
+7898ddcb,"Process mining support for Capability Maturity Model Integration-based
+software process assessment, in principle and in ",10.1002/smr.1645,,aux_include,manual,—,,,No OA URL found
+fab243cc,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,,aux_include,downloaded,unpaywall,fab243cc_monitoring_the_software_development_process_with_p.pdf,https://link.springer.com/content/pdf/bfm:978-3-319-94214-8/1,
+f512f749,"On Preparing and Assessing Data for Process Simulation Modeling: An
+Industrial Report",10.1109/ICSSP59042.2023.00016,,aux_include,manual,—,,,No OA URL found
+dde62dae,"Using process mining for Git log analysis of projects in a software
+development course",10.1007/s10639-021-10564-6,,aux_include,manual,—,,,No OA URL found
+e54a7dad,"Process Mining Software Repositories from Student Projects in an
+Undergraduate Software Engineering Course",10.1145/2591062.2591152,,aux_include,manual,—,,,No OA URL found
+d044ef55,Experience with software process simulation and modeling,10.1016/S0164-1212(99)00011-4,,aux_include,manual,—,,,No OA URL found
+38694b4e,Code Change Sniffer: Predicting Future Code Changes with Markov Chain,10.1109/COMPSAC51774.2021.00137,,aux_include,oa_found,unpaywall,,https://hdl.handle.net/11147/11253,URL found but download failed (may require auth)
+65ef350b,"Nirikshan: Process Mining Software Repositories to Identify
+Inefficiencies, Imperfections, and Enhance Existing Process ",10.1145/2591062.2591080,,aux_include,manual,—,,,No OA URL found
+7ecd535e,"Microflows: Leveraging Process Mining and an Automated Constraint
+Recommender for Microflow Modeling",10.1007/978-3-319-78428-1_2,,aux_include,manual,—,,,No OA URL found
+50144afd,Software-Engineering Process Simulation model (SEPS),10.1016/S0164-1212(96)00156-2,,aux_include,oa_found,openalex_title,,https://ntrs.nasa.gov/search.jsp?R=19920015071,URL found but download failed (may require auth)
+66d00b19,Software process simulation modeling: Why? What? How?,10.1016/S0164-1212(99)00003-5,,aux_include,manual,—,,,No OA URL found
+3ac74336,The research on software project schedule prediction and controlling,nan,,aux_include,downloaded,openalex_title,3ac74336_the_research_on_software_project_schedule_predicti.pdf,https://download.atlantis-press.com/article/25844989.pdf,
+4f61e947,An Analysis of Monte Carlo Simulations for Forecasting Software Projects,10.1145/3412841.3442030,,aux_include,manual,—,,,No OA URL found
+8188ab12,"On the potential of process simulation in software project schedule
+optimization",nan,,aux_include,manual,—,,,No OA URL found
+eb05417e,Software process simulation to achieve higher CMM levels,10.1016/S0164-1212(99)00009-6,,aux_include,manual,—,,,No OA URL found
+63eacbed,"Toward objective software process information: experiences from a case
+study",10.1007/s11219-010-9105-8,,aux_include,downloaded,unpaywall,63eacbed_toward_objective_software_process_information_expe.pdf,https://link.springer.com/content/pdf/10.1007/s11219-010-9105-8.pdf,
+9f8b9dba,"Analysis of software-intensive system acquisition using hybrid software
+process simulation",nan,,aux_include,manual,—,,,No OA URL found
+542728fe,"A Risk Emergency Management Model for Software Project Based on
+Stochastic Petri Nets",nan,,aux_include,manual,—,,,No OA URL found
+a0b87a64,"Constructing a Hybrid Software Process Simulation Model in Practice: An
+Exemplar from Industry",10.1145/3379177.3388906,,aux_include,manual,—,,,No OA URL found
+c72f823c,"Software Development Process Simulation: Multi Agent-Based Simulation
+versus System Dynamics",nan,,aux_include,oa_found,openalex_title,,http://urn.kb.se/resolve?urn=urn:nbn:se:bth-7666,URL found but download failed (may require auth)
+afd1b7aa,Software process simulation for reliability management,10.1016/S0164-1212(99)00010-2,,aux_include,manual,—,,,No OA URL found
+ab16b112,"Generating transition probabilities to support model-based software
+testing",10.1002/1097-024X(200008)30:10<1095::AID-SPE328>3.0.CO;2-H,,aux_include,oa_found,unpaywall,,https://stars.library.ucf.edu/facultybib2000/2853,URL found but download failed (may require auth)
+b48dde83,"Behavioral characterization: finding and using the influential factors
+in software process simulation models",10.1016/S0164-1212(01)00067-X,,aux_include,manual,—,,,No OA URL found
+863bae01,"GENSIM 2.0: A customizable process simulation model for software process
+evaluation",nan,,aux_include,manual,—,,,No OA URL found
+d32effe8,Mining Software Development Process Variations,10.1145/2695664.2696046,,aux_include,oa_found,unpaywall,,http://hdl.handle.net/10071/25107,URL found but download failed (may require auth)
+89ad8e3a,Mining Software Process Lines,10.1145/2889160.2889267,,aux_include,manual,—,,,No OA URL found
+20c17d18,"Evaluation of Project Architecture in Software Development Mixing
+Waterfall and Agile by Using Process Simulation",10.1142/S2424862217500075,,aux_include,manual,—,,,No OA URL found
+e722b1cf,Software Process Simulation based on Mining Software Repositories,10.1109/ICDMW.2014.35,,aux_include,manual,—,,,No OA URL found
+b0f56a95,"Comparing Pre Commit Reviews and Post Commit Reviews Using Process
+Simulation",10.1145/2904354.2904362,,aux_include,manual,—,,,No OA URL found
+4fd2327e,"Comparing pre-commit reviews and post-commit reviews using process
+simulation",10.1002/smr.1865,,aux_include,manual,—,,,No OA URL found
+cfe3c926,"A Probabilistic Approach to Building Defect Prediction Model for
+Platform-based Product Lines",nan,,aux_include,oa_found,openalex_title,,https://koreauniv.pure.elsevier.com/en/publications/a-probabilistic-approach-to-building-defect-prediction-model-for-,URL found but download failed (may require auth)
+50dda3a0,"Application of a hybrid process simulation model to a software
+development project",10.1016/S0164-1212(01)00065-6,,aux_include,manual,—,,,No OA URL found
+062516d6,Mining Fork-Including Software Development Traces,10.1007/978-3-031-07481-3_12,,aux_include,oa_found,openalex_title,,https://zenodo.org/record/6351644,URL found but download failed (may require auth)
+3b4591cd,"Understanding the effects of requirements volatility in software
+engineering by using analytical modeling and software p",10.1016/j.jss.2009.03.014,,aux_include,manual,—,,,No OA URL found
+6e4114dc,"Using empirical knowledge from, replicated experiments for software
+process simulation:: A practical example",10.1109/ISESE.2003.1237961,,aux_include,oa_found,unpaywall,,http://publica.fraunhofer.de/documents/N-19720.html,URL found but download failed (may require auth)
+b8b834e2,Hybrid modeling of test-and-fix processes in incremental development,nan,,aux_include,manual,—,,,No OA URL found
+3f8fd941,"Using software process simulation to assist software development
+organizations in making good enough quality decisions",nan,,aux_include,manual,—,,,No OA URL found
+2b246ed2,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,,aux_include,downloaded,unpaywall,2b246ed2_unveiling_process_insights_from_refactoring_practi.pdf,https://arxiv.org/pdf/2010.15692,
+1637d1d9,ANOMALY DETECTION ALGORITHMS IN BUSINESS PROCESS LOGS,nan,,aux_include,oa_found,openalex_title,,https://doi.org/10.5220/0001674700110018,URL found but download failed (may require auth)
+3cc91643,"Probabilistic Approach to Predicting Risk in Software Projects Using
+Software Repository Data",10.1142/S0218194015500151,,aux_include,manual,—,,,No OA URL found
+d5b81753,"Mining Collaboration Patterns of Software Development Processes Based on
+Trace Alignment",10.1145/3084100.3084103,,aux_include,manual,—,,,No OA URL found
+839d520d,"Stochastic simulation of risk factor potential effects for software
+development risk management",10.1016/S0164-1212(01)00066-8,,aux_include,manual,—,,,No OA URL found
+650ccfb8,"Assessing the Risk of Software Development in Agile Methodologies Using
+Simulation",10.1109/ACCESS.2021.3115941,,aux_include,oa_found,unpaywall,,https://ieeexplore.ieee.org/ielx7/6287639/6514899/09548910.pdf,URL found but download failed (may require auth)
+b1aabe94,"Using process simulation to compare scheduling strategies for software
+projects",10.1109/APSEC.2002.1183094,,aux_include,manual,—,,,No OA URL found
+d266ec18,"Extracting and Conserving Production Data as Test Cases in Executable
+Business Process Architectures",10.1016/j.procs.2017.11.130,,aux_include,oa_found,unpaywall,,https://doi.org/10.1016/j.procs.2017.11.130,URL found but download failed (may require auth)
+98edc5c2,"Prioritizing code review requests to improve review efficiency: a
+simulation study",10.1007/s10664-024-10575-0,,aux_include,manual,—,,,No OA URL found
+3476b5db,"Studying the impact of uncertainty in operational release planning - An
+integrated method and its initial evaluation",10.1016/j.infsof.2009.11.003,,aux_include,manual,—,,,No OA URL found
+b940a63a,"Understanding Student Interactions in Capstone Courses to Improve
+Learning Experiences",10.1145/3017680.3017716,,aux_include,manual,—,,,No OA URL found
+57d2445c,"A Discrete Event Simulation Model to Evaluate Changes to a Software
+Project Delivery Process",10.1109/CEC.2011.19,,aux_include,manual,—,,,No OA URL found
+a4f13cb1,"Using simulation to analyse the impact of software requirement
+volatility on project performance",10.1016/S0950-5849(00)00152-X,,aux_include,oa_found,unpaywall,,http://publica.fraunhofer.de/documents/N-249.html,URL found but download failed (may require auth)
+db573f61,"Modeling uncertainties involved with software development with a
+stochastic Petri net",10.1111/j.1468-0394.2006.00411.x,,aux_include,manual,—,,,No OA URL found
+c7ed395a,"A procedure to detect problems of processes in software development
+projects using Bayesian networks",10.1016/j.eswa.2014.08.015,,aux_include,manual,—,,,No OA URL found
+3b614f91,"Simulation of software maintenance process, with and without a
+work-in-process limit",10.1002/smr.1599,,aux_include,manual,—,,,No OA URL found
+68dbd881,Moscow Rules: A Quantitative Expose,10.1007/978-3-031-08169-9_2,,aux_include,downloaded,unpaywall,68dbd881_moscow_rules_a_quantitative_expose.pdf,https://link.springer.com/content/pdf/10.1007/978-3-031-08169-9_2.pdf,
+ca00050f,"A Comparative Study of Scrum and Kanban Approaches on a Real Case Study
+Using Simulation",nan,,aux_include,manual,—,,,No OA URL found
+741b52c5,Software Process Evaluation from User Perceptions and Log Data,10.1002/smr.2438,,aux_include,oa_found,unpaywall,,https://doi.org/10.1002/smr.2438,URL found but download failed (may require auth)
+927817d5,"Evaluation of simulation-assisted value stream mapping for software
+product development: Two industrial cases",10.1016/j.infsof.2015.08.005,,aux_include,manual,—,,,No OA URL found
+608b005d,"Using simulation for understanding and reproducing distributed software
+development processes in the cloud",10.1016/j.infsof.2018.07.004,,aux_include,oa_found,unpaywall,,http://hdl.handle.net/11584/250761,URL found but download failed (may require auth)
+53434e77,"Modeling and simulation of open source development using an agile
+practice",10.1016/j.sysarc.2006.06.005,,aux_include,manual,—,,,No OA URL found
+3c32e186,"Probabilistic Model Checking GitHub Repositories for Software Project
+Analysis",10.3390/app14031260,,aux_include,oa_found,unpaywall,,https://www.mdpi.com/2076-3417/14/3/1260/pdf?version=1707119169,URL found but download failed (may require auth)
+efbaa4df,"Statistical Learning and Software Mining for Agent Based Simulation of
+Software Evolution",10.1109/ICSE.2015.279,,aux_include,manual,—,,,No OA URL found
+e080b18d,"DEFINING THE IMPLEMENTATION ORDER OF SOFTWARE PROJECTS IN UNCERTAIN
+ENVIRONMENTS",nan,,aux_include,oa_found,openalex_title,,https://doi.org/10.5220/0001670200230029,URL found but download failed (may require auth)
+2a7de581,"A Model and System for Applying Lean Six Sigma to Agile Software
+Development Using Hybrid Simulation",nan,,aux_include,manual,—,,,No OA URL found
+2fb4f513,NHPP models with Markov switching for software reliability,10.1016/j.csda.2008.01.010,,aux_include,manual,—,,,No OA URL found
+8a7996cf,"Predicting bug-fixing time: A replication study using an open source
+software project",10.1016/j.jss.2017.02.021,,aux_include,manual,—,,,No OA URL found
+3c0dd1ad,"RVSim: A simulation approach to predict the impact of requirements
+volatility on software project plans",nan,,aux_include,manual,—,,,No OA URL found
+76276f2e,"Modeling distributed software defect removal effectiveness in the
+presence of code churn",10.1016/j.mcm.2004.10.021,,aux_include,oa_found,s2,,https://doi.org/10.1016/j.mcm.2004.10.021,URL found but download failed (may require auth)
+da2f44fa,A simplified model of software project dynamics,10.1016/S0164-1212(01)00070-X,,aux_include,downloaded,s2,da2f44fa_a_simplified_model_of_software_project_dynamics.pdf,https://idus.us.es/bitstream/11441/59055/1/A%20simplified%20model.pdf,
+839b7aab,"Experiences in discovering, modeling, and reenacting open source
+software development processes",nan,,aux_include,manual,—,,,No OA URL found
+23ec55bd,SHARING LIMITED RESOURCES IN SOFTWARE PROCESS SIMULATIONS,nan,,aux_include,manual,—,,,No OA URL found
+c94fc209,"Software project management using PROMPT: A hybrid metrics, modeling and
+utility framework",10.1016/j.infsof.2005.09.004,,aux_include,manual,—,,,No OA URL found
+416c979c,Semi-quantitative simulation modeling of software engineering process,nan,,aux_include,manual,—,,,No OA URL found
+fc8f325d,"Dynamic project performance estimation by combining static estimation
+models with system dynamics",10.1016/j.infsof.2008.03.001,,aux_include,manual,—,,,No OA URL found
+ad4f84a7,Simulation-based risk reduction for planning inspections,nan,,aux_include,downloaded,openalex_title,ad4f84a7_simulation_based_risk_reduction_for_planning_inspe.pdf,https://arxiv.org/pdf/1402.5267,
+3fa28ae5,"Quantitative Evaluation of Software Component Behavior Discovery
+Approach",10.1587/transinf.2020MPL0001,,aux_include,downloaded,unpaywall,3fa28ae5_quantitative_evaluation_of_software_component_beha.pdf,https://www.jstage.jst.go.jp/article/transinf/E104.D/1/E104.D_2020MPL0001/_pdf,
+73df5473,"Using a Systematic Literature Review to Strengthen the Evidence
+Supporting a Simulation Model of Distributed Software Pr",10.1109/SEAA.2019.00063,,aux_include,manual,—,,,No OA URL found
+5c43edc7,"Identifying key success factors for Globally Distributed Software
+Development project using simulation: A case study",nan,,aux_include,manual,—,,,No OA URL found
+37385fbd,SOFTWARE PROCESS VALIDATION BASED ON FUNSOFT NETS,nan,,aux_include,manual,—,,,No OA URL found
+747fc068,"A project management approach to using simulation for cost estimation on
+large, complex software development projects",10.1080/10429247.2007.11431746,,aux_include,oa_found,unpaywall,,https://stars.library.ucf.edu/scopus2000/7041,URL found but download failed (may require auth)
+5f84fdc9,A model for estimating change propagation in software,10.1007/s11219-017-9358-6,,aux_include,manual,—,,,No OA URL found
+39157e2c,Simulating human resources in software development processes,nan,,aux_include,oa_found,openalex_title,,http://kluedo.ub.uni-kl.de/frontdoor/index/index/docId/1577,URL found but download failed (may require auth)
+6354fc81,"Modeling a Resource-Constrained Test-and-Fix Cycle and Test Phase
+Duration",nan,,aux_include,manual,—,,,No OA URL found
+2b556768,"Unearthing open source decision-making processes: A case study of python
+enhancement proposals",10.1002/spe.3128,,aux_include,oa_found,unpaywall,,https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/spe.3128,URL found but download failed (may require auth)
+b75d202e,A dynamic integrated framework for software process improvement,10.1023/A:1020580008694,,aux_include,oa_found,unpaywall,,https://idus.us.es/handle/11441/58751,URL found but download failed (may require auth)
+03654165,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,,aux_include,manual,—,,,No OA URL found
+0b759736,"A method for modeling and evaluating software maintenance process
+performances",10.1109/CSMR.2002.995786,,aux_include,manual,—,,,No OA URL found
+d2e1b306,"An Approach to the Discovery of Accurate and Expressive Fix-Time
+Prediction Models",10.1007/978-3-319-22348-3_7,,aux_include,manual,—,,,No OA URL found
+dd71433d,VALIDATION AND VERIFICATION OF SOFTWARE PROCESS MODELS,nan,,aux_include,oa_found,openalex_title,,https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/smr.2612,URL found but download failed (may require auth)
+39e47477,"Exploring bottlenecks in market-driven requirements management processes
+with discrete event simulation",10.1016/S0164-1212(01)00072-3,,aux_include,manual,—,,,No OA URL found
+4155a4da,Hybrid simulation modelling of the software process,10.1016/S0164-1212(01)00064-4,,aux_include,manual,—,,,No OA URL found
+7eaf7eb3,Petri Net Based Simulation for SPI,nan,,aux_include,manual,—,,,No OA URL found
+7766e7b4,"Exploring the impact of task allocation strategies for global software
+development using simulation",nan,,aux_include,manual,—,,,No OA URL found
+ec94ba4d,Spiral lifecycle increment modeling for new hybrid processes,nan,,aux_include,manual,—,,,No OA URL found
+c3683c28,"Project replayer - An investigation tool to revisit processes of past
+projects",nan,,aux_include,manual,—,,,No OA URL found
+836b5ef0,Simulation-based stability analysis for software release plans,nan,,aux_include,manual,—,,,No OA URL found
+8ae72547,"A stochastic model of fault introduction & removal during software
+development",10.1109/24.963126,,aux_include,manual,—,,,No OA URL found
+16644fb0,"Mining Treatment-Outcome Constructs from Sequential Software Engineering
+Data",10.1109/TSE.2019.2892956,,aux_include,downloaded,unpaywall,16644fb0_mining_treatment_outcome_constructs_from_sequentia.pdf,https://arxiv.org/pdf/1901.05604,
+deae809b,"Dynamics of innovation in an ``open source″ collaboration
+environment: lurking, laboring, and launching FLOSS projects o",10.1093/icc/dtn026,,aux_include,oa_found,unpaywall,,https://academic.oup.com/icc/article-pdf/17/4/647/1932453/dtn026.pdf,URL found but download failed (may require auth)
+ff916fb9,"Studying the Impact of Continuous Delivery Adoption on Bug-Fixing Time
+in Apache's Open-Source Projects",10.1145/3524842.3528049,,aux_include,oa_found,s2,,https://dl.acm.org/doi/pdf/10.1145/3524842.3528049,URL found but download failed (may require auth)
+e6ba845c,"Fault-insertion and fault-fixing behavioural patterns in Apache Software
+Foundation Projects",10.1016/j.infsof.2023.107187,,aux_include,oa_found,unpaywall,,https://doi.org/10.1016/j.infsof.2023.107187,URL found but download failed (may require auth)
+b37c10c1,Using software process simulation to assess the impact of IV&amp;V activities,10.1049/ic:20040459,,aux_include,manual,—,,,No OA URL found
