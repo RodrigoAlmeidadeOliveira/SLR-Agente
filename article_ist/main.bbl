@@ -1,0 +1,263 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{kitchenham2007}
+B.~Kitchenham, S.~Charters, Guidelines for performing systematic literature
+  reviews in software engineering, EBSE Technical Report EBSE-2007-01, Keele
+  University and Durham University (2007).
+
+\bibitem{Wohlin2024}
+C.~Wohlin, Guidelines for snowballing in systematic literature studies and a
+  replication in software engineering, in: Proceedings of the 18th
+  International Conference on Evaluation and Assessment in Software Engineering
+  (EASE 2014), ACM, 2014, canonical reference for snowballing in SLRs. Key
+  \texttt{Wohlin2024} preserved for backward compatibility with thesis text;
+  published year is 2014.
+\newblock \href {https://doi.org/10.1145/2601248.2601268}
+  {\path{doi:10.1145/2601248.2601268}}.
+
+\bibitem{petersen2015}
+K.~Petersen, S.~Vakkalanka, L.~Kuzniarz, Guidelines for conducting systematic
+  mapping studies in software engineering: An update, in: Information and
+  Software Technology, Vol.~64, Elsevier, 2015, pp. 1--18.
+\newblock \href {https://doi.org/10.1016/j.infsof.2015.03.007}
+  {\path{doi:10.1016/j.infsof.2015.03.007}}.
+
+\bibitem{whittaker1994}
+J.~A. Whittaker, M.~G. Thomason, A {Markov} chain model for statistical
+  software testing, IEEE Transactions on Software Engineering 20~(10) (1994)
+  812--824.
+\newblock \href {https://doi.org/10.1109/32.328991}
+  {\path{doi:10.1109/32.328991}}.
+
+\bibitem{syriani2023}
+E.~Syriani, I.~D{\'a}vid, L.~Lúcio, Assessing the ability of {ChatGPT} to
+  screen articles for systematic reviews, in: arXiv preprint, 2023,
+  arXiv:2307.06464.
+\newblock \href {https://doi.org/10.48550/arXiv.2307.06464}
+  {\path{doi:10.48550/arXiv.2307.06464}}.
+
+\bibitem{khraisha2024}
+Q.~Khraisha, S.~Put, J.~Kappenberg, A.~Warraitch, K.~Hadfield, Can large
+  language models replace human reviewers? pilot study on systematic review of
+  published studies, Research Synthesis Methods 15~(3) (2024) 510--526.
+\newblock \href {https://doi.org/10.1002/jrsm.1715}
+  {\path{doi:10.1002/jrsm.1715}}.
+
+\bibitem{dyba2008}
+T.~Dyb{\aa}, T.~Dings{\o}yr, Empirical studies of agile software development: A
+  systematic review, Information and Software Technology 50~(9--10) (2008)
+  833--859.
+\newblock \href {https://doi.org/10.1016/j.infsof.2008.01.006}
+  {\path{doi:10.1016/j.infsof.2008.01.006}}.
+
+\bibitem{page2021}
+M.~J. Page, J.~E. McKenzie, P.~M. Bossuyt, I.~Boutron, T.~C. Hoffmann, C.~D.
+  Mulrow, L.~Shamseer, J.~M. Tetzlaff, E.~A. Akl, S.~E. Brennan, R.~Chou,
+  J.~Glanville, J.~M. Grimshaw, A.~Hr{\'o}bjartsson, M.~M. Lalu, T.~Li, E.~W.
+  Loder, E.~Mayo-Wilson, S.~McDonald, L.~A. McGuinness, L.~A. Stewart,
+  J.~Thomas, A.~C. Tricco, V.~A. Welch, P.~Whiting, D.~Moher, The {PRISMA} 2020
+  statement: An updated guideline for reporting systematic reviews, BMJ 372
+  (2021) n71.
+\newblock \href {https://doi.org/10.1136/bmj.n71} {\path{doi:10.1136/bmj.n71}}.
+
+\bibitem{jo2023}
+S.~Jo, R.~Kwon, G.~Kwon, Exploring collaboration patterns in {GitHub} using
+  discrete time {Markov} chain, in: 2023 30th Asia-Pacific Software Engineering
+  Conference (APSEC), IEEE, 2023.
+\newblock \href {https://doi.org/10.1109/APSEC60848.2023.00090}
+  {\path{doi:10.1109/APSEC60848.2023.00090}}.
+
+\bibitem{jo2024}
+S.~Jo, R.~Kwon, G.~Kwon, Probabilistic model checking {GitHub} repositories for
+  software project analysis, Applied Sciences 14~(3) (2024) 1260.
+\newblock \href {https://doi.org/10.3390/app14031260}
+  {\path{doi:10.3390/app14031260}}.
+
+\bibitem{ortu2023}
+M.~Ortu, G.~Destefanis, T.~Hall, D.~Bowes, Fault-insertion and fault-fixing
+  behavioural patterns in {Apache} software foundation projects, Information
+  and Software Technology 160 (2023) 107187.
+\newblock \href {https://doi.org/10.1016/j.infsof.2023.107187}
+  {\path{doi:10.1016/j.infsof.2023.107187}}.
+
+\bibitem{cook1995}
+J.~E. Cook, A.~L. Wolf, Automating process discovery through event-data
+  analysis, in: Proceedings of the 17th International Conference on Software
+  Engineering (ICSE 1995), ACM, 1995, pp. 73--82.
+\newblock \href {https://doi.org/10.1145/225014.225021}
+  {\path{doi:10.1145/225014.225021}}.
+
+\bibitem{cook1998}
+J.~E. Cook, A.~L. Wolf, Discovering models of software processes from
+  event-based data, ACM Transactions on Software Engineering and Methodology
+  (TOSEM) 7~(3) (1998) 215--249.
+\newblock \href {https://doi.org/10.1145/287000.287001}
+  {\path{doi:10.1145/287000.287001}}.
+
+\bibitem{rubin2007}
+V.~Rubin, C.~W. G{\"u}nther, W.~M.~P. van~der Aalst, E.~Kindler, B.~F. van
+  Dongen, W.~Sch{\"a}fer, Process mining framework for software processes, in:
+  International Conference on Software Process (ICSP 2007), Vol. 4470 of LNCS,
+  Springer, 2007, pp. 169--181.
+\newblock \href {https://doi.org/10.1007/978-3-540-72426-1_15}
+  {\path{doi:10.1007/978-3-540-72426-1_15}}.
+
+\bibitem{joshi2024}
+R.~Joshi, N.~Kahani, Comparative study of reinforcement learning in {GitHub}
+  pull request outcome predictions (2024).
+\newblock \href {https://doi.org/10.1109/SANER60148.2024.00057}
+  {\path{doi:10.1109/SANER60148.2024.00057}}.
+
+\bibitem{jeon2015}
+C.-K. Jeon, N.~Kim, H.~P. In, Probabilistic approach to predicting risk in
+  software projects using software repository data, International Journal of
+  Software Engineering and Knowledge Engineering 25~(5) (2015) 845--870.
+\newblock \href {https://doi.org/10.1142/S0218194015500151}
+  {\path{doi:10.1142/S0218194015500151}}.
+
+\bibitem{tian2005}
+L.~Tian, A.~Noore, Modeling distributed software defect removal effectiveness
+  in the presence of code churn, Mathematical and Computer Modelling 42~(3--4)
+  (2005) 323--333.
+\newblock \href {https://doi.org/10.1016/j.mcm.2004.10.021}
+  {\path{doi:10.1016/j.mcm.2004.10.021}}.
+
+\bibitem{tyagi2021}
+M.~Tyagi, D.~K. Tyagi, L.~K. Tyagi, N.~Tyagi, D.~Kumar, A.~Sikandar, Agile
+  planning and tracking of software projects using the state-space approach
+  (2021).
+\newblock \href {https://doi.org/10.1007/978-981-16-0404-1_26}
+  {\path{doi:10.1007/978-981-16-0404-1_26}}.
+
+\bibitem{washizaki2015}
+H.~Washizaki, K.~Honda, Y.~Fukazawa, Predicting release time for open source
+  software based on the generalized software reliability model (2015).
+\newblock \href {https://doi.org/10.1109/Agile.2015.19}
+  {\path{doi:10.1109/Agile.2015.19}}.
+
+\bibitem{massitela2018}
+I.~Massitela, J.~Assun{\c{c}}{\~a}o, A.~R. Santos, P.~Fernandes, A structured
+  stochastic model for software project estimation in {Waterfall} models
+  (2018).
+\newblock \href {https://doi.org/10.18293/SEKE2018-033}
+  {\path{doi:10.18293/SEKE2018-033}}.
+
+\bibitem{benmesmia2021}
+W.~B. Mesmia, M.~Escheikh, K.~Barkaoui, {DevOps} workflow verification and
+  duration prediction using non-{Markovian} stochastic {Petri} nets, Journal of
+  Software: Evolution and Process 33~(12) (2021) e2329.
+\newblock \href {https://doi.org/10.1002/smr.2329}
+  {\path{doi:10.1002/smr.2329}}.
+
+\bibitem{bhadra2022}
+S.~Bhadra, A stochastic {Petri} net model of continuous integration and
+  continuous delivery, in: 2022 IEEE International Symposium on Software
+  Reliability Engineering Workshops (ISSREW), IEEE, 2022, pp. 165--170.
+\newblock \href {https://doi.org/10.1109/ISSREW55968.2022.00050}
+  {\path{doi:10.1109/ISSREW55968.2022.00050}}.
+
+\bibitem{bhadra2023}
+S.~Bhadra, B.~Das, P.~Silva, V.~Nagaraju, L.~Fiondella, A stochastic {Petri}
+  net model of continuous integration and continuous delivery, in: 2023 Annual
+  Reliability and Maintainability Symposium (RAMS), IEEE, 2023.
+\newblock \href {https://doi.org/10.1109/RAMS51473.2023.10088212}
+  {\path{doi:10.1109/RAMS51473.2023.10088212}}.
+
+\bibitem{li2020}
+Y.~Li, H.~Zhang, L.~Dong, B.~Liu, J.~Ma, Constructing a hybrid software process
+  simulation model in practice: An exemplar from industry, in: 2020 IEEE/ACM
+  International Conference on Software and System Processes (ICSSP), IEEE,
+  2020, pp. 91--100.
+\newblock \href {https://doi.org/10.1145/3379177.3388906}
+  {\path{doi:10.1145/3379177.3388906}}.
+
+\bibitem{lunesu2021}
+M.~I. Lunesu, R.~Tonelli, L.~Marchesi, M.~Marchesi, Assessing the risk of
+  software development in agile methodologies using simulation, IEEE Access 9
+  (2021) 135420--135435.
+\newblock \href {https://doi.org/10.1109/ACCESS.2021.3115941}
+  {\path{doi:10.1109/ACCESS.2021.3115941}}.
+
+\bibitem{magennis2015}
+T.~Magennis, The economic impact of software development process choice:
+  Cycle-time analysis and {Monte Carlo} simulation results, in: 2015 48th
+  Hawaii International Conference on System Sciences (HICSS), IEEE, 2015.
+\newblock \href {https://doi.org/10.1109/HICSS.2015.599}
+  {\path{doi:10.1109/HICSS.2015.599}}.
+
+\bibitem{guinea2025}
+M.~A. Guinea-Cabrera, J.~A. Holgado-Terriza, P.~A. Pico-Valencia, {PRIMAD}:
+  Building digital twins for software development lifecycle within an
+  evolutionary architecture, in: 2025 IEEE Smart World Congress (SWC), IEEE,
+  2025.
+\newblock \href {https://doi.org/10.1109/SWC65939.2025.00261}
+  {\path{doi:10.1109/SWC65939.2025.00261}}.
+
+\bibitem{nafreen2020}
+M.~Nafreen, M.~Luperon, L.~Fiondella, V.~Nagaraju, Y.~Shi, T.~Wandji,
+  Connecting software reliability growth models to software defect tracking,
+  in: 2020 IEEE 31st International Symposium on Software Reliability
+  Engineering (ISSRE), IEEE, 2020.
+\newblock \href {https://doi.org/10.1109/ISSRE5003.2020.00022}
+  {\path{doi:10.1109/ISSRE5003.2020.00022}}.
+
+\bibitem{incerto2025}
+E.~Incerto, A.~Vandin, S.~S. Ahrabi, Stochastic conformance checking based on
+  variable-length {Markov} chains, Information Systems 130 (2025) 102561.
+\newblock \href {https://doi.org/10.1016/j.is.2025.102561}
+  {\path{doi:10.1016/j.is.2025.102561}}.
+
+\bibitem{lopezpintado2023}
+O.~L{\'o}pez-Pintado, M.~Dumas, Discovery and simulation of business processes
+  with probabilistic resource availability calendars, in: 2023 5th
+  International Conference on Process Mining (ICPM), IEEE, 2023.
+\newblock \href {https://doi.org/10.1109/ICPM60904.2023.10271965}
+  {\path{doi:10.1109/ICPM60904.2023.10271965}}.
+
+\bibitem{jalote2021}
+P.~Jalote, D.~Kamma, Studying task processes for improving programmer
+  productivity, IEEE Transactions on Software Engineering 47~(10) (2021)
+  2089--2104.
+\newblock \href {https://doi.org/10.1109/TSE.2019.2904230}
+  {\path{doi:10.1109/TSE.2019.2904230}}.
+
+\bibitem{gupta2017}
+M.~Gupta, Improving software maintenance using process mining and predictive
+  analytics, in: 2017 IEEE International Conference on Software Maintenance and
+  Evolution (ICSME), IEEE, 2017.
+\newblock \href {https://doi.org/10.1109/ICSME.2017.39}
+  {\path{doi:10.1109/ICSME.2017.39}}.
+
+\bibitem{pourbafrani2021}
+M.~Pourbafrani, S.~Jiao, W.~M.~P. van~der Aalst, {SIMPT}: Process improvement
+  using interactive simulation of time-aware process trees, in: Research
+  Challenges in Information Science (RCIS 2021), Vol. 415 of LNBIP, Springer,
+  2021, pp. 588--594.
+\newblock \href {https://doi.org/10.1007/978-3-030-75018-3_40}
+  {\path{doi:10.1007/978-3-030-75018-3_40}}.
+
+\bibitem{buliga2025}
+A.~Buliga, F.~Meneghello, R.~Graziosi, M.~Ronzani, Enhanced what-if scenarios
+  generation by bridging generative models and process simulation, in: 2025 7th
+  International Conference on Process Mining (ICPM), IEEE, 2025.
+\newblock \href {https://doi.org/10.1109/ICPM66919.2025.11220730}
+  {\path{doi:10.1109/ICPM66919.2025.11220730}}.
+
+\bibitem{caldeira2022}
+J.~Caldeira, F.~B. e~Abreu, J.~Cardoso, J.~Reis, Unveiling process insights
+  from refactoring practices, Computer Standards \& Interfaces 80 (2022)
+  103587.
+\newblock \href {https://doi.org/10.1016/j.csi.2021.103587}
+  {\path{doi:10.1016/j.csi.2021.103587}}.
+
+\bibitem{landiskoch1977}
+J.~R. Landis, G.~G. Koch, The measurement of observer agreement for categorical
+  data, Biometrics 33~(1) (1977) 159--174.
+\newblock \href {https://doi.org/10.2307/2529310} {\path{doi:10.2307/2529310}}.
+
+\end{thebibliography}

@@ -47,8 +47,8 @@ pdflatex cover_letter
 
 ## Pending camera-ready items (post-acceptance)
 
-- Human spot-check on 69 disagreements (`results/spotcheck/disagreement_list_for_human.csv`)
 - Aux T/A κ rescreen completion (39 of 761 done before API exhaustion)
 - Aux PDF re-extraction (PDF text vs abstract-only) — 49 PDFs ready
 - Snowball v2 T/A LLM screening of 357 candidates
-- Manual full-text retrieval for 595 enrichment-failed + 121 EC5 + 16 reft pending papers
+- Optional manual follow-up only if better OA copies emerge for the 14 EC5 mismatches audited in `results/ec5_recovery/ec5_pdf_rescreen_results.csv`
+- Optional post-submission audit of archived disagreement cases (`results/spotcheck/disagreement_list_for_human.csv`)

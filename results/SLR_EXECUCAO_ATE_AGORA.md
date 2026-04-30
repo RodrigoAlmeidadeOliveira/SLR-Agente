@@ -1697,3 +1697,216 @@ Clusters processados:
    - Distribuição por técnica PM e técnica estocástica
    - Distribuição por tipo de estudo (case_study/experiment/simulation/theoretical)
    - Heatmap IC × ano
+
+---
+
+## 36. Histórico desde a última atualização do documento
+
+A última atualização explícita deste documento ocorreu no commit `39334e6`,
+em `2026-04-19`. Abaixo está o histórico consolidado do que foi feito a partir
+desse ponto.
+
+### 36.1. 2026-04-19 a 2026-04-22: preparação de leitura, revisão dos top 30 e apoio à extração
+
+Commits relevantes:
+
+- `256455c` - mudanças na tradução
+- `756a2e8` - PDFs para ler para a SLR
+- `b12a82e` - artigos finais dos top30
+- `daa6e35` - controles atualizados
+- `6117d86` - inclusão de `results/extraction/studies.csv`
+- `eed9b65` - criação de `scripts/extract_table38.py`
+- `ab880f2` - empacotamento de `slr_extraction_artifacts.zip`
+- `3c13d22` - criação de `results/extraction/download.html`
+- `1390bd6` - merge do PR de apoio à extração
+
+O que foi realizado nesse bloco:
+
+- foi adicionada uma versão extensa traduzida em `appendix_slr.tex`;
+- foram incorporados os PDFs de leitura associados à revisão final da SLR;
+- a lista dos `top30` foi refinada com atualização dos PDFs e da
+  `top30_reading_list.csv`;
+- os controles e a lista corrente de estudos incluídos foram revisados;
+- foi criado um pequeno pacote operacional para extração tabular, com:
+  `studies.csv`, script de extração, artefato ZIP e página HTML de download.
+
+Em termos metodológicos, esse período serviu como ponte entre a consolidação
+inicial do corpus e a preparação da etapa mais pesada de screening, QA,
+extração e redação do artigo.
+
+### 36.2. 2026-04-27 a 2026-04-28: fechamento do screening principal, QA e consistência do Capítulo 3
+
+Commits relevantes:
+
+- `9b150bb` - status de enriquecimento: `6/7` fontes concluídas
+- `0991e74` - QA `169/169`, Cohen's kappa inter-rater e versão IST-ready
+- `99a07bb` - integração automática de `qa_assessment_summary.tex`
+- `d910db5` - correção de consistência do Capítulo 3
+- `24ce420` - ajustes editoriais de revisão
+- `57c079d` - recuperação EC5 e scaffold de sensibilidade
+- `155dd6a` - execução do sensitivity check no corpus auxiliar
+
+O que foi realizado nesse bloco:
+
+- o enriquecimento de abstracts avançou até o estado de `6/7` fontes
+  concluídas, sem novos controles recuperados nesse fechamento parcial;
+- a avaliação de qualidade do working set principal foi concluída para
+  `169/169` estudos;
+- foi implantado o cálculo de concordância interavaliador com amostragem
+  estratificada de `20%`;
+- o relatório principal de concordância passou a registrar:
+  `kappa=0.641` em título/resumo (substancial) e `kappa=0.479` em full text
+  multiclasse (moderado), com `kappa binário=0.694` no FT;
+- o Capítulo 3 foi ajustado para consumir automaticamente a tabela gerada em
+  `results/qa_assessment_summary.tex`, reduzindo edição manual;
+- foram feitas correções de consistência textual e metodológica no
+  `cap3_slr_revised.tex`;
+- foi criado um fluxo específico de recuperação EC5 e um scaffold para medir
+  a sensibilidade do corpus auxiliar.
+
+Resultado do teste de sensibilidade (`results/sensitivity/sensitivity_report.txt`):
+
+- amostra aleatória: `200` registros;
+- corpus auxiliar total: `3.807`;
+- includes confirmados no working set principal naquele momento: `169`;
+- expectativa de novos includes caso o corpus auxiliar fosse totalmente
+  triado: `228`;
+- upper bound considerando `maybe`: `1.351`.
+
+Interpretação operacional:
+
+- o teste indicou que o corpus auxiliar provavelmente continha uma quantidade
+  substantiva de estudos adicionais e justificava screening completo.
+
+### 36.3. 2026-04-29: expansão formal para o corpus auxiliar e consolidação do pacote de submissão
+
+Commits relevantes:
+
+- `c124a9a` - screening completo do corpus auxiliar e conjunto combinado `381`
+- `1567e54` - extensão do QA para o tier auxiliar
+- `a65e51f` - extensão do κ cross-model para o tier auxiliar
+- `68c22f0` - enrichment, re-FT, PDFs e lista de spot-check
+- `2ffc519` - snowball v2 e scaffold de extração por PDF
+- `e416b5a` - pacote de submissão IST + cover letter
+- `dc6b0a7` - finalização de autores, ORCIDs e financiamento CAPES
+
+O que foi realizado nesse bloco:
+
+- o corpus auxiliar passou de análise amostral para screening completo;
+- foram criados pipelines dedicados para:
+  `auxiliary_screening.py`, `auxiliary_ft.py`, `auxiliary_extraction.py`,
+  `aux_qa.py`, `aux_kappa.py`, `aux_enrich.py`, `aux_reft.py`,
+  `aux_reft_extraction.py`, `aux_pdf_download.py`, `aux_pdf_extraction.py`,
+  `snowball_v2.py` e `spotcheck_list.py`;
+- foram gerados artefatos auxiliares de triagem, FT, QA, concordância,
+  enriquecimento, reavaliação FT após enriquecimento, download de PDFs,
+  scaffold de extração por PDF, snowballing v2 e spot-check humano.
+
+Estado consolidado do corpus auxiliar e combinado:
+
+- `1.383` estudos do auxiliar foram encaminhados para full text;
+- no FT auxiliar houve `212` novos includes confirmados;
+- o primeiro combinado `working set + auxiliary confirmed` chegou a `381`;
+- a reavaliação FT de estudos enriquecidos processou `285` papers e recuperou
+  mais `23` includes;
+- com isso, o conjunto combinado final passou a `404` estudos confirmados;
+- foi produzida uma lista de divergências para inspeção humana em
+  `results/spotcheck/disagreement_list_for_human.csv`;
+- foi iniciado um novo ciclo de snowballing com `357` candidatos únicos em
+  `results/snowball_v2/candidates_unique.csv`.
+
+Sobre concordância no tier auxiliar:
+
+- foi gerado relatório específico em
+  `results/auxiliary/kappa/aux_kappa_report.txt`;
+- os valores registrados ficaram muito baixos no auxiliar
+  (`kappa` próximo de `0`), o que expôs forte sensibilidade do tier auxiliar
+  à insuficiência de abstract e metadados;
+- como política metodológica conservadora, os casos que permaneceram sem
+  abstract utilizável após o enriquecimento e os casos irresolvíveis sem
+  full text acessível passaram a ser tratados como `EC5 estendido`
+  (insuficiência de full text/metadados), em vez de backlog aberto de
+  arbitragem humana;
+- isso elimina a necessidade de spot-check humano como pré-condição de
+  submissão para os casos sem evidência recuperável, preservando apenas a
+  necessidade de re-screening dos PDFs efetivamente recuperados.
+
+Sobre o artigo para submissão:
+
+- foi criado o pacote standalone em `article_ist/`;
+- os arquivos centrais passaram a ser:
+  `article_ist/main.tex`, `article_ist/cap3_article_body.tex` e
+  `article_ist/cover_letter.tex`;
+- o pacote passou a depender diretamente dos resumos automáticos gerados em
+  `results/qa_assessment_summary.tex`,
+  `results/kappa/kappa_report.tex`,
+  `results/auxiliary/aux_qa_summary.tex`,
+  `results/auxiliary/aux_ft_summary.tex`,
+  `results/auxiliary/aux_reft_summary.tex`,
+  `results/auxiliary/kappa/aux_kappa_report.tex`,
+  `results/ec5_recovery/ec5_recovery_report.tex` e
+  `results/sensitivity/sensitivity_report.tex`;
+- o `README` do pacote registra artigo com `36` páginas, cover letter e
+  checklist de submissão para a IST;
+- no commit final desse bloco, autores, ORCIDs e menção a financiamento CAPES
+  foram ajustados no material de submissão.
+
+### 36.4. Síntese do que mudou desde a atualização anterior
+
+Desde `2026-04-19`, a execução deixou de estar centrada apenas na montagem e
+limpeza do corpus principal e passou a cobrir também:
+
+- fechamento do working set principal com `169` estudos avaliados em QA;
+- medição formal de concordância interavaliador com relatórios reprodutíveis;
+- teste de sensibilidade que justificou expandir a triagem do corpus auxiliar;
+- screening integral do corpus auxiliar, seguido de re-FT enriquecido,
+  elevando o conjunto combinado final para `404` estudos confirmados;
+- extensão de QA, κ, enriquecimento, re-FT, PDFs e snowballing para a camada
+  auxiliar;
+- adoção explícita de uma política conservadora de `EC5 estendido` para casos
+  sem PDF, sem abstract utilizável ou sem evidência suficiente para resolver
+  ambiguidade sem texto completo acessível;
+- geração de pacote standalone de artigo e cover letter para submissão à IST.
+
+Em outras palavras, a execução evoluiu de um estado de corpus consolidado para
+um estado de análise metodologicamente auditável, com screening ampliado,
+relatórios automatizados e material de submissão pronto.
+
+### 36.5. Auditoria pontual adicional em 2026-04-30
+
+Após essa consolidação, três verificações cirúrgicas foram executadas:
+
+- identificação nominal do único estudo `IC1∩IC2∩IC3` no corpus:
+  `PRIMAD: Building Digital Twins for Software Development Lifecycle within an Evolutionary Architecture`
+  (`10.1109/SWC65939.2025.00261`);
+- auditoria dos `17` PDFs recuperados da estratificação `EC5`;
+- reconciliação dos contadores `EC` usados no artigo contra
+  `results/screening/ft_screening_results.csv`.
+
+Resultado da auditoria dos `17` PDFs `EC5`:
+
+- foi gerado o artefato
+  `results/ec5_recovery/ec5_pdf_rescreen_results.csv`;
+- `14` URLs OA baixaram documentos incorretos ou proceedings genéricos e,
+  portanto, permaneceram em `EC5`;
+- `3` papers foram efetivamente re-screened por PDF e reclassificados de
+  `EC5` para `EC3`:
+  - `10.1007/3-540-46043-8_105`
+  - `10.1007/3-540-45314-8_2`
+  - `10.1007/978-3-540-71209-1_7`
+- nenhum novo `include` foi recuperado nessa auditoria.
+
+Resultado da reconciliação dos contadores `EC`:
+
+- a visão “dominant criterion” do snapshot operacional continua diferente,
+  pois o CSV ainda contém linhas com `EC` composto e linhas malformadas;
+- porém, a contagem usada no artigo é consistente quando calculada sobre os
+  rótulos `EC` bem formados de maneira não-exclusiva (com sobreposição);
+- após a auditoria dos `17` PDFs, a contagem reconciliada do artigo passou a:
+  - `EC3 = 232`
+  - `EC1 = 205`
+  - `EC5 = 145`
+  - `EC2 = 110`
+  - `EC4 = 60`
+- a soma segue `752`, acima dos `717` excluídos, porque a contagem do artigo
+  é intencionalmente sobreposta por critério.

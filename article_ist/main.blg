@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: elsarticle-num.bst
+Database file #1: ../results/final_review/missing_references.bib
+Warning--empty pages in Wohlin2024
+Warning--empty pages in syriani2023
+Warning--empty pages in jo2023
+Warning--empty journal in joshi2024
+Warning--empty journal in tyagi2021
+Warning--empty journal in washizaki2015
+Warning--empty journal in massitela2018
+Warning--empty pages in bhadra2023
+Warning--empty pages in magennis2015
+Warning--empty pages in guinea2025
+Warning--empty pages in nafreen2020
+Warning--empty pages in lopezpintado2023
+Warning--empty pages in gupta2017
+Warning--empty pages in buliga2025
+You've used 36 entries,
+            2952 wiz_defined-function locations,
+            915 strings with 13891 characters,
+and the built_in function-call counts, 12406 in all, are:
+= -- 1140
+> -- 435
+< -- 10
++ -- 169
+- -- 133
+* -- 997
+:= -- 1625
+add.period$ -- 71
+call.type$ -- 36
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 50
+duplicate$ -- 396
+empty$ -- 1432
+format.name$ -- 165
+if$ -- 3199
+int.to.chr$ -- 0
+int.to.str$ -- 36
+missing$ -- 35
+newline$ -- 151
+num.names$ -- 36
+pop$ -- 269
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 818
+stack$ -- 0
+substring$ -- 509
+swap$ -- 142
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 14
+while$ -- 78
+width$ -- 38
+write$ -- 373
+(There were 14 warnings)

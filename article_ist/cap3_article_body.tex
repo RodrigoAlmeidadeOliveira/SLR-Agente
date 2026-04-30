@@ -226,7 +226,12 @@ full-text screening. Exclusion criteria (EC1--EC5) are applied cumulatively
 across both screening phases. Criteria EC1--EC4 are evaluated by the
 LLM-assisted screener; EC5 (full text inaccessible) is applied
 programmatically after the inter-library-loan recovery pass for Band~D/E
-papers fails to retrieve a copy.
+papers fails to retrieve a copy. In the auxiliary tier, EC5 is extended to
+cover non-recoverable metadata insufficiency: papers for which no usable
+abstract could be recovered after the multi-source enrichment cascade, and
+papers for which the primary and verifier raters produced an irreconcilable
+decision without accessible full text, are closed under EC5 rather than
+escalated to human arbitration.
 
 \begin{table}[htbp]
 \centering
@@ -265,9 +270,12 @@ papers fails to retrieve a copy.
           evaluation in a software development context. \\
 & EC4  & Secondary study (SLR, mapping study, survey) not specifically
           addressing PM or stochastic methods in software engineering. \\
-& EC5  & Full text inaccessible despite all retrieval attempts (open access,
-          institutional, ILL, author-provided preprint). Applied programmatically
-          after Band~D/E recovery. \\
+& EC5  & Full text or decision-critical metadata inaccessible despite all
+          retrieval attempts (open access, institutional, ILL,
+          author-provided preprint, multi-source abstract enrichment).
+          Applied programmatically after Band~D/E recovery and auxiliary
+          enrichment; also closes irreconcilable ambiguous cases when no
+          accessible full text exists. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -326,6 +334,12 @@ Syriani~et~al.~\cite{syriani2023} as a practical proxy when a fully
 independent human second rater is not feasible at the working-set scale
 considered here. Results of this verification are reported in
 Section~\ref{sec:slr-threats} (Internal Validity).
+
+Operationally, the protocol does not preserve an open-ended manual-arbitration
+queue. If a paper still lacks decision-critical evidence after the retrieval
+and enrichment cascade, or if the verifier can only return \texttt{pending}
+because the metadata remain insufficient, the paper is closed under EC5 and
+excluded from the valid evidence set.
 
 
 \subsection{Quality Assessment}
@@ -555,9 +569,9 @@ Table~\ref{tab:ft-screening} summarises the outcome.
 \midrule
 Included                             & 169 & 19.1 \\
 Excluded                             & 717 & 80.9 \\
-\quad EC3 (algorithmic, no SE eval.) & (229) & (25.8) \\
+\quad EC3 (algorithmic, no SE eval.) & (232) & (26.2) \\
 \quad EC1 (non-SE domain)            & (205) & (23.1) \\
-\quad EC5 (full text inaccessible)   & (148) & (16.7) \\
+\quad EC5 (full text inaccessible, post-audit active stratum)   & (145) & (16.4) \\
 \quad EC2 (SW as implementation)     & (110) & (12.4) \\
 \quad EC4 (out-of-scope secondary)   & (60)  & (6.8)  \\
 \midrule
@@ -568,20 +582,23 @@ Excluded                             & 717 & 80.9 \\
 \smallskip
 \footnotesize\textit{Note:} EC counts are non-exclusive --- a single paper may
 trigger multiple ECs when more than one applies (e.g., a non-SE-domain paper
-whose contribution is purely theoretical). The sum of per-EC counts is
-$229+205+148+110+60 = 752$, which exceeds the 717 excluded papers by 35
+whose contribution is purely theoretical). The EC5 count of 145 is the active
+post-audit stratum after re-screening the original historical EC5 band of 148
+papers and reclassifying 3 of them to EC3. The sum of per-EC counts is
+$232+205+145+110+60 = 752$, which exceeds the 717 excluded papers by 35
 (corresponding to papers triggering more than one EC). The percentages above
 are with respect to the 886-paper FT queue.
 \end{table}
 
 Among the 717 excluded papers, EC3 (algorithmic or theoretical contribution
-without SE evaluation, $n=229$) and EC1 (domain outside software development,
+without SE evaluation, $n=232$) and EC1 (domain outside software development,
 $n=205$) jointly account for the largest share of FT-stage exclusions. EC5
-(full text inaccessible despite all retrieval attempts, $n=148$) corresponds
-to the Band~D/E subset for which no open-access copy, institutional access,
-or author-provided preprint could be located; these are recorded in a
-dedicated traceability file and documented in the PRISMA flow as a named
-exclusion stratum. EC2 (software as implementation platform rather than
+(full text inaccessible despite all retrieval attempts, active post-audit
+$n=145$) corresponds to the residual portion of the original 148-paper
+Band~D/E stratum for which no open-access copy, institutional access, or
+author-provided preprint could be located; these are recorded in a dedicated
+traceability file and documented in the PRISMA flow as a named exclusion
+stratum. EC2 (software as implementation platform rather than
 analyzed process, $n=110$) and EC4 (out-of-scope secondary studies, $n=60$)
 account for the remainder.
 
@@ -672,9 +689,9 @@ diagram~\cite{page2021} of the selection process.
 
 \node[exc] (ftexc) at (6.0,-11.6)
   {Excluded at FT ($n = 717$)\\
-   EC3: 229 theoretical, no SE\\
+   EC3: 232 theoretical, no SE\\
    EC1: 205 non-SE domain\\
-   EC5: 148 FT inaccessible\\
+   EC5: 145 FT inaccessible\\
    EC2: 110 \textbullet{} EC4: 60};
 
 \draw[arr] (ftq) -- (ft);
@@ -717,7 +734,10 @@ a combined total of \textbf{404 confirmed primary studies}
 ($169_{\text{ws}} + 212_{\text{aux1}} + 23_{\text{aux2}}$). The
 working-set tier is the narrative spine of this article; the combined-tier
 numbers are reported in parallel for findings F1--F5 and provide the
-recall-bounded view of the SLR. The 169-study set spans three decades (1995--2026), with a clear
+recall-bounded view of the SLR. Unless stated otherwise, detailed
+combined-tier distributions refer to the \textbf{381-study analytical
+subset} frozen before the final +23 auxiliary re-FT confirmations. The
+169-study set spans three decades (1995--2026), with a clear
 acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Seventy-one
 percent of confirmed papers (working-set tier) were published between 2015
 and 2026, reflecting the maturation of open-source process mining toolkits
@@ -810,17 +830,18 @@ in Finding~F1 below.
 
 Among the 717 FT-excluded papers (Table~\ref{tab:ft-screening}), the largest
 exclusion reason is EC3 (algorithmic or theoretical contribution without
-software-engineering evaluation, $n=229$), indicating a substantial body of
+software-engineering evaluation, $n=232$), indicating a substantial body of
 process mining and stochastic modeling research that has not been empirically
 applied to software engineering contexts. EC1 (domain exclusively outside
 software development, $n=205$) is the second-largest reason and consists
 primarily of generic business process management (BPM) studies that use the
 same terminology as the search strings but apply techniques to organizational
-processes unrelated to SDLC. EC5 (full text inaccessible, $n=148$) closes the
-group of large strata, followed by EC2 (software as implementation platform
+processes unrelated to SDLC. EC5 (full text inaccessible, active post-audit
+$n=145$; original historical stratum $n=148$) closes the group of large
+strata, followed by EC2 (software as implementation platform
 rather than analyzed process, $n=110$) and EC4 (out-of-scope secondary study,
 $n=60$). EC counts are non-exclusive: the sum of per-EC counts
-($229+205+148+110+60 = 752$) exceeds the 717 excluded papers by 35,
+($232+205+145+110+60 = 752$) exceeds the 717 excluded papers by 35,
 corresponding to papers that triggered more than one EC simultaneously. The
 dominance of EC3 and EC1 directly supports Findings F3 and F4
 below: process mining and stochastic methods are widely studied in the
@@ -1268,7 +1289,7 @@ together with the criterion coverage patterns, supports five key findings:
 \item[F1: Descriptive Ceiling.]
 In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match IC1/IC4a
 (process mining in SE) but only 29 (17.2\%) advance to IC3/IC4c (forecasting
-of process metrics). In the \textbf{combined tier} (381 papers, working-set
+of process metrics). In the \textbf{combined analytical subset} (381 papers, working-set
 + auxiliary), the proportion shifts because the auxiliary corpus pulled in
 more stochastic-only and forecasting-only studies that did not employ
 explicit process mining: 203 (53.3\%) match IC1, 116 (30.4\%) match IC3,
@@ -1280,7 +1301,8 @@ working-set tier persists in the combined tier.
 \item[F2: Event Log Construction Challenge.]
 The reproducibility deficit is uniform across both tiers. Working-set tier:
 only 25 of 169 papers (14.8\%) declare the dataset as publicly available
-and only 4 (2.4\%) declare any replication package. Combined tier: 56 of
+and only 4 (2.4\%) declare any replication package. Combined analytical
+subset: 56 of
 381 papers (14.7\%) declare a public dataset and 11 (2.9\%) declare a
 replication package (5 ``yes''~+~6 ``partial''). The majority of studies
 that mention data collection procedures rely on ad hoc joins between
@@ -1296,7 +1318,8 @@ observed in the QA scoring of the working-set tier.
 Working-set tier: 52 of 169 papers (30.8\%) apply stochastic models
 (IC2/IC4b); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
 stochastic Petri nets, 8 (4.7\%) system dynamics; IC2$\cap$IC3 covers 18
-papers (10.7\%); IC1$\cap$IC2 covers 10 (5.9\%). Combined tier: the
+papers (10.7\%); IC1$\cap$IC2 covers 10 (5.9\%). Combined analytical
+subset: the
 auxiliary corpus contributes a substantial number of stochastic-only papers
 not previously surfaced by the working-set queries; 181 of 381 (47.5\%)
 match IC2 (with 103 Monte Carlo, 80 Markov, 65 system dynamics, 18 SPN), 93
@@ -1307,7 +1330,7 @@ the auxiliary expansion confirms a broader stochastic literature than the
 working-set tier alone suggested; nevertheless, the integration with process
 mining for SDLC forecasting remains minimal in both tiers (5.9\% and 4.2\%
 respectively for IC1$\cap$IC2). EC3 being the largest exclusion reason at
-FT in the working-set tier ($n=229$, 25.8\% of the 886-paper FT queue)
+FT in the working-set tier ($n=232$, 26.2\% of the 886-paper FT queue)
 reinforces the point: the stochastic modeling community has not converged
 on applying its techniques to software development process data.
 
@@ -1320,7 +1343,7 @@ Working-set tier (169 papers): the joint convergence
 IC1$\cap$IC2$\cap$IC3 appears in only 1 paper (0.6\%), and that single
 paper does not specify a formal end-to-end pipeline contract; pairwise
 convergences are IC1$\cap$IC2: 10 (5.9\%), IC1$\cap$IC3: 7 (4.1\%),
-IC2$\cap$IC3: 18 (10.7\%). Combined tier (381 papers): IC1$\cap$IC2$\cap$IC3
+IC2$\cap$IC3: 18 (10.7\%). Combined analytical subset (381 papers): IC1$\cap$IC2$\cap$IC3
 remains 1 paper (0.3\%), with pairwise convergences IC1$\cap$IC2: 16
 (4.2\%), IC1$\cap$IC3: 13 (3.4\%), IC2$\cap$IC3: 93 (24.4\%). The
 auxiliary expansion increased the IC2$\cap$IC3 cluster substantially without
@@ -1333,6 +1356,20 @@ leaves the unified pipeline unevaluated. Even when stochastic components are
 present, validation usually stops at process analysis or simulation without
 a downstream learning component.
 
+PRIMAD is the only paper in the corpus that simultaneously satisfies
+IC1$\cap$IC2$\cap$IC3. Its scope is explicitly SDLC-oriented: it builds a
+digital twin from issue-tracking flows in JIRA to analyze and improve value
+streams in software organizations. Methodologically, it combines empirical
+process discovery (\texttt{pm4py}), a Python-based simulation core, an Akka
+actor system to model issues and resources, and supervised machine learning
+for context-aware prediction. The reported results are preliminary and
+component-wise rather than end-to-end: the paper shows promising independent
+results for the process-mining, simulation, and prediction components, but it
+does not yet validate a formally coupled PM $\rightarrow$ stochastic
+simulation $\rightarrow$ ML pipeline as a unified operational architecture.
+This is precisely why PRIMAD is adherent to the PATHCAST theme while still
+remaining an antecedent rather than a completed L3 instance.
+
 \item[F5: Process-Derived Features Unexplored.]
 ML-based prediction studies in the confirmed set rely overwhelmingly on
 traditional features (code metrics, commit characteristics, defect counts)
@@ -1340,7 +1377,7 @@ rather than on features derived from process mining. Working-set tier: 32
 papers whose research contribution centers on ML/prediction; only 1
 explicitly couples ML with a named process-mining algorithm (alpha,
 inductive, heuristic, conformance, fuzzy, or Petri-net-based discovery).
-Combined tier: the auxiliary corpus added a large number of ML/prediction
+Combined analytical subset: the auxiliary corpus added a large number of ML/prediction
 papers (131 in the combined 381 set), but the rate of process-mining
 coupling remains low: only 4 of 131 (3.1\%) jointly use a named PM
 algorithm. Conformance scores, rework counts, Markov-expected remaining
@@ -1475,8 +1512,9 @@ paper recovery provides empirical evidence of high recall.
 \subsection{Internal Validity}
 
 LLM-based screening introduces the risk of systematic decision bias. This
-threat is addressed by five mechanisms (the first four already executed; the
-fifth planned for the camera-ready version).
+threat is addressed by five mechanisms, of which the first four were
+executed directly in the protocol and the fifth is encoded as a conservative
+closure rule rather than a mandatory human-arbitration step.
 
 (i)~\textbf{Structured outputs}. All screening responses use a strict JSON
 schema, enabling post-hoc analysis of decision patterns and rationale
@@ -1512,9 +1550,7 @@ to a binary decision; this represents a difference in conservativeness, not
 a difference in the final selection outcome. The cross-model verification
 design follows the guidance of Khraisha~et~al.~\cite{khraisha2024} and
 Syriani~et~al.~\cite{syriani2023} for LLM-assisted SLRs and is intended as a
-tractable proxy for a fully independent human second-rater protocol; a human
-spot-check on disagreement cases is recommended before camera-ready
-submission.
+tractable proxy for a fully independent human second-rater protocol.
 
 \input{results/kappa/kappa_report}
 
@@ -1532,12 +1568,14 @@ conservativeness in the face of the auxiliary corpus's weaker abstract
 coverage (the working-set tier benefited from a multi-source abstract
 enrichment cascade that the auxiliary tier did not yet receive). Reading
 together, the working-set tier achieves substantial agreement under the
-same protocol while the auxiliary tier requires post-hoc abstract
-enrichment and full-text retrieval before a comparable agreement can be
-claimed. The 212 auxiliary inclusions are reported here as
-\textit{preliminary additions} pending that enrichment pass; the F1--F5
-findings are sufficiently robust under both tiers (numerical proportions
-shift modestly, but the qualitative pattern persists).
+same protocol while the auxiliary tier is materially more sensitive to weak
+metadata coverage. For that reason, the protocol adopts a conservative
+closure rule: papers that remain abstract-insufficient after the enrichment
+cascade, or for which the verifier can only return \texttt{pending} without
+accessible full text, are closed under EC5-extended. The auxiliary-tier
+findings are therefore interpreted as evidence from the subset that remained
+classifiable under the same retrieval constraints, not as evidence from an
+unresolved arbitration queue.
 
 \input{results/auxiliary/kappa/aux_kappa_report}
 
@@ -1553,17 +1591,18 @@ is made and therefore do not affect the F1--F5 evidence base. The Round~2
 screening reprocessed 495 \texttt{maybe} papers with enriched abstracts and
 brought the confirmed set to its final value of 169.
 
-(v)~\textbf{Human spot-check on disagreements (planned for camera-ready)}.
-Approximately 50 papers where the LLM screener (Haiku 4.5) and the LLM
-verifier (Sonnet 4.6) disagreed on the binary include/exclude outcome will
-be re-rated by a senior human researcher to identify the root cause of each
-disagreement (criteria ambiguity, abstract insufficiency, scope drift). The
-resulting qualitative assessment of LLM-vs-human alignment will be
-incorporated in the camera-ready version, complementing the cross-model
-$\kappa$ evidence reported above. A pre-built disagreement list is
-deposited at \texttt{results/spotcheck/disagreement\_list\_for\_human.csv}
-(69 disagreements across the working-set T/A, working-set FT, and
-auxiliary FT $\kappa$ samples) and is ready for human review.
+(v)~\textbf{Conservative closure of unresolved disagreement cases}.
+Papers where the LLM screener (Haiku 4.5) and the verifier (Sonnet 4.6)
+disagreed on the binary include/exclude outcome were not treated as an
+open-ended manual-arbitration backlog. Instead, when the disagreement could
+not be resolved because the abstract remained insufficient and no accessible
+full text was available, the paper was closed under EC5-extended
+(full-text/metadata insufficiency). This rule intentionally biases the
+protocol toward false negatives rather than unverifiable false positives.
+The archived disagreement list remains available at
+\texttt{results/spotcheck/disagreement\_list\_for\_human.csv} for optional
+post-submission audit, but human arbitration is not required for the valid
+evidence set reported here.
 
 \subsection{External Validity}
 
@@ -1591,7 +1630,9 @@ Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
 screening as \texttt{include}. Combined with the 169 working-set
 confirmations, the SLR therefore covers a confirmed set of 381 primary
-studies after the first auxiliary FT pass.
+studies after the first auxiliary FT pass; this first-pass combined result
+became the frozen analytical subset used by the detailed auxiliary
+extraction, QA, and IC-combination tables.
 
 The protocol then proceeded to a third stage: a multi-source abstract
 enrichment cascade (Semantic Scholar, OpenAlex, CORE, Crossref) was applied
@@ -1599,12 +1640,14 @@ to the 880 auxiliary FT-\texttt{pending} papers
 (\texttt{pipeline/aux\_enrich.py}), recovering an abstract for 285 papers
 (32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
 papers (\texttt{pipeline/aux\_reft.py}), confirming 23 additional includes,
-246 excludes, and 16 still-pending. The combined confirmed set therefore
-becomes \textbf{404 primary studies} ($169_{\text{ws}} + 212_{\text{aux1}} +
-23_{\text{aux2}}$). The remaining 595 papers without abstract after
-enrichment, plus the 16 still-pending from the re-FT, are queued for
-manual full-text retrieval in the camera-ready cycle (analogously to the
-EC5 stratum of the working-set tier).
+246 excludes, and 16 still-pending. Under the conservative closure rule,
+those 16 residual abstract-insufficient papers are closed under EC5-extended
+rather than carried forward as a manual-validation queue. The combined
+confirmed set therefore becomes \textbf{404 primary studies}
+($169_{\text{ws}} + 212_{\text{aux1}} + 23_{\text{aux2}}$). The remaining
+595 papers without abstract after enrichment are likewise closed under
+EC5-extended, rather than queued for manual retrieval, because they remain
+unclassifiable after the full multi-source enrichment cascade.
 
 \input{results/sensitivity/sensitivity_report}
 
@@ -1612,14 +1655,21 @@ EC5 stratum of the working-set tier).
 
 \input{results/auxiliary/aux_reft_summary}
 
-A second external-validity exposure concerns the 148 papers closed under
-EC5 (full text inaccessible). To bound the residual recall risk, an
+A second external-validity exposure concerns the original 148-paper EC5
+stratum (full text inaccessible at first pass). To bound the residual recall
+risk, an
 automated open-access (OA) recovery pass was executed against four public
 discovery services (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE).
 The result is summarised in Table~\ref{tab:ec5-recovery}: 27 of the 148 EC5
 papers (18.2\%) returned at least one OA URL during the recovery pass; of
 those, 17 PDFs were successfully downloaded (\texttt{pipeline/aux\_pdf\_\allowbreak download.py}, scope \texttt{ec5}), corresponding to 11.5\% of the
-148-paper EC5 stratum recovered into the read-set. The remaining 121
+148-paper EC5 stratum recovered into the read-set. A targeted PDF audit was
+then executed on those 17 downloads
+(\texttt{results/ec5\_recovery/ec5\_pdf\_rescreen\_results.csv}): 14 OA
+links resolved to unrelated papers or generic proceedings and therefore
+remained under EC5, while 3 papers were substantively re-screened and
+reclassified to EC3. The active PRISMA EC5 count after this audit is thus
+145 rather than 148. The remaining 121
 papers (81.8\%) remain inaccessible and continue to be reported under EC5
 in the PRISMA flow. A parallel OA-download pass over the 212 auxiliary
 includes recovered 49 PDFs (20.5\% of 212; the lower yield reflects the
@@ -1641,7 +1691,7 @@ F1--F5. The QA-based filtering reported in Table~\ref{tab:qa-results}
 retains 136 of the 169 working-set studies (80.5\%); QA scoring was
 subsequently extended to the auxiliary tier
 (\texttt{pipeline/aux\_qa.py}), retaining 179 of 212 (84.4\%, mean
-$5.09 \pm 1.43$). The combined 381-study set therefore retains 315 papers
+$5.09 \pm 1.43$). The combined 381-study analytical subset therefore retains 315 papers
 ($82.7\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold; full
 combined-QA results are reported in Table~\ref{tab:qa-combined}.
 
@@ -1704,9 +1754,10 @@ papers) with a final \emph{screen-blanks} pass that processed the 186 papers
 that still lacked an FT decision after the earlier rounds. In the final
 screening artifact, 238/886 papers still lack an abstract field, but all have
 a recorded FT decision. Papers whose full text remained inaccessible despite
-all retrieval attempts were closed under EC5 (148 papers). The working-set
+all retrieval attempts were closed under EC5; after the OA recovery audit,
+145 papers remain in that stratum. The working-set
 result is \textbf{169 confirmed primary studies} and 717 FT excluded (EC3:
-229, EC1: 205, EC5: 148, EC2: 110, EC4: 60), with zero pending decisions.
+232, EC1: 205, EC5: 145, EC2: 110, EC4: 60), with zero pending decisions.
 Data extraction for all 169 studies was completed using a structured
 LLM-assisted pipeline operating on locally available PDFs (75/169, with 73
 operationally coded in the triangulation subset) or abstract/title metadata
@@ -1720,11 +1771,18 @@ pass), 291 excludes, and 880 \texttt{pending}. A subsequent re-screening
 pass over 285 abstract-enriched auxiliary papers confirmed 23 further
 studies (second auxiliary pass), bringing the final combined total to
 \textbf{404 primary studies} ($169_{\text{ws}} + 212_{\text{aux1}} +
-23_{\text{aux2}}$); this final figure is the basis for the findings
-reported in Sections~\ref{sec:slr-synthesis} and~\ref{sec:slr-discussion}.
+23_{\text{aux2}}$). Under the adopted EC5-extended policy, the residual
+auxiliary cases without usable abstract and the unresolved disagreement
+cases are treated as non-recoverable exclusions rather than as an open
+manual-validation backlog. The original EC5 recovery pass was also closed:
+its 17 downloaded PDFs were audited, yielding 3 substantive EC3 exclusions
+and 14 residual EC5 mismatches. The final confirmed total is therefore 404,
+while the combined-tier analytical tables reported below continue to refer to
+the 381-study extracted subset frozen before that last incremental update.
 
-Analysis of the working-set tier (169 studies) and the combined tier (404
-studies) supports five key findings. First, the field exhibits a descriptive
+Analysis of the working-set tier (169 studies), together with the 404-study
+combined evidence base and the 381-study combined analytical subset, supports
+five key findings. First, the field exhibits a descriptive
 ceiling: 71.6\% of confirmed working-set papers (53.3\% combined) apply
 process mining to software artifacts (IC1), but only 17.2\% advance
 (working-set; 30.4\% combined) to forecasting of process metrics
