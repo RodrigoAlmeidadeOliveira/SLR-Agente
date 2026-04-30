@@ -1,0 +1,93 @@
+\documentclass[11pt,a4paper]{letter}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{hyperref}
+
+\signature{Rodrigo Almeida de Oliveira \\ PhD candidate, PPGIa \\ Pontif\'icia Universidade Cat\'olica do Paran\'a (PUCPR)}
+\address{Rodrigo Almeida de Oliveira \\ Pontif\'icia Universidade Cat\'olica do Paran\'a \\ Programa de P\'os-Gradua\c c\~ao em Inform\'atica (PPGIa) \\ Curitiba, PR, Brazil \\ rodrigoalmeidadeoliveira@gmail.com}
+
+\begin{document}
+
+\begin{letter}{Editor-in-Chief \\ \emph{Information and Software Technology} \\ Elsevier}
+
+\opening{Dear Editors,}
+
+I am pleased to submit our manuscript titled
+\textbf{``Process Mining and Stochastic Modeling for Software Process
+Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol''}
+for consideration in \emph{Information and Software Technology}.
+
+\medskip\noindent\textbf{Novelty and contribution.}
+This manuscript reports a systematic literature review (SLR) at the
+intersection of process mining (PM), stochastic modeling, and machine
+learning applied to software process forecasting. The contribution is
+threefold:
+\begin{enumerate}
+\item \textbf{Methodological:} we operationalise an LLM-assisted screening
+      protocol with cross-model verification (Claude Haiku 4.5 as primary
+      screener, Claude Sonnet 4.6 as verifier), achieving substantial
+      Cohen's $\kappa$ (binary $\kappa = 0.695$ for title/abstract,
+      $0.694$ for full-text) on a stratified random 20\% sample. The
+      protocol extends the recent work of Khraisha et~al.~(2024) and
+      Syriani et~al.~(2023) to the software-process-mining domain at a
+      scale of 6{,}147 deduplicated papers across two corpus tiers.
+\item \textbf{Empirical:} we confirm 404 primary studies (169 working-set
+      + 212 + 23 auxiliary) covering 1995--2026, scored against an
+      8-criterion quality rubric (Dyba and Dingsoyr, 2008). The combined
+      mean QA score is $5.00 \pm 1.42$ (315 papers, 82.7\%, retained for
+      synthesis).
+\item \textbf{Synthetic:} we report five empirically grounded findings
+      (F1--F5), propose the SPMF taxonomy (Software Process Mining and
+      Forecasting) along three orthogonal dimensions, and articulate a
+      four-direction research agenda (RA1--RA4). The IC-combination
+      analysis shows that only 1 of 404 papers (0.3\%) jointly satisfies
+      process mining, stochastic modeling, and forecasting --- evidence
+      that the gap addressed by our PATHCAST proposal is structural
+      rather than an artefact of the search queries.
+\end{enumerate}
+
+\medskip\noindent\textbf{Fit with IST scope.}
+The manuscript squarely fits IST's scope on empirical software engineering
+methods, mining software repositories, and process modeling. It complements
+the journal's growing body of evidence-based SLRs while contributing to
+the methodological literature on LLM-assisted reviews.
+
+\medskip\noindent\textbf{Reproducibility.}
+A complete replication package is deposited at Zenodo
+(\href{https://doi.org/10.5281/zenodo.15719919}{DOI~10.5281/zenodo.15719919}),
+including all search strings, screening prompts, JSON schemas, decision
+CSVs at every pipeline stage, the cross-model $\kappa$ scripts, and the
+structured extraction tables.
+
+\medskip\noindent\textbf{Prior submission and conflicts.}
+The manuscript is original work, has not been published elsewhere, and is
+not under consideration by any other journal. The author declares no
+competing financial interests. The use of generative AI tools in the
+research is declared in the manuscript per Elsevier policy. AI tools are
+\emph{not} listed as authors and bear no responsibility for editorial
+judgements.
+
+\medskip\noindent\textbf{Suggested reviewers.}
+\begin{itemize}
+\item \textbf{Wil M.\ P.\ van der Aalst} --- TU Eindhoven, foundational PM
+      researcher (\texttt{w.m.p.v.d.aalst@tue.nl})
+\item \textbf{Marcelo Sergio Pavlovic} --- LASIGE, FCUL, PM in software
+      engineering
+\item \textbf{Maria Teresa Baldassarre} --- University of Bari, empirical
+      SE and SLRs
+\item \textbf{Eugene Syriani} --- University of Montreal, LLM-assisted SLR
+      methodology
+\item \textbf{Tore Dyb{\aa}} --- SINTEF / University of Oslo, evidence-based
+      SE
+\end{itemize}
+
+\medskip\noindent\textbf{Reviewers to avoid.}
+None on basis of co-authorship within the past five years. Specific
+exclusions: thesis advisors and committee members at PUCPR.
+
+\closing{Sincerely,}
+
+\end{letter}
+
+\end{document}

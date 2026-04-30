@@ -1,0 +1,192 @@
+%% =============================================================================
+%% IST submission — main entry point
+%%
+%% Build:
+%%   pdflatex main
+%%   bibtex main
+%%   pdflatex main && pdflatex main
+%%
+%% Required \input files (preserve relative paths under the project root):
+%%   ../results/qa_assessment_summary.tex
+%%   ../results/kappa/kappa_report.tex
+%%   ../results/auxiliary/aux_qa_summary.tex
+%%   ../results/auxiliary/aux_ft_summary.tex
+%%   ../results/auxiliary/aux_reft_summary.tex
+%%   ../results/auxiliary/kappa/aux_kappa_report.tex
+%%   ../results/ec5_recovery/ec5_recovery_report.tex
+%%   ../results/sensitivity/sensitivity_report.tex
+%% Bibliography:
+%%   ../results/final_review/missing_references.bib (+ thesis bib if needed)
+%% =============================================================================
+
+\documentclass[review,3p,times]{elsarticle}
+
+%% --- Math + tables ---
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{caption}
+
+%% --- Figures ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+%% --- Misc ---
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+
+%% --- File-search path so \input picks up results/ from project root ---
+\makeatletter
+\providecommand*\input@path{}
+\g@addto@macro\input@path{{../}}
+\makeatother
+
+%% --- Bibliography style: Elsevier numeric + sorted ---
+\bibliographystyle{elsarticle-num}
+
+\journal{Information and Software Technology}
+
+\begin{document}
+
+%% =========================
+%% Front matter
+%% =========================
+\begin{frontmatter}
+
+\title{Process Mining and Stochastic Modeling for Software Process
+       Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol}
+
+%% Authors
+\author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}}
+\ead{rodrigoalmeidadeoliveira@gmail.com}
+
+%% Add second author (advisor) here when ready:
+% \author[pucpr]{Advisor Name}
+% \ead{advisor@pucpr.br}
+
+\cortext[cor1]{Corresponding author.}
+
+\affiliation[pucpr]{
+  organization={Pontif\'icia Universidade Cat\'olica do Paran\'a (PUCPR), PPGIa},
+  city={Curitiba},
+  state={PR},
+  country={Brazil}
+}
+
+%% --- Abstract (150–300 words, structured) ---
+\begin{abstract}
+\textbf{Context.}
+Software development processes generate rich event data --- commits, issues,
+pull requests, CI/CD logs --- that process mining (PM) and stochastic models
+can analyze to support forecasting. Yet integration of these techniques for
+software development lifecycle (SDLC) prediction is reported only
+anecdotally.
+\textbf{Objective.}
+To map the state of the art at the intersection of process mining,
+stochastic modeling, and machine-learning forecasting applied to software
+processes; to identify research gaps; and to propose a research agenda.
+\textbf{Method.}
+We executed a systematic literature review following Kitchenham and Charters
+(2007), Petersen et~al. (2015) for mapping, and Wohlin (2014) for
+snowballing, augmented with an LLM-assisted screening protocol
+(\textit{claude-haiku-4-5} as primary screener, \textit{claude-sonnet-4-6}
+as cross-model verifier). The protocol screened 5{,}783 deduplicated records
+across two tiers: a 2{,}340-paper working-set tier and a 3{,}807-paper
+auxiliary tier. Cohen's $\kappa$ inter-rater agreement was computed on
+stratified 20\% samples; 8-criterion quality assessment (Dyba and Dingsoyr,
+2008) was applied to all confirmed includes.
+\textbf{Results.}
+404 primary studies were confirmed (169 working-set + 212 + 23 auxiliary).
+Inter-rater agreement was substantial in the working-set tier
+($\kappa_{\text{binary}} = 0.695$ T/A, $0.694$ FT). Five findings emerge:
+F1 a descriptive ceiling (PM dominant, forecasting minority); F2 ad-hoc
+event-log construction; F3 weak stochastic--PM integration; F4 pipeline
+fragmentation (only 1 of 404 papers jointly satisfies PM + stochastic +
+forecasting); F5 process-derived ML features unexplored.
+\textbf{Conclusion.}
+The literature is descriptively rich but predictively fragmented. We
+propose the SPMF taxonomy and a four-direction research agenda; PATHCAST is
+introduced as the first formally specified L3 pipeline for SDLC
+forecasting.
+\end{abstract}
+
+\begin{keyword}
+Systematic Literature Review \sep
+Process Mining \sep
+Stochastic Modeling \sep
+Software Process Forecasting \sep
+LLM-Assisted Screening \sep
+Mining Software Repositories
+\end{keyword}
+
+%% --- Highlights (3–5 bullets, ≤85 chars each) ---
+\begin{highlights}
+\item LLM-assisted SLR protocol screens 6{,}147 software-process papers in two corpus tiers.
+\item Cross-model Cohen's $\kappa = 0.695$ inter-rater agreement on a 20\% stratified sample.
+\item 404 primary studies confirmed; only 1 jointly satisfies PM, stochastic, and forecasting.
+\item Five findings (F1--F5) and SPMF taxonomy proposed; four-direction research agenda.
+\item Full replication package (prompts, scripts, decisions) deposited at Zenodo.
+\end{highlights}
+
+\end{frontmatter}
+
+%% =========================
+%% Body
+%% =========================
+\input{cap3_article_body.tex}
+
+%% =========================
+%% Back matter — declarations
+%% =========================
+\section*{CRediT authorship contribution statement}
+\textbf{Rodrigo Almeida de Oliveira:} Conceptualization, Methodology,
+Software, Investigation, Data curation, Formal analysis, Visualization,
+Writing -- original draft, Writing -- review \& editing.
+
+\section*{Declaration of competing interest}
+The author declares that he has no known competing financial interests or
+personal relationships that could have appeared to influence the work
+reported in this article.
+
+\section*{Funding}
+This work was partially supported by the Pontif\'icia Universidade
+Cat\'olica do Paran\'a (PUCPR). \emph{[Confirm specific grant numbers
+before submission.]}
+
+\section*{Declaration of generative AI in the writing process}
+During the conduct of this systematic literature review, the author used
+\textit{claude-haiku-4-5-20251001} (Anthropic) as the primary LLM screener
+at the title/abstract and full-text stages and as the LLM scorer for the
+quality-assessment rubric, and \textit{claude-sonnet-4-6} (Anthropic) as
+the cross-model verifier for inter-rater agreement. All decisions were
+inspected by the author; the LLM tools are not listed as authors and bear
+no responsibility for editorial judgements. Full prompts, JSON schemas,
+and per-paper decisions are deposited in the replication package
+(\hyperlink{https://doi.org/10.5281/zenodo.15719919}{Zenodo
+DOI~10.5281/zenodo.15719919}). The author reviewed and edited the content
+as needed and takes full responsibility for the content of the
+publication.
+
+\section*{Data availability}
+A full replication package is available at Zenodo
+(\href{https://doi.org/10.5281/zenodo.15719919}{DOI~10.5281/zenodo.15719919}).
+The package contains: search strings for all five databases, deduplication
+and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
+the cross-model $\kappa$ verification scripts, all decision CSVs at every
+pipeline stage, the QA-scored 169-study and 212-study tables, the
+structured extraction tables (working-set and auxiliary), the inter-rater
+agreement reports, and a PRISMA flow snapshot.
+
+%% --- Bibliography ---
+\bibliography{../results/final_review/missing_references}
+
+\end{document}
