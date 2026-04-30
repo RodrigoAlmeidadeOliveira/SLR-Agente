@@ -278,7 +278,7 @@ def compute():
             "",
         ]
         tex_rows.append(
-            f"{stage.upper()} & {len(valid)} & {info['po']*100:.1f}\\% & "
+            f"{stage.upper()} & {len(valid)} & {info['po']*100:.1f}\\% & {infob['po']*100:.1f}\\% & "
             f"{k:.3f} ({_interpret(k)}) & {kb:.3f} ({_interpret(kb)}) \\\\"
         )
     lines += [
@@ -289,8 +289,8 @@ def compute():
         "\\begin{table}[htbp]", "\\centering",
         "\\caption{Auxiliary-tier inter-rater agreement (cross-model verification: Haiku 4.5 primary vs.\\ Sonnet 4.6 verifier on a stratified 20\\% sample).}",
         "\\label{tab:aux-kappa-results}",
-        "\\begin{tabular}{lccccc}", "\\toprule",
-        "Stage & $N$ & $P_o$ & $\\kappa_{\\text{multi}}$ & $\\kappa_{\\text{binary}}$ \\\\",
+        "\\begin{tabular}{lcccccc}", "\\toprule",
+        "Stage & $N$ & $P_o^{\\text{multi}}$ & $P_o^{\\text{binary}}$ & $\\kappa_{\\text{multi}}$ & $\\kappa_{\\text{binary}}$ \\\\",
         "\\midrule",
         *tex_rows,
         "\\bottomrule", "\\end{tabular}", "\\end{table}",

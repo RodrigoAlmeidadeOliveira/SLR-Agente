@@ -299,7 +299,16 @@ forcing a binary decision.
 At the full-text screening phase, the same model is applied with a stricter
 prompt that enforces a binary outcome (\texttt{include} or \texttt{exclude})
 with \texttt{pending} reserved only when the abstract is genuinely
-insufficient for a decision.
+insufficient for a decision.\footnote{The two protocols use different
+nomenclature for the uncertainty class: T/A uses \texttt{maybe}
+(epistemically broad: criterion ambiguity \emph{or} abstract
+insufficiency), whereas FT uses \texttt{pending} (narrowly: abstract
+insufficiency only). The semantic difference is intentional --- the
+T/A pass operates on metadata where ambiguity is expected, while the FT
+pass commits to binary decisions whenever the abstract permits and
+escalates only the abstract-insufficient subset to manual full-text
+retrieval. This mapping is preserved in the cross-model $\kappa$ analysis
+(Tables~\ref{tab:kappa-results} and~\ref{tab:aux-kappa-results}).}
 
 This approach extends prior work on LLM-assisted systematic reviews
 \cite{syriani2023,khraisha2024} to the software process mining domain. The
@@ -422,7 +431,7 @@ Table~\ref{tab:retrieval} summarizes the retrieval by source.
 \textbf{Source} & \textbf{Raw Records} & \textbf{After Internal Dedup} \\
 \midrule
 Scopus (6 queries)      & 2{,}377 & 1{,}852 \\
-SpringerLink (10 exports) & 2{,}884 & 1{,}543 \\
+SpringerLink (8 queries, 10 export batches) & 2{,}884 & 1{,}543 \\
 IEEE Xplore (manual)    & 1{,}386 & 1{,}263 \\
 Snowballing             &   595   &   575   \\
 Web of Science (4 queries) & 997  &   514   \\
@@ -441,14 +450,22 @@ Deduplication used normalized DOI matching, followed by fuzzy title matching
 
 \subsection{Operational Working Set Construction}
 
-Screening 5{,}781 records in a single pass would require substantial
-resources. A working set of 2{,}340 papers was therefore constructed from the
-highest-signal primary queries---those whose query design directly targets the
-PATHCAST intersection (process mining, stochastic modeling, and software
-development)---as shown in Table~\ref{tab:working-set}. The remaining 3{,}441
-records constitute a \textit{high-recall auxiliary corpus}, retained as a
-frozen baseline and available for supplementary analysis if gaps in the
-primary results warrant expansion.
+Screening 5{,}783 records in a single pass would require substantial
+resources. A working set of 2{,}340 papers was therefore constructed from
+the highest-signal primary queries---those whose query design directly
+targets the PATHCAST intersection (process mining, stochastic modeling,
+and software development)---as shown in Table~\ref{tab:working-set}. The
+working-set construction also incorporates 364 additional records from the
+manually imported control set and supplementary IEEE/ACM batches that were
+not part of the primary deduplication pool. The 3{,}807 unique records not
+selected for the working set therefore constitute the \textit{high-recall
+auxiliary corpus}, retained as a frozen baseline and available for
+supplementary analysis if gaps in the primary results warrant
+expansion.\footnote{Composition: $5{,}783$ unique deduplicated records,
+of which $1{,}976$ were selected into the working set, plus $364$ control
+and manually imported records added directly to the working set, totalling
+$2{,}340$ working-set papers; the remaining $3{,}807$ unique records
+constitute the auxiliary corpus.}
 
 \begin{table}[htbp]
 \centering
@@ -618,7 +635,7 @@ diagram~\cite{page2021} of the selection process.
    Scopus~2{,}197 \textbullet{} IEEE~97 \textbullet{} ACM~46};
 
 \node[exc] (wsdrop) at (6.0,-4.5)
-  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}441$):\\
+  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}807$):\\
    \mbox{SpringerLink}, WoS,\\Snowball, extra IEEE/ACM};
 
 \draw[arr] (dedup) -- (ws);
@@ -692,12 +709,15 @@ The SLR is reported in two complementary tiers: (i)~the
 that was deduplicated and processed through the LLM-assisted T/A and FT
 screening, yielding \textbf{169 confirmed primary studies}; and (ii)~the
 \textbf{combined tier}, which adds the 3{,}807-paper deferred auxiliary
-corpus after a full T/A and FT pass on the same protocol, yielding
-\textbf{212 additional confirmed studies} for a combined total of
-\textbf{381 confirmed primary studies}. The working-set tier is the
-narrative spine of this chapter; the combined-tier numbers are reported in
-parallel for the findings F1--F5 and provide the recall-bounded view of the
-SLR. The 169-study set spans three decades (1995--2026), with a clear
+corpus after a full T/A and FT pass on the same protocol, yielding 212
+additional confirmed studies in the first auxiliary pass, plus 23 further
+confirmations from a second auxiliary pass over abstracts recovered through
+post-hoc enrichment (Section~\ref{sec:slr-threats}, External Validity), for
+a combined total of \textbf{404 confirmed primary studies}
+($169_{\text{ws}} + 212_{\text{aux1}} + 23_{\text{aux2}}$). The
+working-set tier is the narrative spine of this article; the combined-tier
+numbers are reported in parallel for findings F1--F5 and provide the
+recall-bounded view of the SLR. The 169-study set spans three decades (1995--2026), with a clear
 acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Seventy-one
 percent of confirmed papers (working-set tier) were published between 2015
 and 2026, reflecting the maturation of open-source process mining toolkits
@@ -757,7 +777,7 @@ multiple).
   symbolic y coords={IC4 (MSR for process), IC3 (Forecasting), IC2 (Stochastic), IC1 (PM in SE)},
   ytick=data,
   y tick label style={font=\small},
-  xmin=0, xmax=115,
+  xmin=0, xmax=140,
   nodes near coords,
   nodes near coords align={horizontal},
   fill=gray!40,

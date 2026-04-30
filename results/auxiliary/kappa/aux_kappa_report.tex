@@ -2,11 +2,12 @@
 \centering
 \caption{Auxiliary-tier inter-rater agreement (cross-model verification: Haiku 4.5 primary vs.\ Sonnet 4.6 verifier on a stratified 20\% sample).}
 \label{tab:aux-kappa-results}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccccc}
 \toprule
-Stage & $N$ & $P_o$ & $\kappa_{\text{multi}}$ & $\kappa_{\text{binary}}$ \\
+Stage & $N$ & $P_o^{\text{multi}}$ & $P_o^{\text{binary}}$ & $\kappa_{\text{multi}}$ & $\kappa_{\text{binary}}$ \\
 \midrule
-FT & 276 & 54.3\% & 0.004 (slight) & 0.000 (slight) \\
+TA & 39 & 97.4\% & 97.4\% & 0.000 (slight) & 0.000 (slight) \\
+FT & 276 & 54.3\% & 84.8\% & 0.004 (slight) & 0.000 (slight) \\
 \bottomrule
 \end{tabular}
 \end{table}
