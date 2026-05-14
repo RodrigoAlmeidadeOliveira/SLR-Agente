@@ -1,19 +1,19 @@
 % =============================================================================
-% APPENDICES G–J — Theoretical Supplements to Chapter 2
+% APPENDICES A–D — Theoretical Supplements to Chapter 2
 % Companion to Chapter~\ref{ch:theoretical-foundation}
 %
-% Usage: include AFTER appendix_slr (which uses A–F):
+% Usage: include BEFORE appendix_slr (which now uses E–I):
 %   \appendix
-%   \include{appendix_slr}      % A–F: SLR protocol
-%   \include{appendix_theory}   % G–J: Cap 2 derivations
+%   \include{appendix_theory}   % A–D: Cap 2 derivations
+%   \include{appendix_slr}      % E–I: SLR protocol
 % =============================================================================
 
 
 % =============================================================================
-% APPENDIX G — Markov Chain Derivations
+% APPENDIX A — Markov Chain Derivations
 % =============================================================================
 \chapter{Markov Chain Derivations}
-\label{app:G}
+\label{app:A}
 
 This appendix provides the formal derivations supporting the Markov chain
 results stated in Section~\ref{sec:markov}. Throughout, $S = S_T \cup S_A$
@@ -24,7 +24,7 @@ block $R$.
 
 
 \section{The Fundamental Matrix Identity}
-\label{app:G-fundamental}
+\label{app:A-fundamental}
 
 \begin{lemma}[Spectral Radius of $Q$]
 \label{lem:spectral-radius}
@@ -48,7 +48,7 @@ norm. By Gelfand's formula, $\rho(Q) = \lim_{n \to \infty}
 \label{thm:fundamental}
 $(I - Q)$ is invertible and
 \begin{equation}
-\label{eq:G-fundamental}
+\label{eq:A-fundamental}
 N = (I - Q)^{-1} = \sum_{k=0}^{\infty} Q^k.
 \end{equation}
 \end{theorem}
@@ -73,13 +73,13 @@ $\sum_{k=0}^{\infty} (Q^k)_{ij} = N_{ij}$.
 
 
 \section{Expected Steps to Absorption}
-\label{app:G-expected}
+\label{app:A-expected}
 
 \begin{theorem}[Expected Absorption Time]
 \label{thm:expected-time}
 Let $T_i$ be the absorption time starting from $i \in S_T$. Then
 \begin{equation}
-\label{eq:G-expected}
+\label{eq:A-expected}
 E[T_i] = (N \mathbf{1})_i = \sum_{j \in S_T} N_{ij}.
 \end{equation}
 \end{theorem}
@@ -98,14 +98,14 @@ $\mathbf{t} = (I - Q)^{-1} \mathbf{1} = N \mathbf{1}$.
 
 
 \section{Variance of Absorption Time}
-\label{app:G-variance}
+\label{app:A-variance}
 
 \begin{theorem}[Absorption-Time Variance]
 \label{thm:variance}
 Let $N_{\mathrm{dg}}$ denote the diagonal matrix with the diagonal entries
 of $N$. Then
 \begin{equation}
-\label{eq:G-variance}
+\label{eq:A-variance}
 \mathrm{Var}(T_i)
 = \big( N (2 N_{\mathrm{dg}} - I) \mathbf{1} \big)_i - (E[T_i])^2.
 \end{equation}
@@ -129,14 +129,14 @@ analytical sanity check for the Monte Carlo variance estimate
 
 
 \section{Absorption Probabilities}
-\label{app:G-absorption}
+\label{app:A-absorption}
 
 \begin{theorem}[Absorption Probability Matrix]
 \label{thm:absorption-prob}
 Let $B_{ij}$ denote the probability that, starting from transient state
 $i$, the chain is absorbed in absorbing state $j$. Then
 \begin{equation}
-\label{eq:G-absorption}
+\label{eq:A-absorption}
 B = N R.
 \end{equation}
 Furthermore, $\sum_{j \in S_A} B_{ij} = 1$ for all $i \in S_T$
@@ -156,7 +156,7 @@ since $NQ = N - I$ by the Neumann series identity.
 
 
 \section{Bayesian Estimation and Laplace Smoothing}
-\label{app:G-bayes}
+\label{app:A-bayes}
 
 The transition matrix is estimated from observed counts $C_{ij}$. The MLE
 is given by Equation~\ref{eq:mle-transition}. This section formalizes the
@@ -179,7 +179,7 @@ P_i \mid \mathbf{c}_i \sim
 \paragraph{Posterior mean and Laplace estimator.} The posterior mean of
 the $j$-th component is
 \begin{equation}
-\label{eq:G-laplace}
+\label{eq:A-laplace}
 E[p_{ij} \mid \mathbf{c}_i]
 = \frac{c_{ij} + \alpha}{c_{i\cdot} + \alpha m},
 \end{equation}
@@ -197,7 +197,7 @@ of Equation~\ref{eq:confidence-grade}.
 
 
 \section{Semi-Markov Connection}
-\label{app:G-semi-markov}
+\label{app:A-semi-markov}
 
 The augmentation of a DTMC with state-dependent sojourn distributions
 yields a \emph{semi-Markov process} (Definition~\ref{def:semi-markov}).
@@ -219,19 +219,19 @@ of time spent in each transient state, conditional on non-absorption. Let
 $\bar{T}_i$ denote the mean sojourn in state $i$ (Equation~\ref{eq:mean-sojourn}).
 Then
 \begin{equation}
-\label{eq:G-quasi-stationary}
+\label{eq:A-quasi-stationary}
 \pi^q_i = \frac{\sum_{j \in S_T} N_{ji} \cdot \bar{T}_i}
               {\sum_{k \in S_T} \sum_{j \in S_T} N_{jk} \cdot \bar{T}_k}.
 \end{equation}
 This formula is the calendar-time analogue of the discrete-step
 fundamental-matrix result. PATHCAST uses
-Equation~\ref{eq:G-quasi-stationary} as an analytical baseline against
+Equation~\ref{eq:A-quasi-stationary} as an analytical baseline against
 which the simulation-based WIP estimate
 (Equation~\ref{eq:wip-composition}) is cross-validated.
 
 
 \section{Numerical Example: Six-State SDLC Chain}
-\label{app:G-numerical}
+\label{app:A-numerical}
 
 This section presents the full numerical resolution of the example
 introduced in Section~\ref{sec:s3-example}.
@@ -320,23 +320,23 @@ distribution (Stage 4) is validated.
 
 
 % =============================================================================
-% APPENDIX H — Probabilistic Metric Derivations
+% APPENDIX B — Probabilistic Metric Derivations
 % =============================================================================
 \chapter{Probabilistic Metric Derivations}
-\label{app:H}
+\label{app:B}
 
 This appendix derives the probabilistic forecasting metrics introduced in
-Section~\ref{sec:prob-metrics} and used in the empirical evaluation
+Section~\ref{sec:monte-carlo} and used in the empirical evaluation
 (Chapter~\ref{ch:methodology}).
 
 
 \section{CRPS: Definition and Equivalent Forms}
-\label{app:H-crps-def}
+\label{app:B-crps-def}
 
 \begin{definition}[Continuous Ranked Probability Score]
 For a forecast distribution $F$ and a realized value $y \in \mathbb{R}$:
 \begin{equation}
-\label{eq:H-crps-int}
+\label{eq:B-crps-int}
 \mathrm{CRPS}(F, y)
 = \int_{-\infty}^{\infty} \big( F(t) - \mathbf{1}(t \geq y) \big)^2 \, dt.
 \end{equation}
@@ -346,13 +346,13 @@ For a forecast distribution $F$ and a realized value $y \in \mathbb{R}$:
 \label{thm:H-kernel}
 Let $X, X' \overset{\mathrm{iid}}{\sim} F$. Then
 \begin{equation}
-\label{eq:H-crps-kernel}
+\label{eq:B-crps-kernel}
 \mathrm{CRPS}(F, y) = E_F |X - y| - \tfrac{1}{2} E_F |X - X'|.
 \end{equation}
 \end{theorem}
 
 \begin{proof}
-Expanding the integrand of Equation~\ref{eq:H-crps-int} and applying
+Expanding the integrand of Equation~\ref{eq:B-crps-int} and applying
 Fubini–Tonelli to interchange integrals yields the kernel form. The
 first term penalizes inaccuracy (mean absolute deviation from $y$); the
 second term rewards sharpness (penalty for diffuse forecasts). See
@@ -366,7 +366,7 @@ averaging absolute differences across simulated samples.
 
 
 \section{Propriety of CRPS}
-\label{app:H-crps-proper}
+\label{app:B-crps-proper}
 
 \begin{definition}[Strictly Proper Scoring Rule]
 A scoring rule $S(F, y)$ is \emph{strictly proper} relative to a class
@@ -397,7 +397,7 @@ for RQ2.
 
 
 \section{CRPS--MAE Relationship}
-\label{app:H-crps-mae}
+\label{app:B-crps-mae}
 
 \begin{theorem}[Degenerate Forecast]
 \label{thm:H-mae}
@@ -407,7 +407,7 @@ $\mathrm{CRPS}(\delta_{\hat{y}}, y) = |y - \hat{y}|$.
 
 \begin{proof}
 Substitute $F(t) = \mathbf{1}(t \geq \hat{y})$ in
-Equation~\ref{eq:H-crps-int}. The integrand
+Equation~\ref{eq:B-crps-int}. The integrand
 $(\mathbf{1}(t \geq \hat{y}) - \mathbf{1}(t \geq y))^2$ equals $1$ on the
 interval between $y$ and $\hat{y}$ and $0$ elsewhere. The integral equals
 the length of that interval, $|y - \hat{y}|$.
@@ -421,7 +421,7 @@ PATHCAST simulation, eliminating the need for separate metrics.
 
 
 \section{Calibration and the Aggregate Calibration Error}
-\label{app:H-calibration}
+\label{app:B-calibration}
 
 \begin{definition}[Calibration]
 A forecaster is calibrated if, for every $\alpha \in (0, 1)$,
@@ -446,14 +446,14 @@ optimization of one at the expense of the other.
 
 
 \section{Worked Numerical Examples}
-\label{app:H-examples}
+\label{app:B-examples}
 
 \paragraph{Example 1 (Point forecast).} $\hat{F} = \delta_{10}$, observed
 $y = 12$. By Theorem~\ref{thm:H-mae}, $\mathrm{CRPS} = |12 - 10| = 2$.
 
 \paragraph{Example 2 (Empirical forecast).} An MC run produces lead-time
 samples $\{8, 9, 10, 11, 12, 14, 15\}$; observed $y = 13$. Using the
-kernel form (Equation~\ref{eq:H-crps-kernel}):
+kernel form (Equation~\ref{eq:B-crps-kernel}):
 $E |X - y| = \frac{1}{7}(5+4+3+2+1+1+2) = 2.571$;
 $E |X - X'| \approx 2.612$ (computed across all $7^2 = 49$ pairs);
 $\mathrm{CRPS} \approx 2.571 - \tfrac{1}{2}(2.612) = 1.265$. The
@@ -468,17 +468,17 @@ analogously, summarizing systematic over- or underconfidence.
 
 
 % =============================================================================
-% APPENDIX I — Process Mining Algorithmic Details
+% APPENDIX C — Process Mining Algorithmic Details
 % =============================================================================
 \chapter{Process Mining Algorithmic Details}
-\label{app:I}
+\label{app:C}
 
-This appendix expands the algorithmic content of Sections~\ref{sec:process-discovery}
-and~\ref{sec:conformance-checking}.
+This appendix expands the algorithmic content sketched in
+Section~\ref{sec:process-mining}.
 
 
 \section{Inductive Miner Internals}
-\label{app:I-im}
+\label{app:C-im}
 
 The Inductive Miner (IM)~\cite{leemans2013discovering} discovers a process
 tree by recursively partitioning the directly-follows graph (DFG) extracted
@@ -523,7 +523,7 @@ $|\mathcal{A}|$ levels, giving overall $O(|\mathcal{L}| +
 
 
 \section{Alignment-Based Conformance Checking}
-\label{app:I-alignment}
+\label{app:C-alignment}
 
 \paragraph{Synchronous product.} Given trace $\sigma$ and model $M$, the
 synchronous product is a Petri net (or transition system) whose
@@ -544,7 +544,7 @@ practice because the state spaces are small (typically $|S| \leq 20$).
 
 
 \section{Fitness, Precision, and Generalization}
-\label{app:I-quality}
+\label{app:C-quality}
 
 \paragraph{Fitness.} As stated in Equation~\ref{eq:fitness}, fitness is
 $1 - \mathrm{cost}(\gamma^*) / \mathrm{cost}(\gamma_{\mathrm{worst}})$,
@@ -573,7 +573,7 @@ states visited by few.
 
 
 \section{Worked Example}
-\label{app:I-examples}
+\label{app:C-examples}
 
 \paragraph{Toy log.} Three traces over four activities:
 $\sigma_1 = \langle A, B, C, D \rangle$,
@@ -597,10 +597,10 @@ $\approx 0.7$ (depends on weighting; full computation in PM4Py).
 
 
 % =============================================================================
-% APPENDIX J — End-to-End Walkthrough Example
+% APPENDIX D — End-to-End Walkthrough Example
 % =============================================================================
 \chapter{End-to-End Walkthrough Example}
-\label{app:J}
+\label{app:D}
 
 This appendix presents a complete worked example of the PATHCAST pipeline
 on a small synthetic project, making the data-flow concrete from raw
@@ -608,7 +608,7 @@ events through probabilistic forecast.
 
 
 \section{Synthetic Event Log}
-\label{app:J-log}
+\label{app:D-log}
 
 The synthetic dataset contains 10 issues across 35 days, with events from
 three sources (Jira, Git, GitHub Actions). Issue keys: PROJ-1 to PROJ-10.
@@ -645,7 +645,7 @@ absorbed into the surrounding state to avoid spurious transitions.
 
 
 \section{Process Discovery}
-\label{app:J-discovery}
+\label{app:D-discovery}
 
 Inductive Miner with $\theta_{\text{noise}} = 0.2$ produces the process
 tree
@@ -664,7 +664,7 @@ $\mathtt{in\_progress}$.
 
 
 \section{Markov Estimation}
-\label{app:J-markov}
+\label{app:D-markov}
 
 \paragraph{Transition counts (transient block).}
 \begin{equation*}
@@ -705,7 +705,7 @@ $\hat{F}_{\mathtt{T}}  = \{0.5, 0.8, 1.5\}$.
 
 
 \section{Monte Carlo Simulation}
-\label{app:J-mc}
+\label{app:D-mc}
 
 Run $M_{\mathrm{sim}} = 10{,}000$ trajectories starting from
 \texttt{in\_progress}, sampling sojourns from $\hat{F}_s$ and next states
@@ -731,7 +731,7 @@ from $\hat{Q}$.
 
 
 \section{Cross-Validation Against Analytical Results}
-\label{app:J-validation}
+\label{app:D-validation}
 
 Mean lead time, computed analytically with mean sojourns $\bar{T}_{IP} =
 1.9$, $\bar{T}_R = 1.125$, $\bar{T}_T = 0.93$:
@@ -744,7 +744,7 @@ consistency between analytical and simulation paths.
 
 
 \section{ML Feature Construction}
-\label{app:J-ml}
+\label{app:D-ml}
 
 For each of the 10 cases, the 15 features defined in
 Table~\ref{tab:features} are constructed at the half-trace observation

@@ -196,6 +196,88 @@ feature store (cold and warm) that serves as input for the forecasting
 stages described in Sections~\ref{sec:stage2} through~\ref{sec:stage4}.
 
 
+\subsection{Stage Contracts}
+\label{sec:stage-contracts}
+
+Each stage of the pipeline is specified by an input/output contract with
+pre- and postconditions; the contracts are gathered here once and
+referenced---rather than restated---in the stage sections that follow.
+Stage composability (Principle~2) depends on these contracts: stages may
+be independently replaced or extended as long as their contracts are
+preserved.
+
+\begin{definition}[Stage 1 Contract]
+\label{def:contract-s1}
+\textbf{Input:} repositories $\mathcal{R} = \{r_1, \ldots, r_n\}$, each
+$r_i$ a set of time-ordered raw-event streams $\{D_i^{(j)}\}$.
+\textbf{Output:} structured event log
+$\mathcal{L} = \{\sigma_c \mid c \in \mathcal{C}\}$ satisfying
+Definition~\ref{def:event-log}.
+\textbf{Postconditions:} every event has a valid case identifier,
+activity name and timestamp; events are timestamp-ordered within each
+trace; activity names belong to the SDLC taxonomy $\mathcal{A}$.
+$\mathcal{S}_1 = \textsc{Format} \circ \textsc{Map} \circ
+\textsc{Correlate} \circ \textsc{Extract}$
+(Equation~\ref{eq:s1-decomposition}).
+\end{definition}
+
+\begin{definition}[Stage 2 Contract]
+\label{def:contract-s2}
+\textbf{Input:} an event log $\mathcal{L}$ satisfying
+Definition~\ref{def:contract-s1}.
+\textbf{Output:} a triple $(M, \Phi, S)$ with discovered model $M$,
+metrics vector
+$\Phi = (\phi_{\text{fit}}, \phi_{\text{prec}}, \phi_{\text{gen}},
+\phi_{\text{perf}})$, and state space $S = (S_T, S_A)$.
+\textbf{Postconditions:} $M$ is sound;
+$\phi_{\text{fit}}, \phi_{\text{prec}} \in [0,1]$; $\phi_{\text{perf}}$
+contains per-activity sojourn statistics; $|S_T|\geq 1$ and $|S_A|\geq 1$;
+every $a \in \mathcal{A}$ observed in $\mathcal{L}$ maps to exactly one
+state.
+\end{definition}
+
+\begin{definition}[Stage 3 Contract]
+\label{def:contract-s3}
+\textbf{Input:} $\mathcal{L}$ and $S = S_T \cup S_A$.
+\textbf{Output:} $(P, N, B, \hat{F}, \pi)$ with transition matrix
+$P \in \mathbb{R}^{|S|\times|S|}$, fundamental matrix
+$N = (I-Q)^{-1} \in \mathbb{R}^{|S_T|\times|S_T|}$, absorption matrix
+$B = NR \in \mathbb{R}^{|S_T|\times|S_A|}$, sojourn distributions
+$\hat{F} = \{\hat{F}_s\}_{s \in S_T}$, and stationary distribution $\pi$.
+\textbf{Preconditions:} $|S_T| \geq 1$, $|S_A| \geq 1$, every transient
+state has at least one observed outgoing transition.
+\textbf{Postconditions:} $P$ row-stochastic; $(I-Q)$ invertible;
+$N_{ij} \geq 0$; $\sum_j B_{ij} = 1$; each $\hat{F}_s$ has at least
+$n_{\min}$ observations.
+$\mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
+\textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count}$
+(Equation~\ref{eq:s3-decomposition}).
+\end{definition}
+
+\begin{definition}[Stage 4 Contract]
+\label{def:contract-s4}
+\textbf{Input:} $P$, $\hat{F}$, initial state $s_0$ (or initial
+distribution $\pi_0$), and the simulation budget
+$M_{\text{sim}} \in \mathbb{N}$.
+\textbf{Output:} the empirical forecast distribution
+$\hat{\mathcal{D}} = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}$
+of lead times, terminal states and trajectories
+(Equation~\ref{eq:forecast-distribution}).
+\textbf{Postconditions:} $|\hat{\mathcal{D}}| = M_{\text{sim}}$, every
+trajectory absorbs, $T^{(m)} > 0$.
+\end{definition}
+
+\begin{definition}[ML Component Contract]
+\label{def:contract-ml}
+\textbf{Input:} $\mathcal{L}$, $\Phi$, $P$, $N$.
+\textbf{Output:} trained predictor $\hat{f}$ and feature importance
+vector $\mathbf{w}$.
+\textbf{Postconditions:} $\hat{f}$ is evaluated on a temporally disjoint
+test set; AUC-ROC, F1, Brier score, MAE and MAPE are reported; $\mathbf{w}$
+ranks features.
+\end{definition}
+
+
 % =============================================================================
 % 4.2 STAGE 1: EVENT LOG CONSTRUCTION
 % =============================================================================
@@ -205,37 +287,13 @@ stages described in Sections~\ref{sec:stage2} through~\ref{sec:stage4}.
 Stage 1 transforms heterogeneous software repository data into structured
 event logs suitable for process mining.
 
-\subsection{Formal Specification}
-\label{sec:s1-formal}
-
-\begin{definition}[Stage 1 Contract]
-\label{def:contract-s1}
-\textbf{Input:} A set of software repositories
-$\mathcal{R} = \{r_1, \ldots, r_n\}$, where each repository $r_i$ contains
-data sources $r_i = \{D_i^{(1)}, \ldots, D_i^{(k_i)}\}$ with each
-$D_i^{(j)}$ a time-ordered sequence of raw events from a specific tool.
-
-\textbf{Output:} A structured event log
-$\mathcal{L} = \{\sigma_c \mid c \in \mathcal{C}\}$, where $\mathcal{C}$
-is the set of identified cases and each
-$\sigma_c = \langle e_1, \ldots, e_{|\sigma_c|} \rangle$ is an ordered
-event sequence satisfying Definition~\ref{def:event-log}.
-
-\textbf{Postconditions:}
-\begin{enumerate}
-    \item Every event $e \in \sigma_c$ has a valid case identifier,
-    activity name, and timestamp.
-    \item Events within each trace are ordered by timestamp.
-    \item Activity names belong to a defined SDLC activity taxonomy
-    $\mathcal{A}$.
-\end{enumerate}
-\end{definition}
-
-Stage 1 decomposes into four sub-operations:
+Stage 1 satisfies the contract of
+Definition~\ref{def:contract-s1}; the decomposition is
 \begin{equation}
 \label{eq:s1-decomposition}
-\mathcal{S}_1 = \textsc{Format} \circ \textsc{Map} \circ \textsc{Correlate} \circ \textsc{Extract}
+\mathcal{S}_1 = \textsc{Format} \circ \textsc{Map} \circ \textsc{Correlate} \circ \textsc{Extract},
 \end{equation}
+detailed in the four subsections that follow.
 
 
 \subsection{Event Extraction}
@@ -464,27 +522,9 @@ The normalized form $H_{\text{norm}}(V) = H(V) / \log_2 |V|$ provides a
 scale-independent measure in $[0, 1]$. PATHCAST uses $H_{\text{norm}}$ as
 a complexity proxy and as a candidate ML feature.
 
-\subsection{Stage 2 Contract}
-
-\begin{definition}[Stage 2 Contract]
-\label{def:contract-s2}
-\textbf{Input:} Event log $\mathcal{L}$ satisfying
-Definition~\ref{def:contract-s1}.
-
-\textbf{Output:} $(M, \Phi, S)$ with discovered model $M$, metrics vector
-$\Phi = (\phi_{\text{fit}}, \phi_{\text{prec}}, \phi_{\text{gen}},
-\phi_{\text{perf}})$, and state space $S = (S_T, S_A)$.
-
-\textbf{Postconditions:}
-\begin{enumerate}
-    \item $M$ is sound (no deadlocks, no livelocks).
-    \item $\phi_{\text{fit}}, \phi_{\text{prec}} \in [0, 1]$.
-    \item $\phi_{\text{perf}}$ includes per-activity sojourn statistics.
-    \item $|S_T| \geq 1$ and $|S_A| \geq 1$.
-    \item Every $a \in \mathcal{A}$ observed in $\mathcal{L}$ maps to
-    exactly one state.
-\end{enumerate}
-\end{definition}
+Stage 2 satisfies the contract of Definition~\ref{def:contract-s2}; the
+remainder of this section specifies the discovery, conformance and
+performance-enhancement sub-operations.
 
 
 \subsection{Process Discovery}
@@ -587,33 +627,14 @@ from empirical distributions, the Monte Carlo simulation propagates the
 full uncertainty structure of the observed process.
 \end{remark}
 
-\subsection{Formal Specification}
-\label{sec:s3-formal}
-
-\begin{definition}[Stage 3 Contract]
-\label{def:contract-s3}
-\textbf{Input:} $\mathcal{L}$ and $S = S_T \cup S_A$.
-
-\textbf{Output:} $(P, N, B, \hat{F}, \pi)$ with transition matrix
-$P \in \mathbb{R}^{|S| \times |S|}$, fundamental matrix
-$N = (I-Q)^{-1} \in \mathbb{R}^{|S_T| \times |S_T|}$, absorption matrix
-$B = NR \in \mathbb{R}^{|S_T| \times |S_A|}$, sojourn distributions
-$\hat{F} = \{\hat{F}_s\}_{s \in S_T}$, and stationary distribution $\pi$.
-
-\textbf{Preconditions:} $|S_T| \geq 1$, $|S_A| \geq 1$, every transient
-state has at least one observed outgoing transition.
-
-\textbf{Postconditions:} $P$ row-stochastic, $(I - Q)$ invertible,
-$N_{ij} \geq 0$, $\sum_j B_{ij} = 1$, each $\hat{F}_s$ has at least
-$n_{\min}$ observations.
-\end{definition}
-
-Decomposition:
+Stage 3 satisfies the contract of Definition~\ref{def:contract-s3}. The
+decomposition is
 \begin{equation}
 \label{eq:s3-decomposition}
 \mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
-    \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count}.
+    \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count},
 \end{equation}
+detailed in the subsections that follow.
 
 
 \subsection{Transition Counting}
@@ -662,7 +683,7 @@ For $\alpha = 0$, $\hat{P} \xrightarrow{a.s.} P^*$ as $|\mathcal{L}| \to
 
 The Bayesian justification of Laplace smoothing
 ($\alpha = 1$ corresponds to a uniform Dirichlet prior) is in
-Appendix~G, Section~\ref{app:G-bayes}.
+Appendix~A, Section~\ref{app:A-bayes}.
 
 
 \subsection{Confidence Assessment}
@@ -705,7 +726,7 @@ B &= N R \label{eq:absorption-prob}
 \begin{property}[Invertibility]
 \label{prop:invertibility}
 $(I - Q)$ is invertible iff every transient state can reach an absorbing
-state. Proof in Appendix~G, Section~\ref{app:G-fundamental}.
+state. Proof in Appendix~A, Section~\ref{app:A-fundamental}.
 \end{property}
 
 \begin{property}[Absorption Certainty]
@@ -758,7 +779,7 @@ non-absorption:
 \end{equation}
 States with disproportionately high $\tilde{\pi}_j$ relative to processing
 capacity indicate bottleneck accumulation. Full derivation in
-Appendix~G, Section~\ref{app:G-semi-markov}.
+Appendix~A, Section~\ref{app:A-semi-markov}.
 
 
 \subsection{Rework Analysis}
@@ -782,8 +803,8 @@ relative to the nominal SDLC ordering.
 \subsection{Numerical Example}
 \label{sec:s3-example}
 
-A six-state SDLC chain is fully resolved in Appendix~G,
-Section~\ref{app:G-numerical}: matrix computations of $Q, R, N, B$ and
+A six-state SDLC chain is fully resolved in Appendix~A,
+Section~\ref{app:A-numerical}: matrix computations of $Q, R, N, B$ and
 analytical lead time. The example illustrates the closed-form analytical
 baseline against which Stage 4 simulation results are validated.
 
@@ -797,24 +818,12 @@ baseline against which Stage 4 simulation results are validated.
 Stage 4 generates probabilistic forecasts by simulating stochastic
 trajectories through the Markov model.
 
-\subsection{Formal Specification}
-\label{sec:s4-formal}
-
-\begin{definition}[Stage 4 Contract]
-\label{def:contract-s4}
-\textbf{Input:} $P$, $\hat{F}$, initial state $s_0$ (or distribution
-$\pi_0$), and $M_{\text{sim}} \in \mathbb{N}$.
-
-\textbf{Output:}
+Stage 4 satisfies the contract of Definition~\ref{def:contract-s4}; the
+empirical forecast distribution is
 \begin{equation}
 \label{eq:forecast-distribution}
-\hat{\mathcal{D}} = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}
+\hat{\mathcal{D}} = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}.
 \end{equation}
-with lead time, terminal state, and trajectory per simulation.
-
-\textbf{Postconditions:} $|\hat{\mathcal{D}}| = M_{\text{sim}}$, every
-trajectory absorbs, $T^{(m)} > 0$.
-\end{definition}
 
 
 \subsection{Simulation Algorithm}
@@ -963,18 +972,10 @@ Distributional outputs      & Completion only     & Lead time + outcome + path +
 \section{Machine Learning Enhancement Component}
 \label{sec:ml-component}
 
-\subsection{Formal Specification}
-\label{sec:ml-formal}
-
-\begin{definition}[ML Component Contract]
-\label{def:contract-ml}
-\textbf{Input:} $\mathcal{L}$, $\Phi$, $P$, $N$.
-\textbf{Output:} Trained predictor $\hat{f}$ and feature importance vector
-$\mathbf{w}$.
-\textbf{Postconditions:} $\hat{f}$ evaluated on temporally disjoint test
-set; AUC-ROC, F1, Brier score, MAE, MAPE reported; $\mathbf{w}$ ranks
-features.
-\end{definition}
+The ML component satisfies the contract of
+Definition~\ref{def:contract-ml}; the remainder of this section specifies
+feature engineering, label construction, training and integration with the
+Monte Carlo forecasts.
 
 
 \subsection{Feature Engineering}
@@ -1092,16 +1093,18 @@ $\delta_c < 0$ indicates below-baseline.
 % =============================================================================
 % 4.7 PIPELINE INTEGRATION
 % =============================================================================
-\section{Pipeline Integration and Data Contracts}
+\section{Pipeline Integration}
 \label{sec:integration}
 
-\subsection{Data Flow Summary}
-\label{sec:data-flow}
-
-The pipeline forms a directed acyclic graph: Stage~2 feeds both Stage~3
-and the ML component; Stage~3 feeds both Stage~4 and the ML component.
-Inter-stage data contracts are summarized in
-Table~\ref{tab:data-contracts}.
+The stages compose into a directed acyclic graph (Stage~2 feeds Stage~3
+and the ML component; Stage~3 feeds Stage~4 and the ML component) under
+the inter-stage data contracts already stated
+(Definitions~\ref{def:contract-s1}--\ref{def:contract-ml}; data objects
+summarised in Table~\ref{tab:data-contracts}). Two execution modes are
+supported: a full historical run that estimates $(P, \hat{F}, \hat{f})$
+end-to-end, and an incremental operational mode that scores new cases
+through Stages~4 and ML only, periodically re-estimating the upstream
+artefacts.
 
 \begin{table}[htbp]
 \centering
@@ -1124,21 +1127,6 @@ ML      & Output & $(\hat{f}, \mathbf{w})$ & Predictor + importances \\
 \end{tabular}
 \end{table}
 
-
-\subsection{Pipeline Execution Modes}
-\label{sec:execution-modes}
-
-\textbf{Full Pipeline (Historical Analysis):} all four stages execute
-sequentially on a complete historical dataset.
-
-\textbf{Incremental Forecast (Operational):} given a pre-estimated
-$(P, \hat{F}, \hat{f})$ from a prior full run, new cases are scored in
-real-time via Stages 4 and ML only. Periodic re-estimation (e.g., weekly).
-
-
-\subsection{Pipeline Composition Theorem}
-\label{sec:composition}
-
 \begin{theorem}[Pipeline Correctness]
 \label{thm:pipeline-correctness}
 If each stage satisfies its contract, then the composed pipeline
@@ -1150,11 +1138,12 @@ $\hat{\mathcal{D}}$ for any input $\mathcal{R}$ satisfying:
 \end{theorem}
 
 \begin{proof}
-By structural induction on stages. Each stage's postconditions imply the
-next stage's preconditions: S1 $\to$ S2 (event log validity); S2 $\to$ S3
-(sound model + non-empty states); S3 $\to$ S4 (row-stochastic $P$ +
-non-empty $\hat{F}$); S4 terminates by absorption certainty
-(Property~\ref{prop:absorption-certainty}) or the $K_{\max}$ bound. \qed
+By structural induction on stages: each postcondition implies the next
+precondition (S1$\to$S2 event-log validity; S2$\to$S3 sound model and
+non-empty states; S3$\to$S4 row-stochastic $P$ and non-empty $\hat{F}$);
+S4 terminates by absorption certainty
+(Property~\ref{prop:absorption-certainty}) or the $K_{\max}$ bound.
+\qed
 \end{proof}
 
 

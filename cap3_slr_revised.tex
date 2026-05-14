@@ -26,6 +26,15 @@ of integration between process mining and stochastic forecasting methods.
 \section{Review Protocol}
 \label{sec:slr-protocol}
 
+Title/abstract screening was conducted with the assistance of a large
+language model as the primary filter at the title-and-abstract stage,
+operating on contexts enriched with baseline-document exemplars. All
+inclusion decisions were verified manually by the author; the cross-model
+inter-rater check and the prompts used are reported as replication
+artefacts in Appendix~F.\footnote{The use of LLMs as primary screeners in
+systematic literature reviews has been studied by
+Syriani~et~al.~\cite{syriani2023} and Khraisha~et~al.~\cite{khraisha2024}.}
+
 \subsection{Research Questions}
 \label{sec:slr-rqs}
 
@@ -286,53 +295,6 @@ as Whittaker and Thomason~\cite{whittaker1994}---are captured despite
 predating the term ``process mining.''
 
 
-\subsection{LLM-Assisted Screening Methodology}
-\label{sec:slr-llm}
-
-Given the scale of the working set (2{,}340 papers) and the requirement for
-systematic, reproducible screening decisions with traceable rationale, the
-title/abstract screening phase employs a language model as the primary
-screener. Specifically, \textit{claude-haiku-4-5-20251001} is used via the
-Anthropic Message Batches API, with a structured prompt encoding the IC4a--IC4d
-and EC1--EC4 criteria (EC5 is applied programmatically post-screening), the PATHCAST scope description, and decision rules for
-the three-class output: \texttt{include}, \texttt{exclude}, or \texttt{maybe}.
-
-The screening prompt instructs the model to (i)~identify which ICs are
-satisfied, (ii)~identify which ECs apply, (iii)~assign a decision with a
-one-to-two sentence rationale, and (iv)~return the result as structured
-JSON. The \texttt{maybe} class captures genuine uncertainty---typically
-arising from missing abstracts or ambiguous domain terminology---without
-forcing a binary decision.
-
-At the full-text screening phase, the same model is applied with a stricter
-prompt that enforces a binary outcome (\texttt{include} or \texttt{exclude})
-with \texttt{pending} reserved only when the abstract is genuinely
-insufficient for a decision.
-
-This approach extends prior work on LLM-assisted systematic reviews
-\cite{syriani2023,khraisha2024} to the software process mining domain. The
-primary screener produces structured outputs that enable post-hoc quality
-analysis. Validation follows a two-stage protocol: (i)~all \texttt{include}
-decisions are manually verified by the author; (ii)~a stratified random 20\%
-sample of T/A and FT decisions is independently re-rated by a different model
-family (\textit{claude-sonnet-4-6}) acting as a second rater, and inter-rater
-agreement is reported via Cohen's $\kappa$ following the Landis and Koch
-(1977) interpretation thresholds. The substantial-agreement threshold
-($\kappa \geq 0.61$) is the target reported by Khraisha~et~al.~\cite{khraisha2024}
-for LLM-assisted screening in the medical SLR domain and adopted here for
-SE-domain SLRs. Cross-model verification is recommended by
-Syriani~et~al.~\cite{syriani2023} as a practical proxy when a fully
-independent human second rater is not feasible at the working-set scale
-considered here. Results of this verification are reported in
-Section~\ref{sec:slr-threats} (Internal Validity).
-
-Operationally, the protocol does not preserve an open-ended manual-arbitration
-queue. If a paper still lacks decision-critical evidence after the retrieval
-and enrichment cascade, or if the verifier can only return \texttt{pending}
-because the metadata remain insufficient, the paper is closed under EC5 and
-excluded from the valid evidence set.
-
-
 \subsection{Quality Assessment}
 \label{sec:slr-qa}
 
@@ -362,11 +324,10 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 Studies scoring below 4.0/8 (50\%) are excluded from the synthesis. QA8
 reflects the centrality of process model quality in the PATHCAST pipeline.
 
-QA scoring is performed by the same LLM-assisted protocol used for screening
-(Section~\ref{sec:slr-llm}): \textit{claude-haiku-4-5-20251001} receives a
-strict rubric for each criterion and returns a binary score with a brief
-justification. The full prompt and the per-study scores are part of the
-replication package (Section~\ref{sec:slr-replication}).
+QA scoring is performed by the same LLM-assisted protocol used for
+screening, with a strict per-criterion rubric returning a binary score
+and a brief justification. The full prompt and the per-study scores are
+part of the replication package (Section~\ref{sec:slr-replication}).
 Table~\ref{tab:qa-results} reports the quality-assessment outcome for the
 complete confirmed set ($n = 169$). All 169 studies were scored.
 
@@ -491,11 +452,12 @@ the 80\% threshold.
 
 \subsection{Title/Abstract Screening}
 
-All 2{,}340 working-set papers were screened against IC4a--IC4d and EC1--EC4
-using the LLM-assisted protocol described in Section~\ref{sec:slr-llm}. The
-screening was executed across five sequential batches of up to 500 papers each
-via the Anthropic Batches API, producing structured JSON outputs with decision,
-rationale, and matched criteria for each record.
+All 2{,}340 working-set papers were screened against IC4a--IC4d and
+EC1--EC4 using the LLM-assisted protocol introduced in the review-protocol
+preamble. The screening was executed across five sequential batches of up
+to 500 papers each via the Anthropic Batches API, producing structured
+JSON outputs with decision, rationale, and matched criteria for each
+record.
 
 \begin{table}[htbp]
 \centering
@@ -523,10 +485,9 @@ software development, principally generic business process management) and EC3
 \subsection{Full-Text Screening}
 
 The 886 papers forwarded from the T/A phase were subjected to LLM-assisted
-full-text screening using the strict prompt described in
-Section~\ref{sec:slr-llm} (decisions limited to \texttt{include},
-\texttt{exclude}, or \texttt{pending}; \texttt{maybe} is not permitted at this
-stage). To maximise the number of papers assessable by the LLM, a
+full-text screening with a strict binary prompt (decisions limited to
+\texttt{include}, \texttt{exclude}, or \texttt{pending}; \texttt{maybe}
+is not permitted at this stage). To maximise the number of papers assessable by the LLM, a
 multi-source abstract-enrichment cascade was executed prior to
 screening---combining DOI-based lookups via Semantic Scholar, OpenAlex, CORE,
 and Crossref, followed by title-based fallback lookups---raising abstract
@@ -1686,35 +1647,122 @@ observed in the spot-check, but a complete human re-extraction on a
 stratified sample is recommended before camera-ready submission.
 
 
-\subsection{Reproducibility and Use of AI}
+\subsection{Replication Package}
 \label{sec:slr-replication}
 
-In line with current Elsevier and Springer-Nature editorial policy, this
-review explicitly declares the use of AI tools in its conduct. The primary
-screener at the title/abstract and full-text stages is
-\textit{claude-haiku-4-5-20251001} (Anthropic), invoked through the
-Anthropic Message Batches API for screening and through the
-synchronous Messages API for QA scoring. The cross-model
-inter-rater verification described above uses
-\textit{claude-sonnet-4-6} (Anthropic) as the second rater. AI tools are
-\textbf{not} listed as authors of this work and are responsible for none of
-the editorial judgements; final selection, QA threshold, taxonomy design,
-and synthesis claims are the responsibility of the author.
-
 A complete replication package is deposited at Zenodo (DOI~10.5281/zenodo.20130276)
-and includes: the search strings for all five databases, the deduplication and
+and includes the search strings for all five databases, the deduplication and
 enrichment scripts (\texttt{pipeline/dedup.py}, \texttt{pipeline/enrich.py}),
-the screening prompts and JSON schema (\texttt{config/screening\_criteria.py}),
-the QA prompt (\texttt{pipeline/qa\_llm.py}), the cross-model verification
-prompts and computation (\texttt{pipeline/kappa.py}), the decision CSVs at
-each stage (\texttt{results/screening/ta\_screening\_results.csv},
-\texttt{results/screening/ft\_screening\_results.csv}), the QA-scored 169-study
-table (\texttt{results/qa\_assessment.csv}), the structured extraction
-table (\texttt{results/extraction/extraction\_template.csv}), the
-inter-rater agreement reports (\texttt{results/kappa/}), and a PRISMA flow
-snapshot. The package is intended to be self-contained: any reviewer can
-re-run the LLM-assisted protocol on the same working set and reproduce the
-169-study confirmed selection within the stated $\kappa$ confidence band.
+the screening and QA prompts and JSON schema
+(\texttt{config/screening\_criteria.py}, \texttt{pipeline/qa\_llm.py}),
+the cross-model verification computation (\texttt{pipeline/kappa.py}),
+the decision CSVs at each stage, the QA-scored 169-study table, the
+structured extraction table, the inter-rater agreement reports, and a
+PRISMA flow snapshot. The package is intended to be self-contained: any
+reviewer can re-run the LLM-assisted protocol on the same working set and
+reproduce the 169-study confirmed selection within the stated $\kappa$
+confidence band. AI tools were used as primary screeners under the manual
+verification protocol stated in the review-protocol preamble; they are
+not listed as authors and bear no responsibility for editorial
+judgements.
+
+
+\section{Cross-Domain Synthesis and Gap Map}
+\label{sec:slr-related-work}
+
+The findings synthesised above are positioned here against the broader
+related-work landscape, completing the gap map that motivates PATHCAST.
+
+\subsection{Process Mining Applied to SDLC}
+
+The principal contributions are summarised in Table~\ref{tab:pm-sd}: from
+the seminal work of Cook and Wolf~\cite{cook1998}, through the MSR-PM
+methodology of Poncin et al.~\cite{poncin2011process}, to the industrial
+applications by Caldeira and Cardoso~\cite{Caldeira2019AssessingSoftwareTeams}.
+The consistent pattern is concentration at the descriptive and diagnostic
+levels: discovery and conformance, rarely advancing to prediction or
+forecasting (Finding~F1).
+
+\begin{table}[htbp]
+\centering
+\caption{Process mining applied to software development.}
+\label{tab:pm-sd}
+\small
+\begin{tabular}{p{4.0cm}p{2.5cm}p{2.2cm}p{2.0cm}c}
+\toprule
+\textbf{Study} & \textbf{PM Type} & \textbf{Data Source} &
+\textbf{SDLC Phase} & \textbf{Pred.} \\
+\midrule
+Cook \& Wolf (1998)            & Discovery       & Build logs       & Build/Test     & No \\
+Rubin et al.\ (2007)            & Framework       & Conceptual       & All            & No \\
+Poncin et al.\ (2011)           & Discovery       & VCS, Issues, ML  & Multi-repo     & No \\
+Lemos et al.\ (2011)            & Disc., Conform. & Issue tracker    & Dev.\ lifecycle & No \\
+Mannhardt et al.\ (2016)        & Conform.        & Multi-system     & Healthcare\textsuperscript{*} & No \\
+Caldeira \& Cardoso (2019)     & Disc., Enhance. & Jira, Git        & Issue lifecycle & No \\
+\bottomrule
+\multicolumn{5}{l}{\textsuperscript{*}\scriptsize{Methodological reference for multi-perspective conformance.}}
+\end{tabular}
+\end{table}
+
+\subsection{Stochastic Forecasting and ML for SE}
+
+Markov chains have been applied to software testing
+(Whittaker and Thomason~\cite{WhittakerThomason1994}) and reliability
+modelling~\cite{WhittakerRekabThomason2000}, but not parameterised by
+process-mining-discovered structures.
+Vacanti~\cite{vacanti2015} popularised throughput-based Monte Carlo for
+agile forecasting, but this approach treats the process as a black box.
+Rogge-Solti and Weske~\cite{RoggeSolti2015NonMarkovianSPN} integrated PM
+with stochastic Petri nets for BPM remaining-time prediction, but did not
+target SDLC. Defect prediction~\cite{Zimmermann2005MiningVersionHistories,
+Wahono2015, pachouly2022} relies overwhelmingly on artefact-level
+features; PPM benchmarks~\cite{tax2017, marquezChamorro2018} operate on
+BPM event logs, not software development; Camargo et
+al.~\cite{camargo2022learning} combine deep learning with simulation in
+BPM domains.
+
+\subsection{Gap Map}
+
+Table~\ref{tab:gap} maps the intersection of techniques and SDLC focus.
+
+\begin{table}[htbp]
+\centering
+\caption{Technique integration ($\checkmark$) across studies. PATHCAST is
+the first proposal at the full intersection.}
+\label{tab:gap}
+\small
+\begin{tabular}{p{3.8cm}ccccc}
+\toprule
+\textbf{Approach} & \textbf{PM} & \textbf{Markov} &
+\textbf{MC Sim.} & \textbf{ML} & \textbf{SDLC} \\
+\midrule
+Cook \& Wolf (1998)             & $\checkmark$ &              &              &              & $\checkmark$ \\
+Whittaker \& Thomason (1994)    &              & $\checkmark$ &              &              & $\checkmark$ \\
+Vacanti (2015)                  &              &              & $\checkmark$ &              & $\checkmark$ \\
+Zimmermann et al.\ (2005)        &              &              &              & $\checkmark$ & $\checkmark$ \\
+Tax et al.\ (2017)               & $\checkmark$ &              &              & $\checkmark$ &              \\
+Rogge-Solti \& Weske (2015)     & $\checkmark$ &              & $\checkmark$ &              &              \\
+Rozinat et al.\ (2009)           & $\checkmark$ &              & $\checkmark$ &              &              \\
+Camargo et al.\ (2019)          & $\checkmark$ &              & $\checkmark$ & $\checkmark$ &              \\
+Marquez-Ch.\ et al.\ (2018)       & $\checkmark$ &              &              & $\checkmark$ &              \\
+Caldeira \& Cardoso (2019)     & $\checkmark$ &              &              &              & $\checkmark$ \\
+\midrule
+\textbf{PATHCAST} & $\boldsymbol{\checkmark}$ & $\boldsymbol{\checkmark}$ &
+$\boldsymbol{\checkmark}$ & $\boldsymbol{\checkmark}$ & $\boldsymbol{\checkmark}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The gap decomposes into five deficits, each constituting a contribution
+dimension of PATHCAST: \textbf{(D1)~Descriptive Ceiling} (PM in SDLC
+stops at discovery); \textbf{(D2)~Structural Blindness} (forecasting
+methods ignore process structure); \textbf{(D3)~Stochastic Integration
+Absence} (Markov/MC not parameterised by PM in SE); \textbf{(D4)~Feature
+Engineering Void} (ML predictors do not incorporate PM-derived features);
+and \textbf{(D5)~Pipeline Fragmentation} (no formal end-to-end
+PM~$\to$~Markov~$\to$~MC~$\to$~ML pipeline for SDLC). PATHCAST
+(Chapter~\ref{ch:method}) addresses all five simultaneously through a
+four-stage pipeline with formal inter-stage contracts.
 
 
 \section{Chapter Summary}
