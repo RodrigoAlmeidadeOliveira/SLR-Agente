@@ -1,0 +1,81 @@
+% =============================================================================
+% 8. THEORETICAL COMPARISON WITH RELATED APPROACHES
+% Target: 1 page (~500 words)
+% Source: cap4 sec:s4-comparison (tab:mc-comparison) + extended discussion
+% Status: SKELETON
+%
+% Purpose: position PATHCAST against three classes of related approaches
+% on EXPRESSIVENESS and ASSUMPTIONS, not on empirical numbers.
+% =============================================================================
+
+\section{Theoretical Comparison with Related Approaches}
+\label{sec:comparison}
+
+\textbf{[TODO — 1 p.]}
+We compare PATHCAST with three families of related approaches along
+five theoretical dimensions: process model, sampling unit, rework
+modeling, state-specific delays, and distributional outputs.
+
+\begin{table}[ht]
+\centering
+\caption{Theoretical comparison of forecasting approaches along five
+dimensions. ``--'' indicates the approach does not capture the
+dimension.}
+\label{tab:approach-comparison}
+\small
+\begin{tabular}{@{}l l l l l@{}}
+\toprule
+\textbf{Dimension}    &
+\textbf{Throughput MC}~\cite{vacanti2015} &
+\textbf{Markov analyt.}~\cite{kemeny1976finite} &
+\textbf{NM-SPN}~\cite{RoggeSolti2015NonMarkovianSPN} &
+\textbf{PATHCAST} \\
+\midrule
+Process model         & --                 & exogenous          & Petri net          & PM-discovered \\
+Sampling unit         & daily throughput   & none (analytical)  & timed firing       & transition + sojourn \\
+Rework                & --                 & via $N$           & via Petri loops    & via $P_{ab}$ + $\hat{F}$ \\
+State-specific delay  & --                 & via $\bar{d}_s$    & general dist.      & empirical $\hat{F}_s$ \\
+Distributional output & completion only    & --                 & lead-time only     & LT + outcome + path + WIP \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Throughput Monte Carlo.}
+\textbf{[TODO — 2 sentences.]}
+Throughput MC samples future cumulative completion from the empirical
+throughput distribution of a team. It is operationally simple but
+process-blind: rework, state-specific delays, and path information are
+not represented. By Theorem~\ref{thm:information}, throughput MC
+cannot exploit the information gain $I(T;\psi)$ encoded in the
+trajectory.
+
+\paragraph{Analytical absorbing Markov chains.}
+\textbf{[TODO — 2 sentences.]}
+The closed-form expectations $N\mathbf{1}$ and $NR$ are
+deterministic; they yield expected lead time but not a forecast
+distribution. PATHCAST uses these expressions for analytical
+cross-validation (Section~\ref{sec:numerical-example}) but produces
+distributional forecasts via Monte Carlo, exposing percentiles and tail
+risk that the analytical baseline cannot.
+
+\paragraph{Non-Markovian stochastic Petri nets (NM-SPN).}
+\textbf{[TODO — 2 sentences.]}
+NM-SPN~\cite{RoggeSolti2015NonMarkovianSPN} parameterize timed firings
+with general distributions over an exogenously specified Petri net.
+PATHCAST differs in two respects: (i) the process model is
+\emph{discovered} from the event log rather than supplied externally,
+removing a strong modelling burden; (ii) sojourn distributions are
+empirical rather than parametric, avoiding misspecification of the
+heavy-tailed, zero-inflated distributions typical of software
+processes.
+
+\paragraph{Process-prediction approaches.}
+\textbf{[TODO — 2 sentences.]}
+The predictive process monitoring
+literature~\cite{polato2018time, verenich2019survey} addresses remaining
+time prediction in business processes, typically via supervised
+learning. PATHCAST occupies a complementary niche: it integrates a
+stochastic process model (not a black-box predictor) and is specialised
+to the heterogeneous data sources of the SDLC. The ML component
+(Section~\ref{sec:ml-component}) bridges to this literature by adding
+case-level point forecasts on top of the population-level distribution.

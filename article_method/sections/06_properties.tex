@@ -1,0 +1,125 @@
+% =============================================================================
+% 6. FORMAL PROPERTIES
+% Target: 2 pages (~1000 words) — THIS IS THE PAPER'S DIFFERENTIATOR FOR A1
+% Source: cap4 §4.7–§4.8 (sec:integration, sec:method-properties)
+% Status: SKELETON
+% =============================================================================
+
+\section{Formal Properties}
+\label{sec:properties}
+
+% ---------- §6.1 Pipeline correctness ----------
+\subsection{Pipeline Correctness}
+\label{sec:prop-correctness}
+
+\begin{theorem}[Pipeline Correctness]
+\label{thm:pipeline-correctness}
+If each stage satisfies its contract (Table~\ref{tab:contracts}), then
+the composed pipeline $\mathcal{F} = \mathcal{S}_4 \circ \mathcal{S}_3
+\circ \mathcal{S}_2 \circ \mathcal{S}_1$ produces a valid empirical
+forecast distribution $\hat{\mathcal{D}}$ for any input $\mathcal{R}$
+satisfying:
+(i)~at least one repository contains events from $\ge 2$ data sources;
+(ii)~$|\mathcal{L}| \ge n_{\min}^{\text{cases}}$ (default 50);
+(iii)~$|S_T| \ge 1$ and $|S_A| \ge 1$.
+\end{theorem}
+
+\begin{proof}
+\textbf{[TODO — keep the short structural induction from cap4.]}
+By structural induction on stages: each postcondition implies the
+precondition of the next stage. (S1$\to$S2) event-log validity;
+(S2$\to$S3) sound model and non-empty state space; (S3$\to$S4)
+row-stochastic $P$ and non-empty empirical sojourn distributions; S4
+terminates either by absorption certainty
+(Property~\ref{prop:absorption-certainty}) or by the $K_{\max}$ safety
+bound. \qed
+\end{proof}
+
+% ---------- §6.2 Statistical consistency ----------
+\subsection{Statistical Consistency}
+\label{sec:prop-consistency}
+
+\begin{theorem}[Asymptotic Consistency]
+\label{thm:consistency}
+As $|\mathcal{L}| \to \infty$ and $M_{\text{sim}} \to \infty$:
+\begin{enumerate}
+    \item[(i)] $\hat{P} \xrightarrow{a.s.} P^*$;
+    \item[(ii)] $\hat{F}_T \xrightarrow{d} F_T^*$;
+    \item[(iii)] $\hat{Q}_\alpha \to Q_\alpha^*$ at continuity points.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\textbf{[TODO — 3-line sketch as in cap4.]}
+(i) Property~\ref{prop:mle-consistency}.
+(ii) Continuous mapping theorem applied to (i) and the
+Glivenko--Cantelli convergence $\hat{F}_s \to F_s^*$.
+(iii) Quantile continuity. \qed
+\end{proof}
+
+% ---------- §6.3 End-to-end convergence ----------
+\subsection{End-to-End Distributional Convergence}
+\label{sec:prop-convergence}
+
+\textbf{[TODO — paste def:calibration (CalErr, ACE) compactly.]}
+
+\begin{theorem}[End-to-End Convergence]
+\label{thm:pipeline-convergence}
+Under (a)~ergodicity of the underlying chain, (b)~uniform sojourn
+consistency
+$\sup_t |\hat{F}_i^{(n)}(t) - F_i^*(t)| \xrightarrow{a.s.} 0$ for each
+$i$, and (c)~$K(n) \to \infty$:
+\begin{equation}
+\label{eq:pipeline-convergence}
+\sup_t |\hat{F}_{n,K}(t) - F^*(t)| \xrightarrow{a.s.} 0,
+\qquad
+\text{ACE}_{n,K} \to 0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\textbf{[TODO — 4-line sketch, three steps as in cap4.]}
+SLLN for ergodic Markov chains gives entry-wise
+$\hat{P}^{(n)}\to P$~\cite{billingsley1961statistical};
+Glivenko--Cantelli per state plus union bound across the finite $S$;
+continuous mapping on simulated trajectories plus a second
+Glivenko--Cantelli application across $K$ replications gives the
+uniform convergence. ACE convergence follows.
+\end{proof}
+
+% ---------- §6.4 Information-theoretic advantage ----------
+\subsection{Information-Theoretic Advantage of Process Awareness}
+\label{sec:prop-information}
+
+\begin{theorem}[Information Gain from Process Structure]
+\label{thm:information}
+\begin{equation}
+\label{eq:information-gain}
+I(T; \psi) = H(T) - H(T \mid \psi) \ge 0,
+\end{equation}
+with equality iff $T$ is independent of the trajectory $\psi$.
+\end{theorem}
+
+\textbf{[TODO — one-paragraph practical interpretation: in real
+software processes $I(T;\psi)>0$ because rework-laden paths have
+systematically longer lead times. Process-aware MC captures this
+variance decomposition; throughput-based MC does not.]}
+
+% ---------- §6.5 Complexity and assumptions ----------
+\subsection{Complexity and Assumptions}
+\label{sec:prop-complexity}
+
+\textbf{[TODO — paste compact complexity table tab:complexity and
+assumptions table tab:assumptions. Both fit one row each per stage.]}
+
+The total cost is dominated by Stage~4:
+\begin{equation}
+\label{eq:total-cost}
+C_{\text{total}} = \mathcal{O}(|\mathcal{L}|)
+                 + \mathcal{O}(M_{\text{sim}} \cdot \bar{K}),
+\end{equation}
+where $\bar{K}$ is the expected trajectory length, bounded by $K_{\max}$.
+Monte Carlo is embarrassingly parallel and admits GPU
+offload~\cite{lecuyer2017random}.
+
+\textbf{[TODO — compact tab:assumptions with A1..A5 and mitigations.]}

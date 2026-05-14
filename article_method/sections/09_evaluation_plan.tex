@@ -1,0 +1,45 @@
+% =============================================================================
+% 9. EVALUATION PLAN (FORWARD-LOOKING)
+% Target: 0.5 page (~250 words)
+% Source: cap5 distilled to one short paragraph + forward reference
+% Status: SKELETON
+%
+% IMPORTANT: This section is intentionally short. The full evaluation
+% protocol and results are the subject of a companion empirical paper.
+% Reviewer-deflection: it answers "what about evaluation?" without
+% consuming the empirical material.
+% =============================================================================
+
+\section{Evaluation Plan}
+\label{sec:evaluation-plan}
+
+\textbf{[TODO — keep to one tight paragraph.]}
+The empirical validation of PATHCAST is reported in a companion paper
+(under review). For completeness, we summarize the design here.
+
+The protocol follows Design Science
+Research~\cite{hevner2004, peffers2007} and is evaluated on a dataset of
+48 open-source repositories selected by stratified sampling across
+primary language, project scale, governance model, and workflow
+maturity, totalling approximately 227{,}000 commits. The experimental
+design comprises two stages: \textbf{E1 (pipeline validation)}, which
+assesses event-log and process-model quality (correlation coverage,
+activity coverage, fitness, precision, generalization); and \textbf{E2
+(forecasting accuracy)}, which compares PATHCAST against four baselines
+--- historical mean, throughput-based Monte Carlo~\cite{vacanti2015},
+analytical Markov, and historical empirical
+CDF --- using the continuous ranked probability score (CRPS) as primary
+metric, mean absolute error (MAE) and median absolute error for point
+accuracy, the aggregate calibration error (ACE) for distributional
+fidelity, and 85\% coverage for the operational reporting interval. The
+ML component is evaluated with AUC-ROC, F1, and Brier score across three
+feature sets (PM-only, MSR-only, Combined). Statistical analysis uses
+Wilcoxon signed-rank tests with Bonferroni correction
+($\alpha_{\text{adj}} = 0.0125$) across repositories and Cliff's
+$\delta$ for effect size~\cite{kampenes2007systematic}. Temporal
+hold-out (70/30 split) and leave-one-project-out within domain groups
+control for information leakage and cross-repository generalization.
+
+\textbf{This paper does not report empirical results.} The reader is
+referred to the companion paper for the full evaluation, including
+calibration plots, CRPS box plots, and feature-importance rankings.

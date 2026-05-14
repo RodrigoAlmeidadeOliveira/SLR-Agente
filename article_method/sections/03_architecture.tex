@@ -1,0 +1,107 @@
+% =============================================================================
+% 3. PATHCAST ARCHITECTURE
+% Target: 1.5 pages (~750 words)
+% Source: cap4 §4.1 (sec:method-overview)
+% Status: SKELETON — migrate Definition 4.1, Figure 4.1, design principles,
+%         and consolidate the five stage contracts into a single table.
+% =============================================================================
+
+\section{PATHCAST Architecture}
+\label{sec:architecture}
+
+% ---------- §3.1 Pipeline definition ----------
+\subsection{Pipeline Definition}
+\label{sec:arch-pipeline}
+
+\textbf{[TODO — migrate cap4 def:pipeline (eq:pipeline).]}
+PATHCAST is defined as a composition of four sequential transformation
+stages and one parallel enhancement component.
+
+\begin{definition}[PATHCAST Pipeline]
+\label{def:pipeline}
+\textbf{[TODO — paste from cap4 def:pipeline. Stage signatures
+$\mathcal{S}_1$..$\mathcal{S}_4$ and $\mathcal{S}_{\text{ML}}$.]}
+\end{definition}
+
+\textbf{[TODO — paste notation paragraph: $\mathcal{R}$, $\mathcal{L}$,
+$M$, $\Phi$, $P$, $N$, $B$, $\hat{F}$, $\hat{\mathcal{D}}$, $\hat{f}$.]}
+
+% ---------- §3.2 Architecture figure ----------
+\subsection{Pipeline Architecture}
+\label{sec:arch-figure}
+
+\textbf{[TODO — migrate Figure fig:pipeline-architecture (TikZ from cap4).]}
+Figure~\ref{fig:pipeline-architecture} illustrates the pipeline with
+its data flows.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \input{figures/pipeline_architecture.tex}
+%     \caption{PATHCAST pipeline architecture. Solid arrows: primary
+%     sequential pipeline; dashed arrows: ML enhancement data flows.}
+%     \label{fig:pipeline-architecture}
+% \end{figure}
+
+% ---------- §3.3 Design principles ----------
+\subsection{Design Principles}
+\label{sec:arch-principles}
+
+\textbf{[TODO — consolidate into a single short paragraph (not 3
+boxes).]}
+The architecture is governed by three principles:
+\textbf{(P1) Empirical grounding} --- every model parameter is estimated
+from observed data; no \emph{a priori} distribution is assumed unless
+empirically validated.
+\textbf{(P2) Stage composability} --- each stage exposes a formal
+input/output contract (Table~\ref{tab:contracts}) so that stages may be
+independently tested, replaced or extended.
+\textbf{(P3) Distributional outputs} --- the pipeline produces
+probability distributions, not point estimates; every forecast is the
+empirical distribution of $M_{\text{sim}}$ simulated outcomes.
+
+% ---------- §3.4 Inter-stage contracts (CONSOLIDATED TABLE) ----------
+\subsection{Inter-Stage Contracts}
+\label{sec:arch-contracts}
+
+\textbf{[TODO — replace cap4 def:contract-s1..ml (5 boxes) with the
+single table below.]}
+
+\begin{table}[ht]
+\centering
+\caption{Inter-stage contracts. Each stage is specified by its input,
+output and key postconditions. Full specifications are given in
+Section~\ref{sec:stages}.}
+\label{tab:contracts}
+\small
+\begin{tabular}{@{}l l l p{5.5cm}@{}}
+\toprule
+\textbf{Stage} & \textbf{Input} & \textbf{Output} &
+\textbf{Key Postconditions} \\
+\midrule
+$\mathcal{S}_1$    & $\mathcal{R}$
+                   & $\mathcal{L}$
+                   & Valid case ID, activity, timestamp per event;
+                     timestamp-ordered within each trace. \\
+$\mathcal{S}_2$    & $\mathcal{L}$
+                   & $(M, \Phi, S)$
+                   & $M$ sound; $\phi_{\text{fit}}, \phi_{\text{prec}}
+                     \in [0,1]$; $|S_T|\ge1$, $|S_A|\ge1$. \\
+$\mathcal{S}_3$    & $(\mathcal{L}, S)$
+                   & $(P, N, B, \hat{F}, \pi)$
+                   & $P$ row-stochastic; $(I-Q)$ invertible;
+                     $\sum_j B_{ij}=1$. \\
+$\mathcal{S}_4$    & $(P, \hat{F}, s_0, M_{\text{sim}})$
+                   & $\hat{\mathcal{D}}$
+                   & $|\hat{\mathcal{D}}| = M_{\text{sim}}$;
+                     every trajectory absorbs or is flagged. \\
+$\mathcal{S}_{\text{ML}}$ & $(\mathcal{L},\Phi,P,N)$
+                   & $(\hat{f}, \mathbf{w})$
+                   & Temporal hold-out enforced; AUC-ROC, F1, Brier
+                     reported. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The contracts establish the preconditions of the correctness theorem
+proved in Section~\ref{sec:properties}
+(Theorem~\ref{thm:pipeline-correctness}).

@@ -1,0 +1,187 @@
+% =============================================================================
+% 4. STAGE SPECIFICATIONS
+% Target: 4.5 pages (~2250 words)
+% Source: cap4 §4.2–§4.5 (sec:stage1..sec:stage4)
+% Status: SKELETON — keep only one operation + one property + one equation
+%         per stage; move detailed tables and rework analysis to supplementary.
+% =============================================================================
+
+\section{Stage Specifications}
+\label{sec:stages}
+
+% =============================================================================
+% 4.1 STAGE 1 — Event Log Construction (1 p)
+% =============================================================================
+\subsection{Stage 1: Event Log Construction}
+\label{sec:stages-s1}
+
+\textbf{[TODO — 1 p.]}
+Stage~1 transforms heterogeneous repository data into a structured event
+log. It is the composition
+\begin{equation}
+\label{eq:s1-decomposition}
+\mathcal{S}_1 = \textsc{Format} \circ \textsc{Map} \circ
+    \textsc{Correlate} \circ \textsc{Extract}.
+\end{equation}
+
+\textbf{[TODO — migrate def:raw-event, def:correlation, eq:kappa1,
+def:corr-quality. Move the detailed extraction/mapping tables
+(tab:event-extraction, tab:activity-mapping) to online supplementary.]}
+
+Case correlation is implemented as a cascade of three strategies
+($\kappa_1$: explicit reference, $\kappa_2$: structural link,
+$\kappa_3$: heuristic). Correlation quality is monitored by
+$\text{Coverage} = |E^{\text{corr}}|/|E^{\text{raw}}|$ and
+ambiguity rate (Definition~\ref{def:corr-quality}).
+
+\begin{definition}[Structured Event]
+\label{def:structured-event}
+A structured event is
+$e = (\kappa(e), \mu(e), \tau(e), \rho(e), \omega(e))$ with case ID,
+activity, timestamp, resource, and attribute map.
+\end{definition}
+
+\textbf{[TODO — final event-log equation eq:final-log.]}
+
+% =============================================================================
+% 4.2 STAGE 2 — Process Mining (1 p)
+% =============================================================================
+\subsection{Stage 2: Process Mining}
+\label{sec:stages-s2}
+
+\textbf{[TODO — 1 p.]}
+Stage~2 produces a process model $M$ and the metrics vector
+$\Phi$. The Inductive Miner~\cite{leemans2013discovering} is
+applied with noise threshold $\theta_{\text{noise}} \in [0,1]$:
+\begin{equation}
+\label{eq:discovery}
+M = \textsc{InductiveMiner}(\mathcal{L}, \theta_{\text{noise}}).
+\end{equation}
+
+\begin{property}[Soundness Guarantee]
+\label{prop:soundness}
+The Inductive Miner produces a sound process tree by
+construction~\cite{leemans2013discovering}.
+\end{property}
+
+Alignment-based conformance produces
+$\phi_{\text{fit}}, \phi_{\text{prec}}, \phi_{\text{gen}} \in [0,1]$ and
+per-case scores $\phi_{\text{conf}}(c)$ that feed the ML component
+(Section~\ref{sec:ml-component}).
+\textbf{[TODO — paste eq:case-conformance.]}
+
+\textbf{[TODO — variant entropy def:variant-entropy as a complexity
+proxy; state-space extraction def:state-space; performance-enhancement
+metrics moved to supplementary except for the per-state mean sojourn
+$\bar{d}_a$ which is used in $\hat{F}$.]}
+
+% =============================================================================
+% 4.3 STAGE 3 — Stochastic Modeling (1.5 p)
+% =============================================================================
+\subsection{Stage 3: Stochastic Modeling}
+\label{sec:stages-s3}
+
+\textbf{[TODO — 1.5 p. This is the formal core; keep dense.]}
+
+Stage~3 estimates a transition matrix, an empirical sojourn-time
+distribution, and the fundamental quantities of an absorbing Markov
+chain. The decomposition is
+\begin{equation}
+\label{eq:s3-decomposition}
+\mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
+    \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count}.
+\end{equation}
+
+\paragraph{Maximum-likelihood estimation with optional smoothing.}
+\textbf{[TODO — paste eq:mle-full and prop:mle-consistency.]}
+\begin{equation}
+\label{eq:mle-full}
+\hat{P}_{ij} = \frac{C_{ij} + \alpha}
+                    {\sum_{j'} C_{ij'} + \alpha |S|}, \qquad
+\alpha \geq 0.
+\end{equation}
+
+\paragraph{Absorbing-chain decomposition.}
+\textbf{[TODO — paste eq:absorbing-decomposition, eq:fundamental-computation,
+eq:absorption-prob, prop:invertibility, prop:absorption-certainty.]}
+States are reordered so that transient precede absorbing:
+\begin{equation}
+\label{eq:absorbing-decomposition}
+\hat{P} = \begin{pmatrix} Q & R \\ \mathbf{0} & I \end{pmatrix},
+\qquad
+N = (I-Q)^{-1}, \qquad
+B = NR.
+\end{equation}
+
+\begin{property}[Absorption Certainty]
+\label{prop:absorption-certainty}
+$\sum_{a \in S_A} B_{ia} = 1$ for every $i \in S_T$.
+\end{property}
+
+Expected lead time in calendar time:
+\begin{equation}
+\label{eq:expected-lead-time}
+\mathbb{E}[\text{LeadTime} \mid s_0 = i]
+  = \sum_{j \in S_T} N_{ij} \cdot \bar{d}_j.
+\end{equation}
+
+\paragraph{Empirical sojourn-time distributions.}
+\textbf{[TODO — paste def:sojourn-distribution and rem:nonparametric.
+Justify non-parametric design choice in two sentences.]}
+\begin{equation}
+\label{eq:ecdf}
+\hat{F}_s(t) = \tfrac{1}{|\mathcal{T}_s|}
+    \sum_{\tau \in \mathcal{T}_s} \mathbf{1}[\tau \leq t].
+\end{equation}
+
+\paragraph{Confidence assessment.}
+\textbf{[TODO — paste eq:se-transition and eq:confidence-grade. Mention
+that rows with $n_i < n_{\min}$ are flagged; full sensitivity to
+$\alpha$ in supplementary.]}
+
+\textbf{[Cut: §3.7 quasi-stationary derivation; §3.8 rework analysis ---
+moved to online supplementary.]}
+
+% =============================================================================
+% 4.4 STAGE 4 — Monte Carlo Simulation (1 p)
+% =============================================================================
+\subsection{Stage 4: Process-Aware Monte Carlo Simulation}
+\label{sec:stages-s4}
+
+\textbf{[TODO — 1 p.]}
+
+Stage~4 generates the empirical forecast distribution by simulating
+trajectories of the absorbing chain with sojourn times sampled from
+$\hat{F}_s$:
+\begin{equation}
+\label{eq:forecast-distribution}
+\hat{\mathcal{D}}
+  = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}.
+\end{equation}
+
+\textbf{[TODO — paste Algorithm alg:mc-full (process-aware Monte Carlo)
+with the $K_{\max}$ safety bound.]}
+
+% \begin{algorithm}[htbp]
+% \caption{Process-Aware Monte Carlo Simulation}
+% \label{alg:mc-full}
+% \begin{algorithmic}[1]
+% ...
+% \end{algorithmic}
+% \end{algorithm}
+
+\paragraph{Forecast extraction.}
+From $\hat{\mathcal{D}}$ the pipeline extracts percentile forecasts
+$\hat{Q}_\alpha$ (P50, P85, P95), completion probability
+$\hat{P}(\text{Done})$, and tail risk
+$\hat{P}(T > \tau_{\text{deadline}})$.
+\textbf{[TODO — paste eq:percentile, eq:completion-prob, eq:tail-risk.]}
+
+\paragraph{Convergence.}
+The MC estimation error decreases as
+$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}. Adaptive doubling
+from $M_{\text{sim}}=1{,}000$ to $100{,}000$ stops when the relative
+half-width of the 95\% CI on $\hat{Q}_{0.5}$ falls below
+$\epsilon = 0.02$ (Definition~\ref{def:convergence}).
+
+\textbf{[TODO — paste def:convergence and prop:convergence-rate.]}

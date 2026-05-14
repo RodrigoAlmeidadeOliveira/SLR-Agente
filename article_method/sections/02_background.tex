@@ -1,0 +1,92 @@
+% =============================================================================
+% 2. BACKGROUND AND RELATED WORK
+% Target: 2 pages (~1000 words)
+% Source: tese/cap2_reduced.tex (compressed) + gap synthesis from SLR (cap. 3)
+% Status: SKELETON
+% =============================================================================
+
+\section{Background and Related Work}
+\label{sec:background}
+
+% ---------- §2.1 Process mining fundamentals ----------
+\subsection{Process Mining}
+\label{sec:bg-pm}
+
+\textbf{[TODO §2.1 — 0.5 p.]}
+Process mining~\cite{aalst2016process} extracts process knowledge from
+event logs. The discipline distinguishes three families of techniques:
+discovery (e.g., the Inductive Miner~\cite{leemans2013discovering}),
+conformance checking (alignments), and enhancement.
+The Inductive Miner is adopted here for its
+formal soundness guarantee on the discovered process tree, which is
+required by Stage~2 of the pipeline (Section~\ref{sec:stages-s2}).
+
+% Key concepts to summarize:
+% - event log (case id, activity, timestamp)
+% - process model (Petri net / process tree)
+% - fitness, precision, generalization (four-quality framework)
+
+% ---------- §2.2 Markov chains for business processes ----------
+\subsection{Absorbing Markov Chains}
+\label{sec:bg-markov}
+
+\textbf{[TODO §2.2 — 0.5 p.]}
+Absorbing Markov chains provide closed-form expressions for expected
+absorption times and absorption probabilities via the fundamental matrix
+$N = (I-Q)^{-1}$~\cite{kemeny1976finite}. Their application to business
+process analysis has been explored by Rogge-Solti and
+Weske~\cite{RoggeSolti2015NonMarkovianSPN} via stochastic Petri nets,
+and by~\cite{Spedicato2017} via direct estimation from event logs.
+PATHCAST adopts the latter approach but couples it with empirical
+sojourn-time distributions, avoiding the parametric assumptions of
+classical semi-Markov treatments.
+
+% ---------- §2.3 Stochastic forecasting in software engineering ----------
+\subsection{Stochastic Forecasting in Software Engineering}
+\label{sec:bg-forecasting}
+
+\textbf{[TODO §2.3 — 0.5 p.]}
+Throughput-based Monte Carlo, popularized by
+Vacanti~\cite{vacanti2015} and extended
+by~\cite{savage2009flaw, magennis2015forecasting}, samples future
+completion dates from the empirical throughput distribution of a team.
+The approach is operationally simple and widely adopted in agile
+practice, but treats the process as a black box: rework, state-specific
+delays, and path diversity are not captured.
+Recent work on probabilistic process forecasting in business processes
+includes~\cite{polato2018time, verenich2019survey}; none of these
+methods is specialised to the SDLC nor integrates the heterogeneous
+data sources (Git, issue tracker, CI/CD, code review) characteristic of
+software repositories.
+
+% ---------- §2.4 Gap synthesis ----------
+\subsection{Pipeline-Fragmentation Gap}
+\label{sec:bg-gap}
+
+\textbf{[TODO §2.4 — 0.5 p.]}
+Table~\ref{tab:gap-synthesis} summarizes the coverage of process mining,
+stochastic modeling, and forecasting across five representative
+categories of work in the SDLC literature. Only a single primary study
+in the SLR of~\cite{almeida2026slr} satisfies all three dimensions,
+motivating the integrated pipeline proposed in this paper.
+
+\begin{table}[ht]
+\centering
+\caption{Coverage of PM, stochastic modeling, and forecasting across
+representative SDLC-related research families. ``\checkmark'' indicates
+explicit treatment; ``--'' indicates absence.}
+\label{tab:gap-synthesis}
+\small
+\begin{tabular}{@{}lccc l@{}}
+\toprule
+\textbf{Family} & \textbf{PM} & \textbf{Stochastic} &
+\textbf{Forecasting} & \textbf{Representative} \\
+\midrule
+SDLC process discovery       & \checkmark & --          & --          & \cite{rubin2007process} \\
+Throughput Monte Carlo       & --         & \checkmark  & \checkmark  & \cite{vacanti2015}     \\
+Effort/lead-time ML          & --         & --          & \checkmark  & \cite{choetkiertikul2018deep} \\
+Stochastic Petri nets (BPM)  & \checkmark & \checkmark  & --          & \cite{RoggeSolti2015NonMarkovianSPN} \\
+\textbf{PATHCAST (this paper)} & \checkmark & \checkmark & \checkmark & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
