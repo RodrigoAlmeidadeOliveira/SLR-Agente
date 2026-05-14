@@ -1,0 +1,10 @@
+SLR PATHCAST — Auxiliary FT Screening Result
+============================================================
+Forwarded to FT: 1383
+  include: 212 (15.3%)
+  exclude: 291 (21.0%)
+  pending: 880 (63.6%)
+  errors:  0
+
+NEW confirmed includes from auxiliary corpus: 212
+Combined working-set + auxiliary confirmed: 381

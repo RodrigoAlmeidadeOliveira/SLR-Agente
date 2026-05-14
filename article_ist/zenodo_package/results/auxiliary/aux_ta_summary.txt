@@ -1,0 +1,9 @@
+SLR PATHCAST — Auxiliary Corpus T/A Screening Result
+============================================================
+Total papers: 3807
+  include: 232 (6.1%)
+  maybe:   1151 (30.2%)
+  exclude: 2423 (63.6%)
+  errors:  1
+
+Forwarded to FT screening (include + maybe): 1383

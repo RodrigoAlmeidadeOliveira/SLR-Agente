@@ -1,0 +1,51 @@
+{
+  "title": "Replication Package for \"Process Mining and Stochastic Modeling for Software Process Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol\"",
+  "upload_type": "dataset",
+  "description": "Full replication artefact for a systematic literature review at the intersection of process mining, stochastic modeling, and machine-learning forecasting applied to software-development processes. Includes: search strings for five databases (Scopus, IEEE Xplore, ACM Digital Library, Springer Link, Web of Science); deduplication, enrichment, and screening pipelines; LLM screening prompts and JSON schemas (claude-haiku-4-5 primary, claude-sonnet-4-6 verifier); 8-criterion quality-assessment rubric (Dyba and Dingsoyr, 2008); cross-model Cohen's kappa verification scripts and reports; decision CSVs at every pipeline stage; structured extraction tables; PRISMA flow snapshot; snowballing-v2 outputs; EC5 audit results; sensitivity analysis. Reproduces the figures and tables of the corresponding manuscript submitted to Information and Software Technology (Elsevier). PDFs of primary studies are not redistributed (copyright); DOIs are provided in results/final_review/included_studies_current.csv.",
+  "creators": [
+    {
+      "name": "Almeida de Oliveira, Rodrigo",
+      "orcid": "0009-0009-6310-4126",
+      "affiliation": "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+    },
+    {
+      "name": "Ribeiro, Juliano de Paulo",
+      "orcid": "0009-0004-3605-485X",
+      "affiliation": "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+    },
+    {
+      "name": "Scalabrin, Edson Emilio",
+      "orcid": "0000-0002-3918-1799",
+      "affiliation": "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+    }
+  ],
+  "keywords": [
+    "Systematic Literature Review",
+    "Process Mining",
+    "Stochastic Modeling",
+    "Software Process Forecasting",
+    "LLM-Assisted Screening",
+    "Mining Software Repositories",
+    "Software Engineering",
+    "PRISMA",
+    "Cohen's kappa",
+    "Replication Package"
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "language": "eng",
+  "communities": [
+    {"identifier": "msr"}
+  ],
+  "grants": [
+    {"id": "10.13039/501100002322::001"}
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://www.editorialmanager.com/infsof/",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-article"
+    }
+  ],
+  "notes": "Funded in part by CAPES (Finance Code 001). LLM tools used: claude-haiku-4-5-20251001 (primary screener and QA scorer) and claude-sonnet-4-6 (cross-model verifier); both from Anthropic. The LLM tools are not listed as authors and bear no responsibility for editorial judgements."
+}

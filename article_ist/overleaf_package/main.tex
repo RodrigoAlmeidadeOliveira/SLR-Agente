@@ -49,6 +49,11 @@
 %% --- Bibliography style: Elsevier numeric + sorted ---
 \bibliographystyle{elsarticle-num}
 
+%% --- Zenodo replication-package DOI (single point of update) ---
+%% Reserve DOI on Zenodo *before* submission, then replace the value below.
+\newcommand{\zenododoi}{10.5281/zenodo.20130276}
+\newcommand{\zenododoiurl}{https://doi.org/\zenododoi}
+
 \journal{Information and Software Technology}
 
 \begin{document}
@@ -179,14 +184,14 @@ the cross-model verifier for inter-rater agreement. All decisions were
 inspected by the authors; the LLM tools are not listed as authors and
 bear no responsibility for editorial judgements. Full prompts, JSON
 schemas, and per-paper decisions are deposited in the replication package
-(\href{https://doi.org/10.5281/zenodo.15719919}{Zenodo
-DOI~10.5281/zenodo.15719919}). The authors reviewed and edited the content
+(\href{\zenododoiurl}{Zenodo
+DOI~\zenododoi}). The authors reviewed and edited the content
 as needed and take full responsibility for the content of the
 publication.
 
 \section*{Data availability}
 A full replication package is available at Zenodo
-(\href{https://doi.org/10.5281/zenodo.15719919}{DOI~10.5281/zenodo.15719919}).
+(\href{\zenododoiurl}{DOI~\zenododoi}).
 The package contains: search strings for all five databases, deduplication
 and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
 the cross-model $\kappa$ verification scripts, all decision CSVs at every

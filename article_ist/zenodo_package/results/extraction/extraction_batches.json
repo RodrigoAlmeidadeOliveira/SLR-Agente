@@ -1,0 +1,26 @@
+[
+  {
+    "batch_id": "msgbatch_01Wiecgkayek1i2jRs7juwY8",
+    "mode": "pdf",
+    "count": 75,
+    "ts": "2026-04-19T10:57:38"
+  },
+  {
+    "batch_id": "msgbatch_01QepzMZDTUTKQN6kYGyUmn8",
+    "mode": "abstract",
+    "count": 94,
+    "ts": "2026-04-19T11:01:55"
+  },
+  {
+    "batch_id": "msgbatch_01DJiVogeLagnhJXAEnfV1sR",
+    "mode": "pdf",
+    "count": 75,
+    "ts": "2026-04-19T11:07:36"
+  },
+  {
+    "batch_id": "msgbatch_01FMBGM9xey1ptRqHBXCLrmJ",
+    "mode": "abstract",
+    "count": 94,
+    "ts": "2026-04-19T11:11:30"
+  }
+]

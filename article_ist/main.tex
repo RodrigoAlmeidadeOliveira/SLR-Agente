@@ -1,22 +1,24 @@
 %% =============================================================================
-%% IST submission — main entry point
+%% IST submission — Overleaf package (flat layout)
 %%
-%% Build:
+%% Build on Overleaf (pdfLaTeX + BibTeX, default settings):
 %%   pdflatex main
 %%   bibtex main
 %%   pdflatex main && pdflatex main
 %%
-%% Required \input files (preserve relative paths under the project root):
-%%   ../results/qa_assessment_summary.tex
-%%   ../results/kappa/kappa_report.tex
-%%   ../results/auxiliary/aux_qa_summary.tex
-%%   ../results/auxiliary/aux_ft_summary.tex
-%%   ../results/auxiliary/aux_reft_summary.tex
-%%   ../results/auxiliary/kappa/aux_kappa_report.tex
-%%   ../results/ec5_recovery/ec5_recovery_report.tex
-%%   ../results/sensitivity/sensitivity_report.tex
-%% Bibliography:
-%%   ../results/final_review/missing_references.bib (+ thesis bib if needed)
+%% Files (paths relative to main.tex):
+%%   main.tex
+%%   cap3_article_body.tex
+%%   cover_letter.tex
+%%   results/qa_assessment_summary.tex
+%%   results/kappa/kappa_report.tex
+%%   results/auxiliary/aux_qa_summary.tex
+%%   results/auxiliary/aux_ft_summary.tex
+%%   results/auxiliary/aux_reft_summary.tex
+%%   results/auxiliary/kappa/aux_kappa_report.tex
+%%   results/ec5_recovery/ec5_recovery_report.tex
+%%   results/sensitivity/sensitivity_report.tex
+%%   results/final_review/missing_references.bib
 %% =============================================================================
 
 \documentclass[review,3p,times]{elsarticle}
@@ -44,14 +46,13 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
 
-%% --- File-search path so \input picks up results/ from project root ---
-\makeatletter
-\providecommand*\input@path{}
-\g@addto@macro\input@path{{../}}
-\makeatother
-
 %% --- Bibliography style: Elsevier numeric + sorted ---
 \bibliographystyle{elsarticle-num}
+
+%% --- Zenodo replication-package DOI (single point of update) ---
+%% Reserve DOI on Zenodo *before* submission, then replace the value below.
+\newcommand{\zenododoi}{10.5281/zenodo.20130276}
+\newcommand{\zenododoiurl}{https://doi.org/\zenododoi}
 
 \journal{Information and Software Technology}
 
@@ -183,14 +184,14 @@ the cross-model verifier for inter-rater agreement. All decisions were
 inspected by the authors; the LLM tools are not listed as authors and
 bear no responsibility for editorial judgements. Full prompts, JSON
 schemas, and per-paper decisions are deposited in the replication package
-(\href{https://doi.org/10.5281/zenodo.15719919}{Zenodo
-DOI~10.5281/zenodo.15719919}). The authors reviewed and edited the content
+(\href{\zenododoiurl}{Zenodo
+DOI~\zenododoi}). The authors reviewed and edited the content
 as needed and take full responsibility for the content of the
 publication.
 
 \section*{Data availability}
 A full replication package is available at Zenodo
-(\href{https://doi.org/10.5281/zenodo.15719919}{DOI~10.5281/zenodo.15719919}).
+(\href{\zenododoiurl}{DOI~\zenododoi}).
 The package contains: search strings for all five databases, deduplication
 and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
 the cross-model $\kappa$ verification scripts, all decision CSVs at every
@@ -199,6 +200,6 @@ structured extraction tables (working-set and auxiliary), the inter-rater
 agreement reports, and a PRISMA flow snapshot.
 
 %% --- Bibliography ---
-\bibliography{../results/final_review/missing_references}
+\bibliography{results/final_review/missing_references}
 
 \end{document}

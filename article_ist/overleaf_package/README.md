@@ -42,7 +42,7 @@ pdflatex cover_letter
 - [ ] Native English proofread (Editage / Elsevier Author Services)
 - [ ] iThenticate plagiarism check (PUC-PR)
 - [ ] Confirm 5 suggested reviewers in `cover_letter.tex`
-- [ ] Verify Zenodo DOI 10.5281/zenodo.15719919 has latest replication package
+- [ ] **Reserve DOI on Zenodo** before submission, then update `\zenododoi` macro in `main.tex` and `cover_letter.tex` (currently set to `10.5281/zenodo.20130276`)
 - [ ] Submit at https://www.editorialmanager.com/infsof/
 
 ## Journal target
