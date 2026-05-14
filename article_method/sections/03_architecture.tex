@@ -1,9 +1,7 @@
 % =============================================================================
 % 3. PATHCAST ARCHITECTURE
 % Target: 1.5 pages (~750 words)
-% Source: cap4 §4.1 (sec:method-overview)
-% Status: SKELETON — migrate Definition 4.1, Figure 4.1, design principles,
-%         and consolidate the five stage contracts into a single table.
+% Source: cap4 §4.1 (sec:method-overview) — MIGRATED
 % =============================================================================
 
 \section{PATHCAST Architecture}
@@ -13,95 +11,204 @@
 \subsection{Pipeline Definition}
 \label{sec:arch-pipeline}
 
-\textbf{[TODO — migrate cap4 def:pipeline (eq:pipeline).]}
 PATHCAST is defined as a composition of four sequential transformation
 stages and one parallel enhancement component.
 
 \begin{definition}[PATHCAST Pipeline]
 \label{def:pipeline}
-\textbf{[TODO — paste from cap4 def:pipeline. Stage signatures
-$\mathcal{S}_1$..$\mathcal{S}_4$ and $\mathcal{S}_{\text{ML}}$.]}
+The PATHCAST pipeline is the function composition
+\begin{equation}
+\label{eq:pipeline}
+\mathcal{F} = \mathcal{S}_4 \circ \mathcal{S}_3
+            \circ \mathcal{S}_2 \circ \mathcal{S}_1,
+\end{equation}
+where
+\begin{align}
+\mathcal{S}_1 &: \mathcal{R} \to \mathcal{L}
+    && \text{\textup{(Event Log Construction)}} \label{eq:stage1-sig} \\
+\mathcal{S}_2 &: \mathcal{L} \to (M, \Phi)
+    && \text{\textup{(Process Mining)}}         \label{eq:stage2-sig} \\
+\mathcal{S}_3 &: (\mathcal{L}, M) \to (P, N, B, \hat{F})
+    && \text{\textup{(Markov Estimation)}}      \label{eq:stage3-sig} \\
+\mathcal{S}_4 &: (P, \hat{F}, s_0, M_{\text{sim}}) \to \hat{\mathcal{D}}
+    && \text{\textup{(Monte Carlo Simulation)}} \label{eq:stage4-sig}
+\end{align}
+together with the parallel component
+\begin{equation}
+\label{eq:ml-sig}
+\mathcal{S}_{\text{ML}} : (\mathcal{L}, \Phi, P, N) \to \hat{f}
+    \quad \text{\textup{(ML Enhancement)}}.
+\end{equation}
 \end{definition}
 
-\textbf{[TODO — paste notation paragraph: $\mathcal{R}$, $\mathcal{L}$,
-$M$, $\Phi$, $P$, $N$, $B$, $\hat{F}$, $\hat{\mathcal{D}}$, $\hat{f}$.]}
+\paragraph{Notation.}
+$\mathcal{R}$ denotes the set of software repositories;
+$\mathcal{L}$ the structured event log;
+$M$ the discovered process model;
+$\Phi$ the process metrics vector;
+$P$ the Markov transition matrix;
+$N = (I-Q)^{-1}$ the fundamental matrix of the absorbing chain;
+$B = NR$ the absorption probability matrix;
+$\hat{F} = \{\hat{F}_s\}_{s \in S_T}$ the empirical sojourn-time
+distributions per transient state;
+$s_0$ an initial state (or initial distribution $\pi_0$);
+$M_{\text{sim}}$ the Monte Carlo simulation budget;
+$\hat{\mathcal{D}}$ the empirical forecast distribution;
+$\hat{f}$ the trained ML predictor.
 
 % ---------- §3.2 Architecture figure ----------
 \subsection{Pipeline Architecture}
 \label{sec:arch-figure}
 
-\textbf{[TODO — migrate Figure fig:pipeline-architecture (TikZ from cap4).]}
-Figure~\ref{fig:pipeline-architecture} illustrates the pipeline with
-its data flows.
+Figure~\ref{fig:pipeline-architecture} illustrates the pipeline
+architecture and its data flows. Solid arrows denote the primary
+sequential pipeline; dashed arrows denote the data flows feeding the
+ML enhancement component.
 
-% \begin{figure}[htbp]
-%     \centering
-%     \input{figures/pipeline_architecture.tex}
-%     \caption{PATHCAST pipeline architecture. Solid arrows: primary
-%     sequential pipeline; dashed arrows: ML enhancement data flows.}
-%     \label{fig:pipeline-architecture}
-% \end{figure}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.8cm,
+    stage/.style={rectangle, draw, thick, rounded corners=4pt,
+                  minimum width=5.2cm, minimum height=1.3cm,
+                  align=center, font=\small},
+    data/.style={rectangle, draw, dashed, rounded corners=2pt,
+                 minimum width=3.0cm, minimum height=0.7cm,
+                 align=center, font=\scriptsize, fill=gray!5},
+    arrow/.style={->, thick, >=stealth},
+    darrow/.style={->, dashed, >=stealth, gray},
+    lbl/.style={font=\scriptsize, midway, right, xshift=3pt}
+]
+    \node[data] (git)  at (-3.2, 0) {Git Logs};
+    \node[data] (jira) at ( 0.0, 0) {Issue Tracker};
+    \node[data] (ci)   at ( 3.2, 0) {CI/CD Logs};
+
+    \node[stage, fill=blue!8,  below of=jira, yshift=-0.4cm] (s1) {
+        \textbf{Stage 1: Event Log Construction}\\
+        $\mathcal{S}_1 : \mathcal{R} \to \mathcal{L}$
+    };
+    \node[stage, fill=blue!15, below of=s1, yshift=-0.6cm] (s2) {
+        \textbf{Stage 2: Process Mining}\\
+        $\mathcal{S}_2 : \mathcal{L} \to (M, \Phi)$
+    };
+    \node[stage, fill=orange!15, below of=s2, yshift=-0.6cm] (s3) {
+        \textbf{Stage 3: Markov Estimation}\\
+        $\mathcal{S}_3 : (\mathcal{L}, M) \to (P, N, B, \hat{F})$
+    };
+    \node[stage, fill=red!12, below of=s3, yshift=-0.6cm] (s4) {
+        \textbf{Stage 4: Monte Carlo Simulation}\\
+        $\mathcal{S}_4 : (P, \hat{F}, s_0, M_{\text{sim}})
+            \to \hat{\mathcal{D}}$
+    };
+    \node[stage, fill=green!12, right of=s3, xshift=4.5cm] (ml) {
+        \textbf{ML Enhancement}\\
+        $\mathcal{S}_{\text{ML}} : (\mathcal{L}, \Phi, P, N) \to \hat{f}$
+    };
+    \node[data, below of=s4, yshift=-0.1cm,
+          minimum width=5.2cm, fill=purple!8] (output) {
+        Probabilistic Forecasts $\hat{\mathcal{D}}$\\
+        {\scriptsize Percentiles, Completion Prob., Tail Risk, Paths}
+    };
+
+    \draw[arrow] (git)  -- (s1);
+    \draw[arrow] (jira) -- (s1);
+    \draw[arrow] (ci)   -- (s1);
+    \draw[arrow] (s1) -- (s2) node[lbl] {$\mathcal{L}$};
+    \draw[arrow] (s2) -- (s3) node[lbl] {$M, \Phi$};
+    \draw[arrow] (s3) -- (s4) node[lbl] {$P, \hat{F}$};
+    \draw[arrow] (s4) -- (output);
+
+    \draw[darrow] (s2.east) -| (ml.north)
+        node[font=\scriptsize, above, pos=0.25] {$\mathcal{L}, \Phi$};
+    \draw[darrow] (s3.east) -- (ml.west)
+        node[font=\scriptsize, above] {$P, N$};
+    \draw[darrow] (ml.south) |- (output.east)
+        node[font=\scriptsize, right, pos=0.3] {$\hat{f}$};
+\end{tikzpicture}
+\caption{PATHCAST pipeline architecture. Solid arrows: primary
+sequential pipeline; dashed arrows: ML enhancement data flows.}
+\label{fig:pipeline-architecture}
+\end{figure}
 
 % ---------- §3.3 Design principles ----------
 \subsection{Design Principles}
 \label{sec:arch-principles}
 
-\textbf{[TODO — consolidate into a single short paragraph (not 3
-boxes).]}
-The architecture is governed by three principles:
-\textbf{(P1) Empirical grounding} --- every model parameter is estimated
-from observed data; no \emph{a priori} distribution is assumed unless
-empirically validated.
-\textbf{(P2) Stage composability} --- each stage exposes a formal
-input/output contract (Table~\ref{tab:contracts}) so that stages may be
-independently tested, replaced or extended.
-\textbf{(P3) Distributional outputs} --- the pipeline produces
-probability distributions, not point estimates; every forecast is the
-empirical distribution of $M_{\text{sim}}$ simulated outcomes.
+The architecture is governed by three principles.
+\textbf{(P1) Empirical grounding.} Every model parameter is estimated
+from observed data --- the transition matrix $P$ from event-log counts,
+sojourn distributions $\hat{F}_s$ from observed timestamps, and ML
+features from empirical traces --- so that no distributional assumption
+is imposed unless empirically validated.
+\textbf{(P2) Stage composability.} Each stage exposes a formal
+input/output contract (Table~\ref{tab:contracts}) with explicit pre- and
+postconditions, so that stages may be independently tested, replaced or
+extended provided the contract is preserved.
+\textbf{(P3) Distributional outputs.} The pipeline produces probability
+distributions, not point estimates: every forecast is the empirical
+distribution of $M_{\text{sim}}$ simulated outcomes, from which
+percentiles, completion probabilities, and tail risks are extracted.
 
 % ---------- §3.4 Inter-stage contracts (CONSOLIDATED TABLE) ----------
 \subsection{Inter-Stage Contracts}
 \label{sec:arch-contracts}
 
-\textbf{[TODO — replace cap4 def:contract-s1..ml (5 boxes) with the
-single table below.]}
+Each stage is specified by an input/output contract that governs the
+data exchanged with neighbouring stages. Table~\ref{tab:contracts}
+consolidates the five contracts; the full pre- and postconditions, as
+well as the internal decomposition of each stage, are given in
+Section~\ref{sec:stages} (sequential stages) and
+Section~\ref{sec:ml-component} (ML component).
 
 \begin{table}[ht]
 \centering
-\caption{Inter-stage contracts. Each stage is specified by its input,
-output and key postconditions. Full specifications are given in
-Section~\ref{sec:stages}.}
+\caption{Inter-stage contracts. \emph{Preconditions} are inherited from
+the postconditions of the previous stage by composition; the
+\emph{postconditions} listed are the ones consumed downstream and are
+verified before passing data to the next stage.}
 \label{tab:contracts}
 \small
-\begin{tabular}{@{}l l l p{5.5cm}@{}}
+\begin{tabular}{@{}l l l p{5.2cm}@{}}
 \toprule
 \textbf{Stage} & \textbf{Input} & \textbf{Output} &
-\textbf{Key Postconditions} \\
+\textbf{Postconditions (verified)} \\
 \midrule
-$\mathcal{S}_1$    & $\mathcal{R}$
-                   & $\mathcal{L}$
-                   & Valid case ID, activity, timestamp per event;
-                     timestamp-ordered within each trace. \\
-$\mathcal{S}_2$    & $\mathcal{L}$
-                   & $(M, \Phi, S)$
-                   & $M$ sound; $\phi_{\text{fit}}, \phi_{\text{prec}}
-                     \in [0,1]$; $|S_T|\ge1$, $|S_A|\ge1$. \\
-$\mathcal{S}_3$    & $(\mathcal{L}, S)$
-                   & $(P, N, B, \hat{F}, \pi)$
-                   & $P$ row-stochastic; $(I-Q)$ invertible;
-                     $\sum_j B_{ij}=1$. \\
-$\mathcal{S}_4$    & $(P, \hat{F}, s_0, M_{\text{sim}})$
-                   & $\hat{\mathcal{D}}$
-                   & $|\hat{\mathcal{D}}| = M_{\text{sim}}$;
-                     every trajectory absorbs or is flagged. \\
+$\mathcal{S}_1$ & $\mathcal{R}$
+                & $\mathcal{L}$
+                & Every event has a valid case ID, activity and
+                  timestamp; events are timestamp-ordered within each
+                  trace; activity names belong to the SDLC taxonomy
+                  $\mathcal{A}$. \\
+\midrule
+$\mathcal{S}_2$ & $\mathcal{L}$
+                & $(M, \Phi, S)$
+                & $M$ sound; $\phi_{\text{fit}},\phi_{\text{prec}}
+                  \in [0,1]$; $|S_T|\geq 1$, $|S_A|\geq 1$; every
+                  observed $a \in \mathcal{A}$ maps to a unique state. \\
+\midrule
+$\mathcal{S}_3$ & $(\mathcal{L}, S)$
+                & $(P, N, B, \hat{F}, \pi)$
+                & $P$ row-stochastic; $(I-Q)$ invertible; $N_{ij}\geq0$;
+                  $\sum_j B_{ij}=1$; $|\mathcal{T}_s|\geq n_{\min}$ for
+                  each transient $s$. \\
+\midrule
+$\mathcal{S}_4$ & $(P,\hat{F},s_0,M_{\text{sim}})$
+                & $\hat{\mathcal{D}}$
+                & $|\hat{\mathcal{D}}|=M_{\text{sim}}$; every trajectory
+                  is absorbed or flagged \texttt{non-absorbed};
+                  $T^{(m)}>0$. \\
+\midrule
 $\mathcal{S}_{\text{ML}}$ & $(\mathcal{L},\Phi,P,N)$
-                   & $(\hat{f}, \mathbf{w})$
-                   & Temporal hold-out enforced; AUC-ROC, F1, Brier
-                     reported. \\
+                & $(\hat{f},\mathbf{w})$
+                & $\hat{f}$ evaluated on a temporally disjoint test set;
+                  AUC-ROC, F1, Brier, MAE, MAPE reported;
+                  $\mathbf{w}$ ranks features. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The contracts establish the preconditions of the correctness theorem
 proved in Section~\ref{sec:properties}
-(Theorem~\ref{thm:pipeline-correctness}).
+(Theorem~\ref{thm:pipeline-correctness}). The composability of the
+stages under these contracts is the technical foundation of
+Principle~(P2).

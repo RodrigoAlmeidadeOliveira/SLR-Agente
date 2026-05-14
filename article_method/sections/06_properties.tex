@@ -1,12 +1,20 @@
 % =============================================================================
 % 6. FORMAL PROPERTIES
-% Target: 2 pages (~1000 words) — THIS IS THE PAPER'S DIFFERENTIATOR FOR A1
-% Source: cap4 §4.7–§4.8 (sec:integration, sec:method-properties)
-% Status: SKELETON
+% Target: 2 pages (~1000 words) — KEY DIFFERENTIATOR FOR A1 VENUE
+% Source: cap4 §4.7–§4.8 — MIGRATED
 % =============================================================================
 
 \section{Formal Properties}
 \label{sec:properties}
+
+This section establishes the formal properties of the pipeline:
+correctness under the inter-stage contracts (§\ref{sec:prop-correctness}),
+asymptotic statistical consistency (§\ref{sec:prop-consistency}),
+end-to-end distributional convergence (§\ref{sec:prop-convergence}), an
+information-theoretic advantage over process-blind forecasting
+(§\ref{sec:prop-information}), complexity bounds
+(§\ref{sec:prop-complexity}), and an explicit catalogue of the
+underlying assumptions (§\ref{sec:prop-assumptions}).
 
 % ---------- §6.1 Pipeline correctness ----------
 \subsection{Pipeline Correctness}
@@ -15,24 +23,39 @@
 \begin{theorem}[Pipeline Correctness]
 \label{thm:pipeline-correctness}
 If each stage satisfies its contract (Table~\ref{tab:contracts}), then
-the composed pipeline $\mathcal{F} = \mathcal{S}_4 \circ \mathcal{S}_3
-\circ \mathcal{S}_2 \circ \mathcal{S}_1$ produces a valid empirical
-forecast distribution $\hat{\mathcal{D}}$ for any input $\mathcal{R}$
-satisfying:
-(i)~at least one repository contains events from $\ge 2$ data sources;
-(ii)~$|\mathcal{L}| \ge n_{\min}^{\text{cases}}$ (default 50);
-(iii)~$|S_T| \ge 1$ and $|S_A| \ge 1$.
+the composed pipeline
+$\mathcal{F} = \mathcal{S}_4 \circ \mathcal{S}_3 \circ \mathcal{S}_2
+            \circ \mathcal{S}_1$
+produces a valid empirical forecast distribution $\hat{\mathcal{D}}$
+for any input $\mathcal{R}$ satisfying
+\begin{enumerate}
+    \item[\textup{(i)}] at least one repository contains events from
+    $\ge 2$ data sources;
+    \item[\textup{(ii)}] $|\mathcal{L}| \ge n_{\min}^{\text{cases}}$
+    (default 50);
+    \item[\textup{(iii)}] $|S_T| \ge 1$ and $|S_A| \ge 1$.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-\textbf{[TODO — keep the short structural induction from cap4.]}
-By structural induction on stages: each postcondition implies the
-precondition of the next stage. (S1$\to$S2) event-log validity;
-(S2$\to$S3) sound model and non-empty state space; (S3$\to$S4)
-row-stochastic $P$ and non-empty empirical sojourn distributions; S4
-terminates either by absorption certainty
-(Property~\ref{prop:absorption-certainty}) or by the $K_{\max}$ safety
-bound. \qed
+By structural induction on the stages. Conditions (i)--(iii) imply the
+precondition of $\mathcal{S}_1$. The postcondition of $\mathcal{S}_1$
+(event-log validity in Table~\ref{tab:contracts}) is, by definition,
+the precondition of $\mathcal{S}_2$. The postcondition of
+$\mathcal{S}_2$ (soundness of $M$ and non-empty state space)
+implies the precondition of $\mathcal{S}_3$, namely that every
+transient state has at least one observed outgoing transition. The
+postcondition of $\mathcal{S}_3$ (row-stochasticity of $P$,
+invertibility of $I-Q$, non-empty empirical sojourn distributions
+$\hat{F}_s$) implies the precondition of $\mathcal{S}_4$. Termination
+of $\mathcal{S}_4$ follows from absorption certainty
+(Property~\ref{prop:absorption-certainty}); on absorbing-chain
+violations a trajectory is bounded by the safety threshold $K_{\max}$,
+in which case it is flagged \texttt{non-absorbed} and excluded from
+forecast aggregation. Hence
+$|\hat{\mathcal{D}}| = M_{\text{sim}}$ with all trajectories either
+absorbed or explicitly flagged, satisfying the postcondition of
+$\mathcal{S}_4$. \qed
 \end{proof}
 
 % ---------- §6.2 Statistical consistency ----------
@@ -41,51 +64,114 @@ bound. \qed
 
 \begin{theorem}[Asymptotic Consistency]
 \label{thm:consistency}
-As $|\mathcal{L}| \to \infty$ and $M_{\text{sim}} \to \infty$:
+Let $P^*$ denote the true transition matrix of the generating chain
+and $F_T^*$ the true distribution of lead time. As
+$|\mathcal{L}| \to \infty$ and $M_{\text{sim}} \to \infty$:
 \begin{enumerate}
-    \item[(i)] $\hat{P} \xrightarrow{a.s.} P^*$;
-    \item[(ii)] $\hat{F}_T \xrightarrow{d} F_T^*$;
-    \item[(iii)] $\hat{Q}_\alpha \to Q_\alpha^*$ at continuity points.
+    \item[\textup{(i)}]
+    $\hat{P} \xrightarrow{\textup{a.s.}} P^*$;
+    \item[\textup{(ii)}]
+    $\hat{F}_T \xrightarrow{d} F_T^*$;
+    \item[\textup{(iii)}]
+    $\hat{Q}_\alpha \to Q_\alpha^*$ at every continuity point of
+    $F_T^*$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-\textbf{[TODO — 3-line sketch as in cap4.]}
-(i) Property~\ref{prop:mle-consistency}.
-(ii) Continuous mapping theorem applied to (i) and the
-Glivenko--Cantelli convergence $\hat{F}_s \to F_s^*$.
-(iii) Quantile continuity. \qed
+(i) Almost-sure convergence of the maximum-likelihood transition
+estimator $\hat{P}_{ij} = C_{ij}/\sum_{j'} C_{ij'}$ to $P^*$ for
+ergodic chains is the standard MLE consistency
+result~\cite{billingsley1961statistical, Spedicato2017}; under Laplace
+smoothing ($\alpha>0$) the same limit holds since the smoothing bias
+$O(\alpha/n_i)$ vanishes as $n_i \to \infty$.
+(ii) The Monte Carlo estimator $\hat{F}_T$ is the empirical CDF of
+$M_{\text{sim}}$ trajectories sampled from the pipeline composed with
+$\hat{P}$ and $\hat{F}_s$. The Glivenko--Cantelli theorem yields
+$\sup_s |\hat{F}_s - F_s^*| \xrightarrow{\textup{a.s.}} 0$ per state;
+the continuous mapping theorem applied to (i) and the per-state
+Glivenko--Cantelli convergence delivers
+$\hat{F}_T \xrightarrow{d} F_T^*$.
+(iii) Quantile-function continuity at continuity points of $F_T^*$
+gives $\hat{Q}_\alpha \to Q_\alpha^*$. \qed
 \end{proof}
 
 % ---------- §6.3 End-to-end convergence ----------
 \subsection{End-to-End Distributional Convergence}
 \label{sec:prop-convergence}
 
-\textbf{[TODO — paste def:calibration (CalErr, ACE) compactly.]}
+We first define the calibration error used as the end-to-end metric.
+
+\begin{definition}[Forecast Calibration]
+\label{def:calibration}
+For a confidence level $\alpha$,
+\begin{equation}
+\label{eq:calibration}
+\text{CalErr}(\alpha) =
+\bigl|\hat{P}(T \le \hat{Q}_\alpha) - \alpha\bigr|,
+\end{equation}
+and the \emph{aggregate calibration error} over a finite set of levels
+$\mathcal{A} \subset (0,1)$ is
+\begin{equation}
+\label{eq:aggregate-calibration}
+\textup{ACE} \;=\; \tfrac{1}{|\mathcal{A}|}
+    \sum_{\alpha \in \mathcal{A}} \text{CalErr}(\alpha).
+\end{equation}
+\end{definition}
 
 \begin{theorem}[End-to-End Convergence]
 \label{thm:pipeline-convergence}
-Under (a)~ergodicity of the underlying chain, (b)~uniform sojourn
-consistency
-$\sup_t |\hat{F}_i^{(n)}(t) - F_i^*(t)| \xrightarrow{a.s.} 0$ for each
-$i$, and (c)~$K(n) \to \infty$:
+Let $\hat{F}_{n,K}$ denote the empirical forecast CDF produced by the
+pipeline from $n$ observed cases and $K$ simulated trajectories. Under
+\begin{enumerate}
+    \item[\textup{(a)}] ergodicity of the underlying chain;
+    \item[\textup{(b)}] uniform sojourn consistency
+    $\sup_{t}\bigl|\hat{F}_i^{(n)}(t) - F_i^*(t)\bigr|
+        \xrightarrow{\textup{a.s.}} 0$ for every $i \in S_T$;
+    \item[\textup{(c)}] $K(n) \to \infty$ as $n \to \infty$,
+\end{enumerate}
+we have
 \begin{equation}
 \label{eq:pipeline-convergence}
-\sup_t |\hat{F}_{n,K}(t) - F^*(t)| \xrightarrow{a.s.} 0,
+\sup_{t}\bigl|\hat{F}_{n,K}(t) - F^*(t)\bigr|
+    \xrightarrow{\textup{a.s.}} 0,
 \qquad
-\text{ACE}_{n,K} \to 0.
+\textup{ACE}_{n,K} \;\to\; 0.
 \end{equation}
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-\textbf{[TODO — 4-line sketch, three steps as in cap4.]}
-SLLN for ergodic Markov chains gives entry-wise
-$\hat{P}^{(n)}\to P$~\cite{billingsley1961statistical};
-Glivenko--Cantelli per state plus union bound across the finite $S$;
-continuous mapping on simulated trajectories plus a second
-Glivenko--Cantelli application across $K$ replications gives the
-uniform convergence. ACE convergence follows.
+\emph{Step 1 (transition kernel).} The strong law of large numbers for
+ergodic Markov chains~\cite{billingsley1961statistical} gives entry-wise
+convergence $\hat{P}^{(n)}_{ij} \to P^*_{ij}$ almost surely; the
+absolute matrix norm $\|\hat{P}^{(n)} - P^*\|$ converges to zero by
+finite-dimensional equivalence.
+\emph{Step 2 (sojourn kernel).} Assumption (b) is the per-state
+Glivenko--Cantelli condition. Since $|S_T|$ is finite, a union bound
+yields uniform convergence over the joint sojourn law.
+\emph{Step 3 (composed simulator).} The Stage~4 simulator is a
+continuous functional of $(\hat{P}, \{\hat{F}_s\})$ in the topology of
+weak convergence; the continuous mapping theorem propagates the
+convergence of Steps 1--2 to the empirical lead-time CDF
+$\hat{F}_{n,K}$. A second Glivenko--Cantelli application across the
+$K$ Monte Carlo replications gives the supremum-uniform convergence in
+Equation~\eqref{eq:pipeline-convergence}.
+\emph{Step 4 (calibration).}
+$\textup{CalErr}(\alpha) \to 0$ at every continuity point of $F^*$ by
+the previous step; averaging over the finite level set
+$\mathcal{A}$ yields $\textup{ACE}_{n,K} \to 0$. \qed
 \end{proof}
+
+\begin{remark}[Practical implications]
+\label{rem:convergence-practical}
+The pipeline is end-to-end consistent: the only sources of error are
+(i)~per-state effective sample size for transition and sojourn
+estimation, (ii)~non-stationarity of the underlying process, and
+(iii)~the Monte Carlo budget. The convergence rate in (iii) is
+$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}; (i) is mitigated
+by the confidence-grade reporting of Stage~3; (ii) is treated as
+Assumption A2 in §\ref{sec:prop-assumptions}.
+\end{remark}
 
 % ---------- §6.4 Information-theoretic advantage ----------
 \subsection{Information-Theoretic Advantage of Process Awareness}
@@ -93,33 +179,137 @@ uniform convergence. ACE convergence follows.
 
 \begin{theorem}[Information Gain from Process Structure]
 \label{thm:information}
+For any random lead time $T$ and any random trajectory $\psi$ in the
+state space,
 \begin{equation}
 \label{eq:information-gain}
-I(T; \psi) = H(T) - H(T \mid \psi) \ge 0,
+I(T;\psi) \;=\; H(T) - H(T \mid \psi) \;\ge\; 0,
 \end{equation}
-with equality iff $T$ is independent of the trajectory $\psi$.
+with equality if and only if $T$ and $\psi$ are independent.
 \end{theorem}
 
-\textbf{[TODO — one-paragraph practical interpretation: in real
-software processes $I(T;\psi)>0$ because rework-laden paths have
-systematically longer lead times. Process-aware MC captures this
-variance decomposition; throughput-based MC does not.]}
+\begin{proof}
+$I(T;\psi) = D_{\textup{KL}}\!\bigl(p_{T,\psi} \,\|\,
+p_T \otimes p_\psi\bigr) \ge 0$ by the non-negativity of
+Kullback--Leibler divergence; equality holds iff
+$p_{T,\psi} = p_T \otimes p_\psi$. \qed
+\end{proof}
 
-% ---------- §6.5 Complexity and assumptions ----------
-\subsection{Complexity and Assumptions}
+\paragraph{Practical interpretation.}
+In real software processes $I(T;\psi) > 0$: rework-laden trajectories
+exhibit systematically longer lead times than rework-free ones for the
+same nominal SDLC stage. The process-aware Monte Carlo of
+$\mathcal{S}_4$ samples $\psi^{(m)}$ jointly with $T^{(m)}$ and
+therefore captures the variance decomposition
+$\mathbb{V}(T) = \mathbb{E}[\mathbb{V}(T \mid \psi)]
+              + \mathbb{V}(\mathbb{E}[T \mid \psi])$; throughput-based
+Monte Carlo, which collapses $\psi$, can only estimate the first term.
+This is the formal counterpart of the empirical claim that path
+information improves forecast resolution.
+
+% ---------- §6.5 Complexity ----------
+\subsection{Complexity}
 \label{sec:prop-complexity}
 
-\textbf{[TODO — paste compact complexity table tab:complexity and
-assumptions table tab:assumptions. Both fit one row each per stage.]}
-
-The total cost is dominated by Stage~4:
+The total computational cost of one pipeline run is
 \begin{equation}
 \label{eq:total-cost}
-C_{\text{total}} = \mathcal{O}(|\mathcal{L}|)
-                 + \mathcal{O}(M_{\text{sim}} \cdot \bar{K}),
+C_{\textup{total}} \;=\;
+   \mathcal{O}\!\bigl(|\mathcal{L}|\bigr)
+ + \mathcal{O}\!\bigl(M_{\textup{sim}} \cdot \bar{K}\bigr),
 \end{equation}
-where $\bar{K}$ is the expected trajectory length, bounded by $K_{\max}$.
-Monte Carlo is embarrassingly parallel and admits GPU
-offload~\cite{lecuyer2017random}.
+where $\bar{K} \le K_{\max}$ is the expected trajectory length.
+Table~\ref{tab:complexity} reports the per-stage breakdown.
 
-\textbf{[TODO — compact tab:assumptions with A1..A5 and mitigations.]}
+\begin{table}[ht]
+\centering
+\caption{Computational complexity per pipeline stage. $|\mathcal{L}|$
+denotes the total number of events, $|\mathcal{C}|$ the number of
+cases, $|S_T|$ the number of transient states, $|\mathcal{A}|$ the
+activity-taxonomy size, $p$ the number of ML features, and $T$ the
+number of trees in an ensemble.}
+\label{tab:complexity}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Stage} & \textbf{Time complexity} & \textbf{Dominant factor} \\
+\midrule
+$\mathcal{S}_1$: Event Log
+    & $\mathcal{O}(|E^{\textup{raw}}| \cdot |\mathcal{K}|)$
+    & raw events $\times$ correlation strategies \\
+$\mathcal{S}_2$: Discovery (IM)
+    & $\mathcal{O}(|\mathcal{L}| \cdot |\mathcal{A}|^2)$
+    & log $\times$ activities$^2$ \\
+$\mathcal{S}_2$: Conformance
+    & $\mathcal{O}(|\mathcal{C}| \cdot |M|)$
+    & cases $\times$ model size \\
+$\mathcal{S}_3$: Markov
+    & $\mathcal{O}(|\mathcal{L}| + |S_T|^3)$
+    & counting + matrix inversion \\
+$\mathcal{S}_4$: Monte Carlo
+    & $\mathcal{O}(M_{\textup{sim}} \cdot \bar{K})$
+    & simulations $\times$ path length \\
+$\mathcal{S}_{\textup{ML}}$: Training
+    & $\mathcal{O}(|\mathcal{C}| \cdot p \cdot T)$
+    & cases $\times$ features $\times$ trees \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Monte Carlo stage dominates and is embarrassingly parallel: a
+CUDA-style implementation assigns one thread per replication, with
+throughput $\sim\!10^8$ trajectories per second for
+$|S_T| < 100$~\cite{lecuyer2017random}. Sequential stages are linear in
+$|\mathcal{L}|$ and run in seconds for $\le 10^6$ events. The space
+complexity is $\mathcal{O}(|\mathcal{L}|) + \mathcal{O}(|S_T|^2)
++ \mathcal{O}(M_{\textup{sim}})$; a streaming Monte Carlo implementation
+reduces the third term to $\mathcal{O}(1)$ via incremental quantile
+estimation.
+
+% ---------- §6.6 Assumptions ----------
+\subsection{Assumptions and Boundary Conditions}
+\label{sec:prop-assumptions}
+
+The theoretical results above rest on five explicit assumptions
+(Table~\ref{tab:assumptions}). Each assumption is reported together
+with the consequence of its violation and the mitigation adopted in the
+pipeline. None of the assumptions is innocuous in practice; their
+empirical impact is investigated in the companion paper.
+
+\begin{table}[ht]
+\centering
+\caption{Assumptions, violation consequences, and mitigations.}
+\label{tab:assumptions}
+\small
+\begin{tabular}{@{}p{2.7cm} p{4.3cm} p{4.6cm}@{}}
+\toprule
+\textbf{Assumption} & \textbf{Violation consequence} &
+\textbf{Mitigation} \\
+\midrule
+A1: First-order Markov  & Underestimates rework-conditioned delays.
+    & State augmentation (concatenate previous activity into state). \\
+\midrule
+A2: Stationarity        & Stale forecasts after process changes.
+    & Sliding-window estimation; drift detection on $P$ and $\hat{F}$. \\
+\midrule
+A3: Case independence   & Ignores queueing and resource contention.
+    & Acknowledged limitation; team-level extension left for future
+      work. \\
+\midrule
+A4: Sojourn--history independence
+    & Underestimates delays for reworked cases.
+    & State augmentation; ML features 4 and 8 capture history
+      explicitly. \\
+\midrule
+A5: Complete case observation
+    & Bias if long-running cases are systematically excluded.
+    & Include right-censored cases via an artificial absorbing state. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The assumptions partition the pipeline's validity domain: A1 and A4 are
+relaxable by enriching the state space; A2 is monitored at runtime by
+drift detection; A3 is an open extension toward team-level scheduling;
+A5 is a data-engineering choice. The empirical paper reports the
+forecasting impact of each relaxation on the 48-repository dataset.
