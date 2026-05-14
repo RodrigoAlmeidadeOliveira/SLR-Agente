@@ -1,0 +1,92 @@
+% =============================================================================
+% 5. ML ENHANCEMENT COMPONENT
+% Target: 1 page (~500 words)
+% Source: cap4 §4.6 (sec:ml-component)
+% Status: SKELETON
+% =============================================================================
+
+\section{Machine-Learning Enhancement Component}
+\label{sec:ml-component}
+
+\textbf{[TODO — 1 p.]}
+The ML component $\mathcal{S}_{\text{ML}}$ runs in parallel to the
+sequential pipeline and produces a case-level predictor $\hat{f}$. Its
+contract is summarized in Table~\ref{tab:contracts}; its novelty is the
+\emph{family of features} it consumes, half of which are PM- and
+Markov-derived and are not available to traditional MSR baselines.
+
+% ---------- §5.1 Feature engineering ----------
+\subsection{Feature Engineering}
+\label{sec:ml-features}
+
+\textbf{[TODO — paste consolidated feature table from cap4 tab:features.]}
+
+\begin{table}[ht]
+\centering
+\caption{Feature definitions. Features 1--8 are derived from the PM and
+Markov stages; features 9--15 are traditional MSR features used as
+baseline.}
+\label{tab:features}
+\small
+\begin{tabular}{@{}clll@{}}
+\toprule
+\textbf{\#} & \textbf{Feature} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Process-derived (novel)}} \\
+1 & Current state          & $\mathcal{L}$       & $\mu(e_{\text{last}})$ \\
+2 & Sojourn in current state & $\mathcal{L}$     & $t_{\text{obs}} - \tau(e_{\text{last}})$ \\
+3 & Transition count       & $\mathcal{L}$       & $|\sigma_c^{\text{partial}}|$ \\
+4 & Rework count           & $\mathcal{L}$       & regression count \\
+5 & Conformance score      & $M,\mathcal{L}$     & $\phi_{\text{conf}}(c)$ \\
+6 & Markov expected remaining & $N$              & $t_{\mu(e_{\text{last}})}$ \\
+7 & Completion probability & $B$                 & $B_{\mu(e_{\text{last}}),\texttt{done}}$ \\
+8 & Sojourn ratio          & $\hat{F}$           & sojourn/$\bar{d}_{\mu(e_{\text{last}})}$ \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Traditional MSR (baseline)}} \\
+9--15 & Files / lines / commits / authors / priority / type / etc.\
+     & Git, Jira & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three feature sets are evaluated in the companion empirical paper:
+\textbf{PM-only} (1--8), \textbf{MSR-only} (9--15), and
+\textbf{Combined} (1--15).
+
+% ---------- §5.2 Label construction & training protocol ----------
+\subsection{Label Construction and Training Protocol}
+\label{sec:ml-training}
+
+\textbf{[TODO — paste def:label and short version of alg:ml-training.]}
+
+\begin{definition}[Outcome Label]
+\label{def:label}
+$y_c = 1$ if $T_c > \tau_{\text{threshold}}$
+(\texttt{delayed}); $y_c = 0$ otherwise (\texttt{on\_time}).
+\end{definition}
+
+The training protocol enforces a strict temporal hold-out:
+$\mathcal{L}_{\text{train}}$ contains all cases completed before
+$t_{\text{cut}}$, $\mathcal{L}_{\text{test}}$ contains only cases that
+\emph{start} after $t_{\text{cut}}$. Temporal cross-validation uses
+expanding windows~\cite{tashman2000out, hyndman2021forecasting}.
+
+% ---------- §5.3 Integration with Monte Carlo ----------
+\subsection{Integration with Monte Carlo Forecasts}
+\label{sec:ml-integration}
+
+\textbf{[TODO — paste def:deviation.]}
+
+\begin{definition}[Deviation Score]
+\label{def:deviation}
+\begin{equation}
+\label{eq:deviation}
+\delta_c = \hat{f}(\mathbf{x}_c) -
+           \hat{P}_{\text{MC}}(\text{delayed} \mid s_0 = s).
+\end{equation}
+\end{definition}
+
+Monte Carlo (§\ref{sec:stages-s4}) produces population-level
+distributional forecasts; the ML component produces case-level point
+forecasts; $\delta_c$ identifies cases departing from the population
+baseline.
