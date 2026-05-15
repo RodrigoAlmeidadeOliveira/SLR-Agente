@@ -11,8 +11,8 @@
 \subsection{Pipeline Definition}
 \label{sec:arch-pipeline}
 
-PATHCAST is defined as a composition of four sequential transformation
-stages and one parallel enhancement component.
+PATHCAST is the composition of four sequential transformation stages
+and one parallel enhancement component.
 
 \begin{definition}[PATHCAST Pipeline]
 \label{def:pipeline}
@@ -155,9 +155,8 @@ percentiles, completion probabilities, and tail risks are extracted.
 
 Each stage is specified by an input/output contract that governs the
 data exchanged with neighbouring stages. Table~\ref{tab:contracts}
-consolidates the five contracts; the full pre- and postconditions, as
-well as the internal decomposition of each stage, are given in
-Section~\ref{sec:stages} (sequential stages) and
+consolidates the five contracts; the internal decomposition of each
+stage is given in Section~\ref{sec:stages} (sequential stages) and
 Section~\ref{sec:ml-component} (ML component).
 
 \begin{table}[ht]

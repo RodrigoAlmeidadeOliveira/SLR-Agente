@@ -8,12 +8,12 @@
 \label{sec:properties}
 
 This section establishes the formal properties of the pipeline:
-correctness under the inter-stage contracts (§\ref{sec:prop-correctness}),
-asymptotic statistical consistency (§\ref{sec:prop-consistency}),
-end-to-end distributional convergence (§\ref{sec:prop-convergence}), an
-information-theoretic advantage over process-blind forecasting
-(§\ref{sec:prop-information}), complexity bounds
-(§\ref{sec:prop-complexity}), and an explicit catalogue of the
+correctness under the inter-stage contracts
+(§\ref{sec:prop-correctness}), asymptotic statistical consistency
+(§\ref{sec:prop-consistency}), end-to-end distributional convergence
+(§\ref{sec:prop-convergence}), an information-theoretic advantage
+over process-blind forecasting (§\ref{sec:prop-information}),
+complexity bounds (§\ref{sec:prop-complexity}), and the catalogue of
 underlying assumptions (§\ref{sec:prop-assumptions}).
 
 % ---------- §6.1 Pipeline correctness ----------
@@ -39,20 +39,19 @@ for any input $\mathcal{R}$ satisfying
 
 \begin{proof}
 By structural induction on the stages. Conditions (i)--(iii) imply the
-precondition of $\mathcal{S}_1$. The postcondition of $\mathcal{S}_1$
-(event-log validity in Table~\ref{tab:contracts}) is, by definition,
-the precondition of $\mathcal{S}_2$. The postcondition of
-$\mathcal{S}_2$ (soundness of $M$ and non-empty state space)
-implies the precondition of $\mathcal{S}_3$, namely that every
-transient state has at least one observed outgoing transition. The
-postcondition of $\mathcal{S}_3$ (row-stochasticity of $P$,
-invertibility of $I-Q$, non-empty empirical sojourn distributions
-$\hat{F}_s$) implies the precondition of $\mathcal{S}_4$. Termination
-of $\mathcal{S}_4$ follows from absorption certainty
-(Property~\ref{prop:absorption-certainty}); on absorbing-chain
-violations a trajectory is bounded by the safety threshold $K_{\max}$,
-in which case it is flagged \texttt{non-absorbed} and excluded from
-forecast aggregation. Hence
+precondition of $\mathcal{S}_1$. Each postcondition in
+Table~\ref{tab:contracts} is, by composition, the precondition of the
+next stage:
+$\mathcal{S}_1 \to \mathcal{S}_2$ via event-log validity;
+$\mathcal{S}_2 \to \mathcal{S}_3$ via soundness of $M$ and non-empty
+state space (which guarantees that every transient state has at least
+one observed outgoing transition);
+$\mathcal{S}_3 \to \mathcal{S}_4$ via row-stochasticity of $\hat{P}$,
+invertibility of $I-Q$, and non-empty empirical sojourn distributions
+$\hat{F}_s$. Termination of $\mathcal{S}_4$ follows from absorption
+certainty (Property~\ref{prop:absorption-certainty}); trajectories
+that would exceed $K_{\max}$ are flagged \texttt{non-absorbed} and
+excluded from forecast aggregation. Hence
 $|\hat{\mathcal{D}}| = M_{\text{sim}}$ with all trajectories either
 absorbed or explicitly flagged, satisfying the postcondition of
 $\mathcal{S}_4$. \qed
@@ -164,13 +163,13 @@ $\mathcal{A}$ yields $\textup{ACE}_{n,K} \to 0$. \qed
 
 \begin{remark}[Practical implications]
 \label{rem:convergence-practical}
-The pipeline is end-to-end consistent: the only sources of error are
+The pipeline is end-to-end consistent, with three error sources:
 (i)~per-state effective sample size for transition and sojourn
-estimation, (ii)~non-stationarity of the underlying process, and
-(iii)~the Monte Carlo budget. The convergence rate in (iii) is
-$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}; (i) is mitigated
-by the confidence-grade reporting of Stage~3; (ii) is treated as
-Assumption A2 in §\ref{sec:prop-assumptions}.
+estimation, mitigated by the confidence-grade reporting of Stage~3;
+(ii)~non-stationarity of the underlying process, addressed as
+Assumption A2 in §\ref{sec:prop-assumptions};
+(iii)~the Monte Carlo budget, converging as
+$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}.
 \end{remark}
 
 % ---------- §6.4 Information-theoretic advantage ----------

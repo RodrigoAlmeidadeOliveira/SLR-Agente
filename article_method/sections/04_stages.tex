@@ -197,19 +197,18 @@ chain. The decomposition is
                   \circ \textsc{Count}.
 \end{equation}
 
-\paragraph{Maximum-likelihood estimation with optional smoothing.}
-For each ordered pair $(i,j) \in S \times S$, let $C_{ij}$ be the
-number of observed transitions $i \to j$ across $\mathcal{L}$. The
-estimator is
+\paragraph{Transition-matrix estimation.}
+Let $C_{ij}$ be the number of observed transitions $i \to j$ across
+$\mathcal{L}$. The smoothed MLE is
 \begin{equation}
 \label{eq:mle-full}
 \hat{P}_{ij} \;=\;
 \frac{C_{ij} + \alpha}{\sum_{j'} C_{ij'} + \alpha |S|},
 \qquad \alpha \ge 0,
 \end{equation}
-with $\alpha = 0$ recovering the standard MLE and $\alpha = 1$
-corresponding to a uniform Dirichlet prior (Laplace smoothing). The
-matrix $\hat{P}$ is row-stochastic by construction.
+with $\alpha = 0$ recovering the unsmoothed MLE and $\alpha = 1$
+corresponding to a uniform Dirichlet prior (Laplace smoothing).
+$\hat{P}$ is row-stochastic by construction.
 
 \begin{property}[MLE Consistency]
 \label{prop:mle-consistency}
@@ -239,10 +238,10 @@ some absorbing state~\cite{kemeny1976finite}.
 $\sum_{a \in S_A} B_{ia} = 1$ for every transient $i \in S_T$.
 \end{property}
 
-The expected number of visits to transient state $j$ starting from
-transient state $i$ is $N_{ij}$; together with the per-state mean
-sojourn $\bar{d}_j$ from Stage~2, this yields the closed-form
-expected lead time
+The entry $N_{ij}$ is the expected number of visits to transient
+state $j$ starting from transient state $i$; combined with the
+per-state mean sojourn $\bar{d}_j$ from Stage~2, it yields the
+closed-form expected lead time
 \begin{equation}
 \label{eq:expected-lead-time}
 \mathbb{E}\!\bigl[\textup{LeadTime} \mid s_0 = i\bigr] \;=\;
@@ -346,7 +345,7 @@ Algorithm~\ref{alg:mc-full} formalises the simulation.
 
 The safety bound $K_{\max} = 10^3$ prevents infinite loops on
 degenerate inputs; flagged trajectories are excluded from forecast
-aggregation but counted in a diagnostic report.
+aggregation but counted in the diagnostic report.
 
 \paragraph{Forecast extraction.}
 From the empirical distribution $\hat{\mathcal{D}}$ the pipeline

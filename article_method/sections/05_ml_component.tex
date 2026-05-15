@@ -9,15 +9,13 @@
 
 The ML component $\mathcal{S}_{\textup{ML}}$ runs in parallel to the
 sequential pipeline (Figure~\ref{fig:pipeline-architecture}) and
-produces a case-level predictor $\hat{f}$ together with a
-feature-importance vector $\mathbf{w}$. Its contract is the row
-$\mathcal{S}_{\textup{ML}}$ of Table~\ref{tab:contracts}: input
-$(\mathcal{L}, \Phi, P, N)$, output $(\hat{f}, \mathbf{w})$, with
-postconditions on temporal hold-out enforcement and on the set of
-reported metrics. The novelty of the component is the
-\emph{family of features it consumes}: half of them are derived from
-the PM and Markov stages and are unavailable to traditional MSR
-baselines.
+produces a case-level predictor $\hat{f}$ and feature-importance
+vector $\mathbf{w}$. Its contract is the last row of
+Table~\ref{tab:contracts}: input $(\mathcal{L}, \Phi, P, N)$, output
+$(\hat{f}, \mathbf{w})$, with postconditions on temporal hold-out
+enforcement and on the set of reported metrics. The novelty is the
+feature family: half of the features are derived from the PM and
+Markov stages and are unavailable to repository-mining baselines.
 
 % ---------- §5.1 Feature engineering ----------
 \subsection{Feature Engineering}
@@ -82,13 +80,12 @@ integer and ordinal types.}
 \end{tabular}
 \end{table}
 
-Three feature sets are evaluated in the companion empirical paper:
+The companion empirical paper evaluates three feature sets:
 \textbf{PM-only} (features 1--8), \textbf{MSR-only} (features 9--15),
 and \textbf{Combined} (features 1--15). Features 6 and 7 instantiate
-the information-theoretic advantage of
-Theorem~\ref{thm:information}: they inject the trajectory-conditional
-expectations $\mathbb{E}[T \mid \psi]$ and
-$P(\textup{Done} \mid \psi)$ directly into the predictor, quantities
+Theorem~\ref{thm:information}: they inject the
+trajectory-conditional expectations $\mathbb{E}[T \mid \psi]$ and
+$P(\textup{Done} \mid \psi)$ directly into the predictor --- quantities
 that are by construction inaccessible to MSR-only baselines.
 
 % ---------- §5.2 Label construction ----------

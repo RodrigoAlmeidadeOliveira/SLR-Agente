@@ -12,21 +12,21 @@
 \label{sec:bg-pm}
 
 Process mining~\cite{aalst2016process} extracts process knowledge from
-event logs --- sequences of timestamped activity occurrences grouped by
-case identifier. The discipline distinguishes three families of
-techniques: \emph{discovery}, which infers a process model from an
-event log; \emph{conformance checking}, which compares observed traces
-to a reference model via alignments; and \emph{enhancement}, which
-enriches a model with frequency or performance information.
-PATHCAST uses the Inductive Miner~\cite{leemans2013discovering} as its
-discovery algorithm, motivated by its soundness guarantee on the
-discovered process tree (Property~\ref{prop:soundness}), a property
-required by the contract of Stage~3 (Table~\ref{tab:contracts}). The
-\emph{four-quality framework}~\cite{aalst2016process} ---
-fitness, precision, generalisation, and simplicity --- is the standard
-yardstick for discovered models; PATHCAST adopts the first three
-explicitly (Equation~\ref{eq:conformance}) and constrains simplicity by
-construction through the bounded SDLC activity taxonomy of Stage~1.
+event logs --- sequences of timestamped activity occurrences grouped
+by case identifier --- through three families of techniques:
+\emph{discovery} (inferring a model from a log),
+\emph{conformance checking} (comparing observed traces to a reference
+model via alignments), and \emph{enhancement} (enriching a model with
+frequency or performance information). PATHCAST adopts the Inductive
+Miner~\cite{leemans2013discovering} for discovery, motivated by its
+soundness guarantee on the resulting process tree
+(Property~\ref{prop:soundness}), which is required by the contract of
+Stage~3 (Table~\ref{tab:contracts}). The standard yardstick for
+discovered models is the four-quality
+framework~\cite{aalst2016process} --- fitness, precision,
+generalisation, and simplicity. PATHCAST evaluates the first three
+explicitly (Equation~\ref{eq:conformance}); simplicity is bounded by
+construction through the SDLC activity taxonomy of Stage~1.
 
 % ---------- §2.2 Markov chains for business processes ----------
 \subsection{Absorbing Markov Chains}
@@ -56,48 +56,40 @@ required.
 \subsection{Stochastic Forecasting in Software Engineering}
 \label{sec:bg-forecasting}
 
-The state-of-practice approach to lead-time forecasting in agile
-software development is throughput-based Monte
-Carlo~\cite{vacanti2015, savage2009flaw, magennis2015forecasting}.
-The method samples future cumulative completion from the empirical
-throughput distribution of a team --- typically the number of items
-completed per day over a recent window --- and propagates the sample
-forward to estimate the probability of meeting a deadline. It is
-operationally simple, makes no assumption about the process structure,
-and has been widely adopted in agile practice; its limitation is the
-collapse of the trajectory, which prevents the modelling of rework or
-state-specific delays. Recent work on probabilistic process
-forecasting in business processes
-includes time-series and sequence
-models~\cite{polato2018time} and remaining-time prediction via
-supervised learning~\cite{verenich2019survey}; in the
-effort-estimation strand of software
-engineering, deep-learning approaches operate on case-level
-features extracted from issue
-trackers~\cite{choetkiertikul2018deep}. None of these methods is
-specialised to the SDLC nor integrates the heterogeneous data sources
-that software repositories provide.
+Throughput-based Monte
+Carlo~\cite{vacanti2015, savage2009flaw, magennis2015forecasting} is
+the state-of-practice approach to lead-time forecasting in agile
+software development. It samples future cumulative completion from the
+empirical throughput distribution of a team --- typically the number
+of items completed per day over a recent window --- and propagates the
+sample forward to estimate the probability of meeting a deadline. The
+method is operationally simple and process-agnostic; its limitation is
+the collapse of the trajectory, which precludes the modelling of
+rework or state-specific delays. Adjacent literature includes
+time-series and sequence models for business
+processes~\cite{polato2018time}, supervised remaining-time
+prediction~\cite{verenich2019survey}, and deep-learning effort
+estimation from issue-tracker
+features~\cite{choetkiertikul2018deep}. None of these is specialised
+to the SDLC or integrates the heterogeneous data sources that software
+repositories provide.
 
 % ---------- §2.4 Gap synthesis ----------
 \subsection{Pipeline-Fragmentation Gap}
 \label{sec:bg-gap}
 
-The systematic literature review of~\cite{almeida2026slr} screened
-5{,}783 deduplicated records and confirmed 404 primary studies at the
-intersection of process mining, stochastic modelling, and forecasting
-for software processes. The review reports five findings; the one
-that motivates the present paper is finding F4 ---
+Our companion systematic literature review~\cite{almeida2026slr}
+screened 5{,}783 deduplicated records and confirmed 404 primary
+studies at the intersection of process mining, stochastic modelling,
+and forecasting for software processes. The review reports five
+findings; the one that motivates the present paper is finding F4 ---
 \emph{pipeline fragmentation}: only a single primary study in the
-corpus jointly satisfies the three dimensions PM, stochastic
-modelling, and forecasting. The remaining studies sit in one of three
-partial regions: PM without forecasting, forecasting without process
-awareness, or stochastic modelling without integration with the
-heterogeneous data sources of software repositories.
-Table~\ref{tab:gap-synthesis} summarises this fragmentation across
-five representative families. PATHCAST is positioned at the
-intersection of all three dimensions; the formal pipeline of
-Section~\ref{sec:architecture} and the properties of
-Section~\ref{sec:properties} are its technical instantiation.
+corpus jointly satisfies the three dimensions. The remaining studies
+sit in one of three partial regions: PM without forecasting,
+forecasting without process awareness, or stochastic modelling without
+integration with the heterogeneous data sources of software
+repositories. Table~\ref{tab:gap-synthesis} summarises this
+fragmentation across five representative families.
 
 \begin{table}[ht]
 \centering

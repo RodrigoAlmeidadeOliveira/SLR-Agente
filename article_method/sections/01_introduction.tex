@@ -7,20 +7,19 @@
 \label{sec:introduction}
 
 % ---------- ¶1: Motivation ----------
-Software development lifecycle (SDLC) data is increasingly available in
-machine-readable form across version control, issue trackers,
-code-review systems, and continuous-integration platforms. Process
-mining (PM) and stochastic modelling each offer mature techniques for
-analysing such data --- the former for inferring process structure
-from event logs, the latter for forecasting completion times and
-absorption probabilities --- and a growing body of work in agile
-practice has popularised Monte Carlo forecasting at the project
+Software development lifecycle (SDLC) data is now routinely
+machine-readable across version control, issue trackers, code-review
+systems, and continuous-integration platforms. Process mining (PM)
+infers process structure from event logs; stochastic modelling
+forecasts completion times and absorption probabilities; and a growing
+body of work in agile practice has popularised Monte Carlo forecasting
+at the project
 level~\cite{vacanti2015, savage2009flaw, magennis2015forecasting}.
-The joint deployment of these techniques for \emph{predictive} use in
-the SDLC, however, remains rare: most works either discover process
-models without forecasting, forecast lead times without process
-awareness, or apply machine learning to features that ignore the
-underlying process structure.
+Yet the joint deployment of these techniques for \emph{predictive} use
+in the SDLC remains rare: works tend to discover process models
+without forecasting, forecast lead times without process awareness, or
+apply machine learning to features that ignore the underlying process
+structure.
 
 % ---------- ¶2: Gap (from SLR) ----------
 A recent systematic literature review across 5{,}783 deduplicated
@@ -74,16 +73,15 @@ pipeline for the SDLC. The contributions of this paper are:
 \end{enumerate}
 
 % ---------- ¶4: Scope ----------
-This paper focuses on the \emph{formal specification} of the method
-and its theoretical properties. The empirical validation of
-\textsc{PATHCAST} across 48 open-source repositories --- including the
+The present paper specifies the method and its theoretical properties.
+The empirical validation across 48 open-source repositories ---
 two-stage experimental design (pipeline validation and forecasting
-accuracy), the comparison against four baselines using the continuous
-ranked probability score, and the statistical analysis across
-repositories with Bonferroni correction --- is reported in a companion
-paper. The evaluation protocol is summarised in
-Section~\ref{sec:evaluation-plan}; this paper does not report
-empirical numbers from real repositories.
+accuracy), comparison against four baselines under the continuous
+ranked probability score, and statistical analysis across repositories
+with Bonferroni correction --- is the subject of a companion paper. We
+summarise the evaluation protocol in
+Section~\ref{sec:evaluation-plan}; no empirical numbers from real
+repositories appear here.
 
 % ---------- ¶5: Roadmap ----------
 Section~\ref{sec:background} reviews process mining, absorbing Markov

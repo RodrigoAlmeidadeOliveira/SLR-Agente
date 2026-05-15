@@ -8,14 +8,13 @@
 \section{Illustrative Numerical Example}
 \label{sec:numerical-example}
 
-This section instantiates PATHCAST on a controlled six-state SDLC chain
-to (i) exhibit the closed-form analytical derivation of $N$, $B$ and
-the expected lead time and (ii) verify agreement with the Monte Carlo
-simulation of Stage~4. The example uses synthetic parameters chosen to
-mirror typical SDLC patterns; no real-repository data is involved.
-The computations are reproducible from the script deposited in the
-replication package
-(\texttt{scripts/numerical\_example.py}).
+We instantiate PATHCAST on a controlled six-state SDLC chain to
+(i)~exhibit the closed-form analytical derivation of $N$, $B$ and the
+expected lead time and (ii)~verify agreement with the Monte Carlo
+simulation of Stage~4. The example uses synthetic parameters chosen
+to mirror typical SDLC patterns; no real-repository data is involved.
+The computations are reproducible from
+\texttt{scripts/numerical\_example.py} in the replication package.
 
 % ---------- §7.1 Setup ----------
 \subsection{Setup}
@@ -176,11 +175,10 @@ locating the bottleneck at $\texttt{in\_progress}$. Throughput-based
 Monte Carlo, which has no explicit state, cannot produce this
 diagnosis (Theorem~\ref{thm:information}).
 
-\textbf{(D3) Cross-validation between analytical and simulated paths.}
-The agreement of Table~\ref{tab:num-comparison} verifies that the
-Monte Carlo of Stage~4 implements the same model as the closed-form
-absorbing-chain derivation of Stage~3 within the expected Monte Carlo
-error.
+\textbf{(D3) Cross-validation.} The agreement of
+Table~\ref{tab:num-comparison} verifies that Stage~4 implements the
+same model as the closed-form derivation of Stage~3, within the
+expected Monte Carlo error.
 
 \textbf{This example is not an empirical evaluation.} The empirical
 evaluation across 48 open-source repositories is the subject of the
