@@ -25,7 +25,6 @@ satisfying:
 \end{theorem}
 
 \begin{proof}
-\textbf{[TODO — keep the short structural induction from cap4.]}
 By structural induction on stages: each postcondition implies the
 precondition of the next stage. (S1$\to$S2) event-log validity;
 (S2$\to$S3) sound model and non-empty state space; (S3$\to$S4)
@@ -50,7 +49,6 @@ As $|\mathcal{L}| \to \infty$ and $M_{\text{sim}} \to \infty$:
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-\textbf{[TODO — 3-line sketch as in cap4.]}
 (i) Property~\ref{prop:mle-consistency}.
 (ii) Continuous mapping theorem applied to (i) and the
 Glivenko--Cantelli convergence $\hat{F}_s \to F_s^*$.
@@ -61,7 +59,18 @@ Glivenko--Cantelli convergence $\hat{F}_s \to F_s^*$.
 \subsection{End-to-End Distributional Convergence}
 \label{sec:prop-convergence}
 
-\textbf{[TODO — paste def:calibration (CalErr, ACE) compactly.]}
+\begin{definition}[Forecast Calibration]
+\label{def:calibration}
+For a finite set of nominal levels
+$\mathcal{A} \subset (0,1)$,
+\begin{equation}
+\label{eq:calibration}
+\text{CalErr}(\alpha) = |\hat{P}(T \leq \hat{Q}_\alpha) - \alpha|,
+\qquad
+\text{ACE} = \tfrac{1}{|\mathcal{A}|}
+    \sum_{\alpha \in \mathcal{A}} \text{CalErr}(\alpha).
+\end{equation}
+\end{definition}
 
 \begin{theorem}[End-to-End Convergence]
 \label{thm:pipeline-convergence}
@@ -78,7 +87,6 @@ $i$, and (c)~$K(n) \to \infty$:
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-\textbf{[TODO — 4-line sketch, three steps as in cap4.]}
 SLLN for ergodic Markov chains gives entry-wise
 $\hat{P}^{(n)}\to P$~\cite{billingsley1961statistical};
 Glivenko--Cantelli per state plus union bound across the finite $S$;
@@ -100,26 +108,66 @@ I(T; \psi) = H(T) - H(T \mid \psi) \ge 0,
 with equality iff $T$ is independent of the trajectory $\psi$.
 \end{theorem}
 
-\textbf{[TODO — one-paragraph practical interpretation: in real
-software processes $I(T;\psi)>0$ because rework-laden paths have
-systematically longer lead times. Process-aware MC captures this
-variance decomposition; throughput-based MC does not.]}
+\paragraph{Practical interpretation.}
+In real software processes $I(T;\psi) > 0$ because rework-laden paths
+have systematically longer lead times: the trajectory $\psi$ carries
+information about state-specific delays and revisits that the
+marginal $T$ does not. Process-aware Monte Carlo (Stage~4) samples
+the joint $(T, \psi)$ and captures this variance decomposition;
+throughput-based Monte Carlo collapses $\psi$ into a daily-throughput
+scalar and forfeits the information gain.
 
 % ---------- §6.5 Complexity and assumptions ----------
 \subsection{Complexity and Assumptions}
 \label{sec:prop-complexity}
 
-\textbf{[TODO — paste compact complexity table tab:complexity and
-assumptions table tab:assumptions. Both fit one row each per stage.]}
-
-The total cost is dominated by Stage~4:
+The per-stage time complexity is summarized in
+Table~\ref{tab:complexity}; the total cost is dominated by Stage~4:
 \begin{equation}
 \label{eq:total-cost}
 C_{\text{total}} = \mathcal{O}(|\mathcal{L}|)
                  + \mathcal{O}(M_{\text{sim}} \cdot \bar{K}),
 \end{equation}
-where $\bar{K}$ is the expected trajectory length, bounded by $K_{\max}$.
-Monte Carlo is embarrassingly parallel and admits GPU
+where $\bar{K}$ is the expected trajectory length, bounded by
+$K_{\max}$. Monte Carlo is embarrassingly parallel and admits GPU
 offload~\cite{lecuyer2017random}.
 
-\textbf{[TODO — compact tab:assumptions with A1..A5 and mitigations.]}
+\begin{table}[ht]
+\centering
+\caption{Per-stage time complexity.}
+\label{tab:complexity}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Stage} & \textbf{Time complexity} & \textbf{Dominant factor} \\
+\midrule
+$\mathcal{S}_1$: Event Log     & $O(|E^{\text{raw}}| \cdot |\mathcal{K}|)$ & raw events $\times$ strategies \\
+$\mathcal{S}_2$: Discovery + Conf. & $O(|\mathcal{L}| \cdot |\mathcal{A}|^2 + |\mathcal{C}| \cdot |M|)$ & alignment cost \\
+$\mathcal{S}_3$: Markov         & $O(|\mathcal{L}| + |S_T|^3)$ & counting + matrix inversion \\
+$\mathcal{S}_4$: Monte Carlo    & $O(M_{\text{sim}} \cdot \bar{K})$ & simulations $\times$ path length \\
+$\mathcal{S}_{\text{ML}}$: Training & $O(|\mathcal{C}| \cdot p \cdot T)$ & cases $\times$ features $\times$ trees \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The theoretical results rest on five explicit assumptions, listed in
+Table~\ref{tab:assumptions} together with the consequence of
+violation and the mitigation adopted by PATHCAST.
+
+\begin{table}[ht]
+\centering
+\caption{Assumptions, violation consequences and mitigations.}
+\label{tab:assumptions}
+\small
+\begin{tabular}{@{}p{2.6cm} p{4.6cm} p{4.6cm}@{}}
+\toprule
+\textbf{Assumption} & \textbf{Violation consequence} & \textbf{Mitigation} \\
+\midrule
+A1 First-order Markov            & Underestimates rework-conditioned delays & State augmentation; ML features \\
+A2 Stationarity                   & Stale forecasts after process change      & Sliding window; drift detection \\
+A3 Case independence              & Ignores queueing/resource contention      & Acknowledged limitation \\
+A4 Sojourn-history independence   & Underestimates reworked-item delays       & State augmentation; ML features \\
+A5 Complete case observation      & Bias if long cases excluded               & Include right-censored cases \\
+\bottomrule
+\end{tabular}
+\end{table}

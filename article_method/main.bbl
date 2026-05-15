@@ -1,0 +1,104 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{almeida2026slr}
+R.~Almeida~de Oliveira, J.~de~Paulo~Ribeiro, E.~E. Scalabrin, Process mining
+  and stochastic modeling for software process forecasting: A systematic
+  literature review with an llm-assisted protocol, Information and Software
+  TechnologyUnder review (2026).
+
+\bibitem{aalst2016process}
+W.~M.~P. van~der Aalst, Process Mining: Data Science in Action, 2nd Edition,
+  Springer, 2016.
+
+\bibitem{leemans2013discovering}
+S.~J.~J. Leemans, D.~Fahland, W.~M.~P. van~der Aalst, Discovering
+  block-structured process models from event logs --- a constructive approach,
+  in: Application and Theory of Petri Nets and Concurrency, Springer, 2013, pp.
+  311--329.
+
+\bibitem{kemeny1976finite}
+J.~G. Kemeny, J.~L. Snell, Finite Markov Chains, Springer, 1976.
+
+\bibitem{RoggeSolti2015NonMarkovianSPN}
+A.~Rogge-Solti, M.~Weske, Prediction of business process durations using
+  non-{M}arkovian stochastic {P}etri nets, Information Systems 54 (2015) 1--14.
+
+\bibitem{Spedicato2017}
+G.~A. Spedicato, Discrete time markov chains with r, The R Journal 9~(2) (2017)
+  84--104.
+
+\bibitem{vacanti2015}
+D.~S. Vacanti, Actionable Agile Metrics for Predictability: An Introduction,
+  Leanpub, 2015.
+
+\bibitem{savage2009flaw}
+S.~L. Savage, The Flaw of Averages: Why We Underestimate Risk in the Face of
+  Uncertainty, Wiley, 2009.
+
+\bibitem{magennis2015forecasting}
+T.~Magennis, Forecasting and simulating software development projects:
+  Effective modeling of {Kanban} \& {Scrum} projects using {Monte} carlo
+  simulation (2015).
+
+\bibitem{polato2018time}
+M.~Polato, A.~Sperduti, A.~Burattin, M.~de~Leoni, Time and activity sequence
+  prediction of business process instances, Computing 100~(9) (2018)
+  1005--1031.
+
+\bibitem{verenich2019survey}
+I.~Verenich, M.~Dumas, M.~La~Rosa, F.~M. Maggi, I.~Teinemaa, Survey and
+  cross-benchmark comparison of remaining time prediction methods in business
+  process monitoring, ACM Transactions on Intelligent Systems and Technology
+  10~(4) (2019).
+
+\bibitem{rubin2007process}
+V.~Rubin, C.~W. G\"unther, W.~M.~P. van~der Aalst, E.~Kindler, B.~F. van
+  Dongen, W.~Sch\"afer, Process mining framework for software processes, in:
+  International Conference on Software Process, 2007.
+
+\bibitem{choetkiertikul2018deep}
+M.~Choetkiertikul, H.~K. Dam, T.~Tran, T.~Pham, A.~Ghose, T.~Menzies, A deep
+  learning model for estimating story points, IEEE Transactions on Software
+  Engineering 45~(7) (2018) 637--656.
+
+\bibitem{robert2004monte}
+C.~P. Robert, G.~Casella, Monte Carlo Statistical Methods, 2nd Edition,
+  Springer, 2004.
+
+\bibitem{tashman2000out}
+L.~J. Tashman, Out-of-sample tests of forecasting accuracy: An analysis and
+  review, International Journal of Forecasting 16~(4) (2000) 437--450.
+
+\bibitem{hyndman2021forecasting}
+R.~J. Hyndman, G.~Athanasopoulos, Forecasting: Principles and Practice, 3rd
+  Edition, OTexts, 2021.
+
+\bibitem{billingsley1961statistical}
+P.~Billingsley, Statistical methods in {M}arkov chains, The Annals of
+  Mathematical Statistics 32~(1) (1961) 12--40.
+
+\bibitem{lecuyer2017random}
+P.~L'Ecuyer, D.~Munger, B.~Oreshkin, R.~Simard, Random numbers for parallel
+  computers: Requirements and methods, with emphasis on {GPU}s, Mathematics and
+  Computers in Simulation 135 (2017) 3--17.
+
+\bibitem{hevner2004}
+A.~R. Hevner, S.~T. March, J.~Park, S.~Ram, Design science in information
+  systems research, MIS Quarterly 28~(1) (2004) 75--105.
+
+\bibitem{peffers2007}
+K.~Peffers, T.~Tuunanen, M.~A. Rothenberger, S.~Chatterjee, A design science
+  research methodology for information systems research, Journal of Management
+  Information Systems 24~(3) (2007) 45--77.
+
+\bibitem{kampenes2007systematic}
+V.~B. Kampenes, T.~Dyb{\aa}, J.~E. Hannay, D.~I.~K. Sj{\o}berg, A systematic
+  review of effect size in software engineering experiments, Information and
+  Software Technology 49~(11--12) (2007) 1073--1086.
+
+\end{thebibliography}

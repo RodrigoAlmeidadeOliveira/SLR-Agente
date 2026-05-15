@@ -8,7 +8,6 @@
 \section{Machine-Learning Enhancement Component}
 \label{sec:ml-component}
 
-\textbf{[TODO — 1 p.]}
 The ML component $\mathcal{S}_{\text{ML}}$ runs in parallel to the
 sequential pipeline and produces a case-level predictor $\hat{f}$. Its
 contract is summarized in Table~\ref{tab:contracts}; its novelty is the
@@ -18,8 +17,6 @@ Markov-derived and are not available to traditional MSR baselines.
 % ---------- §5.1 Feature engineering ----------
 \subsection{Feature Engineering}
 \label{sec:ml-features}
-
-\textbf{[TODO — paste consolidated feature table from cap4 tab:features.]}
 
 \begin{table}[ht]
 \centering
@@ -57,25 +54,31 @@ Three feature sets are evaluated in the companion empirical paper:
 \subsection{Label Construction and Training Protocol}
 \label{sec:ml-training}
 
-\textbf{[TODO — paste def:label and short version of alg:ml-training.]}
-
 \begin{definition}[Outcome Label]
 \label{def:label}
 $y_c = 1$ if $T_c > \tau_{\text{threshold}}$
 (\texttt{delayed}); $y_c = 0$ otherwise (\texttt{on\_time}).
 \end{definition}
 
+Three threshold strategies are supported:
+\emph{percentile-based} ($\tau_{\text{threshold}} = \hat{Q}_{0.75}$),
+\emph{SLA-based}, and \emph{relative}
+($2 \cdot \tilde{d}_{\text{type}}$).
+
 The training protocol enforces a strict temporal hold-out:
 $\mathcal{L}_{\text{train}}$ contains all cases completed before
 $t_{\text{cut}}$, $\mathcal{L}_{\text{test}}$ contains only cases that
-\emph{start} after $t_{\text{cut}}$. Temporal cross-validation uses
-expanding windows~\cite{tashman2000out, hyndman2021forecasting}.
+\emph{start} after $t_{\text{cut}}$. Candidate models
+$\{\text{RF}, \text{XGBoost}, \text{LogReg}\}$ are compared by
+temporal cross-validation with expanding
+windows~\cite{tashman2000out, hyndman2021forecasting}; the best model
+$\hat{f}$ is evaluated on $\mathcal{L}_{\text{test}}$ via AUC-ROC,
+F1, Brier score, and the feature-importance vector $\mathbf{w}$ is
+reported.
 
 % ---------- §5.3 Integration with Monte Carlo ----------
 \subsection{Integration with Monte Carlo Forecasts}
 \label{sec:ml-integration}
-
-\textbf{[TODO — paste def:deviation.]}
 
 \begin{definition}[Deviation Score]
 \label{def:deviation}

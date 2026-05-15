@@ -13,42 +13,111 @@
 \subsection{Pipeline Definition}
 \label{sec:arch-pipeline}
 
-\textbf{[TODO — migrate cap4 def:pipeline (eq:pipeline).]}
 PATHCAST is defined as a composition of four sequential transformation
-stages and one parallel enhancement component.
+stages and one parallel enhancement component:
 
 \begin{definition}[PATHCAST Pipeline]
 \label{def:pipeline}
-\textbf{[TODO — paste from cap4 def:pipeline. Stage signatures
-$\mathcal{S}_1$..$\mathcal{S}_4$ and $\mathcal{S}_{\text{ML}}$.]}
+The PATHCAST pipeline is the function composition
+\begin{equation}
+\label{eq:pipeline}
+\mathcal{F} = \mathcal{S}_4 \circ \mathcal{S}_3 \circ \mathcal{S}_2 \circ \mathcal{S}_1
+\end{equation}
+where the stage signatures are
+\begin{align}
+\mathcal{S}_1 &: \mathcal{R} \to \mathcal{L}
+    && \text{(Event Log Construction)} \label{eq:stage1-sig} \\
+\mathcal{S}_2 &: \mathcal{L} \to (M, \Phi, S)
+    && \text{(Process Mining)} \label{eq:stage2-sig} \\
+\mathcal{S}_3 &: (\mathcal{L}, S) \to (P, N, B, \hat{F}, \pi)
+    && \text{(Stochastic Modeling)} \label{eq:stage3-sig} \\
+\mathcal{S}_4 &: (P, \hat{F}, s_0, M_{\text{sim}}) \to \hat{\mathcal{D}}
+    && \text{(Monte Carlo Simulation)} \label{eq:stage4-sig}
+\end{align}
+together with a parallel enhancement component
+\begin{equation}
+\label{eq:ml-sig}
+\mathcal{S}_{\text{ML}} : (\mathcal{L}, \Phi, P, N) \to (\hat{f}, \mathbf{w})
+\quad \text{(ML Enhancement)}.
+\end{equation}
 \end{definition}
 
-\textbf{[TODO — paste notation paragraph: $\mathcal{R}$, $\mathcal{L}$,
-$M$, $\Phi$, $P$, $N$, $B$, $\hat{F}$, $\hat{\mathcal{D}}$, $\hat{f}$.]}
+Notation: $\mathcal{R}$ denotes the input repositories;
+$\mathcal{L}$ the structured event log; $M$ the discovered process
+model; $\Phi$ the process metrics vector; $S = S_T \cup S_A$ the state
+space; $P$ the Markov transition matrix; $N = (I-Q)^{-1}$ the
+fundamental matrix; $B = NR$ the absorption probability matrix;
+$\hat{F}$ the empirical sojourn-time distributions; $\pi$ the
+stationary distribution; $\hat{\mathcal{D}}$ the empirical forecast
+distribution; $\hat{f}$ the trained ML predictor; $\mathbf{w}$ the
+feature-importance vector.
 
 % ---------- §3.2 Architecture figure ----------
 \subsection{Pipeline Architecture}
 \label{sec:arch-figure}
 
-\textbf{[TODO — migrate Figure fig:pipeline-architecture (TikZ from cap4).]}
 Figure~\ref{fig:pipeline-architecture} illustrates the pipeline with
 its data flows.
 
-% \begin{figure}[htbp]
-%     \centering
-%     \input{figures/pipeline_architecture.tex}
-%     \caption{PATHCAST pipeline architecture. Solid arrows: primary
-%     sequential pipeline; dashed arrows: ML enhancement data flows.}
-%     \label{fig:pipeline-architecture}
-% \end{figure}
+\begin{figure}[htbp]
+\centering
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[
+    node distance=1.6cm,
+    stage/.style={rectangle, draw, thick, rounded corners=4pt,
+                  minimum width=5.5cm, minimum height=1.2cm,
+                  align=center, font=\small},
+    data/.style={rectangle, draw, dashed, rounded corners=2pt,
+                 minimum width=2.6cm, minimum height=0.7cm,
+                 align=center, font=\scriptsize, fill=gray!5},
+    arrow/.style={->, thick, >=stealth},
+    darrow/.style={->, dashed, >=stealth, gray},
+    lbl/.style={font=\scriptsize, midway, right, xshift=3pt}
+]
+    \node[data] (git) at (-3.2, 0) {Git Logs};
+    \node[data] (jira) at (0, 0) {Issue Tracker};
+    \node[data] (ci) at (3.2, 0) {CI/CD Logs};
+
+    \node[stage, fill=blue!8,  below of=jira, yshift=-0.2cm] (s1) {%
+      \textbf{$\mathcal{S}_1$: Event Log Construction}\\
+      $\mathcal{R} \to \mathcal{L}$};
+    \node[stage, fill=blue!15, below of=s1,   yshift=-0.4cm] (s2) {%
+      \textbf{$\mathcal{S}_2$: Process Mining}\\
+      $\mathcal{L} \to (M, \Phi, S)$};
+    \node[stage, fill=orange!15, below of=s2, yshift=-0.4cm] (s3) {%
+      \textbf{$\mathcal{S}_3$: Stochastic Modeling}\\
+      $(\mathcal{L}, S) \to (P, N, B, \hat{F}, \pi)$};
+    \node[stage, fill=red!12,  below of=s3,   yshift=-0.4cm] (s4) {%
+      \textbf{$\mathcal{S}_4$: Monte Carlo Simulation}\\
+      $(P, \hat{F}, s_0, M_{\text{sim}}) \to \hat{\mathcal{D}}$};
+    \node[stage, fill=green!12, right of=s3,  xshift=4.5cm] (ml) {%
+      \textbf{$\mathcal{S}_{\text{ML}}$: ML Enhancement}\\
+      $(\mathcal{L},\Phi,P,N) \to (\hat{f}, \mathbf{w})$};
+    \node[data, below of=s4, yshift=-0.0cm, minimum width=5.5cm, fill=purple!8]
+      (output) {Probabilistic Forecasts $\hat{\mathcal{D}}, \hat{f}$};
+
+    \draw[arrow] (git) -- (s1);
+    \draw[arrow] (jira) -- (s1);
+    \draw[arrow] (ci) -- (s1);
+    \draw[arrow] (s1) -- (s2) node[lbl] {$\mathcal{L}$};
+    \draw[arrow] (s2) -- (s3) node[lbl] {$M,\Phi,S$};
+    \draw[arrow] (s3) -- (s4) node[lbl] {$P,\hat{F}$};
+    \draw[arrow] (s4) -- (output);
+
+    \draw[darrow] (s2) -| (ml) node[font=\scriptsize, above, pos=0.25] {$\mathcal{L},\Phi$};
+    \draw[darrow] (s3) -- (ml) node[font=\scriptsize, above] {$P,N$};
+    \draw[darrow] (ml) |- (output) node[font=\scriptsize, right, pos=0.3] {$\hat{f}$};
+\end{tikzpicture}}
+\caption{PATHCAST pipeline architecture. Solid arrows: primary
+sequential pipeline; dashed arrows: ML enhancement data flows.}
+\label{fig:pipeline-architecture}
+\end{figure}
 
 % ---------- §3.3 Design principles ----------
 \subsection{Design Principles}
 \label{sec:arch-principles}
 
-\textbf{[TODO — consolidate into a single short paragraph (not 3
-boxes).]}
-The architecture is governed by three principles:
+The architecture is governed by three principles.
 \textbf{(P1) Empirical grounding} --- every model parameter is estimated
 from observed data; no \emph{a priori} distribution is assumed unless
 empirically validated.
@@ -62,9 +131,6 @@ empirical distribution of $M_{\text{sim}}$ simulated outcomes.
 % ---------- §3.4 Inter-stage contracts (CONSOLIDATED TABLE) ----------
 \subsection{Inter-Stage Contracts}
 \label{sec:arch-contracts}
-
-\textbf{[TODO — replace cap4 def:contract-s1..ml (5 boxes) with the
-single table below.]}
 
 \begin{table}[ht]
 \centering
