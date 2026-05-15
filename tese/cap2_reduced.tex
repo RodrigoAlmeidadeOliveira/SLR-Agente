@@ -57,14 +57,11 @@ traces.
 An alignment $\gamma$ between trace $\sigma$ and model $M$ is a sequence
 of synchronous, log and model moves~\cite{adriansyah2011alignments}. With
 $\gamma^*$ the cost-optimal alignment,
-\begin{equation}
-\label{eq:fitness}
-\text{fitness}(\sigma, M) = 1 - \frac{\text{cost}(\gamma^*)}
-{\text{cost}(\gamma_{\text{worst}})},
-\qquad
-\text{conf}(c) = \frac{|\{(s_i,m_i)\in\gamma^*_c : s_i=m_i\}|}{|\gamma^*_c|}.
-\label{eq:case-conformance-cap2}
-\end{equation}
+\begin{align}
+\text{fitness}(\sigma, M) &= 1 - \frac{\text{cost}(\gamma^*)}
+{\text{cost}(\gamma_{\text{worst}})}, \label{eq:fitness} \\
+\text{conf}(c) &= \frac{|\{(s_i,m_i)\in\gamma^*_c : s_i=m_i\}|}{|\gamma^*_c|}. \label{eq:case-conformance-cap2}
+\end{align}
 Log-level fitness is the trace-weighted average. The case-level
 conformance $\text{conf}(c)$ is reused as an ML feature in
 Chapter~\ref{ch:method}.
@@ -148,13 +145,10 @@ Chapman--Kolmogorov relation $P^{(n)} = P^n$.
 \label{def:absorbing}
 For an absorbing chain with $t$ transient and $r$ absorbing states the
 canonical form is
-\begin{equation}
-\label{eq:absorbing-form}
-P = \begin{pmatrix} Q & R \\ \mathbf{0} & I_r \end{pmatrix},
-\qquad
-N = (I_t - Q)^{-1} = \sum_{k=0}^{\infty} Q^k,
-\label{eq:fundamental}
-\end{equation}
+\begin{align}
+P &= \begin{pmatrix} Q & R \\ \mathbf{0} & I_r \end{pmatrix}, \label{eq:absorbing-form} \\
+N &= (I_t - Q)^{-1} = \sum_{k=0}^{\infty} Q^k, \label{eq:fundamental}
+\end{align}
 where $N_{ij}$ is the expected number of visits to transient state $j$
 starting from transient state $i$ before absorption
 (Definition~\ref{def:fundamental-matrix}).
@@ -224,13 +218,10 @@ The central limit theorem yields, with $\text{Var}(X)=\sigma^2 < \infty$,
 \end{equation}
 so for any trajectory functional $g$ the MC estimator and confidence
 interval are
-\begin{equation}
-\label{eq:mc-estimator}
-\hat{\mu}_g = \tfrac{1}{M}\sum_{m=1}^{M} g(\omega^{(m)}),
-\qquad
-\hat{\mu}_g \pm z_{\alpha/2} \cdot \tfrac{\hat{\sigma}_g}{\sqrt{M}}.
-\label{eq:mc-ci}
-\end{equation}
+\begin{align}
+\hat{\mu}_g &= \tfrac{1}{M}\sum_{m=1}^{M} g(\omega^{(m)}), \label{eq:mc-estimator} \\
+\text{CI} &= \hat{\mu}_g \pm z_{\alpha/2} \cdot \tfrac{\hat{\sigma}_g}{\sqrt{M}}. \label{eq:mc-ci}
+\end{align}
 The standard error scales as $O(1/\sqrt{M})$ independently of
 dimension, and seed control via the Mersenne Twister makes the simulation
 exactly reproducible.
