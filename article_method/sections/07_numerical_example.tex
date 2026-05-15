@@ -1,37 +1,33 @@
 % =============================================================================
 % 7. ILLUSTRATIVE NUMERICAL EXAMPLE
 % Target: 1.5 pages (~750 words)
-% Source: appendix_theory.tex / cap4 sec:s3-example (numerical example)
-% Status: SKELETON
-%
-% Purpose: NOT empirical results in real repositories.
-% This is a closed-form proof-of-concept that the analytical derivation
-% and the Monte Carlo simulation produce the same answer on a controlled
-% 6-state SDLC chain. Validates Property prop:convergence-rate and
-% Theorem thm:consistency on a verifiable instance.
+% Source: cap4 §4.4.9 / appendix_theory.tex (sec:s3-example) — MIGRATED
+% Values reproducible via scripts/numerical_example.py
 % =============================================================================
 
 \section{Illustrative Numerical Example}
 \label{sec:numerical-example}
 
-\textbf{[TODO — 1.5 p.]}
 This section instantiates PATHCAST on a controlled six-state SDLC chain
-to demonstrate (i) the closed-form analytical derivation of $N$, $B$
-and the expected lead time and (ii) agreement with the Monte Carlo
+to (i) exhibit the closed-form analytical derivation of $N$, $B$ and
+the expected lead time and (ii) verify agreement with the Monte Carlo
 simulation of Stage~4. The example uses synthetic parameters chosen to
 mirror typical SDLC patterns; no real-repository data is involved.
+The computations are reproducible from the script deposited in the
+replication package
+(\texttt{scripts/numerical\_example.py}).
 
 % ---------- §7.1 Setup ----------
 \subsection{Setup}
 \label{sec:num-setup}
 
-\textbf{[TODO — describe the 6-state chain.]}
-States: $S_T = \{\texttt{backlog}, \texttt{in\_progress},
-\texttt{review}, \texttt{testing}\}$,
+The state space is
+$S_T = \{\texttt{backlog}, \texttt{in\_progress},
+        \texttt{review}, \texttt{testing}\}$,
 $S_A = \{\texttt{done}, \texttt{cancelled}\}$.
-
-Transition matrix $P$ (with rework edges from \texttt{review} and
-\texttt{testing} back to \texttt{in\_progress}):
+The transition matrix $P$, with rework edges
+$\texttt{review} \to \texttt{in\_progress}$ and
+$\texttt{testing} \to \texttt{in\_progress}$, is
 \[
 P =
 \begin{pmatrix}
@@ -41,83 +37,150 @@ P =
 0.0 & 0.2 & 0.0 & 0.0 & 0.8 & 0.0 \\
 0.0 & 0.0 & 0.0 & 0.0 & 1.0 & 0.0 \\
 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 1.0 \\
-\end{pmatrix}
+\end{pmatrix},
 \]
-
-Per-state mean sojourn $\bar{d}_s$ (in days):
-\textbf{[TODO — fill values, e.g.\ backlog 3, in\_progress 4,
-review 2, testing 3.]}
+with mean sojourn vector
+$\bar{d} = (3, 4, 2, 3)$ (in days) for the transient states in the
+order above. The matrix is row-stochastic, satisfying the
+postcondition of Stage~3 (Table~\ref{tab:contracts}).
 
 % ---------- §7.2 Closed-form analytical computation ----------
-\subsection{Closed-Form Computation}
+\subsection{Closed-Form Analytical Computation}
 \label{sec:num-analytical}
 
-\textbf{[TODO — compute $Q, R, N=(I-Q)^{-1}, B=NR$ explicitly with
-the matrices above. Show one or two intermediate matrices, then the
-final $N$ and $B$.]}
+The transient and absorbing blocks are
+\[
+Q =
+\begin{pmatrix}
+0.0 & 0.9 & 0.0 & 0.0 \\
+0.0 & 0.0 & 0.8 & 0.0 \\
+0.0 & 0.3 & 0.0 & 0.6 \\
+0.0 & 0.2 & 0.0 & 0.0 \\
+\end{pmatrix},
+\qquad
+R =
+\begin{pmatrix}
+0.0 & 0.1 \\
+0.0 & 0.2 \\
+0.1 & 0.0 \\
+0.8 & 0.0 \\
+\end{pmatrix}.
+\]
+Inverting $I - Q$ (which is invertible by
+Property~\ref{prop:invertibility}) yields the fundamental matrix
+\[
+N \;=\; (I - Q)^{-1} \;=\;
+\begin{pmatrix}
+1.0000 & 1.3554 & 1.0843 & 0.6506 \\
+0.0000 & 1.5060 & 1.2048 & 0.7229 \\
+0.0000 & 0.6325 & 1.5060 & 0.9036 \\
+0.0000 & 0.3012 & 0.2410 & 1.1446 \\
+\end{pmatrix},
+\]
+and the absorption matrix
+\[
+B \;=\; N R \;=\;
+\begin{pmatrix}
+0.6289 & 0.3711 \\
+0.6988 & 0.3012 \\
+0.8735 & 0.1265 \\
+0.9398 & 0.0602 \\
+\end{pmatrix},
+\]
+whose rows sum to one as required by
+Property~\ref{prop:absorption-certainty}.
 
-Expected lead time from $s_0 = \texttt{backlog}$:
-\begin{equation}
-\label{eq:num-lead}
-\mathbb{E}[\text{LeadTime} \mid s_0 = \texttt{backlog}]
-  = \sum_{j \in S_T} N_{\texttt{backlog},j} \cdot \bar{d}_j
-  = \textbf{[TODO — numerical value, e.g.\ 14.3 days.]}
-\end{equation}
-
-Completion probability:
-\begin{equation}
-\label{eq:num-completion}
-B_{\texttt{backlog},\texttt{done}}
-  = \textbf{[TODO — numerical value, e.g.\ 0.84.]}
-\end{equation}
+From the first row of $N$ and $B$, the analytical forecasts for a case
+starting at $s_0 = \texttt{backlog}$ are
+\begin{align}
+\mathbb{E}\!\bigl[\textup{LeadTime} \mid s_0 = \texttt{backlog}\bigr]
+   &= \sum_{j \in S_T} N_{\texttt{backlog},j} \cdot \bar{d}_j
+   \nonumber \\
+   &= 1.0000 \cdot 3 + 1.3554 \cdot 4
+    + 1.0843 \cdot 2 + 0.6506 \cdot 3
+   \;=\; 12.5422 \;\text{days}, \label{eq:num-lead} \\[2pt]
+\hat{P}(\textup{Done} \mid s_0 = \texttt{backlog})
+   &= B_{\texttt{backlog},\texttt{done}} \;=\; 0.6289.
+   \label{eq:num-completion}
+\end{align}
 
 % ---------- §7.3 Monte Carlo cross-validation ----------
 \subsection{Monte Carlo Cross-Validation}
 \label{sec:num-mc}
 
-\textbf{[TODO — simulate $M_{\text{sim}} = 10{,}000$ trajectories of
-$P$ with exponential sojourns matched to $\bar{d}_s$. Report:
-$\hat{Q}_{0.5}$, $\hat{Q}_{0.85}$, $\hat{P}(\text{Done})$ and the
-empirical mean. Compare with closed-form values.]}
-
-Table~\ref{tab:num-comparison} compares analytical and Monte Carlo
-estimates. The relative error is below 1\% on every quantity, as
-predicted by Property~\ref{prop:convergence-rate}.
+We instantiate Algorithm~\ref{alg:mc-full} on the same chain with
+exponential sojourns of rate $1/\bar{d}_s$ for each transient state,
+$M_{\textup{sim}} = 10{,}000$, $K_{\max} = 10^3$ and seed 42.
+Table~\ref{tab:num-comparison} reports the agreement between the
+analytical and Monte Carlo estimates of the quantities for which a
+closed form exists; the percentiles ($\hat{Q}_{0.5}$, $\hat{Q}_{0.85}$,
+$\hat{Q}_{0.95}$) are available only from the Monte Carlo
+distribution.
 
 \begin{table}[ht]
 \centering
-\caption{Analytical vs.\ Monte Carlo estimates on the six-state SDLC
-chain. $M_{\text{sim}} = 10{,}000$.}
+\caption{Analytical vs.\ Monte Carlo estimates from
+$s_0 = \texttt{backlog}$. $M_{\textup{sim}} = 10{,}000$, seed 42.
+Percentiles are reported by Monte Carlo only, since no closed form
+exists for the distribution of a sum of exponentials over a random
+number of visits.}
 \label{tab:num-comparison}
 \small
-\begin{tabular}{@{}lrrl@{}}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
 \textbf{Quantity} & \textbf{Analytical} &
 \textbf{Monte Carlo} & \textbf{Rel.\ error} \\
 \midrule
-$\mathbb{E}[\text{LeadTime}]$  & \textbf{[TODO]} & \textbf{[TODO]} & $< 1\%$ \\
-$\hat{Q}_{0.5}$                & \textbf{[TODO]} & \textbf{[TODO]} & $< 1\%$ \\
-$\hat{P}(\text{Done})$         & \textbf{[TODO]} & \textbf{[TODO]} & $< 1\%$ \\
+$\mathbb{E}[\textup{LeadTime}]$ (days)  & 12.5422 & 12.5462 & $0.03\%$ \\
+$\hat{P}(\textup{Done})$                &  0.6289 &  0.6252 & $0.59\%$ \\
+$\hat{P}(\textup{Cancelled})$           &  0.3711 &  0.3748 & $1.00\%$ \\
+\midrule
+$\hat{Q}_{0.50}$ (days)                 & ---     & 10.40   & --- \\
+$\hat{Q}_{0.85}$ (days)                 & ---     & 21.60   & --- \\
+$\hat{Q}_{0.95}$ (days)                 & ---     & 30.82   & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-% ---------- §7.4 What the example illustrates ----------
-\subsection{Discussion}
+All quantities with an analytical reference agree within $1\%$, in line
+with the $O(1/\sqrt{M_{\textup{sim}}})$ rate of
+Property~\ref{prop:convergence-rate}.
+
+% ---------- §7.4 Discussion ----------
+\subsection{What the Example Illustrates}
 \label{sec:num-discussion}
 
-\textbf{[TODO — 1 paragraph.]}
-The example illustrates three properties of the pipeline.
-\textbf{(D1)} The fundamental matrix $N$ exposes the contribution of
-each transient state to the expected lead time, locating
-\texttt{review} as the dominant contributor through the rework loop.
-\textbf{(D2)} The quasi-stationary distribution
-(Equation~\textbf{[TODO ref]}) identifies \texttt{review} as the
-accumulating state, a bottleneck diagnosis unavailable to
-throughput-based Monte Carlo.
-\textbf{(D3)} Analytical and Monte Carlo answers agree within 1\%, a
-controlled cross-validation that the simulation implements the same
-model as the closed-form derivation.
+The example exhibits three properties of the pipeline.
+
+\textbf{(D1) Closed-form interpretability.}
+The first row of $N$ decomposes the expected lead time
+(Equation~\ref{eq:num-lead}) into the contribution of each transient
+state. The dominant terms are $\texttt{in\_progress}$
+($1.36 \cdot 4 = 5.42$ days) and $\texttt{review}$
+($1.08 \cdot 2 = 2.17$ days). Although $\texttt{review}$ is the
+nominal rework gate, the bulk of the calendar cost accrues in
+$\texttt{in\_progress}$, fed by the rework edges
+$\texttt{review}\to\texttt{in\_progress}$ (0.3) and
+$\texttt{testing}\to\texttt{in\_progress}$ (0.2).
+
+\textbf{(D2) Bottleneck diagnosis.}
+The quasi-stationary distribution computed from $N$ as
+$\tilde{\pi}_j \propto (\pi_0\, N)_j \cdot \bar{d}_j$ assigns
+\[
+\tilde{\pi}_{\texttt{in\_progress}} = 0.43, \quad
+\tilde{\pi}_{\texttt{backlog}}      = 0.24, \quad
+\tilde{\pi}_{\texttt{review}}       = 0.17, \quad
+\tilde{\pi}_{\texttt{testing}}      = 0.16,
+\]
+locating the bottleneck at $\texttt{in\_progress}$. Throughput-based
+Monte Carlo, which has no explicit state, cannot produce this
+diagnosis (Theorem~\ref{thm:information}).
+
+\textbf{(D3) Cross-validation between analytical and simulated paths.}
+The agreement of Table~\ref{tab:num-comparison} verifies that the
+Monte Carlo of Stage~4 implements the same model as the closed-form
+absorbing-chain derivation of Stage~3 within the expected Monte Carlo
+error.
 
 \textbf{This example is not an empirical evaluation.} The empirical
 evaluation across 48 open-source repositories is the subject of the

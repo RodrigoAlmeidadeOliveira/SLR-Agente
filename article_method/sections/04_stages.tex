@@ -1,9 +1,7 @@
 % =============================================================================
 % 4. STAGE SPECIFICATIONS
 % Target: 4.5 pages (~2250 words)
-% Source: cap4 §4.2–§4.5 (sec:stage1..sec:stage4)
-% Status: SKELETON — keep only one operation + one property + one equation
-%         per stage; move detailed tables and rework analysis to supplementary.
+% Source: cap4 §4.2–§4.5 — MIGRATED
 % =============================================================================
 
 \section{Stage Specifications}
@@ -15,24 +13,77 @@
 \subsection{Stage 1: Event Log Construction}
 \label{sec:stages-s1}
 
-\textbf{[TODO — 1 p.]}
-Stage~1 transforms heterogeneous repository data into a structured event
-log. It is the composition
+Stage~1 transforms heterogeneous repository data into a structured
+event log. It is the composition
 \begin{equation}
 \label{eq:s1-decomposition}
-\mathcal{S}_1 = \textsc{Format} \circ \textsc{Map} \circ
-    \textsc{Correlate} \circ \textsc{Extract}.
+\mathcal{S}_1 \;=\; \textsc{Format} \circ \textsc{Map}
+                  \circ \textsc{Correlate} \circ \textsc{Extract},
 \end{equation}
+applied to the raw event streams of every repository in $\mathcal{R}$.
 
-\textbf{[TODO — migrate def:raw-event, def:correlation, eq:kappa1,
-def:corr-quality. Move the detailed extraction/mapping tables
-(tab:event-extraction, tab:activity-mapping) to online supplementary.]}
+\paragraph{Extraction.}
+Each data source (Git, issue tracker, CI/CD, code review) is parsed
+into a homogeneous representation.
 
-Case correlation is implemented as a cascade of three strategies
-($\kappa_1$: explicit reference, $\kappa_2$: structural link,
-$\kappa_3$: heuristic). Correlation quality is monitored by
-$\text{Coverage} = |E^{\text{corr}}|/|E^{\text{raw}}|$ and
-ambiguity rate (Definition~\ref{def:corr-quality}).
+\begin{definition}[Raw Event]
+\label{def:raw-event}
+A raw event is a tuple
+$e^{\textup{raw}} = (ts, src, type, payload)$, with timestamp $ts$,
+source identifier $src$, source-specific type, and an attribute map
+$payload$. The raw event pool is
+$E^{\textup{raw}} = \bigcup_{i,j}
+    \textsc{Extract}_{src(D_i^{(j)})}(D_i^{(j)})$.
+\end{definition}
+
+\paragraph{Case correlation.}
+Raw events are assigned to a business case (typically an issue) by a
+correlation function $\kappa$.
+
+\begin{definition}[Case Correlation Function]
+\label{def:correlation}
+$\kappa : E^{\textup{raw}} \to \mathcal{C} \cup \{\bot\}$, where
+$\bot$ indicates an uncorrelated event.
+\end{definition}
+
+The correlation function is implemented as a cascade of three
+strategies applied in decreasing order of specificity:
+$\kappa_1$~\emph{explicit reference} (issue key extracted from
+structured fields, e.g.\ Jira key or PR linkage),
+\begin{equation}
+\label{eq:kappa1}
+\kappa_1(e) =
+\begin{cases}
+\textup{issue\_key}(e.\textup{payload}) & \text{if extractable}, \\
+\bot                                    & \text{otherwise};
+\end{cases}
+\end{equation}
+$\kappa_2$~\emph{structural link} (platform-provided relationships
+such as PR$\to$issue and build$\to$commit); and $\kappa_3$~\emph{heuristic}
+(temporal proximity, author identity, file overlap), applied only to
+events unresolved by $\kappa_1$ or $\kappa_2$. The cascade terminates
+at the first match, producing a case-annotated event set
+$E^{\textup{corr}}$. Correlation quality is monitored by
+\begin{definition}[Correlation Quality]
+\label{def:corr-quality}
+\begin{equation}
+\label{eq:corr-coverage}
+\textup{Coverage} \;=\; |E^{\textup{corr}}| / |E^{\textup{raw}}|,
+\qquad
+\textup{Ambiguity Rate} \;=\;
+   |\{e : |\kappa(e)| > 1\}| / |E^{\textup{raw}}|.
+\end{equation}
+\end{definition}
+
+\paragraph{Activity mapping and formatting.}
+Each correlated event is mapped to one of the activities of the SDLC
+taxonomy
+$\mathcal{A} = \{\texttt{created}, \texttt{backlog},
+\texttt{in\_progress}, \texttt{review}, \texttt{testing},
+\texttt{build}, \texttt{deploy}, \texttt{done}, \texttt{cancelled}\}$
+via a configurable lookup function $\mu$; the default mapping table is
+deposited in the online supplementary material. Bot events and
+duplicates are filtered.
 
 \begin{definition}[Structured Event]
 \label{def:structured-event}
@@ -41,7 +92,24 @@ $e = (\kappa(e), \mu(e), \tau(e), \rho(e), \omega(e))$ with case ID,
 activity, timestamp, resource, and attribute map.
 \end{definition}
 
-\textbf{[TODO — final event-log equation eq:final-log.]}
+The output event log is
+\begin{equation}
+\label{eq:final-log}
+\mathcal{L} \;=\;
+\Bigl\{\, \sigma_c
+   = \langle e_1, \dots, e_{|\sigma_c|} \rangle
+   \;\Big|\;
+   c \in \mathcal{C}, \;
+   \tau(e_k) \le \tau(e_{k+1})\ \forall k
+\,\Bigr\}.
+\end{equation}
+
+\paragraph{Quality assessment.}
+The log is rejected with a quality warning when trace completeness falls
+below $\theta_{\textup{comp}}$ (default 0.5) or activity coverage falls
+below $\theta_{\textup{cov}}$ (default 0.6); the full quality metric
+definitions (mean trace length, variant count) are in the supplementary
+material.
 
 % =============================================================================
 % 4.2 STAGE 2 — Process Mining (1 p)
@@ -49,13 +117,16 @@ activity, timestamp, resource, and attribute map.
 \subsection{Stage 2: Process Mining}
 \label{sec:stages-s2}
 
-\textbf{[TODO — 1 p.]}
-Stage~2 produces a process model $M$ and the metrics vector
-$\Phi$. The Inductive Miner~\cite{leemans2013discovering} is
-applied with noise threshold $\theta_{\text{noise}} \in [0,1]$:
+Stage~2 takes the event log $\mathcal{L}$ and produces a process model
+$M$, a metrics vector $\Phi$, and the state space $S = S_T \cup S_A$
+used by Stages~3 and~4.
+
+\paragraph{Process discovery.}
+The Inductive Miner~\cite{leemans2013discovering} is applied with noise
+threshold $\theta_{\textup{noise}} \in [0,1]$:
 \begin{equation}
 \label{eq:discovery}
-M = \textsc{InductiveMiner}(\mathcal{L}, \theta_{\text{noise}}).
+M \;=\; \textsc{InductiveMiner}(\mathcal{L}, \theta_{\textup{noise}}).
 \end{equation}
 
 \begin{property}[Soundness Guarantee]
@@ -64,16 +135,51 @@ The Inductive Miner produces a sound process tree by
 construction~\cite{leemans2013discovering}.
 \end{property}
 
-Alignment-based conformance produces
-$\phi_{\text{fit}}, \phi_{\text{prec}}, \phi_{\text{gen}} \in [0,1]$ and
-per-case scores $\phi_{\text{conf}}(c)$ that feed the ML component
+\paragraph{Conformance checking.}
+Alignment-based conformance produces fitness, precision, and
+generalization scores:
+\begin{equation}
+\label{eq:conformance}
+\phi_{\textup{fit}} = \textup{fitness}(\mathcal{L}, M), \quad
+\phi_{\textup{prec}} = \textup{precision}(\mathcal{L}, M), \quad
+\phi_{\textup{gen}} = \textup{generalization}(\mathcal{L}, M).
+\end{equation}
+Per-case alignment cost yields a case-level conformance score
+\begin{equation}
+\label{eq:case-conformance}
+\phi_{\textup{conf}}(c) \;=\;
+   1 - \frac{\textup{cost}(\textup{align}(\sigma_c, M))}
+            {\textup{cost}(\textup{worst\_align}(\sigma_c, M))},
+\end{equation}
+used as feature~5 of the ML component
 (Section~\ref{sec:ml-component}).
-\textbf{[TODO — paste eq:case-conformance.]}
 
-\textbf{[TODO — variant entropy def:variant-entropy as a complexity
-proxy; state-space extraction def:state-space; performance-enhancement
-metrics moved to supplementary except for the per-state mean sojourn
-$\bar{d}_a$ which is used in $\hat{F}$.]}
+\paragraph{Variant entropy.}
+Let $V = \{v_1, \dots, v_k\}$ be the distinct trace variants in
+$\mathcal{L}$, with
+$p(v_i) = |\{c : \sigma_c = v_i\}| / |\mathcal{L}|$.
+
+\begin{definition}[Variant Entropy]
+\label{def:variant-entropy}
+$H(V) = -\sum_{v \in V} p(v) \log_2 p(v)$;
+$H_{\textup{norm}}(V) = H(V) / \log_2 |V| \in [0,1]$.
+\end{definition}
+$H_{\textup{norm}}$ is used as a scale-independent complexity proxy and
+as a candidate ML feature.
+
+\paragraph{State-space extraction.}
+\begin{definition}[SDLC State Space]
+\label{def:state-space}
+$S = S_T \cup S_A$, where $S_T$ comprises non-terminal observed
+activities and $S_A = \{\texttt{done}, \texttt{cancelled}\}$ collects
+the absorbing terminal states.
+\end{definition}
+
+Per-activity performance metrics (mean, variance, and median sojourn,
+per-transition waiting time) populate the metrics vector $\Phi$; their
+formal definitions are in the supplementary material. The mean
+sojourn $\bar{d}_s$ is also consumed by Stage~3
+(Equation~\ref{eq:expected-lead-time}).
 
 % =============================================================================
 % 4.3 STAGE 3 — Stochastic Modeling (1.5 p)
@@ -81,66 +187,116 @@ $\bar{d}_a$ which is used in $\hat{F}$.]}
 \subsection{Stage 3: Stochastic Modeling}
 \label{sec:stages-s3}
 
-\textbf{[TODO — 1.5 p. This is the formal core; keep dense.]}
-
-Stage~3 estimates a transition matrix, an empirical sojourn-time
-distribution, and the fundamental quantities of an absorbing Markov
+Stage~3 estimates the transition matrix, the empirical sojourn-time
+distributions, and the fundamental matrices of the absorbing Markov
 chain. The decomposition is
 \begin{equation}
 \label{eq:s3-decomposition}
-\mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
-    \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count}.
+\mathcal{S}_3 \;=\; \textsc{Stationary} \circ \textsc{Sojourn}
+                  \circ \textsc{Absorb}     \circ \textsc{Estimate}
+                  \circ \textsc{Count}.
 \end{equation}
 
 \paragraph{Maximum-likelihood estimation with optional smoothing.}
-\textbf{[TODO — paste eq:mle-full and prop:mle-consistency.]}
+For each ordered pair $(i,j) \in S \times S$, let $C_{ij}$ be the
+number of observed transitions $i \to j$ across $\mathcal{L}$. The
+estimator is
 \begin{equation}
 \label{eq:mle-full}
-\hat{P}_{ij} = \frac{C_{ij} + \alpha}
-                    {\sum_{j'} C_{ij'} + \alpha |S|}, \qquad
-\alpha \geq 0.
+\hat{P}_{ij} \;=\;
+\frac{C_{ij} + \alpha}{\sum_{j'} C_{ij'} + \alpha |S|},
+\qquad \alpha \ge 0,
 \end{equation}
+with $\alpha = 0$ recovering the standard MLE and $\alpha = 1$
+corresponding to a uniform Dirichlet prior (Laplace smoothing). The
+matrix $\hat{P}$ is row-stochastic by construction.
+
+\begin{property}[MLE Consistency]
+\label{prop:mle-consistency}
+For $\alpha = 0$ and ergodic dynamics,
+$\hat{P} \xrightarrow{\textup{a.s.}} P^*$ as
+$|\mathcal{L}| \to \infty$~\cite{Spedicato2017}.
+\end{property}
 
 \paragraph{Absorbing-chain decomposition.}
-\textbf{[TODO — paste eq:absorbing-decomposition, eq:fundamental-computation,
-eq:absorption-prob, prop:invertibility, prop:absorption-certainty.]}
-States are reordered so that transient precede absorbing:
+States are reordered so transient states precede absorbing ones:
 \begin{equation}
 \label{eq:absorbing-decomposition}
-\hat{P} = \begin{pmatrix} Q & R \\ \mathbf{0} & I \end{pmatrix},
-\qquad
-N = (I-Q)^{-1}, \qquad
-B = NR.
+\hat{P} \;=\;
+\begin{pmatrix} Q & R \\ \mathbf{0} & I \end{pmatrix}, \qquad
+N \;=\; (I - Q)^{-1}, \qquad
+B \;=\; N R.
 \end{equation}
+
+\begin{property}[Invertibility]
+\label{prop:invertibility}
+$(I - Q)$ is invertible if and only if every transient state can reach
+some absorbing state~\cite{kemeny1976finite}.
+\end{property}
 
 \begin{property}[Absorption Certainty]
 \label{prop:absorption-certainty}
-$\sum_{a \in S_A} B_{ia} = 1$ for every $i \in S_T$.
+$\sum_{a \in S_A} B_{ia} = 1$ for every transient $i \in S_T$.
 \end{property}
 
-Expected lead time in calendar time:
+The expected number of visits to transient state $j$ starting from
+transient state $i$ is $N_{ij}$; together with the per-state mean
+sojourn $\bar{d}_j$ from Stage~2, this yields the closed-form
+expected lead time
 \begin{equation}
 \label{eq:expected-lead-time}
-\mathbb{E}[\text{LeadTime} \mid s_0 = i]
-  = \sum_{j \in S_T} N_{ij} \cdot \bar{d}_j.
+\mathbb{E}\!\bigl[\textup{LeadTime} \mid s_0 = i\bigr] \;=\;
+   \sum_{j \in S_T} N_{ij} \cdot \bar{d}_j.
 \end{equation}
 
 \paragraph{Empirical sojourn-time distributions.}
-\textbf{[TODO — paste def:sojourn-distribution and rem:nonparametric.
-Justify non-parametric design choice in two sentences.]}
+For each transient state $s$, let
 \begin{equation}
-\label{eq:ecdf}
-\hat{F}_s(t) = \tfrac{1}{|\mathcal{T}_s|}
-    \sum_{\tau \in \mathcal{T}_s} \mathbf{1}[\tau \leq t].
+\label{eq:sojourn-obs}
+\mathcal{T}_s \;=\;
+\bigl\{\tau(e_{k+1}) - \tau(e_k) \;\big|\; \mu(e_k) = s,\;
+       (e_k, e_{k+1}) \text{ consecutive in some } \sigma_c\bigr\}.
 \end{equation}
 
-\paragraph{Confidence assessment.}
-\textbf{[TODO — paste eq:se-transition and eq:confidence-grade. Mention
-that rows with $n_i < n_{\min}$ are flagged; full sensitivity to
-$\alpha$ in supplementary.]}
+\begin{definition}[Empirical Sojourn Distribution]
+\label{def:sojourn-distribution}
+\begin{equation}
+\label{eq:ecdf}
+\hat{F}_s(t) \;=\;
+\tfrac{1}{|\mathcal{T}_s|}
+   \sum_{\tau \in \mathcal{T}_s} \mathbf{1}[\tau \le t].
+\end{equation}
+\end{definition}
 
-\textbf{[Cut: §3.7 quasi-stationary derivation; §3.8 rework analysis ---
-moved to online supplementary.]}
+\begin{remark}[Non-parametric design choice]
+\label{rem:nonparametric}
+Empirical resampling avoids parametric misspecification (lognormal,
+Weibull, gamma) for the multi-modal, heavy-tailed, zero-inflated
+patterns typical of software process
+sojourns~\cite{vacanti2015}. The distributional shape is preserved
+into the Monte Carlo simulation of Stage~4.
+\end{remark}
+
+\paragraph{Confidence assessment.}
+For row $i$ with $n_i = \sum_j C_{ij}$ observations the standard error
+of each transition probability is
+\begin{equation}
+\label{eq:se-transition}
+\textup{SE}(\hat{P}_{ij}) \;=\;
+\sqrt{\hat{P}_{ij}(1 - \hat{P}_{ij}) / n_i},
+\end{equation}
+and rows with $n_i < n_{\min}$ (default 30) are flagged. A summary
+confidence grade is reported with each estimated chain,
+\begin{equation}
+\label{eq:confidence-grade}
+\textup{Grade}(P) \;=\;
+   \bigl|\{i \in S_T : n_i \ge n_{\min}\}\bigr| / |S_T|,
+\end{equation}
+with grade below $\theta_{\textup{grade}} = 0.8$ reported as a
+validity caveat. The quasi-stationary distribution and the rework
+intensity (Section~\ref{sec:numerical-example}) are derived from
+$N$ and $P$ but are deferred to the supplementary material for
+brevity.
 
 % =============================================================================
 % 4.4 STAGE 4 — Monte Carlo Simulation (1 p)
@@ -148,40 +304,96 @@ moved to online supplementary.]}
 \subsection{Stage 4: Process-Aware Monte Carlo Simulation}
 \label{sec:stages-s4}
 
-\textbf{[TODO — 1 p.]}
-
 Stage~4 generates the empirical forecast distribution by simulating
-trajectories of the absorbing chain with sojourn times sampled from
-$\hat{F}_s$:
+trajectories of the absorbing chain with sojourn times sampled from the
+empirical distributions $\hat{F}_s$:
 \begin{equation}
 \label{eq:forecast-distribution}
-\hat{\mathcal{D}}
-  = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}.
+\hat{\mathcal{D}} \;=\;
+\bigl\{ (T^{(m)}, o^{(m)}, \psi^{(m)}) \bigr\}_{m=1}^{M_{\textup{sim}}}.
 \end{equation}
 
-\textbf{[TODO — paste Algorithm alg:mc-full (process-aware Monte Carlo)
-with the $K_{\max}$ safety bound.]}
+Algorithm~\ref{alg:mc-full} formalises the simulation.
 
-% \begin{algorithm}[htbp]
-% \caption{Process-Aware Monte Carlo Simulation}
-% \label{alg:mc-full}
-% \begin{algorithmic}[1]
-% ...
-% \end{algorithmic}
-% \end{algorithm}
+\begin{algorithm}[ht]
+\caption{Process-Aware Monte Carlo Simulation}
+\label{alg:mc-full}
+\begin{algorithmic}[1]
+\REQUIRE $P$, $\hat{F}$, initial state $s_0$ (or initial distribution
+         $\pi_0$), simulation budget $M_{\textup{sim}}$, safety bound
+         $K_{\max}$
+\ENSURE  $\hat{\mathcal{D}} = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}
+         _{m=1}^{M_{\textup{sim}}}$
+\STATE   $\hat{\mathcal{D}} \gets \emptyset$
+\FOR{$m = 1$ to $M_{\textup{sim}}$}
+    \STATE Initialise $s \gets s_0$ (or sample $s$ from $\pi_0$);
+           $T \gets 0$; $\psi \gets [s]$; $k \gets 0$
+    \WHILE{$s \notin S_A$ \textbf{and} $k < K_{\max}$}
+        \STATE $\Delta t \gets$ sample from $\hat{F}_s$
+        \STATE $T \gets T + \Delta t$
+        \STATE $s' \gets$ categorical sample from $P[s, :]$
+        \STATE $s \gets s'$; append $s$ to $\psi$; $k \gets k + 1$
+    \ENDWHILE
+    \IF{$s \notin S_A$}
+        \STATE Flag simulation $m$ as \texttt{non-absorbed}
+    \ENDIF
+    \STATE $\hat{\mathcal{D}} \gets
+            \hat{\mathcal{D}} \cup \{(T, s, \psi)\}$
+\ENDFOR
+\RETURN $\hat{\mathcal{D}}$
+\end{algorithmic}
+\end{algorithm}
+
+The safety bound $K_{\max} = 10^3$ prevents infinite loops on
+degenerate inputs; flagged trajectories are excluded from forecast
+aggregation but counted in a diagnostic report.
 
 \paragraph{Forecast extraction.}
-From $\hat{\mathcal{D}}$ the pipeline extracts percentile forecasts
-$\hat{Q}_\alpha$ (P50, P85, P95), completion probability
-$\hat{P}(\text{Done})$, and tail risk
-$\hat{P}(T > \tau_{\text{deadline}})$.
-\textbf{[TODO — paste eq:percentile, eq:completion-prob, eq:tail-risk.]}
+From the empirical distribution $\hat{\mathcal{D}}$ the pipeline
+extracts the standard agile percentiles (P50, P85, P95):
+\begin{equation}
+\label{eq:percentile}
+\hat{Q}_\alpha \;=\;
+   \inf \{ t : \hat{F}_T(t) \ge \alpha \},
+\end{equation}
+the completion probability
+\begin{equation}
+\label{eq:completion-prob}
+\hat{P}(\textup{Done}) \;=\;
+   \bigl|\{m : o^{(m)} = \texttt{done}\}\bigr| / M_{\textup{sim}},
+\end{equation}
+and the tail risk against a deadline $\tau_{\textup{deadline}}$,
+\begin{equation}
+\label{eq:tail-risk}
+\hat{P}(\textup{late}) \;=\;
+   \bigl|\{m : T^{(m)} > \tau_{\textup{deadline}}\}\bigr|
+       / M_{\textup{sim}}.
+\end{equation}
+Path frequencies $\textup{freq}(\psi)$ and the work-in-progress
+composition are reported as additional diagnostics.
 
-\paragraph{Convergence.}
-The MC estimation error decreases as
-$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}. Adaptive doubling
-from $M_{\text{sim}}=1{,}000$ to $100{,}000$ stops when the relative
-half-width of the 95\% CI on $\hat{Q}_{0.5}$ falls below
-$\epsilon = 0.02$ (Definition~\ref{def:convergence}).
+\paragraph{Convergence and simulation budget.}
+The convergence of $\hat{Q}_{0.5}$ is monitored at runtime:
 
-\textbf{[TODO — paste def:convergence and prop:convergence-rate.]}
+\begin{definition}[Convergence Criterion]
+\label{def:convergence}
+$\hat{\mathcal{D}}$ is declared converged at level $\epsilon$ when
+\begin{equation}
+\label{eq:convergence-criterion}
+\frac{z_{0.025} \cdot \hat{\sigma}_T / \sqrt{M_{\textup{sim}}}}
+     {\hat{Q}_{0.5}} \;<\; \epsilon.
+\end{equation}
+\end{definition}
+
+\begin{property}[Convergence Rate]
+\label{prop:convergence-rate}
+The Monte Carlo estimation error of any bounded forecast statistic
+decreases as
+$O(1/\sqrt{M_{\textup{sim}}})$~\cite{robert2004monte}.
+\end{property}
+
+Default tolerance $\epsilon = 0.02$, with adaptive doubling of the
+budget from $M_{\textup{sim}} = 10^3$ up to $M_{\textup{sim}} = 10^5$
+until the criterion is met. The pseudo-random source is the Mersenne
+Twister (MT19937), the NumPy default~\cite{numpy2020}; seeds are
+recorded per run to enable exact replication.
