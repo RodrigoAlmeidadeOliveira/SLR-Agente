@@ -1,81 +1,99 @@
 % =============================================================================
 % 8. THEORETICAL COMPARISON WITH RELATED APPROACHES
 % Target: 1 page (~500 words)
-% Source: cap4 sec:s4-comparison (tab:mc-comparison) + extended discussion
-% Status: SKELETON
-%
-% Purpose: position PATHCAST against three classes of related approaches
-% on EXPRESSIVENESS and ASSUMPTIONS, not on empirical numbers.
+% Source: cap4 sec:s4-comparison (tab:mc-comparison) — EXPANDED
+% Purpose: position PATHCAST against four classes of related approaches
+%          on EXPRESSIVENESS and ASSUMPTIONS, not on empirical numbers.
 % =============================================================================
 
 \section{Theoretical Comparison with Related Approaches}
 \label{sec:comparison}
 
-\textbf{[TODO — 1 p.]}
-We compare PATHCAST with three families of related approaches along
-five theoretical dimensions: process model, sampling unit, rework
-modeling, state-specific delays, and distributional outputs.
+We compare PATHCAST with four families of related approaches along
+five theoretical dimensions: the process model assumed or discovered,
+the unit at which stochastic sampling operates, the explicit modelling
+of rework, the capacity to represent state-specific delays, and the
+form of the forecast output. Table~\ref{tab:approach-comparison}
+summarises the comparison; the paragraphs that follow discuss each
+family.
 
 \begin{table}[ht]
 \centering
 \caption{Theoretical comparison of forecasting approaches along five
 dimensions. ``--'' indicates the approach does not capture the
-dimension.}
+dimension; ``LT'' denotes lead time.}
 \label{tab:approach-comparison}
 \small
 \begin{tabular}{@{}l l l l l@{}}
 \toprule
-\textbf{Dimension}    &
-\textbf{Throughput MC}~\cite{vacanti2015} &
-\textbf{Markov analyt.}~\cite{kemeny1976finite} &
-\textbf{NM-SPN}~\cite{RoggeSolti2015NonMarkovianSPN} &
+\textbf{Dimension} &
+\textbf{Throughput MC} &
+\textbf{Markov analyt.} &
+\textbf{NM-SPN} &
 \textbf{PATHCAST} \\
+& \cite{vacanti2015} & \cite{kemeny1976finite}
+  & \cite{RoggeSolti2015NonMarkovianSPN} & (this paper) \\
 \midrule
-Process model         & --                 & exogenous          & Petri net          & PM-discovered \\
-Sampling unit         & daily throughput   & none (analytical)  & timed firing       & transition + sojourn \\
-Rework                & --                 & via $N$           & via Petri loops    & via $P_{ab}$ + $\hat{F}$ \\
-State-specific delay  & --                 & via $\bar{d}_s$    & general dist.      & empirical $\hat{F}_s$ \\
-Distributional output & completion only    & --                 & lead-time only     & LT + outcome + path + WIP \\
+Process model         & ---                 & exogenous          & Petri net          & PM-discovered \\
+Sampling unit         & daily throughput    & none (analytical)  & timed firing       & transition + sojourn \\
+Rework                & ---                 & via $N$            & via Petri loops    & via $P_{ab}$ + $\hat{F}$ \\
+State-specific delay  & ---                 & via $\bar{d}_s$    & general dist.      & empirical $\hat{F}_s$ \\
+Distributional output & completion only     & ---                & LT only            & LT + outcome + path + WIP \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Throughput Monte Carlo.}
-\textbf{[TODO — 2 sentences.]}
-Throughput MC samples future cumulative completion from the empirical
-throughput distribution of a team. It is operationally simple but
-process-blind: rework, state-specific delays, and path information are
-not represented. By Theorem~\ref{thm:information}, throughput MC
-cannot exploit the information gain $I(T;\psi)$ encoded in the
-trajectory.
+The state-of-practice approach in agile
+forecasting~\cite{vacanti2015, savage2009flaw, magennis2015forecasting}
+samples future cumulative completion from the empirical throughput
+distribution of a team. It is operationally simple and widely adopted,
+but treats the process as a black box: the trajectory $\psi$ is
+collapsed, so neither rework nor state-specific delays are
+representable. By Theorem~\ref{thm:information}, throughput-based
+Monte Carlo cannot exploit the information gain
+$I(T;\psi) > 0$ encoded in the trajectory; PATHCAST does, by sampling
+$T^{(m)}$ jointly with $\psi^{(m)}$ in Algorithm~\ref{alg:mc-full}.
 
 \paragraph{Analytical absorbing Markov chains.}
-\textbf{[TODO — 2 sentences.]}
-The closed-form expectations $N\mathbf{1}$ and $NR$ are
-deterministic; they yield expected lead time but not a forecast
-distribution. PATHCAST uses these expressions for analytical
-cross-validation (Section~\ref{sec:numerical-example}) but produces
-distributional forecasts via Monte Carlo, exposing percentiles and tail
-risk that the analytical baseline cannot.
+The classical closed-form expressions
+$N\mathbf{1}$ and $NR$ for absorbing
+chains~\cite{kemeny1976finite, Spedicato2017} yield expected absorption
+times and absorption probabilities, but no forecast distribution. They
+are deterministic in the parameters and silent about quantiles or tail
+risk. PATHCAST uses these expressions for analytical cross-validation
+(Section~\ref{sec:numerical-example}) but produces distributional
+forecasts via Stage~4, recovering the percentiles
+$\hat{Q}_\alpha$ that operational forecasting
+requires~\cite{vacanti2015}.
 
-\paragraph{Non-Markovian stochastic Petri nets (NM-SPN).}
-\textbf{[TODO — 2 sentences.]}
-NM-SPN~\cite{RoggeSolti2015NonMarkovianSPN} parameterize timed firings
+\paragraph{Non-Markovian stochastic Petri nets.}
+NM-SPN~\cite{RoggeSolti2015NonMarkovianSPN} parameterise timed firings
 with general distributions over an exogenously specified Petri net.
-PATHCAST differs in two respects: (i) the process model is
-\emph{discovered} from the event log rather than supplied externally,
-removing a strong modelling burden; (ii) sojourn distributions are
-empirical rather than parametric, avoiding misspecification of the
-heavy-tailed, zero-inflated distributions typical of software
-processes.
+PATHCAST differs in two respects.
+\emph{First,} the process model is discovered from the event log by
+Stage~2 rather than supplied externally, eliminating the
+domain-expert modelling step that NM-SPN requires.
+\emph{Second,} sojourn distributions are empirical rather than
+parametric, avoiding misspecification of the heavy-tailed,
+zero-inflated distributions typical of software process
+sojourns (Remark~\ref{rem:nonparametric}). NM-SPN's expressivity ---
+in particular, race policies and concurrent firings --- exceeds
+PATHCAST's first-order Markov assumption (A1 in
+Table~\ref{tab:assumptions}); PATHCAST trades that expressivity for
+estimation from data without expert modelling.
 
-\paragraph{Process-prediction approaches.}
-\textbf{[TODO — 2 sentences.]}
-The predictive process monitoring
-literature~\cite{polato2018time, verenich2019survey} addresses remaining
-time prediction in business processes, typically via supervised
-learning. PATHCAST occupies a complementary niche: it integrates a
-stochastic process model (not a black-box predictor) and is specialised
-to the heterogeneous data sources of the SDLC. The ML component
-(Section~\ref{sec:ml-component}) bridges to this literature by adding
-case-level point forecasts on top of the population-level distribution.
+\paragraph{Predictive process monitoring and lead-time ML.}
+The predictive process-monitoring
+literature~\cite{polato2018time, verenich2019survey} and the
+effort-estimation strand of software
+engineering~\cite{choetkiertikul2018deep} address remaining-time
+prediction via supervised learning over case-level features. PATHCAST
+occupies a complementary niche: it integrates a stochastic process
+model (not a black-box predictor) and is specialised to the
+heterogeneous data sources of the SDLC (Git, issue tracker, CI/CD,
+code review). The ML component (Section~\ref{sec:ml-component}) bridges
+to this literature by adding case-level point forecasts on top of the
+population-level distribution, with features 1--8 of
+Table~\ref{tab:features} exposing the PM- and Markov-derived signals
+that supervised baselines do not see.

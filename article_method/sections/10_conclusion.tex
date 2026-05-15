@@ -1,46 +1,53 @@
 % =============================================================================
 % 10. CONCLUSION
 % Target: 0.5 page (~250 words)
-% Status: SKELETON
 % =============================================================================
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-\textbf{[TODO — 0.5 p, 3 short paragraphs.]}
-
-% ---------- ¶1 Recap contributions ----------
-We introduced PATHCAST, a formally specified pipeline for process-aware
-stochastic forecasting of the software development lifecycle. The
-pipeline integrates event log construction, process mining, absorbing
-Markov chain estimation, process-aware Monte Carlo simulation, and a
-machine-learning enhancement component, under contract-based stage
-composition. We proved pipeline correctness under stated preconditions
+% ---------- ¶1 Recap ----------
+We introduced \textsc{PATHCAST}, a formally specified pipeline for
+process-aware stochastic forecasting of the software development
+lifecycle. The pipeline integrates event log construction, process
+mining, absorbing Markov chain estimation, process-aware Monte Carlo
+simulation, and a machine-learning enhancement component, under
+contract-based stage composition (Table~\ref{tab:contracts}). The
+contribution is not the invention of new individual techniques but
+their formal integration into an SDLC-specific pipeline with provable
+properties: pipeline correctness under stated preconditions
 (Theorem~\ref{thm:pipeline-correctness}), asymptotic statistical
 consistency (Theorem~\ref{thm:consistency}), end-to-end distributional
-convergence (Theorem~\ref{thm:pipeline-convergence}), and an
-information-theoretic advantage of process awareness over throughput-based
-Monte Carlo (Theorem~\ref{thm:information}). A closed-form numerical
-example on a six-state SDLC chain cross-validates the analytical and
-Monte Carlo computations.
+convergence with vanishing calibration error
+(Theorem~\ref{thm:pipeline-convergence}), and an information-theoretic
+advantage of process awareness over throughput-based Monte Carlo
+(Theorem~\ref{thm:information}). A closed-form numerical example on a
+six-state SDLC chain (Section~\ref{sec:numerical-example})
+cross-validates the analytical and Monte Carlo computations to within
+$1\%$ on every quantity for which a closed form exists.
 
-% ---------- ¶2 Limitations (theoretical) ----------
-The theoretical results rest on five explicit assumptions:
-(A1) first-order Markov dynamics, (A2) stationarity, (A3) case
-independence, (A4) sojourn--history independence, and (A5) complete case
-observation. Each assumption is reported with its mitigation (state
-augmentation, sliding-window estimation, right-censored inclusion). The
-relaxation of A1 via second-order or history-augmented chains is a
-natural extension.
+% ---------- ¶2 Limitations ----------
+The theoretical results rest on five explicit assumptions
+(Table~\ref{tab:assumptions}): first-order Markov dynamics,
+stationarity, case independence, sojourn--history independence, and
+complete case observation. Each assumption is reported together with
+the consequence of its violation and the mitigation adopted in the
+pipeline (state augmentation, sliding-window estimation, drift
+detection, or inclusion of right-censored cases). None of the
+assumptions is innocuous in practice; their empirical impact on
+forecast quality is investigated in the companion paper.
 
 % ---------- ¶3 Future work ----------
-The companion empirical paper reports the full evaluation across 48
-open-source repositories with comparison to four baselines. Two further
-directions are anticipated: (i) integration of resource and queueing
-effects (relaxing A3) for team-level scheduling; (ii) online operation
-with drift detection on $P$ and $\hat{F}$ for continuous forecasting.
-
-% ---------- (optional) acknowledgements ----------
-% \section*{Acknowledgements}
-% The authors thank the maintainers of the open-source repositories
-% used in the companion empirical paper.
+Three directions are anticipated. \emph{First,} the empirical
+validation of \textsc{PATHCAST} across 48 open-source repositories
+with comparison against four baselines and statistical analysis
+(Section~\ref{sec:evaluation-plan}) is reported in the companion
+paper. \emph{Second,} the relaxation of the first-order Markov
+assumption via state augmentation or history-conditioned semi-Markov
+models is a natural theoretical extension, motivated by the rework
+patterns that the present model captures only indirectly.
+\emph{Third,} integrating resource and queueing effects (relaxing the
+case-independence assumption) would extend the pipeline from
+case-level to team-level forecasting and connect this line of work to
+the classical queueing theory used in software process performance
+analysis.

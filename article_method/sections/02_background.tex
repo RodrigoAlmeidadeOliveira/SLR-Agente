@@ -1,8 +1,7 @@
 % =============================================================================
 % 2. BACKGROUND AND RELATED WORK
 % Target: 2 pages (~1000 words)
-% Source: tese/cap2_reduced.tex (compressed) + gap synthesis from SLR (cap. 3)
-% Status: SKELETON
+% Source: cap2_reduced.tex (compressed) + gap synthesis from SLR (cap. 3)
 % =============================================================================
 
 \section{Background and Related Work}
@@ -12,81 +11,124 @@
 \subsection{Process Mining}
 \label{sec:bg-pm}
 
-\textbf{[TODO §2.1 — 0.5 p.]}
 Process mining~\cite{aalst2016process} extracts process knowledge from
-event logs. The discipline distinguishes three families of techniques:
-discovery (e.g., the Inductive Miner~\cite{leemans2013discovering}),
-conformance checking (alignments), and enhancement.
-The Inductive Miner is adopted here for its
-formal soundness guarantee on the discovered process tree, which is
-required by Stage~2 of the pipeline (Section~\ref{sec:stages-s2}).
-
-% Key concepts to summarize:
-% - event log (case id, activity, timestamp)
-% - process model (Petri net / process tree)
-% - fitness, precision, generalization (four-quality framework)
+event logs --- sequences of timestamped activity occurrences grouped by
+case identifier. The discipline distinguishes three families of
+techniques: \emph{discovery}, which infers a process model from an
+event log; \emph{conformance checking}, which compares observed traces
+to a reference model via alignments; and \emph{enhancement}, which
+enriches a model with frequency or performance information.
+PATHCAST uses the Inductive Miner~\cite{leemans2013discovering} as its
+discovery algorithm, motivated by its soundness guarantee on the
+discovered process tree (Property~\ref{prop:soundness}), a property
+required by the contract of Stage~3 (Table~\ref{tab:contracts}). The
+\emph{four-quality framework}~\cite{aalst2016process} ---
+fitness, precision, generalisation, and simplicity --- is the standard
+yardstick for discovered models; PATHCAST adopts the first three
+explicitly (Equation~\ref{eq:conformance}) and constrains simplicity by
+construction through the bounded SDLC activity taxonomy of Stage~1.
 
 % ---------- §2.2 Markov chains for business processes ----------
 \subsection{Absorbing Markov Chains}
 \label{sec:bg-markov}
 
-\textbf{[TODO §2.2 — 0.5 p.]}
-Absorbing Markov chains provide closed-form expressions for expected
-absorption times and absorption probabilities via the fundamental matrix
-$N = (I-Q)^{-1}$~\cite{kemeny1976finite}. Their application to business
-process analysis has been explored by Rogge-Solti and
-Weske~\cite{RoggeSolti2015NonMarkovianSPN} via stochastic Petri nets,
-and by~\cite{Spedicato2017} via direct estimation from event logs.
-PATHCAST adopts the latter approach but couples it with empirical
-sojourn-time distributions, avoiding the parametric assumptions of
-classical semi-Markov treatments.
+Absorbing Markov chains provide closed-form expressions for the
+expected number of visits to each transient state and the absorption
+probability into each terminal state, via the fundamental matrix
+$N = (I - Q)^{-1}$ and the absorption matrix
+$B = NR$~\cite{kemeny1976finite}. Their applicability rests on a
+first-order Markov assumption and on the certainty of absorption from
+every transient state (Property~\ref{prop:absorption-certainty}).
+Estimation of $P$ from event-log counts is a standard MLE
+problem~\cite{Spedicato2017, billingsley1961statistical}, with the
+sample complexity governed by the row-wise observation counts.
+Rogge-Solti and Weske~\cite{RoggeSolti2015NonMarkovianSPN} extended
+this line of work to non-Markovian stochastic Petri nets for general
+business processes, parameterising firings with arbitrary
+distributions over an exogenously specified Petri net. PATHCAST stays
+within the absorbing-chain framework --- preserving the closed-form
+analytical results --- but couples the chain with empirical
+sojourn-time distributions sampled inside Monte Carlo, so that the
+parametric assumptions of classical semi-Markov treatments are not
+required.
 
 % ---------- §2.3 Stochastic forecasting in software engineering ----------
 \subsection{Stochastic Forecasting in Software Engineering}
 \label{sec:bg-forecasting}
 
-\textbf{[TODO §2.3 — 0.5 p.]}
-Throughput-based Monte Carlo, popularized by
-Vacanti~\cite{vacanti2015} and extended
-by~\cite{savage2009flaw, magennis2015forecasting}, samples future
-completion dates from the empirical throughput distribution of a team.
-The approach is operationally simple and widely adopted in agile
-practice, but treats the process as a black box: rework, state-specific
-delays, and path diversity are not captured.
-Recent work on probabilistic process forecasting in business processes
-includes~\cite{polato2018time, verenich2019survey}; none of these
-methods is specialised to the SDLC nor integrates the heterogeneous
-data sources (Git, issue tracker, CI/CD, code review) characteristic of
-software repositories.
+The state-of-practice approach to lead-time forecasting in agile
+software development is throughput-based Monte
+Carlo~\cite{vacanti2015, savage2009flaw, magennis2015forecasting}.
+The method samples future cumulative completion from the empirical
+throughput distribution of a team --- typically the number of items
+completed per day over a recent window --- and propagates the sample
+forward to estimate the probability of meeting a deadline. It is
+operationally simple, makes no assumption about the process structure,
+and has been widely adopted in agile practice; its limitation is the
+collapse of the trajectory, which prevents the modelling of rework or
+state-specific delays. Recent work on probabilistic process
+forecasting in business processes
+includes time-series and sequence
+models~\cite{polato2018time} and remaining-time prediction via
+supervised learning~\cite{verenich2019survey}; in the
+effort-estimation strand of software
+engineering, deep-learning approaches operate on case-level
+features extracted from issue
+trackers~\cite{choetkiertikul2018deep}. None of these methods is
+specialised to the SDLC nor integrates the heterogeneous data sources
+that software repositories provide.
 
 % ---------- §2.4 Gap synthesis ----------
 \subsection{Pipeline-Fragmentation Gap}
 \label{sec:bg-gap}
 
-\textbf{[TODO §2.4 — 0.5 p.]}
-Table~\ref{tab:gap-synthesis} summarizes the coverage of process mining,
-stochastic modeling, and forecasting across five representative
-categories of work in the SDLC literature. Only a single primary study
-in the SLR of~\cite{almeida2026slr} satisfies all three dimensions,
-motivating the integrated pipeline proposed in this paper.
+The systematic literature review of~\cite{almeida2026slr} screened
+5{,}783 deduplicated records and confirmed 404 primary studies at the
+intersection of process mining, stochastic modelling, and forecasting
+for software processes. The review reports five findings; the one
+that motivates the present paper is finding F4 ---
+\emph{pipeline fragmentation}: only a single primary study in the
+corpus jointly satisfies the three dimensions PM, stochastic
+modelling, and forecasting. The remaining studies sit in one of three
+partial regions: PM without forecasting, forecasting without process
+awareness, or stochastic modelling without integration with the
+heterogeneous data sources of software repositories.
+Table~\ref{tab:gap-synthesis} summarises this fragmentation across
+five representative families. PATHCAST is positioned at the
+intersection of all three dimensions; the formal pipeline of
+Section~\ref{sec:architecture} and the properties of
+Section~\ref{sec:properties} are its technical instantiation.
 
 \begin{table}[ht]
 \centering
-\caption{Coverage of PM, stochastic modeling, and forecasting across
-representative SDLC-related research families. ``\checkmark'' indicates
-explicit treatment; ``--'' indicates absence.}
+\caption{Coverage of PM, stochastic modelling, and forecasting across
+representative families of SDLC-related research. ``\checkmark''
+indicates explicit treatment; ``--'' indicates absence.}
 \label{tab:gap-synthesis}
 \small
-\begin{tabular}{@{}lccc l@{}}
+\begin{tabular}{@{}l c c c l@{}}
 \toprule
 \textbf{Family} & \textbf{PM} & \textbf{Stochastic} &
 \textbf{Forecasting} & \textbf{Representative} \\
 \midrule
 SDLC process discovery       & \checkmark & --          & --          & \cite{rubin2007process} \\
-Throughput Monte Carlo       & --         & \checkmark  & \checkmark  & \cite{vacanti2015}     \\
+Throughput Monte Carlo       & --         & \checkmark  & \checkmark  & \cite{vacanti2015} \\
 Effort/lead-time ML          & --         & --          & \checkmark  & \cite{choetkiertikul2018deep} \\
 Stochastic Petri nets (BPM)  & \checkmark & \checkmark  & --          & \cite{RoggeSolti2015NonMarkovianSPN} \\
-\textbf{PATHCAST (this paper)} & \checkmark & \checkmark & \checkmark & --- \\
+Remaining-time monitoring    & \checkmark & \checkmark  & \checkmark  & \cite{verenich2019survey} \\
+\midrule
+\textbf{PATHCAST} (this paper) & \checkmark & \checkmark & \checkmark
+& --- \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The single row of the table that matches PATHCAST on all three
+dimensions ---
+remaining-time monitoring~\cite{verenich2019survey} --- targets
+generic business processes rather than the SDLC and treats the process
+model as exogenously given rather than discovered from heterogeneous
+software-repository data. PATHCAST's contribution is therefore not
+the invention of new individual techniques but their formal
+integration into a SDLC-specific pipeline with provable correctness
+and consistency properties.

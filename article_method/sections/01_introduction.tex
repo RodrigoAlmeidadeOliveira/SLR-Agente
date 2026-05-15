@@ -1,84 +1,103 @@
 % =============================================================================
 % 1. INTRODUCTION
 % Target: 1.5 pages (~750 words)
-% Status: SKELETON — to be drafted
 % =============================================================================
 
 \section{Introduction}
 \label{sec:introduction}
 
 % ---------- ¶1: Motivation ----------
-% Software repositories produce rich event data; PM + stochastic modeling
-% offer in principle a path to predictive analytics on the SDLC.
-% Cite: van der Aalst (process mining book), Vacanti (actionable agile metrics).
-\textbf{[TODO ¶1 — Motivation.]}
 Software development lifecycle (SDLC) data is increasingly available in
-machine-readable form across version control, issue trackers, code-review
-systems and CI/CD platforms. Process mining (PM) and stochastic modeling
-each offer mature techniques for analyzing such data; yet their joint
-deployment for \emph{predictive} use in the SDLC remains rare.
+machine-readable form across version control, issue trackers,
+code-review systems, and continuous-integration platforms. Process
+mining (PM) and stochastic modelling each offer mature techniques for
+analysing such data --- the former for inferring process structure
+from event logs, the latter for forecasting completion times and
+absorption probabilities --- and a growing body of work in agile
+practice has popularised Monte Carlo forecasting at the project
+level~\cite{vacanti2015, savage2009flaw, magennis2015forecasting}.
+The joint deployment of these techniques for \emph{predictive} use in
+the SDLC, however, remains rare: most works either discover process
+models without forecasting, forecast lead times without process
+awareness, or apply machine learning to features that ignore the
+underlying process structure.
 
 % ---------- ¶2: Gap (from SLR) ----------
-% Cite the companion SLR (Almeida de Oliveira et al., 2026):
-% F4 — pipeline fragmentation: 1/404 confirmed primary studies jointly
-% satisfies PM + stochastic + forecasting.
-\textbf{[TODO ¶2 — Gap.]}
-A recent systematic literature review across 5{,}783 deduplicated records
-and 404 confirmed primary studies~\cite{almeida2026slr} reports that
-only a single study jointly integrates process mining, stochastic
-modeling, and forecasting for the SDLC. The literature is descriptively
-rich but predictively fragmented: most works either discover process
-models without forecasting, forecast lead times without process awareness,
-or apply machine learning to features that ignore the underlying process
-structure.
+A recent systematic literature review across 5{,}783 deduplicated
+records and 404 confirmed primary studies~\cite{almeida2026slr}
+quantifies this fragmentation: only a \emph{single} primary study in
+the corpus jointly satisfies the three dimensions PM, stochastic
+modelling, and forecasting, and that study targets generic business
+processes rather than the SDLC. The literature is therefore
+descriptively rich but predictively fragmented; no end-to-end pipeline
+specialised to the SDLC and formally specified --- with input/output
+contracts, correctness guarantees, and consistency properties ---
+appears in the surveyed corpus. The absence of such a pipeline is the
+problem this paper addresses.
 
 % ---------- ¶3: Contributions ----------
-\textbf{[TODO ¶3 — Contributions.]}
-This paper addresses the pipeline-fragmentation gap by proposing
-\textsc{PATHCAST}, a formally specified method that integrates event
-log construction, process discovery, absorbing Markov chain estimation,
-process-aware Monte Carlo simulation, and a machine-learning enhancement
-component. Our contributions are:
+We introduce \textsc{PATHCAST}, a formally specified method that
+integrates event log construction, process discovery, absorbing Markov
+chain estimation, process-aware Monte Carlo simulation, and a
+machine-learning enhancement component into a single forecasting
+pipeline for the SDLC. The contributions of this paper are:
 \begin{enumerate}
-    \item \textbf{C1.} A formal pipeline specification with contract-based
-    stage composition (Section~\ref{sec:architecture}) and a correctness
-    theorem under stated preconditions
+    \item \textbf{C1.} A formal pipeline specification with
+    contract-based stage composition
+    (Section~\ref{sec:architecture}, Table~\ref{tab:contracts}) and a
+    correctness theorem under explicit preconditions
     (Theorem~\ref{thm:pipeline-correctness}).
     \item \textbf{C2.} An empirically grounded stochastic model that
     couples a Markov transition kernel with empirical sojourn-time
     distributions (Section~\ref{sec:stages}), preserving the
-    distributional shape observed in real software processes.
+    multi-modal, heavy-tailed shapes observed in software process
+    sojourns without parametric assumptions.
     \item \textbf{C3.} A novel family of features for delay prediction
     derived from PM and Markov analysis
-    (Section~\ref{sec:ml-component}), complementing traditional mining
-    software repositories (MSR) features.
-    \item \textbf{C4.} Formal guarantees: asymptotic consistency,
-    end-to-end distributional convergence, and an information-theoretic
-    advantage over process-blind throughput-based Monte Carlo
-    (Section~\ref{sec:properties}).
-    \item \textbf{C5.} A closed-form numerical example
-    (Section~\ref{sec:numerical-example}) that validates the analytical
-    derivation against Monte Carlo simulation on a six-state SDLC chain.
+    (Section~\ref{sec:ml-component}, Table~\ref{tab:features}),
+    instantiating the trajectory-conditional expectations
+    $\mathbb{E}[T \mid \psi]$ and $P(\textup{Done} \mid \psi)$ as
+    predictor inputs that are by construction inaccessible to
+    repository-mining baselines.
+    \item \textbf{C4.} Formal guarantees: asymptotic statistical
+    consistency (Theorem~\ref{thm:consistency}), end-to-end
+    distributional convergence with vanishing calibration error
+    (Theorem~\ref{thm:pipeline-convergence}), and an
+    information-theoretic advantage over process-blind throughput-based
+    Monte Carlo (Theorem~\ref{thm:information}).
+    \item \textbf{C5.} A closed-form illustrative example
+    (Section~\ref{sec:numerical-example}) that instantiates the
+    pipeline on a six-state SDLC chain, derives the fundamental
+    matrix and absorption probabilities analytically, and verifies
+    agreement with Monte Carlo simulation within $1\%$ on every
+    quantity for which a closed form exists.
 \end{enumerate}
 
-% ---------- ¶4: Scope (this is a method paper) ----------
-\textbf{[TODO ¶4 — Scope.]}
-This paper focuses on the \emph{formal specification} of the method and
-its theoretical properties. The empirical evaluation of \textsc{PATHCAST}
-across 48 open-source repositories, including comparison with four
-baselines and statistical analysis of forecasting accuracy, is reported
-in a companion paper. The evaluation protocol is summarized in
-Section~\ref{sec:evaluation-plan}.
+% ---------- ¶4: Scope ----------
+This paper focuses on the \emph{formal specification} of the method
+and its theoretical properties. The empirical validation of
+\textsc{PATHCAST} across 48 open-source repositories --- including the
+two-stage experimental design (pipeline validation and forecasting
+accuracy), the comparison against four baselines using the continuous
+ranked probability score, and the statistical analysis across
+repositories with Bonferroni correction --- is reported in a companion
+paper. The evaluation protocol is summarised in
+Section~\ref{sec:evaluation-plan}; this paper does not report
+empirical numbers from real repositories.
 
 % ---------- ¶5: Roadmap ----------
-\textbf{[TODO ¶5 — Roadmap.]}
-Section~\ref{sec:background} reviews background and related work.
-Section~\ref{sec:architecture} introduces the pipeline architecture and
-inter-stage contracts. Section~\ref{sec:stages} specifies the four
-sequential stages. Section~\ref{sec:ml-component} specifies the ML
-enhancement component. Section~\ref{sec:properties} establishes the
-formal properties. Section~\ref{sec:numerical-example} presents the
-closed-form numerical example. Section~\ref{sec:comparison} compares
-\textsc{PATHCAST} with related approaches.
+Section~\ref{sec:background} reviews process mining, absorbing Markov
+chains, stochastic forecasting in software engineering, and the
+pipeline-fragmentation gap.
+Section~\ref{sec:architecture} introduces the pipeline architecture
+and the five inter-stage contracts.
+Section~\ref{sec:stages} specifies the four sequential stages.
+Section~\ref{sec:ml-component} specifies the parallel ML enhancement
+component. Section~\ref{sec:properties} establishes the formal
+properties, with proofs.
+Section~\ref{sec:numerical-example} presents the closed-form
+numerical example with Monte Carlo cross-validation.
+Section~\ref{sec:comparison} compares \textsc{PATHCAST} with related
+approaches along five theoretical dimensions.
 Section~\ref{sec:evaluation-plan} outlines the planned empirical
 validation. Section~\ref{sec:conclusion} concludes.
