@@ -1,0 +1,247 @@
+% =====================================================================
+%  related_work_seed.bib
+%  Seed related-work bibliography for the COMPANION ARTICLE on
+%  process-regime archaeology / forensic flow analysis / flow maturity.
+%  NOT part of the PATHCAST thesis SLR.
+%
+%  Provenance: built offline (2026-05-22) from the existing PATHCAST SLR
+%  corpus (results/deduplicated.json, 5,783 unique records). Identified by
+%  a topic-facet scan; this is a STARTER set of methodological neighbours,
+%  NOT a systematic search. A live, dedicated search is still required --
+%  see the *_artigo_* queries in config/queries.py -- especially for the
+%  Kanban Maturity Model literature, which the PATHCAST search string
+%  never targeted (only 0 KMM / 10 Kanban hits in the whole corpus).
+%
+%  Author names for 3 records (Bose 2011, Carmona 2012, Gupta 2015) were
+%  concatenated on import; the delimiter was restored from the same data.
+%  Some Scopus-sourced records list only the first author -- complete
+%  before final use.
+%
+%  Facet tags: drift | hmm-pm | regime-adjacent | archaeology |
+%              forensics | cmmi-maturity | changepoint | kanban
+% =====================================================================
+
+% [drift] Canonical concept-drift-in-PM paper (Bose et al.); direct methodological neighbour.
+@inproceedings{Bose2011Handling,
+  title      = {{Handling Concept Drift in Process Mining}},
+  author     = {R. P. Jagadeesh Chandra Bose and Wil M. P. van der Aalst and Indrė Žliobaitė and Mykola Pechenizkiy},
+  year       = {2011},
+  booktitle  = {Advanced Information Systems Engineering},
+  doi        = {10.1007/978-3-642-21640-4_30}
+}
+
+% [drift] Online concept-drift handling in process mining.
+@inproceedings{Carmona2012Online,
+  title      = {{Online Techniques for Dealing with Concept Drift in Process Mining}},
+  author     = {Josep Carmona and Ricard Gavaldà},
+  year       = {2012},
+  booktitle  = {Advances in Intelligent Data Analysis XI},
+  doi        = {10.1007/978-3-642-34156-4_10}
+}
+
+% [drift] Online drift detection from event streams; types sudden/gradual/recurring/incremental.
+@inproceedings{Liu2018Framework,
+  title      = {{A Framework for Online Process Concept Drift Detection from Event Streams}},
+  author     = {Liu, Na and Huang, Jiwei and Cui, Lizhen},
+  year       = {2018},
+  booktitle  = {2018 IEEE International Conference on Services Computing (SCC)},
+  pages      = {105-112},
+  doi        = {10.1109/SCC.2018.00021},
+  abstract   = {Business processes are prone to variations due to the phenomenon known as concept drift, which refers to the situation where the business process is changing while being executed. Concept drift detection of business processes is one of the most critical problems in process mining. Most of the state-of-the-art approaches use statistical hypothesis testing for change point detection by sliding-window-based analysis and feature extraction, which suffer from bad performance and missed detection of certain types of changes. To attack such challenges, this paper proposes a framework as well as detailed models and techniques for online process concept drift detection without any feature extraction. A streaming scheme is presented to detect, locate, and classify the concept drifts simultaneously without requiring any storage of the event traces that have been analyzed. Four types of process concept drifts which are sudden drift, gradual drift, recurring drift, and incremental drift can be precisely discovered, and noise as well as flexibility in business processes are fully considered. The efficacy of the approach is also validated by simulation experiments on large-scale business process event streams.}
+}
+
+% [drift] VDD: visualisation-based drift detection.
+@inproceedings{Yeshchenko2020VDD,
+  title      = {{VDD: A visual drift detection system for process mining}},
+  author     = {Yeshchenko A.},
+  year       = {2020},
+  booktitle  = {Ceur Workshop Proceedings},
+  volume     = {2703},
+  pages      = {31-34}
+}
+
+% [drift] Fine-grained drift detection over event-sequence data of business processes.
+@article{Yeshchenko2022Visual,
+  title      = {{Visual Drift Detection for Event Sequence Data of Business Processes}},
+  author     = {Yeshchenko, Anton and Di Ciccio, Claudio and Mendling, Jan and Polyvyanyy, Artem},
+  year       = {2022},
+  journal    = {IEEE Transactions on Visualization and Computer Graphics},
+  volume     = {28},
+  number     = {8},
+  pages      = {3050-3068},
+  doi        = {10.1109/TVCG.2021.3050071},
+  abstract   = {Event sequence data is increasingly available in various application domains, such as business process management, software engineering, or medical pathways. Processes in these domains are typically represented as process diagrams or flow charts. So far, various techniques have been developed for automatically generating such diagrams from event sequence data. An open challenge is the visual analysis of drift phenomena when processes change over time. In this article, we address this research gap. Our contribution is a system for fine-granular process drift detection and corresponding visualizations for event logs of executed business processes. We evaluated our system both on synthetic and real-world data. On synthetic logs, we achieved an average F-score of 0.96 and outperformed all the state-of-the-art methods. On real-world logs, we identified all types of process drifts in a comprehensive manner. Finally, we conducted a user study highlighting that our visualizations are easy to use and useful as perceived by process mining experts. In this way, our work contributes to research on process mining, event sequence analysis, and visualization of temporal data.}
+}
+
+% [drift] Recent drift detection + localization framework (nested drifts).
+@article{Xu2023Concept,
+  title      = {{Concept drift detection and localization framework based on behavior replacement}},
+  author     = {Xu, Jiuyun and Zhang, Yue and Duan, Qiang},
+  year       = {2023},
+  journal    = {APPLIED INTELLIGENCE},
+  volume     = {53},
+  number     = {13},
+  pages      = {16776-16796},
+  doi        = {10.1007/s10489-022-04341-2},
+  abstract   = {With the application of numerous services or software, process mining has attracted more and more attention. However, concept drift may occur during process mining due to the instability of the process. Sudden and gradual drifts are considered to be two basic modes of change, that may always appear in independent or nested forms. Although the existing methods have studied the detection of two basic modes, they do not consider the nesting of two change modes. We identify the change mode that sudden drifts and gradual drifts do not appear independently as nested drifts. The current drift detection methods can only detect the drift modes that occur independently, but not suitable for nested drift detection. To fill this gap, this paper proposes a business concept drift detection and localization framework called BRDDL (Behavior Replacement-based Drift Detection and Localization) which can not only detect independent drifts such as sudden drifts and gradual drifts, but also detect nested drifts. Firstly, we propose an integrated drift point detection and localization method which can report the location of change points and return the changed behaviors (activity relationship pairs). On this basis, we propose a behavior replacement method by updating the changed traces to restore an unchanged sub log. Then we compare the behaviors in the updated traces with those in the associated unchanged traces to judge the type of drifts. The effectiveness of the method is verified by simulation experiments on the synthetic log.}
+}
+
+% [hmm-pm] One of only two HMM-in-process-mining hits in the corpus.
+@inproceedings{Baskoro2019Predicting,
+  title      = {{Predicting Issue Handling Process using Case Attributes and Categorical Variable Encoding Techniques}},
+  author     = {Baskoro, Sangaji and Sunindyo, Wikan Danar},
+  year       = {2019},
+  booktitle  = {2019 International Conference on Data and Software Engineering (ICoDSE)},
+  pages      = {1-5},
+  doi        = {10.1109/ICoDSE48700.2019.9092617},
+  abstract   = {Software development process deals with the increasing complexity, needs for enhancement, and the reduction of bugs. The software project managers have a responsibility to maintain the software quality, e.g., by establishing Service Level Agreement (SLA) to the software development. However, there are difficulties to monitor SLA and to predict the software quality, due to a lot of issues should be handled. This work proposed prediction techniques for handling issues in the software development by using historical data from software repositories. There are two types of predictions in this work, namely 1) prediction of the remaining duration, and 2) prediction of the next activities. Event logs extracted from historical data in the software repositories exploited case and event attributes as predictors. Furthermore, the categorical variable encoding technique used in the preprocessing data phase. Some categorical variable encoding techniques also proposed in this study. The results showed that the use of case attributes as predictors could improve performance by 8.57\% in the next activity prediction and 1.9\% in the remaining duration prediction. Of the 4 (four) categorical variable encoding techniques used, one-hot encoding and sum encoding techniques can provide the best remaining duration prediction with a MAE of 19.72 and one-hot encoding technique can provide the best next activity prediction with an accuracy of 65.38\%. All of these methods are widely evaluated using datasets from the Google Chromium Project. Further work including utilization of other attributes outside case and event attributes, e.g., component attributes, as predictor variables.}
+}
+
+% [hmm-pm] Hidden Markov Models applied to mine event logs into usage models.
+@inproceedings{Gadler2017Mining,
+  title      = {{Mining Logs to Model the Use of a System}},
+  author     = {Gadler, Daniele and Mairegger, Michael and Janes, Andrea and Russo, Barbara},
+  year       = {2017},
+  booktitle  = {2017 ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM)},
+  pages      = {334-343},
+  doi        = {10.1109/ESEM.2017.47},
+  abstract   = {Background. Process mining is a technique to build process models from "execution logs" (i.e., events triggered by the execution of a process). State-of-the-art tools can provide process managers with different graphical representations of such models. Managers use these models to compare them with an ideal process model or to support process improvement. They typically select the representation based on their experience and knowledge of the system. Aim. This work studies how to automatically build process models representing the actual intents (or uses) of users while interacting with a software system. Such intents are expressed as a set of actions performed by a user to a system to achieve specific use goals. Method. This work applies the theory of Hidden Markov Models to mine use logs and automatically model the use of a system. Results. Unlike the models generated with process mining tools, the Hidden Markov Models automatically generated in this study provide the intents of a user and can be used to recommend managers with a faithful representation of the use of their systems. Conclusions. The automatic generation of the Hidden Markov Models can achieve a good level of accuracy in representing the actual user's intents provided the log dataset is carefully chosen. In our study, the information contained in one-month set of logs helped automatically build Hidden Markov Models with superior accuracy and similar expressiveness of the models built together with the company's stakeholder.}
+}
+
+% [regime-adjacent] Markov-modulated model in the sibling software-reliability subfield.
+@article{Landon2013Markov,
+  title      = {{A Markov modulated Poisson model for software reliability}},
+  author     = {Landon J.},
+  year       = {2013},
+  journal    = {European Journal of Operational Research},
+  volume     = {229},
+  number     = {2},
+  pages      = {404-410},
+  doi        = {10.1016/j.ejor.2013.03.014}
+}
+
+% [regime-adjacent] Latent Markov chain switching NHPP parameters for software reliability growth.
+@article{Ravishanker2008NHPP,
+  title      = {{NHPP models with Markov switching for software reliability}},
+  author     = {Ravishanker, Nalini and Liu, Zhaohui and Ray, Bonnie K.},
+  year       = {2008},
+  journal    = {COMPUTATIONAL STATISTICS \& DATA ANALYSIS},
+  volume     = {52},
+  number     = {8},
+  pages      = {3988-3999},
+  doi        = {10.1016/j.csda.2008.01.010},
+  abstract   = {We describe the use of a latent Markov process governing the parameters of a nonhomogeneous Poisson process (NHPP) model for characterizing the software development defect discovery process. Use of a Markov switching process allows us to characterize non-smooth variations in the rate at which defects are found, better reflecting the industrial software development environment in practice. Additionally, we propose a multivariate model for characterizing changes in the distribution of defect types that are found over time, conditional on the total number of defects. A latent Markov chain governs the evolution of probabilities of the different types. Bayesian methods via Markov chain Monte Carlo facilitate inference. We illustrate the efficacy of the methods using simulated data, then apply them to model reliability growth in a large operating system software component-based on defects discovered during the system testing phase of development. (c) 2008 Elsevier B.V. All rights reserved.}
+}
+
+% [archaeology] MARBLE: owns the term 'business process archaeology' (model recovery from legacy code) -- terminology-collision watch.
+@article{PerezCastillo2011MARBLE,
+  title      = {{MARBLE. A business process archeology tool}},
+  author     = {Ricardo Pérez‐Castillo and María Fernández-Ropero and Ignacio García‐Rodríguez de Guzmán and Mario Piattini},
+  year       = {2011},
+  doi        = {10.1109/icsm.2011.6080834},
+  abstract   = {Modernization of legacy information systems is usually triggered by the need of introducing new business requirements or due to the technology obsolescence. During modernization software projects, there exists a lot of business knowledge that was embedded in source code owing to progressive maintenance, which is not present anywhere else. In order to preserve embedded business knowledge this paper presents MARBLE, a tool to recover business processes from legacy information systems. MARBLE provides an extensible framework, thus it is developed as an Eclipse™ plugin to ensure its future extension. So far, MARBLE supports Java-based system and focuses mainly on legacy source code. To facilitate its adoption in the industry, MARBLE has been applied in some real-life modernization projects, which demonstrated that MARBLE is suitable to retrieve business processes and facilitated its continuous improvement to reach an appropriate maturity level.}
+}
+
+% [forensics] Pariket: root-cause analysis from business process logs.
+@inproceedings{Gupta2015Pariket,
+  title      = {{Pariket: Mining Business Process Logs for Root Cause Analysis of Anomalous Incidents}},
+  author     = {Nisha Gupta and Kritika Anand and Ashish Sureka},
+  year       = {2015},
+  booktitle  = {Databases in Networked Information Systems},
+  doi        = {10.1007/978-3-319-16313-0_19}
+}
+
+% [forensics] Anomaly detection in the bug-fixing process of OSS projects (JIRA event logs).
+@article{Saini2020ControlFlow,
+  title      = {{Control-Flow based Anomaly Detection in the Bug-Fixing Process of Open-Source Projects}},
+  author     = {Veena Saini and Paramvir Singh and Ashish Sureka},
+  year       = {2020},
+  doi        = {10.1145/3385032.3385038},
+  abstract   = {In the past few years, substantial research has been conducted to find out the anomalies present in the real-world business processes. Existing research either uses process mining techniques or discrete sequence-based anomaly detection techniques. The bug-fixing process of various open-source projects has been analyzed previously to discover the process inefficiencies using process mining techniques. These works exploit generic process mining tools to create the process models. Also, they did not evaluate the performance of their proposed conformance checking algorithms. In addition to these, the discrete sequence-based analogy and anomaly detection techniques are not discussed in the bug-fixing process context. In this paper, we report a bug-fixing process dataset for 30 Apache open-source projects that use JIRA bug tracking system for bug reporting. This real-world dataset is analyzed to discover the anomalous process sequences and the root cause of anomalies. The contributions of this paper include (i) a formalized approach for pre-processing and transforming the bug report history data, from bug tracking systems into event logs, suitable for process analysis; (ii) a process mining based anomaly detection framework for bug-fixing processes that comprises our proposed algorithms for process discovery and conformance checking; and (iii) an artificial labelled process dataset available at Mendeley open-source dataset repository ( doi:10.17632/5yb2xv93w3.1).}
+}
+
+% [cmmi-maturity] Process mining for CMMI-based software process assessment.
+@article{Samalikova2014Process,
+  title      = {{Process mining support for Capability Maturity Model Integration-based software process assessment, in principle and in practice}},
+  author     = {Samalikova, J. and Kusters, R. J. and Trienekens, J. J. M. and Weijters, A. J. M. M.},
+  year       = {2014},
+  journal    = {JOURNAL OF SOFTWARE-EVOLUTION AND PROCESS},
+  volume     = {26},
+  number     = {7},
+  pages      = {714-728},
+  doi        = {10.1002/smr.1645},
+  abstract   = {Currently used software process improvement methods such as the Capability Maturity Model Integration (CMMI) rely in their process assessments on information, which is gathered during interviews, in oral audit sessions, and from quality manuals and process standard reviews. Although valuable information about software processes can be gained in these assessments, the resulting data quality can be improved upon. This paper investigates the potential of process mining to support current software process assessment and improvement approaches. Based on an analysis of CMMI from a process mining perspective, particular CMMI model components are identified for which it is in principle possible to apply process mining techniques. Subsequently, criteria have been defined to select, with respect to these particular CMMI components, software processes for which process mining has an added value. These criteria have been applied in the selection of a particular `minable' software process, that is, a change control process. Subsequently, the results of a case study from industrial practice, on the process mining of a change control board process, are used to illustrate that process mining can provide CMMI assessors with relevant information. This information reflects the actual or `real' software processes in practice, and as such, it offers an excellent basis to support assessors in understanding the `actual' software processes. Copyright (C) 2014 John Wiley \& Sons, Ltd.}
+}
+
+% [cmmi-maturity] Continuous CMMI assessment via non-invasive measurement + process mining.
+@article{Astromskis2014Continuous,
+  title      = {{Continuous CMMI Assessment Using Non-Invasive Measurement and Process Mining}},
+  author     = {Astromskis, Saulius and Janes, Andrea and Sillitti, Alberto and Succi, Giancarlo},
+  year       = {2014},
+  journal    = {INTERNATIONAL JOURNAL OF SOFTWARE ENGINEERING AND KNOWLEDGE ENGINEERING},
+  volume     = {24},
+  number     = {9},
+  pages      = {1255-1272},
+  doi        = {10.1142/S0218194014400117},
+  abstract   = {The reputation of lightweight software development processes such as Agile and Lean is damaged by practitioners that claim benefits of such processes that are not true. Teams that want to demonstrate their seriousness, could benefit from matching their processes to the CMMI model, a recognized model by industry and the public administration. CMMI stands for Capability Maturity Model Integration and provides a reference model to improve and evaluate processes according to their maturity based on best practices. On the other hand, particularly in a lightweight software development process, the costs of a CMMI appraisal are hard to justify since its advantages are not directly related to the creation of value for the customer. This paper presents Jidoka4CMMI, a tool that once a CMMI appraisal has been conducted allows the documentation of the assessment criteria in form of executable test cases. The test cases, and so the CMMI appraisal, can be repeated anytime, without additional costs. The use of Jidoka4CMMI increases the benefits of conducting a CMMI appraisal. We hope that this encourages practitioners using lightweight software development processes to assess their processes using a CMMI model.}
+}
+
+% [cmmi-maturity] Non-invasive, PM-supported CMMI assessment (Jidoka4CMMI).
+@article{Astromskis2013Supporting,
+  title      = {{Supporting CMMI assessment using distributed, non-invasive measurement and process mining}},
+  author     = {Saulius Astromskis and Andrea Janes and Alberto Sillitti and Giancarlo Succi},
+  year       = {2013},
+  journal    = {View},
+  abstract   = {The reputation of lightweight software development processes such as Agile and Lean is damaged by practitioners that claim benefits of such processes that are not true. Teams that want to demonstrate their seriousness, could benefit from matching their processes to the CMMI model, a recognized model by the industry and the public administration. CMMI stands for Capability Maturity Model Integration and provides a reference model to improve and evaluate processes according to their maturity based on best practices. On the other hand, particulary in a lightweight software development process, the costs of a CMMI appraisal are hard to justify since its advantages are not directly related to the creation of value for the customer. This paper presents Jidoka4CMMI, a tool to – once a CMMI appraisal has been conducted – allow to document the assessment criteria in form of executable test cases. The test cases, and so the CMMI appraisal, can be repeated anytime, without additional costs. The use of Jidoka4CMMI increases the benefits of conducting a CMMI appraisal. We hope that this encourages practitioners using lightweight software development processes to assess their processes using a CMMI model. © 2013 by Knowledge Systems Institute Graduate School.}
+}
+
+% [cmmi-maturity] Early 'PM for maturity assessment' study; CMMI prior-art anchor.
+@misc{Cruanas2010Process,
+  title      = {{Process Mining Opportunities for CMMI Assessments}},
+  author     = {Jordi Riera Cruañas},
+  year       = {2010},
+  abstract   = {Software process improvement has become essential for striving at satisfying the needs of customers and requeriments of markets reagrding the quality of software products. To improve software processes in a systematic and structures way, also called process maturity some models have been developed, e.g. CMMI. CMMI specifies key process areas (KPA5) on different levels of maturity. To grow in maturity, software companies should implement theses KPAs. For assess KPAs in a quantitative way, data should be collected from that process, preferably on the basis of already existing and used software engineering tools. Previous research showed that particular configuration management can collect data from software processes, the called software process mining. The objective of this project is to investigate literature on tool support in particular CMMI KPAs to find out whether there are tools that could be supported by process mining.}
+}
+
+% [changepoint] Change-point detection for runtime probabilistic model checking.
+@inproceedings{Zhao2020Interval,
+  title      = {{Interval Change-Point Detection for Runtime Probabilistic Model Checking}},
+  author     = {Zhao X.},
+  year       = {2020},
+  booktitle  = {Proceedings 2020 35th IEEE ACM International Conference on Automated Software Engineering Ase 2020},
+  pages      = {163-174},
+  doi        = {10.1145/3324884.3416565}
+}
+
+% [changepoint] Change-point detection for black-box service behaviour.
+@inproceedings{Epifani2010Changepoint,
+  title      = {{Change-point detection for black-box services}},
+  author     = {Epifani I.},
+  year       = {2010},
+  booktitle  = {Proceedings of the ACM SIGSOFT Symposium on the Foundations of Software Engineering},
+  pages      = {227-236},
+  doi        = {10.1145/1882291.1882326}
+}
+
+% [kanban] Rare Kanban + process mining intersection.
+@inproceedings{Mendes2015Kanban,
+  title      = {{Kanban and process mining in the task management}},
+  author     = {Mendes, Vitor and Faria Junior, Elio Ribeiro and Garcia, Cleiton and Malucelli, Andreia},
+  year       = {2015},
+  booktitle  = {PROCEEDINGS OF THE 17TH BRAZILIAN SYMPOSIUM ON SOFTWARE QUALITY (SBQS)},
+  pages      = {269-278},
+  doi        = {10.1145/3275245.3275286},
+  abstract   = {In a world continuously changing with markets that are in permanent evolution and in contend, the companys must inovate, be more flexible, offer quality and respond swiftly. These factors do not apply for product manufacture processes only, but for software development processes aswell. This paper describes an account of experiences with the use of Kanban to improve the activities management in an ERP's development. To do this, a mapping of the current process was carried out, so to propose a set of improvements in the management of activities. As a result, a set of tools were implemented to enable a clear view and control over the activities, as well as to integrate the Issue Tracking System with the Kanban board. Furthermore, a process mining technique was used to estimate the time of conclusion of the activities and to detect performance problem.}
+}
+
+% [kanban] Probabilistic model checking of lean-Kanban processes.
+@article{Zhang2016Verification,
+  title      = {{Verification of lean-kanban processes with probabilistic model checking}},
+  author     = {Zhang L.},
+  year       = {2016},
+  journal    = {International Journal of Computer Applications in Technology},
+  volume     = {53},
+  number     = {4},
+  pages      = {358-368},
+  doi        = {10.1504/IJCAT.2016.076799}
+}

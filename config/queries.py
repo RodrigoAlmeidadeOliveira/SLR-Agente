@@ -148,6 +148,56 @@ AND PUBYEAR > 1993 AND PUBYEAR < 2027
 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp"))
 AND LIMIT-TO(LANGUAGE, "English")""",
         },
+
+        # ================================================================ #
+        #  ARTIGO COMPANHEIRO (não-tese) — Arqueologia de regimes /          #
+        #  Análise forense de fluxo / Maturidade de fluxo (KMM).             #
+        #  Rascunho 2026-05-22: strings ainda NÃO executadas nem validadas.  #
+        #  Rodar com RESULTS_DIR separado p/ não contaminar o corpus da      #
+        #  tese, ex.: RESULTS_DIR=results_artigo python main.py run all      #
+        # ================================================================ #
+        {
+            "id": "scopus_artigo_regime",
+            "label": "Artigo: regimes / HMM / drift / forense em process mining",
+            "notes": "Companion article, não-tese. Não restringe a 'software' de propósito: capta também process mining genérico de BPM, para cobrir o related work. Não executada.",
+            "query": """TITLE-ABS-KEY(
+  (
+    "regime switching" OR "regime-switching" OR "Markov switching"
+    OR "Markov-switching" OR "Markov modulated" OR "Markov-modulated"
+    OR "hidden Markov" OR "hidden semi-Markov"
+    OR "concept drift" OR "process drift" OR "drift detection"
+    OR "process change detection" OR "change point detection"
+    OR "changepoint detection" OR "process forensics"
+    OR "process archaeology" OR "business process archaeology"
+    OR "root cause analysis"
+  )
+  AND
+  (
+    "process mining" OR "process discovery" OR "conformance checking"
+    OR "event log" OR "predictive process monitoring"
+    OR "business process" OR "workflow mining"
+    OR "software process" OR "value stream"
+  )
+)
+AND PUBYEAR > 1993 AND PUBYEAR < 2027
+AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp"))
+AND LIMIT-TO(LANGUAGE, "English")""",
+        },
+        {
+            "id": "scopus_artigo_kmm",
+            "label": "Artigo: Kanban Maturity Model / maturidade de fluxo",
+            "notes": "Companion article, não-tese. Busca dedicada a KMM/flow maturity — vocabulário ausente da SLR PATHCAST. Não executada.",
+            "query": """TITLE-ABS-KEY(
+  "Kanban Maturity Model" OR "Kanban maturity" OR "flow maturity"
+  OR ("Kanban" AND ("maturity model" OR "maturity assessment"
+      OR "maturity level" OR "process maturity"))
+  OR (("value stream" OR "value-stream") AND ("maturity model"
+      OR "maturity assessment"))
+)
+AND PUBYEAR > 1993 AND PUBYEAR < 2027
+AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp"))
+AND LIMIT-TO(LANGUAGE, "English")""",
+        },
     ],
 
     # ------------------------------------------------------------------ #
@@ -209,6 +259,43 @@ AND LIMIT-TO(LANGUAGE, "English")""",
                 ' ("process model" OR "workflow" OR "state transition"'
                 ' OR "Markov" OR "Monte Carlo" OR "stochastic"'
                 ' OR "process mining" OR "process analysis")'
+            ),
+        },
+
+        # ================================================================ #
+        #  ARTIGO COMPANHEIRO (não-tese) — regimes / forense / maturidade.   #
+        #  Rascunho 2026-05-22: strings ainda NÃO executadas nem validadas.  #
+        # ================================================================ #
+        {
+            "id": "ieee_artigo_regime",
+            "label": "Artigo: regimes / HMM / drift / forense em process mining",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": (
+                '("regime switching" OR "regime-switching"'
+                ' OR "Markov switching" OR "Markov-modulated"'
+                ' OR "hidden Markov" OR "hidden semi-Markov"'
+                ' OR "concept drift" OR "process drift" OR "drift detection"'
+                ' OR "process change detection" OR "change point detection"'
+                ' OR "process forensics" OR "process archaeology"'
+                ' OR "root cause analysis")'
+                ' AND'
+                ' ("process mining" OR "process discovery"'
+                ' OR "conformance checking" OR "event log"'
+                ' OR "predictive process monitoring" OR "business process"'
+                ' OR "workflow mining" OR "software process"'
+                ' OR "value stream")'
+            ),
+        },
+        {
+            "id": "ieee_artigo_kmm",
+            "label": "Artigo: Kanban Maturity Model / maturidade de fluxo",
+            "notes": "Companion article, não-tese. Busca dedicada a KMM/flow maturity. Não executada.",
+            "query": (
+                '("Kanban Maturity Model" OR "Kanban maturity"'
+                ' OR "flow maturity")'
+                ' OR'
+                ' ("Kanban" AND ("maturity model" OR "maturity assessment"'
+                ' OR "process maturity"))'
             ),
         },
     ],
@@ -295,6 +382,59 @@ AND LIMIT-TO(LANGUAGE, "English")""",
             "notes": "Busca focal para V9",
             "query": '"discovering simulation models" "process mining"',
         },
+
+        # ================================================================ #
+        #  ARTIGO COMPANHEIRO (não-tese) — regimes / forense / maturidade.   #
+        #  Rascunho 2026-05-22: strings ainda NÃO executadas nem validadas.  #
+        # ================================================================ #
+        {
+            "id": "springer_artigo_1",
+            "label": "Artigo: regime switching + process mining",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"regime switching" "process mining"',
+        },
+        {
+            "id": "springer_artigo_2",
+            "label": "Artigo: hidden Markov + process mining",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"hidden Markov" "process mining"',
+        },
+        {
+            "id": "springer_artigo_3",
+            "label": "Artigo: concept drift + process mining",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"concept drift" "process mining"',
+        },
+        {
+            "id": "springer_artigo_4",
+            "label": "Artigo: process drift + event log",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"process drift" "event log"',
+        },
+        {
+            "id": "springer_artigo_5",
+            "label": "Artigo: Markov switching + software",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"Markov switching" "software"',
+        },
+        {
+            "id": "springer_artigo_6",
+            "label": "Artigo: root cause analysis + process mining",
+            "notes": "Companion article, não-tese. Não executada.",
+            "query": '"root cause analysis" "process mining"',
+        },
+        {
+            "id": "springer_artigo_7",
+            "label": "Artigo: Kanban Maturity Model",
+            "notes": "Companion article, não-tese. Busca dedicada a KMM. Não executada.",
+            "query": '"Kanban Maturity Model"',
+        },
+        {
+            "id": "springer_artigo_8",
+            "label": "Artigo: flow maturity",
+            "notes": "Companion article, não-tese. Busca dedicada a maturidade de fluxo. Não executada.",
+            "query": '"flow maturity"',
+        },
     ],
 
     # ------------------------------------------------------------------ #
@@ -351,6 +491,43 @@ AND LIMIT-TO(LANGUAGE, "English")""",
                 ' OR Abstract:"Monte Carlo" OR Abstract:"lead time"'
                 ' OR Abstract:"cycle time" OR Abstract:"throughput"'
                 ' OR Abstract:"process mining" OR Abstract:"process analysis")'
+            ),
+        },
+
+        # ================================================================ #
+        #  ARTIGO COMPANHEIRO (não-tese) — regimes / forense / maturidade.   #
+        #  Exportar manualmente do ACM DL como BibTeX e importar.            #
+        #  Rascunho 2026-05-22: strings ainda NÃO executadas nem validadas.  #
+        # ================================================================ #
+        {
+            "id": "acm_artigo_regime",
+            "label": "Artigo: regimes / HMM / drift / forense em process mining",
+            "notes": "Companion article, não-tese. Exportar manualmente do ACM DL e importar. Não executada.",
+            "query": (
+                '(Abstract:"regime switching" OR Abstract:"Markov switching"'
+                ' OR Abstract:"Markov-modulated" OR Abstract:"hidden Markov"'
+                ' OR Abstract:"hidden semi-Markov" OR Abstract:"concept drift"'
+                ' OR Abstract:"process drift" OR Abstract:"drift detection"'
+                ' OR Abstract:"change point detection"'
+                ' OR Abstract:"process forensics" OR Abstract:"process archaeology"'
+                ' OR Abstract:"root cause analysis")'
+                ' AND'
+                ' (Abstract:"process mining" OR Abstract:"process discovery"'
+                ' OR Abstract:"conformance checking" OR Abstract:"event log"'
+                ' OR Abstract:"business process" OR Abstract:"software process"'
+                ' OR Abstract:"value stream")'
+            ),
+        },
+        {
+            "id": "acm_artigo_kmm",
+            "label": "Artigo: Kanban Maturity Model / maturidade de fluxo",
+            "notes": "Companion article, não-tese. Busca dedicada a KMM. Exportar manualmente do ACM DL e importar. Não executada.",
+            "query": (
+                '(Abstract:"Kanban Maturity Model" OR Abstract:"Kanban maturity"'
+                ' OR Abstract:"flow maturity")'
+                ' OR'
+                ' (Abstract:"Kanban" AND (Abstract:"maturity model"'
+                ' OR Abstract:"maturity assessment" OR Abstract:"process maturity"))'
             ),
         },
     ],
@@ -419,6 +596,40 @@ AND LIMIT-TO(LANGUAGE, "English")""",
                 ' TS=("software development" OR "software engineering"'
                 '    OR "software process" OR "DevOps" OR "SDLC"'
                 '    OR "issue tracker" OR "commit log" OR "build pipeline")'
+            ),
+        },
+
+        # ================================================================ #
+        #  ARTIGO COMPANHEIRO (não-tese) — regimes / forense / maturidade.   #
+        #  Exportar do WoS como RIS e importar.                              #
+        #  Rascunho 2026-05-22: strings ainda NÃO executadas nem validadas.  #
+        # ================================================================ #
+        {
+            "id": "wos_artigo_regime",
+            "label": "Artigo: regimes / HMM / drift / forense em process mining",
+            "notes": "Companion article, não-tese. Exportar do WoS como RIS e importar. Não executada.",
+            "query": (
+                'TS=("regime switching" OR "Markov switching" OR "Markov-modulated"'
+                '    OR "hidden Markov" OR "hidden semi-Markov"'
+                '    OR "concept drift" OR "process drift" OR "drift detection"'
+                '    OR "change point detection" OR "process change detection"'
+                '    OR "process forensics" OR "process archaeology"'
+                '    OR "root cause analysis")'
+                ' AND'
+                ' TS=("process mining" OR "process discovery" OR "conformance checking"'
+                '    OR "event log" OR "predictive process monitoring"'
+                '    OR "business process" OR "software process" OR "value stream")'
+            ),
+        },
+        {
+            "id": "wos_artigo_kmm",
+            "label": "Artigo: Kanban Maturity Model / maturidade de fluxo",
+            "notes": "Companion article, não-tese. Busca dedicada a KMM. Exportar do WoS como RIS e importar. Não executada.",
+            "query": (
+                'TS=("Kanban Maturity Model" OR "Kanban maturity" OR "flow maturity")'
+                ' OR'
+                ' (TS=("Kanban") AND TS=("maturity model" OR "maturity assessment"'
+                '    OR "maturity level" OR "process maturity"))'
             ),
         },
     ],
