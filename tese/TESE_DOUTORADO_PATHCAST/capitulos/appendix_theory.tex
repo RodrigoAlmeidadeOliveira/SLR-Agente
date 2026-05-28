@@ -1,0 +1,765 @@
+% =============================================================================
+% APPENDICES A–D — Theoretical Supplements to Chapter 2
+% Companion to Chapter~\ref{ch:theoretical-foundation}
+%
+% Usage: include BEFORE appendix_slr (which now uses E–I):
+%   \appendix
+%   \include{appendix_theory}   % A–D: Cap 2 derivations
+%   \include{appendix_slr}      % E–I: SLR protocol
+% =============================================================================
+
+
+% =============================================================================
+% APPENDIX A — Markov Chain Derivations
+% =============================================================================
+\chapter{Markov Chain Derivations}
+\label{app:A}
+
+This appendix provides the formal derivations supporting the Markov chain
+results stated in Section~\ref{sec:markov}. Throughout, $S = S_T \cup S_A$
+denotes the partition into transient ($t = |S_T|$) and absorbing
+($r = |S_A|$) states, and $P$ is given in canonical form
+(Equation~\ref{eq:absorbing-form}) with transient block $Q$ and absorption
+block $R$.
+
+
+\section{The Fundamental Matrix Identity}
+\label{app:A-fundamental}
+
+\begin{lemma}[Spectral Radius of $Q$]
+\label{lem:spectral-radius}
+Let $\rho(Q)$ denote the spectral radius of $Q$. For an absorbing Markov
+chain in which every transient state can reach an absorbing state in a
+finite number of steps, $\rho(Q) < 1$.
+\end{lemma}
+
+\begin{proof}
+By the absorbing-chain hypothesis, for every $i \in S_T$ there exists
+$k_i \in \mathbb{N}$ such that $\sum_{j \in S_T} (Q^{k_i})_{ij} < 1$, since
+the chain has positive probability of reaching an absorbing state within
+$k_i$ steps. Let $k^* = \max_i k_i$ and
+$\eta = \max_i \sum_{j \in S_T} (Q^{k^*})_{ij} < 1$. Then
+$\| Q^{k^*} \|_\infty \leq \eta$, where $\|\cdot\|_\infty$ is the row-sum
+norm. By Gelfand's formula, $\rho(Q) = \lim_{n \to \infty}
+\| Q^n \|_\infty^{1/n} \leq \eta^{1/k^*} < 1$.
+\end{proof}
+
+\begin{theorem}[Fundamental Matrix]
+\label{thm:fundamental}
+$(I - Q)$ is invertible and
+\begin{equation}
+\label{eq:A-fundamental}
+N = (I - Q)^{-1} = \sum_{k=0}^{\infty} Q^k.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:spectral-radius}, $\rho(Q) < 1$, so all eigenvalues of
+$Q$ lie strictly inside the unit disk. Consequently, no eigenvalue of $I-Q$
+equals zero, and $(I-Q)$ is invertible. Furthermore, the Neumann series
+$\sum_{k=0}^{\infty} Q^k$ converges entry-wise (geometric convergence with
+rate $\rho(Q)$). Multiplying the partial sum
+$S_n = \sum_{k=0}^{n} Q^k$ by $(I - Q)$ telescopes:
+$(I - Q) S_n = I - Q^{n+1}$. Taking $n \to \infty$ and using
+$Q^{n+1} \to \mathbf{0}$ yields $(I - Q) \sum_{k=0}^{\infty} Q^k = I$,
+proving the identity.
+\end{proof}
+
+\paragraph{Interpretation.} $N_{ij}$ counts the expected number of visits
+to transient state $j$ before absorption, starting from transient state
+$i$. The visit indicator $\mathbf{1}[X_k = j]$ has expectation
+$(Q^k)_{ij}$, and the total expected number of visits is
+$\sum_{k=0}^{\infty} (Q^k)_{ij} = N_{ij}$.
+
+
+\section{Expected Steps to Absorption}
+\label{app:A-expected}
+
+\begin{theorem}[Expected Absorption Time]
+\label{thm:expected-time}
+Let $T_i$ be the absorption time starting from $i \in S_T$. Then
+\begin{equation}
+\label{eq:A-expected}
+E[T_i] = (N \mathbf{1})_i = \sum_{j \in S_T} N_{ij}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+First-step analysis gives $T_i = 1 + T_{X_1}$ if $X_1 \in S_T$ and
+$T_i = 1$ if $X_1 \in S_A$. Taking expectations and conditioning:
+\begin{equation}
+E[T_i] = 1 + \sum_{k \in S_T} Q_{ik} \, E[T_k].
+\end{equation}
+Stacking these equations across $i$ yields the matrix identity
+$\mathbf{t} = \mathbf{1} + Q \mathbf{t}$, where
+$\mathbf{t}_i = E[T_i]$. Solving: $(I - Q) \mathbf{t} = \mathbf{1}$, hence
+$\mathbf{t} = (I - Q)^{-1} \mathbf{1} = N \mathbf{1}$.
+\end{proof}
+
+
+\section{Variance of Absorption Time}
+\label{app:A-variance}
+
+\begin{theorem}[Absorption-Time Variance]
+\label{thm:variance}
+Let $N_{\mathrm{dg}}$ denote the diagonal matrix with the diagonal entries
+of $N$. Then
+\begin{equation}
+\label{eq:A-variance}
+\mathrm{Var}(T_i)
+= \big( N (2 N_{\mathrm{dg}} - I) \mathbf{1} \big)_i - (E[T_i])^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By first-step analysis, $E[T_i^2] = 1 + 2\sum_k Q_{ik} E[T_k] +
+\sum_k Q_{ik} \mathrm{Var}(T_k) + \sum_k Q_{ik} (E[T_k])^2$. Define
+$\mathbf{u}_i = E[T_i^2]$ and exploit $\mathbf{t} = N \mathbf{1}$.
+Algebraic manipulation (see Kemeny and Snell, \emph{Finite Markov
+Chains}, Ch.~3) yields the closed form
+$\mathbf{u} = (2 N - I) \mathbf{t}$, i.e.\
+$E[T_i^2] = ((2N - I) N \mathbf{1})_i = (N(2 N_{\mathrm{dg}} -
+I)\mathbf{1})_i + (E[T_i])^2 + \mathrm{Var}(T_i) - \mathrm{Var}(T_i)$,
+yielding the stated identity.
+\end{proof}
+
+The variance result is operationally important for PATHCAST: it provides an
+analytical sanity check for the Monte Carlo variance estimate
+(Section~\ref{sec:s4-convergence}).
+
+
+\section{Absorption Probabilities}
+\label{app:A-absorption}
+
+\begin{theorem}[Absorption Probability Matrix]
+\label{thm:absorption-prob}
+Let $B_{ij}$ denote the probability that, starting from transient state
+$i$, the chain is absorbed in absorbing state $j$. Then
+\begin{equation}
+\label{eq:A-absorption}
+B = N R.
+\end{equation}
+Furthermore, $\sum_{j \in S_A} B_{ij} = 1$ for all $i \in S_T$
+(absorption is certain).
+\end{theorem}
+
+\begin{proof}
+Let $\mathbf{1}[\text{absorb at } j]$ denote the indicator of absorption
+at state $j$. Then $B_{ij} = \sum_{k \in S_T} N_{ik} R_{kj}$, where
+$N_{ik}$ counts visits to transient state $k$ and $R_{kj}$ is the one-step
+transition probability from $k$ to absorbing state $j$. In matrix form,
+$B = N R$. Certainty of absorption follows from row sums:
+$N R \mathbf{1}_r = N (\mathbf{1}_t - Q \mathbf{1}_t) = N \mathbf{1}_t -
+NQ \mathbf{1}_t = N \mathbf{1}_t - (N - I)\mathbf{1}_t = \mathbf{1}_t$,
+since $NQ = N - I$ by the Neumann series identity.
+\end{proof}
+
+
+\section{Bayesian Estimation and Laplace Smoothing}
+\label{app:A-bayes}
+
+The transition matrix is estimated from observed counts $C_{ij}$. The MLE
+is given by Equation~\ref{eq:mle-transition}. This section formalizes the
+Bayesian alternative used when the count matrix has zero entries that may
+reflect data sparsity rather than structural impossibility.
+
+\paragraph{Conjugate prior.} Place a symmetric Dirichlet prior
+$P_i \sim \mathrm{Dir}(\alpha, \alpha, \ldots, \alpha)$ on each row $i$ of
+$P$. The likelihood of the observed counts $\mathbf{c}_i = (c_{i1},
+\ldots, c_{im})$ is multinomial:
+\begin{equation}
+L(\mathbf{p}_i \mid \mathbf{c}_i) \propto \prod_{j} p_{ij}^{c_{ij}}.
+\end{equation}
+By Dirichlet–Multinomial conjugacy, the posterior is
+\begin{equation}
+P_i \mid \mathbf{c}_i \sim
+\mathrm{Dir}(c_{i1} + \alpha, \ldots, c_{im} + \alpha).
+\end{equation}
+
+\paragraph{Posterior mean and Laplace estimator.} The posterior mean of
+the $j$-th component is
+\begin{equation}
+\label{eq:A-laplace}
+E[p_{ij} \mid \mathbf{c}_i]
+= \frac{c_{ij} + \alpha}{c_{i\cdot} + \alpha m},
+\end{equation}
+which coincides with the Laplace-smoothed estimator
+$\hat{p}_{ij}^{(\alpha)}$ used in
+Equation~\ref{eq:mle-full} of Chapter~\ref{ch:method}. With $\alpha = 1$
+this is the symmetric Laplace prior.
+
+\paragraph{Credible intervals.} Marginal posterior of each $p_{ij}$ is
+$\mathrm{Beta}(c_{ij} + \alpha,\, c_{i\cdot} - c_{ij} + (m-1)\alpha)$.
+A $(1-\delta)$ credible interval for $p_{ij}$ is the
+$(\delta/2, 1-\delta/2)$ quantile pair of this Beta distribution; the
+width decreases with $c_{i\cdot}$, justifying the confidence-grade metric
+of Equation~\ref{eq:confidence-grade}.
+
+
+\section{Semi-Markov Connection}
+\label{app:A-semi-markov}
+
+The augmentation of a DTMC with state-dependent sojourn distributions
+yields a \emph{semi-Markov process} (Definition~\ref{def:semi-markov}).
+This section formalizes the connection.
+
+\paragraph{Reduction to Markov renewal.} When sojourn distributions depend
+only on the current state ($H_{ij}(t) = H_i(t)$), the SMP simplifies to a
+Markov renewal process with state-dependent holding times. PATHCAST adopts
+this simplification: the sojourn time in $s$ is drawn from $\hat{F}_s$
+regardless of which state is visited next. The implicit assumption is
+that sojourn time is determined by the current state alone; empirical
+violations (e.g., shorter Review sojourns when the next state is Done)
+appear as state-dependent residual variance and are partially captured by
+the ML component (Section~\ref{sec:ml-se}).
+
+\paragraph{Quasi-stationary distribution.} For absorbing semi-Markov
+processes, the quasi-stationary distribution gives the long-run fraction
+of time spent in each transient state, conditional on non-absorption. Let
+$\bar{T}_i$ denote the mean sojourn in state $i$ (Equation~\ref{eq:mean-sojourn}).
+Then
+\begin{equation}
+\label{eq:A-quasi-stationary}
+\pi^q_i = \frac{\sum_{j \in S_T} N_{ji} \cdot \bar{T}_i}
+              {\sum_{k \in S_T} \sum_{j \in S_T} N_{jk} \cdot \bar{T}_k}.
+\end{equation}
+This formula is the calendar-time analogue of the discrete-step
+fundamental-matrix result. PATHCAST uses
+Equation~\ref{eq:A-quasi-stationary} as an analytical baseline against
+which the simulation-based WIP estimate
+(Equation~\ref{eq:wip-composition}) is cross-validated.
+
+
+\section{Numerical Example: Six-State SDLC Chain}
+\label{app:A-numerical}
+
+This section presents the full numerical resolution of the example
+introduced in Section~\ref{sec:s3-example}.
+
+\paragraph{Inputs.} Six states $\{B, P, R, T, D, X\}$, with $D$ and $X$
+absorbing. Transition counts:
+\begin{equation}
+C = \bordermatrix{
+    & B & P & R & T & D & X \cr
+  B & 0 & 85 & 0 & 0 & 5 & 10 \cr
+  P & 0 & 0 & 80 & 5 & 0 & 15 \cr
+  R & 0 & 25 & 0 & 70 & 0 & 5 \cr
+  T & 0 & 10 & 15 & 0 & 70 & 5 \cr
+  D & 0 & 0 & 0 & 0 & 0 & 0 \cr
+  X & 0 & 0 & 0 & 0 & 0 & 0 \cr}.
+\end{equation}
+
+\paragraph{MLE estimate.} With $\alpha = 0$, normalizing each row of $C$
+yields:
+\begin{equation}
+\hat{P} = \begin{pmatrix}
+0 & 0.85 & 0    & 0    & 0.05 & 0.10 \\
+0 & 0    & 0.80 & 0.05 & 0    & 0.15 \\
+0 & 0.25 & 0    & 0.70 & 0    & 0.05 \\
+0 & 0.10 & 0.15 & 0    & 0.70 & 0.05 \\
+0 & 0    & 0    & 0    & 1    & 0    \\
+0 & 0    & 0    & 0    & 0    & 1
+\end{pmatrix}.
+\end{equation}
+
+\paragraph{Canonical decomposition.}
+\begin{equation}
+Q = \begin{pmatrix}
+0 & 0.85 & 0    & 0    \\
+0 & 0    & 0.80 & 0.05 \\
+0 & 0.25 & 0    & 0.70 \\
+0 & 0.10 & 0.15 & 0
+\end{pmatrix}, \qquad
+R = \begin{pmatrix}
+0.05 & 0.10 \\
+0    & 0.15 \\
+0    & 0.05 \\
+0.70 & 0.05
+\end{pmatrix}.
+\end{equation}
+
+\paragraph{Fundamental matrix.} Computing $N = (I - Q)^{-1}$ in
+double-precision arithmetic:
+\begin{equation}
+N \approx \begin{pmatrix}
+1.000 & 1.431 & 1.458 & 1.134 \\
+0     & 1.684 & 1.715 & 1.334 \\
+0     & 0.675 & 1.688 & 1.054 \\
+0     & 0.285 & 0.441 & 1.267
+\end{pmatrix}.
+\end{equation}
+
+\paragraph{Expected steps to absorption.}
+\begin{equation}
+\mathbf{t} = N \mathbf{1} \approx (5.023,\ 4.733,\ 3.417,\ 1.993)^\top.
+\end{equation}
+A work item starting in Backlog visits an expected 5.02 transient states
+before reaching Done or Cancelled.
+
+\paragraph{Absorption probabilities.}
+\begin{equation}
+B = N R \approx \begin{pmatrix}
+0.844 & 0.156 \\
+0.934 & 0.066 \\
+0.738 & 0.262 \\
+0.887 & 0.113
+\end{pmatrix}.
+\end{equation}
+From Backlog, the probability of completion (Done) is approximately 0.84
+and of cancellation (Cancelled) approximately 0.16.
+
+\paragraph{Expected lead time.} With mean sojourn times (hours)
+$\bar{d}_B = 48$, $\bar{d}_P = 24$, $\bar{d}_R = 8$, $\bar{d}_T = 4$:
+\begin{equation}
+E[\mathrm{LT} \mid s_0 = B]
+= 1.000 \cdot 48 + 1.431 \cdot 24 + 1.458 \cdot 8 + 1.134 \cdot 4
+\approx 98.9 \text{ h}.
+\end{equation}
+This analytical estimate is the baseline against which the Monte Carlo
+distribution (Stage 4) is validated.
+
+
+% =============================================================================
+% APPENDIX B — Probabilistic Metric Derivations
+% =============================================================================
+\chapter{Probabilistic Metric Derivations}
+\label{app:B}
+
+This appendix derives the probabilistic forecasting metrics introduced in
+Section~\ref{sec:monte-carlo} and used in the empirical evaluation
+(Chapter~\ref{ch:methodology}).
+
+
+\section{CRPS: Definition and Equivalent Forms}
+\label{app:B-crps-def}
+
+\begin{definition}[Continuous Ranked Probability Score]
+For a forecast distribution $F$ and a realized value $y \in \mathbb{R}$:
+\begin{equation}
+\label{eq:B-crps-int}
+\mathrm{CRPS}(F, y)
+= \int_{-\infty}^{\infty} \big( F(t) - \mathbf{1}(t \geq y) \big)^2 \, dt.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Kernel Form]
+\label{thm:H-kernel}
+Let $X, X' \overset{\mathrm{iid}}{\sim} F$. Then
+\begin{equation}
+\label{eq:B-crps-kernel}
+\mathrm{CRPS}(F, y) = E_F |X - y| - \tfrac{1}{2} E_F |X - X'|.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Expanding the integrand of Equation~\ref{eq:B-crps-int} and applying
+Fubini–Tonelli to interchange integrals yields the kernel form. The
+first term penalizes inaccuracy (mean absolute deviation from $y$); the
+second term rewards sharpness (penalty for diffuse forecasts). See
+Gneiting and Raftery~\cite{gneiting2007strictly} for the full algebraic
+expansion.
+\end{proof}
+
+The kernel form is the operational expression used in Monte Carlo
+implementations: $E_F |X - y|$ and $E_F |X - X'|$ are estimated by
+averaging absolute differences across simulated samples.
+
+
+\section{Propriety of CRPS}
+\label{app:B-crps-proper}
+
+\begin{definition}[Strictly Proper Scoring Rule]
+A scoring rule $S(F, y)$ is \emph{strictly proper} relative to a class
+$\mathcal{F}$ if, for every $G \in \mathcal{F}$,
+$E_{Y \sim G}[S(G, Y)] \leq E_{Y \sim G}[S(F, Y)]$, with equality iff
+$F = G$.
+\end{definition}
+
+\begin{theorem}[CRPS is Strictly Proper]
+\label{thm:H-proper}
+CRPS is a strictly proper scoring rule on the class of distributions with
+finite first moment.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Decompose $E_{Y \sim G}[\mathrm{CRPS}(F, Y)]$ using the kernel form.
+Comparison with $E_{Y \sim G}[\mathrm{CRPS}(G, Y)]$ reduces to the
+non-negativity of an L\textsuperscript{2} distance between the CDFs of $F$
+and $G$, which is zero iff $F = G$ almost everywhere. See
+\cite{gneiting2007strictly}, Theorem~6, for the full argument.
+\end{proof}
+
+\paragraph{Implication for PATHCAST.} Strict propriety guarantees that
+minimizing CRPS in expectation is consistent with reporting the true
+predictive distribution. A forecaster cannot game CRPS by reporting a
+miscalibrated distribution, justifying its choice as the primary metric
+for RQ2.
+
+
+\section{CRPS--MAE Relationship}
+\label{app:B-crps-mae}
+
+\begin{theorem}[Degenerate Forecast]
+\label{thm:H-mae}
+If $F = \delta_{\hat{y}}$ (Dirac mass at the point $\hat{y}$), then
+$\mathrm{CRPS}(\delta_{\hat{y}}, y) = |y - \hat{y}|$.
+\end{theorem}
+
+\begin{proof}
+Substitute $F(t) = \mathbf{1}(t \geq \hat{y})$ in
+Equation~\ref{eq:B-crps-int}. The integrand
+$(\mathbf{1}(t \geq \hat{y}) - \mathbf{1}(t \geq y))^2$ equals $1$ on the
+interval between $y$ and $\hat{y}$ and $0$ elsewhere. The integral equals
+the length of that interval, $|y - \hat{y}|$.
+\end{proof}
+
+\paragraph{Operational consequence.} A point forecaster (B1, B3 baselines
+in Section~\ref{sec:baselines}) and a distributional forecaster
+(PATHCAST) are directly comparable on the same scale. CRPS reduces to MAE
+for the point baselines and accounts for distributional sharpness for the
+PATHCAST simulation, eliminating the need for separate metrics.
+
+
+\section{Calibration and the Aggregate Calibration Error}
+\label{app:B-calibration}
+
+\begin{definition}[Calibration]
+A forecaster is calibrated if, for every $\alpha \in (0, 1)$,
+$P(Y \leq \hat{Q}_\alpha) = \alpha$, where $\hat{Q}_\alpha$ is the
+forecaster's $\alpha$-quantile.
+\end{definition}
+
+The empirical version replaces the population probability by the observed
+frequency $\hat{p}_\alpha$ across the test set.
+
+\paragraph{Calibration error and ACE.} The pointwise calibration error
+is $\mathrm{CalErr}(\alpha) = |\hat{p}_\alpha - \alpha|$. The Aggregate
+Calibration Error averages across decile checkpoints
+(Equation~\ref{eq:ace}):
+$\mathrm{ACE} = \frac{1}{|\mathcal{A}|} \sum_{\alpha \in \mathcal{A}}
+|\hat{p}_\alpha - \alpha|$.
+
+\paragraph{Calibration vs.\ sharpness.} A forecast may be sharp (low
+spread) but miscalibrated, or calibrated but diffuse. CRPS combines both;
+ACE isolates calibration. Reporting both prevents Goodhart-style
+optimization of one at the expense of the other.
+
+
+\section{Worked Numerical Examples}
+\label{app:B-examples}
+
+\paragraph{Example 1 (Point forecast).} $\hat{F} = \delta_{10}$, observed
+$y = 12$. By Theorem~\ref{thm:H-mae}, $\mathrm{CRPS} = |12 - 10| = 2$.
+
+\paragraph{Example 2 (Empirical forecast).} An MC run produces lead-time
+samples $\{8, 9, 10, 11, 12, 14, 15\}$; observed $y = 13$. Using the
+kernel form (Equation~\ref{eq:B-crps-kernel}):
+$E |X - y| = \frac{1}{7}(5+4+3+2+1+1+2) = 2.571$;
+$E |X - X'| \approx 2.612$ (computed across all $7^2 = 49$ pairs);
+$\mathrm{CRPS} \approx 2.571 - \tfrac{1}{2}(2.612) = 1.265$. The
+distributional forecast achieves a CRPS lower than the worst point error
+of $5$, illustrating the sharpness reward.
+
+\paragraph{Example 3 (Calibration over a test set).} Decile coverage on
+40 test cases yields observed frequencies $\hat{p}_{0.1} = 0.08$,
+$\hat{p}_{0.5} = 0.55$, $\hat{p}_{0.9} = 0.85$. Pointwise errors:
+$0.02, 0.05, 0.05$. ACE (averaged across all nine deciles) computed
+analogously, summarizing systematic over- or underconfidence.
+
+
+% =============================================================================
+% APPENDIX C — Process Mining Algorithmic Details
+% =============================================================================
+\chapter{Process Mining Algorithmic Details}
+\label{app:C}
+
+This appendix expands the algorithmic content sketched in
+Section~\ref{sec:process-mining}.
+
+
+\section{Inductive Miner Internals}
+\label{app:C-im}
+
+The Inductive Miner (IM)~\cite{leemans2013discovering} discovers a process
+tree by recursively partitioning the directly-follows graph (DFG) extracted
+from the event log.
+
+\paragraph{Directly-follows graph.} For event log $\mathcal{L}$, the DFG is
+a graph $G_{\mathcal{L}} = (V, E)$ with $V = \mathcal{A}_{\mathcal{L}}$
+and edge $(a, b) \in E$ iff there exist consecutive events $e_k, e_{k+1}$
+in some trace with $\alpha(e_k) = a$ and $\alpha(e_{k+1}) = b$.
+
+\paragraph{Recursive partitioning.} At each recursion level, IM identifies
+the most prominent control-flow operator in the DFG and partitions the
+activity set accordingly:
+\begin{itemize}
+  \item \textbf{Sequence ($\to$):} $\mathcal{A}$ partitions into
+  $\mathcal{A}_1, \mathcal{A}_2$ such that all edges from $\mathcal{A}_1$
+  to $\mathcal{A}_2$ exist and no reverse edges exist.
+  \item \textbf{Exclusive choice ($\times$):} $\mathcal{A}$ partitions
+  into disjoint subsets with no edges between them.
+  \item \textbf{Parallel ($\wedge$):} $\mathcal{A}$ partitions into
+  subsets with edges in both directions between every pair of subsets.
+  \item \textbf{Loop ($\circlearrowleft$):} a body subset and a
+  redo subset, with edges from body end to redo start and from redo end
+  to body start.
+\end{itemize}
+Recursion terminates at single-activity leaves or empty sequences.
+
+\paragraph{IMf variant.} Inductive Miner—Infrequent (IMf) filters edges
+with frequency below a threshold $\theta_{\text{noise}}$ before partition
+detection, yielding a model that ignores rare patterns while preserving
+soundness.
+
+\paragraph{Soundness guarantee.} The block-structured nature of process
+trees guarantees soundness: every reachable marking can reach the final
+marking, and the final marking is reachable. The proof reduces to
+structural induction over tree operators.
+
+\paragraph{Complexity.} The DFG construction is $O(|\mathcal{L}|)$. The
+recursive partitioning is $O(|\mathcal{A}|^3)$ per level with at most
+$|\mathcal{A}|$ levels, giving overall $O(|\mathcal{L}| +
+|\mathcal{A}|^3 \log |\mathcal{A}|)$.
+
+
+\section{Alignment-Based Conformance Checking}
+\label{app:C-alignment}
+
+\paragraph{Synchronous product.} Given trace $\sigma$ and model $M$, the
+synchronous product is a Petri net (or transition system) whose
+transitions are labeled with the moves of Definition~\ref{def:alignment}.
+The cost function assigns $0$ to synchronous moves and a positive cost
+(typically $1$) to log moves and model moves.
+
+\paragraph{$A^*$ search.} The optimal alignment $\gamma^*$ is the
+minimum-cost path from the initial marking to a final marking. $A^*$
+expands states in order of $f(n) = g(n) + h(n)$, where $g(n)$ is the
+accumulated cost and $h(n)$ is an admissible heuristic (a lower bound on
+the remaining cost). A typical heuristic is the number of remaining
+non-synchronous moves implied by the unmatched portion of the trace.
+
+\paragraph{Complexity.} Alignment is $\mathit{NP}$-hard in the general
+case; efficient implementations (PM4Py, ProM) handle SDLC logs in
+practice because the state spaces are small (typically $|S| \leq 20$).
+
+
+\section{Fitness, Precision, and Generalization}
+\label{app:C-quality}
+
+\paragraph{Fitness.} As stated in Equation~\ref{eq:fitness}, fitness is
+$1 - \mathrm{cost}(\gamma^*) / \mathrm{cost}(\gamma_{\mathrm{worst}})$,
+where $\gamma_{\mathrm{worst}}$ is the alignment with all moves
+non-synchronous (cost equal to $|\sigma| + |M_{\min}|$, where
+$|M_{\min}|$ is the length of the shortest model trace).
+
+\paragraph{ETC precision.} Escaping Edges precision counts model states
+where transitions allowed by the model were never observed in the log.
+For each state $s$ visited during alignment, let $\mathrm{en}_M(s)$ be the
+set of model-allowed activities and $\mathrm{en}_{\mathcal{L}}(s)$ the
+set of log-observed activities. Then
+\begin{equation}
+\mathrm{Precision}(M, \mathcal{L}) = 1 - \frac{\sum_s w_s \cdot
+|\mathrm{en}_M(s) \setminus \mathrm{en}_{\mathcal{L}}(s)|}
+{\sum_s w_s \cdot |\mathrm{en}_M(s)|},
+\end{equation}
+where $w_s$ is the visit frequency of $s$.
+
+\paragraph{Generalization.} Quantifies the extent to which the model
+captures behavior beyond observed traces. A common formulation uses the
+expected fitness on cases generated by a hold-out replication of the
+underlying process; the empirical estimator weighs states by visit
+frequency, penalizing states visited by many distinct traces less than
+states visited by few.
+
+
+\section{Worked Example}
+\label{app:C-examples}
+
+\paragraph{Toy log.} Three traces over four activities:
+$\sigma_1 = \langle A, B, C, D \rangle$,
+$\sigma_2 = \langle A, B, C, D \rangle$,
+$\sigma_3 = \langle A, C, B, D \rangle$.
+
+\paragraph{DFG.} Edges $A \to B$ (count 2), $A \to C$ (count 1),
+$B \to C$ (count 2), $C \to B$ (count 1), $C \to D$ (count 2),
+$B \to D$ (count 1).
+
+\paragraph{Discovered process tree.} IM identifies $A$ as a sequence
+predecessor to $\{B, C\}$ and $D$ as a sequence successor of $\{B, C\}$,
+with $\{B, C\}$ in parallel ($B \parallel C$). Resulting tree:
+$\to(A,\, \wedge(B, C),\, D)$.
+
+\paragraph{Quality metrics.} Replaying the three traces against the tree
+yields fitness $= 1.0$ (all traces are valid sequences of the parallel
+construct); precision $\approx 0.5$ (the parallel construct admits two
+permutations of $B, C$, but only two of them are observed); generalization
+$\approx 0.7$ (depends on weighting; full computation in PM4Py).
+
+
+% =============================================================================
+% APPENDIX D — End-to-End Walkthrough Example
+% =============================================================================
+\chapter{End-to-End Walkthrough Example}
+\label{app:D}
+
+This appendix presents a complete worked example of the PATHCAST pipeline
+on a small synthetic project, making the data-flow concrete from raw
+events through probabilistic forecast.
+
+
+\section{Synthetic Event Log}
+\label{app:D-log}
+
+The synthetic dataset contains 10 issues across 35 days, with events from
+three sources (Jira, Git, GitHub Actions). Issue keys: PROJ-1 to PROJ-10.
+Total raw events: 58.
+
+\paragraph{Raw events (excerpt for PROJ-1).}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Source} & \textbf{Type} & \textbf{Timestamp} \\
+\midrule
+Jira  & status\_change (Backlog $\to$ In Progress) & day 1, 09:00 \\
+Git   & commit (msg: ``PROJ-1 initial impl'')      & day 1, 14:30 \\
+Jira  & status\_change (In Progress $\to$ Review)  & day 2, 11:00 \\
+PR    & pr\_opened (PROJ-1)                        & day 2, 11:05 \\
+Git   & commit (msg: ``PROJ-1 review fix'')        & day 3, 10:00 \\
+PR    & pr\_merged                                 & day 3, 16:00 \\
+Jira  & status\_change (Review $\to$ Testing)      & day 4, 09:30 \\
+CI    & build\_end (status: pass)                  & day 4, 09:45 \\
+Jira  & status\_change (Testing $\to$ Done)        & day 5, 14:00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Case correlation.} The cascade $\kappa_1 \circ \kappa_2 \circ
+\kappa_3$ assigns 56 of 58 events to one of the 10 issues; 2 unrelated
+commits are discarded. Coverage = $56/58 = 0.966$.
+
+\paragraph{Activity mapping.} The mapping $\mu$ projects raw events onto
+$\mathcal{A} = \{\mathtt{backlog}, \mathtt{in\_progress},
+\mathtt{review}, \mathtt{testing}, \mathtt{done}\}$. Build events are
+absorbed into the surrounding state to avoid spurious transitions.
+
+
+\section{Process Discovery}
+\label{app:D-discovery}
+
+Inductive Miner with $\theta_{\text{noise}} = 0.2$ produces the process
+tree
+$\to(\mathtt{backlog}, \mathtt{in\_progress}, \mathtt{review},
+   \mathtt{testing}, \mathtt{done})$
+with an optional rework loop between $\mathtt{review}$ and
+$\mathtt{in\_progress}$.
+
+\paragraph{Quality metrics on the synthetic log.}
+\begin{itemize}
+  \item Fitness: $0.93$ (one trace contains an unmatched
+    \texttt{review} $\to$ \texttt{testing} loop)
+  \item Precision: $0.81$
+  \item Generalization: $0.74$
+\end{itemize}
+
+
+\section{Markov Estimation}
+\label{app:D-markov}
+
+\paragraph{Transition counts (transient block).}
+\begin{equation*}
+C_T = \bordermatrix{
+   & \mathtt{IP} & \mathtt{R} & \mathtt{T} \cr
+\mathtt{IP} & 0 & 11 & 0 \cr
+\mathtt{R}  & 2 & 0  & 9 \cr
+\mathtt{T}  & 1 & 0  & 0 \cr}.
+\end{equation*}
+
+\paragraph{MLE transition matrix.}
+\begin{equation*}
+\hat{Q} = \begin{pmatrix}
+0    & 1.000 & 0     \\
+0.182 & 0    & 0.818 \\
+1.000 & 0    & 0
+\end{pmatrix},
+\qquad
+\hat{R} = \begin{pmatrix}
+0 \\ 0 \\ 0
+\end{pmatrix}_{\to \mathtt{done}}.
+\end{equation*}
+
+\paragraph{Fundamental matrix.}
+$N = (I - \hat{Q})^{-1} \approx \begin{pmatrix}
+1.22 & 1.22 & 1.00 \\
+0.22 & 1.22 & 1.00 \\
+1.22 & 1.22 & 1.00
+\end{pmatrix}$.
+
+\paragraph{Expected steps to absorption.}
+$\mathbf{t} = N \mathbf{1} \approx (3.44,\ 2.44,\ 3.44)^\top$.
+
+\paragraph{Empirical sojourn distributions.} Per state, in days:
+$\hat{F}_{\mathtt{IP}} = \{1.0, 1.5, 2.0, 2.0, 3.0\}$,
+$\hat{F}_{\mathtt{R}}  = \{0.5, 1.0, 1.0, 2.0\}$,
+$\hat{F}_{\mathtt{T}}  = \{0.5, 0.8, 1.5\}$.
+
+
+\section{Monte Carlo Simulation}
+\label{app:D-mc}
+
+Run $M_{\mathrm{sim}} = 10{,}000$ trajectories starting from
+\texttt{in\_progress}, sampling sojourns from $\hat{F}_s$ and next states
+from $\hat{Q}$.
+
+\paragraph{Forecasts.}
+\begin{itemize}
+  \item Median lead time $\hat{Q}_{0.5} \approx 5.4$ days
+  \item P85 forecast $\hat{Q}_{0.85} \approx 7.9$ days
+  \item P95 forecast $\hat{Q}_{0.95} \approx 9.7$ days
+  \item Completion probability (Done): $1.00$ (no Cancelled in this
+    synthetic example)
+\end{itemize}
+
+\paragraph{Top-3 paths.}
+\begin{itemize}
+  \item $\mathtt{IP} \to \mathtt{R} \to \mathtt{T} \to \mathtt{Done}$
+    (frequency 0.81)
+  \item $\mathtt{IP} \to \mathtt{R} \to \mathtt{IP} \to \mathtt{R} \to
+    \mathtt{T} \to \mathtt{Done}$ (frequency 0.15)
+  \item Longer rework paths (frequency 0.04)
+\end{itemize}
+
+
+\section{Cross-Validation Against Analytical Results}
+\label{app:D-validation}
+
+Mean lead time, computed analytically with mean sojourns $\bar{T}_{IP} =
+1.9$, $\bar{T}_R = 1.125$, $\bar{T}_T = 0.93$:
+\begin{equation}
+E[\mathrm{LT} \mid s_0 = \mathtt{IP}]
+= 1.22 \cdot 1.9 + 1.22 \cdot 1.125 + 1.00 \cdot 0.93 \approx 4.62 \text{ days}.
+\end{equation}
+Monte Carlo mean: 4.59 days. Relative deviation: 0.6\%, confirming
+consistency between analytical and simulation paths.
+
+
+\section{ML Feature Construction}
+\label{app:D-ml}
+
+For each of the 10 cases, the 15 features defined in
+Table~\ref{tab:features} are constructed at the half-trace observation
+point. Random Forest with 5-fold temporal cross-validation yields:
+\begin{itemize}
+  \item AUC-ROC (PM-only features): $0.79$
+  \item AUC-ROC (MSR-only features): $0.71$
+  \item AUC-ROC (Combined): $0.84$
+\end{itemize}
+SHAP analysis ranks Markov-expected remaining transitions and rework
+count among the top three predictors, illustrating the predictive value
+of process-derived features hypothesized in Section~\ref{sec:ml-se} and
+formally evaluated in Chapter~\ref{ch:evaluation}.
+
+\paragraph{Disclaimer.} Numbers above are illustrative for a synthetic
+$n=10$ dataset. Statistical significance and external validity are not
+established at this scale; the example serves to demonstrate the
+end-to-end data flow, not to evidence empirical claims.

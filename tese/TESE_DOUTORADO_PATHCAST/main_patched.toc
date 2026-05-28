@@ -1,0 +1,287 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{List of Figures}{xii}{chapter*.9}%
+\contentsline {chapter}{List of Tables}{xv}{chapter*.11}%
+\contentsline {chapter}{List of Charts}{xvi}{chapter*.13}%
+\contentsline {chapter}{List of Algorithms}{xvii}{chapter*.15}%
+\contentsline {chapter}{List of Acronyms}{xviii}{section*.17}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Research Problem}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objectives}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}General Objective}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Specific Objectives}{3}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Research Questions}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Justification and Research Gap}{5}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Expected Contributions}{6}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Research Methodology}{7}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Structure of the Document}{8}{section.1.7}%
+\contentsline {chapter}{\numberline {2}Theoretical Foundation}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Process Mining}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Mining Software Repositories}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Stochastic Process Modeling with Markov Chains}{12}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Monte Carlo Simulation and Probabilistic Forecasting Metrics}{13}{section.2.4}%
+\contentsline {paragraph}{Forecasting metrics.}{14}{equation.2.10}%
+\contentsline {section}{\numberline {2.5}Machine Learning for Software Engineering}{14}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Variant Entropy}{15}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Chapter Synthesis}{15}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Systematic Literature Review}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Review Protocol}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Research Questions}{17}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Search Strategy}{17}{subsection.3.2.2}%
+\contentsline {subsubsection}{PICO Decomposition}{17}{subsection.3.2.2}%
+\contentsline {subsubsection}{Search Strings}{18}{table.caption.22}%
+\contentsline {paragraph}{Principal String (P $\wedge $ I).}{18}{table.caption.22}%
+\contentsline {paragraph}{Complementary String (MSR $\rightarrow $ Process Modeling).}{18}{table.caption.22}%
+\contentsline {paragraph}{Frontier String (Stochastic $\wedge $ PM $\wedge $ SE).}{19}{table.caption.22}%
+\contentsline {subsubsection}{Snowballing Procedure}{19}{table.caption.23}%
+\contentsline {subsubsection}{Search String Validation}{20}{table.caption.23}%
+\contentsline {subsection}{\numberline {3.2.3}Inclusion and Exclusion Criteria}{20}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Quality Assessment}{21}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Data Extraction}{21}{subsection.3.2.5}%
+\contentsline {section}{\numberline {3.3}Search Results and Study Selection}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Database Retrieval and Deduplication}{21}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Operational Working Set Construction}{25}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Title/Abstract Screening}{25}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Full-Text Screening}{26}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Results and Synthesis}{29}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Overview of Included Studies}{29}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Inclusion Criterion Coverage}{30}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Prevalent Exclusion Patterns}{30}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Full-Text Extraction and PDF-Based Triangulation}{31}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}RQ1: Application Landscape}{31}{subsection.3.4.5}%
+\contentsline {subsubsection}{RQ1.1: SDLC Phases Covered}{31}{subsection.3.4.5}%
+\contentsline {subsubsection}{RQ1.2: Event Log Sources and Construction}{32}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}RQ2: Techniques and Prediction}{34}{subsection.3.4.6}%
+\contentsline {subsubsection}{RQ2.1: Discovery Algorithms Applied to SDLC}{34}{subsection.3.4.6}%
+\contentsline {subsubsection}{RQ2.2: Predictive and Stochastic Techniques}{35}{figure.caption.37}%
+\contentsline {subsection}{\numberline {3.4.7}RQ3: Integration and Gaps}{38}{subsection.3.4.7}%
+\contentsline {subsubsection}{RQ3.1: PM and Stochastic Integration Level}{38}{subsection.3.4.7}%
+\contentsline {subsubsection}{RQ3.2: Gap Analysis}{39}{figure.caption.38}%
+\contentsline {section}{\numberline {3.5}Discussion}{39}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Research Gap Identification}{39}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Positioning of PATHCAST}{43}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Proposed Taxonomy: SPMF}{43}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Research Agenda}{44}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Implications for Practitioners}{45}{subsection.3.5.5}%
+\contentsline {section}{\numberline {3.6}Threats to Validity of the SLR}{45}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Construct Validity}{45}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Internal Validity}{46}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}External Validity}{48}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Conclusion Validity}{51}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}Replication Package}{51}{subsection.3.6.5}%
+\contentsline {section}{\numberline {3.7}Cross-Domain Synthesis and Gap Map}{52}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Process Mining Applied to SDLC}{52}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Stochastic Forecasting and ML for SE}{53}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Gap Map}{53}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}Chapter Summary}{54}{section.3.8}%
+\contentsline {chapter}{\numberline {4}The Proposed Method: PATHCAST}{57}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Architectural Overview}{57}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Pipeline Definition}{57}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Pipeline Architecture}{58}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Design Principles}{58}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Component View}{60}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Stage Contracts}{60}{subsection.4.1.5}%
+\contentsline {section}{\numberline {4.2}Stage 1: Event Log Construction}{61}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Event Extraction}{62}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Case Correlation}{62}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Activity Mapping}{63}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Event Log Formatting and Filtering}{64}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Log Quality Assessment}{65}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Stage 2: Process Mining}{65}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Variant Entropy}{65}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Process Discovery}{65}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Conformance Checking}{66}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Performance Enhancement}{66}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}State Space Extraction}{66}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Stage 3: Stochastic Modeling}{67}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Transition Counting}{67}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Maximum Likelihood Estimation}{67}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Confidence Assessment}{68}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Absorbing Chain Decomposition}{68}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Empirical Sojourn Time Distributions}{69}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Stationary Distribution and WIP Analysis}{69}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}Rework Analysis}{69}{subsection.4.4.7}%
+\contentsline {subsection}{\numberline {4.4.8}Numerical Example}{69}{subsection.4.4.8}%
+\contentsline {section}{\numberline {4.5}Stage 4: Monte Carlo Simulation}{70}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Simulation Algorithm}{70}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Forecast Extraction}{71}{subsection.4.5.2}%
+\contentsline {subsubsection}{Percentile Forecasts}{71}{subsection.4.5.2}%
+\contentsline {subsubsection}{Completion Probability}{71}{equation.4.46}%
+\contentsline {subsubsection}{Tail Risk}{71}{equation.4.47}%
+\contentsline {subsubsection}{Path Distribution}{71}{equation.4.48}%
+\contentsline {subsubsection}{WIP Composition}{71}{equation.4.49}%
+\contentsline {subsection}{\numberline {4.5.3}Convergence and Simulation Budget}{72}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Reproducibility}{72}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.5}Comparison with Throughput-Based Monte Carlo}{72}{subsection.4.5.5}%
+\contentsline {section}{\numberline {4.6}Machine Learning Enhancement Component}{72}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Feature Engineering}{72}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Label Construction}{73}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Training Protocol}{73}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}Integration with Monte Carlo Forecasts}{74}{subsection.4.6.4}%
+\contentsline {section}{\numberline {4.7}Pipeline Integration}{74}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Formal Properties and Theoretical Guarantees}{75}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Statistical Consistency}{75}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Calibration Property}{75}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Information-Theoretic Advantage of Process Awareness}{76}{subsection.4.8.3}%
+\contentsline {subsection}{\numberline {4.8.4}Complexity Analysis}{76}{subsection.4.8.4}%
+\contentsline {subsubsection}{Space Complexity}{76}{table.caption.57}%
+\contentsline {subsubsection}{Parallelization}{77}{equation.4.60}%
+\contentsline {subsection}{\numberline {4.8.5}Assumptions and Boundary Conditions}{77}{subsection.4.8.5}%
+\contentsline {section}{\numberline {4.9}Chapter Summary}{77}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Research Methodology}{80}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Design Science Research Paradigm}{80}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}DSR Artifact Characterization}{80}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}DSRM Process Instantiation}{81}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}DSR Knowledge Contribution}{81}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Dataset Description}{81}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Repository Selection Criteria}{81}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Selection Process}{82}{subsection.5.2.2}%
+\contentsline {paragraph}{Step 1 — Candidate generation.}{82}{subsection.5.2.2}%
+\contentsline {paragraph}{Step 2 — Criterion verification.}{82}{subsection.5.2.2}%
+\contentsline {paragraph}{Step 3 — Stratified selection.}{82}{subsection.5.2.2}%
+\contentsline {paragraph}{Step 4 — Jira enrichment.}{82}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Data Collection}{82}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Dataset Descriptive Statistics}{82}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Ethical Considerations}{82}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3}Experimental Design}{83}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}E1: Pipeline Validation}{83}{subsection.5.3.1}%
+\contentsline {subsubsection}{Scope}{84}{subsection.5.3.1}%
+\contentsline {subsubsection}{Protocol}{84}{Item.12}%
+\contentsline {subsubsection}{Sensitivity Analysis}{84}{Item.18}%
+\contentsline {subsubsection}{Acceptance Criteria}{84}{Item.18}%
+\contentsline {subsection}{\numberline {5.3.2}E2: Forecasting Accuracy}{85}{subsection.5.3.2}%
+\contentsline {subsubsection}{Scope}{85}{subsection.5.3.2}%
+\contentsline {subsubsection}{Temporal Hold-Out Protocol}{85}{Item.21}%
+\contentsline {subsubsection}{Cross-Repository Generalization}{85}{equation.5.4}%
+\contentsline {section}{\numberline {5.4}Evaluation Metrics}{86}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Metrics for RQ1: Event Log and Process Model Quality}{86}{subsection.5.4.1}%
+\contentsline {paragraph}{Metric rationale.}{86}{table.caption.64}%
+\contentsline {subsection}{\numberline {5.4.2}Metrics for RQ2: Stochastic Forecasting Accuracy}{87}{subsection.5.4.2}%
+\contentsline {paragraph}{CRPS}{87}{table.caption.65}%
+\contentsline {paragraph}{Point metrics.}{87}{table.caption.65}%
+\contentsline {paragraph}{ACE}{87}{table.caption.65}%
+\contentsline {paragraph}{Coverage at 85\%}{87}{table.caption.65}%
+\contentsline {paragraph}{Completion Accuracy.}{87}{table.caption.65}%
+\contentsline {subsection}{\numberline {5.4.3}Metrics for RQ3: ML Feature Comparison}{87}{subsection.5.4.3}%
+\contentsline {paragraph}{AUC-ROC}{87}{table.caption.66}%
+\contentsline {paragraph}{F1}{87}{table.caption.66}%
+\contentsline {paragraph}{Brier}{88}{table.caption.66}%
+\contentsline {paragraph}{Permutation importance}{88}{table.caption.66}%
+\contentsline {section}{\numberline {5.5}Baseline Methods}{88}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Statistical Analysis Procedures}{89}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Within-Repository Comparison}{89}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Cross-Repository Aggregation}{89}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}Statistical Power Analysis}{89}{subsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.6.4}Reporting Standards}{90}{subsection.5.6.4}%
+\contentsline {section}{\numberline {5.7}Threats to Validity}{90}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Internal Validity}{90}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}External Validity}{91}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Construct Validity}{91}{subsection.5.7.3}%
+\contentsline {subsection}{\numberline {5.7.4}Conclusion Validity}{91}{subsection.5.7.4}%
+\contentsline {section}{\numberline {5.8}Chapter Summary}{91}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Implementation}{93}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Empirical Evaluation}{94}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Conclusion}{95}{chapter.8}%
+\contentsline {chapter}{\numberline {A}Markov Chain Derivations}{96}{appendix.A}%
+\contentsline {section}{\numberline {A.1}The Fundamental Matrix Identity}{96}{section.A.1}%
+\contentsline {paragraph}{Interpretation.}{97}{equation.A.1}%
+\contentsline {section}{\numberline {A.2}Expected Steps to Absorption}{97}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Variance of Absorption Time}{97}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Absorption Probabilities}{98}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Bayesian Estimation and Laplace Smoothing}{98}{section.A.5}%
+\contentsline {paragraph}{Conjugate prior.}{98}{section.A.5}%
+\contentsline {paragraph}{Posterior mean and Laplace estimator.}{99}{equation.A.7}%
+\contentsline {paragraph}{Credible intervals.}{99}{equation.A.8}%
+\contentsline {section}{\numberline {A.6}Semi-Markov Connection}{99}{section.A.6}%
+\contentsline {paragraph}{Reduction to Markov renewal.}{99}{section.A.6}%
+\contentsline {paragraph}{Quasi-stationary distribution.}{99}{section.A.6}%
+\contentsline {section}{\numberline {A.7}Numerical Example: Six-State SDLC Chain}{100}{section.A.7}%
+\contentsline {paragraph}{Inputs.}{100}{section.A.7}%
+\contentsline {paragraph}{MLE estimate.}{100}{equation.A.10}%
+\contentsline {paragraph}{Canonical decomposition.}{100}{equation.A.11}%
+\contentsline {paragraph}{Fundamental matrix.}{100}{equation.A.12}%
+\contentsline {paragraph}{Expected steps to absorption.}{101}{equation.A.13}%
+\contentsline {paragraph}{Absorption probabilities.}{101}{equation.A.14}%
+\contentsline {paragraph}{Expected lead time.}{101}{equation.A.15}%
+\contentsline {chapter}{\numberline {B}Probabilistic Metric Derivations}{102}{appendix.B}%
+\contentsline {section}{\numberline {B.1}CRPS: Definition and Equivalent Forms}{102}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Propriety of CRPS}{103}{section.B.2}%
+\contentsline {paragraph}{Implication for PATHCAST.}{103}{theorem.B.2}%
+\contentsline {section}{\numberline {B.3}CRPS--MAE Relationship}{103}{section.B.3}%
+\contentsline {paragraph}{Operational consequence.}{103}{theorem.B.3}%
+\contentsline {section}{\numberline {B.4}Calibration and the Aggregate Calibration Error}{104}{section.B.4}%
+\contentsline {paragraph}{Calibration error and ACE.}{104}{definition.B.3}%
+\contentsline {paragraph}{Calibration vs.\ sharpness.}{104}{definition.B.3}%
+\contentsline {section}{\numberline {B.5}Worked Numerical Examples}{104}{section.B.5}%
+\contentsline {paragraph}{Example 1 (Point forecast).}{104}{section.B.5}%
+\contentsline {paragraph}{Example 2 (Empirical forecast).}{104}{section.B.5}%
+\contentsline {paragraph}{Example 3 (Calibration over a test set).}{104}{section.B.5}%
+\contentsline {chapter}{\numberline {C}Process Mining Algorithmic Details}{105}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Inductive Miner Internals}{105}{section.C.1}%
+\contentsline {paragraph}{Directly-follows graph.}{105}{section.C.1}%
+\contentsline {paragraph}{Recursive partitioning.}{105}{section.C.1}%
+\contentsline {paragraph}{IMf variant.}{106}{section.C.1}%
+\contentsline {paragraph}{Soundness guarantee.}{106}{section.C.1}%
+\contentsline {paragraph}{Complexity.}{106}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Alignment-Based Conformance Checking}{106}{section.C.2}%
+\contentsline {paragraph}{Synchronous product.}{106}{section.C.2}%
+\contentsline {paragraph}{$A^*$ search.}{106}{section.C.2}%
+\contentsline {paragraph}{Complexity.}{106}{section.C.2}%
+\contentsline {section}{\numberline {C.3}Fitness, Precision, and Generalization}{106}{section.C.3}%
+\contentsline {paragraph}{Fitness.}{106}{section.C.3}%
+\contentsline {paragraph}{ETC precision.}{107}{section.C.3}%
+\contentsline {paragraph}{Generalization.}{107}{equation.C.1}%
+\contentsline {section}{\numberline {C.4}Worked Example}{107}{section.C.4}%
+\contentsline {paragraph}{Toy log.}{107}{section.C.4}%
+\contentsline {paragraph}{DFG.}{107}{section.C.4}%
+\contentsline {paragraph}{Discovered process tree.}{107}{section.C.4}%
+\contentsline {paragraph}{Quality metrics.}{107}{section.C.4}%
+\contentsline {chapter}{\numberline {D}End-to-End Walkthrough Example}{108}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Synthetic Event Log}{108}{section.D.1}%
+\contentsline {paragraph}{Raw events (excerpt for PROJ-1).}{108}{section.D.1}%
+\contentsline {paragraph}{Case correlation.}{109}{section.D.1}%
+\contentsline {paragraph}{Activity mapping.}{109}{section.D.1}%
+\contentsline {section}{\numberline {D.2}Process Discovery}{109}{section.D.2}%
+\contentsline {paragraph}{Quality metrics on the synthetic log.}{109}{section.D.2}%
+\contentsline {section}{\numberline {D.3}Markov Estimation}{109}{section.D.3}%
+\contentsline {paragraph}{Transition counts (transient block).}{109}{section.D.3}%
+\contentsline {paragraph}{MLE transition matrix.}{109}{section.D.3}%
+\contentsline {paragraph}{Fundamental matrix.}{109}{section.D.3}%
+\contentsline {paragraph}{Expected steps to absorption.}{110}{section.D.3}%
+\contentsline {paragraph}{Empirical sojourn distributions.}{110}{section.D.3}%
+\contentsline {section}{\numberline {D.4}Monte Carlo Simulation}{110}{section.D.4}%
+\contentsline {paragraph}{Forecasts.}{110}{section.D.4}%
+\contentsline {paragraph}{Top-3 paths.}{110}{section.D.4}%
+\contentsline {section}{\numberline {D.5}Cross-Validation Against Analytical Results}{110}{section.D.5}%
+\contentsline {section}{\numberline {D.6}ML Feature Construction}{111}{section.D.6}%
+\contentsline {paragraph}{Disclaimer.}{111}{section.D.6}%
+\contentsline {chapter}{References}{96}{section*.70}%
+\contentsline {chapter}{\numberline {E}Search Protocol: Search Strings}{112}{appendix.E}%
+\contentsline {section}{\numberline {E.1}Search String Summary by Database}{112}{section.E.1}%
+\contentsline {section}{\numberline {E.2}String S1 --- Principal ($\text {P} \wedge \text {I}$)}{113}{section.E.2}%
+\contentsline {section}{\numberline {E.3}String S2 --- Complementary (MSR $\rightarrow $ Process Modelling)}{113}{section.E.3}%
+\contentsline {section}{\numberline {E.4}String S3 --- Frontier (Stochastic $\wedge $ PM $\wedge $ SE)}{113}{section.E.4}%
+\contentsline {section}{\numberline {E.5}String S4 --- Markov in Software Testing (Scopus supplement)}{114}{section.E.5}%
+\contentsline {chapter}{\numberline {F}LLM Screening Prompts}{115}{appendix.F}%
+\contentsline {section}{\numberline {F.1}Phase 1: Title/Abstract Screening}{115}{section.F.1}%
+\contentsline {section}{\numberline {F.2}Phase 2: Full-Text Screening}{117}{section.F.2}%
+\contentsline {section}{\numberline {F.3}Phase 2b: \textit {Screen-Blanks} Pass}{117}{section.F.3}%
+\contentsline {section}{\numberline {F.4}Model Parameters by Phase}{118}{section.F.4}%
+\contentsline {chapter}{\numberline {G}Data Extraction Form}{119}{appendix.G}%
+\contentsline {section}{\numberline {G.1}Extraction Prompt}{119}{section.G.1}%
+\contentsline {section}{\numberline {G.2}Data Extraction Form Fields}{120}{section.G.2}%
+\contentsline {section}{\numberline {G.3}Controlled Vocabulary (Enums) for Structured Output}{120}{section.G.3}%
+\contentsline {chapter}{\numberline {H}Assessment and Classification Instruments}{123}{appendix.H}%
+\contentsline {section}{\numberline {H.1}Priority Bands for the Full-Text Queue}{123}{section.H.1}%
+\contentsline {section}{\numberline {H.2}Abstract Enrichment Algorithm}{123}{section.H.2}%
+\contentsline {section}{\numberline {H.3}Quality Assessment Checklist}{125}{section.H.3}%
+\contentsline {section}{\numberline {H.4}Control Paper Set}{125}{section.H.4}%
+\contentsline {section}{\numberline {H.5}SPMF Integration-Level Taxonomy}{128}{section.H.5}%
+\contentsline {chapter}{\numberline {I}Reading List and Pipeline Artefacts}{129}{appendix.I}%
+\contentsline {section}{\numberline {I.1}Multi-criterion Scoring Rubric}{129}{section.I.1}%
+\contentsline {section}{\numberline {I.2}Top-32: Ranked Reading List}{130}{section.I.2}%
+\contentsline {section}{\numberline {I.3}Review Pipeline Scripts}{130}{section.I.3}%
+\contentsline {section}{\numberline {I.4}Persistent Artefact Registry}{130}{section.I.4}%
+\contentsline {chapter}{\numberline {J}Evaluation Dataset: Repository List}{133}{appendix.J}%
+\contentsline {section}{\numberline {J.1}Stratification Summary}{133}{section.J.1}%
+\contentsline {section}{\numberline {J.2}Complete Repository List}{133}{section.J.2}%

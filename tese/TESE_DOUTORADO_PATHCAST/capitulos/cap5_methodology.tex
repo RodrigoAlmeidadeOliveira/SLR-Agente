@@ -1,0 +1,1347 @@
+% =============================================================================
+% CHAPTER 5 — RESEARCH METHODOLOGY
+% Thesis: PATHCAST
+% Covers: DSR, dataset, experimental design, metrics, baselines, threats
+% Target: ~12-16 pages
+% =============================================================================
+
+\chapter{Research Methodology}
+\label{ch:methodology}
+
+This chapter describes the methodological framework adopted in this 
+research. Section~\ref{sec:dsr} presents the Design Science Research 
+paradigm and its instantiation. Section~\ref{sec:dataset} describes the 
+dataset, including repository selection criteria and descriptive 
+statistics. Section~\ref{sec:eval-design} formalizes the experimental 
+design for the two evaluation stages. Section~\ref{sec:evaluation-metrics} 
+defines the evaluation metrics for each research question. 
+Section~\ref{sec:baselines} specifies the baseline methods against which 
+the proposed approach is compared. Section~\ref{sec:statistical-analysis} 
+describes the statistical analysis procedures. 
+Section~\ref{sec:threats} discusses threats to validity and the 
+mitigation strategies adopted.
+
+
+% =============================================================================
+% 5.1 DESIGN SCIENCE RESEARCH
+% =============================================================================
+\section{Design Science Research Paradigm}
+\label{sec:dsr}
+
+This research adopts the Design Science Research (DSR) paradigm, following 
+the framework of Hevner et al.~\cite{hevner2004} and the Design 
+Science Research Methodology (DSRM) process of Peffers et 
+al.~\cite{peffers2007}. DSR is appropriate because the primary goal 
+is to design, implement, and evaluate an artifact (the PATHCAST 
+method and its supporting tool) that addresses a practical problem 
+identified in the literature.
+
+
+\subsection{DSR Artifact Characterization}
+\label{sec:dsr-artifact}
+
+According to the taxonomy of Hevner et al.~\cite{hevner2004}, DSR 
+artifacts can be classified as constructs, models, methods, or 
+instantiations. The artifact produced in this research is a \textbf{method}: 
+PATHCAST is a formally specified pipeline that prescribes how to 
+transform software repository data into probabilistic process forecasts 
+through a defined sequence of operations.
+
+The method artifact is accompanied by a supporting \textbf{instantiation}: 
+a Python-based tool that implements the four pipeline stages and the ML 
+component, serving as the vehicle for empirical evaluation.
+
+
+\subsection{DSRM Process Instantiation}
+\label{sec:dsrm-instantiation}
+
+Table~\ref{tab:dsrm-mapping} maps the six DSRM activities to the 
+corresponding thesis chapters and deliverables.
+
+\begin{table}[htbp]
+\centering
+\caption{Mapping of DSRM activities to thesis components.}
+\label{tab:dsrm-mapping}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{Activity} & \textbf{DSRM Activity} & \textbf{Chapter} & \textbf{Deliverable} \\
+\midrule
+1 & Problem Identification & Ch.~\ref{ch:introduction} & 
+    Three research problems \\
+  & \& Motivation & Ch.~\ref{ch:theoretical-foundation} & 
+    Gap analysis table \\
+\midrule
+2 & Objectives Definition & Ch.~\ref{ch:introduction} & 
+    3 RQs, 4 specific objectives \\
+  & & & 5 expected contributions \\
+\midrule
+3 & Design \& Development & Ch.~\ref{ch:method} & 
+    PATHCAST method \\
+  & & Ch.~\ref{ch:implementation} & 
+    Python tool implementation \\
+\midrule
+4 & Demonstration & Ch.~\ref{ch:evaluation} & 
+    Application to 48 repositories \\
+\midrule
+5 & Evaluation & Ch.~\ref{ch:evaluation} & 
+    E1: Pipeline Validation \\
+  & & & E2: Forecasting Accuracy \\
+\midrule
+6 & Communication & This thesis & 
+    Doctoral dissertation \\
+  & & Venues: EASE, MSR & 
+    Conference/journal papers \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{DSR Knowledge Contribution}
+\label{sec:dsr-contribution}
+
+The contribution of this research lies in the formal integration of established techniques into a unified process-oriented prediction pipeline, tailored to the SDLC domain and supported by both theoretical guarantees and empirical validation.
+
+Following the DSR knowledge contribution framework of Gregor and 
+Hevner~\cite{gregor2013positioning}, this research operates in the 
+\emph{Improvement} quadrant: it addresses a known problem class (software 
+process forecasting) with a new solution (process-aware stochastic 
+simulation parameterized by process mining). The contribution is not the
+invention of new individual techniques (process mining, Markov chains, 
+Monte Carlo simulation, and machine learning are established methods), 
+but rather their formal integration into a pipeline specifically designed 
+for the SDLC domain, accompanied by empirical evidence of its 
+effectiveness.
+
+
+% =============================================================================
+% 5.2 DATASET
+% =============================================================================
+\section{Dataset Description}
+\label{sec:dataset}
+
+The empirical evaluation uses a curated dataset of 48 open-source software 
+repositories. This section describes the selection criteria, data 
+collection process, and descriptive statistics.
+
+
+\subsection{Repository Selection Criteria}
+\label{sec:selection-criteria}
+
+Repositories were selected according to the following inclusion criteria, 
+designed to ensure sufficient data volume and process maturity for 
+meaningful process mining analysis:
+
+\begin{enumerate}
+    \item \textbf{Minimum commit volume:} At least 1{,}000 commits in the 
+    main branch, ensuring sufficient event data for Markov estimation 
+    with adequate statistical power.
+    
+    \item \textbf{Issue tracker usage:} Active use of an issue tracking 
+    system (GitHub Issues or Jira) with at least 100 closed issues 
+    containing state transition data, enabling SDLC process reconstruction.
+    
+    \item \textbf{Pull request workflow:} Evidence of a pull request-based 
+    development workflow, ensuring that code review events are available 
+    for event log construction.
+    
+    \item \textbf{Activity period:} At least 12 months of continuous 
+    development activity, providing sufficient temporal depth for 
+    temporal hold-out validation.
+    
+    \item \textbf{Non-trivial contributor base:} At least 5 distinct 
+    contributors, excluding single-developer projects where process 
+    dynamics are degenerate.
+    
+    \item \textbf{Non-fork:} The repository is not a fork of another 
+    project, avoiding duplicate process data.
+\end{enumerate}
+
+Exclusion criteria remove repositories where process mining would produce 
+unreliable results:
+
+\begin{enumerate}
+    \item Repositories with predominantly bot-generated commits 
+    (>50\% of total commits from automated accounts).
+    
+    \item Repositories where issue tracking is used only for external 
+    bug reports (no internal workflow state transitions).
+    
+    \item Mirror or archive repositories with no active development.
+\end{enumerate}
+
+
+\subsection{Selection Process}
+\label{sec:selection-process}
+
+The selection followed a four-step protocol designed to be reproducible
+and auditable, with each step documented in the replication
+package~\cite{oliveira2025replication}.
+
+\paragraph{Step 1 – Candidate generation.}
+An initial candidate list of approximately 150 repositories was
+generated using the SEART GitHub Search engine~\cite{seart2021} with
+the following query parameters: at least 1,000 commits, issues enabled,
+pull requests present, fork status false, last push after 2022-01-01,
+and primary language in \{Python, JavaScript/TypeScript, Java, Go, Rust,
+C/C++\}. SEART was chosen because it exposes filter parameters not
+available through the native GitHub search API and produces a
+reproducible, timestamped export~\cite{dabic2021sampling}.
+
+\paragraph{Step 2 – Criterion verification.}
+Each candidate was verified against criteria C2 and C5 through direct
+calls to the GitHub REST API~\cite{github2023api}. For C2, the issues
+timeline events endpoint was queried to confirm the presence of at least
+100 closed issues with recorded state transitions. For C5, the
+contributors endpoint was used to count distinct contributors, excluding
+accounts identified as bots by the GitHub platform. Repositories
+failing either criterion were removed from the candidate list.
+
+\paragraph{Step 3 – Stratified selection.}
+From the verified candidates, 48 repositories were selected by
+stratified sampling to ensure coverage of all dimensions defined in
+Table~\ref{tab:dataset-diversity}. The stratification targets were:
+three to four repositories per primary language (six language strata);
+balanced representation across scale tiers (Small, Medium, Large); and
+at least four repositories per governance model (Foundation-backed,
+corporate-backed, community-driven). Where multiple candidates competed
+for the same stratification cell, preference was given to the repository
+with the longer activity span and higher contributor diversity, used
+here as proxies for process maturity.
+
+\paragraph{Step 4 – Jira enrichment for Apache and Spring projects.}
+For repositories associated with Apache Software Foundation or Spring
+Framework projects, the issue tracking component was enriched with data
+from the Public Jira Dataset of Montgomery et
+al.~\cite{montgomery2022jira}, which provides 32 million historical
+state-change records for 1,822 projects across 16 public Jira instances.
+The Jira and GitHub issue records were linked by project key, and the
+richer Jira transition history was used in place of the GitHub Issues
+timeline where available. This substitution is documented
+per-repository in Appendix~\ref{app:repository-list} and declared as a
+data source variant in the event log metadata field
+\texttt{issue\_source}.
+
+The complete list of 48 repositories, with metadata on language, domain,
+scale, governance model, workflow maturity, and issue source, is
+provided in Appendix~\ref{app:repository-list}.
+
+
+\subsection{Data Collection}
+\label{sec:data-collection}
+
+Data collection is scheduled for completion prior to the empirical
+evaluation reported in Chapter~\ref{ch:evaluation}; timestamps will be
+updated upon completion. The collection protocol was executed through the
+GitHub REST and GraphQL APIs~\cite{github2023api}, with Jira data
+sourced from Montgomery et al.~\cite{montgomery2022jira} for the subset
+of projects described in Step~4 of
+Section~\ref{sec:selection-process}. The following artifacts were
+extracted per repository:
+
+\begin{itemize}
+    \item \textbf{Git commit history.} Full commit log including hash,
+    author, committer, timestamps, message, and file change statistics
+    (additions, deletions, files changed), retrieved via the
+    \texttt{/repos/\{owner\}/\{repo\}/commits} endpoint with pagination.
+
+    \item \textbf{Issue data.} Complete issue lifecycle including
+    creation, state transitions via the timeline events API
+    (\texttt{/repos/\{owner\}/\{repo\}/issues/\{number\}/timeline}),
+    labels, assignees, milestones, and closure events. For Apache and
+    Spring projects, this component was replaced by the Jira transition
+    history as described above.
+
+    \item \textbf{Pull request data.} PR creation, review requests,
+    review decisions, status check runs, merge events, and linked issue
+    references, retrieved via the GraphQL API to minimise request volume.
+
+    \item \textbf{CI/CD data.} GitHub Actions workflow runs including
+    trigger event type, status, conclusion, and duration, retrieved via
+    the \texttt{/repos/\{owner\}/\{repo\}/actions/runs} endpoint. Only
+    repositories with at least 50 recorded workflow runs were classified
+    as \textit{Advanced} workflow maturity in
+    Table~\ref{tab:dataset-diversity}.
+\end{itemize}
+
+All data was collected in JSON format and stored in a normalised
+relational schema (PostgreSQL) for efficient querying during event log
+construction in Stage~1 of the PATHCAST pipeline.
+
+
+\subsection{Dataset Descriptive Statistics}
+\label{sec:dataset-stats}
+
+The dataset construction strategy balances statistical power, process observability, and diversity, ensuring both internal validity for stochastic modeling and external validity for generalization across different SDLC contexts.
+
+Table~\ref{tab:dataset-summary} presents aggregate statistics for the 
+48-repository dataset.
+
+\begin{table}[htbp]
+\centering
+\caption{Aggregate dataset statistics (48 repositories).}
+\label{tab:dataset-summary}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Metric} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
+\midrule
+Commits & 227{,}000 & 4{,}729 & 3{,}215 & -- \\
+Closed issues & -- & -- & -- & -- \\
+Pull requests & -- & -- & -- & -- \\
+Contributors & -- & -- & -- & -- \\
+Activity span (months) & -- & -- & -- & -- \\
+\bottomrule
+\multicolumn{5}{l}{\parbox{13cm}{\footnotesize Note: Cells marked ``--'' are
+    populated upon completion of data collection
+    (Chapter~\ref{ch:evaluation}). Of the 48 planned repositories,
+    45 have been confirmed at the time of writing; three slots remain
+    pending stratified selection (Step~3,
+    Section~\ref{sec:selection-process}). The 227K commits figure
+    is confirmed from the SEART candidate-generation phase.}}
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:dataset-diversity} characterizes the diversity of the 
+dataset across dimensions relevant to generalizability.
+
+\begin{table}[htbp]
+\centering
+\caption{Dataset diversity profile.}
+\label{tab:dataset-diversity}
+\begin{tabular}{ll}
+\toprule
+\textbf{Dimension} & \textbf{Coverage} \\
+\midrule
+Primary languages & Python, JavaScript/TypeScript, Java, Go, Rust, C/C++ \\
+Domain categories & Web frameworks, CLI tools, libraries, DevOps, data processing \\
+Project scale & Small ($<$5K commits), Medium (5K--20K), Large ($>$20K) \\
+Governance model & Foundation-backed, corporate-backed, community-driven \\
+Workflow maturity & Basic (issues only), Standard (issues + PRs), Advanced (+ CI/CD) \\
+Issue source       & \parbox[t]{7.5cm}{GitHub Issues only, Jira
+                     (Apache/Spring enrichment via
+                     \cite{montgomery2022jira})} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Of the 48 planned repositories, 45 have been confirmed at the time of
+writing. The three remaining slots will be filled upon completion of the
+stratified selection described in Step~3 of
+Section~\ref{sec:selection-process}, prioritising languages or governance
+models with fewer than three current representatives. All statistical
+analyses reported in Chapter~\ref{ch:evaluation} are based on the final
+48-repository dataset; any deviation from this target will be declared
+as a limitation in Section~\ref{sec:threats-external}.
+
+The dataset is intentionally heterogeneous to support generalisability
+claims. The diversity across languages, domains, scales, and governance
+models enables the evaluation to assess whether the proposed method 
+generalizes beyond specific project types.
+
+
+\subsection{Ethical Considerations}
+\label{sec:ethics}
+
+All data used in this research is publicly available on GitHub under 
+open-source licenses. No private repositories, proprietary data, or 
+personally identifiable information beyond publicly visible GitHub 
+usernames are used. The research complies with the GitHub Terms of Service 
+for API usage and does not involve human subjects.
+
+
+% =============================================================================
+% 5.3 EXPERIMENTAL DESIGN
+% =============================================================================
+\section{Experimental Design}
+\label{sec:eval-design}
+
+The evaluation is structured into two complementary stages, each 
+addressing specific research questions. Figure~\ref{fig:eval-design} 
+illustrates the experimental design.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    stage/.style={rectangle, draw, thick, rounded corners=4pt, 
+                  minimum width=5cm, minimum height=1.4cm, 
+                  align=center, font=\small},
+    rq/.style={rectangle, draw, dashed, rounded corners=2pt,
+               minimum width=2.2cm, minimum height=0.8cm,
+               align=center, font=\scriptsize, fill=gray!5},
+    arrow/.style={->, thick, >=stealth},
+    brace/.style={decorate, decoration={brace, amplitude=8pt, mirror}}
+]
+    % E1
+    \node[stage, fill=blue!10] (e1) {
+        \textbf{E1: Pipeline Validation}\\
+        {\scriptsize Event log quality + Process model quality}
+    };
+    \node[rq, right=1cm of e1] (rq1) {RQ1};
+    \draw[arrow] (e1) -- (rq1);
+    
+    % E2
+    \node[stage, fill=orange!10, below=1.5cm of e1] (e2) {
+        \textbf{E2: Forecasting Accuracy}\\
+        {\scriptsize Stochastic forecasts + ML comparison}
+    };
+    \node[rq, right=1cm of e2, yshift=0.4cm] (rq2) {RQ2};
+    \node[rq, right=1cm of e2, yshift=-0.4cm] (rq3) {RQ3};
+    \draw[arrow] (e2) -- (rq2);
+    \draw[arrow] (e2) -- (rq3);
+    
+    % Flow
+    \draw[arrow] (e1) -- (e2) node[midway, right, font=\scriptsize] 
+        {Validated event logs};
+    
+    % Dataset
+    \node[rectangle, draw, fill=green!8, rounded corners=2pt, 
+          minimum width=3cm, font=\scriptsize, align=center,
+          left=1.5cm of e1, yshift=-0.75cm] (data) {
+        48 Repositories\\227K commits\\Dataset $\mathcal{R}$
+    };
+    \draw[arrow] (data) |- (e1);
+    \draw[arrow] (data) |- (e2);
+    
+\end{tikzpicture}
+\caption{Experimental design: two evaluation stages addressing three 
+research questions.}
+\label{fig:eval-design}
+\end{figure}
+
+
+\subsection{E1: Pipeline Validation}
+\label{sec:e1-design}
+
+E1 ensures that subsequent stochastic modelling is not performed on
+low-quality process representations, thereby mitigating error propagation
+across pipeline stages.
+
+The first evaluation stage assesses whether the PATHCAST pipeline 
+(Stages 1 and 2) produces event logs and process models of sufficient 
+quality to support stochastic modeling. This stage addresses \textbf{RQ1}.
+
+\subsubsection{Scope}
+
+E1 executes Stages 1 and 2 of the pipeline on all 48 repositories 
+and evaluates the outputs:
+
+\begin{enumerate}
+    \item \textbf{Event log quality:} Measured by correlation coverage 
+    (fraction of raw events successfully assigned to cases), activity 
+    coverage (fraction of the SDLC taxonomy represented in the log), 
+    and trace completeness (fraction of cases reaching an absorbing 
+    state).
+    
+    \item \textbf{Process model quality:} Measured by fitness, precision, 
+    and generalization of the discovered models, using the alignment-based 
+    conformance checking described in Section~\ref{sec:s2-conformance}.
+\end{enumerate}
+
+\subsubsection{Protocol}
+
+For each repository $r_i \in \mathcal{R}$:
+
+\begin{enumerate}
+    \item Execute Stage 1 (Event Log Construction) with the default 
+    correlation configuration.
+    
+    \item Compute event log quality metrics 
+    (Definition~\ref{def:log-quality}).
+    
+    \item Execute Stage 2 (Process Mining) with the Inductive Miner 
+    Infrequent variant at noise threshold $\theta_{\text{noise}} = 0.2$.
+    
+    \item Compute process model quality metrics (fitness, precision, 
+    generalization).
+    
+    \item Record the number of unique process variants and the state
+    space $|S|$ for downstream Markov estimation.
+
+    \item Flag state-transition pairs with fewer than 30 observed
+    transitions. These pairs receive Laplace additive smoothing
+    ($\alpha = 1$) during Markov estimation
+    (Section~\ref{sec:s3-mle}), ensuring that the transition
+    matrix $\hat{P}$ remains fully defined even for infrequently
+    observed transitions. The count of smoothed pairs is reported
+    per repository as a data-quality indicator.
+\end{enumerate}
+
+\subsubsection{Sensitivity Analysis}
+
+The noise threshold $\theta_{\text{noise}}$ is varied over the range 
+$\{0.0, 0.1, 0.2, 0.3, 0.5\}$ on a representative subset of 10 
+repositories to assess the sensitivity of discovery quality to this 
+parameter. The analysis reports the Pareto front of fitness versus 
+precision, identifying the threshold that best balances both objectives.
+
+\subsubsection{Acceptance Criteria}
+
+A repository is considered suitable for stochastic modeling (Stage 3) 
+if its event log and process model satisfy:
+
+\begin{equation}
+\label{eq:acceptance}
+\text{fitness}(\mathcal{L}, M) \geq 0.7 \;\wedge\;
+\text{coverage}(\mathcal{L}) \geq 0.5 \;\wedge\;
+|S_T| \geq 2 \;\wedge\;
+|\mathcal{L}_{\text{test}}| \geq 50
+\end{equation}
+
+The fourth condition, $|\mathcal{L}_{\text{test}}| \geq 50$, requires
+that the temporal hold-out test set
+(Definition~\ref{def:temporal-holdout}) contains at least 50 completed
+cases. Below this threshold, empirical percentile estimates exhibit
+high variance and CRPS becomes unreliable~\cite{gneiting2007strictly}.
+Repositories that satisfy the first three conditions but fail the case
+count threshold are reported separately as \emph{process-quality
+validated but statistically insufficient for forecasting comparison};
+their E1 results are retained in full while they are excluded from E2
+only. Repositories failing any of the four criteria are excluded from
+E2 and reported separately, with analysis of the corresponding failure
+modes.
+
+
+\subsection{E2: Forecasting Accuracy}
+\label{sec:e2-design}
+
+The second evaluation stage assesses the accuracy and calibration of 
+the probabilistic forecasts produced by Stages 3 and 4, and evaluates 
+the predictive contribution of process-derived ML features. This stage 
+addresses \textbf{RQ2} and \textbf{RQ3}.
+
+\subsubsection{Scope}
+
+E2 operates on the repositories that passed all four acceptance
+criteria of E1, including the minimum test-set size of 50~completed
+cases (Equation~\ref{eq:acceptance}). Repositories excluded from E2
+for failing the case count threshold are listed in the replication
+package with their E1 quality metrics, ensuring full transparency
+about the effective sample size for each RQ. For each qualifying
+repository:
+
+\begin{enumerate}
+    \item Execute Stages 3 and 4 (Markov Estimation + Monte Carlo
+    Simulation) to produce probabilistic lead time forecasts.
+
+    \item Execute the ML component with three feature sets (PM-only,
+    MSR-only, Combined) to produce case-level outcome predictions.
+
+    \item Compare all forecasts against ground truth (observed lead
+    times and outcomes).
+\end{enumerate}
+
+\subsubsection{Temporal Hold-Out Protocol}
+\label{sec:temporal-holdout}
+
+To simulate realistic deployment conditions, where a model is trained 
+on historical data and used to forecast future outcomes, a temporal 
+hold-out split is applied:
+
+\begin{definition}[Temporal Hold-Out]
+\label{def:temporal-holdout}
+For each repository with event log $\mathcal{L}$ spanning the time 
+interval $[t_{\min}, t_{\max}]$:
+\begin{align}
+t_{\text{cut}} &= t_{\min} + 0.7 \cdot (t_{\max} - t_{\min}) 
+    \label{eq:cutoff} \\
+\mathcal{L}_{\text{train}} &= \{c \in \mathcal{L} : 
+    \max(\tau(\sigma_c)) \leq t_{\text{cut}}\} 
+    \label{eq:train-set} \\
+\mathcal{L}_{\text{test}} &= \{c \in \mathcal{L} : 
+    \min(\tau(\sigma_c)) > t_{\text{cut}}\} 
+    \label{eq:test-set}
+\end{align}
+
+The training set contains cases completed before the cutoff date. The 
+test set contains cases that started after the cutoff date, ensuring 
+no temporal overlap.
+\end{definition}
+
+The 70/30 split ratio is chosen as a standard convention in temporal 
+validation for software engineering prediction 
+tasks~\cite{tashman2000out}. Sensitivity to the split ratio is assessed 
+by repeating the evaluation with 60/40 and 80/20 splits on a 
+representative subset.
+
+\textbf{Model estimation:} The Markov transition matrix $P$, sojourn 
+distributions $\hat{F}$, and ML models are estimated exclusively from 
+$\mathcal{L}_{\text{train}}$.
+
+\textbf{Forecast evaluation:} Forecasts are generated for each case 
+$c \in \mathcal{L}_{\text{test}}$ and compared against the observed 
+lead time $T_c^{\text{obs}}$ and outcome $y_c^{\text{obs}}$.
+
+
+\subsubsection{Cross-Repository Generalization}
+\label{sec:cross-repo}
+
+To assess whether the method generalizes across projects, a
+leave-one-project-out (LOPO) evaluation is conducted on subsets of
+repositories within the same domain (e.g., all Python web frameworks):
+
+\begin{enumerate}
+    \item Train the Markov model and ML predictor on $k-1$ repositories.
+    \item Generate forecasts for the held-out repository.
+    \item Repeat for each repository in the group.
+\end{enumerate}
+
+\noindent\textbf{Minimum group size.} The LOPO protocol requires at
+least five repositories per domain group to produce a meaningful
+leave-one-out sample. Groups with fewer than five repositories are
+excluded from LOPO inference and reported with descriptive statistics
+only. With the current dataset composition, Python web frameworks
+(Django, Flask, FastAPI, Requests, Click~=~5) and Go DevOps tools
+(kubectl, Helm, Terraform, Prometheus, cli~=~5) satisfy this
+requirement; other domain groups are reported descriptively.
+
+This protocol tests the transferability of transition patterns across
+projects with similar development cultures.
+
+
+%============================================================
+% Section 5.4  Evaluation Metrics
+% ============================================================
+
+\section{Evaluation Metrics}
+\label{sec:evaluation-metrics}
+ 
+The experimental design ensures internal validity through temporal isolation,
+external validity through cross-project evaluation, and construct validity
+through multiple metrics.
+This section defines the metrics used to evaluate the proposed method,
+organized by research question.
+ 
+% ------------------------------------------------------------
+\subsection{Metrics for RQ1: Event Log and Process Model Quality}
+\label{sec:metrics-rq1}
+ 
+Answering RQ1 requires evaluating two distinct aspects of pipeline
+output: the quality of the constructed event log and the quality
+of the process model discovered from it.
+These two aspects are treated separately because degradation in
+event log quality propagates to the model and can obscure whether
+discovery failures stem from sparse data or from modeling
+limitations.
+Table~\ref{tab:metrics-rq1} summarizes the full metric set;
+the following paragraphs justify each choice.
+ 
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ1.}
+\label{tab:metrics-rq1}
+\small
+\begin{tabular}{@{}l l p{7.8cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Range} & \textbf{Definition} \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Event Log Quality}} \\[2pt]
+Correlation Coverage & $[0, 1]$ &
+  Fraction of raw events assigned to a case (Equation~4.15). \\[3pt]
+Activity Coverage    & $[0, 1]$ &
+  Fraction of SDLC taxonomy activities observed in the log
+  (Equation~4.22). \\[3pt]
+Trace Completeness   & $[0, 1]$ &
+  Fraction of cases reaching an absorbing state (Equation~4.20). \\[3pt]
+Mean Trace Length    & $\mathbb{R}^+$ &
+  Average number of events per trace (Equation~4.21). \\[3pt]
+Variant Count        & $\mathbb{N}$ &
+  Number of unique activity sequences (Equation~4.23). \\[4pt]
+\midrule
+\multicolumn{3}{@{}l}{\textit{Process Model Quality}} \\[2pt]
+Fitness              & $[0, 1]$ &
+  Alignment-based fitness (Equation~2.2). Higher is better. \\[3pt]
+Precision            & $[0, 1]$ &
+  Fraction of model-allowed behaviour observed in the log.
+  Higher is better. \\[3pt]
+Generalization       & $[0, 1]$ &
+  Degree to which the model captures the underlying process rather
+  than overfitting to the observed traces. Higher is better. \\
+\bottomrule
+\end{tabular}
+\end{table}
+ 
+\paragraph{Correlation Coverage.}
+Stage~1 of PATHCAST correlates raw events from heterogeneous sources
+(Git commits, issue tracker transitions, CI/CD runs) into unified
+case traces.
+Correlation Coverage measures the fraction of raw events that were
+successfully attributed to a case identifier.
+A low value indicates that the cascade correlation strategy failed to
+resolve a substantial portion of the raw data, either due to missing
+cross-references, incomplete issue keys in commit messages, or gaps in
+the CI/CD linkage.
+The metric provides a direct signal of Stage~1 output fidelity and is
+the first indicator of whether the pipeline can produce a usable log
+from a given repository.
+ 
+\paragraph{Activity Coverage.}
+Not all repositories exercise every SDLC phase defined in the reference
+taxonomy (Definition~\ref{def:activity-taxonomy}).
+Activity Coverage measures the proportion of taxonomy-defined activities
+that appear at least once in the constructed log.
+A repository that exercises few taxonomy activities will yield a
+Markov model with a sparse state space, reducing the generality of
+downstream forecasts.
+The metric thus contextualizes fitness and precision results: a high
+fitness on a log with low activity coverage may reflect an overly
+simple model rather than genuine predictive power.
+ 
+\paragraph{Trace Completeness.}
+A trace is complete if it reaches one of the designated absorbing
+states (Done or Cancelled).
+Incomplete traces correspond to work items that are still in progress
+at the time of data collection, or whose final state could not be
+determined from the available sources.
+Trace Completeness directly bounds the size of the training set
+available for Markov estimation and ML training, since only complete
+traces contribute to the supervised learning protocol
+(Section~\ref{sec:temporal-holdout}).
+Repositories with low Trace Completeness are flagged and excluded
+from the comparison analysis if the count of complete cases falls
+below the minimum threshold $n_{\min}^{\text{cases}} = 50$.
+ 
+\paragraph{Mean Trace Length and Variant Count.}
+These two metrics characterize the structural complexity of the
+discovered process.
+Mean Trace Length indicates the average number of observed state
+transitions per case and serves as a proxy for process depth: shallow
+processes generate short traces that provide limited evidence for
+Markov estimation, whereas deep processes may indicate fragmented
+correlation strategies that split single work items into many events.
+Variant Count enumerates the distinct activity sequences observed
+across all traces.
+A high variant count relative to the number of traces signals process
+diversity or noise in activity labeling, both of which affect the
+reliability of the discovered process model.
+Together, these two metrics inform the interpretation of fitness and
+precision results reported in Evaluation Stage~E1.
+ 
+\paragraph{Process Model Quality: Fitness, Precision, and Generalization.}
+Once the event log passes the quality threshold, the process model
+discovered by the Inductive Miner is evaluated on three
+complementary dimensions.
+Fitness, computed via alignment-based conformance checking
+(Equation~2.2), measures the extent to which the model
+can replay the observed traces without deviations.
+A fitness value close to~1 indicates that the model accounts for the
+full behavioral repertoire present in the log.
+Precision penalizes the opposite failure mode: a model that allows
+many behaviors not present in the log is imprecise, even if it
+perfectly replays all observed traces.
+Overly imprecise models produce permissive Markov transition matrices
+that inflate forecast uncertainty by assigning probability mass to
+transitions that never occur in practice.
+Generalization assesses whether the model captures the underlying
+process rather than overfitting the specific traces in the log.
+A model with high fitness and high precision but low generalization
+has memorized the training traces; it will perform poorly on new cases
+that follow legitimate but previously unobserved paths.
+ 
+The combination of fitness, precision, and generalization provides a
+balanced assessment consistent with the four-quality-dimension
+framework of van der Aalst~\cite{aalst2016process}, which
+additionally includes simplicity as a fourth dimension.
+Simplicity is not reported as a primary metric in this evaluation
+because the state space is constrained by the SDLC taxonomy
+(Section~\ref{sec:s1-mapping}), limiting model complexity by
+construction.
+ 
+% ------------------------------------------------------------
+\subsection{Metrics for RQ2: Stochastic Forecasting Accuracy}
+\label{sec:metrics-rq2}
+ 
+Evaluating probabilistic forecasts requires metrics that assess both
+point accuracy and distributional calibration.
+Table~\ref{tab:metrics-rq2} lists the full metric set for RQ2.
+ 
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ2.}
+\label{tab:metrics-rq2}
+\small
+\begin{tabular}{@{}l l p{7.2cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Type} & \textbf{Definition} \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Point Forecast Accuracy}} \\[2pt]
+MAE  & Error &
+  $\dfrac{1}{n}\displaystyle\sum_c
+    \lvert T_c^{\text{obs}} - \hat{T}_c^{\text{P50}} \rvert$ \\[8pt]
+MAPE & Error (\%) &
+  $\dfrac{100}{n}\displaystyle\sum_c
+    \dfrac{\lvert T_c^{\text{obs}} - \hat{T}_c^{\text{P50}} \rvert}
+          {T_c^{\text{obs}}}$ \\[8pt]
+MdAE & Error &
+  $\operatorname{median}
+    \!\left(\lvert T_c^{\text{obs}} - \hat{T}_c^{\text{P50}} \rvert\right)$ \\[6pt]
+\midrule
+\multicolumn{3}{@{}l}{\textit{Distributional Accuracy}} \\[2pt]
+CRPS & Score &
+  $\dfrac{1}{n}\displaystyle\sum_c
+    \int_{-\infty}^{\infty}
+    \!\left[\hat{F}_c(t) - \mathbf{1}(t \geq T_c^{\text{obs}})\right]^2
+    \mathrm{d}t$ \\[10pt]
+Calibration Error & Error &
+  $\mathrm{ACE} =
+    \dfrac{1}{9}\displaystyle\sum_{\alpha \in \{0.1,\ldots,0.9\}}
+    \lvert \hat{p}_\alpha - \alpha \rvert$ \\[8pt]
+Coverage (85\%)   & $[0,1]$ &
+  Fraction of $T_c^{\text{obs}}$ inside
+  $[\hat{Q}_{0.075},\,\hat{Q}_{0.925}]$. \\[4pt]
+\midrule
+\multicolumn{3}{@{}l}{\textit{Outcome Prediction}} \\[2pt]
+Completion Accuracy & $[0,1]$ &
+  Accuracy of predicting Done vs.\ Cancelled outcome. \\
+\bottomrule
+\end{tabular}
+\end{table}
+ 
+\paragraph{CRPS.}
+The Continuous Ranked Probability Score (CRPS) is the primary metric
+for RQ2.
+Unlike MAE, which evaluates only the point forecast (P50), CRPS
+evaluates the entire predicted distribution, penalizing both
+inaccuracy and overconfidence.
+A lower CRPS indicates a better probabilistic forecast.
+CRPS reduces to MAE when the forecast degenerates to a point estimate,
+preserving comparability with deterministic baselines
+\cite{gneiting2007strictly}.
+This property makes CRPS the preferred metric whenever both point and
+distributional forecasts are compared in the same study.
+ 
+\paragraph{Point Forecast Metrics: MAE, MAPE, and MdAE.}
+Although CRPS subsumes MAE as a special case, reporting MAE and MAPE
+separately enables direct comparison with prior software effort
+estimation studies that use only point forecasts.
+MAE is reported in calendar days and represents the average absolute
+deviation between the P50 forecast and the observed lead time.
+MAPE expresses the same deviation as a percentage of the observed
+value, facilitating comparisons across repositories with different
+characteristic lead-time scales.
+MdAE complements MAE by providing a robust central tendency estimate
+that is less sensitive to outliers, which are common in software
+lead-time distributions due to blocked or deprioritized work items.
+ 
+\paragraph{Calibration Error.}
+Calibration Error assesses whether the predicted percentiles match
+observed frequencies.
+A well-calibrated forecast at the 85th percentile should contain
+approximately 85\% of observed values below that threshold.
+Aggregate Calibration Error (ACE) averages the absolute deviation
+across nine decile checkpoints, from $\alpha = 0.1$ to
+$\alpha = 0.9$:
+\begin{equation}
+  \mathrm{ACE} = \frac{1}{9}
+    \sum_{\alpha \in \{0.1, 0.2, \ldots, 0.9\}}
+    \lvert \hat{p}_\alpha - \alpha \rvert
+\end{equation}
+An ACE of zero denotes perfect calibration; values above 0.1 indicate
+systematic over- or underconfidence.
+ACE is reported alongside CRPS in all experiments because a forecast
+can achieve a low CRPS while remaining miscalibrated if the
+distributional shape is correct but the percentile coverage is
+skewed.
+ 
+\paragraph{Coverage at 85\%.}
+The 85th-percentile interval $[\hat{Q}_{0.075},\,\hat{Q}_{0.925}]$
+is the standard agile commitment interval recommended by Vacanti
+\cite{vacanti2015}.
+Coverage at 85\% is a single-interval calibration check that
+practitioners can relate directly to delivery commitments: if the
+method claims that 85\% of work items complete within a given
+window, empirical coverage should approximate that claim.
+This metric complements ACE by focusing on the single interval most
+relevant to operational planning, rather than aggregating across
+all deciles.
+ 
+\paragraph{Completion Accuracy.}
+In addition to lead-time forecasts, PATHCAST predicts whether a work
+item will reach Done or Cancelled (Definition~\ref{def:label}).
+Completion Accuracy measures the proportion of cases for which the
+predicted terminal outcome matches the observed outcome.
+This metric is relevant when decision-makers need to estimate scope at
+risk, that is, the fraction of planned work items that will not
+complete successfully.
+ 
+% ------------------------------------------------------------
+\subsection{Metrics for RQ3: ML Feature Comparison}
+\label{sec:metrics-rq3}
+ 
+RQ3 asks whether process-derived features add predictive value
+beyond traditional repository metrics.
+Answering this question requires classification metrics that
+assess both discrimination and calibration, as well as an
+interpretable feature-ranking mechanism.
+Table~\ref{tab:metrics-rq3} defines the metric set.
+ 
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ3.}
+\label{tab:metrics-rq3}
+\small
+\begin{tabular}{@{}l l p{7.4cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Type} & \textbf{Definition} \\
+\midrule
+AUC-ROC &
+  Discrimination &
+  Area under the Receiver Operating Characteristic (ROC) curve.
+  Threshold-independent discrimination between delayed and
+  on-time outcomes. \\[4pt]
+F1-Score &
+  Balance &
+  $2 \cdot \dfrac{\text{Precision} \cdot \text{Recall}}
+                  {\text{Precision} + \text{Recall}}$
+  Computed at the threshold maximising the harmonic mean on the
+  validation set. \\[8pt]
+Brier Score &
+  Calibration &
+  $\dfrac{1}{n}\displaystyle\sum_c (\hat{p}_c - y_c)^2$.
+  Lower is better. Assesses probability calibration quality. \\[6pt]
+Feature Importance &
+  Ranking &
+  Permutation importance (primary) and Gini importance from
+  tree-based models (RF, XGBoost). \\
+\bottomrule
+\end{tabular}
+\end{table}
+ 
+\paragraph{AUC-ROC.}
+The Area Under the Receiver Operating Characteristic Curve (AUC-ROC)
+is the primary discrimination metric for the binary outcome predictor
+(on-time vs.\ delayed, as defined in
+Definition~\ref{def:label}).
+AUC-ROC is threshold-independent: it evaluates the model's ability
+to rank positive instances above negative ones across all possible
+classification thresholds, making it robust to the class imbalance
+that commonly arises when a small fraction of work items is
+categorized as delayed under a given threshold strategy.
+A value of 0.5 corresponds to random classification; a value of 1.0
+denotes perfect discrimination.
+ 
+\paragraph{F1-Score.}
+F1-Score provides a threshold-dependent complement to AUC-ROC.
+Because the cost of missing a delayed item typically exceeds the
+cost of a false alarm in practice, the F1-Score is computed at the
+threshold that maximizes the harmonic mean of precision and recall
+on the validation set.
+This threshold is then applied to the test set without adjustment,
+preserving the temporal integrity of the evaluation.
+ 
+\paragraph{Brier Score.}
+The Brier Score evaluates the calibration of the probabilistic
+classifier, measuring the mean squared deviation between the
+predicted delay probability $\hat{p}_c$ and the binary outcome
+label $y_c$.
+A Brier Score of zero indicates perfect calibration; the Brier Score
+for a random classifier equals the outcome class frequency times one
+minus that frequency.
+Reporting the Brier Score alongside AUC-ROC distinguishes models
+that correctly rank cases from models that additionally produce
+reliable probability estimates, a distinction relevant to risk-based
+portfolio management.
+ 
+\paragraph{Feature Importance.}
+Feature importance rankings determine the relative contribution of
+each feature group (process-derived vs.\ traditional MSR) to
+predictive performance.
+For tree-based models (Random Forest and XGBoost), both Gini
+importance and permutation importance are computed; permutation
+importance is reported as the primary ranking because it is
+invariant to the scale and cardinality of individual features.
+For Logistic Regression, coefficients are standardized before
+reporting.
+ 
+The three feature sets defined in Section~\ref{sec:ml-feature-eng}
+are compared:
+\begin{enumerate}
+  \item \textbf{PM-only}: Features~1--8 (process-derived).
+  \item \textbf{MSR-only}: Features~9--15 (traditional repository metrics).
+  \item \textbf{Combined}: Features~1--15 (all features).
+\end{enumerate}
+A statistically meaningful improvement of PM-only over MSR-only, or
+of Combined over MSR-only, would demonstrate that process
+mining-derived features carry predictive information not captured by
+traditional metrics, answering RQ3 affirmatively.
+The Wilcoxon signed-rank test is applied across the 48 repositories
+to assess statistical significance; effect size is quantified with
+Cliff's~$\delta$ following Kampenes et al.\
+\cite{kampenes2007systematic}.
+% =============================================================================
+% 5.5 BASELINES
+% =============================================================================
+\section{Baseline Methods}
+\label{sec:baselines}
+
+The proposed process-aware Monte Carlo method is compared against four baselines, each representing a distinct level of process awareness, and this baseline hierarchy enables controlled ablation of the modeling components, isolating the contribution of process awareness, stochastic simulation, and distributional forecasting.
+
+\begin{table}[htbp]
+\centering
+\caption{Baseline methods for comparison.}
+\label{tab:baselines}
+\small
+\begin{tabular}{lp{4cm}p{5cm}}
+\toprule
+\textbf{Baseline} & \textbf{Description} & \textbf{Rationale} \\
+\midrule
+B1: Historical Mean & 
+    Point forecast: mean lead time of completed cases in 
+    $\mathcal{L}_{\text{train}}$. & 
+    Na\"ive baseline. Any reasonable method should outperform this. \\
+\midrule
+B2: Throughput MC & 
+    Throughput-based Monte Carlo 
+    simulation~\cite{vacanti2015, savage2009flaw,magennis2015forecasting}. Samples daily 
+    throughput from historical data. & 
+    State-of-practice in agile forecasting. Black-box: no 
+    process structure. \\
+\midrule
+B3: Markov Analytical & 
+    Expected lead time from the fundamental matrix: 
+    $\mathbb{E}[\text{LT}] = \sum_j N_{ij} \cdot \bar{d}_j$. & 
+    Process-aware but deterministic (point estimate only). 
+    Tests the marginal value of Monte Carlo simulation over 
+    analytical computation. \\
+\midrule
+B4: Historical Distribution & 
+    Empirical CDF of lead times from 
+    $\mathcal{L}_{\text{train}}$. No modeling; direct 
+    resampling from observed lead times. & 
+    Distributional baseline. Tests whether the stochastic model 
+    adds value beyond empirical resampling. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The baselines are ordered by increasing sophistication: B1 (no model), 
+B4 (empirical distribution), B2 (stochastic, no process structure), 
+B3 (process-aware, no simulation), and the proposed method (process-aware 
+stochastic simulation). If the proposed method outperforms B2, the 
+value of process awareness is demonstrated. If it outperforms B3, the 
+value of distributional forecasts over point estimates is demonstrated. 
+If it outperforms B4, the value of the stochastic process model over 
+na\"ive resampling is demonstrated.
+
+
+% =============================================================================
+% 5.6 STATISTICAL ANALYSIS
+% =============================================================================
+\section{Statistical Analysis Procedures}
+\label{sec:statistical-analysis}
+
+\subsection{Within-Repository Comparison}
+\label{sec:within-repo}
+
+For each repository, the proposed method and each baseline produce 
+forecasts for the same set of test cases $\mathcal{L}_{\text{test}}$. 
+The comparison uses paired statistical tests because the same cases are 
+evaluated across methods.
+
+\textbf{Normality assessment:} The Shapiro-Wilk test is applied to the 
+distribution of per-case error differences between the proposed method 
+and each baseline. If normality holds ($p > 0.05$), a paired $t$-test 
+is used. Otherwise, the Wilcoxon signed-rank test is applied.
+
+\textbf{Effect size:} Cohen's $d$ (for parametric comparisons) or 
+Cliff's $\delta$ (for non-parametric comparisons) is reported alongside 
+$p$-values, following the recommendations of 
+Kampenes et al.~\cite{kampenes2007systematic} for empirical software 
+engineering studies.
+
+Statistical significance is complemented by the analysis of effect size, allowing one to distinguish the practical relevance of differences that are merely statistical.
+
+\subsection{Cross-Repository Aggregation}
+\label{sec:cross-repo-stats}
+
+To aggregate results across the 48 repositories, the following approach 
+is adopted:
+
+\begin{enumerate}
+    \item For each repository $r_i$, compute the per-repository metric 
+    (e.g., CRPS) for the proposed method and each baseline.
+    
+    \item Treat the 48 per-repository metric values as paired samples 
+    (one pair per repository, proposed vs. baseline).
+    
+    \item Apply the Wilcoxon signed-rank test across repositories to 
+    assess whether the proposed method outperforms each baseline 
+    consistently.
+    
+    \item Report the median improvement and interquartile range across 
+    repositories.
+\end{enumerate}
+
+\textbf{Multiple comparison correction:} Because the proposed method is 
+compared against four baselines, the Bonferroni correction is applied, 
+adjusting the significance level to $\alpha_{\text{adj}} = 0.05 / 4 = 0.0125$.
+
+
+\subsection{Statistical Power Analysis}
+\label{sec:power-analysis}
+
+The adequacy of the 48-repository dataset for the planned statistical
+comparisons is assessed through an a priori power analysis following
+the recommendations of Kampenes et al.~\cite{kampenes2007systematic}
+for empirical software engineering experiments.
+
+\textbf{RQ2 and RQ3 — Cross-repository comparison (Wilcoxon
+signed-rank, $n = 48$).}
+The primary statistical test uses 48 paired per-repository observations
+(proposed method vs.\ each baseline). Under the Bonferroni-adjusted
+significance level $\alpha_{\text{adj}} = 0.05 / 4 = 0.0125$, the
+achieved power for a medium effect size ($r = 0.3$) is
+$1 - \beta \approx 0.72$, and for a large effect ($r = 0.5$) it
+exceeds 0.97. The expected effect sizes are informed by Rogge-Solti
+and Weske~\cite{RoggeSolti2015NonMarkovianSPN}, who reported large
+differences between stochastic process-aware models and exponential
+baselines on comparable BPM datasets. Power is computed via:
+
+\begin{equation}
+\label{eq:power}
+1 - \beta =
+P\!\left(Z > z_{\alpha/2} - r\sqrt{n-1}\right) +
+P\!\left(Z < -z_{\alpha/2} - r\sqrt{n-1}\right)
+\end{equation}
+
+\noindent where $Z \sim \mathcal{N}(0,1)$, $r$ is the point-biserial
+effect size, $n = 48$, and $z_{\alpha/2} = z_{0.00625} \approx 2.50$
+(Bonferroni-adjusted). Table~\ref{tab:power-analysis} summarises power
+estimates across effect sizes.
+
+\begin{table}[htbp]
+\centering
+\caption{A priori power estimates for the cross-repository Wilcoxon
+  signed-rank test ($n = 48$, four baselines).}
+\label{tab:power-analysis}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Effect size} & \textbf{$r$} &
+  \textbf{Power ($\alpha = 0.05$)} &
+  \textbf{Power ($\alpha_{\text{adj}} = 0.0125$)} \\
+\midrule
+Small            & 0.1 & 0.17 & 0.09 \\
+Small--medium    & 0.2 & 0.44 & 0.27 \\
+Medium           & 0.3 & 0.75 & 0.55 \\
+Medium--large    & 0.4 & 0.92 & 0.80 \\
+Large            & 0.5 & 0.98 & 0.94 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dataset is adequately powered for medium to large effects at the
+adjusted significance level. Low power for small effects ($r \leq 0.2$)
+is an accepted limitation: the research hypotheses concern practically
+meaningful improvements over process-blind baselines, which require
+medium or large effect sizes to be scientifically credible.
+
+\textbf{RQ3 — ML within-repository comparison.}
+For the repositories satisfying
+$|\mathcal{L}_{\text{test}}| \geq 50$, the median expected test-set
+size is approximately 80--120 cases, based on the confirmed 227K
+commits and a conservative issue-to-commit ratio of~1:4. This is
+sufficient for reliable AUC-ROC estimation, which stabilises above
+$n \approx 50$ for approximately balanced
+datasets~\cite{hanley1982meaning}. Repositories near the threshold are
+reported with individual confidence intervals.
+
+
+\subsection{Reporting Standards}
+\label{sec:reporting}
+The aggregation strategy ensures robustness to the heterogeneity of the projects, while at the same time preserving statistical power through paired comparisons.
+
+All results are reported following the guidelines of 
+Wohlin et al.~\cite{wohlin2012experimentation} for controlled 
+experiments in software engineering:
+
+\begin{itemize}
+    \item Descriptive statistics: median, IQR, and box plots 
+    (preferred over mean and standard deviation for potentially 
+    skewed distributions).
+    
+    \item Statistical tests: test name, test statistic, $p$-value, 
+    and effect size for every comparison.
+    
+    \item Confidence intervals: 95\% confidence intervals for all 
+    aggregate metrics.
+    
+    \item Visualization: calibration plots (predicted vs. observed 
+    quantile coverage), CRPS comparison box plots, and feature 
+    importance rankings.
+\end{itemize}
+
+
+% =============================================================================
+% 5.7 THREATS TO VALIDITY
+% =============================================================================
+\section{Threats to Validity}
+\label{sec:threats}
+
+Following the classification of Wohlin et 
+al.~\cite{wohlin2012experimentation}, the threats to validity are 
+organized into four categories.
+
+
+\subsection{Internal Validity}
+\label{sec:threats-internal}
+
+\textbf{Temporal information leakage:} The most common threat in 
+predictive studies on software repositories is the use of future 
+information to predict past outcomes. This is mitigated by the strict 
+temporal hold-out protocol (Definition~\ref{def:temporal-holdout}), 
+which ensures that training and test sets are temporally disjoint with 
+no overlap.
+
+\textbf{Confounding by project phase:} A repository may exhibit 
+different process dynamics during early development versus maintenance 
+phases. The training set may capture one phase while the test set 
+captures another. This is partially mitigated by the 70/30 temporal 
+split, which provides a substantial training window, and by the 
+sensitivity analysis with alternative split ratios.
+
+\textbf{Case correlation errors:} Incorrect case correlation in Stage 1 
+may introduce noise into the event log, degrading downstream model 
+quality. This threat is mitigated by the correlation quality metrics 
+(Definition~\ref{def:corr-quality}) reported in E1, and by the cascade 
+strategy that prioritizes high-confidence explicit references over 
+heuristic matching.
+
+\textbf{Bot contamination:} Automated commits from bots (Dependabot, 
+Renovate) may distort process models if not filtered. The bot filtering 
+step in Stage 1 mitigates this threat, and a sensitivity analysis 
+compares results with and without bot filtering on a subset of 
+repositories.
+
+
+\subsection{External Validity}
+\label{sec:threats-external}
+
+\textbf{Open-source bias:} The dataset consists exclusively of 
+open-source repositories hosted on GitHub. Development practices, 
+governance models, and process maturity in open-source projects may 
+differ from proprietary industrial projects. The results should be 
+interpreted as evidence of feasibility and relative method performance 
+rather than as absolute forecasting accuracy applicable to all settings.
+
+\textbf{GitHub platform bias:} All repositories use GitHub as the 
+hosting platform. Workflows, PR conventions, and issue tracking 
+practices may differ on other platforms (GitLab, Bitbucket, Azure 
+DevOps). The event extraction framework (Stage 1) is designed with 
+pluggable source extractors to accommodate alternative platforms, 
+but this extensibility is not empirically validated in this thesis.
+
+\textbf{Language and domain bias:} Despite deliberate heterogeneity in 
+the dataset (Table~\ref{tab:dataset-diversity}), certain languages and 
+domains may be overrepresented. The cross-repository generalization 
+protocol (Section~\ref{sec:cross-repo}) partially addresses this by 
+testing transferability within and across domain groups.
+
+
+\subsection{Construct Validity}
+\label{sec:threats-construct}
+
+\textbf{Lead time definition:} Lead time is measured from the first 
+event in a case trace to the last event. This definition may not align 
+with organizational definitions of lead time (e.g., from customer 
+request to deployment). The choice is justified by data availability 
+(the first and last events are observable in all repositories) and 
+by consistency with the process mining-based measurement.
+
+\textbf{Delay threshold for ML labels:} The binary classification label 
+(on-time vs. delayed) depends on the threshold $\tau_{\text{threshold}}$ 
+(Definition~\ref{def:label}). Different thresholds produce different 
+class distributions and may affect ML performance. This threat is 
+mitigated by evaluating three threshold strategies (percentile-based, 
+SLA-based, relative) and reporting results for each.
+
+\textbf{Metric selection.} CRPS is chosen as the primary metric because
+it evaluates the entire predicted distribution rather than a single
+point estimate, consistent with the thesis hypothesis that distributional
+forecasts are more informative than point forecasts. To preserve
+comparability with point-forecast baselines, MAE is reported alongside
+CRPS in all comparisons.
+
+
+
+\subsection{Conclusion Validity}
+\label{sec:threats-conclusion}
+
+\textbf{Statistical power:} The number of test cases per repository
+varies across the dataset. Repositories near the minimum threshold
+($|\mathcal{L}_{\text{test}}| = 50$) produce per-repository CRPS and
+calibration estimates with higher variance than larger repositories.
+This threat is mitigated by three design choices: (i)~the minimum case
+count condition in Equation~\ref{eq:acceptance} excludes repositories
+with fewer than 50 test cases from E2; (ii)~the cross-repository
+aggregation treats each qualifying repository as a single paired
+observation, so the Wilcoxon signed-rank test operates on $n = 48$
+pairs, achieving power $1 - \beta \geq 0.72$ for medium effect sizes
+at $\alpha_{\text{adj}} = 0.0125$ (Section~\ref{sec:power-analysis},
+Table~\ref{tab:power-analysis}); and (iii)~per-repository results are
+reported with individual confidence intervals, enabling readers to
+assess reliability for each repository independently. The a priori
+analysis confirms that effect sizes consistent with those reported in
+comparable process-aware forecasting
+studies~\cite{RoggeSolti2015NonMarkovianSPN} are detectable with
+adequate power.
+
+\textbf{Multiple comparisons:} Comparing the proposed method against 
+four baselines on multiple metrics increases the risk of Type I errors. 
+The Bonferroni correction (Section~\ref{sec:cross-repo-stats}) 
+addresses this by adjusting the significance threshold.
+
+\textbf{Reproducibility:} To support reproducibility, the following 
+artifacts are made available: (i) the list of 48 repository identifiers
+and collection dates; (ii) the source code of the PATHCAST pipeline;
+(iii) the evaluation scripts; and (iv) the intermediate data files
+(event logs, transition matrices, simulation results). Raw repository
+data is not redistributed but can be independently re-collected via the
+GitHub REST API~\cite{github2023api} using the identifiers listed in
+Appendix~\ref{app:repository-list}.
+
+Although these threats cannot be completely eliminated, the combination
+of design choices, validation protocols, and sensitivity analyses ensures
+that their impact is systematically addressed and reported.
+
+
+% =============================================================================
+% 5.8 CHAPTER SUMMARY
+% =============================================================================
+\section{Chapter Summary}
+\label{sec:methodology-summary}
+
+This chapter presented the methodological framework for the empirical 
+evaluation of the PATHCAST method. Table~\ref{tab:methodology-summary} 
+synthesizes the mapping between research questions, evaluation stages, 
+metrics, and baselines.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary: research questions, evaluation stages, metrics, and baselines.}
+\label{tab:methodology-summary}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{RQ} & \textbf{Stage} & \textbf{Primary Metrics} & \textbf{Baselines} \\
+\midrule
+RQ1 & E1 & 
+    Fitness, precision, coverage & 
+    N/A (quality assessment) \\
+RQ2 & E2 & 
+    CRPS, calibration error, MAE & 
+    B1, B2, B3, B4 \\
+RQ3 & E2 & 
+    AUC-ROC, F1, Brier score & 
+    PM-only vs. MSR-only vs. Combined \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The evaluation is designed to answer three questions with increasing 
+specificity: Can the pipeline produce usable event logs and models from 
+real repositories? (E1, RQ1). Do process-aware stochastic forecasts 
+outperform process-blind baselines? (E2, RQ2). Do process-derived 
+features add predictive value beyond traditional metrics? (E2, RQ3).
+
+Taken together, these evaluation steps provide a comprehensive analysis of feasibility, predictive performance, and feature contribution, ensuring that the proposed method is validated both structurally and empirically.

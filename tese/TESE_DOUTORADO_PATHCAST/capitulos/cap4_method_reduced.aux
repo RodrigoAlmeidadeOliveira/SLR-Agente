@@ -1,0 +1,300 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}The Proposed Method: PATHCAST}{57}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:method}{{4}{57}{The Proposed Method: PATHCAST}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Architectural Overview}{57}{section.4.1}\protected@file@percent }
+\newlabel{sec:method-overview}{{4.1}{57}{Architectural Overview}{section.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Pipeline Definition}{57}{subsection.4.1.1}\protected@file@percent }
+\newlabel{sec:pipeline-def}{{4.1.1}{57}{Pipeline Definition}{subsection.4.1.1}{}}
+\newlabel{def:pipeline}{{4.1}{57}{PATHCAST Pipeline}{definition.4.1}{}}
+\newlabel{eq:pipeline}{{4.1}{57}{PATHCAST Pipeline}{equation.4.1}{}}
+\newlabel{eq:stage1-sig}{{4.2}{58}{PATHCAST Pipeline}{equation.4.2}{}}
+\newlabel{eq:stage2-sig}{{4.3}{58}{PATHCAST Pipeline}{equation.4.3}{}}
+\newlabel{eq:stage3-sig}{{4.4}{58}{PATHCAST Pipeline}{equation.4.4}{}}
+\newlabel{eq:stage4-sig}{{4.5}{58}{PATHCAST Pipeline}{equation.4.5}{}}
+\newlabel{eq:ml-sig}{{4.6}{58}{PATHCAST Pipeline}{equation.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Pipeline Architecture}{58}{subsection.4.1.2}\protected@file@percent }
+\newlabel{sec:pipeline-arch}{{4.1.2}{58}{Pipeline Architecture}{subsection.4.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Design Principles}{58}{subsection.4.1.3}\protected@file@percent }
+\newlabel{sec:design-principles}{{4.1.3}{58}{Design Principles}{subsection.4.1.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces PATHCAST pipeline architecture. Solid arrows indicate the primary sequential pipeline; dashed arrows indicate ML enhancement data flows.}}{59}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:pipeline-architecture}{{4.1}{59}{PATHCAST pipeline architecture. Solid arrows indicate the primary sequential pipeline; dashed arrows indicate ML enhancement data flows}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces PATHCAST component overview.}}{60}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:pathcast-architecture}{{4.2}{60}{PATHCAST component overview}{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Component View}{60}{subsection.4.1.4}\protected@file@percent }
+\newlabel{sec:spaf-overview}{{4.1.4}{60}{Component View}{subsection.4.1.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Stage Contracts}{60}{subsection.4.1.5}\protected@file@percent }
+\newlabel{sec:stage-contracts}{{4.1.5}{60}{Stage Contracts}{subsection.4.1.5}{}}
+\newlabel{def:contract-s1}{{4.2}{60}{Stage 1 Contract}{definition.4.2}{}}
+\newlabel{def:contract-s2}{{4.3}{61}{Stage 2 Contract}{definition.4.3}{}}
+\newlabel{def:contract-s3}{{4.4}{61}{Stage 3 Contract}{definition.4.4}{}}
+\newlabel{def:contract-s4}{{4.5}{61}{Stage 4 Contract}{definition.4.5}{}}
+\newlabel{def:contract-ml}{{4.6}{61}{ML Component Contract}{definition.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Stage 1: Event Log Construction}{61}{section.4.2}\protected@file@percent }
+\newlabel{sec:stage1}{{4.2}{61}{Stage 1: Event Log Construction}{section.4.2}{}}
+\newlabel{eq:s1-decomposition}{{4.7}{61}{Stage 1: Event Log Construction}{equation.4.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Event Extraction}{62}{subsection.4.2.1}\protected@file@percent }
+\newlabel{sec:s1-extraction}{{4.2.1}{62}{Event Extraction}{subsection.4.2.1}{}}
+\newlabel{def:raw-event}{{4.7}{62}{Raw Event}{definition.4.7}{}}
+\newlabel{def:extractors}{{4.8}{62}{Source Extractors}{definition.4.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Event extraction mapping per data source.}}{62}{table.caption.52}\protected@file@percent }
+\newlabel{tab:event-extraction}{{4.1}{62}{Event extraction mapping per data source}{table.caption.52}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Case Correlation}{62}{subsection.4.2.2}\protected@file@percent }
+\newlabel{sec:s1-correlation}{{4.2.2}{62}{Case Correlation}{subsection.4.2.2}{}}
+\newlabel{def:correlation}{{4.9}{62}{Case Correlation Function}{definition.4.9}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Case Correlation Cascade}}{63}{algorithm.1}\protected@file@percent }
+\newlabel{alg:correlation}{{1}{63}{Case Correlation Cascade}{algorithm.1}{}}
+\newlabel{eq:kappa1}{{4.12}{63}{Case Correlation}{equation.4.12}{}}
+\newlabel{def:corr-quality}{{4.10}{63}{Correlation Quality Metrics}{definition.4.10}{}}
+\newlabel{eq:corr-coverage}{{4.13}{63}{Correlation Quality Metrics}{equation.4.13}{}}
+\newlabel{eq:corr-ambiguity}{{4.14}{63}{Correlation Quality Metrics}{equation.4.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Activity Mapping}{63}{subsection.4.2.3}\protected@file@percent }
+\newlabel{sec:s1-mapping}{{4.2.3}{63}{Activity Mapping}{subsection.4.2.3}{}}
+\newlabel{def:activity-taxonomy}{{4.11}{63}{SDLC Activity Taxonomy}{definition.4.11}{}}
+\newlabel{eq:taxonomy}{{4.15}{63}{SDLC Activity Taxonomy}{equation.4.15}{}}
+\newlabel{def:activity-map}{{4.12}{64}{Activity Mapping Function}{definition.4.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Default activity mapping from source event types to SDLC taxonomy.}}{64}{table.caption.53}\protected@file@percent }
+\newlabel{tab:activity-mapping}{{4.2}{64}{Default activity mapping from source event types to SDLC taxonomy}{table.caption.53}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Event Log Formatting and Filtering}{64}{subsection.4.2.4}\protected@file@percent }
+\newlabel{sec:s1-formatting}{{4.2.4}{64}{Event Log Formatting and Filtering}{subsection.4.2.4}{}}
+\newlabel{def:structured-event}{{4.13}{64}{Structured Event}{definition.4.13}{}}
+\newlabel{eq:final-log}{{4.16}{64}{Event Log Formatting and Filtering}{equation.4.16}{}}
+\citation{leemans2013discovering}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}Log Quality Assessment}{65}{subsection.4.2.5}\protected@file@percent }
+\newlabel{sec:s1-quality}{{4.2.5}{65}{Log Quality Assessment}{subsection.4.2.5}{}}
+\newlabel{def:log-quality}{{4.14}{65}{Log Quality Metrics}{definition.4.14}{}}
+\newlabel{eq:log-completeness}{{4.17}{65}{Log Quality Metrics}{equation.4.17}{}}
+\newlabel{eq:trace-length}{{4.18}{65}{Log Quality Metrics}{equation.4.18}{}}
+\newlabel{eq:activity-coverage}{{4.19}{65}{Log Quality Metrics}{equation.4.19}{}}
+\newlabel{eq:variant-count}{{4.20}{65}{Log Quality Metrics}{equation.4.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Stage 2: Process Mining}{65}{section.4.3}\protected@file@percent }
+\newlabel{sec:stage2}{{4.3}{65}{Stage 2: Process Mining}{section.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Variant Entropy}{65}{subsection.4.3.1}\protected@file@percent }
+\newlabel{sec:variant-entropy}{{4.3.1}{65}{Variant Entropy}{subsection.4.3.1}{}}
+\newlabel{def:variant-entropy}{{4.15}{65}{Variant Entropy}{definition.4.15}{}}
+\newlabel{eq:variant-entropy}{{4.21}{65}{Variant Entropy}{equation.4.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Process Discovery}{65}{subsection.4.3.2}\protected@file@percent }
+\newlabel{sec:s2-discovery}{{4.3.2}{65}{Process Discovery}{subsection.4.3.2}{}}
+\newlabel{eq:discovery}{{4.22}{65}{Process Discovery}{equation.4.22}{}}
+\newlabel{prop:soundness}{{4.1}{65}{Soundness Guarantee}{property.4.1}{}}
+\citation{little2011factory}
+\citation{flyvbjerg2022empirical}
+\newlabel{prop:fitness}{{4.2}{66}{Perfect Fitness by Construction}{property.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Conformance Checking}{66}{subsection.4.3.3}\protected@file@percent }
+\newlabel{sec:s2-conformance}{{4.3.3}{66}{Conformance Checking}{subsection.4.3.3}{}}
+\newlabel{eq:conformance}{{4.23}{66}{Conformance Checking}{equation.4.23}{}}
+\newlabel{eq:case-conformance}{{4.24}{66}{Conformance Checking}{equation.4.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Performance Enhancement}{66}{subsection.4.3.4}\protected@file@percent }
+\newlabel{sec:s2-enhancement}{{4.3.4}{66}{Performance Enhancement}{subsection.4.3.4}{}}
+\newlabel{def:performance-metrics}{{4.16}{66}{Per-Activity Performance Metrics}{definition.4.16}{}}
+\newlabel{eq:mean-sojourn}{{4.25}{66}{Per-Activity Performance Metrics}{equation.4.25}{}}
+\newlabel{eq:var-sojourn}{{4.26}{66}{Per-Activity Performance Metrics}{equation.4.26}{}}
+\newlabel{eq:median-sojourn}{{4.27}{66}{Per-Activity Performance Metrics}{equation.4.27}{}}
+\newlabel{eq:waiting-time}{{4.28}{66}{Performance Enhancement}{equation.4.28}{}}
+\newlabel{eq:phi}{{4.29}{66}{Performance Enhancement}{equation.4.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}State Space Extraction}{66}{subsection.4.3.5}\protected@file@percent }
+\newlabel{sec:s2-states}{{4.3.5}{66}{State Space Extraction}{subsection.4.3.5}{}}
+\newlabel{def:state-space}{{4.17}{66}{SDLC State Space}{definition.4.17}{}}
+\citation{Spedicato2017}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Stage 3: Stochastic Modeling}{67}{section.4.4}\protected@file@percent }
+\newlabel{sec:stage3}{{4.4}{67}{Stage 3: Stochastic Modeling}{section.4.4}{}}
+\newlabel{rem:empirical-distributions}{{4.1}{67}{Empirical Distributions}{remark.4.1}{}}
+\newlabel{eq:s3-decomposition}{{4.30}{67}{Stage 3: Stochastic Modeling}{equation.4.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Transition Counting}{67}{subsection.4.4.1}\protected@file@percent }
+\newlabel{sec:s3-counting}{{4.4.1}{67}{Transition Counting}{subsection.4.4.1}{}}
+\newlabel{prop:count-consistency}{{4.3}{67}{Count Consistency}{property.4.3}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Transition Count Extraction}}{67}{algorithm.2}\protected@file@percent }
+\newlabel{alg:counting}{{2}{67}{Transition Count Extraction}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Maximum Likelihood Estimation}{67}{subsection.4.4.2}\protected@file@percent }
+\newlabel{sec:s3-mle}{{4.4.2}{67}{Maximum Likelihood Estimation}{subsection.4.4.2}{}}
+\newlabel{eq:mle-full}{{4.31}{67}{Maximum Likelihood Estimation}{equation.4.31}{}}
+\newlabel{prop:mle-consistency}{{4.4}{68}{MLE Consistency}{property.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Confidence Assessment}{68}{subsection.4.4.3}\protected@file@percent }
+\newlabel{sec:s3-confidence}{{4.4.3}{68}{Confidence Assessment}{subsection.4.4.3}{}}
+\newlabel{eq:se-transition}{{4.32}{68}{Confidence Assessment}{equation.4.32}{}}
+\newlabel{eq:ci-transition}{{4.33}{68}{Confidence Assessment}{equation.4.33}{}}
+\newlabel{eq:confidence-grade}{{4.34}{68}{Confidence Assessment}{equation.4.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Absorbing Chain Decomposition}{68}{subsection.4.4.4}\protected@file@percent }
+\newlabel{sec:s3-absorbing}{{4.4.4}{68}{Absorbing Chain Decomposition}{subsection.4.4.4}{}}
+\newlabel{eq:absorbing-decomposition}{{4.35}{68}{Absorbing Chain Decomposition}{equation.4.35}{}}
+\newlabel{eq:fundamental-computation}{{4.36}{68}{Absorbing Chain Decomposition}{equation.4.36}{}}
+\newlabel{eq:expected-steps}{{4.37}{68}{Absorbing Chain Decomposition}{equation.4.37}{}}
+\newlabel{eq:absorption-prob}{{4.38}{68}{Absorbing Chain Decomposition}{equation.4.38}{}}
+\newlabel{prop:invertibility}{{4.5}{68}{Invertibility}{property.4.5}{}}
+\newlabel{prop:absorption-certainty}{{4.6}{68}{Absorption Certainty}{property.4.6}{}}
+\newlabel{eq:expected-lead-time}{{4.39}{68}{Absorbing Chain Decomposition}{equation.4.39}{}}
+\citation{vacanti2015}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Empirical Sojourn Time Distributions}{69}{subsection.4.4.5}\protected@file@percent }
+\newlabel{sec:s3-sojourn}{{4.4.5}{69}{Empirical Sojourn Time Distributions}{subsection.4.4.5}{}}
+\newlabel{def:sojourn-distribution}{{4.18}{69}{Empirical Sojourn Distribution}{definition.4.18}{}}
+\newlabel{eq:sojourn-obs}{{4.40}{69}{Empirical Sojourn Distribution}{equation.4.40}{}}
+\newlabel{eq:ecdf}{{4.41}{69}{Empirical Sojourn Distribution}{equation.4.41}{}}
+\newlabel{rem:nonparametric}{{4.2}{69}{Non-Parametric Design Choice}{remark.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.6}Stationary Distribution and WIP Analysis}{69}{subsection.4.4.6}\protected@file@percent }
+\newlabel{sec:s3-stationary}{{4.4.6}{69}{Stationary Distribution and WIP Analysis}{subsection.4.4.6}{}}
+\newlabel{eq:quasi-stationary}{{4.42}{69}{Stationary Distribution and WIP Analysis}{equation.4.42}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.7}Rework Analysis}{69}{subsection.4.4.7}\protected@file@percent }
+\newlabel{sec:s3-rework}{{4.4.7}{69}{Rework Analysis}{subsection.4.4.7}{}}
+\newlabel{def:rework}{{4.19}{69}{Rework Intensity}{definition.4.19}{}}
+\newlabel{eq:rework-intensity}{{4.43}{69}{Rework Intensity}{equation.4.43}{}}
+\newlabel{eq:total-rework}{{4.44}{69}{Rework Intensity}{equation.4.44}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.8}Numerical Example}{69}{subsection.4.4.8}\protected@file@percent }
+\newlabel{sec:s3-example}{{4.4.8}{69}{Numerical Example}{subsection.4.4.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Stage 4: Monte Carlo Simulation}{70}{section.4.5}\protected@file@percent }
+\newlabel{sec:stage4}{{4.5}{70}{Stage 4: Monte Carlo Simulation}{section.4.5}{}}
+\newlabel{eq:forecast-distribution}{{4.45}{70}{Stage 4: Monte Carlo Simulation}{equation.4.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Simulation Algorithm}{70}{subsection.4.5.1}\protected@file@percent }
+\newlabel{sec:s4-algorithm}{{4.5.1}{70}{Simulation Algorithm}{subsection.4.5.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Process-Aware Monte Carlo Simulation}}{70}{algorithm.3}\protected@file@percent }
+\newlabel{alg:mc-full}{{3}{70}{Process-Aware Monte Carlo Simulation}{algorithm.3}{}}
+\citation{vacanti2015}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Forecast Extraction}{71}{subsection.4.5.2}\protected@file@percent }
+\newlabel{sec:s4-forecasts}{{4.5.2}{71}{Forecast Extraction}{subsection.4.5.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Percentile Forecasts}{71}{subsection.4.5.2}\protected@file@percent }
+\newlabel{def:percentile-forecast}{{4.20}{71}{Percentile Forecast}{definition.4.20}{}}
+\newlabel{eq:percentile}{{4.46}{71}{Percentile Forecast}{equation.4.46}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Completion Probability}{71}{equation.4.46}\protected@file@percent }
+\newlabel{eq:completion-prob}{{4.47}{71}{Completion Probability}{equation.4.47}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Tail Risk}{71}{equation.4.47}\protected@file@percent }
+\newlabel{def:tail-risk}{{4.21}{71}{Tail Risk}{definition.4.21}{}}
+\newlabel{eq:tail-risk}{{4.48}{71}{Tail Risk}{equation.4.48}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Path Distribution}{71}{equation.4.48}\protected@file@percent }
+\newlabel{eq:path-freq}{{4.49}{71}{Path Distribution}{equation.4.49}{}}
+\@writefile{toc}{\contentsline {subsubsection}{WIP Composition}{71}{equation.4.49}\protected@file@percent }
+\newlabel{eq:wip-composition}{{4.50}{71}{WIP Composition}{equation.4.50}{}}
+\citation{robert2004monte}
+\citation{numpy2020}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Convergence and Simulation Budget}{72}{subsection.4.5.3}\protected@file@percent }
+\newlabel{sec:s4-convergence}{{4.5.3}{72}{Convergence and Simulation Budget}{subsection.4.5.3}{}}
+\newlabel{def:convergence}{{4.22}{72}{Convergence Criterion}{definition.4.22}{}}
+\newlabel{eq:convergence-criterion}{{4.51}{72}{Convergence Criterion}{equation.4.51}{}}
+\newlabel{prop:convergence-rate}{{4.7}{72}{Convergence Rate}{property.4.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Reproducibility}{72}{subsection.4.5.4}\protected@file@percent }
+\newlabel{sec:s4-prng}{{4.5.4}{72}{Reproducibility}{subsection.4.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.5}Comparison with Throughput-Based Monte Carlo}{72}{subsection.4.5.5}\protected@file@percent }
+\newlabel{sec:s4-comparison}{{4.5.5}{72}{Comparison with Throughput-Based Monte Carlo}{subsection.4.5.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Throughput-based vs.\ process-aware Monte Carlo.}}{72}{table.caption.54}\protected@file@percent }
+\newlabel{tab:mc-comparison}{{4.3}{72}{Throughput-based vs.\ process-aware Monte Carlo}{table.caption.54}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Machine Learning Enhancement Component}{72}{section.4.6}\protected@file@percent }
+\newlabel{sec:ml-component}{{4.6}{72}{Machine Learning Enhancement Component}{section.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Feature Engineering}{72}{subsection.4.6.1}\protected@file@percent }
+\newlabel{sec:ml-feature-eng}{{4.6.1}{72}{Feature Engineering}{subsection.4.6.1}{}}
+\newlabel{def:feature-vector}{{4.23}{72}{Feature Vector}{definition.4.23}{}}
+\citation{tashman2000out}
+\citation{hyndman2021forecasting}
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Feature definitions for the ML component.}}{73}{table.caption.55}\protected@file@percent }
+\newlabel{tab:features}{{4.4}{73}{Feature definitions for the ML component}{table.caption.55}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Label Construction}{73}{subsection.4.6.2}\protected@file@percent }
+\newlabel{sec:ml-labels}{{4.6.2}{73}{Label Construction}{subsection.4.6.2}{}}
+\newlabel{def:label}{{4.24}{73}{Outcome Label}{definition.4.24}{}}
+\newlabel{eq:label}{{4.52}{73}{Outcome Label}{equation.4.52}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Training Protocol}{73}{subsection.4.6.3}\protected@file@percent }
+\newlabel{sec:ml-training}{{4.6.3}{73}{Training Protocol}{subsection.4.6.3}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces ML Training with Temporal Hold-Out}}{74}{algorithm.4}\protected@file@percent }
+\newlabel{alg:ml-training}{{4}{74}{ML Training with Temporal Hold-Out}{algorithm.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.4}Integration with Monte Carlo Forecasts}{74}{subsection.4.6.4}\protected@file@percent }
+\newlabel{sec:ml-integration}{{4.6.4}{74}{Integration with Monte Carlo Forecasts}{subsection.4.6.4}{}}
+\newlabel{def:deviation}{{4.25}{74}{Deviation Score}{definition.4.25}{}}
+\newlabel{eq:deviation}{{4.53}{74}{Deviation Score}{equation.4.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Pipeline Integration}{74}{section.4.7}\protected@file@percent }
+\newlabel{sec:integration}{{4.7}{74}{Pipeline Integration}{section.4.7}{}}
+\newlabel{thm:pipeline-correctness}{{4.1}{74}{Pipeline Correctness}{theorem.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Inter-stage data contracts.}}{75}{table.caption.56}\protected@file@percent }
+\newlabel{tab:data-contracts}{{4.5}{75}{Inter-stage data contracts}{table.caption.56}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Formal Properties and Theoretical Guarantees}{75}{section.4.8}\protected@file@percent }
+\newlabel{sec:method-properties}{{4.8}{75}{Formal Properties and Theoretical Guarantees}{section.4.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Statistical Consistency}{75}{subsection.4.8.1}\protected@file@percent }
+\newlabel{sec:prop-consistency}{{4.8.1}{75}{Statistical Consistency}{subsection.4.8.1}{}}
+\newlabel{thm:consistency}{{4.2}{75}{Asymptotic Consistency}{theorem.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Calibration Property}{75}{subsection.4.8.2}\protected@file@percent }
+\newlabel{sec:prop-calibration}{{4.8.2}{75}{Calibration Property}{subsection.4.8.2}{}}
+\newlabel{def:calibration}{{4.26}{75}{Forecast Calibration}{definition.4.26}{}}
+\newlabel{eq:calibration}{{4.54}{75}{Forecast Calibration}{equation.4.54}{}}
+\newlabel{eq:aggregate-calibration}{{4.55}{75}{Forecast Calibration}{equation.4.55}{}}
+\citation{billingsley1961statistical}
+\newlabel{thm:pipeline-convergence}{{4.3}{76}{End-to-End Convergence}{theorem.4.3}{}}
+\newlabel{eq:pipeline-convergence}{{4.56}{76}{End-to-End Convergence}{equation.4.56}{}}
+\newlabel{eq:ace-convergence}{{4.57}{76}{End-to-End Convergence}{equation.4.57}{}}
+\newlabel{rem:convergence-practical}{{4.3}{76}{Practical Implications}{remark.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.3}Information-Theoretic Advantage of Process Awareness}{76}{subsection.4.8.3}\protected@file@percent }
+\newlabel{sec:prop-information}{{4.8.3}{76}{Information-Theoretic Advantage of Process Awareness}{subsection.4.8.3}{}}
+\newlabel{thm:information}{{4.4}{76}{Information Gain from Process Structure}{theorem.4.4}{}}
+\newlabel{eq:information-gain}{{4.58}{76}{Information Gain from Process Structure}{equation.4.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.4}Complexity Analysis}{76}{subsection.4.8.4}\protected@file@percent }
+\newlabel{sec:prop-complexity}{{4.8.4}{76}{Complexity Analysis}{subsection.4.8.4}{}}
+\newlabel{eq:total-cost}{{4.59}{76}{Complexity Analysis}{equation.4.59}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Space Complexity}{76}{table.caption.57}\protected@file@percent }
+\newlabel{eq:space-complexity}{{4.60}{76}{Space Complexity}{equation.4.60}{}}
+\citation{lecuyer2017random}
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Computational complexity per pipeline stage.}}{77}{table.caption.57}\protected@file@percent }
+\newlabel{tab:complexity}{{4.6}{77}{Computational complexity per pipeline stage}{table.caption.57}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Parallelization}{77}{equation.4.60}\protected@file@percent }
+\newlabel{rem:scalability}{{4.4}{77}{Scalability Bounds}{remark.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.5}Assumptions and Boundary Conditions}{77}{subsection.4.8.5}\protected@file@percent }
+\newlabel{sec:assumptions}{{4.8.5}{77}{Assumptions and Boundary Conditions}{subsection.4.8.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Chapter Summary}{77}{section.4.9}\protected@file@percent }
+\newlabel{sec:method-summary}{{4.9}{77}{Chapter Summary}{section.4.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Assumptions, implications, and mitigations.}}{78}{table.caption.58}\protected@file@percent }
+\newlabel{tab:assumptions}{{4.7}{78}{Assumptions, implications, and mitigations}{table.caption.58}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Method components vs.\ research questions.}}{78}{table.caption.59}\protected@file@percent }
+\newlabel{tab:method-rq-mapping}{{4.8}{78}{Method components vs.\ research questions}{table.caption.59}{}}
+\@setckpt{capitulos/cap4_method_reduced}{
+\setcounter{page}{80}
+\setcounter{equation}{60}
+\setcounter{enumi}{4}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{4}
+\setcounter{section}{9}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{2}
+\setcounter{table}{8}
+\setcounter{section@level}{0}
+\setcounter{Item}{4}
+\setcounter{Hfootnote}{2}
+\setcounter{bookmark@seq@number}{108}
+\setcounter{parentequation}{0}
+\setcounter{ABCIaux}{0}
+\setcounter{ABCImax}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{float@type}{32}
+\setcounter{algorithm}{4}
+\setcounter{ALG@line}{11}
+\setcounter{ALG@rem}{0}
+\setcounter{ALG@nested}{0}
+\setcounter{ALG@Lnr}{2}
+\setcounter{ALG@blocknr}{10}
+\setcounter{ALG@storecount}{0}
+\setcounter{ALG@tmpcounter}{0}
+\setcounter{lstnumber}{1}
+\setcounter{quadro}{0}
+\setcounter{totalcount@figure}{8}
+\setcounter{totalcount@table}{23}
+\setcounter{totalcount@quadro}{0}
+\setcounter{totalcount@algorithm}{0}
+\setcounter{totalcount@lstlisting}{0}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{nlinenum}{0}
+\setcounter{definition}{26}
+\setcounter{theorem}{4}
+\setcounter{lemma}{0}
+\setcounter{property}{7}
+\setcounter{remark}{4}
+\setcounter{tcbbreakpart}{0}
+\setcounter{tcblayer}{0}
+\setcounter{tcolorbox@number}{0}
+\setcounter{lstlisting}{0}
+}

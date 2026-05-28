@@ -1,0 +1,719 @@
+% =============================================================================
+% CHAPTER 5 — RESEARCH METHODOLOGY
+% Thesis: PATHCAST
+% Version: REDUCED — paragraph-level paraphrase of tables removed.
+%          All formal content (definitions, equations, protocols) preserved.
+%          Cross-references unchanged.
+% =============================================================================
+
+\chapter{Research Methodology}
+\label{ch:methodology}
+
+This chapter describes the methodological framework. Section~\ref{sec:dsr}
+presents Design Science Research. Section~\ref{sec:dataset} describes the
+dataset. Section~\ref{sec:eval-design} formalizes the experimental design.
+Section~\ref{sec:evaluation-metrics} defines evaluation metrics.
+Section~\ref{sec:baselines} specifies baselines.
+Section~\ref{sec:statistical-analysis} describes statistical procedures.
+Section~\ref{sec:threats} discusses threats to validity.
+
+
+% =============================================================================
+% 5.1 DESIGN SCIENCE RESEARCH
+% =============================================================================
+\section{Design Science Research Paradigm}
+\label{sec:dsr}
+
+This research adopts Design Science Research (DSR) following
+Hevner et al.~\cite{hevner2004} and the DSRM process of Peffers et
+al.~\cite{peffers2007}.
+
+\subsection{DSR Artifact Characterization}
+\label{sec:dsr-artifact}
+
+The artifact produced is a \textbf{method}: PATHCAST is a formally
+specified pipeline that prescribes how to transform repository data into
+probabilistic process forecasts. The supporting \textbf{instantiation} is
+a Python tool implementing the four pipeline stages and the ML component.
+
+
+\subsection{DSRM Process Instantiation}
+\label{sec:dsrm-instantiation}
+
+\begin{table}[htbp]
+\centering
+\caption{Mapping of DSRM activities to thesis components.}
+\label{tab:dsrm-mapping}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{Activity} & \textbf{DSRM Activity} & \textbf{Chapter} & \textbf{Deliverable} \\
+\midrule
+1 & Problem Identification & Ch.~\ref{ch:introduction} & Three research problems \\
+  &                        & Ch.~\ref{ch:theoretical-foundation} & Gap analysis table \\
+\midrule
+2 & Objectives Definition  & Ch.~\ref{ch:introduction} & 3 RQs, 4 objectives, 5 contributions \\
+\midrule
+3 & Design \& Development  & Ch.~\ref{ch:method}        & PATHCAST method \\
+  &                        & Ch.~\ref{ch:implementation} & Python tool \\
+\midrule
+4 & Demonstration          & Ch.~\ref{ch:evaluation}    & 48 repositories \\
+\midrule
+5 & Evaluation             & Ch.~\ref{ch:evaluation}    & E1: Pipeline; E2: Forecasting \\
+\midrule
+6 & Communication          & This thesis                & Conference/journal papers \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{DSR Knowledge Contribution}
+\label{sec:dsr-contribution}
+
+Following Gregor and Hevner~\cite{gregor2013positioning}, this research
+operates in the \emph{Improvement} quadrant: a known problem class
+(software process forecasting) addressed with a new solution
+(process-aware stochastic simulation parameterized by process mining).
+The contribution is the formal integration of established techniques
+into a SDLC-specific pipeline, not the invention of new individual
+techniques.
+
+
+% =============================================================================
+% 5.2 DATASET
+% =============================================================================
+\section{Dataset Description}
+\label{sec:dataset}
+
+The empirical evaluation uses 48 open-source software repositories.
+
+\subsection{Repository Selection Criteria}
+\label{sec:selection-criteria}
+
+Inclusion criteria:
+\begin{enumerate}
+    \item \textbf{Minimum commit volume:} $\geq 1{,}000$ commits in main.
+    \item \textbf{Issue tracker usage:} GitHub Issues or Jira with
+    $\geq 100$ closed issues containing state transitions.
+    \item \textbf{Pull request workflow:} evidence of PR-based development.
+    \item \textbf{Activity period:} $\geq 12$ months continuous activity.
+    \item \textbf{Non-trivial contributors:} $\geq 5$ distinct contributors.
+    \item \textbf{Non-fork:} not a fork of another project.
+\end{enumerate}
+
+Exclusion: $>50\%$ bot commits; external-bug-only issue tracking; mirror
+or archive repositories.
+
+
+\subsection{Selection Process}
+\label{sec:selection-process}
+
+\paragraph{Step 1 — Candidate generation.} 150 candidates from SEART
+GitHub Search~\cite{seart2021}: $\geq 1{,}000$ commits, issues+PRs,
+non-fork, last push $\geq$~2022-01-01, languages
+\{Python, JS/TS, Java, Go, Rust, C/C++\}.
+
+\paragraph{Step 2 — Criterion verification.} Each candidate verified
+against C2 and C5 via the GitHub REST API~\cite{github2023api}.
+
+\paragraph{Step 3 — Stratified selection.} 48 repositories selected by
+stratified sampling across the dimensions of
+Table~\ref{tab:dataset-diversity}: 3--4 per primary language; balanced
+across scale tiers; $\geq 4$ per governance model.
+
+\paragraph{Step 4 — Jira enrichment.} For Apache and Spring projects,
+the issue component was enriched with the Public Jira Dataset of
+Montgomery et al.~\cite{montgomery2022jira}.
+
+The complete list of 48 repositories is in
+Appendix~\ref{app:repository-list}.
+
+
+\subsection{Data Collection}
+\label{sec:data-collection}
+
+Per repository:
+\begin{itemize}
+    \item Git commit history via
+    \texttt{/repos/\{owner\}/\{repo\}/commits}.
+    \item Issue lifecycle via the timeline events API
+    (or Jira~\cite{montgomery2022jira} for Apache/Spring).
+    \item Pull requests via GraphQL API.
+    \item GitHub Actions runs (only $\geq 50$ runs counts as Advanced
+    maturity).
+\end{itemize}
+
+Data stored in PostgreSQL for Stage~1 ingestion.
+
+
+\subsection{Dataset Descriptive Statistics}
+\label{sec:dataset-stats}
+
+\begin{table}[htbp]
+\centering
+\caption{Aggregate dataset statistics (48 repositories).}
+\label{tab:dataset-summary}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Metric} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
+\midrule
+Commits                 & 227{,}000 & 4{,}729 & 3{,}215 & -- \\
+Closed issues           & --        & --      & --      & -- \\
+Pull requests           & --        & --      & --      & -- \\
+Contributors            & --        & --      & --      & -- \\
+Activity span (months)  & --        & --      & --      & -- \\
+\bottomrule
+\multicolumn{5}{l}{\parbox{13cm}{\footnotesize ``--'' populated upon completion of
+    data collection. 44 of 48 repositories confirmed at writing.}}
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Dataset diversity profile.}
+\label{tab:dataset-diversity}
+\begin{tabular}{ll}
+\toprule
+\textbf{Dimension} & \textbf{Coverage} \\
+\midrule
+Primary languages   & Python, JS/TS, Java, Go, Rust, C/C++ \\
+Domain categories   & Web, CLI, libraries, DevOps, data processing \\
+Project scale       & Small ($<5$K), Medium (5--20K), Large ($>20$K commits) \\
+Governance model    & Foundation, corporate, community-driven \\
+Workflow maturity   & Basic / Standard / Advanced \\
+Issue source        & GitHub Issues; Jira via~\cite{montgomery2022jira} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Ethical Considerations}
+\label{sec:ethics}
+
+All data is publicly available under open-source licenses. No private
+repositories, proprietary data, or personally identifiable information
+beyond public GitHub usernames. Compliant with GitHub Terms of Service.
+
+
+% =============================================================================
+% 5.3 EXPERIMENTAL DESIGN
+% =============================================================================
+\section{Experimental Design}
+\label{sec:eval-design}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    stage/.style={rectangle, draw, thick, rounded corners=4pt,
+                  minimum width=5cm, minimum height=1.4cm,
+                  align=center, font=\small},
+    rq/.style={rectangle, draw, dashed, rounded corners=2pt,
+               minimum width=2.2cm, minimum height=0.8cm,
+               align=center, font=\scriptsize, fill=gray!5},
+    arrow/.style={->, thick, >=stealth}
+]
+    \node[stage, fill=blue!10] (e1) {
+        \textbf{E1: Pipeline Validation}\\
+        {\scriptsize Event log + Process model quality}
+    };
+    \node[rq, right=1cm of e1] (rq1) {RQ1};
+    \draw[arrow] (e1) -- (rq1);
+
+    \node[stage, fill=orange!10, below=1.5cm of e1] (e2) {
+        \textbf{E2: Forecasting Accuracy}\\
+        {\scriptsize Stochastic forecasts + ML comparison}
+    };
+    \node[rq, right=1cm of e2, yshift=0.4cm] (rq2) {RQ2};
+    \node[rq, right=1cm of e2, yshift=-0.4cm] (rq3) {RQ3};
+    \draw[arrow] (e2) -- (rq2);
+    \draw[arrow] (e2) -- (rq3);
+
+    \draw[arrow] (e1) -- (e2) node[midway, right, font=\scriptsize]
+        {Validated event logs};
+
+    \node[rectangle, draw, fill=green!8, rounded corners=2pt,
+          minimum width=3cm, font=\scriptsize, align=center,
+          left=1.5cm of e1, yshift=-0.75cm] (data) {
+        48 Repositories\\227K commits\\Dataset $\mathcal{R}$
+    };
+    \draw[arrow] (data) |- (e1);
+    \draw[arrow] (data) |- (e2);
+\end{tikzpicture}
+\caption{Two-stage experimental design.}
+\label{fig:eval-design}
+\end{figure}
+
+
+\subsection{E1: Pipeline Validation}
+\label{sec:e1-design}
+
+E1 assesses whether Stages 1 and 2 produce event logs and process models
+of sufficient quality. Addresses RQ1.
+
+\subsubsection{Scope}
+
+\begin{enumerate}
+    \item Event log quality: correlation coverage, activity coverage,
+    trace completeness.
+    \item Process model quality: fitness, precision, generalization via
+    alignment-based conformance (Section~\ref{sec:s2-conformance}).
+\end{enumerate}
+
+\subsubsection{Protocol}
+
+For each $r_i \in \mathcal{R}$:
+\begin{enumerate}
+    \item Execute Stage~1 with the default correlation configuration.
+    \item Compute event log quality metrics
+    (Definition~\ref{def:log-quality}).
+    \item Execute Stage~2 with IMf at $\theta_{\text{noise}} = 0.2$.
+    \item Compute fitness, precision, generalization.
+    \item Record process variants and state space $|S|$.
+    \item Flag transitions with $< 30$ observations; apply Laplace
+    smoothing ($\alpha = 1$) at Stage~3.
+\end{enumerate}
+
+\subsubsection{Sensitivity Analysis}
+
+$\theta_{\text{noise}}$ varied over $\{0.0, 0.1, 0.2, 0.3, 0.5\}$ on 10
+representative repositories. Pareto front of fitness vs.\ precision
+identifies the threshold balancing both objectives.
+
+\subsubsection{Acceptance Criteria}
+
+\begin{equation}
+\label{eq:acceptance}
+\text{fitness}(\mathcal{L}, M) \geq 0.7 \;\wedge\;
+\text{coverage}(\mathcal{L}) \geq 0.5 \;\wedge\;
+|S_T| \geq 2 \;\wedge\;
+|\mathcal{L}_{\text{test}}| \geq 50.
+\end{equation}
+
+The fourth condition reflects the variance threshold for empirical
+percentiles and CRPS~\cite{gneiting2007strictly}. Repositories satisfying
+the first three but failing the case count threshold are reported as
+\emph{quality-validated but statistically insufficient for E2} and
+excluded from E2 only.
+
+
+\subsection{E2: Forecasting Accuracy}
+\label{sec:e2-design}
+
+E2 assesses Stages 3 and 4 forecasts and the predictive contribution of
+process-derived ML features. Addresses RQ2 and RQ3.
+
+\subsubsection{Scope}
+
+For each repository passing E1:
+\begin{enumerate}
+    \item Execute Stages 3 and 4 to produce probabilistic lead time
+    forecasts.
+    \item Execute the ML component with three feature sets (PM-only,
+    MSR-only, Combined).
+    \item Compare against ground truth.
+\end{enumerate}
+
+\subsubsection{Temporal Hold-Out Protocol}
+\label{sec:temporal-holdout}
+
+\begin{definition}[Temporal Hold-Out]
+\label{def:temporal-holdout}
+For each repository with event log $\mathcal{L}$ over
+$[t_{\min}, t_{\max}]$:
+\begin{align}
+t_{\text{cut}} &= t_{\min} + 0.7 \cdot (t_{\max} - t_{\min})
+    \label{eq:cutoff} \\
+\mathcal{L}_{\text{train}} &= \{c : \max(\tau(\sigma_c)) \leq t_{\text{cut}}\}
+    \label{eq:train-set} \\
+\mathcal{L}_{\text{test}}  &= \{c : \min(\tau(\sigma_c)) > t_{\text{cut}}\}
+    \label{eq:test-set}
+\end{align}
+\end{definition}
+
+The 70/30 split follows
+convention~\cite{tashman2000out}; sensitivity to 60/40 and 80/20 is
+assessed on a representative subset.
+
+\textbf{Model estimation:} $P$, $\hat{F}$, ML models estimated from
+$\mathcal{L}_{\text{train}}$ only.
+
+\textbf{Forecast evaluation:} for each $c \in \mathcal{L}_{\text{test}}$,
+forecast vs.\ observed $T_c^{\text{obs}}$, $y_c^{\text{obs}}$.
+
+
+\subsubsection{Cross-Repository Generalization}
+\label{sec:cross-repo}
+
+Leave-one-project-out (LOPO) within domain groups (e.g., all Python web
+frameworks). Minimum group size~5; smaller groups reported descriptively
+only. Current dataset: Python web frameworks
+(Django, Flask, FastAPI, Requests, Click) and Go DevOps tools
+(kubectl, Helm, Terraform, Prometheus, cli) qualify; others descriptive.
+
+
+% =============================================================================
+% 5.4 EVALUATION METRICS
+% =============================================================================
+\section{Evaluation Metrics}
+\label{sec:evaluation-metrics}
+
+% --- RQ1 metrics ---
+\subsection{Metrics for RQ1: Event Log and Process Model Quality}
+\label{sec:metrics-rq1}
+
+Event log quality and process model quality are reported separately to
+isolate sparse-data effects from modeling effects.
+
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ1.}
+\label{tab:metrics-rq1}
+\small
+\begin{tabular}{@{}l l p{7.8cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Range} & \textbf{Definition} \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Event Log Quality}} \\[2pt]
+Correlation Coverage & $[0,1]$ & Fraction of raw events assigned to a case (Eq.~4.15). \\
+Activity Coverage    & $[0,1]$ & Fraction of SDLC taxonomy observed (Eq.~4.22). \\
+Trace Completeness   & $[0,1]$ & Fraction of cases reaching absorbing state (Eq.~4.20). \\
+Mean Trace Length    & $\mathbb{R}^+$ & Average events per trace (Eq.~4.21). \\
+Variant Count        & $\mathbb{N}$ & Distinct activity sequences (Eq.~4.23). \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Process Model Quality}} \\[2pt]
+Fitness              & $[0,1]$ & Alignment-based fitness (Eq.~2.2). Higher better. \\
+Precision            & $[0,1]$ & Fraction of model behaviour observed in log. Higher better. \\
+Generalization       & $[0,1]$ & Capacity to capture unseen legitimate behaviour. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Metric rationale.} Correlation Coverage signals Stage~1
+fidelity. Activity Coverage contextualizes fitness: high fitness on a
+log with low activity coverage may reflect an oversimplified model.
+Trace Completeness bounds the supervised-learning training set. Mean
+Trace Length and Variant Count characterize structural complexity.
+
+The four-quality framework~\cite{aalst2016process} additionally includes
+\emph{simplicity}; this is constrained by construction in PATHCAST since
+the state space is bounded by the SDLC taxonomy
+(Section~\ref{sec:s1-mapping}) and not reported separately.
+
+
+% --- RQ2 metrics ---
+\subsection{Metrics for RQ2: Stochastic Forecasting Accuracy}
+\label{sec:metrics-rq2}
+
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ2.}
+\label{tab:metrics-rq2}
+\small
+\begin{tabular}{@{}l l p{7.2cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Type} & \textbf{Definition} \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Point Forecast Accuracy}} \\[2pt]
+MAE  & Error & $\tfrac{1}{n}\sum_c |T_c^{\text{obs}} - \hat{T}_c^{\text{P50}}|$ \\
+MAPE & Error (\%) & $\tfrac{100}{n}\sum_c |T_c^{\text{obs}} - \hat{T}_c^{\text{P50}}| / T_c^{\text{obs}}$ \\
+MdAE & Error & $\operatorname{median}(|T_c^{\text{obs}} - \hat{T}_c^{\text{P50}}|)$ \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Distributional Accuracy}} \\[2pt]
+CRPS & Score & $\tfrac{1}{n}\sum_c \int [\hat{F}_c(t) - \mathbf{1}(t \geq T_c^{\text{obs}})]^2 dt$ \\
+ACE  & Error & $\tfrac{1}{9}\sum_{\alpha \in \{0.1,\ldots,0.9\}} |\hat{p}_\alpha - \alpha|$ \\
+Coverage 85\% & $[0,1]$ & Fraction of $T_c^{\text{obs}} \in [\hat{Q}_{0.075}, \hat{Q}_{0.925}]$. \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Outcome Prediction}} \\[2pt]
+Completion Accuracy & $[0,1]$ & Done vs.\ Cancelled prediction accuracy. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{CRPS} is the primary metric. Reduces to MAE for point
+forecasts~\cite{gneiting2007strictly}, preserving comparability with
+deterministic baselines. Derivation in Appendix~B.
+
+\paragraph{Point metrics.} MAE in calendar days; MAPE for cross-repository
+comparison; MdAE robust to outliers.
+
+\paragraph{ACE} averages absolute deviation across nine deciles. ACE = 0
+denotes perfect calibration; ACE $> 0.1$ indicates systematic over- or
+underconfidence. Reported alongside CRPS because a forecast can have low
+CRPS while being miscalibrated.
+
+\paragraph{Coverage at 85\%} is the standard agile commitment
+interval~\cite{vacanti2015}; complements ACE by focusing on the single
+operationally-relevant interval.
+
+\paragraph{Completion Accuracy.} Predicted Done vs.\ Cancelled per
+Definition~\ref{def:label}.
+
+
+% --- RQ3 metrics ---
+\subsection{Metrics for RQ3: ML Feature Comparison}
+\label{sec:metrics-rq3}
+
+\begin{table}[ht]
+\centering
+\caption{Evaluation metrics for RQ3.}
+\label{tab:metrics-rq3}
+\small
+\begin{tabular}{@{}l l p{7.4cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Type} & \textbf{Definition} \\
+\midrule
+AUC-ROC & Discrimination & Threshold-independent discrimination. \\
+F1-Score & Balance & $2 \cdot \mathrm{Precision} \cdot \mathrm{Recall} / (\mathrm{Precision} + \mathrm{Recall})$ at validation-optimal threshold. \\
+Brier Score & Calibration & $\tfrac{1}{n}\sum_c (\hat{p}_c - y_c)^2$. Lower better. \\
+Feature Importance & Ranking & Permutation (primary) and Gini importance. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{AUC-ROC} primary; threshold-independent and robust to class
+imbalance. \paragraph{F1} threshold-dependent; threshold tuned on
+validation, applied unchanged to test. \paragraph{Brier} distinguishes
+ranking accuracy from probability reliability.
+\paragraph{Permutation importance} reported as primary because invariant
+to scale and cardinality.
+
+Three feature sets compared (Section~\ref{sec:ml-feature-eng}):
+\begin{enumerate}
+  \item \textbf{PM-only}: Features 1--8.
+  \item \textbf{MSR-only}: Features 9--15.
+  \item \textbf{Combined}: Features 1--15.
+\end{enumerate}
+
+A statistically meaningful improvement of PM-only or Combined over
+MSR-only answers RQ3 affirmatively. Wilcoxon signed-rank applied across
+48 repositories; effect size via Cliff's~$\delta$ following
+Kampenes et al.~\cite{kampenes2007systematic}.
+
+
+% =============================================================================
+% 5.5 BASELINES
+% =============================================================================
+\section{Baseline Methods}
+\label{sec:baselines}
+
+\begin{table}[htbp]
+\centering
+\caption{Baseline methods.}
+\label{tab:baselines}
+\small
+\begin{tabular}{lp{4cm}p{5cm}}
+\toprule
+\textbf{Baseline} & \textbf{Description} & \textbf{Rationale} \\
+\midrule
+B1: Historical Mean         & Mean lead time of completed cases in $\mathcal{L}_{\text{train}}$. & Naïve baseline. \\
+\midrule
+B2: Throughput MC           & Throughput-based MC~\cite{vacanti2015,savage2009flaw,magennis2015forecasting}. & State-of-practice; black-box. \\
+\midrule
+B3: Markov Analytical       & $\mathbb{E}[\text{LT}] = \sum_j N_{ij} \cdot \bar{d}_j$. & Process-aware but deterministic. \\
+\midrule
+B4: Historical Distribution & Empirical CDF resampling. & Distributional baseline. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The baselines isolate (i)~process awareness (vs.\ B2),
+(ii)~distributional vs.\ point (vs.\ B3), (iii)~stochastic model vs.\
+naïve resampling (vs.\ B4).
+
+
+% =============================================================================
+% 5.6 STATISTICAL ANALYSIS
+% =============================================================================
+\section{Statistical Analysis Procedures}
+\label{sec:statistical-analysis}
+
+\subsection{Within-Repository Comparison}
+\label{sec:within-repo}
+
+Paired tests on the same test cases.
+
+\textbf{Normality assessment:} Shapiro–Wilk on per-case error differences.
+If normal ($p > 0.05$), paired $t$-test; else Wilcoxon signed-rank.
+
+\textbf{Effect size:} Cohen's $d$ (parametric) or Cliff's $\delta$
+(non-parametric)~\cite{kampenes2007systematic}.
+
+
+\subsection{Cross-Repository Aggregation}
+\label{sec:cross-repo-stats}
+
+\begin{enumerate}
+    \item Per-repository metric (e.g., CRPS) for proposed and each
+    baseline.
+    \item Treat 48 metric values as paired samples.
+    \item Wilcoxon signed-rank across repositories.
+    \item Report median improvement and IQR.
+\end{enumerate}
+
+\textbf{Multiple comparison correction:} Bonferroni,
+$\alpha_{\text{adj}} = 0.05 / 4 = 0.0125$.
+
+
+\subsection{Statistical Power Analysis}
+\label{sec:power-analysis}
+
+A priori power following
+Kampenes et al.~\cite{kampenes2007systematic}.
+
+\textbf{RQ2/RQ3 — Cross-repository ($n=48$).} Under
+$\alpha_{\text{adj}} = 0.0125$, power for medium effect ($r = 0.3$) is
+$1-\beta \approx 0.72$; large ($r = 0.5$): $> 0.97$. Effect sizes are
+informed by Rogge-Solti and
+Weske~\cite{RoggeSolti2015NonMarkovianSPN}. Power computed via
+\begin{equation}
+\label{eq:power}
+1 - \beta = P(Z > z_{\alpha/2} - r\sqrt{n-1})
+    + P(Z < -z_{\alpha/2} - r\sqrt{n-1})
+\end{equation}
+with $z_{0.00625} \approx 2.50$.
+
+\begin{table}[htbp]
+\centering
+\caption{A priori power estimates ($n = 48$, four baselines).}
+\label{tab:power-analysis}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Effect size} & \textbf{$r$} &
+  \textbf{Power ($\alpha = 0.05$)} &
+  \textbf{Power ($\alpha_{\text{adj}} = 0.0125$)} \\
+\midrule
+Small         & 0.1 & 0.17 & 0.09 \\
+Small--medium & 0.2 & 0.44 & 0.27 \\
+Medium        & 0.3 & 0.75 & 0.55 \\
+Medium--large & 0.4 & 0.92 & 0.80 \\
+Large         & 0.5 & 0.98 & 0.94 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dataset is adequately powered for medium-to-large effects at the
+adjusted level. Low power for small effects ($r \leq 0.2$) is accepted
+since hypotheses concern practically meaningful improvements.
+
+\textbf{RQ3 — Within-repository ML.} Median expected test-set size
+80--120 cases (227K commits, 1:4 issue ratio); sufficient for AUC-ROC
+which stabilises above $n \approx 50$~\cite{hanley1982meaning}.
+
+
+\subsection{Reporting Standards}
+\label{sec:reporting}
+
+Per Wohlin et al.~\cite{wohlin2012experimentation}:
+\begin{itemize}
+    \item Median, IQR, box plots (preferred over mean for skewed
+    distributions).
+    \item Test name, statistic, $p$-value, effect size for every
+    comparison.
+    \item 95\% CIs for all aggregate metrics.
+    \item Calibration plots, CRPS box plots, feature importance rankings.
+\end{itemize}
+
+
+% =============================================================================
+% 5.7 THREATS TO VALIDITY
+% =============================================================================
+\section{Threats to Validity}
+\label{sec:threats}
+
+Following Wohlin et al.~\cite{wohlin2012experimentation}.
+
+\subsection{Internal Validity}
+\label{sec:threats-internal}
+
+\textbf{Temporal information leakage.} Mitigated by strict temporal
+hold-out (Definition~\ref{def:temporal-holdout}).
+
+\textbf{Confounding by project phase.} Partially mitigated by 70/30 split
+plus sensitivity analysis with alternative ratios.
+
+\textbf{Case correlation errors.} Mitigated by correlation quality
+metrics (Definition~\ref{def:corr-quality}) and the cascade strategy.
+
+\textbf{Bot contamination.} Mitigated by Stage~1 bot filtering plus
+sensitivity analysis with/without filtering on a subset.
+
+
+\subsection{External Validity}
+\label{sec:threats-external}
+
+\textbf{Open-source bias.} Results interpreted as feasibility evidence,
+not absolute accuracy applicable to all settings.
+
+\textbf{GitHub platform bias.} Stage~1 designed with pluggable extractors
+for alternative platforms (GitLab, Bitbucket, Azure DevOps), but
+extensibility not empirically validated here.
+
+\textbf{Language and domain bias.} Partially addressed by cross-repository
+generalization protocol (Section~\ref{sec:cross-repo}).
+
+
+\subsection{Construct Validity}
+\label{sec:threats-construct}
+
+\textbf{Lead time definition.} First-event to last-event measurement.
+Justified by data availability and consistency with PM-based measurement.
+
+\textbf{Delay threshold for ML labels.} Three threshold strategies
+evaluated (Section~\ref{sec:ml-labels}); results reported per strategy.
+
+\textbf{Metric selection.} CRPS chosen as primary; MAE reported
+alongside for comparability with point-forecast baselines.
+
+
+\subsection{Conclusion Validity}
+\label{sec:threats-conclusion}
+
+\textbf{Statistical power.} Mitigated by:
+(i)~minimum case count condition in Equation~\ref{eq:acceptance}
+excluding $|\mathcal{L}_{\text{test}}| < 50$ from E2;
+(ii)~cross-repository aggregation on $n = 48$ pairs achieving
+$1-\beta \geq 0.72$ for medium effects at
+$\alpha_{\text{adj}} = 0.0125$
+(Section~\ref{sec:power-analysis}, Table~\ref{tab:power-analysis});
+(iii)~per-repository CIs reported alongside aggregates.
+
+\textbf{Multiple comparisons.} Bonferroni correction
+(Section~\ref{sec:cross-repo-stats}).
+
+\textbf{Reproducibility.} Released artifacts: (i)~repository identifiers
+and dates; (ii)~PATHCAST source; (iii)~evaluation scripts;
+(iv)~intermediate data (event logs, transition matrices, simulation
+results). Raw repository data not redistributed but
+re-collectable via GitHub API~\cite{github2023api} from
+Appendix~\ref{app:repository-list}.
+
+
+% =============================================================================
+% 5.8 CHAPTER SUMMARY
+% =============================================================================
+\section{Chapter Summary}
+\label{sec:methodology-summary}
+
+\begin{table}[htbp]
+\centering
+\caption{Summary: research questions, evaluation stages, metrics, baselines.}
+\label{tab:methodology-summary}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{RQ} & \textbf{Stage} & \textbf{Primary Metrics} & \textbf{Baselines} \\
+\midrule
+RQ1 & E1 & Fitness, precision, coverage    & N/A (quality) \\
+RQ2 & E2 & CRPS, ACE, MAE                  & B1, B2, B3, B4 \\
+RQ3 & E2 & AUC-ROC, F1, Brier              & PM vs.\ MSR vs.\ Combined \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The evaluation answers three questions: Can the pipeline produce usable
+event logs and models from real repositories (E1, RQ1)? Do process-aware
+stochastic forecasts outperform process-blind baselines (E2, RQ2)? Do
+process-derived features add predictive value beyond traditional metrics
+(E2, RQ3)?

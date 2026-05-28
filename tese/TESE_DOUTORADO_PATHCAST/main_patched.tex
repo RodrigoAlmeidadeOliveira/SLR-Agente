@@ -1,0 +1,204 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TESE DE DOUTORADO - PPGIa/PUCPR
+%data versão: 15/05/2026
+% PATHCAST: Integração de Process Mining, Cadeias de Markov,
+% Simulação de Monte Carlo e Aprendizado de Máquina para
+% Forecasting Probabilístico de Processos de Desenvolvimento
+% de Software
+%
+% Rodrigo Almeida de Oliveira
+% Orientador: Edson E. Scalabrin
+% 2026
+%
+% PATCHED:
+%  - Cap 2 trocado para versão reduzida (cap2_reduced)
+%  - Cap 4 trocado para versão reduzida (cap4_method_reduced)
+%  - Cap 5 trocado para versão reduzida (cap5_methodology_reduced)
+%  - Apêndice teórico (G–J) adicionado após appendix_slr
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{ppgia}
+
+% =================================================================
+% PACKAGES JÁ CARREGADOS POR ppgia.cls — NÃO RECARREGAR:
+%   amsmath, hyperref, graphicx, algorithm, algpseudocode,
+%   tikz (+ arrows.meta, shapes.geometric), adjustbox, color,
+%   url, caption, subcaption, listings, fancyhdr, titlesec,
+%   babel, geometry, setspace, indentfirst, footnote, footmisc,
+%   newpxtext, newpxmath, fontenc[T1], etoolbox, pdfx, lipsum,
+%   scrextend, acronym, abntex2cite
+% =================================================================
+
+% =================================================================
+% Tables (não em ppgia.cls)
+% =================================================================
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{lscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% =================================================================
+% Math extras
+% =================================================================
+\let\openbox\relax
+\usepackage{bm}
+\usepackage{pgfplots}
+\usepackage{amsthm}
+\usepackage{tabularx,makecell,booktabs}
+
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{property}{Property}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+% =================================================================
+% Algorithm compatibility layer (UPPERCASE → CamelCase)
+% =================================================================
+\newcommand{\REQUIRE}{\Require}
+\newcommand{\ENSURE}{\Ensure}
+\newcommand{\STATE}{\State}
+\newcommand{\FOR}{\For}
+\newcommand{\ENDFOR}{\EndFor}
+\newcommand{\WHILE}{\While}
+\newcommand{\ENDWHILE}{\EndWhile}
+\newcommand{\IF}{\If}
+\newcommand{\ENDIF}{\EndIf}
+\newcommand{\ELSE}{\Else}
+\newcommand{\ELSIF}{\ElsIf}
+\newcommand{\RETURN}{\Return}
+
+% =================================================================
+% TikZ libs adicionais
+% =================================================================
+\usetikzlibrary{
+  positioning,
+  fit,
+  calc,
+  shapes.misc,
+  backgrounds,
+  decorations.pathreplacing,
+  patterns
+}
+
+% =================================================================
+% Misc
+% =================================================================
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{tcolorbox}
+
+% =================================================================
+% TikZ STYLES — PATHCAST Pipeline
+% =================================================================
+\tikzset{
+  spaf/stage/.style={
+    draw, rounded corners=4pt, thick, align=center,
+    minimum height=10mm, minimum width=22mm,
+    inner sep=4pt, font=\small
+  },
+  spaf/s1/.style={spaf/stage, fill=green!10},
+  spaf/s2/.style={spaf/stage, fill=blue!10},
+  spaf/s3/.style={spaf/stage, fill=orange!10},
+  spaf/s4/.style={spaf/stage, fill=red!8},
+  spaf/ml/.style={spaf/stage, fill=violet!10},
+  spaf/arrow/.style={-Latex, thick},
+  spaf/data/.style={-Latex, thick, dashed, gray!70},
+  spaf/source/.style={
+    draw, rounded corners=2pt, fill=gray!8,
+    minimum height=7mm, inner sep=3pt, font=\scriptsize, align=center
+  },
+  spaf/output/.style={
+    draw, rounded corners=2pt, fill=yellow!8,
+    minimum height=7mm, inner sep=3pt, font=\scriptsize, align=center
+  },
+  spaf/eval/.style={
+    draw, rounded corners=3pt, dashed, thick, fill=gray!5,
+    minimum height=8mm, inner sep=3pt, font=\scriptsize, align=center
+  },
+  phase/.style={
+    draw, rounded corners=4pt, thick, fill=blue!8,
+    minimum width=18mm, minimum height=14mm,
+    align=center, font=\small
+  },
+  eval/.style={
+    draw, rounded corners=3pt, dashed, thick, fill=orange!8,
+    minimum width=16mm, minimum height=12mm,
+    align=center, font=\scriptsize
+  },
+  artifact/.style={
+    draw, rounded corners=2pt, fill=green!8,
+    minimum height=7mm, inner sep=2pt, font=\scriptsize, align=center
+  }
+}
+
+% =================================================================
+% DOCUMENT METADATA
+% =================================================================
+\idioma{en-us}
+
+\title{%
+ PATHCAST: A Process-Aware Probabilistic Forecasting Method for Software Development Processes
+}
+
+\author{Rodrigo Almeida de Oliveira}
+\orientador{Edson E. Scalabrin}
+
+\tipodocumento{pdd}
+\cidade{Curitiba}
+\universidade{Pontifícia Universidade Católica do Paraná}
+\programa{Programa de Pós-Graduação em Informática}
+\ano{2026}
+
+% =================================================================
+% DOCUMENT
+% =================================================================
+\begin{document}
+
+\frontmatter
+\mainmatter
+
+% Cap. 1 — Introdução
+\include{capitulos/cap1_introduction}
+
+% Cap. 2 — Fundamentação Teórica (REDUZIDA)
+\include{capitulos/cap2_reduced}
+
+% Cap. 3 — Revisão Sistemática da Literatura
+\include{capitulos/cap3_slr_revised}
+
+% Cap. 4 — Método Proposto: PATHCAST (REDUZIDA)
+\include{capitulos/cap4_method_reduced}
+
+% Cap. 5 — Metodologia de Pesquisa (REDUZIDA)
+\include{capitulos/cap5_methodology_reduced}
+
+% Cap. 6 — Implementação (a ser redigido)
+\include{capitulos/cap6_implementation}
+
+% Cap. 7 — Avaliação Empírica (a ser redigido)
+\include{capitulos/cap7_evaluation}
+
+% Cap. 8 — Conclusão (a ser redigido)
+\include{capitulos/cap8_conclusion}
+
+\backmatter
+
+\appendix
+% Apêndices A–D: derivações teóricas (Cap 2 supplements)
+\include{capitulos/appendix_theory}
+% Appendices E--I: SLR protocol (English)
+\include{capitulos/appendix_slr}
+% Apêndice J: lista de repositórios da avaliação empírica
+\include{capitulos/appendix_repositories}
+
+\end{document}

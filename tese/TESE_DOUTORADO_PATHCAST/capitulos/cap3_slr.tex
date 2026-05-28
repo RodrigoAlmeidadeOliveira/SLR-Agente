@@ -1,0 +1,425 @@
+\chapter{Systematic Literature Review}
+\label{ch:slr}
+
+\section{Introduction}
+\label{sec:slr-intro}
+
+This chapter presents a systematic literature review (SLR) conducted to map the state of the art at the intersection of process mining, stochastic modeling, and machine learning applied to software process forecasting. The review follows the guidelines established by Kitchenham and Charters~\cite{kitchenham2007} for evidence-based software engineering, complemented by the snowballing procedures described by Wohlin~\cite{Wohlin2024} and the mapping study guidelines of Petersen et al.~\cite{petersen2015}. The primary objective is to identify, classify, and synthesize existing approaches that combine process-aware techniques with predictive modeling for software development outcomes, establishing the research gap that motivates PATHCAST proposed in Chapter~\ref{ch:method}.
+
+The review addresses three overarching research questions, each decomposed into two sub-questions covering the application landscape of process mining in SDLC contexts, the techniques and prediction methods employed, and the degree of integration between process mining and stochastic forecasting methods.
+
+
+\section{Review Protocol}
+\label{sec:slr-protocol}
+
+\subsection{Research Questions}
+\label{sec:slr-rqs}
+
+The SLR is guided by the following research questions, structured to progressively map the landscape from application scope to technique integration:
+
+\begin{table}[htbp]
+\centering
+\caption{Research questions and expected outputs.}
+\label{tab:slr-rqs}
+\begin{tabular}{llp{7cm}p{4cm}}
+\toprule
+\textbf{RQ} & \textbf{Sub-RQ} & \textbf{Question} & \textbf{Expected Output} \\
+\midrule
+RQ1 & RQ1.1 & Which SDLC phases have been analyzed with process mining? & Frequency distribution by phase \\
+RQ1 & RQ1.2 & What event log sources are used and how are they constructed? & Taxonomy of sources and construction methods \\
+\midrule
+RQ2 & RQ2.1 & Which process discovery algorithms have been applied to SDLC? & Comparative matrix \\
+RQ2 & RQ2.2 & Which predictive and stochastic techniques have been used? & Technique classification \\
+\midrule
+RQ3 & RQ3.1 & What is the level of integration between PM and stochastic methods? & Integration maturity assessment \\
+RQ3 & RQ3.2 & What gaps exist for process-aware forecasting in the SDLC? & Gap analysis matrix \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Search Strategy}
+\label{sec:slr-search}
+
+The search strategy combines automated database search with backward and forward snowballing. The automated search targets five digital libraries: IEEE Xplore, ACM Digital Library, Scopus, Web of Science, and SpringerLink.
+
+\subsubsection{PICO Decomposition}
+
+The search string construction follows the PICO framework adapted for software engineering, as shown in Table~\ref{tab:pico}.
+
+\begin{table}[htbp]
+\centering
+\caption{PICO decomposition for search string construction.}
+\label{tab:pico}
+\begin{tabular}{lp{4cm}p{7cm}}
+\toprule
+\textbf{Facet} & \textbf{Role} & \textbf{Concepts} \\
+\midrule
+Population & Application domain & Software engineering, SDLC, software process, DevOps, CI/CD \\
+Intervention & Analytical technique & Process mining, Markov chain, Monte Carlo, predictive PM, ML \\
+Comparison & N/A & (omitted) \\
+Outcome & Result & Forecasting, prediction, lead time, cycle time, process model \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Search Strings}
+
+Three complementary search strings are executed to maximize coverage while maintaining precision.
+
+\paragraph{Principal String (P $\wedge$ I).} The principal string combines two blocks via conjunction. Block~P captures the software engineering context:
+
+\begin{quote}
+\small
+\texttt{("software engineering" OR "software development" OR "software process" OR "software lifecycle" OR "software life cycle" OR "SDLC" OR "development lifecycle" OR "development life cycle" OR "DevOps" OR "CI/CD" OR "continuous integration" OR "continuous delivery" OR "agile development" OR "agile process" OR "issue tracking" OR "bug tracking" OR "version control" OR "code review" OR "pull request" OR "software project" OR "software repository" OR "software maintenance" OR "software evolution")}
+\end{quote}
+
+Block~I captures the process mining and stochastic modeling techniques:
+
+\begin{quote}
+\small
+\texttt{("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "process model discovery" OR "event log analysis" OR "process intelligence" OR "process analytics" OR "predictive process monitoring" OR "predictive monitoring" OR "process prediction" OR "remaining time prediction" OR "outcome prediction" OR "process forecasting" OR "event log" OR "event log construction" OR "process simulation" OR "Monte Carlo simulation" OR "Markov chain" OR "Markov model" OR "stochastic process model" OR "transition probability" OR "absorbing chain" OR "process enhancement" OR "process performance" OR "lead time prediction" OR "cycle time prediction")}
+\end{quote}
+
+\paragraph{Complementary String (MSR $\rightarrow$ Process Modeling).} This string captures studies that model software processes using MSR terminology without canonical process mining terms:
+
+\begin{quote}
+\small
+\texttt{("mining software repositories" OR "software repository mining" OR "software archaeology" OR "software process archaeology" OR "mining version histories" OR "mining bug reports" OR "mining build logs" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "process flow" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "sequence mining" OR "pattern mining" OR "bottleneck detection" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time")}
+\end{quote}
+
+\paragraph{Frontier String (Stochastic $\wedge$ PM $\wedge$ SE).} This string specifically targets the intersection of stochastic methods with process mining in software contexts:
+
+\begin{quote}
+\small
+\texttt{("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND ("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND ("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline" OR "software deployment")}
+\end{quote}
+
+The strings are adapted to each database's syntax and field conventions as summarized in Table~\ref{tab:db-adaptations}. The search scope covers publications from January 1994 to December 2026, encompassing both the seminal application of Markov chains to software processes by Whittaker and Thomason~\cite{whittaker1994} and the maturation period of process mining tooling and modern ML frameworks applied to software engineering.
+
+\begin{table}[htbp]
+\centering
+\caption{Database-specific search adaptations.}
+\label{tab:db-adaptations}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Database} & \textbf{Search Field} & \textbf{Strings Executed} & \textbf{Filters} \\
+\midrule
+Scopus & TITLE-ABS-KEY & 3 & DocType: ar, cp; EN; 1994--2026 \\
+IEEE Xplore & All Metadata & 4 (split) & Conf + Journals; 1994--2026 \\
+ACM DL & Abstract & 2 & Date: 1994--2026; Research, Proceeding \\
+Web of Science & TS (Topic) & 3 & Article, Proceedings; EN; 1994--2026 \\
+SpringerLink & Simplified & 8 & Chapter, Article; EN; 1994--2026 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Snowballing Procedure}
+
+Backward snowballing examines the reference lists of all included primary studies. Forward snowballing uses Google Scholar citation tracking to identify subsequent works that cite the included studies. Both rounds apply the same inclusion and exclusion criteria defined in Section~\ref{sec:slr-criteria}.
+
+\subsubsection{Search String Validation}
+
+The search strings are validated against a control set of 10 papers that are known to be relevant to the review scope. Table~\ref{tab:validation-set} lists the control papers and their expected capture source. The acceptance threshold is $\geq 8/10$ papers found by the combination of the three strings across all databases.
+
+\begin{table}[htbp]
+\centering
+\caption{Control papers for search string validation.}
+\label{tab:validation-set}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{\#} & \textbf{Paper} & \textbf{Justification} & \textbf{Expected Capture} \\
+\midrule
+V1 & Cook \& Wolf (1998) & Seminal PM + SE & Principal \\
+V2 & Rubin et al. (2007) & PM framework for SW processes & Principal \\
+V3 & Poncin et al. (2011) & PM + MSR intersection & Principal \\
+V4 & Caldeira \& Cardoso (2019) & PM + SW process assessment & Principal \\
+V5 & Lemos et al. (2011) & PM for SW process management & Principal \\
+V6 & Whittaker \& Thomason (1994) & Markov + SW (seminal) & Complementary/Snowball \\
+V7 & Tax et al. (2017) & PPM seminal (BPM baseline) & Principal \\
+V8 & Rogge-Solti \& Weske (2015) & Stochastic + PM forecasting & Principal/Frontier \\
+V9 & Rozinat et al. (2009) & PM $\rightarrow$ Simulation bridge & Principal \\
+V10 & Gupta \& Sureka (2017) & PM multi-repository in SE & Principal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Inclusion and Exclusion Criteria}
+\label{sec:slr-criteria}
+
+\begin{table}[htbp]
+\centering
+\caption{Inclusion and exclusion criteria.}
+\label{tab:criteria}
+\begin{tabular}{clp{10cm}}
+\toprule
+\textbf{Type} & \textbf{ID} & \textbf{Criterion} \\
+\midrule
+\multirow{5}{*}{Inclusion}
+& IC1 & Publication period: 1994--2026 (from Whittaker \& Thomason onward). \\
+& IC2 & Language: English. \\
+& IC3 & Publication type: peer-reviewed journal article, conference paper, or workshop paper ($\geq$ 4 pages). \\
+& IC4 & The study applies at least one process mining or stochastic modeling technique to software processes. \\
+& IC5 & Full text is accessible. \\
+\midrule
+\multirow{5}{*}{Exclusion}
+& EC1 & PM applied exclusively to non-SE domains (healthcare, manufacturing, finance) without connection to SDLC. \\
+& EC2 & Pure MSR without process perspective (code-level metrics only). \\
+& EC3 & Surveys, tutorials, and editorials (used as background, not as primary studies). \\
+& EC4 & Duplicate studies (retain most complete version). \\
+& EC5 & Studies with insufficient description of event log or data source. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The inclusion of stochastic modeling in IC4 ensures that seminal works applying Markov chains to software processes (e.g., Whittaker and Thomason~\cite{whittaker1994}) are captured despite predating the term ``process mining.'' Criterion EC5 ensures that only studies contributing to the understanding of event log construction, a central challenge addressed by Stage~1 of PATHCAST, are included in the synthesis.
+
+
+\subsection{Quality Assessment}
+\label{sec:slr-qa}
+
+Each included study is assessed against a quality checklist adapted from Dyb{\aa} and Dingsøyr~\cite{dyba2008}, with eight binary criteria (scored 0 or 1):
+
+\begin{table}[htbp]
+\centering
+\caption{Quality assessment checklist.}
+\label{tab:qa}
+\begin{tabular}{clc}
+\toprule
+\textbf{\#} & \textbf{Criterion} & \textbf{Score} \\
+\midrule
+QA1 & Are the research objectives clearly stated? & 0/1 \\
+QA2 & Is the software engineering context described in detail? & 0/1 \\
+QA3 & Is the data source (event log) described reproducibly? & 0/1 \\
+QA4 & Is the PM or stochastic technique formally defined? & 0/1 \\
+QA5 & Are results validated empirically? & 0/1 \\
+QA6 & Are threats to validity discussed? & 0/1 \\
+QA7 & Is the study reproducible (data and/or code available)? & 0/1 \\
+QA8 & Are process model quality metrics reported (fitness, precision)? & 0/1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Studies scoring below 4.0 out of 8.0 (50\%) are excluded from the synthesis. QA8 is specific to this review and reflects the centrality of process model quality in the PATHCAST pipeline.
+
+
+\subsection{Data Extraction}
+\label{sec:slr-extraction}
+
+For each included study, the attributes listed in Table~\ref{tab:extraction} are extracted.
+
+\begin{table}[htbp]
+\centering
+\caption{Data extraction form.}
+\label{tab:extraction}
+\small
+\begin{tabular}{lp{9cm}}
+\toprule
+\textbf{Field} & \textbf{Description} \\
+\midrule
+ID & Unique identifier \\
+Authors, Year, Venue & Bibliographic metadata \\
+SDLC Phase(s) & Lifecycle phases covered \\
+Event Log Source & Jira, GitHub, GitLab, Jenkins, etc. \\
+Event Log Construction Method & Manual, semi-automatic, or automatic \\
+PM Technique Category & Discovery / Conformance / Enhancement / Prediction \\
+Specific Algorithm(s) & Alpha, Heuristics, Inductive Miner, etc. \\
+Stochastic Method & Markov / Monte Carlo / Stochastic Petri Net / None \\
+ML Technique & RF, XGBoost, LSTM, etc. / None \\
+Prediction Target & Remaining time, outcome, lead time, delay, etc. \\
+Integration Level & Single / Dual / Multi-technique \\
+Validation Type & Case study / Experiment / Industrial / Simulation \\
+Tool/Platform & PM4Py, ProM, Disco, custom, etc. \\
+Dataset Size & Number of events and cases analyzed \\
+Process Model Quality & Fitness, precision, generalization (if reported) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{Search Results and Study Selection}
+\label{sec:slr-results-selection}
+
+% (To be completed upon execution of the search protocol.)
+
+This section will report the number of studies retrieved per database, the results of deduplication, title/abstract screening, full-text assessment, snowballing rounds, and the final set of included primary studies. The selection process is documented using a PRISMA 2020 flow diagram~\cite{page2021}.
+
+The study selection proceeds in four phases:
+
+\begin{enumerate}
+\item \textbf{Identification:} Execution of the three search strings across five databases, followed by deduplication.
+\item \textbf{Screening:} Title and abstract screening against IC1--IC5 and EC1--EC5. The thesis supervisor acts as second reviewer on a random 20\% sample of studies at this phase. Inter-rater agreement is reported via Cohen's Kappa; a threshold of $\kappa \geq 0.61$ (substantial agreement) is required before proceeding.
+\item \textbf{Full-text assessment:} Full-text reading and application of all criteria to retained studies.
+\item \textbf{Snowballing:} One to two rounds of backward and forward snowballing from included studies.
+\end{enumerate}
+
+% Figure: PRISMA 2020 Flow Diagram
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\textwidth]{figures/prisma.pdf}
+% \caption{PRISMA 2020 flow diagram of the study selection process.}
+% \label{fig:prisma}
+% \end{figure}
+
+
+\section{Results and Synthesis}
+\label{sec:slr-synthesis}
+
+\subsection{RQ1: Application Landscape}
+\label{sec:slr-rq1}
+
+\subsubsection{RQ1.1: SDLC Phases Covered}
+
+% (To be completed after data extraction.)
+
+This subsection will classify the included studies by the SDLC phases they analyze: Requirements, Design, Development (coding, commits, pull requests), Quality (testing, code review, bug management), Delivery (CI/CD, deployment, release), and Operations (incidents, maintenance). The classification will be presented as a bubble plot mapping PM techniques against SDLC phases over time, and as a frequency table.
+
+\subsubsection{RQ1.2: Event Log Sources and Construction}
+
+% (To be completed after data extraction.)
+
+This subsection will present a taxonomy of event log sources used in the included studies, organized by source type (issue trackers, version control systems, CI/CD pipelines, code review platforms, and cross-tool correlations), the specific tools used, and the construction methods employed (manual, semi-automatic, automatic). The ``cross-tool'' category captures studies that address the case correlation challenge, which constitutes the core problem of Stage~1 in PATHCAST.
+
+
+\subsection{RQ2: Techniques and Prediction}
+\label{sec:slr-rq2}
+
+\subsubsection{RQ2.1: Discovery Algorithms Applied to SDLC}
+
+% (To be completed after data extraction.)
+
+This subsection will catalog the process discovery algorithms applied to software development event logs, reporting the algorithm used, the SDLC phase analyzed, whether process model quality metrics were reported, and the key findings of each study.
+
+\subsubsection{RQ2.2: Predictive and Stochastic Techniques}
+
+% (To be completed after data extraction.)
+
+This subsection will classify the predictive and stochastic techniques employed across the included studies into six families: Classical ML (RF, SVM, NB, LR), Deep Learning (LSTM, CNN, Transformer), Markov Chains (DTMC, CTMC, HMM), Monte Carlo (throughput-based and process-based), Stochastic Petri Nets (SPN, GSPN), and Survival Analysis (Cox, Kaplan-Meier). The classification distinguishes whether each study was applied to software engineering or to generic BPM processes, retaining BPM studies only when the technique is transferable to SDLC contexts.
+
+
+\subsection{RQ3: Integration and Gaps}
+\label{sec:slr-rq3}
+
+\subsubsection{RQ3.1: PM and Stochastic Integration Level}
+
+% (To be completed after data extraction.)
+
+This subsection will assess the degree of integration between process mining and stochastic methods across the included studies, using a four-level classification:
+
+\begin{itemize}
+\item \textbf{L0 (None):} PM or stochastic modeling used in isolation, with no integration.
+\item \textbf{L1 (Sequential):} PM output manually fed to a stochastic model in separate steps.
+\item \textbf{L2 (Pipeline):} Automated data flow from PM to stochastic modeling.
+\item \textbf{L3 (Unified):} Single framework integrating both techniques with formal inter-stage contracts.
+\end{itemize}
+
+The expected distribution is concentrated at levels L0 and L1, with few studies at L2 and none at L3 for SDLC contexts. This concentration constitutes the central gap that PATHCAST addresses.
+
+\subsubsection{RQ3.2: Gap Analysis}
+
+% (To be completed after data extraction.)
+
+This subsection will present a gap analysis matrix mapping techniques (PM Discovery, PM Conformance, PM Enhancement, Markov Chains, Monte Carlo, ML) against SDLC phases (Requirements, Development, Quality, Delivery, Operations) and analytical depth levels (Descriptive, Predictive, Forecasting). Cells are populated with study counts; empty cells represent white spaces in the literature. A heatmap visualization of this matrix will highlight the specific intersection where PATHCAST positions its contribution.
+
+
+\section{Discussion}
+\label{sec:slr-discussion}
+
+\subsection{Research Gap Identification}
+\label{sec:slr-gaps}
+
+% (To be completed after synthesis.)
+
+The synthesis of findings from RQ1 through RQ3 is expected to reveal five key findings:
+
+\begin{description}
+\item[F1: Descriptive Ceiling.] The majority of studies applying process mining to software development remain at the descriptive level (discovery, conformance checking). Few advance to predictive analytics, and none combine process mining with distributional forecasting in SDLC contexts.
+
+\item[F2: Event Log Construction Challenge.] The construction of event logs from heterogeneous software repository sources is reported as a primary challenge across virtually all studies. The absence of standardized construction frameworks limits reproducibility and cross-study comparability.
+
+\item[F3: Stochastic Integration Gap.] Markov chains and Monte Carlo simulation are used extensively in BPM and software reliability engineering, but their integration with process mining for forecasting SDLC processes is practically nonexistent.
+
+\item[F4: Pipeline Fragmentation.] Studies apply techniques in isolation (PM alone, ML alone, MC alone). The formal composition of PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML into an integrated pipeline with inter-stage data contracts has not been proposed in the literature.
+
+\item[F5: Process-Derived Features Unexplored.] ML-based prediction studies in software engineering rely on traditional features (code metrics, commit characteristics) and rarely incorporate features derived from process mining (conformance scores, rework counts, Markov-expected remaining time, path entropy).
+\end{description}
+
+These five findings map directly to the five deficits identified in Section~\ref{sec:gap-analysis}: F1 corresponds to D1 (Descriptive Ceiling), F3 to D3 (Stochastic Integration Absence), F4 to D5 (Pipeline Fragmentation), and F5 to D4 (Feature Engineering Void). F2 provides empirical evidence for a challenge that PATHCAST addresses through its Stage~1 (Event Log Construction).
+
+
+\subsection{Positioning of PATHCAST}
+\label{sec:slr-positioning}
+
+% (To be completed after gap identification.)
+
+This subsection will position PATHCAST within the landscape of existing approaches, mapping which pipeline components have precedent in the literature and which constitute novel contributions. The positioning will reference the gap analysis matrix from Section~\ref{sec:slr-rq3} and the technique integration taxonomy from Table~2.6 in Chapter~\ref{ch:theoretical}.
+
+
+\subsection{Proposed Taxonomy: SPMF}
+\label{sec:slr-taxonomy}
+
+Based on the systematic analysis of the included studies, this review proposes the Software Process Mining and Forecasting (SPMF) taxonomy, a classification framework with three dimensions:
+
+\begin{description}
+\item[Analytical Depth] classifies studies along four levels: L1 (Descriptive: discovery, conformance), L2 (Diagnostic: bottleneck analysis, rework identification), L3 (Predictive: outcome prediction, remaining time estimation), and L4 (Forecasting: distributional, probabilistic forecasts).
+
+\item[SDLC Coverage] maps which lifecycle phases are addressed: Requirements and Design, Development (coding, commits, pull requests), Quality (testing, code review, bugs), Delivery (CI/CD, deployment, release), and Operations (incidents, maintenance).
+
+\item[Technique Integration] classifies the degree of methodological combination: Single (PM only, ML only, MC only), Dual (PM + ML, PM + Markov, Markov + MC), and Pipeline (PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML).
+\end{description}
+
+The SPMF taxonomy enables the systematic identification of white spaces in the literature and provides a coordinate system for positioning new contributions.
+
+
+\subsection{Research Agenda}
+\label{sec:slr-agenda}
+
+The gaps identified in this review motivate four research directions:
+
+\begin{description}
+\item[RA1: Standardized Event Log Construction for SDLC.] Frameworks for transforming heterogeneous repository data into comparable event logs with cross-tool case correlation. This direction maps to Stage~1 of PATHCAST (Section~\ref{sec:stage1}).
+
+\item[RA2: Process-Aware Stochastic Forecasting.] Formal integration of process mining with Markov chains and Monte Carlo simulation for distributional forecasting of SDLC processes. This direction maps to Stages~2--4 of PATHCAST (Sections~\ref{sec:stage2}--\ref{sec:stage4}).
+
+\item[RA3: Process-Derived Features for ML.] Systematic exploration of features derived from process mining (conformance scores, rework counts, Markov-expected remaining time) for outcome prediction in software engineering. This direction maps to the ML Enhancement Component of PATHCAST (Section~\ref{sec:ml-component}).
+
+\item[RA4: Empirical Benchmarking.] Empirical evaluation of forecasting methods on comparable OSS repository datasets with temporal hold-out and standardized baselines. This direction maps to the Empirical Evaluation in Chapter~\ref{ch:evaluation}.
+\end{description}
+
+
+\subsection{Implications for Practitioners}
+\label{sec:slr-practitioners}
+
+% (To be completed after discussion.)
+
+This subsection will present practical recommendations for software organizations, including the adoption of issue tracking systems with explicit status transitions, branch naming conventions that enable case correlation, available tooling (PM4Py, ProM), and current limitations of process mining approaches for software development.
+
+
+\section{Threats to Validity of the SLR}
+\label{sec:slr-threats}
+
+\subsection{Construct Validity}
+
+The search strings may exclude studies that use non-canonical terminology to describe process mining or stochastic modeling techniques. This threat is mitigated through three mechanisms: the complementary search string captures MSR-specific terminology, the frontier string targets the stochastic-PM intersection directly, and snowballing (both backward and forward) identifies studies missed by automated search. The validation set of 10 control papers provides an empirical check on search completeness.
+
+\subsection{Internal Validity}
+
+Selection bias may arise from subjective interpretation of inclusion and exclusion criteria. This threat is mitigated by having the thesis supervisor review a random 20\% sample of studies during title/abstract screening, with inter-rater agreement reported via Cohen's Kappa. A pilot data extraction on 5 studies is conducted before full extraction to calibrate the extraction form and resolve ambiguities. If a second independent reviewer is not available for the full screening, this limitation is acknowledged explicitly.
+
+\subsection{External Validity}
+
+The review is limited to English-language, peer-reviewed publications, potentially excluding relevant work published in other languages or in grey literature. This limitation is inherent to the chosen review methodology and is acknowledged. The broad time span (1994--2026) and five-database coverage partially mitigate geographic and temporal bias.
+
+\subsection{Conclusion Validity}
+
+The interpretation of the SPMF taxonomy and the gap analysis matrix involves subjective judgment. This threat is mitigated by deriving the taxonomy dimensions from the extracted data and applying numerical quality assessment criteria with explicit thresholds.
+
+
+\section{Chapter Summary}
+\label{sec:slr-summary}
+
+% (To be completed after all sections are finalized.)
+
+This chapter will summarize the key findings of the systematic literature review, the identified research gap at the intersection of process mining, stochastic modeling, and machine learning for software process forecasting, and how this gap motivates the design decisions of the PATHCAST method presented in Chapter~\ref{ch:method}. The four research agenda directions (RA1--RA4) will be connected to the specific pipeline stages and components of PATHCAST, establishing the SLR as the empirical foundation for the thesis contribution.

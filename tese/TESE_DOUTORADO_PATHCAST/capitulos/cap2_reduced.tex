@@ -1,0 +1,323 @@
+% =============================================================================
+% CHAPTER 2 — THEORETICAL FOUNDATION (REDUCED, six-section version)
+% Thesis: PATHCAST
+% Style:  formal definition -> central property -> deferral to appendix/chapter
+%         that develops the topic. Each section is bounded to ~1 page.
+% Defer:  derivations, proofs, algorithmic details and numerical examples to
+%         Appendices A (Markov), B (Probabilistic Metrics), C (Process Mining
+%         details) and D (end-to-end walkthrough).
+% =============================================================================
+
+\chapter{Theoretical Foundation}
+\label{ch:theoretical-foundation}
+
+This chapter states the formal vocabulary on which PATHCAST is built. Six
+concepts are introduced in succession: process mining
+(Section~\ref{sec:process-mining}), mining of software repositories
+(Section~\ref{sec:msr}), Markov chains (Section~\ref{sec:markov}), Monte
+Carlo simulation and the probabilistic forecasting metrics it requires
+(Section~\ref{sec:monte-carlo}), machine learning for software engineering
+(Section~\ref{sec:ml-se}), and the entropy of trace variants
+(Section~\ref{sec:variant-entropy-cap2}). Each section is intentionally short:
+its purpose is to fix notation and quote the central property used elsewhere in
+the thesis. Derivations, algorithmic internals and worked examples are
+deferred to Appendices~A--D. The literature gap that motivates the method is
+synthesised in Chapter~\ref{ch:slr}, not here.
+
+
+% =============================================================================
+% 2.1 PROCESS MINING
+% =============================================================================
+\section{Process Mining}
+\label{sec:process-mining}
+
+Process mining extracts behavioural knowledge from event logs recorded by
+information systems~\cite{aalst2016process}. Three classes of analysis are
+distinguished: \emph{discovery} extracts a model $M$ from a log
+$\mathcal{L}$ alone; \emph{conformance} compares $\mathcal{L}$ against a
+given $M$; \emph{enhancement} enriches $M$ with information derived from
+$\mathcal{L}$. PATHCAST uses all three.
+
+\begin{definition}[Event, Trace, Event Log]
+\label{def:event}
+\label{def:event-log}
+An event $e = (c, a, t, d)$ is a tuple with case identifier
+$c \in \mathcal{C}$, activity $a \in \mathcal{A}$, timestamp
+$t \in \mathbb{R}^+$ and attribute map $d \in \mathcal{D}$. Projections
+$\kappa(e), \alpha(e), \tau(e)$ return case, activity and timestamp. A
+trace $\sigma_c = \langle e_1, \ldots, e_n \rangle$ is the
+timestamp-ordered sequence of events of case $c$. An event log
+$\mathcal{L} = \{\sigma_{c_1}, \ldots, \sigma_{c_N}\}$ is a multiset of
+traces.
+\end{definition}
+
+\begin{definition}[Alignment and Alignment-Based Fitness]
+\label{def:alignment}
+\label{def:fitness}
+An alignment $\gamma$ between trace $\sigma$ and model $M$ is a sequence
+of synchronous, log and model moves~\cite{adriansyah2011alignments}. With
+$\gamma^*$ the cost-optimal alignment,
+\begin{align}
+\text{fitness}(\sigma, M) &= 1 - \frac{\text{cost}(\gamma^*)}
+{\text{cost}(\gamma_{\text{worst}})}, \label{eq:fitness} \\
+\text{conf}(c) &= \frac{|\{(s_i,m_i)\in\gamma^*_c : s_i=m_i\}|}{|\gamma^*_c|}. \label{eq:case-conformance-cap2}
+\end{align}
+Log-level fitness is the trace-weighted average. The case-level
+conformance $\text{conf}(c)$ is reused as an ML feature in
+Chapter~\ref{ch:method}.
+\end{definition}
+
+PATHCAST adopts the Inductive Miner with infrequent-behaviour filtering
+(IMf)~\cite{leemans2013discovering} because it is the only discovery
+algorithm that guarantees soundness by construction, producing a
+block-structured process tree compatible with SDLC workflows. Discovery
+quality is quantified along four dimensions---fitness, precision,
+generalisation and simplicity~\cite{aalst2016process}; precision and
+generalisation are estimated by the ETC metric and state-visit frequency
+analysis, respectively. The internals of IMf, the alignment search and
+the precision/generalisation estimators are presented in Appendix~A.
+
+
+% =============================================================================
+% 2.2 MINING SOFTWARE REPOSITORIES
+% =============================================================================
+\section{Mining Software Repositories}
+\label{sec:msr}
+
+Mining Software Repositories (MSR) extracts evidence from version control,
+issue trackers, code review platforms and CI/CD pipelines~\cite{hassan2008road,
+kagdi2007}. The bridge with process mining was established by Cook and
+Wolf~\cite{cook1998} and formalised by Poncin et al.~\cite{poncin2011process}:
+software events are reframed as sequences belonging to process instances.
+
+Modern toolchains emit heterogeneous, partly overlapping streams:
+issue-tracker status transitions (Jira, GitHub Issues), version-control
+commits (Git, SVN), code-review activities (PRs, Gerrit) and CI/CD
+outcomes (Jenkins, GitHub Actions). The empirical challenge is
+integration~\cite{kochhar2019moving, Dixit2021}: a unified event log
+requires identifier mapping, temporal alignment and semantic
+harmonisation across tools. Curated datasets and collectors---SEART GitHub
+Search~\cite{seart2021}, GH~Archive~\cite{gharchive2023},
+SmartSHARK~\cite{trautsch2020smartshark},
+GrimoireLab~\cite{dueenas2021grimoirelab} and the Public Jira
+Dataset~\cite{montgomery2022jira}---reduce candidate-generation cost
+without eliminating known validity threats (open-source bias, bot noise,
+incompleteness). The construction sub-tasks (extraction, case
+correlation, activity mapping) and their archaeological caveats
+(stratigraphy, contextual interpretation, taphonomic
+bias~\cite{Zimmermann2005MiningVersionHistories}) are operationalised by
+PATHCAST Stage~1 (Chapter~\ref{ch:method}). Software-specific construction
+patterns are catalogued in Appendix~C, Section~C.4.
+
+
+% =============================================================================
+% 2.3 STOCHASTIC PROCESS MODELING WITH MARKOV CHAINS
+% =============================================================================
+\section{Stochastic Process Modeling with Markov Chains}
+\label{sec:markov}
+
+Software delivery evolves through discrete states (Backlog, In~Progress,
+Review, Testing, Done) under queuing, rework and variable service times.
+Discrete-time Markov chains (DTMCs) provide the mathematical formalism for
+the state-transition layer of PATHCAST~\cite{Spedicato2017, Haggstrom2002}.
+
+\begin{definition}[Discrete-Time Markov Chain]
+\label{def:dtmc}
+A stochastic process $\{X_t\}_{t \in \mathbb{N}}$ on finite state space
+$S = \{1, \ldots, m\}$ is a DTMC if
+\begin{equation}
+\label{eq:markov-property}
+P(X_{t+1} = j \mid X_t, \ldots, X_0) = P(X_{t+1} = j \mid X_t).
+\end{equation}
+The (time-homogeneous) chain is fully described by a row-stochastic
+transition matrix $P = [p_{ij}]$, with $p_{ij} = P(X_{t+1}=j \mid X_t=i)$
+satisfying $p_{ij} \geq 0$ and $\sum_j p_{ij} = 1$
+(Definition~\ref{def:transition-matrix}).
+\end{definition}
+
+\begin{definition}[Transition Matrix]
+\label{def:transition-matrix}
+$P$ as in Definition~\ref{def:dtmc}; multi-step probabilities follow the
+Chapman--Kolmogorov relation $P^{(n)} = P^n$.
+\end{definition}
+
+\begin{definition}[Absorbing Chain and Fundamental Matrix]
+\label{def:absorbing}
+For an absorbing chain with $t$ transient and $r$ absorbing states the
+canonical form is
+\begin{align}
+P &= \begin{pmatrix} Q & R \\ \mathbf{0} & I_r \end{pmatrix}, \label{eq:absorbing-form} \\
+N &= (I_t - Q)^{-1} = \sum_{k=0}^{\infty} Q^k, \label{eq:fundamental}
+\end{align}
+where $N_{ij}$ is the expected number of visits to transient state $j$
+starting from transient state $i$ before absorption
+(Definition~\ref{def:fundamental-matrix}).
+\end{definition}
+
+\begin{definition}[Fundamental Matrix]
+\label{def:fundamental-matrix}
+The matrix $N$ in Equation~\ref{eq:fundamental} is well-defined because
+$\rho(Q) < 1$.
+\end{definition}
+
+\begin{theorem}[Properties of Absorbing Chains]
+\label{thm:absorption}
+With $N = (I-Q)^{-1}$:
+\emph{(i)} $E[T_i] = (N\mathbf{1})_i$;
+\emph{(ii)} $\text{Var}(T_i) = (N(2N_{\text{dg}}-I)\mathbf{1})_i - E[T_i]^2$;
+\emph{(iii)} $B = NR$ is the absorption probability matrix. Proofs in
+Appendix~A.
+\end{theorem}
+
+Counts $c_{ij}$ of observed $i \to j$ transitions yield the maximum
+likelihood estimator
+\begin{equation}
+\label{eq:mle-transition}
+\hat{p}_{ij} = \frac{c_{ij}}{\sum_{k} c_{ik}};
+\end{equation}
+Bayesian smoothing under a symmetric Dirichlet prior is derived in
+Appendix~A. Augmenting a DTMC with state-dependent sojourn distributions
+$\{H_{ij}\}$ yields a semi-Markov
+process~\cite{RoggeSolti2015NonMarkovianSPN}:
+
+\begin{definition}[Semi-Markov Process]
+\label{def:semi-markov}
+The pair (DTMC $\{X_n\}$, sojourn distributions $\{H_{ij}\}$) under which
+the process remains in $X_n$ for a random time drawn from
+$H_{X_n,X_{n+1}}$ before transitioning.
+\end{definition}
+
+The first-order assumption hides history dependence and time-varying
+transitions; PATHCAST mitigates both through optional state-space
+expansion and the ML residual signal (Section~\ref{sec:ml-se}).
+
+
+% =============================================================================
+% 2.4 MONTE CARLO SIMULATION AND PROBABILISTIC FORECASTING METRICS
+% =============================================================================
+\section{Monte Carlo Simulation and Probabilistic Forecasting Metrics}
+\label{sec:monte-carlo}
+
+Monte Carlo simulation estimates statistical properties of intractable
+systems through repeated random sampling~\cite{metropolis1949monte,
+robert2004monte}. In PATHCAST, MC generates synthetic process trajectories
+by alternating sojourn draws from $\hat{F}_s$ and next-state draws from
+$P[s,:]$ until absorption (Chapter~\ref{ch:method},
+Algorithm~\ref{alg:mc-full}).
+
+Convergence rests on two classical results. The strong law of large
+numbers gives, for i.i.d.\ $X_1, X_2, \ldots$ with $E[X]=\mu$,
+\begin{equation}
+\label{eq:lln}
+\bar{X}_M = \tfrac{1}{M}\sum_{m=1}^{M} X_m \xrightarrow{a.s.} \mu.
+\end{equation}
+The central limit theorem yields, with $\text{Var}(X)=\sigma^2 < \infty$,
+\begin{equation}
+\label{eq:clt}
+\frac{\bar{X}_M - \mu}{\sigma/\sqrt{M}} \xrightarrow{d} \mathcal{N}(0,1),
+\end{equation}
+so for any trajectory functional $g$ the MC estimator and confidence
+interval are
+\begin{align}
+\hat{\mu}_g &= \tfrac{1}{M}\sum_{m=1}^{M} g(\omega^{(m)}), \label{eq:mc-estimator} \\
+\text{CI} &= \hat{\mu}_g \pm z_{\alpha/2} \cdot \tfrac{\hat{\sigma}_g}{\sqrt{M}}. \label{eq:mc-ci}
+\end{align}
+The standard error scales as $O(1/\sqrt{M})$ independently of
+dimension, and seed control via the Mersenne Twister makes the simulation
+exactly reproducible.
+
+\paragraph{Forecasting metrics.} A distributional forecast must be
+evaluated jointly for sharpness and calibration. The continuous ranked
+probability score~\cite{gneiting2007strictly} is the operational
+choice in this thesis:
+
+\begin{definition}[CRPS]
+\label{def:crps}
+For predicted distribution $\hat{F}$ and observed value $y$,
+\begin{equation}
+\label{eq:crps}
+\text{CRPS}(\hat{F}, y) = \int_{-\infty}^{\infty}
+   [\hat{F}(t) - \mathbf{1}(t \geq y)]^2 \, dt.
+\end{equation}
+CRPS is a strictly proper scoring rule and reduces to mean absolute error
+when $\hat{F}$ degenerates to a point mass, so distributional forecasters
+and point baselines remain comparable on a common scale. Calibration is
+summarised by the aggregate calibration error
+\begin{equation}
+\label{eq:ace}
+\text{ACE} = \tfrac{1}{|\mathcal{A}|}
+   \sum_{\alpha \in \mathcal{A}}|\hat{p}_\alpha - \alpha|,
+\end{equation}
+averaged across decile checkpoints. Worked CRPS-versus-MAE derivations
+and numerical examples are in Appendix~B.
+\end{definition}
+
+
+% =============================================================================
+% 2.5 MACHINE LEARNING FOR SOFTWARE ENGINEERING
+% =============================================================================
+\section{Machine Learning for Software Engineering}
+\label{sec:ml-se}
+
+Machine learning is widely applied to defect prediction, effort
+estimation and code quality assessment~\cite{Wahono2015, pachouly2022};
+process-oriented prediction (throughput, workflow optimisation) remains
+comparatively underexplored~\cite{kotti2023}. PATHCAST formulates outcome
+prediction as supervised learning: a binary classifier
+$\hat{f}\colon \mathbb{R}^d \to \{0,1\}$ for on-time versus delayed cases,
+and a regressor $\hat{f}_T\colon \mathbb{R}^d \to \mathbb{R}^+$ for lead
+time, both trained on a feature vector $\mathbf{x}_c \in \mathbb{R}^d$
+derived per case. The candidate algorithms (Random
+Forest~\cite{breiman2001random}, XGBoost~\cite{chen2016xgboost},
+logistic/linear regression baselines, LSTM~\cite{tax2017} for the
+sequence comparator) and the training protocol (temporal hold-out,
+hyperparameter search, SHAP interpretation) are specified in
+Chapter~\ref{ch:methodology}. The working hypothesis is that
+process-derived features---conformance, rework count, expected remaining
+transitions, completion probability, path entropy---add predictive value
+beyond traditional MSR features; the feature catalogue and the
+PM-only/MSR-only/Combined comparison protocol are in Chapter~\ref{ch:method},
+Table~\ref{tab:features}.
+
+
+% =============================================================================
+% 2.6 VARIANT ENTROPY
+% =============================================================================
+\section{Variant Entropy}
+\label{sec:variant-entropy-cap2}
+
+The trace-variant distribution $V = \{v_1, \ldots, v_k\}$ with empirical
+frequencies $p(v_i)$ summarises the diversity of execution paths in an
+event log. The Shannon entropy
+\begin{equation}
+\label{eq:variant-entropy-cap2}
+H(V) = - \sum_{v \in V} p(v)\, \log_2 p(v)
+\end{equation}
+quantifies path uncertainty in bits; its normalised form
+$H_{\text{norm}}(V) = H(V) / \log_2 |V| \in [0,1]$ is a scale-independent
+process-complexity proxy. Higher $H_{\text{norm}}$ signals greater
+behavioural heterogeneity and is empirically correlated with lower
+forecast confidence; PATHCAST uses it as both a diagnostic indicator at
+Stage~2 (Section~\ref{sec:variant-entropy}) and a feature of the ML
+component.
+
+
+% =============================================================================
+% 2.7 CHAPTER SYNTHESIS  (one paragraph)
+% =============================================================================
+\section{Chapter Synthesis}
+\label{sec:ch2-synthesis}
+
+The six concepts compose the PATHCAST pipeline as follows: process mining
+yields the discovered backbone and the per-case conformance feature;
+mining of software repositories provides the heterogeneous event sources
+from which that log is built; the Markov chain layer turns the backbone
+into a probabilistic state-transition model with closed-form expressions
+for expected completion time and absorption probabilities; Monte Carlo
+simulation, paired with CRPS and ACE, produces and evaluates the
+distributional forecasts; machine learning consumes process-derived
+features alongside MSR features to refine the point predictions; and the
+entropy of variants quantifies the process complexity that constrains
+forecast confidence. The empirical evidence that this integration has not
+been previously proposed for software development is the subject of
+Chapter~\ref{ch:slr}.

@@ -1,0 +1,74 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Positioning relative to existing work.}}{6}{table.caption.19}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and expected outputs.}}{17}{table.caption.21}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces PICO decomposition for search string construction.}}{18}{table.caption.22}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Database-specific search adaptations and raw retrieval counts.}}{19}{table.caption.23}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Control papers for search string validation.}}{20}{table.caption.24}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Inclusion and exclusion criteria.}}{22}{table.caption.25}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Quality assessment checklist.}}{23}{table.caption.26}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Quality-assessment results for the confirmed included set ($n = 169$; full QA applied). Auto-generated from \texttt {pipeline/qa\_llm.py}.}}{23}{table.caption.27}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Data extraction form.}}{24}{table.caption.28}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Record retrieval by source.}}{25}{table.caption.29}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Working set composition.}}{26}{table.caption.30}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Title/abstract screening results.}}{26}{table.caption.31}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Full-text screening outcomes (886 papers forwarded from T/A phase).}}{27}{table.caption.32}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Integration levels in the 169-study confirmed set and PATHCAST positioning.}}{44}{table.caption.40}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Inter-rater agreement (Cohen's $\kappa $) between primary screener (claude-haiku-4-5) and verifier (claude-sonnet-4-6) on a stratified random 20\% sample.}}{47}{table.caption.41}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Auxiliary-tier inter-rater agreement (cross-model verification: Haiku 4.5 primary vs.\ Sonnet 4.6 verifier on a stratified 20\% sample).}}{47}{table.caption.42}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Auxiliary-corpus sensitivity check. A random sample of $n$ papers from the deferred auxiliary corpus was re-screened with the same T/A LLM protocol used for the working set.}}{49}{table.caption.43}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Auxiliary-corpus FT-screening outcome (papers that passed T/A on the 3{,}807-paper deferred corpus).}}{50}{table.caption.44}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces Re-FT screening of aux-pending papers that gained an abstract through the post-hoc enrichment cascade.}}{50}{table.caption.45}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces EC5 recovery attempt against four open-access discovery APIs.}}{50}{table.caption.46}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Quality assessment combined across working-set and auxiliary tiers ($n = 381$).}}{51}{table.caption.47}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces Process mining applied to software development.}}{52}{table.caption.48}%
+\contentsline {table}{\numberline {3.22}{\ignorespaces Technique integration ($\text {$\mathsurround \z@ \mathchar "5D8$}$) across studies. PATHCAST is the first proposal at the full intersection.}}{53}{table.caption.49}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Event extraction mapping per data source.}}{62}{table.caption.52}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Default activity mapping from source event types to SDLC taxonomy.}}{64}{table.caption.53}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Throughput-based vs.\ process-aware Monte Carlo.}}{72}{table.caption.54}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Feature definitions for the ML component.}}{73}{table.caption.55}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Inter-stage data contracts.}}{75}{table.caption.56}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Computational complexity per pipeline stage.}}{77}{table.caption.57}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Assumptions, implications, and mitigations.}}{78}{table.caption.58}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Method components vs.\ research questions.}}{78}{table.caption.59}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Mapping of DSRM activities to thesis components.}}{81}{table.caption.60}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Aggregate dataset statistics (48 repositories).}}{83}{table.caption.61}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Dataset diversity profile.}}{83}{table.caption.62}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics for RQ1.}}{86}{table.caption.64}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics for RQ2.}}{87}{table.caption.65}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Evaluation metrics for RQ3.}}{88}{table.caption.66}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Baseline methods.}}{88}{table.caption.67}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces A priori power estimates ($n = 48$, four baselines).}}{89}{table.caption.68}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Summary: research questions, evaluation stages, metrics, baselines.}}{92}{table.caption.69}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces Search strings by database and field scope.}}{112}{table.caption.72}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {F.1}{\ignorespaces LLM parameters in each screening phase.}}{118}{table.caption.73}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {G.1}{\ignorespaces Data extraction form: all fields in \texttt {extraction\_template.csv}.}}{121}{table.caption.74}%
+\contentsline {table}{\numberline {G.2}{\ignorespaces Controlled vocabulary for LLM structured output.}}{122}{table.caption.75}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {H.1}{\ignorespaces Priority-band definitions for the full-text review queue.}}{124}{table.caption.76}%
+\contentsline {table}{\numberline {H.2}{\ignorespaces Abstract enrichment results by priority band.}}{125}{table.caption.78}%
+\contentsline {table}{\numberline {H.3}{\ignorespaces Quality assessment checklist with scoring guide.}}{126}{table.caption.79}%
+\contentsline {table}{\numberline {H.4}{\ignorespaces Complete control-paper set for string validation.}}{127}{table.caption.80}%
+\contentsline {table}{\numberline {H.5}{\ignorespaces SPMF taxonomy: three dimensions with level definitions.}}{128}{table.caption.81}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Multi-criterion scoring rubric for the top-32 reading list.}}{129}{table.caption.82}%
+\contentsline {table}{\numberline {I.2}{\ignorespaces Top-32 reading list with score, year, IC cluster, and summary of the main finding. Papers marked with $\dagger $ are forced inclusions due to seminal status.}}{131}{table.caption.83}%
+\contentsline {table}{\numberline {I.3}{\ignorespaces Review pipeline scripts and their functions.}}{132}{table.caption.84}%
+\contentsline {table}{\numberline {I.4}{\ignorespaces Persistent review artefacts.}}{132}{table.caption.85}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {J.1}{\ignorespaces Repository count by primary language stratum ($n = 48$).}}{134}{table.caption.86}%
+\contentsline {table}{\numberline {J.2}{\ignorespaces Complete list of 48 evaluation repositories with stratification metadata. Abbreviations: Scale --- S\,=\,Small ($<5$K commits), M\,=\,Medium (5--20K), L\,=\,Large ($>20$K); Gov. --- Fdn\,=\,Foundation, Corp\,=\,Corporate, Comm\,=\,Community; WF --- B\,=\,Basic, St\,=\,Standard, A\,=\,Advanced.}}{135}{table.J.2}%
