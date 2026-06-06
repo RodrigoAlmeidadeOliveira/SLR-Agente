@@ -1401,7 +1401,46 @@ A5: Complete case observation   & Bias if long cases excluded                & I
 \section{Chapter Summary}
 \label{sec:method-summary}
 
-The PATHCAST components map to the thesis contributions as follows:
+This chapter presented PATHCAST, a formally specified forecasting framework
+for software-development processes that integrates process mining,
+stochastic modeling, Monte Carlo simulation, and machine learning into a
+unified architecture for transforming heterogeneous software-engineering
+repositories into probabilistic forecasts. Stage~1 formalized event-log
+construction from multiple data sources through configurable extraction,
+correlation, mapping, and quality-assessment procedures. Stage~2 introduced
+process discovery, conformance analysis, and performance enhancement as
+mechanisms for extracting executable process representations and
+process-quality metrics from SDLC event logs. Stage~3 defined the stochastic
+layer---Markov-chain estimation, absorbing-state analysis, empirical
+sojourn-time modeling, bottleneck identification, and rework
+quantification. Stage~4 formalized process-aware Monte Carlo simulation for
+distributional forecasts (completion probabilities, percentile estimates,
+tail-risk, and path-level outcome distributions). Finally, the
+machine-learning enhancement introduced a family of process-derived
+predictive features based on conformance, state occupancy, expected
+remaining time, absorption probabilities, and rework indicators.
+
+A central contribution is the formal composition of these components through
+explicit inter-stage contracts. Unlike the prior approaches identified in
+Chapter~\ref{ch:slr}, which apply process mining, stochastic modeling,
+simulation, or machine learning in isolation or through loosely coupled
+pipelines, PATHCAST defines a unified end-to-end architecture in which each
+stage produces formally specified outputs that satisfy the input
+requirements of the next. This compositional design enabled the derivation
+of correctness guarantees, convergence properties, calibration criteria,
+complexity bounds, and information-theoretic arguments supporting the value
+of process-aware forecasting.
+
+The framework directly addresses the five gaps identified in the systematic
+review: the event-log construction framework addresses the lack of
+standardized SDLC event-log generation (F2); the integration of process
+mining with absorbing Markov chains and Monte Carlo simulation addresses the
+stochastic-integration gap (F3); the process-derived predictive features
+address the feature-engineering void (F5); the formal pipeline architecture
+addresses the fragmentation across existing approaches (F4); and the
+transition from descriptive process analysis toward probabilistic
+forecasting responds to the descriptive ceiling (F1). Concretely, the
+PATHCAST components map to the thesis contributions as follows:
 
 \begin{itemize}
   \item \textbf{Stage 1} addresses \textbf{C2}: configurable, multi-source

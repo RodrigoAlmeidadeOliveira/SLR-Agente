@@ -28,6 +28,17 @@ This research adopts Design Science Research (DSR) following
 Hevner et al.~\cite{hevner2004} and the DSRM process of Peffers et
 al.~\cite{peffers2007}.
 
+Design Science Research was selected because the primary objective of this
+work is not merely to explain or predict an existing phenomenon, but to
+\emph{design}, formally specify, implement, and evaluate an artifact capable
+of solving a previously identified problem---the absence of an integrated,
+process-aware probabilistic forecasting method for software-development
+processes. This distinguishes the present research from explanatory or
+purely observational paradigms: it is engineering research, in which the
+artifact (the PATHCAST method and its software instantiation) is itself the
+central contribution, and the evaluation establishes that the artifact meets
+its intended goals.
+
 \subsection{DSR Artifact Characterization}
 \label{sec:dsr-artifact}
 
@@ -35,6 +46,14 @@ The artifact produced is a \textbf{method}: PATHCAST is a formally
 specified pipeline that prescribes how to transform repository data into
 probabilistic process forecasts. The supporting \textbf{instantiation} is
 a Python tool implementing the four pipeline stages and the ML component.
+In the terms of Gregor and Hevner~\cite{gregor2013positioning}, PATHCAST is
+therefore a Level-2 design artifact, combining a \emph{method} and an
+\emph{instantiation}: the method specifies the transformation process from
+SDLC event data to probabilistic forecasts, while the instantiation
+operationalizes this method as an executable software system. This dual
+characterization is what allows the artifact to be evaluated both
+analytically (the formal properties of Chapter~\ref{ch:method}) and
+empirically (the experiments designed in this chapter).
 
 
 \subsection{DSRM Process Instantiation}
@@ -87,6 +106,24 @@ techniques.
 
 The empirical evaluation uses 48 open-source software repositories.
 
+\subsection{Dataset Rationale}
+\label{sec:dataset-rationale}
+
+The 48 repositories were selected to maximize heterogeneity with respect to
+project size, contributor population, activity patterns, programming
+ecosystem, and governance model, reducing the risk that the results are
+specific to a single development context and thereby strengthening external
+validity. The final size of 48 reflects a deliberate compromise between this
+diversity and the computational cost of executing the complete PATHCAST
+pipeline---process discovery, Markov estimation, Monte Carlo simulation, and
+machine-learning evaluation---on every repository under temporal hold-out and
+leave-one-project-out protocols. A larger corpus would increase statistical
+power marginally (the cross-repository tests already attain high power for
+large effects; Section~\ref{sec:power-analysis}) at a substantial increase in
+pipeline-execution and verification effort, whereas a smaller corpus would
+compromise stratified coverage of the diversity dimensions in
+Table~\ref{tab:dataset-diversity}.
+
 \subsection{Repository Selection Criteria}
 \label{sec:selection-criteria}
 
@@ -119,14 +156,69 @@ against C2 and C5 via the GitHub REST API~\cite{github2023api}.
 \paragraph{Step 3 — Stratified selection.} 48 repositories selected by
 stratified sampling across the dimensions of
 Table~\ref{tab:dataset-diversity}: 3--4 per primary language; balanced
-across scale tiers; $\geq 4$ per governance model.
+across scale tiers; $\geq 4$ per governance model. Stratification was
+adopted to reduce selection bias and to ensure representation across
+heterogeneous development contexts (programming ecosystems, project scales,
+and governance structures), rather than over-representing any single
+context. Formally, the selection is the function
+\begin{definition}[Repository Selection Function]
+\label{def:repo-selection}
+\[
+\textsc{Select}: (\mathcal{P}, \mathcal{C}_{\text{repo}}) \mapsto
+\mathcal{D}, \qquad \mathcal{D} \subseteq \mathcal{P},\ |\mathcal{D}| = 48,
+\]
+where $\mathcal{P}$ is the candidate pool obtained from SEART (Step~1),
+$\mathcal{C}_{\text{repo}}$ are the inclusion criteria of
+Section~\ref{sec:selection-criteria}, and $\mathcal{D}$ is the stratified
+sample satisfying the per-stratum quotas above.
+\end{definition}
 
-\paragraph{Step 4 — Jira enrichment.} For Apache and Spring projects,
-the issue component was enriched with the Public Jira Dataset of
-Montgomery et al.~\cite{montgomery2022jira}.
+\paragraph{Step 4 — Jira enrichment.} For repositories whose development
+workflow relied on Jira as the primary issue-tracking system (the Apache and
+Spring projects), the issue histories were enriched with the Public Jira
+Dataset of Montgomery et al.~\cite{montgomery2022jira}, enabling recovery of
+workflow-state transitions that are not directly available through the GitHub
+APIs.
 
 The complete list of 48 repositories is in
-Appendix~\ref{app:repository-list}.
+Appendix~\ref{app:repository-list}. The overall selection and enrichment
+flow is summarized in Figure~\ref{fig:repo-selection}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=6mm,
+  box/.style={draw, rounded corners=4pt, align=center,
+              text width=6.6cm, minimum height=0.95cm,
+              font=\small, fill=white, thick},
+  note/.style={draw, rounded corners=4pt, align=left,
+               inner xsep=5pt, inner ysep=4pt, text width=4.3cm,
+               minimum height=0.8cm, font=\footnotesize,
+               fill=gray!8, draw=gray!60},
+  arr/.style={->, >=Stealth, thick},
+  sidearr/.style={->, >=Stealth, dashed, draw=gray!70, thick},
+]
+\node[box] (cand) {\textbf{Candidate generation (SEART)}\\150 candidate repositories};
+\node[box, below=of cand] (crit) {\textbf{Inclusion / exclusion criteria}\\$\geq$1{,}000 commits, issues+PRs,\\non-fork, active, $\geq$5 contributors};
+\node[box, below=of crit] (verif) {\textbf{Criterion verification}\\GitHub REST API};
+\node[box, below=of verif] (strat) {\textbf{Stratified sampling}\\language $\times$ scale $\times$ governance};
+\node[box, below=of strat] (sel) {\textbf{48 selected repositories}};
+\node[box, below=of sel] (jira) {\textbf{Jira enrichment}\\Apache / Spring (Montgomery et al.)};
+\node[box, below=of jira] (final) {\textbf{Final frozen dataset}\\(snapshots for evaluation)};
+
+\draw[arr] (cand) -- (crit);
+\draw[arr] (crit) -- (verif);
+\draw[arr] (verif) -- (strat);
+\draw[arr] (strat) -- (sel);
+\draw[arr] (sel) -- (jira);
+\draw[arr] (jira) -- (final);
+
+\node[note, right=8mm of strat] (note1) {Quotas: 3--4 per language; balanced scale tiers; $\geq$4 per governance model};
+\draw[sidearr] (strat.east) -- (note1.west);
+\end{tikzpicture}
+\caption{Repository selection and enrichment process.}
+\label{fig:repo-selection}
+\end{figure}
 
 
 \subsection{Data Collection}
@@ -140,9 +232,16 @@ Per repository:
     (or Jira~\cite{montgomery2022jira} for Apache/Spring).
     \item Pull requests via GraphQL API.
     \item GitHub Actions runs (only $\geq 50$ runs counts as Advanced
-    maturity).
+    maturity). The threshold of 50 workflow executions was adopted to reduce
+    the influence of sporadic CI/CD usage and to characterize repositories
+    with sustained automation practices, rather than projects that merely
+    trialed CI/CD.
 \end{itemize}
 
+To guarantee reproducibility against the continuous evolution of live
+repositories, each repository snapshot was frozen at its collection date;
+all analyses in this thesis are based on these frozen snapshots, and the
+collection dates are recorded in Appendix~\ref{app:repository-list}.
 Data stored in PostgreSQL for Stage~1 ingestion.
 
 
@@ -550,6 +649,32 @@ naïve resampling (vs.\ B4).
 \section{Statistical Analysis Procedures}
 \label{sec:statistical-analysis}
 
+\subsection{Statistical Hypotheses}
+\label{sec:hypotheses}
+
+The inferential analysis is framed by explicit hypotheses. For RQ2, letting
+$\mu_{\text{PC}}$ and $\mu_{B}$ denote the median per-repository CRPS of
+PATHCAST and of baseline $B \in \{\text{B1},\text{B2},\text{B3},\text{B4}\}$:
+\[
+H_0^{\text{RQ2}}:\ \mu_{\text{PC}} \geq \mu_{B}
+\qquad\text{vs.}\qquad
+H_1^{\text{RQ2}}:\ \mu_{\text{PC}} < \mu_{B}
+\]
+(lower CRPS is better), tested per baseline. For RQ3, letting
+$\mu_{\text{Comb}}$, $\mu_{\text{PM}}$, and $\mu_{\text{MSR}}$ denote the
+median predictive performance of the Combined, PM-only, and MSR-only feature
+sets:
+\[
+H_0^{\text{RQ3}}:\ \mu_{\text{Comb}} \leq \max(\mu_{\text{PM}}, \mu_{\text{MSR}})
+\qquad\text{vs.}\qquad
+H_1^{\text{RQ3}}:\ \mu_{\text{Comb}} > \max(\mu_{\text{PM}}, \mu_{\text{MSR}}),
+\]
+i.e., adding process-derived features yields a statistically meaningful
+improvement over either feature family alone. Hypotheses are evaluated with
+the tests below at the Bonferroni-adjusted level
+$\alpha_{\text{adj}} = 0.0125$ and reported together with effect sizes, so
+that statistical significance is always accompanied by a magnitude judgment.
+
 \subsection{Within-Repository Comparison}
 \label{sec:within-repo}
 
@@ -559,7 +684,10 @@ Paired tests on the same test cases.
 If normal ($p > 0.05$), paired $t$-test; else Wilcoxon signed-rank.
 
 \textbf{Effect size:} Cohen's $d$ (parametric) or Cliff's $\delta$
-(non-parametric)~\cite{kampenes2007systematic}.
+(non-parametric)~\cite{kampenes2007systematic}. Cliff's $\delta$ is
+interpreted following the thresholds of Kampenes et
+al.~\cite{kampenes2007systematic}: $|\delta| < 0.147$ negligible,
+$< 0.33$ small, $< 0.474$ medium, and $\geq 0.474$ large.
 
 
 \subsection{Cross-Repository Aggregation}
@@ -782,3 +910,32 @@ event logs and models from real repositories (E1, RQ1)? Do process-aware
 stochastic forecasts outperform process-blind baselines (E2, RQ2)? Do
 process-derived features add predictive value beyond traditional metrics
 (E2, RQ3)?
+
+This chapter established the methodological framework used to evaluate
+PATHCAST. Following the Design Science Research paradigm, the evaluation is
+structured around two complementary experiments. E1 validates the event-log
+construction and process-mining stages through log-quality and
+process-model-quality metrics, addressing RQ1. E2 evaluates the forecasting
+and machine-learning components through temporal hold-out validation,
+probabilistic forecasting metrics (with CRPS as the primary criterion), and
+comparative feature analysis, addressing RQ2 and RQ3.
+
+The empirical study is conducted on a dataset of 48 open-source repositories
+selected through explicit inclusion criteria and enriched with
+issue-tracking and pull-request data. Forecasting performance is compared
+against four baselines designed to isolate the contributions of process
+awareness, stochastic modeling, and distributional forecasting. The
+statistical analysis combines within-repository and cross-repository
+comparisons using non-parametric hypothesis testing, effect-size estimation,
+confidence intervals, and multiple-comparison correction, and the threats to
+validity---including temporal leakage, process drift, the first-order Markov
+simplification, and open-source versus industrial generalization---are made
+explicit.
+
+Together, these elements provide a rigorous basis for assessing the five
+contributions claimed by PATHCAST: event-log construction, process-aware
+stochastic modeling, distributional forecasting, process-derived
+machine-learning features, and end-to-end pipeline integration. The
+implementation architecture used to instantiate the method, and the
+empirical results obtained on the 48-repository dataset, are presented in
+the subsequent chapters (in preparation).
