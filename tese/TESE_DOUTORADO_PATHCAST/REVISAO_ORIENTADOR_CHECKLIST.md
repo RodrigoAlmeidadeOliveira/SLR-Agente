@@ -18,20 +18,30 @@ Itens adicionais do orientador fechados nesta rodada de re-avaliação:
 | "on-time vs delayed" pressupõe prazo/SLA/sprint — explicitado | cap2 §2.5 | ✅ |
 | "process backbone" definido formalmente | cap2 §2.7 | ✅ |
 
-Itens que permanecem 🟡/⬜ após a re-avaliação:
+Itens RESOLVIDOS na rodada de fechamento (com dados rastreados):
 
-- ⬜ **Split EC5 → EC5/EC6/EC7**: os dados do pipeline só têm o código EC5 (145);
-  separar exige re-classificar os sub-motivos (texto inacessível / metadados
-  irrecuperáveis / discordância irreconciliável). Mantido como "EC5-extended"
-  com os 3 sub-motivos documentados no texto. Requer re-rodar a classificação.
-- ⬜ Reliability diagram e comparação Markov-analítico × Monte Carlo → pertencem
-  ao capítulo de avaliação (em preparação).
-- ⬜ Capítulo de arquitetura conceitual completo → já há a figura de arquitetura
-  (`fig:pathcast-architecture`); capítulo dedicado adiado.
-- ⬜ Fortalecer §5.2.5 Ética (versão expandida do orientador) e enumerar eventos
-  de PR coletados → melhorias menores, opcionais.
-- ⬜ Citar Augusto/Bose para entropia–complexidade → orientador ambivalente;
-  `augusto2019` existe, Bose não.
+- ✅ **Split EC5 → EC5/EC6/EC7**: re-classifiquei os dados. Working-set EC5 =
+  **145** (todos texto-inacessível, causa única confirmada pelos rationales).
+  Auxiliar: **EC6 (metadados insuficientes) = 611** (595 sem abstract + 16
+  pending residual) e **EC7 (discordância irreconciliável) = 52** (10 ws_TA +
+  42 aux_FT). Critérios separados na tabela; "EC5-extended" eliminado do texto.
+- ✅ **Reliability diagram** adicionado às métricas (cap5 §5.4) como artefato de
+  calibração visual.
+- ✅ **Comparação Markov-analítico × Monte-Carlo** adicionada (cap5 §5.5,
+  ablação B3 vs Stage 4 — ganho da camada de simulação).
+- ✅ **Arquitetura conceitual**: já existia `fig:pipeline-architecture`
+  (R→S1→S2→S3→S4→ML→Forecast); reforçada com parágrafo de visão conceitual
+  end-to-end antes dos detalhes algorítmicos (cap4 §4.1).
+- ✅ **Ética §5.2.5** expandida (dados públicos, unidade de análise não é o
+  indivíduo, conformidade ToS/Jira, risco mínimo, replicação).
+- ✅ **Augusto (2019) + Bose & van der Aalst (2013)** citados na seção de
+  entropia de variantes (cap4 §4.3), com enquadramento Phase-9-compliant
+  (complexidade/variabilidade comportamental, não "definem entropia"); entrada
+  `bose2013trace` adicionada ao `references.bib`.
+
+Remanescente menor:
+- ⬜ Enumerar explicitamente os eventos de PR coletados (created/reviewed/
+  merged/closed) em §5.2.3 — cosmético.
 
 ## Skill de revisão de artigos
 

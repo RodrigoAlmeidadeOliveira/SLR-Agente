@@ -73,6 +73,27 @@ forecast distribution; $\hat{f}$ the trained ML predictor.
 \subsection{Pipeline Architecture}
 \label{sec:pipeline-arch}
 
+Before the algorithmic details of each stage, this subsection presents the
+conceptual architecture of PATHCAST as an end-to-end pipeline, so that the
+formal stage specifications that follow can be read against a single mental
+model. Conceptually, PATHCAST is a five-step transformation of repository
+evidence into a probabilistic forecast:
+\[
+\underbrace{\text{Repository data}}_{\mathcal{R}}
+\;\to\; \underbrace{\text{Event-log construction}}_{\mathcal{S}_1}
+\;\to\; \underbrace{\text{Process discovery}}_{\mathcal{S}_2}
+\;\to\; \underbrace{\text{Markov estimation}}_{\mathcal{S}_3}
+\;\to\; \underbrace{\text{Monte-Carlo simulation}}_{\mathcal{S}_4}
+\;\to\; \underbrace{\text{Forecast}}_{\hat{\mathcal{D}}},
+\]
+with a machine-learning enhancement component that consumes the
+process-derived artefacts of $\mathcal{S}_2$ and $\mathcal{S}_3$ to refine
+case-level predictions. Each step is a function with a formally specified
+input/output contract (Section~\ref{sec:stage-contracts}), and the stages
+compose into the directed acyclic graph of
+Figure~\ref{fig:pipeline-architecture}; the remainder of this chapter then
+specifies each function in turn.
+
 Figure~\ref{fig:pipeline-architecture} illustrates the complete pipeline
 architecture with data flows between stages.
 
@@ -556,7 +577,11 @@ H(V) = -\sum_{v \in V} p(v) \log_2 p(v).
 
 The normalized form $H_{\text{norm}}(V) = H(V) / \log_2 |V|$ provides a
 scale-independent measure in $[0, 1]$. PATHCAST uses $H_{\text{norm}}$ as
-a complexity proxy and as a candidate ML feature.
+a complexity proxy and as a candidate ML feature. Using the diversity of
+trace variants as an indicator of behavioural complexity is consistent with
+established process-mining practice: behavioural variability is a recognised
+driver of process-model complexity and of the difficulty of conformance and
+prediction~\cite{bose2013trace, augusto2019}.
 
 Stage 2 satisfies the contract of Definition~\ref{def:contract-s2}; the
 remainder of this section specifies the discovery, conformance and

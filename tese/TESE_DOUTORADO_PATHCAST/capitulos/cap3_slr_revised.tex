@@ -234,16 +234,19 @@ The inclusion criteria are organized in two tiers. Formal criteria
 database search configuration. Content criteria (IC4a--IC4d) require that the
 study's research contribution addresses at least one of four specific
 technique-domain intersections; they are applied during title/abstract and
-full-text screening. Exclusion criteria (EC1--EC5) are applied cumulatively
+full-text screening. Exclusion criteria (EC1--EC7) are applied cumulatively
 across both screening phases. Criteria EC1--EC4 are evaluated by the
-LLM-assisted screener; EC5 (full text inaccessible) is applied
-programmatically after the inter-library-loan recovery pass for Band~D/E
-papers fails to retrieve a copy. In the auxiliary tier, EC5 is extended to
-cover non-recoverable metadata insufficiency: papers for which no usable
-abstract could be recovered after the multi-source enrichment cascade, and
-papers for which the primary and verifier raters produced an irreconcilable
-decision without accessible full text, are closed under EC5 rather than
-escalated to human arbitration.
+LLM-assisted screener; the access/quality criteria EC5--EC7 are applied
+programmatically. EC5 (full text inaccessible) is applied after the
+inter-library-loan recovery pass for Band~D/E papers fails to retrieve a
+copy; EC6 (insufficient metadata) closes papers for which no usable abstract
+could be recovered after the multi-source enrichment cascade; and EC7
+(unresolvable screening disagreement) closes, conservatively, the cases in
+which the primary and verifier raters produced an irreconcilable decision
+that no accessible full text could adjudicate---rather than escalating them
+to open-ended human arbitration. This three-way split replaces the single
+umbrella ``EC5-extended'' code used in earlier drafts and improves the
+transparency of the PRISMA exclusion accounting.
 
 \begin{table}[htbp]
 \centering
@@ -272,7 +275,7 @@ escalated to human arbitration.
 & IC4d & Mines software repositories (GitHub, Jira, VCS, CI/CD platforms) to
           discover, analyze, or improve software process models. \\
 \midrule
-\multirow{5}{*}{Exclusion}
+\multirow{7}{*}{Exclusion}
 & EC1  & Application domain is exclusively outside software development
           (healthcare, manufacturing, supply chain) without demonstrated
           relevance to SDLC processes. \\
@@ -282,12 +285,17 @@ escalated to human arbitration.
           evaluation in a software development context. \\
 & EC4  & Secondary study (SLR, mapping study, survey) not specifically
           addressing PM or stochastic methods in software engineering. \\
-& EC5  & Full text or decision-critical metadata inaccessible despite all
-          retrieval attempts (open access, institutional, ILL,
-          author-provided preprint, multi-source abstract enrichment).
-          Applied programmatically after Band~D/E recovery and auxiliary
-          enrichment; also closes irreconcilable ambiguous cases when no
-          accessible full text exists. \\
+& EC5  & \textbf{Full text inaccessible} despite all retrieval attempts
+          (open access, institutional, ILL, author-provided preprint).
+          Applied programmatically after Band~D/E recovery. \\
+& EC6  & \textbf{Insufficient metadata}: no usable abstract could be
+          recovered after the multi-source enrichment cascade (Semantic
+          Scholar, OpenAlex, CORE, Crossref), so the study cannot be assessed
+          against the content criteria. \\
+& EC7  & \textbf{Unresolvable screening disagreement}: the primary screener
+          and the verifier produced an irreconcilable include/exclude
+          decision and no accessible full text was available to adjudicate
+          it; closed conservatively (biased toward exclusion). \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1599,9 +1607,10 @@ conservativeness is itself explained by the auxiliary corpus's weaker
 abstract coverage (the working-set tier benefited from a multi-source
 abstract enrichment cascade that the auxiliary tier did not receive in
 full). Accordingly, the protocol adopts a conservative closure rule: papers
-that remain abstract-insufficient after the enrichment cascade, or for which
-the verifier can only return \texttt{pending} without accessible full text,
-are closed under EC5-extended. The auxiliary-tier findings are therefore
+that remain abstract-insufficient after the enrichment cascade are closed
+under EC6 (insufficient metadata), and those for which the verifier can only
+return \texttt{pending} without accessible full text are closed under EC7
+(unresolvable screening disagreement). The auxiliary-tier findings are therefore
 interpreted as supplementary evidence from the subset that remained
 classifiable under the same retrieval constraints, not as evidence from an
 unresolved arbitration queue.
@@ -1625,8 +1634,9 @@ Papers where the LLM screener (Haiku 4.5) and the verifier (Sonnet 4.6)
 disagreed on the binary include/exclude outcome were not treated as an
 open-ended manual-arbitration backlog. Instead, when the disagreement could
 not be resolved because the abstract remained insufficient and no accessible
-full text was available, the paper was closed under EC5-extended
-(full-text/metadata insufficiency). This rule intentionally biases the
+full text was available, the paper was closed under EC7 (unresolvable
+screening disagreement). Across both tiers, 52 such cases were flagged
+(10 at working-set T/A and 42 at auxiliary FT). This rule intentionally biases the
 protocol toward false negatives rather than unverifiable false positives.
 The archived disagreement list remains available at
 \texttt{results/spotcheck/disagreement\_list\_for\_human.csv} for optional
@@ -1690,16 +1700,19 @@ to the 880 auxiliary FT-\texttt{pending} papers
 (32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
 papers (\texttt{pipeline/aux\_reft.py}), confirming 23 additional includes,
 246 excludes, and 16 still-pending. Under the conservative closure rule,
-those 16 residual abstract-insufficient papers are closed under EC5-extended
-rather than carried forward as a manual-validation queue. The 23 second-pass
+those 16 residual abstract-insufficient papers are closed under EC6
+(insufficient metadata) rather than carried forward as a manual-validation
+queue. The 23 second-pass
 inclusions reduce to 22 unique studies after cross-tier de-duplication, so
 the de-duplicated final combined set is \textbf{341 primary studies}
 ($169_{\text{ws}} + 150_{\text{aux1}}^{\text{unique}} +
 22_{\text{aux2}}^{\text{unique}}$; the raw sum before de-duplication was
 404). The remaining
-595 papers without abstract after enrichment are likewise closed under
-EC5-extended, rather than queued for manual retrieval, because they remain
-unclassifiable after the full multi-source enrichment cascade.
+595 papers without abstract after enrichment are likewise closed under EC6,
+rather than queued for manual retrieval, because they remain
+unclassifiable after the full multi-source enrichment cascade. In total, the
+auxiliary tier closes 611 papers under EC6 (595 without a recoverable
+abstract plus the 16 residual re-FT pending).
 
 \input{results/sensitivity/sensitivity_report}
 
@@ -1923,10 +1936,10 @@ studies, plus 2 internal duplicates---these contribute 150 and 22 unique
 new studies, giving a de-duplicated combined total of
 \textbf{341 primary studies} ($169_{\text{ws}} +
 150_{\text{aux1}}^{\text{unique}} + 22_{\text{aux2}}^{\text{unique}}$; the
-raw sum was 404). Under the adopted EC5-extended policy, the residual
-auxiliary cases without usable abstract and the unresolved disagreement
-cases are treated as non-recoverable exclusions rather than as an open
-manual-validation backlog. The original EC5 recovery pass was also closed:
+raw sum was 404). Under the conservative closure policy, the residual
+auxiliary cases without usable abstract are treated as EC6 (insufficient
+metadata) exclusions and the unresolved disagreement cases as EC7, rather
+than as an open manual-validation backlog. The original EC5 recovery pass was also closed:
 its 17 downloaded PDFs were audited, yielding 3 substantive EC3 exclusions
 and 14 residual EC5 mismatches. The de-duplicated final total is therefore
 341, and the combined-tier analytical tables below refer to the

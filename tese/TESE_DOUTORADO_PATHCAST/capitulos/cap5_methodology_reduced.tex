@@ -289,9 +289,31 @@ Issue source        & GitHub Issues; Jira via~\cite{montgomery2022jira} \\
 \subsection{Ethical Considerations}
 \label{sec:ethics}
 
-All data is publicly available under open-source licenses. No private
-repositories, proprietary data, or personally identifiable information
-beyond public GitHub usernames. Compliant with GitHub Terms of Service.
+All data analysed in this research originate from publicly accessible
+open-source software repositories and issue-tracking systems. The study does
+not access private repositories, proprietary development artefacts, restricted
+datasets, or confidential organisational information. Repository metadata,
+commits, pull requests, issue histories, and workflow events were collected
+exclusively through publicly available APIs and datasets, in accordance with
+the corresponding platform terms of service.
+
+Although GitHub usernames and contributor identifiers are publicly visible,
+individual developers are \emph{not} the unit of analysis. All analyses are
+conducted at the repository, workflow, process, or event-log level, and no
+attempt is made to profile, rank, evaluate, or infer personal characteristics
+of individual contributors; results are reported only in aggregated form.
+
+The study complies with the GitHub Terms of Service and the usage policies of
+all external data sources, including the Public Jira Dataset of Montgomery et
+al.~\cite{montgomery2022jira}. Data collection was restricted to information
+necessary for process-mining and forecasting purposes. The research presents
+minimal ethical risk because it relies exclusively on publicly available
+software-engineering artefacts and does not involve human subjects,
+interventions, surveys, or the collection of sensitive personal data;
+consequently, no personally identifiable information beyond publicly available
+repository metadata is processed. To support transparency and reproducibility,
+the selection criteria, collection procedures, preprocessing steps, and
+analysis scripts are documented in the replication package.
 
 
 % =============================================================================
@@ -548,6 +570,15 @@ denotes perfect calibration; ACE $> 0.1$ indicates systematic over- or
 underconfidence. Reported alongside CRPS because a forecast can have low
 CRPS while being miscalibrated.
 
+\paragraph{Reliability diagrams.} In addition to the scalar ACE, a
+\emph{reliability diagram} (observed vs.\ nominal coverage across the
+quantile checkpoints, with the diagonal denoting perfect calibration) is
+reported as a visual calibration artefact for each repository and for the
+pooled test set. This is now standard practice in probabilistic-forecast
+evaluation~\cite{gneiting2007strictly} and exposes \emph{where} on the
+distribution miscalibration occurs (e.g., over-confident tails), which a
+single ACE value cannot convey.
+
 \paragraph{Coverage at 85\%} reports the empirical coverage of the
 \emph{central} 85\% prediction interval $[\hat{Q}_{0.075}, \hat{Q}_{0.925}]$
 (i.e., the interval between the 7.5th and 92.5th simulated percentiles),
@@ -641,6 +672,18 @@ B4: Historical Distribution & Empirical CDF resampling. & Distributional baselin
 The baselines isolate (i)~process awareness (vs.\ B2),
 (ii)~distributional vs.\ point (vs.\ B3), (iii)~stochastic model vs.\
 naïve resampling (vs.\ B4).
+
+\paragraph{Analytical Markov vs.\ Monte-Carlo (Stage~3 vs.\ Stage~4).}
+Because B3 is the closed-form analytical Markov expectation
+$\mathbb{E}[\text{LT}] = \sum_j N_{ij}\bar{d}_j$ (Stage~3) and PATHCAST's
+full forecast is the Monte-Carlo distribution (Stage~4), the B3-vs-PATHCAST
+contrast is reported as a dedicated ablation that quantifies the
+\emph{incremental value of the simulation layer}. The analytical mean is a
+point estimate and cannot produce percentiles, tail risk, or calibration;
+the comparison therefore reports (a) point accuracy (MAE/MdAE) where both are
+defined, and (b) the distributional metrics (CRPS, ACE, PI coverage,
+reliability diagram) that only Stage~4 can deliver, making explicit what the
+Monte-Carlo expansion adds over the deterministic Markov baseline.
 
 
 % =============================================================================
