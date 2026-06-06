@@ -183,7 +183,9 @@ intervals, and tail probabilities are extracted.
 \end{figure}
 
 Figure~\ref{fig:pathcast-architecture} presents the component view of
-PATHCAST, operating on the temporal dimension of the past. The framework
+PATHCAST; this view focuses on the historical-data processing layer that
+precedes forecasting (the past-facing portion of the pipeline that builds
+the models later used to project the future). The framework
 ingests historical, immutable data sources (code repositories, ALM tools,
 CI/CD logs, organizational metadata) through a batch archaeological
 processing layer. The pipeline produces a unified event log through event
@@ -191,9 +193,28 @@ normalization and cross-source correlation
 (Jira~$\to$~Git~$\to$~CI/CD), feeding both the process discovery module
 (Inductive Miner, Heuristic Miner) and the feature store. Outputs of the
 PATHCAST component---empirical models, historical baselines, structural
-profiles, social networks---are persisted incrementally in a two-layer
-feature store (cold and warm) that serves as input for the forecasting
-stages described in Sections~\ref{sec:stage2} through~\ref{sec:stage4}.
+profiles, and (optionally) organizational social-network features---are
+persisted incrementally in a two-layer feature store (cold and warm) that
+serves as input for the forecasting stages described in
+Sections~\ref{sec:stage2} through~\ref{sec:stage4}. The social-network
+features are an optional input to the machine-learning enhancement
+component (Section~\ref{sec:ml-component}) and are not required by the core
+process-aware forecasting pipeline; they are included here for architectural
+completeness and may be omitted without affecting Stages~1--4.
+
+Figure~\ref{fig:pathcast-architecture} is the \emph{architectural
+realization} of the method: it shows implementation concerns such as the
+cold/warm feature store and the persistence layer. The \emph{functional
+abstraction} of the method---the mathematical mapping from repositories to
+forecast distributions---is given by the stage contracts of
+Section~\ref{sec:stage-contracts}, in which the feature store is the
+persistence mechanism for the formally specified stage outputs
+$(\mathcal{L}, M, \Phi, S, P, N, B, \hat{F})$ rather than an additional
+formal object. The fundamental matrix $N$ and absorption matrix $B$
+produced by Stage~3, in particular, are consumed by the machine-learning
+component as predictive features (see the $\mathrm{S3}\to\mathrm{ML}$
+contract in Table~\ref{tab:data-contracts}), not merely computed for
+descriptive analysis.
 
 
 \subsection{Stage Contracts}
@@ -486,16 +507,22 @@ The output event log is
 \begin{definition}[Log Quality Metrics]
 \label{def:log-quality}
 \begin{align}
-\text{Completeness}      &= |\{c : \sigma_c \text{ reaches absorbing}\}| / |\mathcal{C}| \label{eq:log-completeness} \\
+\text{Closed-Case Ratio} &= |\{c : \sigma_c \text{ reaches absorbing}\}| / |\mathcal{C}| \label{eq:log-completeness} \\
 \text{Trace Length}      &= \tfrac{1}{|\mathcal{C}|} \sum_c |\sigma_c| \label{eq:trace-length} \\
 \text{Activity Coverage} &= |\{\mu(e) : e \in \mathcal{L}\}| / |\mathcal{A}| \label{eq:activity-coverage} \\
 \text{Variant Count}     &= |\{\text{unique activity sequences}\}| \label{eq:variant-count}
 \end{align}
 \end{definition}
 
-Logs with completeness below $\theta_{\text{comp}}$ (default 0.5) or
-activity coverage below $\theta_{\text{cov}}$ (default 0.6) trigger a
-quality warning.
+We deliberately name Equation~\ref{eq:log-completeness} the
+\emph{closed-case ratio} rather than ``completeness'': in a live repository
+a substantial fraction of cases (open issues, in-progress pull requests,
+pending builds) are legitimately non-terminal, so a low value reflects
+ongoing work rather than a defective log. Logs with a closed-case ratio
+below $\theta_{\text{comp}}$ (default 0.5) or activity coverage below
+$\theta_{\text{cov}}$ (default 0.6) trigger a quality warning, which flags
+that a large share of cases is still in flight (and thus right-censored for
+forecasting) rather than indicating data corruption.
 
 
 % =============================================================================
@@ -544,9 +571,14 @@ The Inductive Miner produces a sound process tree by
 construction~\cite{leemans2013discovering}.
 \end{property}
 
-\begin{property}[Perfect Fitness by Construction]
+\begin{property}[Replay Guarantee under Noise-Free Filtering]
 \label{prop:fitness}
-With $\theta_{\text{noise}} = 0$, $\text{fitness}(\mathcal{L}, M) = 1.0$.
+With $\theta_{\text{noise}} = 0$, the Inductive Miner returns a process tree
+that can replay all behaviour represented in the (filtered) log; under the
+assumptions of a complete and noise-free log, the measured
+$\text{fitness}(\mathcal{L}, M) \to 1.0$. In practice, residual noise,
+duplicated events, or incompleteness in the underlying log may yield a
+measured fitness slightly below $1.0$ when evaluated post-hoc by alignment.
 \end{property}
 
 
@@ -689,7 +721,10 @@ Appendix~A, Section~\ref{app:A-bayes}.
 \subsection{Confidence Assessment}
 \label{sec:s3-confidence}
 
-For row $i$ with $n_i = C_{i \cdot}$ observations:
+For row $i$ with $n_i = C_{i \cdot}$ observations, each transition
+probability $\hat{P}_{ij}$ is treated marginally as a binomial proportion
+(success $=$ ``next state is $j$''), although the full row
+$(\hat{P}_{i1}, \ldots, \hat{P}_{i|S|})$ is jointly multinomial:
 \begin{equation}
 \label{eq:se-transition}
 \text{SE}(\hat{P}_{ij}) = \sqrt{\hat{P}_{ij}(1 - \hat{P}_{ij}) / n_i}
@@ -698,6 +733,11 @@ For row $i$ with $n_i = C_{i \cdot}$ observations:
 \label{eq:ci-transition}
 \hat{P}_{ij} \pm z_{\delta/2} \cdot \text{SE}(\hat{P}_{ij}).
 \end{equation}
+Equation~\ref{eq:ci-transition} is thus an approximate (Wald) interval; for
+rows with small $n_i$ or probabilities near $0$ or $1$, the Wilson interval
+is used instead, as it has better coverage in those regimes. The Wald form
+is reported here for readability and is adequate for the well-sampled rows
+($n_i \geq n_{\min}$) that dominate the analysis.
 
 Rows with $n_i < n_{\min}$ (default 30) are flagged. Confidence grade:
 \begin{equation}
@@ -766,17 +806,22 @@ observed in software process sojourns~\cite{vacanti2015}.
 \end{remark}
 
 
-\subsection{Stationary Distribution and WIP Analysis}
+\subsection{Expected Occupancy Distribution and WIP Analysis}
 \label{sec:s3-stationary}
 
-For absorbing chains, the quasi-stationary distribution describes the
-long-run proportion of time spent in each transient state, conditional on
-non-absorption:
+For absorbing chains, the \emph{expected (transient) occupancy
+distribution} describes the expected proportion of visits to each transient
+state before absorption:
 \begin{equation}
 \label{eq:quasi-stationary}
 \tilde{\pi}_j = \frac{\sum_{i \in S_T} \pi_0(i) \cdot N_{ij}}
     {\sum_{i \in S_T} \pi_0(i) \cdot t_i}.
 \end{equation}
+This quantity is the visit-normalised expected occupancy and should be
+distinguished from the classical quasi-stationary distribution (QSD), which
+is the left eigenvector $\tilde{\pi}Q = \lambda_{\max}\tilde{\pi}$
+associated with the dominant eigenvalue $\lambda_{\max}$ of the transient
+sub-generator and characterises the conditional law as $t \to \infty$.
 States with disproportionately high $\tilde{\pi}_j$ relative to processing
 capacity indicate bottleneck accumulation. Full derivation in
 Appendix~A, Section~\ref{app:A-semi-markov}.
@@ -836,7 +881,7 @@ empirical forecast distribution is
 \REQUIRE $P$, $\hat{F}$, $\pi_0$ (or fixed $s_0$), $M_{\text{sim}}$,
     max steps $K_{\max}$
 \ENSURE $\hat{\mathcal{D}} = \{(T^{(m)}, o^{(m)}, \psi^{(m)})\}_{m=1}^{M_{\text{sim}}}$
-\STATE $\hat{\mathcal{D}} \gets \emptyset$
+\STATE $\hat{\mathcal{D}} \gets \emptyset$; \ $n_{\text{na}} \gets 0$
 \FOR{$m = 1$ to $M_{\text{sim}}$}
     \IF{$s_0$ is fixed}
         \STATE $s \gets s_0$
@@ -850,17 +895,22 @@ empirical forecast distribution is
         \STATE $s' \gets \text{categorical}(P[s, :])$
         \STATE $s \gets s'$; append $s$ to $\psi$; $k \gets k + 1$
     \ENDWHILE
-    \IF{$s \notin S_A$}
-        \STATE Mark simulation $m$ as \texttt{non-absorbed}
+    \IF{$s \in S_A$}
+        \STATE $\hat{\mathcal{D}} \gets \hat{\mathcal{D}} \cup \{(T, s, \psi)\}$
+    \ELSE
+        \STATE $n_{\text{na}} \gets n_{\text{na}} + 1$ \quad (non-absorbed; excluded from aggregation)
     \ENDIF
-    \STATE $\hat{\mathcal{D}} \gets \hat{\mathcal{D}} \cup \{(T, s, \psi)\}$
 \ENDFOR
-\RETURN $\hat{\mathcal{D}}$
+\RETURN $\hat{\mathcal{D}}$, \ $n_{\text{na}}$
 \end{algorithmic}
 \end{algorithm}
 
 The safety bound $K_{\max} = 1000$ prevents infinite loops in degenerate
-cases. Non-absorbed simulations are excluded from forecast aggregation.
+cases. Non-absorbed simulations are excluded from the forecast aggregation
+$\hat{\mathcal{D}}$ and counted separately as $n_{\text{na}}$; the
+non-absorption rate $n_{\text{na}}/M_{\text{sim}}$ is reported alongside the
+forecast so that aggregation is performed over the $M_{\text{abs}} =
+M_{\text{sim}} - n_{\text{na}}$ absorbed trajectories only.
 
 
 \subsection{Forecast Extraction}
@@ -883,8 +933,15 @@ Standard reporting: P50, P85, P95~\cite{vacanti2015}.
 
 \begin{equation}
 \label{eq:completion-prob}
-\hat{P}(\text{Done}) = |\{m : o^{(m)} = \texttt{done}\}| / M_{\text{sim}}.
+\hat{P}(\text{Done}) =
+   \frac{|\{m \in \hat{\mathcal{D}} : o^{(m)} \in S_{\text{done}}\}|}
+        {M_{\text{abs}}},
+\qquad M_{\text{abs}} = M_{\text{sim}} - n_{\text{na}},
 \end{equation}
+computed over the absorbed trajectories only, where $S_{\text{done}}
+\subseteq S_A$ is the set of successful-completion absorbing states (as
+distinct from cancellation or rejection states); the non-absorption rate
+$n_{\text{na}}/M_{\text{sim}}$ is reported separately.
 
 \subsubsection{Tail Risk}
 
@@ -910,7 +967,7 @@ Standard reporting: P50, P85, P95~\cite{vacanti2015}.
 \hat{\pi}_j^{\text{MC}} = \frac{\sum_m \text{time in state } j \text{ during } \psi^{(m)}}
     {\sum_m T^{(m)}}.
 \end{equation}
-This is cross-validated against the analytical quasi-stationary
+This is cross-validated against the analytical expected-occupancy
 distribution (Equation~\ref{eq:quasi-stationary}).
 
 
@@ -927,7 +984,15 @@ distribution (Equation~\ref{eq:quasi-stationary}).
 \end{definition}
 
 Default tolerance $\epsilon = 0.02$. Adaptive doubling from
-$M_{\text{sim}} = 1{,}000$ up to $M_{\text{sim}} = 100{,}000$.
+$M_{\text{sim}} = 1{,}000$ up to $M_{\text{sim}} = 100{,}000$. Because the
+criterion in Equation~\ref{eq:convergence-criterion} controls the relative
+half-width of the \emph{mean} estimator, and the forecasts of primary
+interest are upper percentiles ($\hat{Q}_{0.85}$, $\hat{Q}_{0.95}$), the
+budget is increased until the tail quantiles themselves stabilise: the
+batch-to-batch relative change of $\hat{Q}_{0.85}$ and $\hat{Q}_{0.95}$
+is additionally required to fall below $\epsilon$ before the simulation is
+declared converged. This guards against the case where the mean has
+converged but the tail estimates remain unstable.
 
 \begin{property}[Convergence Rate]
 \label{prop:convergence-rate}
@@ -940,8 +1005,9 @@ $O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}.
 \label{sec:s4-prng}
 
 PATHCAST uses Mersenne Twister (MT19937), the default in
-NumPy~\cite{numpy2020}. Seeds are recorded per run, enabling exact
-replication.
+NumPy~\cite{numpy2020}. Seeds are recorded per run, enabling deterministic
+replication under the same software environment (library versions and
+platform), since pseudo-random sequences may differ across implementations.
 
 
 \subsection{Comparison with Throughput-Based Monte Carlo}
@@ -1083,8 +1149,12 @@ identifies cases departing from the population baseline:
 \label{def:deviation}
 \begin{equation}
 \label{eq:deviation}
-\delta_c = \hat{f}(\mathbf{x}_c) - \hat{P}_{\text{MC}}(\text{delayed} \mid s_0 = s).
+\delta_c = \hat{p}_{\text{ML}}(\mathbf{x}_c) - \hat{P}_{\text{MC}}(\text{delayed} \mid s_0 = s),
 \end{equation}
+where $\hat{p}_{\text{ML}}(\mathbf{x}_c) = \hat{P}_{\text{ML}}(\text{delayed}
+\mid \mathbf{x}_c) \in [0,1]$ is the classifier's predicted delay
+\emph{probability} (not the thresholded class label), so that both terms are
+on the same probability scale.
 $\delta_c > 0$ indicates above-baseline delay risk;
 $\delta_c < 0$ indicates below-baseline.
 \end{definition}
@@ -1104,7 +1174,10 @@ summarised in Table~\ref{tab:data-contracts}). Two execution modes are
 supported: a full historical run that estimates $(P, \hat{F}, \hat{f})$
 end-to-end, and an incremental operational mode that scores new cases
 through Stages~4 and ML only, periodically re-estimating the upstream
-artefacts.
+artefacts. Re-estimation may be triggered either on a calendar schedule
+(e.g., weekly or per sprint) or conditionally, when a monitored degradation
+signal---such as a rise in the rolling CRPS or a drift in the
+expected-occupancy distribution---exceeds a configured threshold.
 
 \begin{table}[htbp]
 \centering
@@ -1127,7 +1200,7 @@ ML      & Output & $(\hat{f}, \mathbf{w})$ & Predictor + importances \\
 \end{tabular}
 \end{table}
 
-\begin{theorem}[Pipeline Correctness]
+\begin{proposition}[Pipeline Correctness]
 \label{thm:pipeline-correctness}
 If each stage satisfies its contract, then the composed pipeline
 $\mathcal{F}$ produces a valid empirical forecast distribution
@@ -1135,14 +1208,19 @@ $\hat{\mathcal{D}}$ for any input $\mathcal{R}$ satisfying:
 (i)~at least one repository contains events from $\geq 2$ data sources;
 (ii)~$|\mathcal{L}| \geq n_{\min}^{\text{cases}}$ (default 50);
 (iii)~$|S_T| \geq 1$ and $|S_A| \geq 1$.
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 By structural induction on stages: each postcondition implies the next
 precondition (S1$\to$S2 event-log validity; S2$\to$S3 sound model and
-non-empty states; S3$\to$S4 row-stochastic $P$ and non-empty $\hat{F}$);
-S4 terminates by absorption certainty
-(Property~\ref{prop:absorption-certainty}) or the $K_{\max}$ bound.
+non-empty states; S3$\to$S4 row-stochastic $P$ and non-empty $\hat{F}$).
+Under Property~\ref{prop:absorption-certainty}, every simulation is absorbed
+almost surely, so S4 terminates with probability one; the $K_{\max}$ bound
+acts solely as a defensive implementation safeguard against degenerate or
+numerically pathological inputs and is not required for the termination
+argument. This is a compositional-correctness property that depends on the
+inter-stage software contracts rather than a purely analytic theorem, and is
+stated as a proposition accordingly.
 \qed
 \end{proof}
 
@@ -1337,7 +1415,7 @@ The PATHCAST components map to the thesis contributions as follows:
   family derived from PM and Markov analysis.
   \item \textbf{Pipeline Composition} addresses \textbf{C1}: formal
   inter-stage contracts and correctness guarantees
-  (Theorem~\ref{thm:pipeline-correctness}).
+  (Proposition~\ref{thm:pipeline-correctness}).
 \end{itemize}
 
 \textbf{C5} (Empirical Evidence) is addressed in Chapter~\ref{ch:evaluation}.

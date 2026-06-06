@@ -158,8 +158,11 @@ contexts:
 \end{quote}
 
 The strings are adapted to each database's syntax and field conventions as
-summarized in Table~\ref{tab:db-adaptations}. The search scope covers
-publications from January 1994 to December 2026.
+summarized in Table~\ref{tab:db-adaptations}. The eligibility window for
+publications spans January 1994 to December 2025 (full calendar years),
+and the searches were executed on the search-execution date of April 2026;
+publications dated 2026 that were already indexed at execution time are
+therefore retained.
 
 \begin{table}[htbp]
 \centering
@@ -321,8 +324,16 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 \end{tabular}
 \end{table}
 
-Studies scoring below 4.0/8 (50\%) are excluded from the synthesis. QA8
-reflects the centrality of process model quality in the PATHCAST pipeline.
+Studies scoring below 4.0/8 (50\%) are excluded from the evidence synthesis
+(Findings F1--F5) but are retained in the PRISMA included set as context.
+QA8 reflects the centrality of process-model quality in the PATHCAST
+pipeline. Because QA8 rewards the reporting of conformance metrics
+(fitness, precision) that are native to process-mining studies but are not
+expected from purely Markov-, Monte-Carlo-, or forecasting-oriented work,
+it is scored as ``not applicable'' (no penalty) for studies whose
+methodological family does not produce a discovered process model, so that
+the criterion does not systematically disadvantage non-process-mining
+contributions.
 
 QA scoring is performed by the same LLM-assisted protocol used for
 screening, with a strict per-criterion rubric returning a binary score
@@ -401,7 +412,7 @@ SpringerLink (10 exports) & 2{,}884 & 1{,}543 \\
 IEEE Xplore (manual)    & 1{,}386 & 1{,}263 \\
 Snowballing             &   595   &   575   \\
 Web of Science (4 queries) & 997  &   514   \\
-ACM Digital Library (3 queries) & 96 &  34  \\
+ACM Digital Library (2 queries) & 96 &  34  \\
 Control set (validation only) & 12 &    2   \\
 \midrule
 \textbf{Total} & \textbf{8{,}347} & \textbf{5{,}783} \\
@@ -420,10 +431,14 @@ Screening 5{,}781 records in a single pass would require substantial
 resources. A working set of 2{,}340 papers was therefore constructed from the
 highest-signal primary queries---those whose query design directly targets the
 PATHCAST intersection (process mining, stochastic modeling, and software
-development)---as shown in Table~\ref{tab:working-set}. The remaining 3{,}441
-records constitute a \textit{high-recall auxiliary corpus}, retained as a
-frozen baseline and available for supplementary analysis if gaps in the
-primary results warrant expansion.
+development)---as shown in Table~\ref{tab:working-set}. The 3{,}441
+deduplicated records not assigned to the working set ($5{,}781 - 2{,}340$),
+together with the 366 cross-source near-duplicate records that strict
+cross-source deduplication had removed but that are restored under a
+high-recall policy, constitute a \textit{high-recall auxiliary corpus} of
+3{,}807 records, retained as a frozen baseline and available for
+supplementary robustness analysis rather than as a primary evidence source
+(Section~\ref{sec:slr-extval}).
 
 \begin{table}[htbp]
 \centering
@@ -596,7 +611,7 @@ diagram~\cite{page2021} of the selection process.
    Scopus~2{,}197 \textbullet{} IEEE~97 \textbullet{} ACM~46};
 
 \node[exc] (wsdrop) at (6.0,-4.5)
-  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}441$):\\
+  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}441$\\primary; $3{,}807$ with\\restored near-duplicates):\\
    \mbox{SpringerLink}, WoS,\\Snowball, extra IEEE/ACM};
 
 \draw[arr] (dedup) -- (ws);
@@ -803,7 +818,24 @@ primary input for studies without locally available PDFs (94/169); for the
 remaining 75/169 studies a locally accessible PDF was available and used to
 triangulate against the LLM-extracted fields. Of these 75 PDFs, 73 were
 fully coded in the operational triangulation spreadsheet used for the
-figures and positioning tables below.
+figures and positioning tables below; the remaining 2 PDFs were excluded
+from operational coding because they were corrupted or duplicate exports
+with insufficient extractable content, and their studies are retained in the
+169-study set on the basis of their abstract/metadata extraction.
+
+The extraction was run with the LLM configured for deterministic output
+(\texttt{temperature}~$=0$, fixed model \texttt{claude-haiku-4-5-20251001},
+JSON-schema-constrained responses), and each extracted field carried an
+explicit \texttt{not\_reported} sentinel. Fields that require full-text
+inspection and that were unavailable in title/abstract metadata---most
+notably dataset size, process-model quality scores, validation type, and
+tool/platform for the 94 studies without a locally available PDF---were
+coded as missing rather than imputed, and are excluded from any analysis
+that depends on them; the corresponding tables report the effective $n$ for
+each variable. For the 75-study PDF subset, the LLM-extracted fields were
+triangulated against the source PDF, and the observed field-level
+disagreement rate is reported in the replication package
+(Section~\ref{sec:slr-replication}).
 
 The 73-paper PDF triangulation subset is therefore not a separate selection
 stage and does not override the PRISMA counts. It is used in this chapter as
@@ -1117,8 +1149,9 @@ placing it at L2 rather than a fully validated end-to-end pipeline. Notably,
 no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
 which process mining discovery feeds an absorbing Markov chain, whose transient
 distributions drive Monte Carlo forecasting, with residuals corrected by a
-learned model, all validated on SDLC event logs. PATHCAST is proposed as the
-first such L3 system.
+learned model, all validated on SDLC event logs. PATHCAST is proposed to
+fill this gap; to the best of our knowledge, no study identified in this
+review implements such an L3 system.
 
 Quantitative evidence over the full 169-study set confirms the pattern. Only
 1 of 169 papers (0.6\%) jointly satisfies IC1, IC2, and IC3---that is,
@@ -1382,9 +1415,11 @@ Based on the systematic analysis, this review proposes the Software Process
 Mining and Forecasting (SPMF) taxonomy with three dimensions:
 
 \begin{description}
-\item[Analytical Depth] classifies studies along four levels: L1
-  (Descriptive: discovery, conformance), L2 (Diagnostic: bottleneck, rework),
-  L3 (Predictive: outcome, remaining time), and L4 (Forecasting:
+\item[Analytical Depth] classifies studies along four levels, denoted
+  AD1--AD4 to avoid confusion with the architectural integration levels
+  L0--L3 used elsewhere in this chapter: AD1
+  (Descriptive: discovery, conformance), AD2 (Diagnostic: bottleneck, rework),
+  AD3 (Predictive: outcome, remaining time), and AD4 (Forecasting:
   distributional, probabilistic).
 
 \item[SDLC Coverage] maps which lifecycle phases are addressed: Requirements
@@ -1500,22 +1535,30 @@ The cross-model verification protocol was also extended to the auxiliary
 tier (\texttt{pipeline/aux\_kappa.py}, FT stage, $n = 276$ stratified
 random 20\% sample). On the auxiliary tier the verifier (Sonnet 4.6)
 returned \texttt{pending} on every paper that the primary screener
-(Haiku 4.5) had rated as \texttt{include}, yielding a multi-class
-$\kappa = 0.004$ and a binary $\kappa = 0.000$ (Po = 84.8\%). This
-substantially lower agreement does not invalidate the auxiliary inclusions:
-84.8\% of the binary outcomes still match (the verifier agrees on
-``not-include'' for the exclude-pending portion), and the systematic
-\texttt{pending} verdict on Haiku-include papers reflects the verifier's
-conservativeness in the face of the auxiliary corpus's weaker abstract
-coverage (the working-set tier benefited from a multi-source abstract
-enrichment cascade that the auxiliary tier did not yet receive). Reading
-together, the working-set tier achieves substantial agreement under the
-same protocol while the auxiliary tier is materially more sensitive to weak
-metadata coverage. For that reason, the protocol adopts a conservative
-closure rule: papers that remain abstract-insufficient after the enrichment
-cascade, or for which the verifier can only return \texttt{pending} without
-accessible full text, are closed under EC5-extended. The auxiliary-tier
-findings are therefore interpreted as evidence from the subset that remained
+(Haiku 4.5) had rated as \texttt{include}, yielding an observed agreement of
+$P_o = 54.3\%$ with a multi-class $\kappa = 0.004$ and a binary
+$\kappa = 0.000$. The near-zero $\kappa$ is a direct consequence of the
+verifier's blanket \texttt{pending} verdict on every Haiku-\texttt{include}
+paper: when one rater assigns essentially all items to a single category,
+$P_e \to P_o$ and $\kappa$ collapses toward zero even when the raw
+overlap on the exclude side is non-trivial. This is a known degeneracy of
+the $\kappa$ statistic under severe class imbalance rather than evidence of
+random labelling. Nevertheless, a $\kappa$ of zero \emph{does} bound the
+evidentiary weight that can be placed on the auxiliary inclusions, and we do
+not claim otherwise. For this reason the auxiliary tier is positioned
+throughout as a \emph{robustness and recall-bounding} layer rather than as a
+primary evidence source: the substantive Findings F1--F5 are established on
+the 169-study working set (which achieves substantial agreement under the
+same protocol), and the auxiliary results are reported only to test whether
+those findings are stable under a high-recall expansion. The verifier's
+conservativeness is itself explained by the auxiliary corpus's weaker
+abstract coverage (the working-set tier benefited from a multi-source
+abstract enrichment cascade that the auxiliary tier did not receive in
+full). Accordingly, the protocol adopts a conservative closure rule: papers
+that remain abstract-insufficient after the enrichment cascade, or for which
+the verifier can only return \texttt{pending} without accessible full text,
+are closed under EC5-extended. The auxiliary-tier findings are therefore
+interpreted as supplementary evidence from the subset that remained
 classifiable under the same retrieval constraints, not as evidence from an
 unresolved arbitration queue.
 
@@ -1547,15 +1590,19 @@ post-submission audit, but human arbitration is not required for the valid
 evidence set reported here.
 
 \subsection{External Validity}
+\label{sec:slr-extval}
 
 The review is limited to English-language peer-reviewed publications,
 potentially excluding relevant work in other languages or grey literature.
-The broad time span (1994--2026) and five-database coverage mitigate
-geographic and temporal bias. The deferred high-recall auxiliary corpus
-(3{,}807 records from SpringerLink, WoS, Snowball, and other low-precision
-queries; corresponds to the difference between the 5{,}783 unique deduplicated
-records and the 2{,}340-paper operational working set) provides a mechanism
-for expansion if gaps in the confirmed 169-study set are identified.
+The broad time span (1994--2025, search executed April 2026) and
+five-database coverage mitigate geographic and temporal bias. The deferred
+high-recall auxiliary corpus (3{,}807 records from SpringerLink, WoS,
+Snowball, and other low-precision queries) comprises the 3{,}441
+deduplicated records not assigned to the working set ($5{,}781 - 2{,}340$)
+together with 366 cross-source near-duplicate records restored under the
+high-recall policy. It provides a mechanism for robustness testing and for
+expansion if gaps in the confirmed 169-study set are identified, and is not
+treated as a primary evidence source.
 
 A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM
@@ -1828,9 +1875,9 @@ antecedent at L2~(F4). Fifth, ML studies in SE rarely incorporate process-derive
 features~(F5).
 
 Synthesis of the top-ranked papers by IC cluster sharpens the picture. The
-IC2+IC3 cluster (18 papers) concentrates at L1, parametrising stochastic models
+IC2+IC3 cluster (18 papers) concentrates at analytical depth AD1, parametrising stochastic models
 from aggregate statistics rather than mined transitions. The IC1+IC2 cluster
-reaches L2 through stochastic conformance and simulation, but stops short of
+reaches AD2 through stochastic conformance and simulation, but stops short of
 distributional forecasting. The IC1+IC3 cluster chains PM and prediction
 sequentially without a stochastic layer. The IC2+IC4 cluster demonstrates that
 public repository traces support state-transition modelling, but event-to-state
@@ -1838,9 +1885,9 @@ mapping remains unstandardised. No paper occupies L3.
 
 These five gaps directly motivate the PATHCAST method presented in
 Chapter~\ref{ch:method}. PATHCAST is positioned at integration level~L3 in
-the SPMF taxonomy---the first formally specified pipeline to compose all four
-technique families into a unified, architecturally specified framework for
-SDLC process forecasting.
+the SPMF taxonomy; to the best of our knowledge, no study identified in this
+review composes all four technique families into a unified, architecturally
+specified framework for SDLC process forecasting.
 
 Methodologically, the LLM-assisted protocol used in this review achieves
 substantial inter-rater agreement under cross-model verification (binary

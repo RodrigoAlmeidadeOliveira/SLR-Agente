@@ -375,14 +375,14 @@ isolate sparse-data effects from modeling effects.
 \textbf{Metric} & \textbf{Range} & \textbf{Definition} \\
 \midrule
 \multicolumn{3}{@{}l}{\textit{Event Log Quality}} \\[2pt]
-Correlation Coverage & $[0,1]$ & Fraction of raw events assigned to a case (Eq.~4.15). \\
-Activity Coverage    & $[0,1]$ & Fraction of SDLC taxonomy observed (Eq.~4.22). \\
-Trace Completeness   & $[0,1]$ & Fraction of cases reaching absorbing state (Eq.~4.20). \\
-Mean Trace Length    & $\mathbb{R}^+$ & Average events per trace (Eq.~4.21). \\
-Variant Count        & $\mathbb{N}$ & Distinct activity sequences (Eq.~4.23). \\
+Correlation Coverage & $[0,1]$ & Fraction of raw events assigned to a case (Eq.~\ref{eq:corr-coverage}). \\
+Activity Coverage    & $[0,1]$ & Fraction of SDLC taxonomy observed (Eq.~\ref{eq:activity-coverage}). \\
+Trace Completeness   & $[0,1]$ & Fraction of cases reaching absorbing state (closed-case ratio, Eq.~\ref{eq:log-completeness}). \\
+Mean Trace Length    & $\mathbb{R}^+$ & Average events per trace (Eq.~\ref{eq:trace-length}). \\
+Variant Count        & $\mathbb{N}$ & Distinct activity sequences (Eq.~\ref{eq:variant-count}). \\
 \midrule
 \multicolumn{3}{@{}l}{\textit{Process Model Quality}} \\[2pt]
-Fitness              & $[0,1]$ & Alignment-based fitness (Eq.~2.2). Higher better. \\
+Fitness              & $[0,1]$ & Alignment-based fitness (Eq.~\ref{eq:fitness}). Higher better. \\
 Precision            & $[0,1]$ & Fraction of model behaviour observed in log. Higher better. \\
 Generalization       & $[0,1]$ & Capacity to capture unseen legitimate behaviour. \\
 \bottomrule
@@ -422,32 +422,54 @@ MdAE & Error & $\operatorname{median}(|T_c^{\text{obs}} - \hat{T}_c^{\text{P50}}
 \multicolumn{3}{@{}l}{\textit{Distributional Accuracy}} \\[2pt]
 CRPS & Score & $\tfrac{1}{n}\sum_c \int [\hat{F}_c(t) - \mathbf{1}(t \geq T_c^{\text{obs}})]^2 dt$ \\
 ACE  & Error & $\tfrac{1}{9}\sum_{\alpha \in \{0.1,\ldots,0.9\}} |\hat{p}_\alpha - \alpha|$ \\
-Coverage 85\% & $[0,1]$ & Fraction of $T_c^{\text{obs}} \in [\hat{Q}_{0.075}, \hat{Q}_{0.925}]$. \\
+PI Coverage 85\% & $[0,1]$ & Fraction of $T_c^{\text{obs}}$ inside the central 85\% prediction interval $[\hat{Q}_{0.075}, \hat{Q}_{0.925}]$. \\
 \midrule
 \multicolumn{3}{@{}l}{\textit{Outcome Prediction}} \\[2pt]
-Completion Accuracy & $[0,1]$ & Done vs.\ Cancelled prediction accuracy. \\
+Completion Accuracy & $[0,1]$ & Done vs.\ Cancelled classification accuracy at threshold $\tau$ (Eq.~\ref{eq:completion-acc}). \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{CRPS} is the primary metric. Reduces to MAE for point
-forecasts~\cite{gneiting2007strictly}, preserving comparability with
+\paragraph{CRPS} is the primary metric \emph{because PATHCAST produces full
+predictive distributions rather than deterministic point forecasts}, so a
+strictly proper scoring rule that evaluates the entire predicted
+distribution is the appropriate primary criterion; MAE, MAPE, and MdAE are
+secondary point summaries. CRPS reduces to MAE when the forecast degenerates
+to a point mass~\cite{gneiting2007strictly}, preserving comparability with
 deterministic baselines. Derivation in Appendix~B.
 
 \paragraph{Point metrics.} MAE in calendar days; MAPE for cross-repository
-comparison; MdAE robust to outliers.
+comparison; MdAE robust to outliers. Cases with an observed lead time of
+zero (e.g., same-day hotfixes) are excluded from the MAPE computation to
+avoid division by zero and the well-known instability of MAPE for very small
+denominators; they are retained for MAE, MdAE, and CRPS.
 
 \paragraph{ACE} averages absolute deviation across nine deciles. ACE = 0
 denotes perfect calibration; ACE $> 0.1$ indicates systematic over- or
 underconfidence. Reported alongside CRPS because a forecast can have low
 CRPS while being miscalibrated.
 
-\paragraph{Coverage at 85\%} is the standard agile commitment
-interval~\cite{vacanti2015}; complements ACE by focusing on the single
-operationally-relevant interval.
+\paragraph{Coverage at 85\%} reports the empirical coverage of the
+\emph{central} 85\% prediction interval $[\hat{Q}_{0.075}, \hat{Q}_{0.925}]$
+(i.e., the interval between the 7.5th and 92.5th simulated percentiles),
+which is the standard agile commitment interval~\cite{vacanti2015}; it
+complements ACE by focusing on the single operationally-relevant interval. A
+well-calibrated forecaster yields an empirical coverage close to $0.85$.
 
-\paragraph{Completion Accuracy.} Predicted Done vs.\ Cancelled per
-Definition~\ref{def:label}.
+\paragraph{Completion Accuracy.} Because PATHCAST produces a completion
+\emph{probability} $\hat{P}(\text{Done})$ (Eq.~\ref{eq:completion-prob})
+rather than a hard label, the predicted outcome is obtained by thresholding,
+and completion accuracy is defined as
+\begin{equation}
+\label{eq:completion-acc}
+\text{Acc} = \frac{1}{n}\sum_{c=1}^{n}
+   \mathbf{1}\!\left[\,\mathbf{1}\{\hat{P}_c(\text{Done}) \geq \tau\}
+   = y_c\,\right],
+\end{equation}
+where $y_c \in \{\text{Done}, \text{Cancelled}\}$ is the observed outcome
+(per Definition~\ref{def:label}) and $\tau = 0.5$ is the default decision
+threshold. The threshold is stated explicitly so that the mapping from the
+probabilistic forecast to the predicted class is unambiguous.
 
 
 % --- RQ3 metrics ---
@@ -561,9 +583,12 @@ $\alpha_{\text{adj}} = 0.05 / 4 = 0.0125$.
 A priori power following
 Kampenes et al.~\cite{kampenes2007systematic}.
 
-\textbf{RQ2/RQ3 — Cross-repository ($n=48$).} Under
-$\alpha_{\text{adj}} = 0.0125$, power for medium effect ($r = 0.3$) is
-$1-\beta \approx 0.72$; large ($r = 0.5$): $> 0.97$. Effect sizes are
+\textbf{RQ2/RQ3 — Cross-repository ($n=48$).} At the Bonferroni-adjusted
+level $\alpha_{\text{adj}} = 0.0125$, the design attains moderate power for a
+medium effect ($r = 0.3$: $1-\beta \approx 0.55$) and high power for a large
+effect ($r = 0.5$: $> 0.97$), as detailed in
+Table~\ref{tab:power-analysis}; at the unadjusted level $\alpha = 0.05$ the
+corresponding medium-effect power is $\approx 0.75$. Effect sizes are
 informed by Rogge-Solti and
 Weske~\cite{RoggeSolti2015NonMarkovianSPN}. Power computed via
 \begin{equation}
@@ -639,6 +664,23 @@ metrics (Definition~\ref{def:corr-quality}) and the cascade strategy.
 \textbf{Bot contamination.} Mitigated by Stage~1 bot filtering plus
 sensitivity analysis with/without filtering on a subset.
 
+\textbf{Process drift.} Software development processes evolve over time
+(team turnover, workflow changes, CI/CD adoption, backlog reorganization),
+potentially violating the stationarity of the Stage~3 transition matrix
+(which is estimated from historical traces and assumed stable over the
+forecast horizon). This threat is partially mitigated by the temporal
+hold-out evaluation and can be further addressed through the sliding-window
+re-estimation and drift-triggered retraining discussed in
+Section~\ref{sec:integration}.
+
+\textbf{First-order Markov simplification.} The first-order Markov property
+underlying the Stage~3 chain may not capture long-range dependencies in software
+processes (recurrent rework, repeated blocking, multi-round review cycles).
+This is partially mitigated by process-discovery-driven state definition and
+by the ML residual-correction component, and can be more fully addressed
+through state augmentation (higher-order or memory-extended states) in
+future work.
+
 
 \subsection{External Validity}
 \label{sec:threats-external}
@@ -646,9 +688,18 @@ sensitivity analysis with/without filtering on a subset.
 \textbf{Open-source bias.} Results interpreted as feasibility evidence,
 not absolute accuracy applicable to all settings.
 
-\textbf{GitHub platform bias.} Stage~1 designed with pluggable extractors
-for alternative platforms (GitLab, Bitbucket, Azure DevOps), but
-extensibility not empirically validated here.
+\textbf{GitHub platform bias.} The Stage~1 architecture is
+platform-independent and designed with pluggable extractors for alternative
+platforms (GitLab, Bitbucket, Azure DevOps); however, the empirical
+evaluation is conducted exclusively on GitHub-derived traces, whose
+event vocabulary and workflow conventions are GitHub-specific, and this
+extensibility is not empirically validated here.
+
+\textbf{Industrial vs.\ open-source settings.} The evaluation uses public
+OSS repositories, which may differ from industrial projects in governance,
+reporting discipline, and process maturity. Results should therefore be
+interpreted as evidence of methodological feasibility rather than as direct
+estimates of industrial forecasting performance.
 
 \textbf{Language and domain bias.} Partially addressed by cross-repository
 generalization protocol (Section~\ref{sec:cross-repo}).
@@ -657,8 +708,20 @@ generalization protocol (Section~\ref{sec:cross-repo}).
 \subsection{Construct Validity}
 \label{sec:threats-construct}
 
-\textbf{Lead time definition.} First-event to last-event measurement.
-Justified by data availability and consistency with PM-based measurement.
+\textbf{Lead time definition and forecast target.} The primary forecasting
+target is the \emph{total case lead time}, measured from the first to the
+last event of a case (with remaining-lead-time forecasting from an
+intermediate state treated as a derived quantity). This first-event to
+last-event definition is justified by data availability and consistency with
+PM-based measurement.
+
+\textbf{SDLC taxonomy mapping subjectivity.} Mapping heterogeneous
+repository events to the SDLC activity taxonomy (e.g., whether a Jira status
+or an open pull request maps to \texttt{review}) involves modeling decisions
+that may influence the discovered process structure. To mitigate this
+threat, the mapping rules are documented explicitly and implemented as
+configurable lookup tables, so that alternative mappings can be substituted
+and their effect assessed.
 
 \textbf{Delay threshold for ML labels.} Three threshold strategies
 evaluated (Section~\ref{sec:ml-labels}); results reported per strategy.
@@ -673,9 +736,9 @@ alongside for comparability with point-forecast baselines.
 \textbf{Statistical power.} Mitigated by:
 (i)~minimum case count condition in Equation~\ref{eq:acceptance}
 excluding $|\mathcal{L}_{\text{test}}| < 50$ from E2;
-(ii)~cross-repository aggregation on $n = 48$ pairs achieving
-$1-\beta \geq 0.72$ for medium effects at
-$\alpha_{\text{adj}} = 0.0125$
+(ii)~cross-repository aggregation on $n = 48$ pairs achieving moderate
+power ($1-\beta \approx 0.55$) for medium effects and high power
+($> 0.97$) for large effects at $\alpha_{\text{adj}} = 0.0125$
 (Section~\ref{sec:power-analysis}, Table~\ref{tab:power-analysis});
 (iii)~per-repository CIs reported alongside aggregates.
 
@@ -685,7 +748,9 @@ $\alpha_{\text{adj}} = 0.0125$
 \textbf{Reproducibility.} Released artifacts: (i)~repository identifiers
 and dates; (ii)~PATHCAST source; (iii)~evaluation scripts;
 (iv)~intermediate data (event logs, transition matrices, simulation
-results). Raw repository data not redistributed but
+results); (v)~the simulation random seeds (MT19937) and configuration files
+needed to reproduce the Monte Carlo runs under a fixed software environment.
+Raw repository data not redistributed but
 re-collectable via GitHub API~\cite{github2023api} from
 Appendix~\ref{app:repository-list}.
 
