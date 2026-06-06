@@ -48,7 +48,9 @@ $\kappa(e), \alpha(e), \tau(e)$ return case, activity and timestamp. A
 trace $\sigma_c = \langle e_1, \ldots, e_n \rangle$ is the
 timestamp-ordered sequence of events of case $c$. An event log
 $\mathcal{L} = \{\sigma_{c_1}, \ldots, \sigma_{c_N}\}$ is a multiset of
-traces.
+traces. Since each case corresponds to exactly one trace, we use the case
+identifier $c$ and its trace $\sigma_c$ interchangeably where no ambiguity
+arises.
 \end{definition}
 
 \begin{definition}[Alignment and Alignment-Based Fitness]
@@ -68,8 +70,8 @@ Chapter~\ref{ch:method}.
 \end{definition}
 
 PATHCAST adopts the Inductive Miner with infrequent-behaviour filtering
-(IMf)~\cite{leemans2013discovering} because it is the only discovery
-algorithm that guarantees soundness by construction, producing a
+(IMf)~\cite{leemans2013discovering} because it is among the few discovery
+algorithms that guarantee soundness by construction, producing a
 block-structured process tree compatible with SDLC workflows. Discovery
 quality is quantified along four dimensions---fitness, precision,
 generalisation and simplicity~\cite{aalst2016process}; precision and
@@ -100,12 +102,14 @@ harmonisation across tools. Curated datasets and collectors---SEART GitHub
 Search~\cite{seart2021}, GH~Archive~\cite{gharchive2023},
 SmartSHARK~\cite{trautsch2020smartshark},
 GrimoireLab~\cite{dueenas2021grimoirelab} and the Public Jira
-Dataset~\cite{montgomery2022jira}---reduce candidate-generation cost
-without eliminating known validity threats (open-source bias, bot noise,
-incompleteness). The construction sub-tasks (extraction, case
-correlation, activity mapping) and their archaeological caveats
-(stratigraphy, contextual interpretation, taphonomic
-bias~\cite{Zimmermann2005MiningVersionHistories}) are operationalised by
+Dataset~\cite{montgomery2022jira}---reduce the effort required to identify
+and collect suitable repositories for analysis, without eliminating known
+validity threats (open-source bias, bot noise, incompleteness). The
+construction sub-tasks (extraction, case correlation, activity mapping) and
+their archaeological caveats (stratigraphy, contextual interpretation,
+taphonomic bias~\cite{Zimmermann2005MiningVersionHistories}---i.e.,
+distortions caused by the incomplete preservation of historical repository
+data) are operationalised by
 PATHCAST Stage~1 (Chapter~\ref{ch:method}). Software-specific construction
 patterns are catalogued in Appendix~C, Section~C.4.
 
@@ -188,8 +192,9 @@ $H_{X_n,X_{n+1}}$ before transitioning.
 \end{definition}
 
 The first-order assumption hides history dependence and time-varying
-transitions; PATHCAST mitigates both through optional state-space
-expansion and the ML residual signal (Section~\ref{sec:ml-se}).
+transitions; PATHCAST partially mitigates both through optional state-space
+expansion and ML-based residual correction (Section~\ref{sec:ml-se}),
+neither of which fully removes violations of the Markov property.
 
 
 % =============================================================================
@@ -222,9 +227,11 @@ interval are
 \hat{\mu}_g &= \tfrac{1}{M}\sum_{m=1}^{M} g(\omega^{(m)}), \label{eq:mc-estimator} \\
 \text{CI} &= \hat{\mu}_g \pm z_{\alpha/2} \cdot \tfrac{\hat{\sigma}_g}{\sqrt{M}}. \label{eq:mc-ci}
 \end{align}
-The standard error scales as $O(1/\sqrt{M})$ independently of
-dimension, and seed control via the Mersenne Twister makes the simulation
-exactly reproducible.
+The Monte Carlo convergence rate remains $O(1/\sqrt{M})$ regardless of
+dimensionality (although the estimator variance $\sigma^2$ may itself grow
+with dimension), and seed control via the Mersenne Twister
+makes the simulation reproducible under fixed seeds and implementation
+settings.
 
 \paragraph{Forecasting metrics.} A distributional forecast must be
 evaluated jointly for sharpness and calibration. The continuous ranked
@@ -239,16 +246,24 @@ For predicted distribution $\hat{F}$ and observed value $y$,
 \text{CRPS}(\hat{F}, y) = \int_{-\infty}^{\infty}
    [\hat{F}(t) - \mathbf{1}(t \geq y)]^2 \, dt.
 \end{equation}
-CRPS is a strictly proper scoring rule and reduces to mean absolute error
-when $\hat{F}$ degenerates to a point mass, so distributional forecasters
-and point baselines remain comparable on a common scale. Calibration is
-summarised by the aggregate calibration error
+CRPS is a strictly proper scoring rule~\cite{gneiting2007strictly} and
+reduces to mean absolute error when $\hat{F}$ degenerates to a point mass,
+so distributional forecasters and point baselines remain comparable on a
+common scale. Calibration is summarised by the average calibration error
+(ACE)
 \begin{equation}
 \label{eq:ace}
 \text{ACE} = \tfrac{1}{|\mathcal{A}|}
    \sum_{\alpha \in \mathcal{A}}|\hat{p}_\alpha - \alpha|,
 \end{equation}
-averaged across decile checkpoints. Worked CRPS-versus-MAE derivations
+averaged across the quantile checkpoints $\mathcal{A}$. ACE is the
+unweighted mean of the absolute deviations between nominal and empirical
+coverage at a fixed set of probability levels; unlike the
+\emph{expected} calibration error (ECE), which weights bins by their
+population, ACE assigns equal weight to each checkpoint and is therefore
+more sensitive to miscalibration in sparsely populated tail quantiles---the
+regime most relevant to the percentile-based forecasts produced by
+PATHCAST. Worked CRPS-versus-MAE derivations
 and numerical examples are in Appendix~B.
 \end{definition}
 
@@ -269,7 +284,10 @@ and a regressor $\hat{f}_T\colon \mathbb{R}^d \to \mathbb{R}^+$ for lead
 time, both trained on a feature vector $\mathbf{x}_c \in \mathbb{R}^d$
 derived per case. The candidate algorithms (Random
 Forest~\cite{breiman2001random}, XGBoost~\cite{chen2016xgboost},
-logistic/linear regression baselines, LSTM~\cite{tax2017} for the
+logistic/linear regression baselines, and an LSTM~\cite{tax2017} as a
+consolidated predictive-process-monitoring baseline---included to quantify
+the gain of process-oriented modelling rather than to compete with more
+recent Transformer-based architectures---for the
 sequence comparator) and the training protocol (temporal hold-out,
 hyperparameter search, SHAP interpretation) are specified in
 Chapter~\ref{ch:methodology}. The working hypothesis is that
@@ -296,7 +314,7 @@ H(V) = - \sum_{v \in V} p(v)\, \log_2 p(v)
 quantifies path uncertainty in bits; its normalised form
 $H_{\text{norm}}(V) = H(V) / \log_2 |V| \in [0,1]$ is a scale-independent
 process-complexity proxy. Higher $H_{\text{norm}}$ signals greater
-behavioural heterogeneity and is empirically correlated with lower
+behavioural heterogeneity and is expected to be associated with lower
 forecast confidence; PATHCAST uses it as both a diagnostic indicator at
 Stage~2 (Section~\ref{sec:variant-entropy}) and a feature of the ML
 component.
@@ -316,8 +334,8 @@ into a probabilistic state-transition model with closed-form expressions
 for expected completion time and absorption probabilities; Monte Carlo
 simulation, paired with CRPS and ACE, produces and evaluates the
 distributional forecasts; machine learning consumes process-derived
-features alongside MSR features to refine the point predictions; and the
-entropy of variants quantifies the process complexity that constrains
-forecast confidence. The empirical evidence that this integration has not
-been previously proposed for software development is the subject of
-Chapter~\ref{ch:slr}.
+features alongside MSR features to refine case-level outcome predictions;
+and the entropy of variants provides a proxy for process complexity and
+expected forecasting difficulty. The empirical evidence that this
+integration has not, to the best of our knowledge, been previously proposed
+for software development is the subject of Chapter~\ref{ch:slr}.
