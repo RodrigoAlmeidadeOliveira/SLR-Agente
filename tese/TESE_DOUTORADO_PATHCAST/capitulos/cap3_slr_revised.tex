@@ -10,7 +10,7 @@ modeling, and machine learning applied to software process forecasting. The
 review follows the guidelines established by Kitchenham and
 Charters~\cite{kitchenham2007} for evidence-based software engineering,
 complemented by the snowballing procedures described by
-Wohlin~\cite{Wohlin2024} and the mapping study guidelines of Petersen et
+Wohlin~\cite{wohlin2014guidelines} and the mapping study guidelines of Petersen et
 al.~\cite{petersen2015}. The primary objective is to identify, classify, and
 synthesize existing approaches that combine process-aware techniques with
 predictive modeling for software development outcomes, establishing the
@@ -160,7 +160,7 @@ contexts:
 The strings are adapted to each database's syntax and field conventions as
 summarized in Table~\ref{tab:db-adaptations}. The eligibility window for
 publications spans January 1994 to December 2025 (full calendar years),
-and the searches were executed on the search-execution date of April 2026;
+and the searches were executed on 12 April 2026;
 publications dated 2026 that were already indexed at execution time are
 therefore retained.
 
@@ -178,7 +178,7 @@ Scopus         & TITLE-ABS-KEY & 3         & ar, cp; EN; 1994--2026             
 IEEE Xplore    & All Metadata  & 4 (split) & Conf.\ + Journals; 1994--2026          & 1{,}386 \\
 Web of Science & TS (Topic)    & 3         & Article, Proc.; EN; 1994--2026         & 997 \\
 SpringerLink   & Simplified    & 8 queries & Chapter, Article; EN                   & 2{,}884 \\
-ACM DL         & Abstract      & 2         & Date: 1994--2026                       & 96 \\
+ACM DL         & Abstract      & 3         & Date: 1994--2026                       & 96 \\
 Snowballing    & --            & --        & Backward + forward                     & 595 \\
 Control set    & --            & --        & Manual                                 & 12 \\
 \midrule
@@ -412,7 +412,7 @@ SpringerLink (10 exports) & 2{,}884 & 1{,}543 \\
 IEEE Xplore (manual)    & 1{,}386 & 1{,}263 \\
 Snowballing             &   595   &   575   \\
 Web of Science (4 queries) & 997  &   514   \\
-ACM Digital Library (2 queries) & 96 &  34  \\
+ACM Digital Library (3 queries) & 96 &  34  \\
 Control set (validation only) & 12 &    2   \\
 \midrule
 \textbf{Total} & \textbf{8{,}347} & \textbf{5{,}783} \\
@@ -431,14 +431,22 @@ Screening 5{,}781 records in a single pass would require substantial
 resources. A working set of 2{,}340 papers was therefore constructed from the
 highest-signal primary queries---those whose query design directly targets the
 PATHCAST intersection (process mining, stochastic modeling, and software
-development)---as shown in Table~\ref{tab:working-set}. The 3{,}441
-deduplicated records not assigned to the working set ($5{,}781 - 2{,}340$),
-together with the 366 cross-source near-duplicate records that strict
-cross-source deduplication had removed but that are restored under a
-high-recall policy, constitute a \textit{high-recall auxiliary corpus} of
-3{,}807 records, retained as a frozen baseline and available for
-supplementary robustness analysis rather than as a primary evidence source
-(Section~\ref{sec:slr-extval}).
+development)---as shown in Table~\ref{tab:working-set}. All remaining
+deduplicated records that are not matched to the working set by identifier
+constitute a \textit{high-recall auxiliary corpus} of 3{,}807 records,
+retained as a frozen baseline and used for supplementary robustness analysis
+rather than as a primary evidence source (Section~\ref{sec:slr-extval}).
+Because the working set was frozen before the high-recall re-deduplication
+snapshot, approximately 364 working-set papers carry divergent identifiers
+in that snapshot and therefore also appear, as near-duplicates, in the
+auxiliary pool; the working set (2{,}340) and the auxiliary corpus
+(3{,}807) consequently overlap by about 364 records. A title-level
+cross-check confirms that 60 of the 212 first-pass auxiliary inclusions
+duplicate working-set studies under divergent identifiers; the combined-tier
+counts reported in this chapter therefore include this overlap and are
+interpreted as recall upper bounds rather than fully de-duplicated totals
+(Section~\ref{sec:slr-extval}). The substantive findings are anchored on the
+169-study working set and are unaffected by this overlap.
 
 \begin{table}[htbp]
 \centering
@@ -611,7 +619,7 @@ diagram~\cite{page2021} of the selection process.
    Scopus~2{,}197 \textbullet{} IEEE~97 \textbullet{} ACM~46};
 
 \node[exc] (wsdrop) at (6.0,-4.5)
-  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}441$\\primary; $3{,}807$ with\\restored near-duplicates):\\
+  {Deferred to auxiliary\\high-recall corpus ($n = 3{,}807$;\\$\sim$364 near-dup.\ overlap\\with working set):\\
    \mbox{SpringerLink}, WoS,\\Snowball, extra IEEE/ACM};
 
 \draw[arr] (dedup) -- (ws);
@@ -1620,15 +1628,27 @@ evidence set reported here.
 
 The review is limited to English-language peer-reviewed publications,
 potentially excluding relevant work in other languages or grey literature.
-The broad time span (1994--2025, search executed April 2026) and
+The broad time span (1994--2025, search executed 12 April 2026) and
 five-database coverage mitigate geographic and temporal bias. The deferred
 high-recall auxiliary corpus (3{,}807 records from SpringerLink, WoS,
-Snowball, and other low-precision queries) comprises the 3{,}441
-deduplicated records not assigned to the working set ($5{,}781 - 2{,}340$)
-together with 366 cross-source near-duplicate records restored under the
-high-recall policy. It provides a mechanism for robustness testing and for
-expansion if gaps in the confirmed 169-study set are identified, and is not
-treated as a primary evidence source.
+Snowball, and other low-precision queries) consists of every deduplicated
+record not matched to the 2{,}340-paper working set by identifier. Because
+the working set was frozen before the high-recall re-deduplication snapshot,
+roughly 364 working-set papers carry divergent identifiers in that snapshot
+and thus also appear as near-duplicates in the auxiliary pool; the two sets
+therefore overlap by about 364 records. A title-level cross-check of the
+first-pass auxiliary inclusions against the working-set studies shows that
+60 of the 212 auxiliary includes are duplicates of working-set studies
+carrying divergent identifiers (no DOI matches were found, which is
+consistent with the metadata-sparsity that caused the identifier
+divergence). The auxiliary tier therefore contributes approximately 152
+genuinely new studies rather than 212, and the de-duplicated combined
+evidence base is on the order of 321 rather than 381 studies; the combined
+counts reported in this chapter are consequently recall-oriented upper bounds
+pending a final cross-tier de-duplication. The auxiliary corpus provides a
+mechanism for robustness testing and for expansion if gaps in the confirmed
+169-study set are identified, and is not treated as a primary evidence
+source.
 
 A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM

@@ -140,8 +140,28 @@ Branch: `claude/thesis-advisor-feedback-F0L7I` · Commits: `259ac71`, `c3b616c`
 
 ---
 
-## Itens que dependem do AUTOR (verificar antes da banca)
+## Rastreamento dos dados da SLP no repositório (RESOLVIDO)
 
-- 🟡 **1.5 / O.8** — composição exata do corpus auxiliar (3.441 vs 3.807) e datas de coleta dos snapshots: só você tem os contadores brutos das exportações.
-- 🟡 Conferir que a chave `gneiting2007strictly` no `references.bib` corresponde a Gneiting & Raftery (2007), *Strictly Proper Scoring Rules*.
-- 🟡 Revisar a referência Wohlin (WOHLIN; RUNESON, 2024) vs o clássico Wohlin (2014) de snowballing.
+Fontes-verdade: `results/frozen/report_high_recall_2026-04-12.txt`,
+`results/SLR_EXECUCAO_ATE_AGORA.md`, `results/auxiliary/aux_ta_summary.txt`,
+`pipeline/sensitivity.py`, e contagens diretas dos CSVs.
+
+| Item | Achado rastreado | Ação |
+|------|------------------|------|
+| **Data de coleta** | Snapshot congelado em **2026-04-12 15:47** (`results/frozen/`) | ✅ datas concretizadas (cap3 §3.2.1, External Validity) |
+| **ACM queries** | Relatório: **3 queries** (Extra Refs 40 + Complementar MSR 32 + Principal 24 = 96). Meu ajuste anterior (3→2) estava ERRADO | ✅ revertido; `tab:retrieval`=3, `tab:db-adaptations`=3 |
+| **`gneiting2007strictly`** | = Gneiting & Raftery (2007), *Strictly Proper Scoring Rules* — correto p/ CRPS | ✅ confirmado |
+| **Citação snowballing** | cap3 citava `Wohlin2024` = livro *Experimentation in SE* (errado). Correto = `wohlin2014guidelines` (Wohlin 2014, snowballing) | ✅ corrigido em cap3 (compilado) |
+| **3.441 vs 3.807** | `auxiliar = unique_papers.csv(5.783) − working_set ids`. Só **1.976** dos 2.340 ids da WS casam → aux = 5.783−1.976 = **3.807**. Os **364** restantes da WS divergiram de identificador na re-dedup high-recall e sobram no pool auxiliar como near-duplicates | ✅ reconciliação reescrita com a causa real (3 pontos do cap3) |
+| **⚠️ 381/404 inflados** | **60 dos 212** includes auxiliares têm título idêntico a estudos da working set (0 match por DOI). Auxiliar contribui **~152 novos**, não 212 → combinado de-duplicado ≈ **321**, não 381 | 🟡 **decisão sua** — ver abaixo |
+
+## Itens que ainda dependem da SUA decisão
+
+- 🟡 **381/404 → ~321/~344**: o trace provou que o combinado contém ~60 duplicatas
+  WS↔auxiliar. Marquei no texto como "recall upper bounds pendentes de
+  de-duplicação cross-tier" e removi a afirmação (agora falsa) de que o auxiliar
+  "não introduz estudos além dos confirmados". **Decisão**: (a) re-rodar a
+  de-duplicação combinada e propagar 321/344 em todo o cap. 3, ou (b) manter como
+  upper bounds documentados. Só você pode validar a de-dup definitiva.
+- 🟡 Datas de coleta por repositório no Apêndice (O.8): o snapshot global é
+  2026-04-12; faltam as datas individuais por repositório, se desejar granularidade.
