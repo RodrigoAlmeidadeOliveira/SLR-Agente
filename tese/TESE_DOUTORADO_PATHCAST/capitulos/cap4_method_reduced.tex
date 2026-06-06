@@ -446,6 +446,15 @@ or $\kappa_2$.
 \end{equation}
 \end{definition}
 
+The taxonomy in Equation~\ref{eq:taxonomy} is the \emph{canonical minimal}
+SDLC taxonomy used by PATHCAST; it is intentionally compact to keep the
+discovered state space interpretable. Project-specific extensions (e.g.,
+\texttt{blocked}, \texttt{changes\_requested}, \texttt{reopened},
+\texttt{failed\_build}, \texttt{hotfix}) are permitted and are accommodated
+by extending $\mathcal{A}$ and the mapping function $\mu$ without altering
+the formalism; finer-grained statuses that are not modelled explicitly are
+collapsed onto the nearest canonical activity.
+
 \begin{definition}[Activity Mapping Function]
 \label{def:activity-map}
 $\mu : (src, type, payload) \to \mathcal{A} \cup \{\bot\}$.
@@ -637,8 +646,19 @@ Full metrics vector:
 
 \begin{definition}[SDLC State Space]
 \label{def:state-space}
-$S = S_T \cup S_A$ where $S_T$ comprises non-terminal observed activities
-and $S_A = \{\texttt{done}, \texttt{cancelled}\}$.
+The Markov state space is obtained from the discovered process model by a
+one-to-one mapping in which each observable activity $a \in \mathcal{A}$ of
+the discovered model becomes a Markov state (state $\equiv$ activity).
+Formally, $S = S_T \cup S_A$, where $S_T$ comprises the non-terminal
+observed activities and $S_A$ comprises the terminal (absorbing) activities.
+By default $S_A = S_{\text{done}} \cup S_{\text{cancelled}}$ with
+$S_{\text{done}} = \{\texttt{done}\}$ (successful completion) and
+$S_{\text{cancelled}} = \{\texttt{cancelled}\}$; this generalises to
+platform-specific terminal states (e.g., \texttt{merged}, \texttt{released}
+as completion; \texttt{rejected}, \texttt{duplicate}, \texttt{won't\_fix},
+\texttt{archived} as cancellation), which are mapped onto $S_{\text{done}}$
+or $S_{\text{cancelled}}$ as appropriate. Transitions of the discovered
+model induce the entries of the transition matrix $P$ over $S$.
 \end{definition}
 
 

@@ -505,10 +505,16 @@ together form the full-text review queue of 886 papers. The
 software development, principally generic business process management) and EC3
 (theoretical algorithm proposals without SE evaluation).
 
-\subsection{Full-Text Screening}
+\subsection{Eligibility Screening (Full-Text / Enriched-Abstract)}
+\label{sec:slr-ft-screening}
 
+This phase is termed \emph{eligibility screening} rather than strictly
+full-text screening because, although a locally accessible PDF was available
+for only a subset of papers, every record was assessed against the
+eligibility criteria using the best available evidence---full text where
+accessible, and enriched abstract plus metadata otherwise.
 The 886 papers forwarded from the T/A phase were subjected to LLM-assisted
-full-text screening with a strict binary prompt (decisions limited to
+eligibility screening with a strict binary prompt (decisions limited to
 \texttt{include}, \texttt{exclude}, or \texttt{pending}; \texttt{maybe}
 is not permitted at this stage). To maximise the number of papers assessable by the LLM, a
 multi-source abstract-enrichment cascade was executed prior to
@@ -895,9 +901,9 @@ review, process evaluation) appear in 74 papers (43.8\%);
 \textbf{maintenance} appears in 38 papers (22.5\%);
 \textbf{requirements engineering} in only 22 papers (13.0\%); and
 \textbf{delivery/DevOps contexts} (CI/CD, build and release pipelines) in
-just 18 papers (10.7\%). \textbf{Design and architecture} are not the primary
-focus of any extracted study, and only 3 papers (1.8\%) center the analysis
-on project management.
+just 18 papers (10.7\%). \textbf{Design and architecture} were not
+identified as the primary focus of any of the confirmed studies, and only 3
+papers (1.8\%) center the analysis on project management.
 
 Two conclusions follow. First, the literature is concentrated on phases where
 digital traces are abundant and already timestamped, such as commits, issues,
@@ -970,10 +976,12 @@ substantially lowering the barrier to formal process modeling. This line of
 inquiry was consolidated in \cite{cook1998}, which refined the event-based
 discovery methodology and established the conceptual vocabulary of inferring
 workflow structures from historical execution data, a paradigm that remains
-central to the field today. Notably, both contributions embedded stochastic
-reasoning---particularly Markov chain representations---within the discovery
-pipeline, anticipating the probabilistic extensions that would later characterise
-mature process mining frameworks. The translation of these principles into an
+central to the field today. Notably, both contributions employed Markov-chain
+representations as a \emph{modeling and inference} mechanism for discovered
+process structure---not as a probabilistic forecasting layer in the modern
+sense---thereby anticipating, rather than implementing, the predictive
+stochastic extensions that would later characterise mature process mining
+frameworks. The translation of these principles into an
 explicit, named framework for software engineering contexts was accomplished by
 \cite{rubin2007}, who applied the ProM toolkit to source code management logs
 and demonstrated multi-perspective analysis spanning control-flow, informational,
@@ -1747,9 +1755,12 @@ combined-QA results are reported in Table~\ref{tab:qa-combined}.
 A residual conclusion-validity threat is the LLM-based extraction of
 PM-technique, stochastic-technique, and SDLC-phase fields. To mitigate this,
 the 73-PDF triangulation subset was used to spot-check the extracted fields
-against the corresponding full texts; no systematic disagreement was
-observed in the spot-check, but a complete human re-extraction on a
-stratified sample is recommended before camera-ready submission.
+against the corresponding full texts; the spot-check did not reveal any
+systematic deviation that would materially alter the IC-combination
+distributions or the F1--F5 findings. As a matter of good methodological
+practice---rather than as a remedy for an observed problem---a complete
+human re-extraction on a stratified sample is planned before camera-ready
+submission.
 
 
 \subsection{Replication Package}

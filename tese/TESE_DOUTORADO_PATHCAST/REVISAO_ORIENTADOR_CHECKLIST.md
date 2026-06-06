@@ -1,7 +1,56 @@
 # Checklist — Revisão do Orientador (Caps. 2–5)
 
 Status: ✅ feito · 🟡 precisa de confirmação do autor · ⬜ pendente/opcional (não feito)
-Branch: `claude/thesis-advisor-feedback-F0L7I` · Commits: `259ac71`, `c3b616c`
+Branch: `claude/thesis-advisor-feedback-F0L7I`
+
+## Re-avaliação final (usando a skill paper-validation-review v3.0)
+
+Itens adicionais do orientador fechados nesta rodada de re-avaliação:
+
+| Item | Local | Status |
+|------|-------|--------|
+| "Full-Text Screening" → "Eligibility Screening (Full-Text/Enriched-Abstract)" | cap3 §3.3.4 | ✅ |
+| Cook & Wolf: Markov como modelagem/inferência, não forecasting moderno | cap3 §3.4.6 | ✅ |
+| "Design and architecture not the primary focus of any study" suavizado | cap3 §3.4.5 | ✅ |
+| "no systematic disagreement" vs re-extração → reformulado como boa prática | cap3 §3.6.4 | ✅ |
+| Taxonomia SDLC: nota "canônica mínima + extensões permitidas" | cap4 §4.2.3 | ✅ |
+| Mapeamento PM→estado de Markov formalizado (estado ≡ atividade) + absorventes generalizados | cap4 §4.3 | ✅ |
+| "on-time vs delayed" pressupõe prazo/SLA/sprint — explicitado | cap2 §2.5 | ✅ |
+| "process backbone" definido formalmente | cap2 §2.7 | ✅ |
+
+Itens que permanecem 🟡/⬜ após a re-avaliação:
+
+- ⬜ **Split EC5 → EC5/EC6/EC7**: os dados do pipeline só têm o código EC5 (145);
+  separar exige re-classificar os sub-motivos (texto inacessível / metadados
+  irrecuperáveis / discordância irreconciliável). Mantido como "EC5-extended"
+  com os 3 sub-motivos documentados no texto. Requer re-rodar a classificação.
+- ⬜ Reliability diagram e comparação Markov-analítico × Monte Carlo → pertencem
+  ao capítulo de avaliação (em preparação).
+- ⬜ Capítulo de arquitetura conceitual completo → já há a figura de arquitetura
+  (`fig:pathcast-architecture`); capítulo dedicado adiado.
+- ⬜ Fortalecer §5.2.5 Ética (versão expandida do orientador) e enumerar eventos
+  de PR coletados → melhorias menores, opcionais.
+- ⬜ Citar Augusto/Bose para entropia–complexidade → orientador ambivalente;
+  `augusto2019` existe, Bose não.
+
+## Skill de revisão de artigos
+
+- ✅ **paper-validation-review atualizada para v3.0** em
+  `.claude/skills/paper-validation-review/SKILL.md`, codificando os padrões de
+  revisão do orientador como novos checks:
+  - Phase 8 — Aggregation & De-duplication Integrity (pega soma cega de tiers /
+    aritmética de funil que não fecha — teria pego 381 inflado)
+  - Phase 9 — Citation–Claim Semantic Validation (Wohlin2024 vs 2014)
+  - Phase 10 — Mathematical Rigor & Terminology (theorem→proposition,
+    quasi-stationary vs QSD, Wald vs Wilson, escala classe×probabilidade)
+  - Phase 2.6 — Claim-Strength & Hedging (first/only/never; causal)
+  - Extensões: sanidade temporal, colisão de namespace (L0–L3 vs L1–L4),
+    interpretação conjunta de κ, completude de definição de métricas,
+    `\input{}`-tabela ↔ narrativa, provenance de extração por LLM
+  - Honesty Invariants #10–#13 + protocolo de Reconciliação de Feedback do
+    Orientador + estudo de caso PATHCAST Cap. 3/4 + contrato de regressão
+
+Commits: `259ac71`, `c3b616c`, `4e03e62`, `250f816`, `732b624`, `9ab293b`, `9dd7fea`
 
 > Observação: não há LaTeX no ambiente — recomenda-se rodar `latexmk -pdf main_patched.tex`
 > localmente para confirmar a compilação antes da banca.
