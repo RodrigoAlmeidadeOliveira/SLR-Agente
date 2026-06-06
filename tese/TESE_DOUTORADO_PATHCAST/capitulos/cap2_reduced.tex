@@ -282,7 +282,10 @@ prediction as supervised learning: a binary classifier
 $\hat{f}\colon \mathbb{R}^d \to \{0,1\}$ for on-time versus delayed cases,
 and a regressor $\hat{f}_T\colon \mathbb{R}^d \to \mathbb{R}^+$ for lead
 time, both trained on a feature vector $\mathbf{x}_c \in \mathbb{R}^d$
-derived per case. The candidate algorithms (Random
+derived per case. The on-time/delayed label presupposes a reference target
+for each case (a due date, an SLA, or a sprint deadline); the concrete
+delay-threshold strategies used to derive this label when no explicit target
+is recorded are specified in Chapter~\ref{ch:methodology}. The candidate algorithms (Random
 Forest~\cite{breiman2001random}, XGBoost~\cite{chen2016xgboost},
 logistic/linear regression baselines, and an LSTM~\cite{tax2017} as a
 consolidated predictive-process-monitoring baseline---included to quantify
@@ -327,7 +330,9 @@ component.
 \label{sec:ch2-synthesis}
 
 The six concepts compose the PATHCAST pipeline as follows: process mining
-yields the discovered backbone and the per-case conformance feature;
+yields the discovered \emph{process backbone}---the sound, block-structured
+process model (Section~\ref{sec:process-mining}) that captures the dominant control-flow
+of the SDLC---and the per-case conformance feature;
 mining of software repositories provides the heterogeneous event sources
 from which that log is built; the Markov chain layer turns the backbone
 into a probabilistic state-transition model with closed-form expressions

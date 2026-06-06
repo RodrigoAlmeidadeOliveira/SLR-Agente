@@ -1,7 +1,66 @@
 # Checklist — Revisão do Orientador (Caps. 2–5)
 
 Status: ✅ feito · 🟡 precisa de confirmação do autor · ⬜ pendente/opcional (não feito)
-Branch: `claude/thesis-advisor-feedback-F0L7I` · Commits: `259ac71`, `c3b616c`
+Branch: `claude/thesis-advisor-feedback-F0L7I`
+
+## Re-avaliação final (usando a skill paper-validation-review v3.0)
+
+Itens adicionais do orientador fechados nesta rodada de re-avaliação:
+
+| Item | Local | Status |
+|------|-------|--------|
+| "Full-Text Screening" → "Eligibility Screening (Full-Text/Enriched-Abstract)" | cap3 §3.3.4 | ✅ |
+| Cook & Wolf: Markov como modelagem/inferência, não forecasting moderno | cap3 §3.4.6 | ✅ |
+| "Design and architecture not the primary focus of any study" suavizado | cap3 §3.4.5 | ✅ |
+| "no systematic disagreement" vs re-extração → reformulado como boa prática | cap3 §3.6.4 | ✅ |
+| Taxonomia SDLC: nota "canônica mínima + extensões permitidas" | cap4 §4.2.3 | ✅ |
+| Mapeamento PM→estado de Markov formalizado (estado ≡ atividade) + absorventes generalizados | cap4 §4.3 | ✅ |
+| "on-time vs delayed" pressupõe prazo/SLA/sprint — explicitado | cap2 §2.5 | ✅ |
+| "process backbone" definido formalmente | cap2 §2.7 | ✅ |
+
+Itens RESOLVIDOS na rodada de fechamento (com dados rastreados):
+
+- ✅ **Split EC5 → EC5/EC6/EC7**: re-classifiquei os dados. Working-set EC5 =
+  **145** (todos texto-inacessível, causa única confirmada pelos rationales).
+  Auxiliar: **EC6 (metadados insuficientes) = 611** (595 sem abstract + 16
+  pending residual) e **EC7 (discordância irreconciliável) = 52** (10 ws_TA +
+  42 aux_FT). Critérios separados na tabela; "EC5-extended" eliminado do texto.
+- ✅ **Reliability diagram** adicionado às métricas (cap5 §5.4) como artefato de
+  calibração visual.
+- ✅ **Comparação Markov-analítico × Monte-Carlo** adicionada (cap5 §5.5,
+  ablação B3 vs Stage 4 — ganho da camada de simulação).
+- ✅ **Arquitetura conceitual**: já existia `fig:pipeline-architecture`
+  (R→S1→S2→S3→S4→ML→Forecast); reforçada com parágrafo de visão conceitual
+  end-to-end antes dos detalhes algorítmicos (cap4 §4.1).
+- ✅ **Ética §5.2.5** expandida (dados públicos, unidade de análise não é o
+  indivíduo, conformidade ToS/Jira, risco mínimo, replicação).
+- ✅ **Augusto (2019) + Bose & van der Aalst (2013)** citados na seção de
+  entropia de variantes (cap4 §4.3), com enquadramento Phase-9-compliant
+  (complexidade/variabilidade comportamental, não "definem entropia"); entrada
+  `bose2013trace` adicionada ao `references.bib`.
+
+Remanescente menor:
+- ⬜ Enumerar explicitamente os eventos de PR coletados (created/reviewed/
+  merged/closed) em §5.2.3 — cosmético.
+
+## Skill de revisão de artigos
+
+- ✅ **paper-validation-review atualizada para v3.0** em
+  `.claude/skills/paper-validation-review/SKILL.md`, codificando os padrões de
+  revisão do orientador como novos checks:
+  - Phase 8 — Aggregation & De-duplication Integrity (pega soma cega de tiers /
+    aritmética de funil que não fecha — teria pego 381 inflado)
+  - Phase 9 — Citation–Claim Semantic Validation (Wohlin2024 vs 2014)
+  - Phase 10 — Mathematical Rigor & Terminology (theorem→proposition,
+    quasi-stationary vs QSD, Wald vs Wilson, escala classe×probabilidade)
+  - Phase 2.6 — Claim-Strength & Hedging (first/only/never; causal)
+  - Extensões: sanidade temporal, colisão de namespace (L0–L3 vs L1–L4),
+    interpretação conjunta de κ, completude de definição de métricas,
+    `\input{}`-tabela ↔ narrativa, provenance de extração por LLM
+  - Honesty Invariants #10–#13 + protocolo de Reconciliação de Feedback do
+    Orientador + estudo de caso PATHCAST Cap. 3/4 + contrato de regressão
+
+Commits: `259ac71`, `c3b616c`, `4e03e62`, `250f816`, `732b624`, `9ab293b`, `9dd7fea`
 
 > Observação: não há LaTeX no ambiente — recomenda-se rodar `latexmk -pdf main_patched.tex`
 > localmente para confirmar a compilação antes da banca.

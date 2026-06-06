@@ -73,6 +73,27 @@ forecast distribution; $\hat{f}$ the trained ML predictor.
 \subsection{Pipeline Architecture}
 \label{sec:pipeline-arch}
 
+Before the algorithmic details of each stage, this subsection presents the
+conceptual architecture of PATHCAST as an end-to-end pipeline, so that the
+formal stage specifications that follow can be read against a single mental
+model. Conceptually, PATHCAST is a five-step transformation of repository
+evidence into a probabilistic forecast:
+\[
+\underbrace{\text{Repository data}}_{\mathcal{R}}
+\;\to\; \underbrace{\text{Event-log construction}}_{\mathcal{S}_1}
+\;\to\; \underbrace{\text{Process discovery}}_{\mathcal{S}_2}
+\;\to\; \underbrace{\text{Markov estimation}}_{\mathcal{S}_3}
+\;\to\; \underbrace{\text{Monte-Carlo simulation}}_{\mathcal{S}_4}
+\;\to\; \underbrace{\text{Forecast}}_{\hat{\mathcal{D}}},
+\]
+with a machine-learning enhancement component that consumes the
+process-derived artefacts of $\mathcal{S}_2$ and $\mathcal{S}_3$ to refine
+case-level predictions. Each step is a function with a formally specified
+input/output contract (Section~\ref{sec:stage-contracts}), and the stages
+compose into the directed acyclic graph of
+Figure~\ref{fig:pipeline-architecture}; the remainder of this chapter then
+specifies each function in turn.
+
 Figure~\ref{fig:pipeline-architecture} illustrates the complete pipeline
 architecture with data flows between stages.
 
@@ -446,6 +467,15 @@ or $\kappa_2$.
 \end{equation}
 \end{definition}
 
+The taxonomy in Equation~\ref{eq:taxonomy} is the \emph{canonical minimal}
+SDLC taxonomy used by PATHCAST; it is intentionally compact to keep the
+discovered state space interpretable. Project-specific extensions (e.g.,
+\texttt{blocked}, \texttt{changes\_requested}, \texttt{reopened},
+\texttt{failed\_build}, \texttt{hotfix}) are permitted and are accommodated
+by extending $\mathcal{A}$ and the mapping function $\mu$ without altering
+the formalism; finer-grained statuses that are not modelled explicitly are
+collapsed onto the nearest canonical activity.
+
 \begin{definition}[Activity Mapping Function]
 \label{def:activity-map}
 $\mu : (src, type, payload) \to \mathcal{A} \cup \{\bot\}$.
@@ -547,7 +577,11 @@ H(V) = -\sum_{v \in V} p(v) \log_2 p(v).
 
 The normalized form $H_{\text{norm}}(V) = H(V) / \log_2 |V|$ provides a
 scale-independent measure in $[0, 1]$. PATHCAST uses $H_{\text{norm}}$ as
-a complexity proxy and as a candidate ML feature.
+a complexity proxy and as a candidate ML feature. Using the diversity of
+trace variants as an indicator of behavioural complexity is consistent with
+established process-mining practice: behavioural variability is a recognised
+driver of process-model complexity and of the difficulty of conformance and
+prediction~\cite{bose2013trace, augusto2019}.
 
 Stage 2 satisfies the contract of Definition~\ref{def:contract-s2}; the
 remainder of this section specifies the discovery, conformance and
@@ -637,8 +671,19 @@ Full metrics vector:
 
 \begin{definition}[SDLC State Space]
 \label{def:state-space}
-$S = S_T \cup S_A$ where $S_T$ comprises non-terminal observed activities
-and $S_A = \{\texttt{done}, \texttt{cancelled}\}$.
+The Markov state space is obtained from the discovered process model by a
+one-to-one mapping in which each observable activity $a \in \mathcal{A}$ of
+the discovered model becomes a Markov state (state $\equiv$ activity).
+Formally, $S = S_T \cup S_A$, where $S_T$ comprises the non-terminal
+observed activities and $S_A$ comprises the terminal (absorbing) activities.
+By default $S_A = S_{\text{done}} \cup S_{\text{cancelled}}$ with
+$S_{\text{done}} = \{\texttt{done}\}$ (successful completion) and
+$S_{\text{cancelled}} = \{\texttt{cancelled}\}$; this generalises to
+platform-specific terminal states (e.g., \texttt{merged}, \texttt{released}
+as completion; \texttt{rejected}, \texttt{duplicate}, \texttt{won't\_fix},
+\texttt{archived} as cancellation), which are mapped onto $S_{\text{done}}$
+or $S_{\text{cancelled}}$ as appropriate. Transitions of the discovered
+model induce the entries of the transition matrix $P$ over $S$.
 \end{definition}
 
 
