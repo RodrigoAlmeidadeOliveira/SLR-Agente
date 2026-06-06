@@ -181,7 +181,44 @@ workflow-state transitions that are not directly available through the GitHub
 APIs.
 
 The complete list of 48 repositories is in
-Appendix~\ref{app:repository-list}.
+Appendix~\ref{app:repository-list}. The overall selection and enrichment
+flow is summarized in Figure~\ref{fig:repo-selection}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=6mm,
+  box/.style={draw, rounded corners=4pt, align=center,
+              text width=6.6cm, minimum height=0.95cm,
+              font=\small, fill=white, thick},
+  note/.style={draw, rounded corners=4pt, align=left,
+               inner xsep=5pt, inner ysep=4pt, text width=4.3cm,
+               minimum height=0.8cm, font=\footnotesize,
+               fill=gray!8, draw=gray!60},
+  arr/.style={->, >=Stealth, thick},
+  sidearr/.style={->, >=Stealth, dashed, draw=gray!70, thick},
+]
+\node[box] (cand) {\textbf{Candidate generation (SEART)}\\150 candidate repositories};
+\node[box, below=of cand] (crit) {\textbf{Inclusion / exclusion criteria}\\$\geq$1{,}000 commits, issues+PRs,\\non-fork, active, $\geq$5 contributors};
+\node[box, below=of crit] (verif) {\textbf{Criterion verification}\\GitHub REST API};
+\node[box, below=of verif] (strat) {\textbf{Stratified sampling}\\language $\times$ scale $\times$ governance};
+\node[box, below=of strat] (sel) {\textbf{48 selected repositories}};
+\node[box, below=of sel] (jira) {\textbf{Jira enrichment}\\Apache / Spring (Montgomery et al.)};
+\node[box, below=of jira] (final) {\textbf{Final frozen dataset}\\(snapshots for evaluation)};
+
+\draw[arr] (cand) -- (crit);
+\draw[arr] (crit) -- (verif);
+\draw[arr] (verif) -- (strat);
+\draw[arr] (strat) -- (sel);
+\draw[arr] (sel) -- (jira);
+\draw[arr] (jira) -- (final);
+
+\node[note, right=8mm of strat] (note1) {Quotas: 3--4 per language; balanced scale tiers; $\geq$4 per governance model};
+\draw[sidearr] (strat.east) -- (note1.west);
+\end{tikzpicture}
+\caption{Repository selection and enrichment process.}
+\label{fig:repo-selection}
+\end{figure}
 
 
 \subsection{Data Collection}

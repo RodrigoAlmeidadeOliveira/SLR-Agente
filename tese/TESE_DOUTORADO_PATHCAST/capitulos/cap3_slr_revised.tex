@@ -1165,17 +1165,17 @@ papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
 end-to-end process-aware forecasting architecture for SDLC data. The
 operational coding of the 73-PDF triangulation subset is consistent with the
 full-set numbers and is summarized in
-Figure~\ref{fig:pdf-integration-priority}.
+Figures~\ref{fig:pdf-integration} and~\ref{fig:pdf-priority}.
 
-\begin{figure}[p]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
   ybar,
-  bar width=0.55cm,
-  width=12cm, height=5.2cm,
+  bar width=0.6cm,
+  width=11cm, height=5.0cm,
   ylabel={Papers},
-  symbolic x coords={L0,L1,L2,L3,High,Medium,Low},
+  symbolic x coords={L0,L1,L2,L3},
   xtick=data,
   x tick label style={font=\small},
   ymin=0, ymax=60,
@@ -1184,13 +1184,39 @@ Figure~\ref{fig:pdf-integration-priority}.
   nodes near coords style={font=\small, above},
   fill=gray!45,
   draw=black,
-  enlarge x limits=0.08,
+  enlarge x limits=0.18,
 ]
-\addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0) (High,54) (Medium,14) (Low,5)};
+\addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational integration levels and reading-priority distribution in the 73-paper PDF triangulation subset.}
-\label{fig:pdf-integration-priority}
+\caption{Operational integration-level distribution (L0--L3) in the 73-paper PDF triangulation subset.}
+\label{fig:pdf-integration}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar,
+  bar width=0.6cm,
+  width=11cm, height=5.0cm,
+  ylabel={Papers},
+  symbolic x coords={High,Medium,Low},
+  xtick=data,
+  x tick label style={font=\small},
+  ymin=0, ymax=60,
+  ytick={0,10,20,30,40,50,60},
+  nodes near coords,
+  nodes near coords style={font=\small, above},
+  fill=gray!45,
+  draw=black,
+  enlarge x limits=0.25,
+]
+\addplot coordinates {(High,54) (Medium,14) (Low,5)};
+\end{axis}
+\end{tikzpicture}
+\caption{Reading-priority distribution (High/Medium/Low) in the 73-paper PDF triangulation subset.}
+\label{fig:pdf-priority}
 \end{figure}
 
 \subsubsection{RQ3.2: Gap Analysis}

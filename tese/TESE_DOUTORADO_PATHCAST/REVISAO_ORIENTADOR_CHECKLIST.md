@@ -125,11 +125,11 @@ Branch: `claude/thesis-advisor-feedback-F0L7I` · Commits: `259ac71`, `c3b616c`
 |---|------|--------------|--------|
 | O.1 | Reforçar resumo §4.9 com narrativa científica (4 níveis) | cap4 §4.9 | ✅ |
 | O.2 | Reforçar resumo §5.8 (versão expandida) | cap5 §5.8 | ✅ |
-| O.3 | Dividir Figura 3.6 em 3.6a (integração) e 3.6b (prioridade) | Legenda já nomeia ambas; cosmético | ⬜ (cosmético) |
+| O.3 | Separar a figura combinada em duas (integração L0–L3 / prioridade) | cap3, fig:pdf-integration + fig:pdf-priority | ✅ |
 | O.4 | Justificativa DSR + caracterização Gregor & Hevner nível 2 | cap5 §5.1 | ✅ |
 | O.5 | Subseção "Dataset Rationale" (por que 48 repositórios) | cap5 §5.2 | ✅ |
 | O.6 | Definição formal da função de seleção (Def.) | cap5 §5.2, def:repo-selection | ✅ |
-| O.7 | Figura de fluxo de seleção/enriquecimento | Diagrama novo; requer layout + compile | ⬜ (adiado) |
+| O.7 | Figura de fluxo de seleção/enriquecimento de repositórios | cap5 §5.2, fig:repo-selection (TikZ) | ✅ |
 | O.8 | Snapshot de coleta congelado + datas | Nota de snapshot adicionada (cap5 §5.2); datas dependem do autor | 🟡 parcial |
 | O.9 | Comparação Markov Analítico × Monte Carlo | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
 | O.10 | Reliability diagram (calibração) | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
