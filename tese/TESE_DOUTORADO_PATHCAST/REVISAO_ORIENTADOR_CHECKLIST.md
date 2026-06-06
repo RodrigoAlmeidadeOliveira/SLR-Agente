@@ -119,22 +119,24 @@ Branch: `claude/thesis-advisor-feedback-F0L7I` · Commits: `259ac71`, `c3b616c`
 
 ---
 
-## OPCIONAIS — recomendados pelo orientador, ainda NÃO aplicados
+## OPCIONAIS — recomendados pelo orientador
 
-| # | Item | Motivo de ter deixado para depois | Status |
-|---|------|-----------------------------------|--------|
-| O.1 | Reforçar resumo §4.9 com a versão "4 níveis" sugerida pelo orientador | Resumo atual existe e é funcional; reescrita é melhoria de impacto, não correção | ⬜ |
-| O.2 | Reforçar resumo §5.8 (versão expandida sugerida) | idem | ⬜ |
-| O.3 | Dividir Figura 3.6 em 3.6a (níveis de integração) e 3.6b (prioridade de leitura) | Legenda já nomeia ambas as dimensões; divisão é cosmética | ⬜ |
-| O.4 | Justificativa DSR + caracterização Gregor & Hevner nível 2 (§5.1) | Texto pronto fornecido pelo orientador; colar quando revisar o Cap. 5 | ⬜ |
-| O.5 | Subseção 5.2.0 "Dataset Rationale" (por que 48 repositórios) | Conteúdo está na versão completa cap5_methodology.tex (não compilada) | ⬜ |
-| O.6 | Definição formal da função de seleção de repositórios (Def. 5.1) | idem | ⬜ |
-| O.7 | Figura de fluxo de seleção/enriquecimento de repositórios (Fig. 5.1) | Diagrama novo; requer decisão de layout | ⬜ |
-| O.8 | Snapshot de coleta congelado (Def. 5.2) + datas de coleta | Datas reais necessárias do autor | 🟡 |
-| O.9 | Comparação Markov Analítico × Monte Carlo (ganho do Stage 4) | Métrica/experimento adicional; pertence ao cap. de avaliação (em preparação) | ⬜ |
-| O.10 | Reliability diagram como artefato visual de calibração | Pertence ao cap. de avaliação (em preparação) | ⬜ |
-| O.11 | Citar Augusto et al. (2019) / Bose & van der Aalst (2013) p/ entropia–complexidade | Verificar se as chaves existem no `references.bib` | ⬜ |
-| O.12 | Hipóteses estatísticas explícitas (H0/H1) para RQ3 | Melhoria de formalização da §5.6 | ⬜ |
+| # | Item | Local / nota | Status |
+|---|------|--------------|--------|
+| O.1 | Reforçar resumo §4.9 com narrativa científica (4 níveis) | cap4 §4.9 | ✅ |
+| O.2 | Reforçar resumo §5.8 (versão expandida) | cap5 §5.8 | ✅ |
+| O.3 | Dividir Figura 3.6 em 3.6a (integração) e 3.6b (prioridade) | Legenda já nomeia ambas; cosmético | ⬜ (cosmético) |
+| O.4 | Justificativa DSR + caracterização Gregor & Hevner nível 2 | cap5 §5.1 | ✅ |
+| O.5 | Subseção "Dataset Rationale" (por que 48 repositórios) | cap5 §5.2 | ✅ |
+| O.6 | Definição formal da função de seleção (Def.) | cap5 §5.2, def:repo-selection | ✅ |
+| O.7 | Figura de fluxo de seleção/enriquecimento | Diagrama novo; requer layout + compile | ⬜ (adiado) |
+| O.8 | Snapshot de coleta congelado + datas | Nota de snapshot adicionada (cap5 §5.2); datas dependem do autor | 🟡 parcial |
+| O.9 | Comparação Markov Analítico × Monte Carlo | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
+| O.10 | Reliability diagram (calibração) | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
+| O.11 | Citar Augusto et al. (2019) / Bose & van der Aalst (2013) p/ entropia | Orientador ambivalente ("método não cita"); `augusto2019` existe, Bose não | ⬜ (a critério) |
+| O.12 | Hipóteses estatísticas explícitas (H0/H1) RQ2/RQ3 | cap5 §5.6, sec:hypotheses | ✅ |
+| O.13 | Limiares de interpretação de Cliff's δ (Kampenes) | cap5 §5.6 (extra) | ✅ |
+| O.14 | Justificativa estratificação + threshold 50 runs CI/CD | cap5 §5.2 (extra) | ✅ |
 
 ---
 
