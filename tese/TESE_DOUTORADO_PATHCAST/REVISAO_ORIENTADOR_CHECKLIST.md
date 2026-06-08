@@ -293,3 +293,50 @@ corrigidas para ✅.
 > → EXIT=0, sem `! errors`, sem `Undefined control sequence`. Bibliografia
 > (cites novos `kuleshov2018calibrated`, `naeini2015obtaining`) entra no
 > próximo build completo com bibtex/biber.
+
+---
+
+## Validação de dados rastreada (2026-06-07) — Opção A e O.8
+
+Rastreio full no repositório. Fontes-verdade:
+`results/auxiliary/extraction_combined_381.csv` (col. `origin`, `title`, `doi`),
+`results/auxiliary/qa_combined_381.csv`, `results/auxiliary/aux_reft_*.csv`.
+
+### Opção A (381→319 / 404→341) — ✅ VALIDADA contra dados reais
+Script de dedup title-normalizado (NFKD + lowercase + alfanumérico) sobre os CSVs:
+
+| Quantidade | Esperado (checklist) | Medido nos dados | Bate? |
+|------------|----------------------|------------------|-------|
+| Working set / Auxiliar (raw) | 169 / 212 | 169 / 212 | ✅ |
+| Cross-tier dups (aux∩ws) por título | 60 | **60** | ✅ |
+| Dups internos do auxiliar | 2 | **2** | ✅ |
+| Auxiliar único 1ª passagem | 150 | **150** | ✅ |
+| Combinado analítico 1ª passagem | 319 | **169+150=319** | ✅ |
+| Novos 2ª passagem (reft) | 22 | **22** (de 23 linhas) | ✅ |
+| Combinado final | 341 | **169+150+22=341** | ✅ |
+| QA retido (dedup) | 260/319 | **260/319** | ✅ |
+
+→ Item **1.5** e **Opção A**: de 🟡 para ✅ (números confirmados nos dados brutos).
+
+### ⚠️ Correção factual propagada à tese (cap3 §3.3.2 e §3.6.3)
+O checklist anterior afirmava "0 match por DOI" e a tese dizia
+*"no DOI matches were found"*. **FALSO**: dos 60 cross-tier, **56 compartilham
+DOI** e apenas **4** têm identificador divergente/ausente (casados só por título).
+Corrigido em ambos os pontos do cap3:
+- "60 ... 56 share a normalized DOI ... 4 carry divergent or missing identifiers"
+- explicação corrigida: overlap surge porque WS e auxiliar foram triados como
+  pipelines separados (dedup intra-tier, reconciliação cross-tier só post-hoc) —
+  não por "metadata sparsity" (que só vale p/ os 4).
+
+O método title-norm continua correto (pega 60 vs 56 do DOII); só o *rationale*
+do "porquê" estava errado.
+
+### O.8 — Datas por-repositório: ⬜ SEM DADO no repo (conclusivo)
+Busca full: nenhum arquivo cita os 48 repos de avaliação (django/django,
+kubernetes/kubectl, denoland/deno…) fora de `appendix_repositories.tex`;
+sem JSON/CSV de harvest, sem script de coleta GitHub (`/repos/`, GraphQL,
+pygithub), appendix sem coluna de data. O harvest dos repos de **avaliação**
+(commits/issues/PRs/contributors + datas) **não existe no SLR-Agente** —
+pertence ao cap. 6/7 (em preparação). O snapshot global 2026-04-12 é o
+*freeze da SLR* (papers), não dos repos de avaliação. Tabela 5.2 e datas
+por-repo permanecem dependentes desse harvest externo.

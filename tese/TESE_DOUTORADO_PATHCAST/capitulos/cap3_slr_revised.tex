@@ -467,9 +467,10 @@ Because the working set was frozen before the high-recall re-deduplication
 snapshot, approximately 364 working-set papers carry divergent identifiers
 in that snapshot and therefore also appear, as near-duplicates, in the
 auxiliary pool; the working set (2{,}340) and the auxiliary corpus
-(3{,}807) consequently overlap by about 364 records. A title-level
+(3{,}807) consequently overlap by about 364 records. A
 cross-check confirms that 60 of the 212 first-pass auxiliary inclusions
-duplicate working-set studies under divergent identifiers; the combined-tier
+duplicate working-set studies (56 by shared DOI, 4 by title under divergent
+identifiers); the combined-tier
 counts reported in this chapter therefore include this overlap and are
 interpreted as recall upper bounds rather than fully de-duplicated totals
 (Section~\ref{sec:slr-extval}). The substantive findings are anchored on the
@@ -1684,12 +1685,15 @@ record not matched to the 2{,}340-paper working set by identifier. Because
 the working set was frozen before the high-recall re-deduplication snapshot,
 roughly 364 working-set papers carry divergent identifiers in that snapshot
 and thus also appear as near-duplicates in the auxiliary pool; the two sets
-therefore overlap by about 364 records. A title-level cross-check of the
+therefore overlap by about 364 records. A cross-check of the
 first-pass auxiliary inclusions against the working-set studies shows that
-60 of the 212 auxiliary includes are duplicates of working-set studies
-carrying divergent identifiers (no DOI matches were found, which is
-consistent with the metadata-sparsity that caused the identifier
-divergence). After removing these 60 cross-tier duplicates and 2 internal
+60 of the 212 auxiliary includes are duplicates of working-set studies:
+56 share a normalized DOI with their working-set counterpart and 4 carry
+divergent or missing identifiers and are matched only by normalized title.
+This cross-tier overlap arises because the working-set and auxiliary tiers
+were screened as separate pipelines, so duplicates were resolved within each
+tier but only reconciled across tiers by this post-hoc check. After removing
+these 60 cross-tier duplicates and 2 internal
 duplicates, the auxiliary tier contributes 150 genuinely new first-pass
 studies (and 22 from the second pass) rather than 212 and 23; accordingly,
 the combined-tier distributions reported in this chapter use the
