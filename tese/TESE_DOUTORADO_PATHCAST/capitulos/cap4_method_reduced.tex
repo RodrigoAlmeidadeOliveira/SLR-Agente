@@ -767,6 +767,30 @@ $\sum_j C_{ij} = c_{i \cdot}$ for all $i$.
 \end{algorithmic}
 \end{algorithm}
 
+\begin{remark}[The DTMC as a Deliberate Projection, and the Role of $M$]
+\label{rem:projection}
+The Markov chain is a deliberate projection $\Pi: M \mapsto (S, P)$ of the
+discovered model, not a replacement for it. Three points make this explicit
+and forestall the objection that ``the process model is decorative.''
+(i)~\emph{State and support come from $M$, not from a free directly-follows
+graph.} The state set $S = f_M(\mathcal{A})$ and the admissible-transition
+support are fixed by the sound process tree (Definition~\ref{def:state-space});
+counts in Algorithm~\ref{alg:counting} populate only $M$-admissible entries,
+and directly-follows pairs that the discovered model does not permit are
+treated as noise and excluded. Without $M$, $P$ would degenerate into the
+unfiltered directly-follows DTMC (a ``spaghetti'' model) with no soundness
+guarantee; $M$ is what constrains the chain to sound, block-structured
+control flow. (ii)~\emph{Concurrency and loops are projected, not ignored.}
+An AND-block of $M$ is realized in the DTMC as the observed interleavings of
+its branches, and a structural loop of $M$ is distinguished from data-level
+rework by the conformance features (Section~\ref{sec:ml-component}); the
+projection therefore loses the explicit concurrency operator but retains its
+observable footprint. (iii)~\emph{$M$ supplies the absorbing structure and
+the conformance/precision signals} consumed downstream. We state the
+resulting modeling commitment as assumption~A1 (first-order Markov over
+$S$) and, rather than merely asserting it, \emph{test} it
+(Definition~\ref{def:markov-order-test}).
+\end{remark}
 
 \subsection{Maximum Likelihood Estimation}
 \label{sec:s3-mle}
@@ -781,8 +805,10 @@ to the standard MLE (Equation~\ref{eq:mle-transition}).
 
 \begin{property}[MLE Consistency]
 \label{prop:mle-consistency}
-For $\alpha = 0$, $\hat{P} \xrightarrow{a.s.} P^*$ as $|\mathcal{L}| \to
-\infty$~\cite{Spedicato2017}.
+For $\alpha = 0$, and provided each transient state is visited infinitely
+often as $|\mathcal{L}| \to \infty$ ($n_i \to \infty$), the per-row
+multinomial MLE is consistent: $\hat{P} \xrightarrow{a.s.}
+P^*$~\cite{anderson1957statistical, billingsley1961statistical}.
 \end{property}
 
 The Bayesian justification of Laplace smoothing
@@ -818,6 +844,59 @@ Rows with $n_i < n_{\min}$ (default 30) are flagged. Confidence grade:
 \end{equation}
 A grade below $\theta_{\text{grade}} = 0.8$ is reported as a validity
 caveat.
+
+
+\subsection{Markov-Order Validation}
+\label{sec:s3-order}
+
+The first-order assumption (A1) is the strongest commitment of the
+stochastic layer and the most likely target of examination. Rather than
+assuming it, PATHCAST submits it to a formal goodness-of-fit test per
+repository and falls back to an explicit state augmentation when it is
+rejected.
+
+\begin{definition}[Anderson--Goodman Markov-Order Test]
+\label{def:markov-order-test}
+For each repository, the null hypothesis $H_0$ that the activity sequence is
+first-order Markov is tested against the first-order-alternative $H_1$ of
+second-order dependence using the likelihood-ratio statistic of
+Anderson and Goodman~\cite{anderson1957statistical}:
+\begin{equation}
+\label{eq:markov-order}
+G^2 = 2 \sum_{h}\sum_{i}\sum_{j}
+   C_{hij} \, \ln \frac{C_{hij}\, C_{i\cdot}}{C_{ij}\, C_{hi\cdot}},
+\end{equation}
+where $C_{hij}$ counts the second-order transitions $h \to i \to j$. Under
+$H_0$, $G^2 \sim \chi^2$ with $|S_T|\,(|S|-1)(|S|-1)$ effective degrees of
+freedom (restricted to realized triples). The complementary
+$\mathrm{AIC}/\mathrm{BIC}$ comparison of the order-1 and order-2 models is
+reported alongside, since $G^2$ is sensitive to sample size at the scale of
+$|\mathcal{L}|$ here.
+\end{definition}
+
+\begin{definition}[Rework State Augmentation]
+\label{def:state-augmentation}
+When the order test rejects $H_0$ for a repository, the dominant source of
+memory in software processes---repeated rework---is reabsorbed into a
+first-order chain on an augmented state space
+\begin{equation}
+\label{eq:augmented-state}
+S' = \{(s, k) : s \in S,\ k \in \{0, 1, \ldots, k_{\max}\}\},
+\end{equation}
+where $k$ is the (capped) number of prior re-entries of the case into a
+review/testing state. The augmented chain is first-order by construction over
+$S'$; $k_{\max}$ (default $2$, with all higher counts collapsed) bounds the
+state-space growth. This makes the A1/A4 mitigation concrete rather than
+rhetorical: a process that is second-order through rework becomes first-order
+once the rework count is lifted into the state, and the test of
+Definition~\ref{def:markov-order-test} is re-applied to confirm closure.
+\end{definition}
+
+This two-step protocol---test, then augment only where the data demand
+it---keeps the canonical chain small and interpretable for the majority of
+repositories while removing the ``unverified first-order assumption'' line of
+attack: the order is an empirical finding per repository, not a blanket
+premise.
 
 
 \subsection{Absorbing Chain Decomposition}
@@ -856,25 +935,69 @@ Expected lead time in calendar time:
 \subsection{Empirical Sojourn Time Distributions}
 \label{sec:s3-sojourn}
 
-\begin{definition}[Empirical Sojourn Distribution]
+\begin{definition}[Sojourn Observations with Right-Censoring]
 \label{def:sojourn-distribution}
+For each transient state $s$ we collect a set of sojourn observations
+$(d_j, \delta_j)$, where $d_j$ is a duration and $\delta_j \in \{0,1\}$ its
+event indicator. An \emph{uncensored} observation ($\delta_j = 1$) is a
+completed dwell time between consecutive events of the same case,
 \begin{equation}
 \label{eq:sojourn-obs}
-\mathcal{T}_s = \{\tau(e_{k+1}) - \tau(e_k) \mid \mu(e_k) = s,\,
-    (e_k, e_{k+1}) \text{ consecutive in some } \sigma_c\}
+\mathcal{T}_s^{\text{obs}} = \{\tau(e_{k+1}) - \tau(e_k) \mid \mu(e_k) = s,\,
+    (e_k, e_{k+1}) \text{ consecutive in some } \sigma_c\}.
 \end{equation}
-\begin{equation}
-\label{eq:ecdf}
-\hat{F}_s(t) = \tfrac{1}{|\mathcal{T}_s|} \sum_{\tau \in \mathcal{T}_s}
-    \mathbf{1}[\tau \leq t]
-\end{equation}
+A \emph{right-censored} observation ($\delta_j = 0$) arises when a case is
+still resident in $s$ at the snapshot-freeze time $t_{\text{end}}$
+(Definition~\ref{def:repo-snapshot} of Chapter~\ref{ch:methodology}): its
+true sojourn is known only to exceed $d_j = t_{\text{end}} - \tau(e_{\text{last}})$.
+Discarding these open cases---as a naive ECDF would---systematically omits
+the longest dwells and biases the sojourn (and hence lead-time) tail
+\emph{downward}, precisely where forecasts matter most.
 \end{definition}
+
+\begin{definition}[Kaplan--Meier Sojourn Estimator]
+\label{def:km-sojourn}
+$\hat{F}_s$ is estimated by the Kaplan--Meier (product-limit)
+estimator~\cite{kaplan1958nonparametric, klein2003survival}, which is the
+nonparametric MLE of a distribution under non-informative right-censoring.
+Let $t_{(1)} < \cdots < t_{(m)}$ be the distinct uncensored sojourn times in
+state $s$, $d_i$ the number of completed sojourns equal to $t_{(i)}$, and
+$n_i$ the number \emph{at risk} (observations with duration $\geq t_{(i)}$,
+censored or not). Then
+\begin{equation}
+\label{eq:km}
+\hat{S}_s(t) = \prod_{t_{(i)} \leq t}\Bigl(1 - \tfrac{d_i}{n_i}\Bigr),
+\qquad \hat{F}_s(t) = 1 - \hat{S}_s(t).
+\end{equation}
+When the censoring fraction is zero, every $n_i$ counts only uncensored
+durations and Equation~\ref{eq:km} reduces exactly to the empirical CDF of
+Equation~\ref{eq:sojourn-obs}, so the estimator strictly generalizes the
+prior design.
+\end{definition}
+
+\begin{remark}[Censoring Assumption and Tail Handling]
+\label{rem:censoring}
+The estimator assumes \emph{non-informative} censoring: the freeze time
+$t_{\text{end}}$ is exogenous to individual case dynamics (a calendar cut, not
+triggered by case state), so censoring is independent of the residual sojourn
+given $s$. This is the standard and defensible assumption for snapshot-based
+repository mining. If the largest observation in $s$ is censored, $\hat{F}_s$
+is \emph{defective} (it does not reach $1$); we close it conservatively by
+attaching a single exponential tail above the last uncensored time, with rate
+matched to the Kaplan--Meier hazard of the final risk set, and report the
+fraction of tail mass so closed as a diagnostic. This makes the simulator
+proper while keeping the body of $\hat{F}_s$ fully nonparametric. The residual
+threat---true sojourns exceeding any observable horizon---is recorded as
+assumption~A5 and revisited in the validity discussion.
+\end{remark}
 
 \begin{remark}[Non-Parametric Design Choice]
 \label{rem:nonparametric}
-Empirical resampling avoids parametric misspecification (lognormal,
-Weibull, gamma) for the multi-modal, heavy-tailed, zero-inflated patterns
-observed in software process sojourns~\cite{vacanti2015}.
+The product-limit body of $\hat{F}_s$ avoids parametric misspecification
+(lognormal, Weibull, gamma) for the multi-modal, heavy-tailed, zero-inflated
+patterns observed in software process sojourns~\cite{vacanti2015}, while the
+Kaplan--Meier construction additionally recovers the censored upper tail that
+a plain ECDF would discard.
 \end{remark}
 
 
@@ -1501,7 +1624,7 @@ $O(|\mathcal{L}|)$ and run in seconds for $\leq 10^6$ events.
 \toprule
 \textbf{Assumption} & \textbf{Violation Consequence} & \textbf{Mitigation} \\
 \midrule
-A1: First-order Markov         & Underestimates rework-conditioned delays   & State augmentation \\
+A1: First-order Markov         & Underestimates rework-conditioned delays   & Anderson--Goodman order test (Def.~\ref{def:markov-order-test}); rework state augmentation when rejected \\
 \midrule
 A2: Stationarity                & Stale forecasts after process changes      & Sliding window; drift detection \\
 \midrule
@@ -1509,7 +1632,7 @@ A3: Case independence           & Ignores queueing/resource contention       & A
 \midrule
 A4: Sojourn-history independence & Underestimates delays for reworked items  & State augmentation; ML features \\
 \midrule
-A5: Complete case observation   & Bias if long cases excluded                & Include right-censored \\
+A5: Complete case observation   & Downward tail bias if open cases dropped   & Kaplan--Meier sojourn estimator (Def.~\ref{def:km-sojourn}) incorporates right-censored dwells; exponential tail closure for censored maxima \\
 \bottomrule
 \end{tabular}
 \end{table}
