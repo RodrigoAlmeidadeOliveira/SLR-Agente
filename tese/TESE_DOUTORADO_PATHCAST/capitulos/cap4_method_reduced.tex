@@ -281,17 +281,24 @@ state.
 \begin{definition}[Stage 3 Contract]
 \label{def:contract-s3}
 \textbf{Input:} $\mathcal{L}$ and $S = S_T \cup S_A$.
-\textbf{Output:} $(P, N, B, \hat{F}, \pi)$ with transition matrix
+\textbf{Output:} $(P, N, B, \hat{F}, \tilde{\pi})$ with transition matrix
 $P \in \mathbb{R}^{|S|\times|S|}$, fundamental matrix
 $N = (I-Q)^{-1} \in \mathbb{R}^{|S_T|\times|S_T|}$, absorption matrix
 $B = NR \in \mathbb{R}^{|S_T|\times|S_A|}$, sojourn distributions
-$\hat{F} = \{\hat{F}_s\}_{s \in S_T}$, and stationary distribution $\pi$.
-\textbf{Preconditions:} $|S_T| \geq 1$, $|S_A| \geq 1$, every transient
-state has at least one observed outgoing transition.
+$\hat{F} = \{\hat{F}_s\}_{s \in S_T}$, and expected transient-occupancy
+distribution $\tilde{\pi}$ (Equation~\ref{eq:quasi-stationary}). We avoid
+the term \emph{stationary distribution} here: an absorbing chain admits only
+the degenerate stationary law supported on $S_A$, so the informative
+quantity for forecasting is the expected occupancy of the transient states
+before absorption, not a stationary vector.
+\textbf{Preconditions:} $|S_T| \geq 1$, $|S_A| \geq 1$, and every transient
+state can reach some absorbing state in $M$ (so that $(I-Q)$ is invertible;
+a mere outgoing transition is insufficient, as a closed transient cycle
+would violate invertibility).
 \textbf{Postconditions:} $P$ row-stochastic; $(I-Q)$ invertible;
 $N_{ij} \geq 0$; $\sum_j B_{ij} = 1$; each $\hat{F}_s$ has at least
 $n_{\min}$ observations.
-$\mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
+$\mathcal{S}_3 = \textsc{Occupancy} \circ \textsc{Sojourn} \circ
 \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count}$
 (Equation~\ref{eq:s3-decomposition}).
 \end{definition}
@@ -593,21 +600,24 @@ performance-enhancement sub-operations.
 
 \begin{equation}
 \label{eq:discovery}
-M = \textsc{InductiveMiner}(\mathcal{L}, \theta_{\text{noise}})
+M = \textsc{InductiveMiner-infrequent}(\mathcal{L}, \theta_{\text{noise}})
 \end{equation}
 
-with $\theta_{\text{noise}} \in [0, 1]$ controlling the
-fitness--generalization trade-off.
+with $\theta_{\text{noise}} \in [0, 1]$ the infrequent-behaviour filtering
+threshold, which controls the fitness--precision (and simplicity)
+trade-off: larger $\theta_{\text{noise}}$ prunes low-frequency edges,
+raising precision and simplicity at the cost of fitness.
 
 \begin{property}[Soundness Guarantee]
 \label{prop:soundness}
-The Inductive Miner produces a sound process tree by
-construction~\cite{leemans2013discovering}.
+The Inductive Miner (IM, and its infrequent variant IMf) produces a sound
+process tree by construction~\cite{leemans2013discovering}.
 \end{property}
 
 \begin{property}[Replay Guarantee under Noise-Free Filtering]
 \label{prop:fitness}
-With $\theta_{\text{noise}} = 0$, the Inductive Miner returns a process tree
+With $\theta_{\text{noise}} = 0$, IMf reduces to the base Inductive Miner
+(IM), which returns a process tree
 that can replay all behaviour represented in the (filtered) log; under the
 assumptions of a complete and noise-free log, the measured
 $\text{fitness}(\mathcal{L}, M) \to 1.0$. In practice, residual noise,
@@ -725,7 +735,7 @@ Stage 3 satisfies the contract of Definition~\ref{def:contract-s3}. The
 decomposition is
 \begin{equation}
 \label{eq:s3-decomposition}
-\mathcal{S}_3 = \textsc{Stationary} \circ \textsc{Sojourn} \circ
+\mathcal{S}_3 = \textsc{Occupancy} \circ \textsc{Sojourn} \circ
     \textsc{Absorb} \circ \textsc{Estimate} \circ \textsc{Count},
 \end{equation}
 detailed in the subsections that follow.
@@ -881,9 +891,13 @@ state before absorption:
 \end{equation}
 This quantity is the visit-normalised expected occupancy and should be
 distinguished from the classical quasi-stationary distribution (QSD), which
-is the left eigenvector $\tilde{\pi}Q = \lambda_{\max}\tilde{\pi}$
-associated with the dominant eigenvalue $\lambda_{\max}$ of the transient
-sub-generator and characterises the conditional law as $t \to \infty$.
+for a discrete-time absorbing chain is the left eigenvector
+$\tilde{\pi}_{\text{QSD}}\,Q = \lambda_{\max}\tilde{\pi}_{\text{QSD}}$
+associated with the dominant eigenvalue $\lambda_{\max} = \rho(Q) < 1$ of the
+transient \emph{sub-stochastic} block $Q$ (the sub-Markov transition
+submatrix; in discrete time $Q$ is sub-stochastic, not an infinitesimal
+generator), characterising the conditional law as the number of steps
+$\to \infty$~\cite{darroch1965quasi}.
 States with disproportionately high $\tilde{\pi}_j$ relative to processing
 capacity indicate bottleneck accumulation. Full derivation in
 Appendix~A, Section~\ref{app:A-semi-markov}.
@@ -1011,9 +1025,20 @@ $n_{\text{na}}/M_{\text{sim}}$ is reported separately.
 \label{def:tail-risk}
 \begin{equation}
 \label{eq:tail-risk}
-\hat{P}(\text{late}) = |\{m : T^{(m)} > \tau_{\text{deadline}}\}| / M_{\text{sim}}.
+\hat{P}(\text{late}) =
+   \frac{|\{m \in \hat{\mathcal{D}} : T^{(m)} > \tau_{\text{deadline}}\}|
+         + n_{\text{na}}}{M_{\text{sim}}}.
 \end{equation}
 \end{definition}
+The denominator is $M_{\text{sim}}$ (not $M_{\text{abs}}$): a non-absorbed
+trajectory has not completed by the $K_{\max}$ horizon and is therefore
+counted as late by convention, so the $n_{\text{na}}$ non-absorbed runs are
+added to the numerator. This makes $\hat{P}(\text{late})$ a conservative
+upper bound consistent with treating non-absorption as right-censored beyond
+the deadline. All other forecast functionals below (path frequencies, WIP)
+range over $\hat{\mathcal{D}}$ (the $M_{\text{abs}}$ absorbed trajectories);
+the index $m \in \hat{\mathcal{D}}$ is used throughout except where
+$M_{\text{sim}}$ is written explicitly.
 
 \subsubsection{Path Distribution}
 
@@ -1040,26 +1065,42 @@ distribution (Equation~\ref{eq:quasi-stationary}).
 \label{def:convergence}
 \begin{equation}
 \label{eq:convergence-criterion}
-\frac{z_{0.025} \cdot \hat{\sigma}_T / \sqrt{M_{\text{sim}}}}{\hat{Q}_{0.5}}
-    < \epsilon
+\frac{z_{\alpha/2} \cdot \hat{\sigma}_T / \sqrt{M_{\text{sim}}}}{\hat{\mu}_T}
+    < \epsilon, \qquad \alpha = 0.05,
 \end{equation}
 \end{definition}
 
-Default tolerance $\epsilon = 0.02$. Adaptive doubling from
-$M_{\text{sim}} = 1{,}000$ up to $M_{\text{sim}} = 100{,}000$. Because the
-criterion in Equation~\ref{eq:convergence-criterion} controls the relative
-half-width of the \emph{mean} estimator, and the forecasts of primary
-interest are upper percentiles ($\hat{Q}_{0.85}$, $\hat{Q}_{0.95}$), the
-budget is increased until the tail quantiles themselves stabilise: the
-batch-to-batch relative change of $\hat{Q}_{0.85}$ and $\hat{Q}_{0.95}$
-is additionally required to fall below $\epsilon$ before the simulation is
-declared converged. This guards against the case where the mean has
-converged but the tail estimates remain unstable.
+Default tolerance $\epsilon = 0.02$. The estimator's standard error
+$\hat{\sigma}_T/\sqrt{M_{\text{sim}}}$ is normalized by the \emph{mean}
+$\hat{\mu}_T$ so that the ratio is a genuine relative half-width of the mean
+estimator (numerator and denominator referring to the same functional).
+Adaptive doubling from $M_{\text{sim}} = 1{,}000$ up to $M_{\text{sim}} =
+100{,}000$. Because this criterion controls only the mean, and the forecasts
+of primary interest are upper percentiles ($\hat{Q}_{0.85}$,
+$\hat{Q}_{0.95}$), the budget is increased until the tail quantiles
+themselves stabilise: the batch-to-batch relative change of
+$\hat{Q}_{0.85}$ and $\hat{Q}_{0.95}$ is additionally required to fall below
+$\epsilon$ before the simulation is declared converged. This guards against
+the case where the mean has converged but the tail estimates remain
+unstable. We note that this batch-to-batch test is a stabilisation heuristic
+rather than a confidence interval for the quantile; the asymptotic standard
+error of an empirical quantile scales as
+$\sqrt{\alpha(1-\alpha)}/(f(\hat{Q}_\alpha)\sqrt{M})$, so for heavy tails
+(small $f$ near $\hat{Q}_{0.95}$) convergence of the tail is intrinsically
+slower than that of the mean.
 
 \begin{property}[Convergence Rate]
 \label{prop:convergence-rate}
-The MC estimation error decreases as
-$O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}.
+For mean functionals with finite variance, the MC estimation error decreases
+as $O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}; for tail quantiles
+the rate is the same order but with a constant proportional to
+$1/f(\hat{Q}_\alpha)$, which motivates the separate tail-stabilisation
+criterion above. The empirical sojourn distributions $\hat{F}_s$ have finite
+support, so all simulated functionals have finite moments and the central
+limit theorem applies; the corresponding price is that the empirical
+bootstrap cannot extrapolate beyond the largest observed sojourn, so tail
+quantiles are conservative lower bounds when the true tail extends past the
+observed maximum (a validity threat revisited with assumption~A5).
 \end{property}
 
 
@@ -1183,8 +1224,9 @@ Three threshold strategies: \emph{percentile-based}
 \ENSURE Trained model $\hat{f}$, test metrics $\mathcal{M}$
 \STATE $\mathcal{L}_{\text{train}} \gets \{c : \max(\tau(\sigma_c)) \leq t_{\text{cut}}\}$
 \STATE $\mathcal{L}_{\text{test}}  \gets \{c : \min(\tau(\sigma_c)) >    t_{\text{cut}}\}$
-\STATE $X_{\text{train}}, y_{\text{train}} \gets \textsc{Featurize}(\mathcal{L}_{\text{train}})$
-\STATE $X_{\text{test}},  y_{\text{test}}  \gets \textsc{Featurize}(\mathcal{L}_{\text{test}})$
+\STATE $(P, N, B, \hat{F}, \bar{d}) \gets \mathcal{S}_3(\mathcal{L}_{\text{train}}, M_{\text{train}})$ \hfill $\triangleright$ Markov objects re-estimated on train only
+\STATE $X_{\text{train}}, y_{\text{train}} \gets \textsc{Featurize}(\mathcal{L}_{\text{train}}; P, N, B, \hat{F}, \bar{d})$
+\STATE $X_{\text{test}},  y_{\text{test}}  \gets \textsc{Featurize}(\mathcal{L}_{\text{test}}; P, N, B, \hat{F}, \bar{d})$
 \FOR{each candidate model $f_k \in \{\text{RF}, \text{XGBoost}, \text{LogReg}\}$}
     \STATE $\text{score}_k \gets \text{TemporalCV}(f_k, X_{\text{train}}, y_{\text{train}}, k=5)$
 \ENDFOR
@@ -1198,6 +1240,17 @@ Three threshold strategies: \emph{percentile-based}
 
 Temporal CV uses expanding windows: fold $k$ trains on $[1, t_k]$ and
 validates on $[t_k, t_{k+1}]$~\cite{tashman2000out, hyndman2021forecasting}.
+Crucially, the Markov objects $(P, N, B, \hat{F}, \bar{d})$ that back the
+process-derived features (in particular the expected-remaining-time and
+absorption-probability features) are re-estimated from
+$\mathcal{L}_{\text{train}}$ alone and then \emph{applied} to the test cases;
+no test-period transition or sojourn statistic enters feature construction,
+preventing leakage of future process behaviour into the predictors. The
+observation point for each case is the prefix available at $t_{\text{cut}}$:
+features are extracted from the trace prefix observed up to the cutoff, while
+the label $y_c$ (on-time vs.\ delayed) is the case's eventual outcome, so the
+task is prefix-based outcome prediction with a fixed decision time
+$t_{\text{cut}}$.
 
 
 \subsection{Integration with Monte Carlo Forecasts}
@@ -1330,7 +1383,9 @@ convergence $\hat{F}_s \to F_s^*$.
 
 \begin{theorem}[End-to-End Convergence]
 \label{thm:pipeline-convergence}
-Under (a)~ergodicity, (b)~sojourn consistency
+Under (a)~per-state visit growth ($n_i \to \infty$ a.s.\ for every
+transient state $i$ as the number of cases grows, so that each row of $P$
+is identifiable), (b)~sojourn consistency
 ($\sup_t |\hat{F}_i^{(n)}(t) - F_i^*(t)| \xrightarrow{a.s.} 0$),
 (c)~$K(n) \to \infty$:
 \begin{equation}
@@ -1344,9 +1399,12 @@ Under (a)~ergodicity, (b)~sojourn consistency
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-\textit{Stage 1.} SLLN for ergodic Markov chains:
-$\hat{P}^{(n)} \to P$ entry-wise, hence in any matrix
-norm~\cite{billingsley1961statistical}.
+\textit{Stage 1.} The chain is absorbing (hence not ergodic); consistency of
+$\hat{P}$ instead follows row-wise: conditional on the visit count $n_i$,
+each row is a multinomial MLE, so by the SLLN for i.i.d.\ transition
+counts---valid once $n_i \to \infty$ under assumption~(a)---$\hat{P}^{(n)}
+\to P$ entry-wise, hence in any matrix
+norm~\cite{anderson1957statistical, billingsley1961statistical}.
 \textit{Stage 2.} Glivenko–Cantelli applied per state plus union bound
 across the finite $S$.
 \textit{Stage 3.} Continuous mapping theorem on simulated trajectories;

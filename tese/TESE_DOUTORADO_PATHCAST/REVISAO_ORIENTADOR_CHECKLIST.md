@@ -340,3 +340,44 @@ pygithub), appendix sem coluna de data. O harvest dos repos de **avaliação**
 pertence ao cap. 6/7 (em preparação). O snapshot global 2026-04-12 é o
 *freeze da SLR* (papers), não dos repos de avaliação. Tabela 5.2 e datas
 por-repo permanecem dependentes desse harvest externo.
+
+---
+
+## Banca de construtos especialistas (2026-06-08) — Markov · PM · ML · Monte Carlo
+
+Quatro revisores especialistas (1 por construto) + auditoria skill v3.0. Achados
+convergentes (≥2 especialistas) tratados como prioridade. Fixes de texto
+aplicados (compila EXIT=0); itens de decisão metodológica marcados 🟡.
+
+### Aplicados (fixes de texto)
+| # | Construto | Fix | Local |
+|---|-----------|-----|-------|
+| E1 | Markov | Contrato S3: "stationary distribution π" (objeto fantasma p/ cadeia absorvente) → "expected transient-occupancy $\tilde\pi$"; operador `Stationary`→`Occupancy`; precondição reforçada p/ alcançabilidade de absorvente | cap4 §4.3 `def:contract-s3`, `eq:s3-decomposition` |
+| E2 | Markov | Teorema de convergência: hipótese "ergodicity" (incompatível c/ cadeia absorvente) → crescimento de visitas por estado $n_i\to\infty$; prova reancorada em SLLN por-linha (Anderson–Goodman 1957) em vez de "SLLN for ergodic chains" | cap4 `thm:pipeline-convergence` |
+| E3 | Markov | "sub-generator" (termo de CTMC) → "sub-stochastic block Q" + cite Darroch–Seneta 1965; QSD discreta correta | cap4 §4.4 |
+| E4 | Markov | Apêndice A: "quasi-stationary distribution" (rótulo errado) → "expected calendar-time occupancy $\pi^{occ}$", alinhado com cap4 | appendix_theory |
+| E5 | Monte Carlo | Denominador inconsistente: P̂(late) agora explicita convenção de censura (não-absorvidas = late, denom $M_{sim}$, numerador + $n_{na}$); índice $m\in\hat{\mathcal D}$ padronizado | cap4 §4.5 `eq:tail-risk` |
+| E6 | Monte Carlo | Critério de convergência: denom mediana $\hat Q_{0.5}$ (estimando incoerente c/ SE da média) → média $\hat\mu_T$; $z_{0.025}\to z_{\alpha/2}$; nota sobre SE de quantil (Maritz-Jarrett) e suporte finito do bootstrap (viés de cauda + CLT) | cap4 §4.5 `eq:convergence-criterion`, `prop:convergence-rate` |
+| E7 | Process Mining | θ_noise rotulado "fitness–generalization" → "fitness–precision (and simplicity)" trade-off | cap4 §4.2 `eq:discovery` |
+| E8 | Process Mining | Consistência IM vs IMf: discovery agora `InductiveMiner-infrequent`; Property de replay condicionada "θ=0 ⇒ IMf reduz a IM" | cap4 §4.2 `prop:soundness`, `prop:fitness` |
+| E9 | ML | Leakage fechado: Algoritmo de treino reestima $(P,N,B,\hat F,\bar d)$ só em $\mathcal L_{train}$ por fold + frase explícita; ponto de predição definido (prefixo em $t_{cut}$, outcome label) | cap4 `alg:ml-training` |
+| E10 | ML | Effect-size unificado: r=Z/√n pareado (mesmo da power analysis) p/ comparações pareadas; Cliff δ p/ unpaired. RQ3-max via intersection–union test; Holm–Bonferroni família completa | cap5 §5.6 |
+| E11 | ML | LOPO: nomeado "within-domain (exploratório, |G|=5)" + LOPO global 48-fold como teste honesto; nomes reais dos repos (owner/repo) | cap5 §5.4 `def:lopo` |
+| E12 | ML | sMAPE adotado como métrica relativa primária (MAPE assimétrico p/ lead times pequenos) | cap5 §5.4 |
+| E13 | ML | LSTM (Tax 2017) inserido como baseline B5 na Tab. baselines (estava órfão) | cap5 §5.5 |
+| E14 | skill v3.0 | tab:qa-combined: esclarecido que reporta 381 bruto; 260/319 é o derivado pós-dedup | cap3 |
+| E15 | bib | +anderson1957statistical, +darroch1965quasi | references.bib |
+
+### ✅ Confirmado SÓLIDO pelos especialistas (passou ataque)
+- **conf(c) cap2↔cap4 idêntico** (cost-based) — PM expert confirmou; unificação anterior correta.
+- Álgebra absorvente N=(I−Q)⁻¹, B=NR, S_A={s:outdeg=0}, ρ(Q)<1 — Markov OK.
+- n_na separado, M_abs em P̂(Done), Kmax guarda defensiva, deterministic replication — MC desarmou 4 armadilhas clássicas.
+- CRPS primário, ACE vs ECE (kuleshov/naeini), deviation score em probabilidade, hold-out temporal c/ gap, H0/H1 — ML exemplar.
+
+### 🟡 Decisões metodológicas do autor (NÃO aplicáveis sem dados/escolha)
+- **C1 — Censura à direita nos sojourns** (Markov #9 + ML #3 + MC #3, TRÊS especialistas): ECDF `F̂_s` descarta casos abertos → viés de cauda p/ baixo. Mitigado parcialmente no texto (nota de suporte finito em `prop:convergence-rate`), mas Kaplan-Meier/NPMLE para `F̂_s` exige decisão de implementação. Assunção A5 promete; equação não implementa.
+- **C2 — Abstração estado≡atividade colapsa process tree** (PM #3 ALTO + Markov #7): IMf fica prescindível p/ estimação de P; declarar projeção deliberada + idealmente teste de ordem de Markov (Anderson-Goodman LR). Decisão narrativa/experimental.
+- precision como gate algorítmico no Stage 2 (PM #6): já há gate em cap5 `eq:acceptance` (precision≥0.5); falta espelhar como postcondition formal em cap4 se desejado.
+
+### Vereditos
+Markov: aprovado-com-correções (2 críticos E1/E2 sanados). PM: aprovado-com-correções (C2 = decisão). ML: aprovado-com-correções (leakage E9 + prediction-point sanados; C1 = decisão). Monte Carlo: aprovado-com-correções (denominador E5 sanado; C1 = decisão).

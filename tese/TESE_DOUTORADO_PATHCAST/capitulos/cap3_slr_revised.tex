@@ -1792,8 +1792,13 @@ subsequently extended to the auxiliary tier
 (\texttt{pipeline/aux\_qa.py}), retaining 124 of the 150 unique auxiliary
 studies (82.7\%, mean $5.09 \pm 1.43$). The de-duplicated combined
 319-study analytical subset therefore retains 260 papers
-($81.5\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold; full
-combined-QA results are reported in Table~\ref{tab:qa-combined}.
+($81.5\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold. The
+auto-generated Table~\ref{tab:qa-combined} reports the QA breakdown over the
+\emph{raw} combined tiers (working set $169$ plus the $212$ first-pass
+auxiliary inclusions $= 381$, of which $315$ pass), \emph{before} cross-tier
+de-duplication; the $260/319$ figure quoted here is the corresponding count
+after removing the $60$ cross-tier and $2$ internal duplicates, and is the
+value used in all combined-tier analyses.
 
 \input{results/auxiliary/aux_qa_summary}
 

@@ -497,10 +497,19 @@ repeated for all $r_i \in G$. Group-level generalization is the mean over the
 $|G|$ held-out folds. Groups with $|G| < 5$ are reported descriptively only.
 \end{definition}
 
-LOPO is applied within domain groups (e.g., all Python web
-frameworks). Current dataset: Python web frameworks
-(Django, Flask, FastAPI, Requests, Click) and Go DevOps tools
-(kubectl, Helm, Terraform, Prometheus, cli) qualify; others descriptive.
+LOPO here is \emph{within-domain} generalization: folds are held out inside a
+single ecosystem/workflow group, so the resulting estimate is an optimistic
+(within-domain) bound rather than fully heterogeneous cross-repository
+transfer. Current dataset: the Python web-framework group
+(\texttt{django/django}, \texttt{pallets/flask}, \texttt{fastapi/fastapi},
+\texttt{psf/requests}, \texttt{pallets/click}) and the Go DevOps group
+(\texttt{kubernetes/kubectl}, \texttt{helm/helm},
+\texttt{hashicorp/terraform}, \texttt{prometheus/prometheus},
+\texttt{grafana/grafana}) reach $|G|=5$ and qualify; smaller groups are
+reported descriptively only. Because each qualifying group has only $|G|=5$
+folds, within-domain LOPO results are interpreted as exploratory; a global
+48-fold leave-one-repository-out pass is additionally reported as the honest
+cross-repository generalization test.
 
 
 % =============================================================================
@@ -589,11 +598,16 @@ secondary point summaries. CRPS reduces to MAE when the forecast degenerates
 to a point mass~\cite{gneiting2007strictly}, preserving comparability with
 deterministic baselines. Derivation in Appendix~B.
 
-\paragraph{Point metrics.} MAE in calendar days; MAPE for cross-repository
-comparison; MdAE robust to outliers. Cases with an observed lead time of
-zero (e.g., same-day hotfixes) are excluded from the MAPE computation to
-avoid division by zero and the well-known instability of MAPE for very small
-denominators; they are retained for MAE, MdAE, and CRPS.
+\paragraph{Point metrics.} MAE in calendar days; MdAE robust to outliers.
+For cross-repository comparison we report \emph{sMAPE} (symmetric MAPE,
+$\tfrac{100}{n}\sum_c |T_c^{\text{obs}}-\hat{T}_c| /
+[(|T_c^{\text{obs}}|+|\hat{T}_c|)/2]$) as the primary relative-error metric
+rather than MAPE, because MAPE is unbounded and asymmetric for the small
+lead times common in hotfixes and trivial pull requests (it penalises
+over-forecasting arbitrarily); MAPE is retained only as a secondary,
+legacy-comparable figure. Cases with an observed lead time of
+zero (e.g., same-day hotfixes) are excluded from MAPE (division by zero) but
+remain in sMAPE, MAE, MdAE, and CRPS.
 
 \paragraph{ACE} averages absolute deviation across nine deciles. ACE = 0
 denotes perfect calibration; ACE $> 0.1$ indicates systematic over- or
@@ -695,13 +709,17 @@ B2: Throughput MC           & Throughput-based MC~\cite{vacanti2015,savage2009fl
 B3: Markov Analytical       & $\mathbb{E}[\text{LT}] = \sum_j N_{ij} \cdot \bar{d}_j$. & Process-aware but deterministic. \\
 \midrule
 B4: Historical Distribution & Empirical CDF resampling. & Distributional baseline. \\
+\midrule
+B5: LSTM (sequence) & LSTM over the activity-event sequence~\cite{tax2017}. & Consolidated predictive-process-monitoring learner; isolates the value of explicit process-derived features (RQ3) against a black-box sequence model. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The baselines isolate (i)~process awareness (vs.\ B2),
 (ii)~distributional vs.\ point (vs.\ B3), (iii)~stochastic model vs.\
-naïve resampling (vs.\ B4).
+naïve resampling (vs.\ B4), and (iv)~explicit process-derived features vs.\
+a black-box sequence learner (vs.\ B5, the LSTM of Tax et
+al.~\cite{tax2017}, used in the RQ3 feature-contribution comparison).
 
 \paragraph{Analytical Markov vs.\ Monte-Carlo (Stage~3 vs.\ Stage~4).}
 Because B3 is the closed-form analytical Markov expectation
@@ -743,10 +761,20 @@ H_0^{\text{RQ3}}:\ \mu_{\text{Comb}} \leq \max(\mu_{\text{PM}}, \mu_{\text{MSR}}
 H_1^{\text{RQ3}}:\ \mu_{\text{Comb}} > \max(\mu_{\text{PM}}, \mu_{\text{MSR}}),
 \]
 i.e., adding process-derived features yields a statistically meaningful
-improvement over either feature family alone. Hypotheses are evaluated with
-the tests below at the Bonferroni-adjusted level
-$\alpha_{\text{adj}} = 0.0125$ and reported together with effect sizes, so
-that statistical significance is always accompanied by a magnitude judgment.
+improvement over either feature family alone. The RQ3 composite null against
+$\max(\mu_{\text{PM}}, \mu_{\text{MSR}})$ is evaluated as an
+intersection--union test: $H_1^{\text{RQ3}}$ is accepted only if Combined
+beats \emph{both} PM-only and MSR-only individually, each at the corrected
+level, so the type-I error of the ``max'' comparison is controlled by
+construction. Across the full family of confirmatory comparisons (the four
+RQ2 baselines and the two RQ3 sub-tests) the per-test threshold is set by
+the \emph{Holm--Bonferroni} step-down procedure (uniformly more powerful
+than plain Bonferroni at the same family-wise error rate
+$\alpha = 0.05$); the single-step Bonferroni level
+$\alpha_{\text{adj}} = 0.05/4 = 0.0125$ for the RQ2 family is reported as a
+conservative reference. Every test is reported together with its effect
+size, so that statistical significance is always accompanied by a magnitude
+judgment.
 
 \subsection{Within-Repository Comparison}
 \label{sec:within-repo}
@@ -756,11 +784,15 @@ Paired tests on the same test cases.
 \textbf{Normality assessment:} Shapiro–Wilk on per-case error differences.
 If normal ($p > 0.05$), paired $t$-test; else Wilcoxon signed-rank.
 
-\textbf{Effect size:} Cohen's $d$ (parametric) or Cliff's $\delta$
-(non-parametric)~\cite{kampenes2007systematic}. Cliff's $\delta$ is
-interpreted following the thresholds of Kampenes et
-al.~\cite{kampenes2007systematic}: $|\delta| < 0.147$ negligible,
-$< 0.33$ small, $< 0.474$ medium, and $\geq 0.474$ large.
+\textbf{Effect size:} for the \emph{paired} repository-level comparisons the
+reported effect size is the matched-pairs $r = Z/\sqrt{n}$ derived from the
+Wilcoxon signed-rank statistic (the same $r$ used in the power analysis of
+Section~\ref{sec:power-analysis}, ensuring planning and reporting use one consistent
+effect-size scale). For unpaired magnitude summaries we additionally report
+Cliff's $\delta$~\cite{kampenes2007systematic}, interpreted following the
+thresholds of Kampenes et al.: $|\delta| < 0.147$ negligible,
+$< 0.33$ small, $< 0.474$ medium, and $\geq 0.474$ large; Cohen's $d$ is used
+where a parametric paired $t$-test applies.
 
 
 \subsection{Cross-Repository Aggregation}

@@ -213,15 +213,20 @@ violations (e.g., shorter Review sojourns when the next state is Done)
 appear as state-dependent residual variance and are partially captured by
 the ML component (Section~\ref{sec:ml-se}).
 
-\paragraph{Quasi-stationary distribution.} For absorbing semi-Markov
-processes, the quasi-stationary distribution gives the long-run fraction
-of time spent in each transient state, conditional on non-absorption. Let
-$\bar{T}_i$ denote the mean sojourn in state $i$ (Equation~\ref{eq:mean-sojourn}).
-Then
+\paragraph{Expected calendar-time occupancy.} For absorbing semi-Markov
+processes, the expected calendar-time occupancy gives the fraction
+of time spent in each transient state before absorption. This is
+\emph{not} the classical quasi-stationary distribution (QSD), which is the
+left eigenvector of the sub-stochastic block $Q$ for its dominant eigenvalue
+$\lambda_{\max}=\rho(Q)<1$; it is, rather, the time-weighted visit
+occupancy, consistent with the discrete-step expected occupancy
+$\tilde{\pi}$ of Equation~\ref{eq:quasi-stationary} in the method chapter.
+Let $\bar{T}_i$ denote the mean sojourn in state $i$
+(Equation~\ref{eq:mean-sojourn}). Then
 \begin{equation}
 \label{eq:A-quasi-stationary}
-\pi^q_i = \frac{\sum_{j \in S_T} N_{ji} \cdot \bar{T}_i}
-              {\sum_{k \in S_T} \sum_{j \in S_T} N_{jk} \cdot \bar{T}_k}.
+\pi^{\text{occ}}_i = \frac{\bar{T}_i \sum_{j \in S_T} N_{ji}}
+              {\sum_{k \in S_T} \bar{T}_k \sum_{j \in S_T} N_{jk}}.
 \end{equation}
 This formula is the calendar-time analogue of the discrete-step
 fundamental-matrix result. PATHCAST uses
