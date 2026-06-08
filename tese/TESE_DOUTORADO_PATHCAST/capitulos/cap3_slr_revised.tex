@@ -133,6 +133,22 @@ simulation" OR "Monte Carlo simulation" OR "Markov chain" OR "Markov model" OR
 "lead time prediction" OR "cycle time prediction")}
 \end{quote}
 
+Machine-learning terms (e.g., \texttt{"machine learning"}, \texttt{"deep
+learning"}, \texttt{"neural network"}, \texttt{"LSTM"}, \texttt{"transformer"})
+are deliberately \emph{not} added to Block~I. The review targets the
+intersection of process mining and stochastic modeling with software-process
+forecasting; ML is treated as an \emph{enhancement} dimension rather than a
+defining technique. Including generic ML terms in the intervention block would
+flood the retrieval with the large body of ML-for-SE work that is unrelated to
+process-aware forecasting, degrading precision without improving coverage of
+the target intersection. Instead, the use of ML is captured \emph{post hoc}
+during extraction via the \textit{ML Technique} field
+(Table~\ref{tab:extraction}), so that ML-enhanced process-forecasting studies
+are recorded when they surface through the process-mining and forecasting
+terms already present in Blocks~I and~O. Predictive-monitoring terms such as
+\texttt{"predictive process monitoring"} and \texttt{"process prediction"}
+further ensure that the dominant ML-based PPM literature is retrieved.
+
 \paragraph{Complementary String (MSR $\rightarrow$ Process Modeling).}
 Captures studies using MSR terminology without canonical process mining terms:
 
@@ -259,7 +275,10 @@ transparency of the PRISMA exclusion accounting.
 \textbf{Type} & \textbf{ID} & \textbf{Criterion} \\
 \midrule
 \multirow{7}{*}{Inclusion}
-& IC1  & Publication period: 1994--2026 (from Whittaker \& Thomason onward). \\
+& IC1  & Publication period: January 1994 to the search-execution date
+          (searches run on 12 April 2026; full calendar years 1994--2025 plus
+          2026 records available at execution), from Whittaker \& Thomason
+          onward. \\
 & IC2  & Language: English. \\
 & IC3  & Peer-reviewed journal article, conference paper, or workshop paper
           ($\geq$4 pages). \\
@@ -476,6 +495,15 @@ ACM DL & acm\_principal, acm\_msr & 46 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Table~\ref{tab:working-set} lists, per database, the query identifiers whose
+records were promoted into the deduplicated working set, together with the
+resulting unique-paper counts. These identifiers index the working-set
+composition and are not a re-count of the strings executed at retrieval time:
+the number of strings executed against each database (e.g., three for
+ACM~DL) is the one reported in Table~\ref{tab:db-adaptations}, while the
+records they returned are consolidated, after cross-string and cross-database
+deduplication, into the unique counts shown here.
 
 The working set preserves $10/10$ control papers when the validation-only
 control set is included, and $8/10$ from primary queries alone---both above
@@ -1364,8 +1392,8 @@ on applying its techniques to software development process data.
 \item[F4: Pipeline Fragmentation.]
 Studies apply techniques in isolation. The formal composition of a
 PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline with
-inter-stage data contracts has not been proposed in the literature for SDLC
-contexts. The IC-combination analysis is robust across both tiers.
+inter-stage data contracts was not identified in the reviewed literature for
+SDLC contexts. The IC-combination analysis is robust across both tiers.
 Working-set tier (169 papers): the joint convergence
 IC1$\cap$IC2$\cap$IC3 appears in only 1 paper (0.6\%), and that single
 paper does not specify a formal end-to-end pipeline contract; pairwise
@@ -1856,8 +1884,9 @@ Table~\ref{tab:gap} maps the intersection of techniques and SDLC focus.
 
 \begin{table}[htbp]
 \centering
-\caption{Technique integration ($\checkmark$) across studies. PATHCAST is
-the first proposal at the full intersection.}
+\caption{Technique integration ($\checkmark$) across studies. To the best of
+the author's knowledge, no reviewed study occupies the full intersection
+targeted by PATHCAST.}
 \label{tab:gap}
 \small
 \begin{tabular}{p{3.8cm}ccccc}

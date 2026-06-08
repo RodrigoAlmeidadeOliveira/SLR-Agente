@@ -62,11 +62,16 @@ $\gamma^*$ the cost-optimal alignment,
 \begin{align}
 \text{fitness}(\sigma, M) &= 1 - \frac{\text{cost}(\gamma^*)}
 {\text{cost}(\gamma_{\text{worst}})}, \label{eq:fitness} \\
-\text{conf}(c) &= \frac{|\{(s_i,m_i)\in\gamma^*_c : s_i=m_i\}|}{|\gamma^*_c|}. \label{eq:case-conformance-cap2}
+\text{conf}(c) &= 1 - \frac{\text{cost}(\gamma^*_c)}
+{\text{cost}(\gamma_{\text{worst},c})}. \label{eq:case-conformance-cap2}
 \end{align}
-Log-level fitness is the trace-weighted average. The case-level
-conformance $\text{conf}(c)$ is reused as an ML feature in
-Chapter~\ref{ch:method}.
+Thus $\text{conf}(c)$ is the per-case (trace-level) alignment-based fitness:
+the cost of the optimal alignment $\gamma^*_c$ of trace $\sigma_c$ normalized
+by its worst-case alignment cost, yielding a score in $[0,1]$. Log-level
+fitness is the trace-weighted average of $\text{conf}(c)$. The case-level
+conformance $\text{conf}(c)$ is reused, under the same definition, as an ML
+feature in Chapter~\ref{ch:method}
+(Eq.~\ref{eq:case-conformance}).
 \end{definition}
 
 PATHCAST adopts the Inductive Miner with infrequent-behaviour filtering
@@ -78,6 +83,12 @@ generalisation and simplicity~\cite{aalst2016process}; precision and
 generalisation are estimated by the ETC metric and state-visit frequency
 analysis, respectively. The internals of IMf, the alignment search and
 the precision/generalisation estimators are presented in Appendix~A.
+
+We refer to this sound, block-structured model $M$ discovered by IMf---the
+one that captures the dominant, infrequent-behaviour-filtered control flow
+of the SDLC---as the \emph{process backbone}. The term is used throughout the
+thesis to denote the discovered control-flow skeleton over which the
+stochastic and forecasting layers are subsequently built.
 
 
 % =============================================================================
@@ -250,7 +261,8 @@ CRPS is a strictly proper scoring rule~\cite{gneiting2007strictly} and
 reduces to mean absolute error when $\hat{F}$ degenerates to a point mass,
 so distributional forecasters and point baselines remain comparable on a
 common scale. Calibration is summarised by the average calibration error
-(ACE)
+(ACE), the quantile-coverage calibration measure of
+Kuleshov et al.~\cite{kuleshov2018calibrated},
 \begin{equation}
 \label{eq:ace}
 \text{ACE} = \tfrac{1}{|\mathcal{A}|}
@@ -259,8 +271,9 @@ common scale. Calibration is summarised by the average calibration error
 averaged across the quantile checkpoints $\mathcal{A}$. ACE is the
 unweighted mean of the absolute deviations between nominal and empirical
 coverage at a fixed set of probability levels; unlike the
-\emph{expected} calibration error (ECE), which weights bins by their
-population, ACE assigns equal weight to each checkpoint and is therefore
+\emph{expected} calibration error (ECE)~\cite{naeini2015obtaining}, which
+weights bins by their population, ACE assigns equal weight to each
+checkpoint and is therefore
 more sensitive to miscalibration in sparsely populated tail quantiles---the
 regime most relevant to the percentile-based forecasts produced by
 PATHCAST. Worked CRPS-versus-MAE derivations
