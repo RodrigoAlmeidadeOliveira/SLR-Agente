@@ -975,19 +975,58 @@ Equation~\ref{eq:sojourn-obs}, so the estimator strictly generalizes the
 prior design.
 \end{definition}
 
-\begin{remark}[Censoring Assumption and Tail Handling]
+\begin{remark}[Censoring Assumption]
 \label{rem:censoring}
 The estimator assumes \emph{non-informative} censoring: the freeze time
 $t_{\text{end}}$ is exogenous to individual case dynamics (a calendar cut, not
 triggered by case state), so censoring is independent of the residual sojourn
 given $s$. This is the standard and defensible assumption for snapshot-based
-repository mining. If the largest observation in $s$ is censored, $\hat{F}_s$
-is \emph{defective} (it does not reach $1$); we close it conservatively by
-attaching a single exponential tail above the last uncensored time, with rate
-matched to the Kaplan--Meier hazard of the final risk set, and report the
-fraction of tail mass so closed as a diagnostic. This makes the simulator
-proper while keeping the body of $\hat{F}_s$ fully nonparametric. The residual
-threat---true sojourns exceeding any observable horizon---is recorded as
+repository mining.
+\end{remark}
+
+\begin{definition}[Extreme-Value Tail Closure]
+\label{def:tail-closure}
+The Kaplan--Meier body of $\hat{F}_s$ is empirical and cannot extrapolate
+beyond the largest observation; for the heavy-tailed lead times targeted by
+this work (where the case-level ratio $\hat{Q}_{0.98}/\hat{Q}_{0.50}$ can
+exceed~$6$), the upper tail is therefore modeled semiparametrically by
+peaks-over-threshold. Above a high threshold $u$ (default the empirical
+$95$th percentile of the uncensored sojourns), the exceedances
+$\{d_j - u : d_j > u\}$ are fitted to a Generalized Pareto Distribution
+(GPD), which the Pickands--Balkema--de~Haan theorem identifies as the
+limiting excess law for essentially all heavy-tailed
+distributions~\cite{coles2001introduction}:
+\begin{equation}
+\label{eq:gpd-tail}
+\widehat{\Pr}(D > u + y \mid D > u) =
+   \Bigl(1 + \tfrac{\hat{\xi}\,y}{\hat{\beta}}\Bigr)^{-1/\hat{\xi}},
+   \qquad y > 0,
+\end{equation}
+with shape $\hat{\xi}$ and scale $\hat{\beta}$ estimated by maximum
+likelihood (right-censored exceedances included). The shape $\hat{\xi}$
+governs tail weight: $\hat{\xi}=0$ recovers the exponential tail (and hence
+the previous closure as a special case), $\hat{\xi}>0$ a Pareto-type
+power-law tail (finite mean only for $\hat{\xi}<1$), and $\hat{\xi}<0$ a
+bounded tail. The simulator draws sojourns from the Kaplan--Meier body below
+$u$ and from the fitted GPD above $u$, so a censored or finite-support sample
+no longer truncates the simulated lead-time tail. The fitted $\hat{\xi}$ per
+state and the fraction of mass in the GPD tail are reported as diagnostics;
+$\hat{\xi}\geq 1$ (infinite-mean regime) is surfaced as an explicit validity
+caveat, since there the expected lead time is not finite and only quantile
+forecasts ($\hat{Q}_{0.85}, \hat{Q}_{0.95}, \hat{Q}_{0.98}$) remain
+well-posed.
+\end{definition}
+
+\begin{remark}[Non-Parametric Body, Extreme-Value Tail]
+\label{rem:tail-rationale}
+This hybrid is the defensible treatment for the $\hat{Q}_{0.98}/\hat{Q}_{0.50}
+> 6$ regime: a purely empirical estimator under-states extreme percentiles
+(it cannot exceed the observed maximum), a single global parametric fit
+mis-specifies the multimodal body, and an exponential closure under-states a
+genuine power-law tail. Fitting the body nonparametrically and only the
+\emph{tail} by extreme-value theory keeps each region under the estimator
+that is correct for it. The residual threat---true sojourns exceeding any
+observable horizon under a mis-estimated $\hat{\xi}$---is recorded as
 assumption~A5 and revisited in the validity discussion.
 \end{remark}
 
@@ -1218,12 +1257,16 @@ For mean functionals with finite variance, the MC estimation error decreases
 as $O(1/\sqrt{M_{\text{sim}}})$~\cite{robert2004monte}; for tail quantiles
 the rate is the same order but with a constant proportional to
 $1/f(\hat{Q}_\alpha)$, which motivates the separate tail-stabilisation
-criterion above. The empirical sojourn distributions $\hat{F}_s$ have finite
-support, so all simulated functionals have finite moments and the central
-limit theorem applies; the corresponding price is that the empirical
-bootstrap cannot extrapolate beyond the largest observed sojourn, so tail
-quantiles are conservative lower bounds when the true tail extends past the
-observed maximum (a validity threat revisited with assumption~A5).
+criterion above. The Kaplan--Meier body of $\hat{F}_s$ has finite support, but the
+GPD tail closure (Definition~\ref{def:tail-closure}) extends the simulated
+sojourns beyond the largest observation, so tail quantiles are no longer
+truncated at the observed maximum. When the fitted shape $\hat{\xi} < 1/2$
+the simulated lead time has finite variance and the central limit theorem
+applies to the mean estimator; for $\hat{\xi} \in [1/2, 1)$ the mean is
+finite but heavy-tailed (slower mean convergence, quantiles unaffected), and
+$\hat{\xi} \geq 1$ is flagged as the infinite-mean regime in which only
+quantile forecasts are reported (a validity threat revisited with
+assumption~A5).
 \end{property}
 
 
@@ -1632,7 +1675,7 @@ A3: Case independence           & Ignores queueing/resource contention       & A
 \midrule
 A4: Sojourn-history independence & Underestimates delays for reworked items  & State augmentation; ML features \\
 \midrule
-A5: Complete case observation   & Downward tail bias if open cases dropped   & Kaplan--Meier sojourn estimator (Def.~\ref{def:km-sojourn}) incorporates right-censored dwells; exponential tail closure for censored maxima \\
+A5: Complete case observation   & Downward tail bias if open cases dropped   & Kaplan--Meier sojourn estimator (Def.~\ref{def:km-sojourn}) incorporates right-censored dwells; GPD extreme-value tail closure (Def.~\ref{def:tail-closure}) for the heavy upper tail \\
 \bottomrule
 \end{tabular}
 \end{table}
