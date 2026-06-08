@@ -261,26 +261,14 @@ Each snapshot is stored in PostgreSQL for Stage~1 ingestion.
 \subsection{Dataset Descriptive Statistics}
 \label{sec:dataset-stats}
 
-\begin{table}[htbp]
-\centering
-\caption{Aggregate dataset statistics (preliminary; harvest of 44/48
-repositories confirmed at writing).}
-\label{tab:dataset-summary}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Metric} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
-\midrule
-Commits                 & 227{,}000 & 4{,}729 & 3{,}215 & \textit{pending} \\
-Closed issues           & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
-Pull requests           & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
-Contributors            & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
-Activity span (months)  & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
-\bottomrule
-\multicolumn{5}{l}{\parbox{13cm}{\footnotesize Cells marked \textit{pending}
-    are populated upon completion of repository harvesting; the final figures
-    will be reported once all 48 snapshots are confirmed.}}
-\end{tabular}
-\end{table}
+The aggregate statistics in Table~\ref{tab:dataset-summary} are computed from
+the Stage-1 GitHub event log (\texttt{github\_event\_log.parquet}) produced by
+the PathCast harvest pipeline. The table is regenerated automatically by
+\texttt{scripts/generate\_dataset\_summary\_tex.py}; cells marked
+\textit{pending} await completion of the commit-level API harvest described
+in Section~\ref{sec:data-collection}.
+
+\input{results/auxiliary/aux_dataset_summary}
 
 \begin{table}[htbp]
 \centering

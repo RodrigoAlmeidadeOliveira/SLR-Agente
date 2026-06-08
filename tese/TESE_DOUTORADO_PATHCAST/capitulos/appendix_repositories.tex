@@ -21,10 +21,11 @@ GitHub REST API~\cite{github2023api}, and stratification across primary
 language, project scale, governance model, and workflow maturity
 (Table~\ref{tab:dataset-diversity}).
 
-Forty-four repositories had completed data collection at the time of
-writing; the remaining four (marked \textit{Pending}) complete the
-stratification targets and are scheduled for collection prior to
-the empirical evaluation (in preparation). Apache and Spring projects use Jira issue
+Forty-four of forty-eight evaluation repositories had usable event logs at
+writing (see \texttt{repo\_manifest.json}); the remaining four
+(\texttt{nestjs/nest}, \texttt{vitejs/vite}, \texttt{pandas-dev/pandas},
+\texttt{torvalds/linux}) require GitHub Issues harvest with a valid token.
+Apache and Spring projects use Jira issue
 transition history from Montgomery et al.~\cite{montgomery2022jira} in
 place of GitHub Issues where noted.
 

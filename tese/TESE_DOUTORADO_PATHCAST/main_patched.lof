@@ -3,28 +3,29 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Overview of the DSRM process applied to this research, with six activities, produced artifacts, and a two-stage evaluation.}}{8}{figure.caption.20}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces PRISMA 2020 flow diagram of the study selection process. Phase labels follow the four-stage structure: Identification, Screening, Eligibility, and Included.}}{29}{figure.caption.33}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Distribution of confirmed studies by publication year ($n = 169$).}}{31}{figure.caption.34}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Inclusion criteria matched by the confirmed set ($n = 169$; non-exclusive; IC labels map to IC4a--IC4d in the protocol).}}{31}{figure.caption.35}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Operational decision distribution in the 73-paper PDF triangulation subset.}}{34}{figure.caption.36}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Main technique families identified in the 169-study confirmed set. Counts are non-exclusive: a paper may use multiple technique families.}}{37}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Operational integration-level distribution (L0--L3) in the 73-paper PDF triangulation subset.}}{41}{figure.caption.38}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Reading-priority distribution (High/Medium/Low) in the 73-paper PDF triangulation subset.}}{41}{figure.caption.39}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Evidence-type distribution in the 73-paper PDF triangulation subset.}}{42}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces PRISMA 2020 flow diagram of the study selection process. Phase labels follow the four-stage structure: Identification, Screening, Eligibility, and Included.}}{31}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Distribution of confirmed studies by publication year ($n = 169$).}}{33}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Inclusion criteria matched by the confirmed set ($n = 169$; non-exclusive; IC labels map to IC4a--IC4d in the protocol).}}{34}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Operational decision distribution in the 73-paper PDF triangulation subset.}}{36}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Main technique families identified in the 169-study confirmed set. Counts are non-exclusive: a paper may use multiple technique families.}}{39}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Operational integration-level distribution (L0--L3) in the 73-paper PDF triangulation subset.}}{43}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Reading-priority distribution (High/Medium/Low) in the 73-paper PDF triangulation subset.}}{44}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Evidence-type distribution in the 73-paper PDF triangulation subset.}}{45}{figure.caption.42}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces PATHCAST pipeline architecture. Solid arrows indicate the primary sequential pipeline; dashed arrows indicate ML enhancement data flows.}}{62}{figure.caption.51}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces PATHCAST component overview.}}{63}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces PATHCAST pipeline architecture. Solid arrows indicate the primary sequential pipeline; dashed arrows indicate ML enhancement data flows.}}{66}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces PATHCAST component overview.}}{67}{figure.caption.54}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Repository selection and enrichment process.}}{91}{figure.caption.62}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Two-stage experimental design.}}{94}{figure.caption.65}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Repository selection and enrichment process.}}{100}{figure.caption.64}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Two-stage experimental design.}}{103}{figure.caption.67}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {H.1}{\ignorespaces Abstract enrichment cascade applied to the 886-paper FT queue.}}{135}{figure.caption.79}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {H.1}{\ignorespaces Abstract enrichment cascade applied to the 886-paper FT queue.}}{161}{figure.caption.87}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

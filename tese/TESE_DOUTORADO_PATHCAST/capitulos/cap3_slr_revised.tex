@@ -732,6 +732,49 @@ diagram~\cite{page2021} of the selection process.
 \section{Results and Synthesis}
 \label{sec:slr-synthesis}
 
+This section reports results at multiple corpus tiers. Three headline
+denominators recur throughout the synthesis; Table~\ref{tab:denominator-provenance}
+maps each count to its definition, composition, and analytical role so that
+percentages quoted below can be traced to a single, explicit evidence base.
+
+\begin{table}[htbp]
+\centering
+\caption{Provenance of headline denominators in the results synthesis.}
+\label{tab:denominator-provenance}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{c p{2.4cm} p{2.6cm} p{4.2cm} p{3.4cm}}
+\toprule
+\textbf{$n$} & \textbf{Tier name} & \textbf{Composition} & \textbf{Primary analyses in this section} & \textbf{Why it coexists with the others} \\
+\midrule
+169 &
+  Working-set confirmed set &
+  FT-included papers from the 2{,}340-paper operational corpus after LLM-assisted T/A and FT screening &
+  Narrative spine: year and document-type distributions, inclusion-criterion coverage, structured extraction, technique families, evidence-type breakdown, and the working-set branch of Findings~F1--F5 &
+  Highest-signal query tier; full structured extraction (PDF or abstract/metadata); unaffected by cross-tier overlap with the auxiliary corpus \\
+\addlinespace
+319 &
+  De-duplicated combined analytical subset &
+  $169_{\text{ws}} + 150_{\text{aux1}}^{\text{unique}}$: working set plus first-pass auxiliary inclusions after removing 60 cross-tier near-duplicates and 2 internal duplicates; frozen before the second auxiliary re-FT pass &
+  Combined-tier F1--F5 distributions, IC-combination counts, event-log source and technique tables, and QA-filtered combined synthesis ($260/319$ above the $\geq 4/8$ threshold) &
+  Recall-bounded expansion of the same protocol over the 3{,}807-paper auxiliary corpus; cross-tier duplicates reconciled so combined percentages are not inflated by papers counted twice \\
+\addlinespace
+381 &
+  Raw combined tier (pre de-duplication) &
+  $169_{\text{ws}} + 212_{\text{aux1}}$: working set plus all first-pass auxiliary FT-includes, before cross-tier reconciliation &
+  Not used as a synthesis denominator; cited in Section~\ref{sec:slr-extval} and the conclusion-validity discussion to contrast the auxiliary screening yield ($315/381$ would pass QA) with the de-duplicated analytical subset reported in Table~\ref{tab:qa-combined} ($260/319$) &
+  Arithmetic sum before cross-tier reconciliation; the $62$ papers removed to obtain~319 ($60$ cross-tier $+$ $2$ internal duplicates) are named explicitly so that combined-tier percentages are not silently inflated \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize\textit{Note:} A fourth headline count, \textbf{341} ($169 + 150 + 22$), denotes the
+final de-duplicated combined evidence base after a second auxiliary re-FT pass
+over enriched abstracts; it extends the recall bound but is not the basis of the
+detailed combined-tier tables below, which refer to the 319-study first-pass
+subset unless stated otherwise.
+\end{table}
+
 \subsection{Overview of Included Studies}
 
 The SLR is reported in two complementary tiers: (i)~the
@@ -1488,12 +1531,17 @@ obtained from the 73-PDF triangulation subset.
 \centering
 \caption{Integration levels in the 169-study confirmed set and PATHCAST positioning.}
 \label{tab:positioning}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{c p{4.8cm} c c p{3.4cm}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{0.85cm} >{\centering\arraybackslash}p{0.85cm}
+    >{\raggedright\arraybackslash}p{2.35cm}@{}}
 \toprule
-\textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, IC-based)}
-  & \textbf{Papers (73-PDF subset, operational)} & \textbf{Representative example} \\
+\textbf{Level} & \textbf{Description} &
+  \makecell[c]{\textbf{Papers}\\\textbf{(169-set,}\\\textbf{IC-based)}} &
+  \makecell[c]{\textbf{Papers}\\\textbf{(73-PDF}\\\textbf{subset, oper.)}} &
+  \makecell[l]{\textbf{Representative}\\\textbf{example}} \\
 \midrule
 L0 & Single analytical family ($\leq$1 IC matched); no cross-technique chaining
   & 95 & 13 & Contextual or single-technique studies \\
@@ -1506,7 +1554,7 @@ L3 & Four ICs matched; unified framework: PM $\rightarrow$ Markov $\rightarrow$ 
 \midrule
 \textbf{Total} & --- & \textbf{169} & \textbf{73} & --- \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 PATHCAST is positioned at level L3---the first proposal, to the best of the
@@ -1639,8 +1687,7 @@ tractable proxy for a fully independent human second-rater protocol.
 \input{results/kappa/kappa_report}
 
 The cross-model verification protocol was also extended to the auxiliary
-tier (\texttt{pipeline/aux\_kappa.py}, FT stage, $n = 276$ stratified
-random 20\% sample). On the auxiliary tier the verifier (Sonnet 4.6)
+tier at the FT stage on a stratified random 20\% sample ($n = 276$). On the auxiliary tier the verifier (Sonnet 4.6)
 returned \texttt{pending} on every paper that the primary screener
 (Haiku 4.5) had rated as \texttt{include}, yielding an observed agreement of
 $P_o = 54.3\%$ with a multi-class $\kappa = 0.004$ and a binary
@@ -1693,10 +1740,9 @@ full text was available, the paper was closed under EC7 (unresolvable
 screening disagreement). Across both tiers, 52 such cases were flagged
 (10 at working-set T/A and 42 at auxiliary FT). This rule intentionally biases the
 protocol toward false negatives rather than unverifiable false positives.
-The archived disagreement list remains available at
-\texttt{results/spotcheck/disagreement\_list\_for\_human.csv} for optional
-post-submission audit, but human arbitration is not required for the valid
-evidence set reported here.
+The complete disagreement log is archived in the replication package
+(Section~\ref{sec:slr-replication}) for optional post-submission audit;
+human arbitration is not required for the valid evidence set reported here.
 
 \subsection{External Validity}
 \label{sec:slr-extval}
@@ -1732,15 +1778,14 @@ source.
 
 A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM
-protocol used for the working set
-(\texttt{pipeline/sensitivity.py}); 12 of 200 (6.0\%) returned a T/A
+protocol used for the working set; 12 of 200 (6.0\%) returned a T/A
 \texttt{include} decision and 59 (29.5\%) returned \texttt{maybe}, yielding
 a point-estimated 228 additional candidate includes if the auxiliary corpus
 were screened in full. Given that this estimate exceeded the working-set
 include count, the second stage was triggered: a \textbf{full-corpus
-T/A and FT screening pass} over all 3{,}807 auxiliary papers, executed via
-\texttt{pipeline/auxiliary\_screening.py} and
-\texttt{pipeline/auxiliary\_ft.py}. The result is reported in
+T/A and FT screening pass} over all 3{,}807 auxiliary papers, executed
+with the same dual-stage LLM protocol used for the working set. The result
+is reported in
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
 screening as \texttt{include}. Of these 212 first-pass inclusions, 150 are
@@ -1753,10 +1798,10 @@ used by the detailed auxiliary extraction, QA, and IC-combination tables.
 
 The protocol then proceeded to a third stage: a multi-source abstract
 enrichment cascade (Semantic Scholar, OpenAlex, CORE, Crossref) was applied
-to the 880 auxiliary FT-\texttt{pending} papers
-(\texttt{pipeline/aux\_enrich.py}), recovering an abstract for 285 papers
-(32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
-papers (\texttt{pipeline/aux\_reft.py}), confirming 23 additional includes,
+to the 880 auxiliary FT-\texttt{pending} papers, recovering an abstract for
+285 papers (32.4\%). The fourth stage re-ran the FT screening on these 285
+enriched papers with the same eligibility protocol, confirming 23 additional
+includes,
 246 excludes, and 16 still-pending. Under the conservative closure rule,
 those 16 residual abstract-insufficient papers are closed under EC6
 (insufficient metadata) rather than carried forward as a manual-validation
@@ -1785,10 +1830,11 @@ automated open-access (OA) recovery pass was executed against four public
 discovery services (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE).
 The result is summarised in Table~\ref{tab:ec5-recovery}: 27 of the 148 EC5
 papers (18.2\%) returned at least one OA URL during the recovery pass; of
-those, 17 PDFs were successfully downloaded (\texttt{pipeline/aux\_pdf\_\allowbreak download.py}, scope \texttt{ec5}), corresponding to 11.5\% of the
-148-paper EC5 stratum recovered into the read-set. A targeted PDF audit was
-then executed on those 17 downloads
-(\texttt{results/ec5\_recovery/ec5\_pdf\_rescreen\_results.csv}): 14 OA
+those, 17 PDFs were successfully downloaded from the recovered OA URLs in
+the EC5 stratum, corresponding to 11.5\% of the 148-paper EC5 stratum
+recovered into the read-set. A targeted PDF audit was
+then executed on those 17 downloads (audit log in the replication package,
+Section~\ref{sec:slr-replication}): 14 OA
 links resolved to unrelated papers or generic proceedings and therefore
 remained under EC5, while 3 papers were substantively re-screened and
 reclassified to EC3. The active PRISMA EC5 count after this audit is thus
@@ -1796,8 +1842,8 @@ reclassified to EC3. The active PRISMA EC5 count after this audit is thus
 papers (81.8\%) remain inaccessible and continue to be reported under EC5
 in the PRISMA flow. A parallel OA-download pass over the 212 auxiliary
 includes recovered 49 PDFs (20.5\% of 212; the lower yield reflects the
-publisher-paywall mix of the auxiliary corpus and is documented in
-\texttt{results/auxiliary/aux\_pdf\_summary.txt}).
+publisher-paywall mix of the auxiliary corpus and is documented in the
+replication package (Section~\ref{sec:slr-replication})).
 
 \input{results/ec5_recovery/ec5_recovery_report}
 
@@ -1807,19 +1853,20 @@ Synthesis findings F1--F5 are derived from the structured data extraction
 applied to two extraction layers: (i)~the full 169-study working-set
 extraction (Section~\ref{sec:slr-extraction};
 Table~\ref{tab:extraction}), partly triangulated against the 73-PDF subset;
-and (ii)~the auxiliary-tier extraction performed via abstract
-only (\texttt{pipeline/auxiliary\_extraction.py}) over the 212 first-pass
-inclusions, of which 150 are unique studies after cross-tier
-de-duplication. Both extractions feed
-the IC-combination counts and the technique distributions reported under
-F1--F5. The QA-based filtering reported in Table~\ref{tab:qa-results}
-retains 136 of the 169 working-set studies (80.5\%); QA scoring was
-subsequently extended to the auxiliary tier
-(\texttt{pipeline/aux\_qa.py}), retaining 124 of the 150 unique auxiliary
+and (ii)~the auxiliary-tier extraction performed from abstract metadata
+only, using the same LLM-assisted extraction template
+(Section~\ref{sec:slr-extraction}), over the 212 first-pass inclusions, of
+which 150 are unique studies after cross-tier de-duplication. Both
+extractions feed the IC-combination counts and the technique distributions
+reported under F1--F5. The QA-based filtering reported in
+Table~\ref{tab:qa-results} retains 136 of the 169 working-set studies
+(80.5\%); QA scoring was subsequently extended to the auxiliary tier with
+the same eight-criterion rubric (Section~\ref{sec:slr-qa}), retaining 124
+of the 150 unique auxiliary
 studies (82.7\%, mean $5.09 \pm 1.43$). The de-duplicated combined
 319-study analytical subset therefore retains 260 papers
-($81.5\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold. The
-auto-generated Table~\ref{tab:qa-combined} reports the QA breakdown over the
+($81.5\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold.
+Table~\ref{tab:qa-combined} reports the QA breakdown over the
 \emph{raw} combined tiers (working set $169$ plus the $212$ first-pass
 auxiliary inclusions $= 381$, of which $315$ pass), \emph{before} cross-tier
 de-duplication; the $260/319$ figure quoted here is the corresponding count
@@ -1899,7 +1946,7 @@ Caldeira \& Cardoso (2019)     & Disc., Enhance. & Jira, Git        & Issue life
 \subsection{Stochastic Forecasting and ML for SE}
 
 Markov chains have been applied to software testing
-(Whittaker and Thomason~\cite{WhittakerThomason1994}) and reliability
+(Whittaker and Thomason~\cite{whittaker1994}) and reliability
 modelling~\cite{WhittakerRekabThomason2000}, but not parameterised by
 process-mining-discovered structures.
 Vacanti~\cite{vacanti2015} popularised throughput-based Monte Carlo for

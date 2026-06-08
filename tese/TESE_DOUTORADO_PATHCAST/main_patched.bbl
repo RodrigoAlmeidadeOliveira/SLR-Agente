@@ -1,0 +1,645 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Aalst 2012]{aalst2012process}
+\abntrefinfo{Aalst}{AALST}{2012}
+{AALST, W. M.~P. van~der. Process mining: Overview and opportunities.
+\emph{ACM Transactions on Management Information Systems}, ACM, v.~3, n.~2, p.
+  1--17, 2012.}
+
+\bibitem[Aalst 2016]{aalst2016process}
+\abntrefinfo{Aalst}{AALST}{2016}
+{AALST, W. van~der. \emph{Process mining: Data science in action}. 2nd. ed.
+  [S.l.]: Springer, 2016.}
+
+\bibitem[Adriansyah, Dongen \& Aalst 2011]{adriansyah2011alignments}
+\abntrefinfo{Adriansyah, Dongen \& Aalst}{ADRIANSYAH; DONGEN; AALST}{2011}
+{ADRIANSYAH, A.; DONGEN, B.~F. van; AALST, W. M.~P. van~der. Conformance
+  checking using cost-based fitness analysis. In:  \emph{IEEE International
+  Enterprise Distributed Object Computing Conference (EDOC)}. [S.l.]: IEEE,
+  2011. p. 55--64.}
+
+\bibitem[Anderson \& Goodman 1957]{anderson1957statistical}
+\abntrefinfo{Anderson \& Goodman}{ANDERSON; GOODMAN}{1957}
+{ANDERSON, T.~W.; GOODMAN, L.~A. Statistical inference about markov chains.
+\emph{The Annals of Mathematical Statistics}, v.~28, n.~1, p. 89--110, 1957.}
+
+\bibitem[Augusto et al. 2019]{augusto2019}
+\abntrefinfo{Augusto et al.}{AUGUSTO et al.}{2019}
+{AUGUSTO, A.; CONFORTI, R.; DUMAS, M.; ROSA, M. L.; MAGGI, F.~M.; MARRELLA, A.;
+  MECELLA, M.; SOO, A. Automated discovery of process models from event logs:
+  Review and benchmark.
+\emph{IEEE Transactions on Knowledge and Data Engineering}, v.~31, n.~4, p.
+  686--705, 2019.}
+
+\bibitem[Bhadra 2022]{bhadra2022}
+\abntrefinfo{Bhadra}{BHADRA}{2022}
+{BHADRA, S. A stochastic {Petri} net model of continuous integration and
+  continuous delivery. In:  \emph{2022 IEEE International Symposium on Software
+  Reliability Engineering Workshops (ISSREW)}. [S.l.]: IEEE, 2022. p.
+  165--170.}
+
+\bibitem[Bhadra et al. 2023]{bhadra2023}
+\abntrefinfo{Bhadra et al.}{BHADRA et al.}{2023}
+{BHADRA, S.; DAS, B.; SILVA, P.; NAGARAJU, V.; FIONDELLA, L. A stochastic
+  {Petri} net model of continuous integration and continuous delivery. In:
+  \emph{2023 Annual Reliability and Maintainability Symposium (RAMS)}. [S.l.]:
+  IEEE, 2023. p.~1--6.}
+
+\bibitem[Billingsley 1961]{billingsley1961statistical}
+\abntrefinfo{Billingsley}{BILLINGSLEY}{1961}
+{BILLINGSLEY, P. Statistical inference for {M}arkov processes.
+\emph{Annals of Mathematical Statistics}, Institute of Mathematical Statistics,
+  v.~32, n.~1, p. 12--40, 1961.}
+
+\bibitem[Bose \& Aalst 2012]{bose2013trace}
+\abntrefinfo{Bose \& Aalst}{BOSE; AALST}{2012}
+{BOSE, R. P. J.~C.; AALST, W. M.~P. van~der. Process diagnostics using trace
+  alignment: Opportunities, issues, and challenges.
+\emph{Information Systems}, Elsevier, v.~37, n.~2, p. 117--141, 2012.}
+
+\bibitem[Breiman 2001]{breiman2001random}
+\abntrefinfo{Breiman}{BREIMAN}{2001}
+{BREIMAN, L. Random forests.
+\emph{Machine Learning}, Springer, v.~45, n.~1, p. 5--32, 2001.}
+
+\bibitem[Buliga et al. 2025]{buliga2025}
+\abntrefinfo{Buliga et al.}{BULIGA et al.}{2025}
+{BULIGA, A.; MENEGHELLO, F.; GRAZIOSI, R.; RONZANI, M. Enhanced what-if
+  scenarios generation by bridging generative models and process simulation.
+  In:  \emph{2025 7th International Conference on Process Mining (ICPM)}.
+  [S.l.]: IEEE, 2025. p.~1--8.}
+
+\bibitem[Burattin 2022]{burattin2022}
+\abntrefinfo{Burattin}{BURATTIN}{2022}
+{BURATTIN, A. Streaming process mining. In:  \emph{Process Mining Handbook}.
+  [S.l.]: Springer, 2022,  (LNBIP, v.~448). p. 349--372.}
+
+\bibitem[Caldeira et al. 2022]{caldeira2022}
+\abntrefinfo{Caldeira et al.}{CALDEIRA et al.}{2022}
+{CALDEIRA, J.; ABREU, F.~B. e; CARDOSO, J.; REIS, J. Unveiling process insights
+  from refactoring practices.
+\emph{Computer Standards \& Interfaces}, Elsevier, v.~80, p. 103587, 2022.}
+
+\bibitem[Caldeira et al. 2019]{Caldeira2019AssessingSoftwareTeams}
+\abntrefinfo{Caldeira et al.}{CALDEIRA et al.}{2019}
+{CALDEIRA, J.; ABREU, F. B.~e.; REIS, J.; CARDOSO, J. Assessing software
+  development teams' efficiency using process mining. In:  \emph{Proceedings of
+  the 2019 International Conference on Process Mining (ICPM)}. Aachen, Germany:
+  IEEE, 2019. p. 65--72. Dispon{\'\i}vel em:
+  \url{https://doi.org/10.1109/ICPM.2019.00020}.}
+
+\bibitem[Camargo, Dumas \& Gonz{\'a}lez-Rojas 2022]{camargo2022learning}
+\abntrefinfo{Camargo, Dumas \& Gonz{\'a}lez-Rojas}{CAMARGO; DUMAS;
+  GONZ{\'A}LEZ-ROJAS}{2022}
+{CAMARGO, M.; DUMAS, M.; GONZ{\'A}LEZ-ROJAS, O. Learning accurate business
+  process simulation models from event logs via automated process discovery and
+  deep learning. In:  FRANCH, X.; POELS, G.; GAILLY, F.; SNOECK, M. (Ed.).
+  \emph{Advanced Information Systems Engineering}. Cham: Springer, 2022.
+  (Lecture Notes in Computer Science (LNCS), v. 13295), p. 52--67.
+ISBN 978-3-031-07472-1. Dispon{\'\i}vel em:
+  \url{https://doi.org/10.1007/978-3-031-07472-1\_4}.}
+
+\bibitem[Chen \& Guestrin 2016]{chen2016xgboost}
+\abntrefinfo{Chen \& Guestrin}{CHEN; GUESTRIN}{2016}
+{CHEN, T.; GUESTRIN, C. {XGBoost}: A scalable tree boosting system. In:
+  \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining}. [S.l.]: ACM, 2016. p. 785--794.}
+
+\bibitem[Coles 2001]{coles2001introduction}
+\abntrefinfo{Coles}{COLES}{2001}
+{COLES, S. \emph{An Introduction to Statistical Modeling of Extreme Values}.
+  [S.l.]: Springer, 2001.  (Springer Series in Statistics).}
+
+\bibitem[Cook \& Wolf 1995]{cook1995}
+\abntrefinfo{Cook \& Wolf}{COOK; WOLF}{1995}
+{COOK, J.~E.; WOLF, A.~L. Automating process discovery through event-data
+  analysis. In:  \emph{Proceedings of the 17th International Conference on
+  Software Engineering (ICSE 1995)}. [S.l.]: ACM, 1995. p. 73--82.}
+
+\bibitem[Cook \& Wolf 1998]{cook1998}
+\abntrefinfo{Cook \& Wolf}{COOK; WOLF}{1998}
+{COOK, J.~E.; WOLF, A.~L. Discovering models of software processes from
+  event-based data.
+\emph{ACM Transactions on Software Engineering and Methodology}, v.~7, n.~3, p.
+  215--249, 1998.}
+
+\bibitem[Dabic, Aghajani \& Bavota 2021]{seart2021}
+\abntrefinfo{Dabic, Aghajani \& Bavota}{DABIC; AGHAJANI; BAVOTA}{2021}
+{DABIC, O.; AGHAJANI, E.; BAVOTA, G. Sampling projects in {GitHub} for {MSR}
+  studies. In:  \emph{Proceedings of the 18th International Conference on
+  Mining Software Repositories (MSR)}. [S.l.]: IEEE, 2021. p. 560--564.}
+
+\bibitem[Darroch \& Seneta 1965]{darroch1965quasi}
+\abntrefinfo{Darroch \& Seneta}{DARROCH; SENETA}{1965}
+{DARROCH, J.~N.; SENETA, E. On quasi-stationary distributions in absorbing
+  discrete-time finite markov chains.
+\emph{Journal of Applied Probability}, v.~2, n.~1, p. 88--100, 1965.}
+
+\bibitem[Dixit, Veri et al. 2021]{Dixit2021}
+\abntrefinfo{Dixit, Veri et al.}{DIXIT; VERI et al.}{2021}
+{DIXIT, S.~G.; VERI, F. et al. Event log preprocessing for process mining: A
+  review.
+\emph{Applied Sciences}, MDPI, v.~11, n.~22, p. 10556, 2021.}
+
+\bibitem[Due{\~n}as et al. 2021]{dueenas2021grimoirelab}
+\abntrefinfo{Due{\~n}as et al.}{DUE{\~N}AS et al.}{2021}
+{DUE{\~N}AS, S.; COSENTINO, V.; GONZALEZ-BARAHONA, J.~M.; FELIX, A. del C.~S.;
+  IZQUIERDO-CORTAZAR, D.; CA{\~N}AS-D{\'I}AZ, L.; GARC{\'I}A-PLAZA, A. P.
+  {GrimoireLab}: A toolset for software development analytics.
+\emph{PeerJ Computer Science}, v.~7, p.~e601, jul. 2021.
+Dispon{\'\i}vel em: \url{https://doi.org/10.7717/peerj-cs.601}.}
+
+\bibitem[Dyb{\aa} \& Dings{\o}yr 2008]{dyba2008}
+\abntrefinfo{Dyb{\aa} \& Dings{\o}yr}{DYB{\AA}; DINGS{\O}YR}{2008}
+{DYB{\AA}, T.; DINGS{\O}YR, T. Empirical studies of agile software development:
+  A systematic review.
+\emph{Information and Software Technology}, Elsevier, v.~50, n. 9--10, p.
+  833--859, 2008.}
+
+\bibitem[Flyvbjerg \& Budzier 2022]{flyvbjerg2022empirical}
+\abntrefinfo{Flyvbjerg \& Budzier}{FLYVBJERG; BUDZIER}{2022}
+{FLYVBJERG, B.; BUDZIER, A. The empirical reality of {IT} project cost
+  overruns: Discovering a power-law distribution.
+\emph{Journal of Management Information Systems}, Taylor \& Francis, v.~39,
+  n.~3, p. 607--639, 2022.}
+
+\bibitem[{GitHub, Inc.} 2023]{github2023api}
+\abntrefinfo{{GitHub, Inc.}}{{GitHub, Inc.}}{2023}
+{{GitHub, Inc.} \emph{{GitHub REST API} and {GraphQL API} Documentation}. 2023.
+  \url{https://docs.github.com/en/rest}.
+Accessed: 2024.}
+
+\bibitem[Gneiting \& Raftery 2007]{gneiting2007strictly}
+\abntrefinfo{Gneiting \& Raftery}{GNEITING; RAFTERY}{2007}
+{GNEITING, T.; RAFTERY, A.~E. Strictly proper scoring rules, prediction, and
+  estimation.
+\emph{Journal of the American Statistical Association}, v.~102, n.~477, p.
+  359--378, 2007.}
+
+\bibitem[Gregor \& Hevner 2013]{gregor2013positioning}
+\abntrefinfo{Gregor \& Hevner}{GREGOR; HEVNER}{2013}
+{GREGOR, S.; HEVNER, A.~R. Positioning and presenting design science research
+  for maximum impact.
+\emph{MIS Quarterly}, v.~37, n.~2, p. 337--355, 2013.}
+
+\bibitem[Grigorik 2012]{gharchive2023}
+\abntrefinfo{Grigorik}{GRIGORIK}{2012}
+{GRIGORIK, I. \emph{{GH Archive}: A Project to Record the Public {GitHub}
+  Timeline and Make It Easily Accessible for Further Analysis}. 2012.
+  \url{https://www.gharchive.org}.
+Originally launched in 2012. Accessed: April 2026.}
+
+\bibitem[Guinea-Cabrera, Holgado-Terriza \& Pico-Valencia 2025]{guinea2025}
+\abntrefinfo{Guinea-Cabrera, Holgado-Terriza \& Pico-Valencia}{GUINEA-CABRERA;
+  HOLGADO-TERRIZA; PICO-VALENCIA}{2025}
+{GUINEA-CABRERA, M.~A.; HOLGADO-TERRIZA, J.~A.; PICO-VALENCIA, P.~A. {PRIMAD}:
+  Building digital twins for software development lifecycle within an
+  evolutionary architecture. In:  \emph{2025 IEEE Smart World Congress (SWC)}.
+  [S.l.]: IEEE, 2025. p. 1680--1685.}
+
+\bibitem[Gupta 2017]{gupta2017}
+\abntrefinfo{Gupta}{GUPTA}{2017}
+{GUPTA, M. Improving software maintenance using process mining and predictive
+  analytics. In:  \emph{2017 IEEE International Conference on Software
+  Maintenance and Evolution (ICSME)}. [S.l.]: IEEE, 2017. p. 681--686.}
+
+\bibitem[H{\"a}ggstr{\"o}m 2002]{Haggstrom2002}
+\abntrefinfo{H{\"a}ggstr{\"o}m}{H{\"A}GGSTR{\"O}M}{2002}
+{H{\"A}GGSTR{\"O}M, O. Finite markov chains and algorithmic applications:
+  Simulated annealing. In:  \emph{Finite Markov Chains and Algorithmic
+  Applications}. Cambridge University Press, 2002.
+Dispon{\'\i}vel em: \url{https://doi.org/10.1017/CBO9780511613586.014}.}
+
+\bibitem[Hanley \& McNeil 1982]{hanley1982meaning}
+\abntrefinfo{Hanley \& McNeil}{HANLEY; MCNEIL}{1982}
+{HANLEY, J.~A.; MCNEIL, B.~J. The meaning and use of the area under a receiver
+  operating characteristic ({ROC}) curve.
+\emph{Radiology}, v.~143, n.~1, p. 29--36, 1982.}
+
+\bibitem[Harris et al. 2020]{numpy2020}
+\abntrefinfo{Harris et al.}{HARRIS et al.}{2020}
+{HARRIS, C.~R.; MILLMAN, K.~J.; WALT, S.~J. van~der; GOMMERS, R.; VIRTANEN, P.;
+  COURNAPEAU, D.; WIESER, E.; TAYLOR, J.; BERG, S.; SMITH, N.~J.; KERN, R.;
+  PICUS, M.; HOYER, S.; KREVELEN, M.~H. van; BRETT, M.; HALDANE, A.; R{\'{I}}O,
+  J.~F. del; WIEBE, M.; PETERSON, P.; G{\'{E}}RARD-MARCHANT, P.; SHEPPARD, K.;
+  REDDY, T.; WECKESSER, W.; ABBASI, H.; GOHLKE, C.; OLIPHANT, T.~E. Array
+  programming with {NumPy}.
+\emph{Nature}, v.~585, p. 357--362, 2020.}
+
+\bibitem[Hassan 2008]{hassan2008road}
+\abntrefinfo{Hassan}{HASSAN}{2008}
+{HASSAN, A.~E. The road ahead for mining software repositories.
+\emph{Frontiers of Software Maintenance}, IEEE, p. 48--57, 2008.}
+
+\bibitem[Hevner et al. 2004]{hevner2004}
+\abntrefinfo{Hevner et al.}{HEVNER et al.}{2004}
+{HEVNER, A.~R.; MARCH, S.~T.; PARK, J.; RAM, S. Design science in information
+  systems research.
+\emph{MIS Quarterly}, v.~28, n.~1, p. 75--105, 2004.}
+
+\bibitem[Hyndman \& Athanasopoulos 2021]{hyndman2021forecasting}
+\abntrefinfo{Hyndman \& Athanasopoulos}{HYNDMAN; ATHANASOPOULOS}{2021}
+{HYNDMAN, R.~J.; ATHANASOPOULOS, G. \emph{Forecasting: Principles and
+  Practice}. 3rd. ed. OTexts, 2021. Dispon{\'\i}vel em:
+  \url{https://otexts.com/fpp3/}.}
+
+\bibitem[Incerto, Vandin \& Ahrabi 2025]{incerto2025}
+\abntrefinfo{Incerto, Vandin \& Ahrabi}{INCERTO; VANDIN; AHRABI}{2025}
+{INCERTO, E.; VANDIN, A.; AHRABI, S.~S. Stochastic conformance checking based
+  on variable-length {Markov} chains.
+\emph{Information Systems}, Elsevier, v.~130, p. 102561, 2025.}
+
+\bibitem[Jalote \& Kamma 2021]{jalote2021}
+\abntrefinfo{Jalote \& Kamma}{JALOTE; KAMMA}{2021}
+{JALOTE, P.; KAMMA, D. Studying task processes for improving programmer
+  productivity.
+\emph{IEEE Transactions on Software Engineering}, IEEE, v.~47, n.~10, p.
+  2089--2104, 2021.}
+
+\bibitem[Jeon, Kim \& In 2015]{jeon2015}
+\abntrefinfo{Jeon, Kim \& In}{JEON; KIM; IN}{2015}
+{JEON, C.-K.; KIM, N.; IN, H.~P. Probabilistic approach to predicting risk in
+  software projects using software repository data.
+\emph{International Journal of Software Engineering and Knowledge Engineering},
+  World Scientific, v.~25, n.~5, p. 845--870, 2015.}
+
+\bibitem[Jo, Kwon \& Kwon 2023]{jo2023}
+\abntrefinfo{Jo, Kwon \& Kwon}{JO; KWON; KWON}{2023}
+{JO, S.; KWON, R.; KWON, G. Exploring collaboration patterns in {GitHub} using
+  discrete time {Markov} chain. In:  \emph{2023 30th Asia-Pacific Software
+  Engineering Conference (APSEC)}. [S.l.]: IEEE, 2023. p. 645--646.}
+
+\bibitem[Jo, Kwon \& Kwon 2024]{jo2024}
+\abntrefinfo{Jo, Kwon \& Kwon}{JO; KWON; KWON}{2024}
+{JO, S.; KWON, R.; KWON, G. Probabilistic model checking {GitHub} repositories
+  for software project analysis.
+\emph{Applied Sciences}, v.~14, n.~3, p.~1260, 2024.
+Dispon{\'\i}vel em: \url{https://doi.org/10.3390/app14031260}.}
+
+\bibitem[Joshi \& Kahani 2024]{joshi2024}
+\abntrefinfo{Joshi \& Kahani}{JOSHI; KAHANI}{2024}
+{JOSHI, R.; KAHANI, N. Comparative study of reinforcement learning in {GitHub}
+  pull request outcome predictions. In:  \emph{2024 IEEE International
+  Conference on Software Analysis, Evolution and Reengineering (SANER)}.
+  [S.l.]: IEEE, 2024. p. 489--500.}
+
+\bibitem[Kagdi, Collard \& Maletic 2007]{kagdi2007}
+\abntrefinfo{Kagdi, Collard \& Maletic}{KAGDI; COLLARD; MALETIC}{2007}
+{KAGDI, H.; COLLARD, M.~L.; MALETIC, J.~I. A survey and taxonomy of approaches
+  for mining software repositories in the context of software evolution.
+\emph{Journal of Software Maintenance and Evolution}, v.~19, n.~2, p. 77--131,
+  2007.}
+
+\bibitem[Kampenes et al. 2007]{kampenes2007systematic}
+\abntrefinfo{Kampenes et al.}{KAMPENES et al.}{2007}
+{KAMPENES, V.~B.; DYBå, T.; HANNAY, J.~E.; SJøBERG, D. I.~K. A systematic
+  review of effect size in software engineering experiments.
+\emph{Information and Software Technology}, v.~49, n. 11--12, p. 1073--1086,
+  2007.}
+
+\bibitem[Kaplan \& Meier 1958]{kaplan1958nonparametric}
+\abntrefinfo{Kaplan \& Meier}{KAPLAN; MEIER}{1958}
+{KAPLAN, E.~L.; MEIER, P. Nonparametric estimation from incomplete
+  observations.
+\emph{Journal of the American Statistical Association}, v.~53, n.~282, p.
+  457--481, 1958.}
+
+\bibitem[Khraisha et al. 2024]{khraisha2024}
+\abntrefinfo{Khraisha et al.}{KHRAISHA et al.}{2024}
+{KHRAISHA, Q.; PUT, S.; KAPPENBERG, J.; WARRAITCH, A.; HADFIELD, K. Can large
+  language models replace humans in systematic reviews? evaluating gpt-4's
+  efficacy in screening and extracting data from peer-reviewed and grey
+  literature in multiple languages.
+\emph{Research Synthesis Methods}, v.~15, n.~4, p. 616--626, 2024.
+Dispon{\'\i}vel em: \url{https://doi.org/10.1002/jrsm.1715}.}
+
+\bibitem[Kitchenham \& Charters 2007]{kitchenham2007}
+\abntrefinfo{Kitchenham \& Charters}{KITCHENHAM; CHARTERS}{2007}
+{KITCHENHAM, B.; CHARTERS, S. \emph{Guidelines for Performing Systematic
+  Literature Reviews in Software Engineering}.
+[S.l.], 2007.}
+
+\bibitem[Klein \& Moeschberger 2003]{klein2003survival}
+\abntrefinfo{Klein \& Moeschberger}{KLEIN; MOESCHBERGER}{2003}
+{KLEIN, J.~P.; MOESCHBERGER, M.~L. \emph{Survival Analysis: Techniques for
+  Censored and Truncated Data}. 2nd. ed. [S.l.]: Springer, 2003.}
+
+\bibitem[Kochhar et al. 2019]{kochhar2019moving}
+\abntrefinfo{Kochhar et al.}{KOCHHAR et al.}{2019}
+{KOCHHAR, P.~S.; KALLIAMVAKOU, E.; NAGAPPAN, N.; ZIMMERMANN, T.; BIRD, C.
+  Moving from closed to open source: Observations from six transitioned
+  projects to github.
+\emph{IEEE Transactions on Software Engineering}, IEEE, v.~47, n.~9, p.
+  1838--1856, 2019.}
+
+\bibitem[Kotti, Galanopoulou \& Spinellis 2023]{kotti2023}
+\abntrefinfo{Kotti, Galanopoulou \& Spinellis}{KOTTI; GALANOPOULOU;
+  SPINELLIS}{2023}
+{KOTTI, Z.; GALANOPOULOU, R.; SPINELLIS, D. Machine learning for software
+  engineering: A tertiary study.
+\emph{ACM Computing Surveys}, ACM, v.~55, n.~12, p. 1--39, 2023.}
+
+\bibitem[Kubrak, Milani \& Nolte 2022]{kubrak2022}
+\abntrefinfo{Kubrak, Milani \& Nolte}{KUBRAK; MILANI; NOLTE}{2022}
+{KUBRAK, K.; MILANI, F.; NOLTE, A. Prescriptive process monitoring: Quo vadis?
+\emph{PeerJ Computer Science}, v.~8, p. e1097, 2022.}
+
+\bibitem[Kuleshov, Fenner \& Ermon 2018]{kuleshov2018calibrated}
+\abntrefinfo{Kuleshov, Fenner \& Ermon}{KULESHOV; FENNER; ERMON}{2018}
+{KULESHOV, V.; FENNER, N.; ERMON, S. Accurate uncertainties for deep learning
+  using calibrated regression. In:  \emph{Proceedings of the 35th International
+  Conference on Machine Learning (ICML)}. [S.l.: s.n.], 2018. p. 2796--2804.}
+
+\bibitem[Landis \& Koch 1977]{landiskoch1977}
+\abntrefinfo{Landis \& Koch}{LANDIS; KOCH}{1977}
+{LANDIS, J.~R.; KOCH, G.~G. The measurement of observer agreement for
+  categorical data.
+\emph{Biometrics}, v.~33, n.~1, p. 159--174, 1977.}
+
+\bibitem[L'Ecuyer et al. 2017]{lecuyer2017random}
+\abntrefinfo{L'Ecuyer et al.}{L'ECUYER et al.}{2017}
+{L'ECUYER, P.; MUNGER, D.; ORESHKIN, B.; SIMARD, R. Random numbers for parallel
+  computers: Requirements and methods, with emphasis on {GPU}s.
+\emph{Mathematics and Computers in Simulation}, Elsevier, v.~135, p. 3--17,
+  2017.}
+
+\bibitem[Leemans, Fahland \& Aalst 2013]{leemans2013discovering}
+\abntrefinfo{Leemans, Fahland \& Aalst}{LEEMANS; FAHLAND; AALST}{2013}
+{LEEMANS, S.~J.; FAHLAND, D.; AALST, W.~M. van~der. Discovering
+  block-structured process models from event logs-a constructive approach. In:
+  SPRINGER. \emph{International conference on applications and theory of Petri
+  nets and concurrency}. [S.l.], 2013. p. 311--329.}
+
+\bibitem[Li et al. 2020]{li2020}
+\abntrefinfo{Li et al.}{LI et al.}{2020}
+{LI, Y.; ZHANG, H.; DONG, L.; LIU, B.; MA, J. Constructing a hybrid software
+  process simulation model in practice: An exemplar from industry. In:
+  \emph{2020 IEEE/ACM International Conference on Software and System Processes
+  (ICSSP)}. [S.l.]: IEEE, 2020. p. 91--100.}
+
+\bibitem[Little \& Graves 2011]{little2011factory}
+\abntrefinfo{Little \& Graves}{LITTLE; GRAVES}{2011}
+{LITTLE, J. D.~C.; GRAVES, S.~C. \emph{Little's Law}. [S.l.]: Springer, 2011.
+  81--100~p.}
+
+\bibitem[L{\'o}pez-Pintado \& Dumas 2023]{lopezpintado2023}
+\abntrefinfo{L{\'o}pez-Pintado \& Dumas}{L{\'O}PEZ-PINTADO; DUMAS}{2023}
+{L{\'O}PEZ-PINTADO, O.; DUMAS, M. Discovery and simulation of business
+  processes with probabilistic resource availability calendars. In:  \emph{2023
+  5th International Conference on Process Mining (ICPM)}. [S.l.]: IEEE, 2023.
+  p.~1--8.}
+
+\bibitem[Lunesu et al. 2021]{lunesu2021}
+\abntrefinfo{Lunesu et al.}{LUNESU et al.}{2021}
+{LUNESU, M.~I.; TONELLI, R.; MARCHESI, L.; MARCHESI, M. Assessing the risk of
+  software development in agile methodologies using simulation.
+\emph{IEEE Access}, IEEE, v.~9, p. 135420--135435, 2021.}
+
+\bibitem[Magennis 2015]{magennis2015}
+\abntrefinfo{Magennis}{MAGENNIS}{2015a}
+{MAGENNIS, T. The economic impact of software development process choice:
+  Cycle-time analysis and {Monte Carlo} simulation results. In:  \emph{2015
+  48th Hawaii International Conference on System Sciences (HICSS)}. [S.l.]:
+  IEEE, 2015. p. 5055--5064.}
+
+\bibitem[Magennis 2015]{magennis2015forecasting}
+\abntrefinfo{Magennis}{MAGENNIS}{2015b}
+{MAGENNIS, T. \emph{Forecasting and Simulating Software Development Projects:
+  Effective Modeling of Kanban and Scrum Projects Using Monte Carlo
+  Simulation}. [S.l.]: Leanpub, 2015.}
+
+\bibitem[Marquez-Chamorro, Resinas \& Ruiz-Cortes 2018]{marquezChamorro2018}
+\abntrefinfo{Marquez-Chamorro, Resinas \& Ruiz-Cortes}{MARQUEZ-CHAMORRO;
+  RESINAS; RUIZ-CORTES}{2018}
+{MARQUEZ-CHAMORRO, A.~E.; RESINAS, M.; RUIZ-CORTES, A. Predictive monitoring of
+  business processes: A survey.
+\emph{IEEE Transactions on Services Computing}, v.~11, n.~6, p. 962--977,
+  2018.}
+
+\bibitem[Massitela et al. 2018]{massitela2018}
+\abntrefinfo{Massitela et al.}{MASSITELA et al.}{2018}
+{MASSITELA, I.; ASSUN{\c{C}}{\~A}O, J.; SANTOS, A.~R.; FERNANDES, P. A
+  structured stochastic model for software project estimation in {Waterfall}
+  models. In:  \emph{Proceedings of the 30th International Conference on
+  Software Engineering and Knowledge Engineering (SEKE 2018)}. [S.l.: s.n.],
+  2018.}
+
+\bibitem[Mesmia, Escheikh \& Barkaoui 2021]{benmesmia2021}
+\abntrefinfo{Mesmia, Escheikh \& Barkaoui}{MESMIA; ESCHEIKH; BARKAOUI}{2021}
+{MESMIA, W.~B.; ESCHEIKH, M.; BARKAOUI, K. {DevOps} workflow verification and
+  duration prediction using non-{Markovian} stochastic {Petri} nets.
+\emph{Journal of Software: Evolution and Process}, Wiley, v.~33, n.~12, p.
+  e2329, 2021.}
+
+\bibitem[Metropolis \& Ulam 1949]{metropolis1949monte}
+\abntrefinfo{Metropolis \& Ulam}{METROPOLIS; ULAM}{1949}
+{METROPOLIS, N.; ULAM, S. The monte carlo method.
+\emph{Journal of the American Statistical Association}, v.~44, n.~247, p.
+  335--341, 1949.}
+
+\bibitem[Montgomery, L{\"u}ders \& Maalej 2022]{montgomery2022jira}
+\abntrefinfo{Montgomery, L{\"u}ders \& Maalej}{MONTGOMERY; L{\"U}DERS;
+  MAALEJ}{2022}
+{MONTGOMERY, L.; L{\"U}DERS, C.; MAALEJ, W. An alternative issue tracking
+  dataset of public {Jira} repositories. In:  \emph{Proceedings of the 19th
+  International Conference on Mining Software Repositories (MSR)}. [S.l.]: ACM,
+  2022. p. 73--77.}
+
+\bibitem[Naeini, Cooper \& Hauskrecht 2015]{naeini2015obtaining}
+\abntrefinfo{Naeini, Cooper \& Hauskrecht}{NAEINI; COOPER; HAUSKRECHT}{2015}
+{NAEINI, M.~P.; COOPER, G.~F.; HAUSKRECHT, M. Obtaining well calibrated
+  probabilities using bayesian binning. In:  \emph{Proceedings of the 29th AAAI
+  Conference on Artificial Intelligence}. [S.l.: s.n.], 2015. p. 2901--2907.}
+
+\bibitem[Nafreen et al. 2020]{nafreen2020}
+\abntrefinfo{Nafreen et al.}{NAFREEN et al.}{2020}
+{NAFREEN, M.; LUPERON, M.; FIONDELLA, L.; NAGARAJU, V.; SHI, Y.; WANDJI, T.
+  Connecting software reliability growth models to software defect tracking.
+  In:  \emph{2020 IEEE 31st International Symposium on Software Reliability
+  Engineering (ISSRE)}. [S.l.]: IEEE, 2020. p. 138--147.}
+
+\bibitem[Ortu et al. 2023]{ortu2023}
+\abntrefinfo{Ortu et al.}{ORTU et al.}{2023}
+{ORTU, M.; DESTEFANIS, G.; HALL, T.; BOWES, D. Fault-insertion and fault-fixing
+  behavioural patterns in {Apache} software foundation projects.
+\emph{Information and Software Technology}, Elsevier, v.~160, p. 107187, 2023.}
+
+\bibitem[Pachouly et al. 2022]{pachouly2022}
+\abntrefinfo{Pachouly et al.}{PACHOULY et al.}{2022}
+{PACHOULY, J.; AHIRRAO, S.; KOTECHA, K.; SELVACHANDRAN, G.; ABRAHAM, A. A
+  systematic literature review on software defect prediction using artificial
+  intelligence: Datasets, data validation methods, approaches, and tools.
+\emph{Engineering Applications of Artificial Intelligence}, Elsevier, v.~111,
+  p. 104773, 2022.}
+
+\bibitem[Page et al. 2021]{page2021}
+\abntrefinfo{Page et al.}{PAGE et al.}{2021}
+{PAGE, M.~J.; MCKENZIE, J.~E.; BOSSUYT, P.~M.; BOUTRON, I.; HOFFMANN, T.~C.;
+  MULROW, C.~D.; SHAMSEER, L.; TETZLAFF, J.~M.; AKL, E.~A.; BRENNAN, S.~E.;
+  CHOU, R.; GLANVILLE, J.; GRIMSHAW, J.~M.; HR{\'O}BJARTSSON, A.; LALU, M.~M.;
+  LI, T.; LODER, E.~W.; MAYO-WILSON, E.; MCDONALD, S.; MCGUINNESS, L.~A.;
+  STEWART, L.~A.; THOMAS, J.; TRICCO, A.~C.; WELCH, V.~A.; WHITING, P.; MOHER,
+  D. The {PRISMA} 2020 statement: An updated guideline for reporting systematic
+  reviews.
+\emph{BMJ}, v.~372, p.~n71, 2021.}
+
+\bibitem[Peffers et al. 2007]{peffers2007}
+\abntrefinfo{Peffers et al.}{PEFFERS et al.}{2007}
+{PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M.~A.; CHATTERJEE, S. A design
+  science research methodology for information systems research.
+\emph{Journal of Management Information Systems}, v.~24, n.~3, p. 45--77,
+  2007.}
+
+\bibitem[Petersen, Vakkalanka \& Kuzniarz 2015]{petersen2015}
+\abntrefinfo{Petersen, Vakkalanka \& Kuzniarz}{PETERSEN; VAKKALANKA;
+  KUZNIARZ}{2015}
+{PETERSEN, K.; VAKKALANKA, S.; KUZNIARZ, L. Guidelines for conducting
+  systematic mapping studies in software engineering: An update.
+\emph{Information and Software Technology}, v.~64, p. 1--18, 2015.}
+
+\bibitem[Poncin, Serebrenik \& Brand 2011]{poncin2011process}
+\abntrefinfo{Poncin, Serebrenik \& Brand}{PONCIN; SEREBRENIK; BRAND}{2011}
+{PONCIN, W.; SEREBRENIK, A.; BRAND, M. V.~D. Process mining software
+  repositories. In:  IEEE. \emph{15th European Conference on Software
+  Maintenance and Reengineering (CSMR 2011)}. [S.l.], 2011. p. 5--14.}
+
+\bibitem[Pourbafrani, Jiao \& Aalst 2021]{pourbafrani2021}
+\abntrefinfo{Pourbafrani, Jiao \& Aalst}{POURBAFRANI; JIAO; AALST}{2021}
+{POURBAFRANI, M.; JIAO, S.; AALST, W. M.~P. van~der. {SIMPT}: Process
+  improvement using interactive simulation of time-aware process trees. In:
+  \emph{Research Challenges in Information Science (RCIS 2021)}. [S.l.]:
+  Springer, 2021.  (LNBIP, v.~415), p. 588--594.}
+
+\bibitem[Robert \& Casella 2004]{robert2004monte}
+\abntrefinfo{Robert \& Casella}{ROBERT; CASELLA}{2004}
+{ROBERT, C.~P.; CASELLA, G. \emph{Monte Carlo Statistical Methods}. 2. ed.
+  [S.l.]: Springer, 2004.}
+
+\bibitem[Rogge-Solti \& Weske 2015]{RoggeSolti2015NonMarkovianSPN}
+\abntrefinfo{Rogge-Solti \& Weske}{ROGGE-SOLTI; WESKE}{2015}
+{ROGGE-SOLTI, A.; WESKE, M. Prediction of business process durations using
+  non-markovian stochastic petri nets.
+\emph{Information Systems}, Elsevier, v.~54, p. 1--14, 2015.
+Dispon{\'\i}vel em: \url{https://doi.org/10.1016/j.is.2015.04.004}.}
+
+\bibitem[Rubin et al. 2007]{rubin2007}
+\abntrefinfo{Rubin et al.}{RUBIN et al.}{2007}
+{RUBIN, V.; G{\"U}NTHER, C.~W.; AALST, W. M.~P. van~der; KINDLER, E.; DONGEN,
+  B.~F. van; SCH{\"A}FER, W. Process mining framework for software processes.
+  In:  \emph{International Conference on Software Process (ICSP 2007)}. [S.l.]:
+  Springer, 2007.  (LNCS, v.~4470), p. 169--181.}
+
+\bibitem[Savage 2009]{savage2009flaw}
+\abntrefinfo{Savage}{SAVAGE}{2009}
+{SAVAGE, S.~L. \emph{The Flaw of Averages: Why We Underestimate Risk in the
+  Face of Uncertainty}. [S.l.]: John Wiley \& Sons, 2009.}
+
+\bibitem[Spedicato 2017]{Spedicato2017}
+\abntrefinfo{Spedicato}{SPEDICATO}{2017}
+{SPEDICATO, G.~A. Discrete time markov chains with {R}.
+\emph{The R Journal}, v.~9, n.~2, p. 84--104, 2017.
+Dispon{\'\i}vel em: \url{https://doi.org/10.32614/rj-2017-036}.}
+
+\bibitem[Syriani, David \& Kumar 2023]{syriani2023}
+\abntrefinfo{Syriani, David \& Kumar}{SYRIANI; DAVID; KUMAR}{2023}
+{SYRIANI, E.; DAVID, I.; KUMAR, G. \emph{Assessing the Ability of ChatGPT to
+  Screen Articles for Systematic Reviews}. 2023.
+Dispon{\'\i}vel em: \url{https://doi.org/10.48550/arXiv.2307.06464}.}
+
+\bibitem[Tashman 2000]{tashman2000out}
+\abntrefinfo{Tashman}{TASHMAN}{2000}
+{TASHMAN, L.~J. Out-of-sample tests of forecasting accuracy: An analysis and
+  review.
+\emph{International Journal of Forecasting}, Elsevier, v.~16, n.~4, p.
+  437--450, 2000.}
+
+\bibitem[Tax et al. 2017]{tax2017}
+\abntrefinfo{Tax et al.}{TAX et al.}{2017}
+{TAX, N.; VERENICH, I.; ROSA, M. L.; DUMAS, M. Predictive business process
+  monitoring with {LSTM} neural networks. In:  \emph{CAiSE 2017}. [S.l.]:
+  Springer, 2017.  (LNCS, v. 10253), p. 477--492.}
+
+\bibitem[Tian \& Noore 2005]{tian2005}
+\abntrefinfo{Tian \& Noore}{TIAN; NOORE}{2005}
+{TIAN, L.; NOORE, A. Modeling distributed software defect removal effectiveness
+  in the presence of code churn.
+\emph{Mathematical and Computer Modelling}, Elsevier, v.~42, n.~3--4, p.
+  323--333, 2005.}
+
+\bibitem[Trautsch et al. 2020]{trautsch2020smartshark}
+\abntrefinfo{Trautsch et al.}{TRAUTSCH et al.}{2020}
+{TRAUTSCH, A.; TRAUTSCH, F.; HERBOLD, S.; LEDEL, B.; GRABOWSKI, J. The
+  {SmartSHARK} ecosystem for software repository mining. In:  \emph{Proceedings
+  of the ACM/IEEE 42nd International Conference on Software Engineering:
+  Companion Proceedings (ICSE-Companion)}. ACM, 2020. p. 25--28.
+  Dispon{\'\i}vel em: \url{https://dl.acm.org/doi/10.1145/3377812.3382139}.}
+
+\bibitem[Tyagi et al. 2021]{tyagi2021}
+\abntrefinfo{Tyagi et al.}{TYAGI et al.}{2021}
+{TYAGI, M.; TYAGI, D.~K.; TYAGI, L.~K.; TYAGI, N.; KUMAR, D.; SIKANDAR, A.
+  Agile planning and tracking of software projects using the state-space
+  approach. In:  \emph{Proceedings of International Conference on Communication
+  and Computational Technologies}. [S.l.]: Springer, 2021.  (Algorithms for
+  Intelligent Systems), p. 289--298.}
+
+\bibitem[Vacanti 2015]{vacanti2015}
+\abntrefinfo{Vacanti}{VACANTI}{2015}
+{VACANTI, D. \emph{Actionable Agile Metrics for Predictability}. [S.l.]:
+  LeanPub, 2015.}
+
+\bibitem[Wahono 2015]{Wahono2015}
+\abntrefinfo{Wahono}{WAHONO}{2015}
+{WAHONO, R.~S. A systematic literature review of software defect prediction:
+  Research trends, datasets, methods and frameworks.
+\emph{IlmuKomputer.com Journal of Software Engineering}, v.~1, p. 1--16, 2015.
+Dispon{\'\i}vel em:
+  \url{http://ilkom.cs.ui.ac.id/journal/index.php/jise/article/view/14}.}
+
+\bibitem[Washizaki, Honda \& Fukazawa 2015]{washizaki2015}
+\abntrefinfo{Washizaki, Honda \& Fukazawa}{WASHIZAKI; HONDA; FUKAZAWA}{2015}
+{WASHIZAKI, H.; HONDA, K.; FUKAZAWA, Y. Predicting release time for open source
+  software based on the generalized software reliability model. In:  \emph{2015
+  Agile Conference}. [S.l.]: IEEE, 2015. p.~1--9.}
+
+\bibitem[Whittaker, Rekab \& Thomason 2000]{WhittakerRekabThomason2000}
+\abntrefinfo{Whittaker, Rekab \& Thomason}{WHITTAKER; REKAB; THOMASON}{2000}
+{WHITTAKER, J.~A.; REKAB, K.; THOMASON, M.~G. A markov chain model for
+  predicting the reliability of multi-build software.
+\emph{Information and Software Technology}, v.~42, n.~13, p. 889--894, 2000.
+Dispon{\'\i}vel em: \url{https://doi.org/10.1016/S0950-5849(00)00122-1}.}
+
+\bibitem[Whittaker \& Thomason 1994]{whittaker1994}
+\abntrefinfo{Whittaker \& Thomason}{WHITTAKER; THOMASON}{1994}
+{WHITTAKER, J.~A.; THOMASON, M.~G. A {Markov} chain model for statistical
+  software testing.
+\emph{IEEE Transactions on Software Engineering}, IEEE, v.~20, n.~10, p.
+  812--824, 1994.
+Dispon{\'\i}vel em: \url{https://doi.org/10.1109/32.328991}.}
+
+\bibitem[Wohlin 2014]{wohlin2014guidelines}
+\abntrefinfo{Wohlin}{WOHLIN}{2014}
+{WOHLIN, C. Guidelines for snowballing in systematic literature studies and a
+  replication in software engineering. In:  \emph{Proceedings of the 18th
+  International Conference on Evaluation and Assessment in Software Engineering
+  (EASE 2014)}. [S.l.]: ACM, 2014. p. 1--10.}
+
+\bibitem[Wohlin et al. 2012]{wohlin2012experimentation}
+\abntrefinfo{Wohlin et al.}{WOHLIN et al.}{2012}
+{WOHLIN, C.; RUNESON, P.; H{\"O}ST, M.; OHLSSON, M.~C.; REGNELL, B.;
+  WESSL{\'E}N, A. \emph{Experimentation in software engineering}. [S.l.]:
+  Springer Science \& Business Media, 2012.}
+
+\bibitem[Zimmermann et al. 2004]{Zimmermann2005MiningVersionHistories}
+\abntrefinfo{Zimmermann et al.}{ZIMMERMANN et al.}{2004}
+{ZIMMERMANN, T.; WEIßGERBER, P.; DIEHL, S.; ZELLER, A. Mining version
+  histories to guide software changes. In:  \emph{Proceedings of the 26th
+  International Conference on Software Engineering (ICSE 2004)}. IEEE, 2004. p.
+  563--572. Dispon{\'\i}vel em:
+  \url{https://doi.org/10.1109/ICSE.2004.1317478}.}
+
+\end{thebibliography}

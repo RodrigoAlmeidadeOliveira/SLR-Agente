@@ -79,12 +79,15 @@ formal stage specifications that follow can be read against a single mental
 model. Conceptually, PATHCAST is a five-step transformation of repository
 evidence into a probabilistic forecast:
 \[
+\begin{split}
 \underbrace{\text{Repository data}}_{\mathcal{R}}
 \;\to\; \underbrace{\text{Event-log construction}}_{\mathcal{S}_1}
 \;\to\; \underbrace{\text{Process discovery}}_{\mathcal{S}_2}
+\\
 \;\to\; \underbrace{\text{Markov estimation}}_{\mathcal{S}_3}
 \;\to\; \underbrace{\text{Monte-Carlo simulation}}_{\mathcal{S}_4}
 \;\to\; \underbrace{\text{Forecast}}_{\hat{\mathcal{D}}},
+\end{split}
 \]
 with a machine-learning enhancement component that consumes the
 process-derived artefacts of $\mathcal{S}_2$ and $\mathcal{S}_3$ to refine

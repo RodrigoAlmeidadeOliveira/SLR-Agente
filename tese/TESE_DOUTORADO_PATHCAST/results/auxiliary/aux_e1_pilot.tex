@@ -1,0 +1,26 @@
+% Auto-generated companion to E1 pilot — update after scripts/run_e1_pilot_pm4py.py
+\begin{table}[htbp]
+\centering
+\caption{Preliminary E1 pilot on \texttt{fastapi/fastapi} (800 most recent cases;
+Inductive Miner, $\theta_{\text{noise}} = 0.2$). Not the full 48-repository E1.}
+\label{tab:e1-pilot}
+\small
+\begin{tabular}{lrr}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{E1 threshold} \\
+\midrule
+Cases analysed            & 800   & $\geq 50$ \\
+Events                    & 6{,}251 & --- \\
+Distinct activities       & 14    & --- \\
+Activity coverage         & 1.00  & $\geq 0.50$ \\
+Petri net places          & 41    & --- \\
+Petri net transitions     & 52    & --- \\
+Fitness (alignments)      & 0.911 & $\geq 0.70$ \\
+Precision (alignments)    & 0.817 & $\geq 0.50$ \\
+Generalization (TBR)      & 0.728 & --- \\
+\bottomrule
+\multicolumn{3}{l}{\parbox{11cm}{\footnotesize Single-repository feasibility
+demonstration only; full E1 aggregates over all repositories satisfying
+Section~\ref{sec:e1-design}.}}
+\end{tabular}
+\end{table}

@@ -1,2 +1,250 @@
+% =============================================================================
+% CHAPTER 6 — IMPLEMENTATION
+% Thesis: PATHCAST
+% Status: preliminary draft grounded in PathCast v0.1.0 harvest (Apr 2026)
+% =============================================================================
+
 \chapter{Implementation}
 \label{ch:implementation}
+
+This chapter documents the software instantiation of PATHCAST
+(Definition~\ref{def:pipeline}). At the time of writing, Stage~1 (event log
+construction) is implemented and exercised on the evaluation corpus described
+in Chapter~\ref{ch:methodology}; Stages~2--4 and the ML component remain
+specified but not yet integrated into the executable pipeline
+(Section~\ref{sec:impl-roadmap}).
+
+Section~\ref{sec:impl-architecture} presents the repository layout and
+technology stack. Section~\ref{sec:impl-stage1} details the Stage~1 modules
+and reports harvest-scale statistics from the April~2026 snapshot.
+Section~\ref{sec:impl-artifacts} lists the interim data products.
+Section~\ref{sec:impl-e1-pilot} reports a single-repository E1 feasibility
+pilot. Section~\ref{sec:impl-confidential} discusses the handling of
+confidential organisational data used for internal validation only.
+
+
+% =============================================================================
+% 6.1 ARCHITECTURE
+% =============================================================================
+\section{Software Architecture}
+\label{sec:impl-architecture}
+
+The implementation is organised as a Python package (\texttt{pathcast}, version
+0.1.0) under a standard \texttt{src/} layout, with configuration in YAML
+(\texttt{configs/repositories.yaml}, \texttt{configs/stage1\_github.yaml}) and
+CLI scripts under \texttt{scripts/}. Table~\ref{tab:impl-modules} maps thesis
+pipeline stages to code modules.
+
+\begin{table}[htbp]
+\centering
+\caption{PATHCAST implementation modules (v0.1.0).}
+\label{tab:impl-modules}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Stage} & \textbf{Package} & \textbf{Status} & \textbf{Entry point} \\
+\midrule
+$\mathcal{S}_1$ & \texttt{stage1\_eventlog} & Implemented & \texttt{run\_stage1\_github.py} \\
+$\mathcal{S}_2$ & \texttt{stage2\_mining}    & Implemented (E1) & \texttt{run\_e1\_batch.py} \\
+$\mathcal{S}_3$ & \texttt{stage3\_markov}    & Scaffold only & --- \\
+$\mathcal{S}_4$ & \texttt{stage4\_montecarlo}& Scaffold only & --- \\
+$\mathcal{S}_{\text{ML}}$ & \texttt{ml}        & Scaffold only & --- \\
+Evaluation      & \texttt{evaluation}        & Pilot script  & \texttt{run\_e1\_pilot\_pm4py.py} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Core dependencies include PM4Py~2.7 for event-log manipulation and conformance
+checking, Pandas/Parquet for columnar storage, PyGithub and Requests for REST
+collection, and Loguru for structured logging. Unit tests under
+\texttt{tests/unit/} cover the XES builder activity mapping and edge cases
+(eight tests at v0.1.0).
+
+
+% =============================================================================
+% 6.2 STAGE 1
+% =============================================================================
+\section{Stage 1: Event Log Construction}
+\label{sec:impl-stage1}
+
+Stage~1 implements the signature $\mathcal{S}_1 : \mathcal{R} \to \mathcal{L}$
+(Equation~\ref{eq:stage1-sig}). The harvest proceeds in three steps:
+\begin{enumerate}
+    \item \textbf{Collection.} \texttt{collector.py} retrieves issues, timeline
+    events, pull requests, and (optionally) GitHub Actions runs via the GitHub
+    REST API, with pagination, rate-limit handling, and retry logic.
+    \item \textbf{Normalisation.} Issue and PR histories are mapped to the
+    PATHCAST activity alphabet (e.g.\ \texttt{ISSUE\_OPENED},
+    \texttt{PR\_MERGED}; see \texttt{xes\_builder.py}).
+    \item \textbf{Serialisation.} Events are written as a columnar Parquet file
+    and, on demand, as an XES~IEEE~1849-2016 log via PM4Py.
+\end{enumerate}
+
+For Jira-backed repositories (Apache and Spring projects), \texttt{jira\_collector.py}
+reads transition histories from the Montgomery et al.\ public Jira dataset and
+produces a separate interim log (\texttt{jira\_event\_log.parquet}, 1.37~M events).
+
+\subsection{Preliminary harvest statistics}
+\label{sec:impl-stage1-stats}
+
+Table~\ref{tab:impl-harvest} summarises the GitHub Stage-1 harvest executed in
+April~2026 over 43 of the 48 evaluation repositories (five repositories
+pending or empty at harvest time; see Appendix~\ref{app:repository-list}).
+
+\begin{table}[htbp]
+\centering
+\caption{Stage-1 GitHub harvest snapshot (April 2026, $n = 43$ repositories).}
+\label{tab:impl-harvest}
+\begin{tabular}{lr}
+\toprule
+\textbf{Quantity} & \textbf{Value} \\
+\midrule
+Total events                         & 174{,}036 \\
+Total process cases (issues + PRs)   & 24{,}066 \\
+Distinct activity types (global)     & 18 \\
+Mean events per repository         & 4{,}047 \\
+Median events per repository       & 164 \\
+Mean cases per repository          & 560 \\
+Median cases per repository        & 82 \\
+\midrule
+Largest repository by cases          & \texttt{cli/cli} (9{,}548 cases) \\
+Second largest                       & \texttt{fastapi/fastapi} (8{,}693) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The highly skewed distribution (median $\ll$ mean) reflects the stratified
+corpus: a few high-activity repositories (\texttt{cli/cli},
+\texttt{fastapi/fastapi}) dominate event volume, while many medium-scale
+projects contribute fewer than 200 cases each. This heterogeneity is intentional
+(Section~\ref{sec:dataset-rationale}) and will be preserved in the full E1/E2
+reporting by repository-level aggregation.
+
+
+% =============================================================================
+% 6.3 ARTIFACTS
+% =============================================================================
+\section{Interim Data Artifacts}
+\label{sec:impl-artifacts}
+
+Table~\ref{tab:impl-artifacts} lists the reproducible artefacts produced by
+the current implementation. Raw API downloads reside under
+\texttt{data/raw/github/}; processed Stage-1 outputs under
+\texttt{data/interim/stage1/}.
+
+\begin{table}[htbp]
+\centering
+\caption{Interim artefacts at v0.1.0.}
+\label{tab:impl-artifacts}
+\small
+\begin{tabular}{llr}
+\toprule
+\textbf{File} & \textbf{Description} & \textbf{Size (approx.)} \\
+\midrule
+\texttt{github\_event\_log.parquet} & GitHub Stage-1 log (43 repos) & 2.9~MB \\
+\texttt{jira\_event\_log.parquet}   & Montgomery Jira transitions  & 35~MB \\
+\texttt{jira\_event\_log.xes}       & XES export (Jira)            & 645~MB \\
+\texttt{dataset\_summary\_stats.json}& Auto-computed table inputs  & $<$1~KB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Aggregate dataset statistics derived from these artefacts appear in
+Table~\ref{tab:dataset-summary} (Chapter~\ref{ch:methodology}).
+
+
+% =============================================================================
+% 6.4 E1 PILOT
+% =============================================================================
+\section{Preliminary E1 Feasibility Pilot}
+\label{sec:impl-e1-pilot}
+
+Although Stage~2 is not yet packaged as a library module, a standalone pilot
+script (\texttt{scripts/run\_e1\_pilot\_pm4py.py}) exercises the E1 protocol of
+Section~\ref{sec:e1-design} on a single public repository using PM4Py directly.
+The pilot filters the 800 most recent cases from \texttt{fastapi/fastapi},
+discovers a Petri net with the Inductive Miner at
+$\theta_{\text{noise}} = 0.2$, and computes alignment-based fitness and
+precision plus token-based-replay generalization.
+
+\input{results/auxiliary/aux_e1_pilot}
+
+\subsection{E1 batch on ten representative repositories}
+\label{sec:impl-e1-batch}
+
+Table~\ref{tab:e1-representative} reports the preliminary E1 batch executed with
+\texttt{scripts/run\_e1\_batch.py} on the ten stratified repositories defined in
+Section~\ref{sec:e1-design} (sensitivity subset). All ten repositories satisfy
+the preview acceptance criteria of Equation~\eqref{eq:acceptance}.
+
+\input{results/auxiliary/aux_e1_representative}
+
+All four preview acceptance checks of Equation~\eqref{eq:acceptance} are
+satisfied for this repository (fitness $= 0.911$, precision $= 0.817$,
+coverage $= 1.00$, cases $= 800$). This result supports the \emph{feasibility}
+of the E1 design on a high-activity GitHub Issues workflow but must not be
+extrapolated to the full 48-repository evaluation: a single pilot cannot
+establish external validity, and several repositories in the corpus use Jira
+workflows with different activity alphabets.
+
+
+% =============================================================================
+% 6.5 CONFIDENTIAL DATA
+% =============================================================================
+\section{Confidential Organisational Data}
+\label{sec:impl-confidential}
+
+During internal development, event logs extracted from a confidential
+organisational environment (Jira and Bitbucket projects) were used
+\emph{off-line} to stress-test Stage~1 activity mapping and PM4Py
+integration. These data are subject to organisational terms of use and are
+not part of the public evaluation corpus (Chapter~\ref{ch:methodology}).
+
+\paragraph{Anonymisation assessment.}
+A field-level review of the raw exports identifies the following
+re-identification risks if published without transformation:
+\begin{itemize}
+    \item \textbf{Direct identifiers:} employee names in the \texttt{Author}
+    column; Atlassian URLs containing the organisation domain; issue titles
+    describing internal deliverables; and project keys.
+    \item \textbf{Quasi-identifiers:} exact timestamps at second resolution;
+    rare activity sequences combined with status labels customised to the
+    organisation's workflow.
+    \item \textbf{Lower risk (aggregates):} DFG edge counts, bottleneck tables
+    by status name, fitness/precision on pseudonymised logs, and variant
+    \emph{structure} without titles or authors.
+\end{itemize}
+
+\paragraph{Thesis reporting policy.}
+Unless explicit written authorisation is obtained from the data controller,
+\emph{no record from the confidential corpus appears in this thesis or in the
+public replication package}. Permitted uses without authorisation are limited to:
+\begin{enumerate}
+    \item methodological prose describing how confidential logs \emph{would} be
+    handled (pseudonymisation, URL removal, date shifting);
+    \item fully synthetic or publicly available substitute logs for figures; and
+    \item aggregate-only statistics that cannot be linked to the organisation
+    (e.g.\ ``a private Jira project with 987 cases and 36 activities yielded
+    fitness $\geq 0.7$''), provided no workflow/status names unique to that
+    organisation are quoted.
+\end{enumerate}
+
+Even when individual status labels appear generic, the combination of labels,
+volumes, and timing could still fingerprint the organisation; therefore the
+conservative default is non-disclosure until a formal anonymisation protocol
+and legal review are completed.
+
+
+% =============================================================================
+% 6.6 ROADMAP
+% =============================================================================
+\section{Implementation Roadmap}
+\label{sec:impl-roadmap}
+
+The remaining milestones follow the PathCast development roadmap (v0.2--v0.6):
+Stage~2 process discovery and conformance as a library module; Stage~3 Markov
+estimation with Laplace smoothing for sparse transitions; Stage~4 Monte Carlo
+simulation with percentile extraction; orchestrating CLI; and the full E1/E2
+evaluation harness. Upon completion, this chapter will be expanded with
+end-to-end runtime metrics, replication-package DOI, and PostgreSQL persistence
+(Section~\ref{sec:data-collection}).
