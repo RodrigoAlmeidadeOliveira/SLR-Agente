@@ -230,7 +230,10 @@ Per repository:
     \texttt{/repos/\{owner\}/\{repo\}/commits}.
     \item Issue lifecycle via the timeline events API
     (or Jira~\cite{montgomery2022jira} for Apache/Spring).
-    \item Pull requests via GraphQL API.
+    \item Pull requests via the GraphQL API, collecting the lifecycle events
+    that feed Stage~1: \texttt{PR\_created}, \texttt{PR\_reviewed},
+    \texttt{PR\_approved}, \texttt{PR\_merged}, and \texttt{PR\_closed}
+    (with their timestamps and authoring/reviewing actors).
     \item GitHub Actions runs (only $\geq 50$ runs counts as Advanced
     maturity). The threshold of 50 workflow executions was adopted to reduce
     the influence of sporadic CI/CD usage and to characterize repositories
@@ -239,10 +242,20 @@ Per repository:
 \end{itemize}
 
 To guarantee reproducibility against the continuous evolution of live
-repositories, each repository snapshot was frozen at its collection date;
-all analyses in this thesis are based on these frozen snapshots, and the
-collection dates are recorded in Appendix~\ref{app:repository-list}.
-Data stored in PostgreSQL for Stage~1 ingestion.
+repositories, each repository is analyzed as a frozen snapshot.
+
+\begin{definition}[Repository Snapshot]
+\label{def:repo-snapshot}
+For a repository $r$ collected at time $t$, the \emph{repository snapshot}
+$R^{(t)}$ denotes the immutable state of $r$ observed at $t$: the set of
+commits, issues, pull requests, and CI/CD events with timestamp $\leq t$.
+All analyses in this thesis are conducted over snapshots
+$\{R_r^{(t_r)}\}_{r \in \mathcal{D}}$ collected within the window
+$[t_{\text{start}}, t_{\text{end}}]$; per-repository collection dates $t_r$
+are recorded in Appendix~\ref{app:repository-list}.
+\end{definition}
+
+Each snapshot is stored in PostgreSQL for Stage~1 ingestion.
 
 
 \subsection{Dataset Descriptive Statistics}
@@ -250,20 +263,22 @@ Data stored in PostgreSQL for Stage~1 ingestion.
 
 \begin{table}[htbp]
 \centering
-\caption{Aggregate dataset statistics (48 repositories).}
+\caption{Aggregate dataset statistics (preliminary; harvest of 44/48
+repositories confirmed at writing).}
 \label{tab:dataset-summary}
 \begin{tabular}{lrrrr}
 \toprule
 \textbf{Metric} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
 \midrule
-Commits                 & 227{,}000 & 4{,}729 & 3{,}215 & -- \\
-Closed issues           & --        & --      & --      & -- \\
-Pull requests           & --        & --      & --      & -- \\
-Contributors            & --        & --      & --      & -- \\
-Activity span (months)  & --        & --      & --      & -- \\
+Commits                 & 227{,}000 & 4{,}729 & 3{,}215 & \textit{pending} \\
+Closed issues           & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
+Pull requests           & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
+Contributors            & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
+Activity span (months)  & \textit{pending} & \textit{pending} & \textit{pending} & \textit{pending} \\
 \bottomrule
-\multicolumn{5}{l}{\parbox{13cm}{\footnotesize ``--'' populated upon completion of
-    data collection. 44 of 48 repositories confirmed at writing.}}
+\multicolumn{5}{l}{\parbox{13cm}{\footnotesize Cells marked \textit{pending}
+    are populated upon completion of repository harvesting; the final figures
+    will be reported once all 48 snapshots are confirmed.}}
 \end{tabular}
 \end{table}
 
@@ -406,14 +421,20 @@ identifies the threshold balancing both objectives.
 \begin{equation}
 \label{eq:acceptance}
 \text{fitness}(\mathcal{L}, M) \geq 0.7 \;\wedge\;
+\text{precision}(\mathcal{L}, M) \geq 0.5 \;\wedge\;
 \text{coverage}(\mathcal{L}) \geq 0.5 \;\wedge\;
 |S_T| \geq 2 \;\wedge\;
 |\mathcal{L}_{\text{test}}| \geq 50.
 \end{equation}
 
-The fourth condition reflects the variance threshold for empirical
-percentiles and CRPS~\cite{gneiting2007strictly}. Repositories satisfying
-the first three but failing the case count threshold are reported as
+The fitness and precision thresholds are imposed jointly so that an accepted
+model both replays the observed behaviour ($\text{fitness} \geq 0.7$) and does
+not overgeneralize into a flower-like model admitting arbitrary behaviour
+($\text{precision} \geq 0.5$); the values are consistent with process-mining
+practice on noisy, real-world logs. The final condition reflects the variance
+threshold for empirical percentiles and CRPS~\cite{gneiting2007strictly}.
+Repositories satisfying the quality conditions but failing the case-count
+threshold are reported as
 \emph{quality-validated but statistically insufficient for E2} and
 excluded from E2 only.
 
@@ -466,9 +487,18 @@ forecast vs.\ observed $T_c^{\text{obs}}$, $y_c^{\text{obs}}$.
 \subsubsection{Cross-Repository Generalization}
 \label{sec:cross-repo}
 
-Leave-one-project-out (LOPO) within domain groups (e.g., all Python web
-frameworks). Minimum group size~5; smaller groups reported descriptively
-only. Current dataset: Python web frameworks
+\begin{definition}[LOPO Generalization]
+\label{def:lopo}
+Let $G \subseteq \mathcal{D}$ be a domain group of repositories sharing an
+ecosystem and workflow profile. Under \emph{leave-one-project-out} (LOPO)
+evaluation, for each $r_i \in G$ the model is trained on
+$\text{Train} = G \setminus \{r_i\}$ and tested on $\text{Test} = \{r_i\}$,
+repeated for all $r_i \in G$. Group-level generalization is the mean over the
+$|G|$ held-out folds. Groups with $|G| < 5$ are reported descriptively only.
+\end{definition}
+
+LOPO is applied within domain groups (e.g., all Python web
+frameworks). Current dataset: Python web frameworks
 (Django, Flask, FastAPI, Requests, Click) and Go DevOps tools
 (kubectl, Helm, Terraform, Prometheus, cli) qualify; others descriptive.
 

@@ -627,13 +627,20 @@ measured fitness slightly below $1.0$ when evaluated post-hoc by alignment.
 \end{equation}
 
 computed via alignment-based methods (Definition~\ref{def:alignment}).
-Per-case conformance:
+Per-case conformance reuses, under the same definition, the per-case
+alignment-based fitness $\text{conf}(c) \in [0,1]$ introduced in
+Chapter~\ref{ch:theoretical-foundation}
+(Eq.~\ref{eq:case-conformance-cap2}); since each case $c$ corresponds to
+exactly one trace $\sigma_c$, we keep the symbol $\text{conf}(c)$:
 \begin{equation}
 \label{eq:case-conformance}
-\phi_{\text{conf}}(c) = 1 - \frac{\text{cost}(\text{align}(\sigma_c, M))}
-    {\text{cost}(\text{worst\_align}(\sigma_c, M))}
+\text{conf}(c) = 1 - \frac{\text{cost}(\gamma^*_c)}
+    {\text{cost}(\gamma_{\text{worst},c})} ,
 \end{equation}
-serves as a feature for the ML component (Section~\ref{sec:ml-component}).
+where $\gamma^*_c$ is the cost-optimal alignment of $\sigma_c$ against $M$ and
+$\gamma_{\text{worst},c}$ its worst-case alignment. This score serves as a
+feature for the ML component (Section~\ref{sec:ml-component}), where it is
+denoted $\phi_{\text{conf}}(c)$ in the feature table.
 
 
 \subsection{Performance Enhancement}
@@ -671,19 +678,29 @@ Full metrics vector:
 
 \begin{definition}[SDLC State Space]
 \label{def:state-space}
-The Markov state space is obtained from the discovered process model by a
-one-to-one mapping in which each observable activity $a \in \mathcal{A}$ of
-the discovered model becomes a Markov state (state $\equiv$ activity).
-Formally, $S = S_T \cup S_A$, where $S_T$ comprises the non-terminal
-observed activities and $S_A$ comprises the terminal (absorbing) activities.
-By default $S_A = S_{\text{done}} \cup S_{\text{cancelled}}$ with
+The Markov state space is obtained from the discovered process model $M$ by
+a structure-preserving mapping
+\[
+    f_M : M \to S, \qquad f_M(a) = s_a,
+\]
+that associates each observable activity $a \in \mathcal{A}$ of $M$ with a
+distinct Markov state $s_a$ (so that, by construction, state $\equiv$
+activity). Formally, $S = f_M(\mathcal{A}) = S_T \cup S_A$. The absorbing
+(terminal) set is defined structurally as
+\[
+    S_A = \{\, s \in S : \operatorname{outdeg}_M(s) = 0 \,\},
+\]
+i.e., the states with no outgoing transition in $M$; $S_T = S \setminus S_A$
+are the non-terminal states. In the canonical SDLC taxonomy this yields
+$S_A = S_{\text{done}} \cup S_{\text{cancelled}}$ with
 $S_{\text{done}} = \{\texttt{done}\}$ (successful completion) and
-$S_{\text{cancelled}} = \{\texttt{cancelled}\}$; this generalises to
-platform-specific terminal states (e.g., \texttt{merged}, \texttt{released}
-as completion; \texttt{rejected}, \texttt{duplicate}, \texttt{won't\_fix},
-\texttt{archived} as cancellation), which are mapped onto $S_{\text{done}}$
-or $S_{\text{cancelled}}$ as appropriate. Transitions of the discovered
-model induce the entries of the transition matrix $P$ over $S$.
+$S_{\text{cancelled}} = \{\texttt{cancelled}\}$; platform-specific terminal
+states (e.g., \texttt{merged}, \texttt{released} as completion;
+\texttt{rejected}, \texttt{duplicate}, \texttt{won't\_fix}, \texttt{archived}
+as cancellation) are likewise absorbing under $\operatorname{outdeg}_M = 0$
+and are mapped onto $S_{\text{done}}$ or $S_{\text{cancelled}}$ as
+appropriate. Each transition $a \to a'$ of $M$ induces, through $f_M$, the
+corresponding entry of the transition matrix $P$ over $S$.
 \end{definition}
 
 
@@ -1114,8 +1131,8 @@ Table~\ref{tab:features}.
 3 & Transition count             & $\mathcal{L}$ & Int.   & $|\sigma_c^{\text{partial}}|$ \\
 4 & Rework count                 & $\mathcal{L}$ & Int.   & regression count \\
 5 & Conformance score            & $M, \mathcal{L}$ & Cont. & $\phi_{\text{conf}}(c)$ \\
-6 & Markov expected remaining    & $N$           & Cont.  & $t_{\mu(e_{\text{last}})}$ \\
-7 & Completion probability       & $B$           & Cont.  & $B_{\mu(e_{\text{last}}), \texttt{done}}$ \\
+6 & Markov expected remaining    & $N$           & Cont.  & $\mathbb{E}[T \mid s = \mu(e_{\text{last}})] = t_{\mu(e_{\text{last}})}$ \\
+7 & Completion probability       & $B$           & Cont.  & $\Pr[\text{absorb in } \texttt{done} \mid s = \mu(e_{\text{last}})] = B_{\mu(e_{\text{last}}), \texttt{done}}$ \\
 8 & Sojourn ratio                & $\hat{F}$     & Cont.  & sojourn/$\bar{d}_{\mu(e_{\text{last}})}$ \\
 \midrule
 \multicolumn{5}{l}{\textit{Traditional MSR (Baseline)}} \\

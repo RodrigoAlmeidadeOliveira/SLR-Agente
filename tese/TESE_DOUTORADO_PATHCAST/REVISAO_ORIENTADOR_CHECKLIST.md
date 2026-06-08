@@ -190,9 +190,9 @@ Commits: `259ac71`, `c3b616c`, `4e03e62`, `250f816`, `732b624`, `9ab293b`, `9dd7
 | O.6 | Definição formal da função de seleção (Def.) | cap5 §5.2, def:repo-selection | ✅ |
 | O.7 | Figura de fluxo de seleção/enriquecimento de repositórios | cap5 §5.2, fig:repo-selection (TikZ) | ✅ |
 | O.8 | Snapshot de coleta congelado + datas | Nota de snapshot adicionada (cap5 §5.2); datas dependem do autor | 🟡 parcial |
-| O.9 | Comparação Markov Analítico × Monte Carlo | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
-| O.10 | Reliability diagram (calibração) | Pertence ao cap. de avaliação (em preparação) | ⬜ (adiado) |
-| O.11 | Citar Augusto et al. (2019) / Bose & van der Aalst (2013) p/ entropia | Orientador ambivalente ("método não cita"); `augusto2019` existe, Bose não | ⬜ (a critério) |
+| O.9 | Comparação Markov Analítico × Monte Carlo | cap5 §5.5 (ablação B3 vs Stage 4, plano de avaliação) | ✅ (corrigido: estava marcado ⬜ por engano) |
+| O.10 | Reliability diagram (calibração) | cap5 §5.4 (paragraph "Reliability diagrams") | ✅ (corrigido: estava marcado ⬜ por engano) |
+| O.11 | Citar Augusto et al. (2019) / Bose & van der Aalst (2013) p/ entropia | cap4 §4.3 (`\cite{bose2013trace, augusto2019}`, enquadramento Phase-9) | ✅ (corrigido: estava marcado ⬜ por engano) |
 | O.12 | Hipóteses estatísticas explícitas (H0/H1) RQ2/RQ3 | cap5 §5.6, sec:hypotheses | ✅ |
 | O.13 | Limiares de interpretação de Cliff's δ (Kampenes) | cap5 §5.6 (extra) | ✅ |
 | O.14 | Justificativa estratificação + threshold 50 runs CI/CD | cap5 §5.2 (extra) | ✅ |
@@ -250,3 +250,46 @@ Tabelas auto-geradas regeneradas: `aux_qa_summary.tex` (319/260),
   de ≤3 — recomputei consistentemente sobre o conjunto de-dup.
 - 🟡 Datas de coleta por repositório no Apêndice (O.8): o snapshot global é
   2026-04-12; faltam as datas individuais por repositório, se desejar granularidade.
+
+---
+
+## Rodada de fechamento adicional (2026-06-07) — gaps não rastreados antes
+
+Auditoria cruzada entre o PDF de sugestões do orientador e o estado real dos
+arquivos revelou itens que NÃO constavam neste checklist (ou marcados ✅ mas
+incompletos). Aplicados e compilados (`pdflatex` draftmode EXIT=0, sem
+undefined refs):
+
+| # | Item | Local | Status |
+|---|------|-------|--------|
+| N.1 | **`precision(L,M) ≥ 0.5`** adicionado ao critério de aceitação (antes só fitness/coverage/\|S_T\|/\|L_test\|) + justificativa flower-model | cap5 §5.3, `eq:acceptance` | ✅ |
+| N.2 | **conf(c) unificado**: cap2 (eq 2.2) estava como *match-ratio* e cap4 como *cost-based* — divergência real. Padronizado na forma cost-normalizada de alinhamento (Adriansyah) nos dois: `conf(c)=1−cost(γ*_c)/cost(γ_worst,c)` | cap2 `eq:case-conformance-cap2`, cap4 `eq:case-conformance` | ✅ |
+| N.3 | **ACE: citação corrigida** — checklist 5.8 citava `gneiting2007strictly` (= ref de CRPS, errada para ACE). Trocado por `kuleshov2018calibrated` (quantile calibration) + `naeini2015obtaining` (ECE). Entradas novas em `references.bib` | cap2 §2.4 | ✅ |
+| N.4 | **Def. formal `Repository Snapshot R^(t)`** (`\begin{definition}`), antes só nota em prosa | cap5 §5.2, `def:repo-snapshot` | ✅ |
+| N.5 | **Def. formal `LOPO Generalization`** (`\begin{definition}` com Train/Test), antes só prosa | cap5 §5.4, `def:lopo` | ✅ |
+| N.6 | **process backbone**: def PRÉVIA formal na §2.1 (estava só in-loco na §2.7) | cap2 §2.1 | ✅ |
+| N.7 | **Mapeamento PM→Markov com símbolo `f_M : M → S`** + absorventes estruturais `S_A={s∈S : outdeg_M(s)=0}` (antes só "estado≡atividade" em prosa) | cap4 §4.3, `def:state-space` | ✅ |
+| N.8 | **Justificativa da ausência de termos ML** nas search strings (machine/deep learning, LSTM, transformer) + captura via campo ML Technique post-hoc — orientador #4/#11 | cap3 §3.2 | ✅ |
+| N.9 | **Features 6/7** reescritas como `E[T\|s=μ(e_last)]` e `Pr[absorb in done\|s=μ(e_last)]` | cap4 §4.6, feature table | ✅ |
+| N.10 | **Hedge em 3 spots faltantes**: caption `tab:gap` ("to the best of the author's knowledge"), F4 ("was not identified" vs "has not been proposed"), data de execução junto ao **IC1 na tabela** de critérios | cap3 | ✅ |
+| N.11 | **Tabela 5.2** marcada "(preliminary; 44/48)", células "–" → "pending" (dado de harvest dos 48 repos NÃO existe no SLR-Agente; pipeline é só SLR; pertence ao cap7) | cap5 §5.2 | ✅ |
+| N.12 | **PR events enumerados** em §5.2.3 (created/reviewed/approved/merged/closed) — fecha o "Remanescente menor" | cap5 §5.2.3 | ✅ |
+| N.13 | **Arquitetura Conceitual** confirmada já presente (cap4 §"Architectural Overview": R→S1→S2→S3→S4→ML→Forecast + fig DAG antes dos detalhes algorítmicos) — sugestão pág.1 do PDF | cap4 §4.1 | ✅ |
+
+### Correção de contradições internas deste checklist
+O.9 / O.10 / O.11 estavam marcados ⬜ na tabela OPCIONAIS mas ✅ na seção
+"Re-avaliação final". Verificação no arquivo confirmou os três FEITOS; linhas
+corrigidas para ✅.
+
+### Permanece dependendo de você
+- 🟡 **Validação da de-dup** (Opção A 381→319 / 404→341; 3441→3807) — match por
+  título normalizado; confirmar vs dedup oficial.
+- 🟡 **Datas por-repositório** no appendix (O.8) — snapshot global 2026-04-12 ok.
+- ⬜ **Dados da Tabela 5.2** — harvest dos 48 repos não está no repo (cap7, em
+  preparação); rastreio confirmou ausência de fonte. "227.000 commits" sem
+  proveniência rastreável no SLR-Agente.
+
+> Compilação: `pdflatex -interaction=nonstopmode -draftmode main_patched.tex`
+> → EXIT=0, sem `! errors`, sem `Undefined control sequence`. Bibliografia
+> (cites novos `kuleshov2018calibrated`, `naeini2015obtaining`) entra no
+> próximo build completo com bibtex/biber.
