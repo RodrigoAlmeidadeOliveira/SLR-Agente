@@ -463,6 +463,9 @@ deduplicated records that are not matched to the working set by identifier
 constitute a \textit{high-recall auxiliary corpus} of 3{,}807 records,
 retained as a frozen baseline and used for supplementary robustness analysis
 rather than as a primary evidence source (Section~\ref{sec:slr-extval}).
+Across the two tiers, the protocol therefore subjected
+$2{,}340 + 3{,}807 = 6{,}147$ deduplicated records to LLM-assisted
+title/abstract screening, of which the working set is the analytical core.
 Because the working set was frozen before the high-recall re-deduplication
 snapshot, approximately 364 working-set papers carry divergent identifiers
 in that snapshot and therefore also appear, as near-duplicates, in the
@@ -1136,6 +1139,16 @@ productivity gains. Together, these contributions confirm that stochastic
 extensions of process models improve both explanatory and predictive validity;
 however, each study confines its stochastic layer to a single analytical
 concern without integrating multiple stages into a unified forecasting pipeline.
+These three results also map directly onto design commitments of the method
+proposed in Chapter~\ref{ch:method}: the variable-length-Markov evidence of
+Incerto~\cite{incerto2025} motivates an explicit \emph{empirical test of
+Markov order} (rather than an assumed first-order chain); the
+log-discovered resource calendars of L\'opez-Pintado~\cite{lopezpintado2023}
+indicate a concrete path to relax the case-independence assumption; and the
+non-Poisson, per-activity sojourn distributions reported for
+PRIMAD~\cite{guinea2025} (with empirical inter-event times far from
+exponential) justify a fully nonparametric sojourn estimator with explicit
+heavy-tail handling rather than a fitted parametric family.
 
 The closest published work to a fully integrated multi-stage architecture is
 PRIMAD, proposed by Guinea-Cabrera~\cite{guinea2025}, which orchestrates
@@ -1287,9 +1300,22 @@ experiments, 5 (3.0\%) are surveys, and 5 (3.0\%) fall in residual
 categories (mixed, framework, exploratory; sum: $69+34+33+13+10+5+5 = 169$).
 The literature is therefore method-heavy and applied-evidence light. Third, \textbf{reproducibility is poor}: only 25 of 169 papers
 (14.8\%) declare their dataset publicly, and only 4 (2.4\%) declare a
-replication package. The QA scoring in Table~\ref{tab:qa-results} confirms
-this pattern: only 33\% of studies score 1 on QA7 (data/code availability),
-which is the single weakest QA criterion across the included set.
+replication package. The item-level QA profile
+(Table~\ref{tab:qa-peritem}) confirms and sharpens this pattern: QA7
+(data/code availability) is satisfied by only \textbf{6.5\%} of studies
+($11/169$) and is the single weakest criterion across the included set;
+\textbf{validity threats} are even more revealing---QA6 (threats to validity
+discussed) is satisfied by only \textbf{22.5\%} ($38/169$), so more than
+three quarters of the corpus reports no validity discussion at all. Tooling
+is largely unreported as well: \textbf{74\%} of studies ($125/169$) name no
+process-mining tool, and among those that do, ProM dominates; and
+\textbf{39\%} ($66/169$) do not even specify whether their dataset is
+industrial, open-source, academic, or synthetic. These three item-level
+deficits---reproducibility (QA7), validity reflection (QA6), and tooling
+transparency---are the concrete face of the maturity gap that motivates
+PATHCAST's emphasis on a determinism-and-replication-first design.
+
+\input{results/qa_peritem_summary}
 
 Taken together, these patterns explain why PATHCAST requires both a formal
 pipeline and an evaluation strategy grounded in real SDLC traces. The gap is

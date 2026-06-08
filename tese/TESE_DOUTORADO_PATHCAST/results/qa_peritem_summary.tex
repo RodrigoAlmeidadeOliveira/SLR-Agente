@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{Item-level quality-assessment profile of the confirmed included set
+($n=169$). Percentages are the share of studies scoring~1 on each binary
+criterion. Auto-generated from \texttt{results/qa\_assessment.csv}
+(\texttt{pipeline/qa\_llm.py}).}
+\label{tab:qa-peritem}
+\small
+\begin{tabular}{clrr}
+\toprule
+\textbf{Item} & \textbf{Criterion} & \textbf{Pass} & \textbf{\% Pass} \\
+\midrule
+QA1 & Research objectives clearly stated            & 168/169 & 99.4\% \\
+QA2 & Software-engineering context described         & 164/169 & 97.0\% \\
+QA3 & Data source described reproducibly             & 108/169 & 63.9\% \\
+QA4 & PM/stochastic technique formally defined       & 139/169 & 82.2\% \\
+QA5 & Results validated empirically                  & 138/169 & 81.7\% \\
+QA6 & \textbf{Threats to validity discussed}         & \textbf{38/169}  & \textbf{22.5\%} \\
+QA7 & \textbf{Reproducible (data and/or code)}       & \textbf{11/169}  & \textbf{6.5\%}  \\
+QA8 & Process-model quality metrics reported         & 58/169  & 34.3\% \\
+\midrule
+\multicolumn{2}{l}{\textbf{Mean QA total}} & \multicolumn{2}{r}{\textbf{4.88 / 8} (SD 1.40)} \\
+\bottomrule
+\end{tabular}
+\end{table}

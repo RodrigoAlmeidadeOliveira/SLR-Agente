@@ -850,10 +850,15 @@ caveat.
 \label{sec:s3-order}
 
 The first-order assumption (A1) is the strongest commitment of the
-stochastic layer and the most likely target of examination. Rather than
-assuming it, PATHCAST submits it to a formal goodness-of-fit test per
-repository and falls back to an explicit state augmentation when it is
-rejected.
+stochastic layer and the most likely target of examination. The concern is
+not hypothetical: variable-length Markov chains, which capture
+higher-than-first-order sequential dependencies, were recently shown to
+outperform eighteen stochastic-conformance techniques on $10/11$
+benchmarks~\cite{incerto2025}, empirical evidence that order-1 can be
+insufficient for software-process sequences. Rather than
+assuming first-order behaviour, PATHCAST therefore submits it to a formal
+goodness-of-fit test per repository and falls back to an explicit state
+augmentation when it is rejected.
 
 \begin{definition}[Anderson--Goodman Markov-Order Test]
 \label{def:markov-order-test}
@@ -1036,7 +1041,12 @@ The product-limit body of $\hat{F}_s$ avoids parametric misspecification
 (lognormal, Weibull, gamma) for the multi-modal, heavy-tailed, zero-inflated
 patterns observed in software process sojourns~\cite{vacanti2015}, while the
 Kaplan--Meier construction additionally recovers the censored upper tail that
-a plain ECDF would discard.
+a plain ECDF would discard. This is reinforced by SDLC-specific evidence:
+the per-activity inter-event times reported for PRIMAD~\cite{guinea2025} are
+strongly non-Poisson (mean far exceeding the median), so a single fitted
+exponential or Weibull family per state would misrepresent the body of the
+distribution---motivating the nonparametric body with an extreme-value tail
+adopted here.
 \end{remark}
 
 
@@ -1299,6 +1309,24 @@ Distributional outputs      & Completion only     & Lead time + outcome + path +
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{remark}[Why Simulation Rather than Probabilistic Model Checking]
+\label{rem:vs-model-checking}
+An analytical alternative to Monte Carlo over the same absorbing chain is
+\emph{probabilistic model checking}: tools such as PRISM evaluate
+PCTL/CSL queries (e.g.\ ``probability of absorption in \texttt{done} within
+$k$ steps'') exactly, and have been applied to DTMCs mined from GitHub
+repositories~\cite{Jo2024}. PATHCAST uses model checking and simulation as
+complements rather than substitutes: exact queries are well suited to bounded
+reachability and expected-reward properties on a fixed chain, whereas the
+forecasting target here is the \emph{full predictive distribution} of
+case-level lead time---including empirical, heavy-tailed sojourn laws and
+path-conditioned functionals (WIP, tail risk) that are not expressible as a
+single PCTL formula. Monte Carlo also accommodates the nonparametric
+Kaplan--Meier/GPD sojourn model directly, where an exact solver would require
+a phase-type approximation. Probabilistic model checking remains available as
+a verification oracle for the structural properties of the discovered chain.
+\end{remark}
 
 
 % =============================================================================
@@ -1671,7 +1699,7 @@ A1: First-order Markov         & Underestimates rework-conditioned delays   & An
 \midrule
 A2: Stationarity                & Stale forecasts after process changes      & Sliding window; drift detection \\
 \midrule
-A3: Case independence           & Ignores queueing/resource contention       & Acknowledged limitation \\
+A3: Case independence           & Ignores queueing/resource contention       & Acknowledged limitation; a concrete relaxation is to parametrise per-state sojourns with log-discovered probabilistic resource-availability calendars~\cite{lopezpintado2023} \\
 \midrule
 A4: Sojourn-history independence & Underestimates delays for reworked items  & State augmentation; ML features \\
 \midrule
