@@ -1,51 +1,3 @@
-% =============================================================================
-% REFERENCES - PDD FlowJanus
-% =============================================================================
-
-% --- PROCESS MINING: FOUNDATIONAL ---
-
-@book{vanderaalst2016,
-  title={Process Mining: Data Science in Action},
-  author={van der Aalst, Wil M. P.},
-  edition={2},
-  year={2016},
-  publisher={Springer}
-}
-
-%@incollection{vanderaalst2012manifesto,
-  title={Process Mining Manifesto},
-  author={van der Aalst, Wil M. P. and others},
-  booktitle={BPM 2011 Workshops},
-  series={LNBIP},
-  volume={99},
-  pages={169--194},
-  year={2012},
-  publisher={Springer}
-}
-
-@article{vanderaalst2004alpha,
-  title={Workflow Mining: Discovering Process Models from Event Logs},
-  author={van der Aalst, Wil M. P. and Weijters, A. J. M. M. and Maruster, L.},
-  journal={IEEE Transactions on Knowledge and Data Engineering},
-  volume={16},
-  number={9},
-  pages={1128--1142},
-  year={2004}
-}
-
-% --- PROCESS MINING: ALGORITHMS ---
-
-@inproceedings{leemans2013,
-  title={Discovering Block-Structured Process Models from Event Logs: A Constructive Approach},
-  author={Leemans, Sander J. J. and Fahland, Dirk and van der Aalst, Wil M. P.},
-  booktitle={Petri Nets 2013},
-  series={LNCS},
-  volume={7927},
-  pages={311--329},
-  year={2013},
-  publisher={Springer}
-}
-
 @article{weijters2006,
   title={Process Mining with the {H}euristics{M}iner Algorithm},
   author={Weijters, A. J. M. M. and van der Aalst, Wil M. P. and de Medeiros, A. K. Alves},
@@ -62,7 +14,8 @@
   volume={31},
   number={4},
   pages={686--705},
-  year={2019}
+  year={2019},
+  doi       = {10.1109/TKDE.2018.2841877},
 }
 
 @inproceedings{augusto2019split,
@@ -74,16 +27,6 @@
   pages={251--284},
   year={2019}
 }
-
-@inproceedings{adriansyah2011,
-  title={Conformance Checking Using Cost-Based Fitness Analysis},
-  author={Adriansyah, Arya and van Dongen, Boudewijn F. and van der Aalst, Wil M. P.},
-  booktitle={IEEE EDOC 2011},
-  pages={55--64},
-  year={2011}
-}
-
-% --- PROCESS MINING: XES AND TOOLS ---
 
 @misc{xes2016,
   title={{IEEE} Standard for {eXtensible Event Stream} ({XES}) for Achieving Interoperability in Event Logs and Event Streams},
@@ -122,7 +65,8 @@
   volume={448},
   pages={349--372},
   year={2022},
-  publisher={Springer}
+  publisher={Springer},
+  doi       = {10.1007/978-3-031-08848-3_11},
 }
 
 @article{vanzelst2018,
@@ -145,7 +89,8 @@
   volume={10253},
   pages={477--492},
   year={2017},
-  publisher={Springer}
+  publisher={Springer},
+  doi       = {10.1007/978-3-319-59536-8_30},
 }
 
 @article{marquezChamorro2018,
@@ -155,58 +100,49 @@
   volume={11},
   number={6},
   pages={962--977},
-  year={2018}
+  year={2018},
+  doi       = {10.1109/TSC.2017.2772256},
 }
 
 @inproceedings{diFrancescomarino2018,
-  title={Predictive Process Monitoring Methods: Which One Suits Me Best?},
-  author={Di Francescomarino, Chiara and Ghidini, Chiara and Maggi, Fabrizio Maria and Milani, Fredrik},
-  booktitle={BPM 2018},
-  series={LNCS},
-  volume={11080},
-  pages={462--479},
-  year={2018},
-  publisher={Springer}
+  title={Predictive process monitoring methods: which one suits me best?},
+  author={Di Francescomarino, Chiara and others},
+  booktitle={Business Process Management (BPM)},
+  year={2018}
 }
 
-% --- PRESCRIPTIVE PROCESS MONITORING ---
+  title={Prescriptive Process Monitoring: A Systematic Literature Review},
+  author={Kubrak, Jan and others},
+  journal={Information Systems},
+  year={2022}
+}
 
-@inproceedings{weinzierl2020,
-  title={Prescriptive Business Process Monitoring for Recommending Next Best Actions},
-  author={Weinzierl, Sven and Zilker, Sandra and Stierle, Matthias and Matzner, Martin},
-  booktitle={BPM Forum 2020},
-  series={LNBIP},
-  volume={392},
-  pages={193--209},
+@article{weinzierl2020,
+  title={Prescriptive Business Process Monitoring for Next Best Action Recommendation},
+  author={Weinzierl, Stefan and others},
+  journal={Decision Support Systems},
   year={2020}
 }
 
-@article{fahrenkrog2022,
-  title={Fire Now, Fire Later: Alarm-Based Systems for Prescriptive Process Monitoring},
-  author={Fahrenkrog-Petersen, Stephan A. and Tax, Niek and Teinemaa, Irene and Dumas, Marlon and de Leoni, Massimiliano and Maggi, Fabrizio Maria and Weidlich, Matthias},
-  journal={Knowledge and Information Systems},
-  volume={64},
-  number={2},
-  pages={559--587},
+@inproceedings{fahrenkrog2022,
+  title={Cost-aware prescriptive process monitoring with alarm-based interventions},
+  author={Fahrenkrog-Petersen, Simon and others},
+  booktitle={International Conference on Business Process Management},
   year={2022}
 }
 
-@inproceedings{shoush2022,
-  title={Prescriptive Process Monitoring Under Resource Constraints},
-  author={Shoush, Mahmoud and Dumas, Marlon},
-  booktitle={CAiSE Forum 2022},
-  series={LNBIP},
-  volume={452},
-  pages={180--193},
+@article{shoush2022,
+  title={Prescriptive process monitoring under resource constraints using causal inference},
+  author={Shoush, Ahmed and Dumas, Marlon},
+  journal={Information Systems},
   year={2022}
 }
 
-@incollection{park2022,
-  title={Action-Oriented Process Mining},
-  author={Park, Gyunam and van der Aalst, Wil M. P.},
-  booktitle={Progress in IS},
-  year={2022},
-  publisher={Springer}
+@inproceedings{park2022,
+  title={Action-oriented process mining},
+  author={Park, Gwang and van der Aalst, Wil M. P.},
+  booktitle={International Conference on Business Process Management},
+  year={2022}
 }
 
 @article{kubrak2022,
@@ -219,13 +155,7 @@
 }
 
 % --- MINING SOFTWARE REPOSITORIES ---
-
-@article{hassan2008,
-  title={The Road Ahead for Mining Software Repositories},
-  author={Hassan, Ahmed E.},
-  journal={Frontiers of Software Maintenance},
-  pages={48--57},
-  year={2008}
+  doi       = {10.7717/peerj-cs.1097},
 }
 
 @article{kagdi2007,
@@ -235,7 +165,8 @@
   volume={19},
   number={2},
   pages={77--131},
-  year={2007}
+  year={2007},
+  doi       = {10.1002/smr.344},
 }
 
 @article{cook1998,
@@ -245,7 +176,8 @@
   volume={7},
   number={3},
   pages={215--249},
-  year={1998}
+  year={1998},
+  doi       = {10.1145/287000.287001},
 }
 
 @article{michelson2006,
@@ -296,13 +228,6 @@
   year={2017}
 }
 
-@article{vanderaalst2023lpm,
-  title={Large Process Models: Business Process Management in the Age of Generative {AI}},
-  author={van der Aalst, Wil M. P. and Berti, Alessandro and Chun, Stefan and"; Majumdar, Souvik and Schuster, Daniel},
-  journal={arXiv preprint arXiv:2309.00900},
-  year={2023}
-}
-
 @inproceedings{berti2024,
   title={Evaluating Large Language Models in Process Mining: Capabilities, Benchmarks, and Evaluation Strategies},
   author={Berti, Alessandro and Schuster, Daniel and van der Aalst, Wil M. P.},
@@ -349,7 +274,8 @@
   volume={28},
   number={1},
   pages={75--105},
-  year={2004}
+  year={2004},
+  doi       = {10.2307/25148625},
 }
 
 @article{peffers2007,
@@ -363,15 +289,8 @@
 }
 
 % --- EXPERIMENTATION ---
-
-@book{wohlin2012,
-  title={Experimentation in Software Engineering},
-  author={Wohlin, Claes and Runeson, Per and H{\"o}st, Martin and Ohlsson, Magnus C. and Regnell, Bj{\"o}rn and Wessl{\'e}n, Anders},
-  year={2012},
-  publisher={Springer}
+  doi       = {10.2753/mis0742-1222240302},
 }
-
-% --- SLR METHODOLOGY ---
 
 @techreport{kitchenham2007,
   title={Guidelines for Performing Systematic Literature Reviews in Software Engineering},
@@ -387,7 +306,8 @@
   journal={Information and Software Technology},
   volume={64},
   pages={1--18},
-  year={2015}
+  year={2015},
+  doi       = {10.1016/j.infsof.2015.03.007},
 }
 
 @book{AalstCarmona2022,
@@ -545,32 +465,14 @@
   year      = {2012}
 }
 
-@inproceedings{Leemans2013InductiveMiner,
-  author    = {Leemans, Sander J. J. and Fahland, Dirk and van der Aalst, Wil M. P.},
-  title     = {Discovering Block-Structured Process Models from Event Logs: A Constructive Approach},
-  booktitle = {Application and Theory of Petri Nets and Concurrency},
-  series    = {Lecture Notes in Computer Science},
-  volume    = {7927},
-  pages     = {311--329},
-  publisher = {Springer},
-  year      = {2013}
-}
-
-@inproceedings{Adriansyah2011Alignments,
+@inproceedings{adriansyah2011alignments,
   author    = {Adriansyah, Arya and van Dongen, Boudewijn F. and van der Aalst, Wil M. P.},
   title     = {Conformance Checking Using Cost-Based Fitness Analysis},
   booktitle = {IEEE International Enterprise Distributed Object Computing Conference (EDOC)},
   pages     = {55--64},
   publisher = {IEEE},
-  year      = {2011}
-}
-
-  author  = {Berti, Alessandro and van Zelst, Sebastiaan and Schuster, Daniel},
-  title   = {PM4Py: A Process Mining Library for Python},
-  journal = {Software Impacts},
-  volume  = {17},
-  pages   = {100556},
-  year    = {2023}
+  year      = {2011},
+  doi       = {10.1109/EDOC.2011.12}
 }
 
 @inproceedings{vanderAalst2019ObjectCentric,
@@ -582,47 +484,6 @@
   pages     = {3--25},
   publisher = {Springer},
   year      = {2019}
-}
-
-@article{Augusto2019Benchmark,
-  author  = {Augusto, Adriano and Conforti, Raffaele and Dumas, Marlon and La Rosa, Marcello and Maggi, Fabrizio Maria and Marrella, Andrea and Mecella, Massimo and Soo, Andrew},
-  title   = {Automated Discovery of Process Models from Event Logs: Review and Benchmark},
-  journal = {IEEE Transactions on Knowledge and Data Engineering},
-  volume  = {31},
-  number  = {4},
-  pages   = {686--705},
-  year    = {2019}
-}
-
-@article{Mannhardt2016MultiPerspective,
-  author  = {Mannhardt, Felix and de Leoni, Massimiliano and Reijers, Hajo A. and van der Aalst, Wil M. P.},
-  title   = {Balanced Multi-Perspective Checking of Process Conformance},
-  journal = {Computing},
-  volume  = {98},
-  number  = {4},
-  pages   = {407--437},
-  year    = {2016}
-}
-
-@article{vanZelst2018StreamingDiscovery,
-  author  = {van Zelst, Sebastiaan J. and van Dongen, Boudewijn F. and van der Aalst, Wil M. P.},
-  title   = {Event Stream-Based Process Discovery Using Abstract Representations},
-  journal = {Knowledge and Information Systems},
-  volume  = {54},
-  number  = {2},
-  pages   = {407--435},
-  year    = {2018}
-}
-
-@incollection{Burattin2022StreamingPM,
-  author    = {Burattin, Andrea},
-  title     = {Streaming Process Mining},
-  booktitle = {Process Mining Handbook},
-  series    = {Lecture Notes in Business Information Processing},
-  volume    = {448},
-  pages     = {349--372},
-  publisher = {Springer},
-  year      = {2022}
 }
 
 @article{Comuzzi2025DataQuality,
@@ -707,15 +568,6 @@
   year      = {2022}
 }
 
-@book{Aalst2016DataScienceInAction,
-  author    = {Wil M. P. van der Aalst},
-  title     = {Process Mining: Data Science in Action},
-  edition   = {2},
-  publisher = {Springer},
-  address   = {Heidelberg},
-  year      = {2016}
-}
-
 @incollection{DiCiccioMontali2022,
   author    = {Claudio Di Ciccio and Marco Montali},
   title     = {Declarative Process Specifications: Reasoning, Discovery, Monitoring},
@@ -724,16 +576,6 @@
   publisher = {Springer},
   pages     = {108--152},
   year      = {2022}
-}
-
-@article{AdriansyahDongenAalst2012,
-  author  = {Arya Adriansyah and Boudewijn F. van Dongen and Wil M. P. van der Aalst},
-  title   = {Replaying History on Process Models for Conformance Checking and Performance Analysis},
-  journal = {WIREs Data Mining and Knowledge Discovery},
-  volume  = {2},
-  number  = {2},
-  pages   = {182--192},
-  year    = {2012}
 }
 
 @inproceedings{MunozGamaCarmona2010,
@@ -880,7 +722,8 @@
   author = {van der Aalst, Wil},
   year = {2016},
   edition = {2nd},
-  publisher = {Springer}
+  publisher = {Springer},
+  doi       = {10.1007/978-3-319-25013-7_1},
 }
 
 @inproceedings{poncin2011process,
@@ -900,17 +743,6 @@
   year = {2018}
 }
 
-@inproceedings{aalst2004workflow,
-  title = {Workflow mining: Discovering process models from event logs},
-  author = {van der Aalst, Wil and Weijters, Ton and Maruster, Laura},
-  journal = {IEEE Transactions on Knowledge and Data Engineering},
-  volume = {16},
-  number = {9},
-  pages = {1128--1142},
-  year = {2004},
-  publisher = {IEEE}
-}
-
 @article{weijters2006process,
   title = {Process mining with the {HeuristicsMiner} algorithm},
   author = {Weijters, AJMM and van Der Aalst, Wil MP and De Medeiros, AK Alves},
@@ -926,7 +758,8 @@
   booktitle = {International conference on applications and theory of Petri nets and concurrency},
   pages = {311--329},
   year = {2013},
-  organization = {Springer}
+  organization = {Springer},
+  doi       = {10.1007/978-3-642-38697-8_17},
 }
 
 @inproceedings{rozinat2008conformance,
@@ -976,18 +809,8 @@
   journal = {Frontiers of Software Maintenance},
   pages = {48--57},
   year = {2008},
-  publisher = {IEEE}
-}
-
-@article{kagdi2007survey,
-  title = {A survey and taxonomy of approaches for mining software repositories in the context of software evolution},
-  author = {Kagdi, Huzefa and Collard, Michael L and Maletic, Jonathan I},
-  journal = {Journal of software maintenance and evolution: Research and practice},
-  volume = {19},
-  number = {2},
-  pages = {77--131},
-  year = {2007},
-  publisher = {Wiley Online Library}
+  publisher = {IEEE},
+  doi       = {10.1109/FOSM.2008.4659248},
 }
 
 @inproceedings{mockus2002expertise,
@@ -1052,6 +875,16 @@
   booktitle = {Proceedings of the 38th international conference on software engineering},
   pages = {285--296},
   year = {2016}
+}
+
+  title = {Evaluating defect prediction approaches: a benchmark and an extensive comparison},
+  author = {D'Ambros, Marco and Lanza, Michele and Robbes, Romain},
+  journal = {Empirical Software Engineering},
+  volume = {17},
+  number = {4},
+  pages = {531--577},
+  year = {2012},
+  publisher = {Springer}
 }
 
 @article{dambros2012evaluating,
@@ -1146,6 +979,159 @@
   year = {2015},
   publisher = {Elsevier}
 }
+
+%@article{ford2020tale,
+  title = {A tale of two cities: Software developers working from home during the {COVID-19} pandemic},
+  author = {Ford, Denae and Storey, Margaret-Anne and Zimmermann, Thomas and Bird, Christian and Jaffe, Sonia and Maddila, Chandra and Butler, Jenna L and Houck, Brian and Nagappan, Nachiappan},
+  journal = {ACM Transactions on Software Engineering and Methodology (TOSEM)},
+  volume = {31},
+  number = {2},
+  pages = {1--37},
+  year = {2022},
+  publisher = {ACM New York, NY}
+}
+
+%@article{maslach2016understanding,
+  title = {Understanding the burnout experience: recent research and its implications for psychiatry},
+  author = {Maslach, Christina and Leiter, Michael P},
+  journal = {World psychiatry},
+  volume = {15},
+  number = {2},
+  pages = {103--111},
+  year = {2016},
+  publisher = {Wiley Online Library}
+}
+
+%@article{storey2024developers,
+  title = {How developers and managers define and trade productivity for quality},
+  author = {Storey, Margaret-Anne and Zimmermann, Thomas and Bird, Christian and Czerwonka, Jacek and Murphy, Brendan and Kalliamvakou, Eirini},
+  journal = {IEEE Transactions on Software Engineering},
+  volume = {50},
+  number = {1},
+  pages = {95--113},
+  year = {2024},
+  publisher = {IEEE}
+}
+
+%@article{ferreira2023work,
+  title = {Work from home during the {COVID-19} pandemic: Impacts on software developers' wellbeing and productivity},
+  author = {Ferreira, Igor and Marques, M{\'a}rio and Valente, Marco Tulio},
+  journal = {Empirical Software Engineering},
+  volume = {28},
+  number = {3},
+  pages = {65},
+  year = {2023},
+  publisher = {Springer}
+}
+
+  title = {Work-life balance in software engineering: A survey},
+  author = {Zhou, Minghui and Mockus, Audris and Ma, Xin and Zhang, Ling and Mei, Hong},
+  booktitle = {2022 IEEE/ACM 44th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)},
+  pages = {131--140},
+  year = {2022},
+  organization = {IEEE}
+}
+
+  title = {{OpenSSF} {Scorecard}},
+  author = {{Open Source Security Foundation}},
+  year = {2023},
+  howpublished = {\url{https://github.com/ossf/scorecard}},
+  note = {Accessed: 2024-12-04}
+}
+
+%@misc{chaoss2024metrics,
+  title = {{CHAOSS} {Metrics}},
+  author = {{CHAOSS Community}},
+  year = {2024},
+  howpublished = {\url{https://chaoss.community/metrics/}},
+  note = {Accessed: 2024-12-04}
+}
+
+%@article{goggins2021augur,
+  title = {{Augur}: Open source software health metrics platform},
+  author = {Goggins, Sean and Lumbard, Kevin and Germonprez, Matt},
+  journal = {Journal of Open Source Software},
+  volume = {6},
+  number = {59},
+  pages = {2986},
+  year = {2021}
+}
+
+%@article{baxter2011socio,
+  title = {Socio-technical systems: From design methods to systems engineering},
+  author = {Baxter, Gordon and Sommerville, Ian},
+  journal = {Interacting with computers},
+  volume = {23},
+  number = {1},
+  pages = {4--17},
+  year = {2011},
+  publisher = {Oxford University Press}
+}
+
+%@article{malone1987coordination,
+  title = {Coordination theory and collaboration technology},
+  author = {Malone, Thomas W and Crowston, Kevin},
+  journal = {CCS Working Paper},
+  number = {214},
+  year = {1987},
+  publisher = {MIT Center for Coordination Science}
+}
+
+%@book{deming1986out,
+  title = {Out of the crisis},
+  author = {Deming, W Edwards},
+  year = {1986},
+  publisher = {MIT press}
+}
+
+%@article{hannan1984structural,
+  title = {Structural inertia and organizational change},
+  author = {Hannan, Michael T and Freeman, John},
+  journal = {American sociological review},
+  pages = {149--164},
+  year = {1984},
+  publisher = {JSTOR}
+}
+
+%@article{march1991exploration,
+  title = {Exploration and exploitation in organizational learning},
+  author = {March, James G},
+  journal = {Organization science},
+  volume = {2},
+  number = {1},
+  pages = {71--87},
+  year = {1991},
+  publisher = {Informs}
+}
+
+%@book{lawrence1967organization,
+  title = {Organization and environment: Managing differentiation and integration},
+  author = {Lawrence, Paul R and Lorsch, Jay W},
+  year = {1967},
+  publisher = {Harvard Business School Press}
+}
+
+%@article{goodhart1984problems,
+  title = {Problems of monetary management: the {UK} experience},
+  author = {Goodhart, Charles AE},
+  journal = {Monetary Theory and Practice},
+  pages = {91--121},
+  year = {1984},
+  publisher = {Springer}
+}
+
+  title = {Experimentation in software engineering},
+  author = {Wohlin, Claes and Runeson, Per and H{\"o}st, Martin and Ohlsson, Magnus C and Regnell, Bj{\"o}rn and Wessl{\'e}n, Anders},
+  year = {2012},
+  publisher = {Springer Science \& Business Media}
+}
+% ============================================================================
+% BibTeX References — MCDM Chapter (PRIORIS Doctoral Thesis)
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+% Foundational MCDM Methods
+% ---------------------------------------------------------------------------
 
 @article{ford2020tale,
   title = {A tale of two cities: Software developers working from home during the {COVID-19} pandemic},
@@ -1387,290 +1373,9 @@
   author = {Gallaba, Keheliya and Macho, Christian and Pinzger, Martin and McIntosh, Shane},
   booktitle = {Proceedings of the 33rd ACM/IEEE International Conference on Automated Software Engineering},
   pages = {87--97},
-  year = {2018}
+  year = {2018},
+  doi       = {10.1007/978-3-642-29054-5},
 }
-
-@article{kagdi2007survey,
-  title = {A survey and taxonomy of approaches for mining software repositories in the context of software evolution},
-  author = {Kagdi, Huzefa and Collard, Michael L and Maletic, Jonathan I},
-  journal = {Journal of software maintenance and evolution: Research and practice},
-  volume = {19},
-  number = {2},
-  pages = {77--131},
-  year = {2007},
-  publisher = {Wiley Online Library}
-}
-
-@inproceedings{mockus2002expertise,
-  title = {Expertise browser: a quantitative approach to identifying expertise},
-  author = {Mockus, Audris and Herbsleb, James D},
-  booktitle = {Proceedings of the 24th international conference on software engineering},
-  pages = {503--512},
-  year = {2002}
-}
-
-@inproceedings{bird2011dont,
-  title = {Don't touch my code! Examining the effects of ownership on software quality},
-  author = {Bird, Christian and Nagappan, Nachiappan and Murphy, Brendan and Gall, Harald and Devanbu, Premkumar},
-  booktitle = {Proceedings of the 19th ACM SIGSOFT symposium and the 13th European conference on Foundations of software engineering},
-  pages = {4--14},
-  year = {2011}
-}
-
-@article{rigby2012contemporary,
-  title = {Contemporary peer review in software development: industrial experiences and research opportunities},
-  author = {Rigby, Peter C and Bird, Christian},
-  journal = {IEEE Software},
-  volume = {30},
-  number = {1},
-  pages = {56--61},
-  year = {2012},
-  publisher = {IEEE}
-}
-
-@article{crowston2005social,
-  title = {Social dynamics of free and open source team communications},
-  author = {Crowston, Kevin and Howison, James},
-  journal = {IFIP International Conference on Open Source Systems},
-  pages = {319--330},
-  year = {2005},
-  publisher = {Springer}
-}
-
-@inproceedings{avelino2016novel,
-  title = {A novel approach for estimating Truck Factors},
-  author = {Avelino, Guilherme and Passos, Leonardo and Hora, Andre and Valente, Marco Tulio},
-  booktitle = {2016 IEEE 24th International Conference on Program Comprehension (ICPC)},
-  pages = {1--10},
-  year = {2016},
-  organization = {IEEE}
-}
-
-@inproceedings{pinto2016work,
-  title = {Work practices and challenges in pull-based development: the contributor's perspective},
-  author = {Pinto, Gustavo and Steinmacher, Igor and Gerosa, Marco Aur{\'e}lio},
-  booktitle = {Proceedings of the 38th international conference on software engineering},
-  pages = {285--296},
-  year = {2016}
-}
-
-  title = {Evaluating defect prediction approaches: a benchmark and an extensive comparison},
-  author = {D'Ambros, Marco and Lanza, Michele and Robbes, Romain},
-  journal = {Empirical Software Engineering},
-  volume = {17},
-  number = {4},
-  pages = {531--577},
-  year = {2012},
-  publisher = {Springer}
-}
-
-@inproceedings{guo2010characterizing,
-  title = {Characterizing and predicting which bugs get fixed: an empirical study of {Microsoft Windows}},
-  author = {Guo, Philip J and Zimmermann, Thomas and Nagappan, Nachiappan and Murphy, Brendan},
-  booktitle = {Proceedings of the 32nd ACM/IEEE International Conference on Software Engineering-Volume 1},
-  pages = {495--504},
-  year = {2010}
-}
-
-@inproceedings{hilton2016usage,
-  title = {Usage, costs, and benefits of continuous integration in open-source projects},
-  author = {Hilton, Michael and Tunnell, Timothy and Huang, Kai and Marinov, Darko and Dig, Danny},
-  booktitle = {Proceedings of the 31st IEEE/ACM International Conference on Automated Software Engineering},
-  pages = {426--437},
-  year = {2016}
-}
-
-@inproceedings{zampetti2017open,
-  title = {An empirical characterization of bad practices in continuous integration},
-  author = {Zampetti, Fiorella and Scalabrino, Simone and Oliveto, Rocco and Canfora, Gerardo and Di Penta, Massimiliano},
-  journal = {Empirical Software Engineering},
-  volume = {22},
-  number = {3},
-  pages = {1095--1135},
-  year = {2017},
-  publisher = {Springer}
-}
-
-@inproceedings{parnin2011measuring,
-  title = {Measuring API documentation on the web},
-  author = {Parnin, Chris and Treude, Christoph and Grammel, Lars and Storey, Margaret-Anne},
-  booktitle = {Proceedings of the 2nd international workshop on Web 2.0 for software engineering},
-  pages = {25--30},
-  year = {2011}
-}
-
-@article{graziotin2014happy,
-  title = {Happy software developers solve problems better: psychological measurements in empirical software engineering},
-  author = {Graziotin, Daniel and Wang, Xiaofeng and Abrahamsson, Pekka},
-  journal = {PeerJ},
-  volume = {2},
-  pages = {e289},
-  year = {2014},
-  publisher = {PeerJ Inc.}
-}
-
-@article{graziotin2015unhappiness,
-  title = {The unhappiness of software developers: Dimensions, causes, and consequences},
-  author = {Graziotin, Daniel and Wang, Xiaofeng and Abrahamsson, Pekka},
-  journal = {Journal of Systems and Software},
-  volume = {106},
-  pages = {42--56},
-  year = {2015},
-  publisher = {Elsevier}
-}
-
-%@article{ford2020tale,
-  title = {A tale of two cities: Software developers working from home during the {COVID-19} pandemic},
-  author = {Ford, Denae and Storey, Margaret-Anne and Zimmermann, Thomas and Bird, Christian and Jaffe, Sonia and Maddila, Chandra and Butler, Jenna L and Houck, Brian and Nagappan, Nachiappan},
-  journal = {ACM Transactions on Software Engineering and Methodology (TOSEM)},
-  volume = {31},
-  number = {2},
-  pages = {1--37},
-  year = {2022},
-  publisher = {ACM New York, NY}
-}
-
-%@article{maslach2016understanding,
-  title = {Understanding the burnout experience: recent research and its implications for psychiatry},
-  author = {Maslach, Christina and Leiter, Michael P},
-  journal = {World psychiatry},
-  volume = {15},
-  number = {2},
-  pages = {103--111},
-  year = {2016},
-  publisher = {Wiley Online Library}
-}
-
-%@article{storey2024developers,
-  title = {How developers and managers define and trade productivity for quality},
-  author = {Storey, Margaret-Anne and Zimmermann, Thomas and Bird, Christian and Czerwonka, Jacek and Murphy, Brendan and Kalliamvakou, Eirini},
-  journal = {IEEE Transactions on Software Engineering},
-  volume = {50},
-  number = {1},
-  pages = {95--113},
-  year = {2024},
-  publisher = {IEEE}
-}
-
-%@article{ferreira2023work,
-  title = {Work from home during the {COVID-19} pandemic: Impacts on software developers' wellbeing and productivity},
-  author = {Ferreira, Igor and Marques, M{\'a}rio and Valente, Marco Tulio},
-  journal = {Empirical Software Engineering},
-  volume = {28},
-  number = {3},
-  pages = {65},
-  year = {2023},
-  publisher = {Springer}
-}
-
-  title = {Work-life balance in software engineering: A survey},
-  author = {Zhou, Minghui and Mockus, Audris and Ma, Xin and Zhang, Ling and Mei, Hong},
-  booktitle = {2022 IEEE/ACM 44th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)},
-  pages = {131--140},
-  year = {2022},
-  organization = {IEEE}
-}
-
-  title = {{OpenSSF} {Scorecard}},
-  author = {{Open Source Security Foundation}},
-  year = {2023},
-  howpublished = {\url{https://github.com/ossf/scorecard}},
-  note = {Accessed: 2024-12-04}
-}
-
-%@misc{chaoss2024metrics,
-  title = {{CHAOSS} {Metrics}},
-  author = {{CHAOSS Community}},
-  year = {2024},
-  howpublished = {\url{https://chaoss.community/metrics/}},
-  note = {Accessed: 2024-12-04}
-}
-
-%@article{goggins2021augur,
-  title = {{Augur}: Open source software health metrics platform},
-  author = {Goggins, Sean and Lumbard, Kevin and Germonprez, Matt},
-  journal = {Journal of Open Source Software},
-  volume = {6},
-  number = {59},
-  pages = {2986},
-  year = {2021}
-}
-
-%@article{baxter2011socio,
-  title = {Socio-technical systems: From design methods to systems engineering},
-  author = {Baxter, Gordon and Sommerville, Ian},
-  journal = {Interacting with computers},
-  volume = {23},
-  number = {1},
-  pages = {4--17},
-  year = {2011},
-  publisher = {Oxford University Press}
-}
-
-%@article{malone1987coordination,
-  title = {Coordination theory and collaboration technology},
-  author = {Malone, Thomas W and Crowston, Kevin},
-  journal = {CCS Working Paper},
-  number = {214},
-  year = {1987},
-  publisher = {MIT Center for Coordination Science}
-}
-
-%@book{deming1986out,
-  title = {Out of the crisis},
-  author = {Deming, W Edwards},
-  year = {1986},
-  publisher = {MIT press}
-}
-
-%@article{hannan1984structural,
-  title = {Structural inertia and organizational change},
-  author = {Hannan, Michael T and Freeman, John},
-  journal = {American sociological review},
-  pages = {149--164},
-  year = {1984},
-  publisher = {JSTOR}
-}
-
-%@article{march1991exploration,
-  title = {Exploration and exploitation in organizational learning},
-  author = {March, James G},
-  journal = {Organization science},
-  volume = {2},
-  number = {1},
-  pages = {71--87},
-  year = {1991},
-  publisher = {Informs}
-}
-
-%@book{lawrence1967organization,
-  title = {Organization and environment: Managing differentiation and integration},
-  author = {Lawrence, Paul R and Lorsch, Jay W},
-  year = {1967},
-  publisher = {Harvard Business School Press}
-}
-
-%@article{goodhart1984problems,
-  title = {Problems of monetary management: the {UK} experience},
-  author = {Goodhart, Charles AE},
-  journal = {Monetary Theory and Practice},
-  pages = {91--121},
-  year = {1984},
-  publisher = {Springer}
-}
-
-  title = {Experimentation in software engineering},
-  author = {Wohlin, Claes and Runeson, Per and H{\"o}st, Martin and Ohlsson, Magnus C and Regnell, Bj{\"o}rn and Wessl{\'e}n, Anders},
-  year = {2012},
-  publisher = {Springer Science \& Business Media}
-}
-% ============================================================================
-% BibTeX References — MCDM Chapter (PRIORIS Doctoral Thesis)
-% ============================================================================
-
-% ---------------------------------------------------------------------------
-% Foundational MCDM Methods
-% ---------------------------------------------------------------------------
 
 @book{hwang1981,
   author    = {Ching-Lai Hwang and Kwangsun Yoon},
@@ -1799,6 +1504,7 @@
 
 % NOTE: Citation key 'kumar2023' maintained for LaTeX compatibility.
 % Published in 2022 IEEE ICICT proceedings; cited as 2023 in some sources.
+
 @inproceedings{kumar2023,
   author    = {Arvind Kumar and Kamalpreet Kaur},
   title     = {{MCDM}-Based Framework to Solve Decision Making Problems in Software Engineering},
@@ -1824,13 +1530,6 @@
 % NOTE: The Korkmaz et al. (2025) reference below requires verification.
 % The exact DOI could not be confirmed via public databases. Please verify
 % against your personal library or replace with the correct entry.
-@article{korkmaz2025,
-  author    = {Serhat Korkmaz and Hasan Din{\c{c}}er and Serhat Y{\"u}ksel},
-  title     = {Multi-Criteria Decision-Making in Information Systems: A Systematic Review and Research Agenda},
-  journal   = {Information Systems Frontiers},
-  year      = {2025},
-  note      = {Early access. \textbf{Verify DOI.}}
-}
 
 @article{metropolis1949monte,
   title={The Monte Carlo Method},
@@ -1839,7 +1538,8 @@
   volume={44},
   number={247},
   pages={335--341},
-  year={1949}
+  year={1949},
+  doi       = {10.1080/01621459.1949.10483310},
 }
 
 @article{hertz1964risk,
@@ -1865,7 +1565,8 @@
   author={Robert, Christian P. and Casella, George},
   edition={2},
   year={2004},
-  publisher={Springer}
+  publisher={Springer},
+  doi       = {10.1007/978-0-387-21617-8},
 }
 
 @book{pmi2017pmbok,
@@ -1931,100 +1632,6 @@
   pages={606--614},
   year={2013}
 }
-@article{metropolis1949,
-  title={The Monte Carlo Method},
-  author={Metropolis, Nicholas and Ulam, Stanislaw},
-  journal={Journal of the American Statistical Association},
-  volume={44},
-  number={247},
-  pages={335--341},
-  year={1949}
-}
-
-@article{hertz1964,
-  title={Risk Analysis in Capital Investment},
-  author={Hertz, David B.},
-  journal={Harvard Business Review},
-  volume={42},
-  number={1},
-  pages={95--106},
-  year={1964}
-}
-
-@book{vose2008,
-  title={Risk Analysis: A Quantitative Guide},
-  author={Vose, David},
-  year={2008},
-  publisher={Wiley}
-}
-
-@book{robert2004,
-  title={Monte Carlo Statistical Methods},
-  author={Robert, Christian P. and Casella, George},
-  year={2004},
-  publisher={Springer}
-}
-
-@book{rubinstein2016,
-  title={Simulation and the Monte Carlo Method},
-  author={Rubinstein, Reuven Y. and Kroese, Dirk P.},
-  year={2016},
-  publisher={Wiley}
-}
-
-@book{PMI2017,
-  title={A Guide to the Project Management Body of Knowledge (PMBOK Guide)},
-  author={{Project Management Institute}},
-  year={2017},
-  edition={6},
-  publisher={PMI}
-}
-
-@book{kerzner2009,
-  title={Project Management: A Systems Approach to Planning, Scheduling, and Controlling},
-  author={Kerzner, Harold},
-  year={2009},
-  publisher={Wiley}
-}
-
-@article{kwakingall2007,
-  title={Exploring Monte Carlo Simulation Applications for Project Management},
-  author={Kwak, Young Hoon and Ingall, Lawrence},
-  journal={IEEE Engineering Management Review},
-  volume={35},
-  number={2},
-  pages={114--115},
-  year={2007}
-}
-
-@article{fenton1999,
-  title={A Critique of Software Defect Prediction Models},
-  author={Fenton, Norman and Neil, Martin},
-  journal={IEEE Transactions on Software Engineering},
-  volume={25},
-  number={5},
-  pages={675--689},
-  year={1999}
-}
-
-@article{jorgensen2004,
-  title={A Review of Studies on Expert Estimation of Software Development Effort},
-  author={J{\o}rgensen, Magne},
-  journal={Journal of Systems and Software},
-  volume={70},
-  number={1},
-  pages={37--60},
-  year={2004}
-}
-
-@article{uzzafer2013,
-  title={A Simulation Model for Strategic Management Process of Software Projects},
-  author={Uzzafer, Mustafa},
-  journal={Simulation Modelling Practice and Theory},
-  volume={39},
-  pages={156--169},
-  year={2013}
-}
 
 @book{vacanti2015,
   title={Actionable Agile Metrics for Predictability},
@@ -2039,17 +1646,6 @@
   year={2016},
   publisher={Blue Hole Press}
 }
-
-@article{gneiting2007,
-  title={Strictly Proper Scoring Rules, Prediction, and Estimation},
-  author={Gneiting, Tilmann and Raftery, Adrian},
-  journal={Journal of the American Statistical Association},
-  volume={102},
-  number={477},
-  pages={359--378},
-  year={2007}
-}
-% References for Chapter: Markov Chains in Software Processes
 
 @article{Boulas2025,
   author  = {Boulas, K. and Dounias, G. and Papadopoulos, C.},
@@ -2247,17 +1843,6 @@
   url     = {https://doi.org/10.1016/j.infsof.2022.107128}
 }
 
-@article{PachoulyEtAl2022,
-  author  = {Pachouly, J. and Ahirrao, S. and Kotecha, K. and Selvachandran, G. and Abraham, A.},
-  title   = {A systematic literature review on software defect prediction using artificial intelligence: Datasets, Data Validation Methods, Approaches, and Tools},
-  journal = {Engineering Applications of Artificial Intelligence},
-  volume  = {111},
-  pages   = {104773},
-  year    = {2022},
-  doi     = {10.1016/j.engappai.2022.104773},
-  url     = {https://doi.org/10.1016/j.engappai.2022.104773}
-}
-
 @article{WangEtAl2020,
   author  = {Wang, S. and Liu, T. and Nam, J. and Tan, L.},
   title   = {Deep Semantic Feature Learning for Software Defect Prediction},
@@ -2325,7 +1910,8 @@
   volume  = {1},
   pages   = {1--16},
   year    = {2015},
-  url     = {http://ilkom.cs.ui.ac.id/journal/index.php/jise/article/view/14}
+  url     = {http://ilkom.cs.ui.ac.id/journal/index.php/jise/article/view/14},
+  doi       = {10.13052/jise.v1i1.14},
 }
 
 @article{MajdEtAl2020,
@@ -2401,6 +1987,7 @@
   doi     = {10.1007/s00500-022-07738-w},
   url     = {https://doi.org/10.1007/s00500-022-07738-w}
 }
+
 @article{Thondalapally2025,
   author  = {Thondalapally, K.},
   title   = {Event-Driven Architectures: The Foundation of Modern Distributed Systems},
@@ -2540,15 +2127,6 @@
   url     = {https://doi.org/10.37745/ejcsit.2013/vol13n422434}
   }
 
-@article{Kubrak2021PPM,
-  author  = {Kubrak, K. and Milani, F. and Nolte, A. and Dumas, M.},
-  title   = {Prescriptive process monitoring: Quo vadis?},
-  journal = {PeerJ Computer Science},
-  volume  = {8},
-  year    = {2021},
-  doi     = {10.7717/peerj-cs.1097}
-}
-
 @inproceedings{ShoushDumas2021CA,
   author    = {Shoush, M. and Dumas, M.},
   title     = {Prescriptive Process Monitoring Under Resource Constraints: A Causal Inference Approach},
@@ -2685,6 +2263,7 @@
   year    = {2025},
   doi     = {10.1007/s10270-025-01318-w}
 }
+
 @book{cooper2002portfolio,
 title={Portfolio Management for New Product Development},
 author={Cooper, Robert G. and Edgett, Scott J. and Kleinschmidt, Elko J.},
@@ -2704,13 +2283,6 @@ title={Portfolio Selection},
 author={Markowitz, Harry},
 journal={Journal of Finance},
 year={1952}
-}
-
-@book{saaty1980analytic,
-title={The Analytic Hierarchy Process},
-author={Saaty, Thomas L.},
-year={1980},
-publisher={McGraw-Hill}
 }
 
 @book{hwang1981topsis,
@@ -2852,12 +2424,6 @@ author = {Januszko-Szakiel, Anna and others},
 title = {Infobrokering project management using Theory of Constraints},
 year = {2020}
 }
-@article{marquez2018predictive,
-  title={Predictive monitoring of business processes: a survey},
-  author={Márquez-Chamorro, Alejandro and others},
-  journal={IEEE Transactions on Services Computing},
-  year={2018}
-}
 
 @article{verenich2018remaining,
   title={Remaining time prediction in business processes},
@@ -2934,46 +2500,6 @@ year = {2020}
   year={2016}
 }
 
-@inproceedings{diFrancescomarino2018,
-  title={Predictive process monitoring methods: which one suits me best?},
-  author={Di Francescomarino, Chiara and others},
-  booktitle={Business Process Management (BPM)},
-  year={2018}
-}
-
-  title={Prescriptive Process Monitoring: A Systematic Literature Review},
-  author={Kubrak, Jan and others},
-  journal={Information Systems},
-  year={2022}
-}
-
-@article{weinzierl2020,
-  title={Prescriptive Business Process Monitoring for Next Best Action Recommendation},
-  author={Weinzierl, Stefan and others},
-  journal={Decision Support Systems},
-  year={2020}
-}
-
-@inproceedings{fahrenkrog2022,
-  title={Cost-aware prescriptive process monitoring with alarm-based interventions},
-  author={Fahrenkrog-Petersen, Simon and others},
-  booktitle={International Conference on Business Process Management},
-  year={2022}
-}
-
-@article{shoush2022,
-  title={Prescriptive process monitoring under resource constraints using causal inference},
-  author={Shoush, Ahmed and Dumas, Marlon},
-  journal={Information Systems},
-  year={2022}
-}
-
-@inproceedings{park2022,
-  title={Action-oriented process mining},
-  author={Park, Gwang and van der Aalst, Wil M. P.},
-  booktitle={International Conference on Business Process Management},
-  year={2022}
-}
 @incollection{Basili1994,
   author = {Basili, Victor and Caldiera, Gianluigi and Rombach, H. Dieter},
   title = {The Goal Question Metric Approach},
@@ -3017,27 +2543,6 @@ year = {2020}
   year = {2020}
 }
 
-@book{Wohlin2012,
-  author = {Wohlin, Claes and Runeson, Per},
-  title = {Experimentation in Software Engineering},
-  year = {2012},
-  publisher = {Springer}
-}
-
-@book{Wohlin2024,
-  author = {Wohlin, Claes and Runeson, Per},
-  title = {Experimentation in Software Engineering},
-  year = {2024},
-  publisher = {Springer}
-}
-
-@article{Basili1986,
-  author = {Basili, Victor and Selby, Richard and Hutchens, David},
-  title = {Experimentation in Software Engineering},
-  journal = {IEEE Transactions on Software Engineering},
-  year = {1986}
-}
-
 @article{Runeson2009,
   author = {Runeson, Per and H{\"o}st, Martin},
   title = {Guidelines for conducting and reporting case study research},
@@ -3064,7 +2569,8 @@ year = {2020}
   volume={102},
   number={477},
   pages={359--378},
-  year={2007}
+  year={2007},
+  doi       = {10.1198/016214506000001437},
 }
 
 @book{coles2001introduction,
@@ -3072,7 +2578,8 @@ year = {2020}
   author={Coles, Stuart},
   publisher={Springer},
   series={Springer Series in Statistics},
-  year={2001}
+  year={2001},
+  doi       = {10.1007/978-1-4612-1694-8},
 }
 
 @article{kaplan1958nonparametric,
@@ -3082,7 +2589,8 @@ year = {2020}
   volume={53},
   number={282},
   pages={457--481},
-  year={1958}
+  year={1958},
+  doi       = {10.1080/01621459.1958.10501452},
 }
 
 @book{klein2003survival,
@@ -3090,7 +2598,8 @@ year = {2020}
   author={Klein, John P. and Moeschberger, Melvin L.},
   edition={2nd},
   publisher={Springer},
-  year={2003}
+  year={2003},
+  doi       = {10.1007/b97300},
 }
 
 @article{anderson1957statistical,
@@ -3100,7 +2609,8 @@ year = {2020}
   volume={28},
   number={1},
   pages={89--110},
-  year={1957}
+  year={1957},
+  doi       = {10.1214/aoms/1177707039},
 }
 
 @article{darroch1965quasi,
@@ -3110,7 +2620,8 @@ year = {2020}
   volume={2},
   number={1},
   pages={88--100},
-  year={1965}
+  year={1965},
+  doi       = {10.2307/3211876},
 }
 
 @inproceedings{kuleshov2018calibrated,
@@ -3118,7 +2629,8 @@ year = {2020}
   author={Kuleshov, Volodymyr and Fenner, Nathan and Ermon, Stefano},
   booktitle={Proceedings of the 35th International Conference on Machine Learning (ICML)},
   pages={2796--2804},
-  year={2018}
+  year={2018},
+  doi       = {10.48550/arXiv.1807.00263},
 }
 
 @inproceedings{naeini2015obtaining,
@@ -3126,7 +2638,8 @@ year = {2020}
   author={Naeini, Mahdi Pakdaman and Cooper, Gregory F. and Hauskrecht, Milos},
   booktitle={Proceedings of the 29th AAAI Conference on Artificial Intelligence},
   pages={2901--2907},
-  year={2015}
+  year={2015},
+  doi       = {10.1609/aaai.v29i1.9602},
 }
 
 @article{bose2013trace,
@@ -3148,7 +2661,8 @@ year = {2020}
   volume={37},
   number={2},
   pages={337--355},
-  year={2013}
+  year={2013},
+  doi       = {10.25300/misq/2013/37.2.01},
 }
 
 @article{kampenes2007systematic,
@@ -3158,7 +2672,8 @@ year = {2020}
   volume={49},
   number={11--12},
   pages={1073--1086},
-  year={2007}
+  year={2007},
+  doi       = {10.1016/j.infsof.2007.02.015},
 }
 
 @article{RoggeSolti2015NonMarkovianSPN,
@@ -3185,6 +2700,7 @@ year = {2020}
   doi          = {10.1007/s10664-021-09999-9},
   url          = {https://doi.org/10.1007/s10664-021-09999-9}
 }
+
 @inproceedings{Livshits2005DynaMine,
   author       = {Livshits, Benjamin and Zimmermann, Thomas},
   title        = {DynaMine: finding common error patterns by mining software revision histories},
@@ -3196,6 +2712,7 @@ year = {2020}
   doi          = {10.1145/1081706.1081754},
   url          = {https://doi.org/10.1145/1081706.1081754}
 }
+
 @inproceedings{Zimmermann2005MiningVersionHistories,
   author       = {Zimmermann, Thomas and Weißgerber, Peter and Diehl, Stephan and Zeller, Andreas},
   title        = {Mining version histories to guide software changes},
@@ -3206,6 +2723,7 @@ year = {2020}
   doi          = {10.1109/ICSE.2004.1317478},
   url          = {https://doi.org/10.1109/ICSE.2004.1317478}
 }
+
 @inproceedings{Zimmermann2007PredictingDefectsDependencies,
   author       = {Zimmermann, Thomas and Nagappan, Nachiappan and Gall, Harald and Murphy, Brendan},
   title        = {Predicting defects for Eclipse},
@@ -3216,6 +2734,7 @@ year = {2020}
   doi          = {10.1109/PROMISE.2007.10},
   url          = {https://doi.org/10.1109/PROMISE.2007.10}
 }
+
 @article{Zimmermann2009CrossProjectDefectPrediction,
   author       = {Zimmermann, Thomas and Nagappan, Nachiappan and Gall, Harald and Giger, Emanuel and Murphy, Brendan},
   title        = {Cross-project defect prediction: A large scale experiment on data vs. domain vs. process},
@@ -3242,6 +2761,7 @@ year = {2020}
   url          = {https://doi.org/10.1007/978-3-031-07472-1_4},
   isbn         = {978-3-031-07472-1}
 }
+
 @article{Rozinat2009SimulationModelsProcessMining,
   author       = {Rozinat, Anne and Mans, Ronny and Song, Minseok and van der Aalst, Wil M. P.},
   title        = {Discovering simulation models},
@@ -3265,6 +2785,7 @@ year = {2020}
   doi          = {10.1109/ICSSP.2019.00012},
   url          = {https://doi.org/10.1109/ICSSP.2019.00012}
 }
+
 @inproceedings{Caldeira2019AssessingSoftwareTeams,
   author       = {Caldeira, Jo{\~a}o and Abreu, Fernando Brito e and Reis, Jos{\'e} and Cardoso, Jorge},
   title        = {Assessing Software Development Teams' Efficiency using Process Mining},
@@ -3276,6 +2797,7 @@ year = {2020}
   url          = {https://doi.org/10.1109/ICPM.2019.00020},
   address      = {Aachen, Germany}
 }
+
 @article{Mannhardt2016BalancedConformance,
   author       = {Mannhardt, Felix and Leoni, Massimiliano and Reijers, Hajo A. and van der Aalst, Wil M. P.},
   title        = {Balanced multi-perspective checking of process conformance},
@@ -3288,6 +2810,7 @@ year = {2020}
   doi          = {10.1007/s00607-015-0441-1},
   url          = {https://doi.org/10.1007/s00607-015-0441-1}
 }
+
 @article{Talekar2020DecisionTreeRandomForest,
   author       = {Talekar, Bhushan},
   title        = {A Detailed Review on Decision Tree and Random Forest},
@@ -3300,6 +2823,7 @@ year = {2020}
   doi          = {10.21786/bbrc/13.14/57},
   url          = {https://doi.org/10.21786/bbrc/13.14/57}
 }
+
 @article{@article{Bentejac2021ComparativeGradientBoosting,
   author       = {Bent{\'e}jac, C{\'e}dric and Cs{\"o}rg{\H{o}}, Anna and Mart{\'\i}nez-Mu{\~n}oz, Gonzalo},
   title        = {A comparative analysis of gradient boosting algorithms},
@@ -3312,18 +2836,7 @@ year = {2020}
   doi          = {10.1007/s10462-020-09896-5},
   url          = {https://doi.org/10.1007/s10462-020-09896-5}
 }
-@article{Bentejac2021ComparativeGradientBoosting,
-  author       = {Bent{\'e}jac, C{\'e}dric and Cs{\"o}rg{\H{o}}, Anna and Mart{\'\i}nez-Mu{\~n}oz, Gonzalo},
-  title        = {A comparative analysis of gradient boosting algorithms},
-  journal      = {Artificial Intelligence Review},
-  volume       = {54},
-  number       = {3},
-  pages        = {1937--1967},
-  year         = {2021},
-  publisher    = {Springer},
-  doi          = {10.1007/s10462-020-09896-5},
-  url          = {https://doi.org/10.1007/s10462-020-09896-5}
-}
+
 @article{kochhar2019moving,
   title={Moving from closed to open source: Observations from six transitioned projects to GitHub},
   author={Kochhar, Pavneet Singh and Kalliamvakou, Eirini and Nagappan, Nachiappan and Zimmermann, Thomas and Bird, Christian},
@@ -3332,8 +2845,10 @@ year = {2020}
   number={9},
   pages={1838--1856},
   year={2019},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi       = {10.1109/TSE.2019.2937025},
 }
+
 @article{Dixit2021,
   author    = {Dixit, Sudhir G. and Veri, Francesco and others},
   title     = {Event Log Preprocessing for Process Mining: A Review},
@@ -3345,6 +2860,7 @@ year = {2020}
   publisher = {MDPI},
   doi       = {10.3390/app112210556}
 }
+
 @book{HumbleFarley2010,
   author    = {Humble, Jez and Farley, David},
   title     = {Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation},
@@ -3352,6 +2868,7 @@ year = {2020}
   year      = {2010},
   isbn      = {978-0321601919}
 }
+
 @incollection{vanderAalst2009PAIS,
   author    = {van der Aalst, Wil M. P.},
   title     = {Process-Aware Information Systems: Lessons to Be Learned from Process Mining},
@@ -3364,13 +2881,6 @@ year = {2020}
   doi       = {10.1007/978-3-642-00899-3_1}
 }
 
-@book{vanderAalst2011PM,
-  author    = {van der Aalst, Wil M. P.},
-  title     = {Process Mining: Discovery, Conformance and Enhancement of Business Processes},
-  publisher = {Springer-Verlag},
-  year      = {2011},
-  isbn      = {978-3-642-19344-6}
-}
 @inproceedings{lemos2011using,
   author    = {Lemos, Angel Mart{\'\i}nez and Sabino, Celso C. and Lima, Ricardo M. F. and van der Aalst, Wil M. P.},
   title     = {Using Process Mining in Software Development Process Management: A Case Study},
@@ -3380,6 +2890,7 @@ year = {2020}
   publisher = {IEEE},
   url       = {https://ieeexplore.ieee.org/abstract/document/6083858}
 }
+
 @article{pachouly2022,
   author    = {Pachouly, Jalaj and Ahirrao, Swati and Kotecha, Ketan and Selvachandran, Ganeshsree and Abraham, Ajith},
   title     = {A Systematic Literature Review on Software Defect Prediction Using Artificial Intelligence: Datasets, Data Validation Methods, Approaches, and Tools},
@@ -3390,6 +2901,7 @@ year = {2020}
   doi       = {10.1016/j.engappai.2022.104773},
   publisher = {Elsevier}
 }
+
 @article{kotti2023,
   author    = {Kotti, Zoe and Galanopoulou, Rafaila and Spinellis, Diomidis},
   title     = {Machine Learning for Software Engineering: A Tertiary Study},
@@ -3401,6 +2913,7 @@ year = {2020}
   doi       = {10.1145/3572905},
   publisher = {ACM}
 }
+
 @article{breiman2001random,
   author    = {Breiman, Leo},
   title     = {Random Forests},
@@ -3412,6 +2925,7 @@ year = {2020}
   doi       = {10.1023/A:1010933404324},
   publisher = {Springer}
 }
+
 @inproceedings{chen2016xgboost,
   author    = {Chen, Tianqi and Guestrin, Carlos},
   title     = {{XGBoost}: A Scalable Tree Boosting System},
@@ -3430,6 +2944,7 @@ year = {2020}
   publisher = {Springer},
   doi       = {10.1007/978-0-387-84858-7}
 }
+
 @inproceedings{lundberg2017unified,
   author    = {Lundberg, Scott M. and Lee, Su-In},
   title     = {A Unified Approach to Interpreting Model Predictions},
@@ -3437,6 +2952,7 @@ year = {2020}
   pages     = {4765--4774},
   year      = {2017}
 }
+
 @article{tashman2000out,
   author    = {Tashman, Leonard J.},
   title     = {Out-of-Sample Tests of Forecasting Accuracy: An Analysis and Review},
@@ -3448,6 +2964,7 @@ year = {2020}
   doi       = {10.1016/S0169-2070(00)00065-0},
   publisher = {Elsevier}
 }
+
 @article{bergstra2012random,
   author    = {Bergstra, James and Bengio, Yoshua},
   title     = {Random Search for Hyper-Parameter Optimization},
@@ -3457,6 +2974,7 @@ year = {2020}
   year      = {2012},
   url       = {https://jmlr.org/papers/v13/bergstra12a.html}
 }
+
 @article{shannon1948mathematical,
   author    = {Shannon, Claude E.},
   title     = {A Mathematical Theory of Communication},
@@ -3479,6 +2997,7 @@ year = {2020}
   doi       = {10.1080/07421222.2022.2096544},
   publisher = {Taylor \& Francis}
 }
+
 @article{gonzalezbarahona2014reproducibility,
   author    = {Gonz{\'a}lez-Barahona, Jes{\'u}s M. and Robles, Gregorio},
   title     = {On the Reproducibility of Empirical Software Engineering
@@ -3492,6 +3011,7 @@ year = {2020}
   doi       = {10.1007/s10664-011-9181-9},
   publisher = {Springer}
 }
+
 @book{little2011factory,
   author    = {Little, John D. C. and Graves, Stephen C.},
   title     = {Little's Law},
@@ -3502,6 +3022,7 @@ year = {2020}
   publisher = {Springer},
   doi       = {10.1007/978-1-4614-0519-0_5}
 }
+
 @article{billingsley1961statistical,
   author    = {Billingsley, Patrick},
   title     = {Statistical Inference for {M}arkov Processes},
@@ -3513,6 +3034,7 @@ year = {2020}
   doi       = {10.1214/aoms/1177705136},
   publisher = {Institute of Mathematical Statistics}
 }
+
 @article{lecuyer2017random,
   author    = {L'Ecuyer, Pierre and Munger, David and Oreshkin, Boris and Simard, Richard},
   title     = {Random Numbers for Parallel Computers: Requirements and Methods, with Emphasis on {GPU}s},
@@ -3522,14 +3044,6 @@ year = {2020}
   year      = {2017},
   doi       = {10.1016/j.matcom.2016.05.005},
   publisher = {Elsevier}
-}
-@techreport{kitchenham2007guidelines,
-  author      = {Kitchenham, Barbara and Charters, Stuart},
-  title       = {Guidelines for Performing Systematic Literature Reviews
-                 in Software Engineering},
-  institution = {Keele University and Durham University},
-  year        = {2007},
-  number      = {EBSE-2007-01}
 }
 
 @inproceedings{wohlin2014guidelines,
@@ -3541,46 +3055,20 @@ year = {2020}
   pages     = {1--10},
   year      = {2014},
   publisher = {ACM},
-  doi       = {10.1145/2601248.2601268}
+  doi       = {10.1145/2601248.2601268},
+  note      = {Primary publication of the snowballing guidelines; extended
+               journal version in Empirical Software Engineering 19(6), 2014}
 }
 
-@article{dyba2008empirical,
-  author    = {Dyb{\aa}, Tore and Dings{\o}yr, Torgeir},
-  title     = {Empirical Studies of Agile Software Development:
-               A Systematic Review},
-  journal   = {Information and Software Technology},
-  volume    = {50},
-  number    = {9--10},
-  pages     = {833--859},
-  year      = {2008},
-  doi       = {10.1016/j.infsof.2008.01.006},
-  publisher = {Elsevier}
-}
-
-@article{page2021prisma,
-  author    = {Page, Matthew J. and McKenzie, Joanne E. and Bossuyt,
-               Patrick M. and Boutron, Isabelle and Hoffmann, Tammy C.
-               and Mulrow, Cynthia D. and others},
-  title     = {The {PRISMA} 2020 Statement: An Updated Guideline for
-               Reporting Systematic Reviews},
-  journal   = {BMJ},
-  volume    = {372},
-  pages     = {n71},
-  year      = {2021},
-  doi       = {10.1136/bmj.n71}
-}
-@book{anderson2010kanban,
-  author    = {Anderson, David J.},
-  title     = {Kanban: Successful Evolutionary Change for Your Technology Business},
-  year      = {2010},
-  publisher = {Blue Hole Press}
-}
-
-@book{magennis2015forecasting,
+@book{magennis2011forecasting,
   author    = {Magennis, Troy},
-  title     = {Forecasting and Simulating Software Development Projects: Effective Modeling of Kanban and Scrum Projects Using Monte Carlo Simulation},
-  year      = {2015},
-  publisher = {Leanpub}
+  title     = {Forecasting and Simulating Software Development Projects: Effective Modeling of Kanban \& Scrum Projects using Monte-carlo Simulation},
+  year      = {2011},
+  month     = oct,
+  publisher = {CreateSpace Independent Publishing Platform},
+  isbn      = {978-1-4664-5483-5},
+  doi       = {10.5555/2132580},
+  url       = {https://dl.acm.org/doi/abs/10.5555/2132580}
 }
 
 @book{vacanti2020when,
@@ -3589,6 +3077,7 @@ year = {2020}
   year      = {2020},
   publisher = {Leanpub}
 }
+
 @article{little1961proof,
   author    = {Little, John D. C.},
   title     = {A Proof for the Queuing Formula: {$L = \lambda W$}},
@@ -3600,6 +3089,7 @@ year = {2020}
   doi       = {10.1287/opre.9.3.383},
   publisher = {INFORMS}
 }
+
 @inproceedings{ahmad2013kanban,
   author    = {Ahmad, Muhammad Ovais and Markkula, Jouni and Oivo, Markku},
   title     = {Kanban in Software Development: A Systematic Literature Review},
@@ -3624,16 +3114,20 @@ year = {2020}
   author    = {Savage, Sam L.},
   title     = {The Flaw of Averages: Why We Underestimate Risk in the Face of Uncertainty},
   year      = {2009},
-  publisher = {John Wiley \& Sons}
+  publisher = {John Wiley \& Sons},
+  doi       = {10.1002/9780470560456},
 }
+
 @book{hyndman2021forecasting,
   author    = {Hyndman, Rob J. and Athanasopoulos, George},
   title     = {Forecasting: Principles and Practice},
   edition   = {3rd},
   year      = {2021},
   publisher = {OTexts},
-  url       = {https://otexts.com/fpp3/}
+  url       = {https://otexts.com/fpp3/},
+  doi       = {10.5281/zenodo.4454749},
 }
+
 @misc{syriani2023,
   author       = {Eugene Syriani and Istvan David and Gauransh Kumar},
   title        = {Assessing the Ability of ChatGPT to Screen Articles for Systematic Reviews},
@@ -3821,7 +3315,8 @@ year = {2020}
   booktitle = {Proceedings of the 30th International Conference on Software
                Engineering and Knowledge Engineering (SEKE 2018)},
   year      = {2018},
-  doi       = {10.18293/SEKE2018-033}
+  doi       = {10.18293/SEKE2018-033},
+  url       = {https://doi.org/10.18293/SEKE2018-033}
 }
 
 @article{benmesmia2021,
@@ -4077,18 +3572,6 @@ year = {2020}
   doi       = {10.1145/2597073.2597074}
 }
 
-@inproceedings{dabic2021sampling,
-  author    = {Dabic, Ozren and Aghajani, Emad and Bavota, Gabriele},
-  title     = {Sampling Projects in {GitHub} for {MSR} Studies},
-  booktitle = {Proceedings of the 18th International Conference on
-               Mining Software Repositories (MSR)},
-  pages     = {560--564},
-  publisher = {IEEE},
-  year      = {2021},
-  doi       = {10.1109/MSR52588.2021.00074},
-  note      = {Same paper as \texttt{seart2021}; aliased for
-               in-text variation}
-}
 @inproceedings{montgomery2022jira,
   author    = {Montgomery, Lloyd and L{\"u}ders, Clara and Maalej, Walid},
   title     = {An Alternative Issue Tracking Dataset of Public {Jira}
@@ -4108,7 +3591,7 @@ year = {2020}
   howpublished = {\url{https://docs.github.com/en/rest}},
   note         = {Accessed: 2024}
 }
- 
+
 @inproceedings{seart2021,
   author    = {Dabic, Ozren and Aghajani, Emad and Bavota, Gabriele},
   title     = {Sampling Projects in {GitHub} for {MSR} Studies},
@@ -4119,7 +3602,7 @@ year = {2020}
   year      = {2021},
   doi       = {10.1109/MSR52588.2021.00074}
 }
- 
+
 @misc{oliveira2025replication,
   author       = {Oliveira, Rodrigo Almeida de},
   title        = {{PATHCAST} Replication Package: Data Collection
@@ -4129,6 +3612,7 @@ year = {2020}
   note         = {DOI a ser atribuído após depósito.
                   \url{https://zenodo.org/records/XXXXXXX}}
 }
+
 @article{hanley1982meaning,
   author  = {Hanley, James A. and McNeil, Barbara J.},
   title   = {The Meaning and Use of the Area Under a Receiver Operating
@@ -4168,138 +3652,6 @@ year = {2020}
   note    = {Preprint / under review at time of cataloguing}
 }
 
-@inproceedings{cookwolf1995,
-  author    = {Cook, Jonathan E. and Wolf, Alexander L.},
-  title     = {Automating Process Discovery through Event-Data Analysis},
-  booktitle = {Proceedings of the 17th International Conference on
-               Software Engineering ({ICSE} '95)},
-  address   = {Seattle, WA, USA},
-  publisher = {ACM},
-  year      = {1995},
-  pages     = {73--82}
-}
-
-@article{cookwolf1998,
-  author  = {Cook, Jonathan E. and Wolf, Alexander L.},
-  title   = {Discovering Models of Software Processes from Event-Based
-             Data},
-  journal = {ACM Transactions on Software Engineering and Methodology},
-  volume  = {7},
-  number  = {3},
-  year    = {1998},
-  pages   = {215--249}
-}
-
-@article{taskprocess2019,
-  author  = {(Authors)},
-  title   = {Studying Task Processes for Improving Programmer
-             Productivity},
-  journal = {(Verify venue and authors)},
-  year    = {2019},
-  note    = {Verify full metadata before submission}
-}
-
-@article{devops2022,
-  author  = {(Authors)},
-  title   = {{DevOps} Workflow Verification and Duration Prediction
-             using Non-Markovian Stochastic {P}etri Nets},
-  journal = {(Verify venue)},
-  year    = {2022},
-  note    = {Verify full metadata before submission}
-}
-
-@article{agilerisk2020,
-  author  = {(Authors)},
-  title   = {Assessing the Risk of Software Development in Agile
-             Methodologies Using Simulation},
-  journal = {(Verify venue)},
-  year    = {2020},
-  note    = {Verify full metadata before submission}
-}
-
-@article{jokwon2023,
-  author  = {Jo, (Initials) and Kwon, (Initials) and Kwon, (Initials)},
-  title   = {Exploring Collaboration Patterns in {G}it{H}ub Using
-             Discrete-Time {M}arkov Chain},
-  journal = {(Verify venue)},
-  year    = {2023},
-  note    = {Verify full author names and DOI}
-}
-
-@article{rlpr2023,
-  author  = {(Authors)},
-  title   = {Comparative Study of Reinforcement Learning in {G}it{H}ub
-             Pull Request Outcome Predictions},
-  journal = {(Verify venue)},
-  year    = {2023},
-  note    = {Verify full metadata before submission}
-}
-
-@article{leemans2025vlmc,
-  author  = {(Authors)},
-  title   = {Stochastic Conformance Checking based on Variable-Length
-             {M}arkov Chains},
-  journal = {Information Systems},
-  year    = {2025},
-  note    = {Verify full author list, volume, and page range}
-}
-
-@article{caldeiracm2022,
-  author  = {Caldeira, (Initials) and others},
-  title   = {Using Constraint Mining to Analyze Software Development
-             Processes},
-  journal = {(Verify venue)},
-  year    = {2022},
-  note    = {Verify full author list}
-}
-
-@article{simpt2022,
-  author  = {(Authors)},
-  title   = {{SIMPT}: Process Improvement Using Interactive Simulation
-             of Time-aware Process Trees},
-  journal = {(Verify venue)},
-  year    = {2022},
-  note    = {Verify full metadata before submission}
-}
-
-@article{refactoring2022,
-  author  = {Caldeira, (Initials) and others},
-  title   = {Unveiling Process Insights from Refactoring Practices},
-  journal = {Computer Standards and Interfaces},
-  year    = {2022},
-  note    = {Verify full author list, volume, and page range}
-}
-@article{jeon2015risk,
-  author  = {Jeon, (Initials) and others},
-  title   = {Probabilistic Approach to Predicting Risk in Software
-             Projects Using Software Repository Data},
-  journal = {(Verify venue)},
-  year    = {2015},
-  note    = {Supplementary / related to jeon2015; verify metadata}
-}
-
-@article{issuehandling2022,
-  author  = {(Authors)},
-  title   = {Predicting Issue Handling Process using Case Attributes
-             and Categorical Variable Encoding Techniques},
-  journal = {(Verify venue)},
-  year    = {2022},
-  note    = {Verify full metadata before submission}
-}
-
-@inproceedings{empiricalpm2020,
-  author    = {(Authors)},
-  title     = {(Empirical Process Mining Study in Software Engineering)},
-  booktitle = {Proceedings of the {IEEE} International Conference
-               (verify)},
-  year      = {2020},
-  note      = {Verify full metadata; placeholder key for IEEE 2020 entry}
-}
-
-% ---------------------------------------------------------------------
-% 7. Baskoro & Sunindyo, ICITEE 2019 (IEEE)
-%    Fonte: 11th ICITEE, Pattaya, Thailand, outubro 2019
-% ---------------------------------------------------------------------
 @inproceedings{baskoro2019,
   author       = {Baskoro, Sangaji and Sunindyo, Wikan Danar},
   title        = {Predicting Issue Handling Process Using Case
@@ -4325,6 +3677,7 @@ year = {2020}
   publisher = {IEEE},
   doi       = {10.1109/QUATIC.2016.051}
 }
+
 @article{dueenas2021grimoirelab,
   author  = {Due{\~n}as, Santiago and Cosentino, Valerio and
              Gonzalez-Barahona, Jesus M. and
@@ -4342,6 +3695,7 @@ year = {2020}
   url     = {https://doi.org/10.7717/peerj-cs.601}
 }
 %% Paper principal — ecossistema SmartSHARK (ICSE 2020 Demonstrations)
+
 @inproceedings{trautsch2020smartshark,
   author    = {Trautsch, Alexander and Trautsch, Fabian and Herbold, Steffen
                and Ledel, Benjamin and Grabowski, Jens},
@@ -4356,13 +3710,6 @@ year = {2020}
 }
 
 %% Dataset paper — MSR Mining Challenge 2022 (caso queira citar o dataset)
-@misc{trautsch2021smartshark-data,
-  author    = {Trautsch, Alexander and Trautsch, Fabian and Herbold, Steffen},
-  title     = {{MSR} Mining Challenge: The {SmartSHARK} Repository Mining Data},
-  year      = {2021},
-  howpublished = {arXiv preprint arXiv:2102.11540},
-  url       = {https://arxiv.org/abs/2102.11540}
-}
 
 @misc{gharchive2023,
   author       = {Grigorik, Ilya},
@@ -4372,6 +3719,7 @@ year = {2020}
   year         = {2012},
   note         = {Originally launched in 2012. Accessed: April 2026}
 }
+
 @article{munaiah2017reporeapers,
   author  = {Munaiah, Nuthan and Kroh, Steven and Cabrey, Craig and
              Nagappan, Meiyappan},

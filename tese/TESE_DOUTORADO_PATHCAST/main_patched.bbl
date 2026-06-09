@@ -400,18 +400,20 @@ Dispon{\'\i}vel em: \url{https://doi.org/10.1002/jrsm.1715}.}
   software development in agile methodologies using simulation.
 \emph{IEEE Access}, IEEE, v.~9, p. 135420--135435, 2021.}
 
+\bibitem[Magennis 2011]{magennis2011forecasting}
+\abntrefinfo{Magennis}{MAGENNIS}{2011}
+{MAGENNIS, T. \emph{Forecasting and Simulating Software Development Projects:
+  Effective Modeling of Kanban \& Scrum Projects using Monte-carlo Simulation}.
+  CreateSpace Independent Publishing Platform, 2011.
+ISBN 978-1-4664-5483-5. Dispon{\'\i}vel em:
+  \url{https://dl.acm.org/doi/abs/10.5555/2132580}.}
+
 \bibitem[Magennis 2015]{magennis2015}
-\abntrefinfo{Magennis}{MAGENNIS}{2015a}
+\abntrefinfo{Magennis}{MAGENNIS}{2015}
 {MAGENNIS, T. The economic impact of software development process choice:
   Cycle-time analysis and {Monte Carlo} simulation results. In:  \emph{2015
   48th Hawaii International Conference on System Sciences (HICSS)}. [S.l.]:
   IEEE, 2015. p. 5055--5064.}
-
-\bibitem[Magennis 2015]{magennis2015forecasting}
-\abntrefinfo{Magennis}{MAGENNIS}{2015b}
-{MAGENNIS, T. \emph{Forecasting and Simulating Software Development Projects:
-  Effective Modeling of Kanban and Scrum Projects Using Monte Carlo
-  Simulation}. [S.l.]: Leanpub, 2015.}
 
 \bibitem[Marquez-Chamorro, Resinas \& Ruiz-Cortes 2018]{marquezChamorro2018}
 \abntrefinfo{Marquez-Chamorro, Resinas \& Ruiz-Cortes}{MARQUEZ-CHAMORRO;
@@ -426,8 +428,8 @@ Dispon{\'\i}vel em: \url{https://doi.org/10.1002/jrsm.1715}.}
 {MASSITELA, I.; ASSUN{\c{C}}{\~A}O, J.; SANTOS, A.~R.; FERNANDES, P. A
   structured stochastic model for software project estimation in {Waterfall}
   models. In:  \emph{Proceedings of the 30th International Conference on
-  Software Engineering and Knowledge Engineering (SEKE 2018)}. [S.l.: s.n.],
-  2018.}
+  Software Engineering and Knowledge Engineering (SEKE 2018)}. [s.n.], 2018.
+  Dispon{\'\i}vel em: \url{https://doi.org/10.18293/SEKE2018-033}.}
 
 \bibitem[Mesmia, Escheikh \& Barkaoui 2021]{benmesmia2021}
 \abntrefinfo{Mesmia, Escheikh \& Barkaoui}{MESMIA; ESCHEIKH; BARKAOUI}{2021}
@@ -626,7 +628,9 @@ Dispon{\'\i}vel em: \url{https://doi.org/10.1109/32.328991}.}
 {WOHLIN, C. Guidelines for snowballing in systematic literature studies and a
   replication in software engineering. In:  \emph{Proceedings of the 18th
   International Conference on Evaluation and Assessment in Software Engineering
-  (EASE 2014)}. [S.l.]: ACM, 2014. p. 1--10.}
+  (EASE 2014)}. [S.l.]: ACM, 2014. p. 1--10. Primary publication of the
+  snowballing guidelines; extended journal version in Empirical Software
+  Engineering 19(6), 2014.}
 
 \bibitem[Wohlin et al. 2012]{wohlin2012experimentation}
 \abntrefinfo{Wohlin et al.}{WOHLIN et al.}{2012}

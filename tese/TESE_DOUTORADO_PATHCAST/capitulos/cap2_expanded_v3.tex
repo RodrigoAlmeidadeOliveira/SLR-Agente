@@ -699,13 +699,13 @@ threats within the constraints imposed by data availability.
 The intellectual bridge between MSR and process mining was established
 incrementally over two decades. Cook and Wolf~\cite{cook1998} are recognized as the pioneers of applying process discovery to software, though their work predates the formalization of ``process mining'' as a discipline. Working at the University of Colorado, they demonstrated that state-machine models could be automatically discovered from event-based data recorded during software builds, establishing the feasibility of treating software development as a process amenable to formal analysis.
 
-Rubin et al.~\cite{rubin2014process} proposed the first explicit framework
-for applying process mining to software development, identifying five
-dimensions of analysis: process model extraction, performance measurement,
-organizational mining, conformance checking, and decision mining. Their
-framework mapped traditional process mining capabilities to the software
-engineering domain, providing a conceptual bridge that subsequent research
-could extend.
+Rubin et al.~\cite{rubin2007} proposed an explicit framework---to the
+best of our knowledge, among the earliest named frameworks for software
+process mining---identifying five dimensions of analysis: process model
+extraction, performance measurement, organizational mining, conformance
+checking, and decision mining. Their framework mapped traditional process
+mining capabilities to the software engineering domain, providing a
+conceptual bridge that subsequent research could extend.
 
 Poncin et al.~\cite{poncin2011process} formalized the intersection by
 proposing a systematic methodology for mining software repositories with
@@ -1484,11 +1484,11 @@ function evaluated at the average input.
 This limitation motivates the transition from deterministic forecasting
 (single-point estimates derived from averages) to probabilistic
 forecasting based on Monte Carlo
-simulation~\cite{magennis2015forecasting, vacanti2020when}. Rather
+simulation~\cite{magennis2011forecasting, vacanti2020when}. Rather
 than predicting a single delivery date, probabilistic forecasting
 produces a distribution of possible outcomes, expressing forecasts as
 confidence intervals (e.g., ``85\% probability of completing 20 items
-by Sprint~12''). Magennis~\cite{magennis2015forecasting} demonstrated
+by Sprint~12''). Magennis~\cite{magennis2011forecasting} demonstrated
 that Monte Carlo simulation using historical throughput data produces
 calibrated forecasts with minimal computational cost, while
 Vacanti~\cite{vacanti2020when} extended this approach to portfolio-level
@@ -1510,7 +1510,7 @@ strategic metrics with demonstrated business impact.
 The PATHCAST method extends the probabilistic forecasting
 paradigm described above in two directions. First, it replaces the
 black-box throughput sampling used by
-Magennis~\cite{magennis2015forecasting} and
+Magennis~\cite{magennis2011forecasting} and
 Vacanti~\cite{vacanti2020when} with a process-aware Monte Carlo
 simulation that models individual state transitions via Markov chains,
 capturing state-specific variability rather than aggregating all
@@ -2342,12 +2342,12 @@ University of Colorado. Their work predates the formal establishment of
 contribution at the intersection of software engineering and what would
 later become process science.
 
-Rubin et al.~\cite{rubin2014process} proposed the first systematic
-framework for applying process mining to software engineering, identifying
+Rubin et al.~\cite{rubin2007} proposed a systematic framework for
+applying process mining to software engineering (ICSP 2007), identifying
 five analytical dimensions: process model extraction, performance
 measurement, organizational mining, conformance checking, and decision
 mining. While conceptual rather than empirical, their framework provided
-the intellectual scaffolding for subsequent research.
+early intellectual scaffolding for subsequent research in the domain.
 
 Poncin et al.~\cite{poncin2011process} advanced the field by proposing
 a methodology for combining data from multiple software repositories
@@ -2395,7 +2395,7 @@ independently of process mining, following two parallel traditions:
 Markov chain modeling and Monte Carlo simulation.
 
 \textbf{Markov Chains in Software Engineering.} Whittaker and
-Thomason~\cite{WhittakerThomason1994} proposed the seminal application of
+Thomason~\cite{whittaker1994} proposed the seminal application of
 Markov chains to software, modeling application states as Markov states
 and generating statistical test sequences from the transition matrix.
 Their ``usage model'' approach demonstrated the feasibility of Markov

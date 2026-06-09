@@ -1,0 +1,1046 @@
+{
+  "summary": {
+    "cited_total": 95,
+    "verified": 48,
+    "no_doi": 5,
+    "issues": 90,
+    "removed_placeholders": 13,
+    "removed_duplicates": 45,
+    "dois_added": 31,
+    "bib_entries_after": 337,
+    "title_mismatch": 31,
+    "other_issues": 42
+  },
+  "removed_placeholders": [
+    "korkmaz2025",
+    "taskprocess2019",
+    "devops2022",
+    "agilerisk2020",
+    "jokwon2023",
+    "rlpr2023",
+    "leemans2025vlmc",
+    "caldeiracm2022",
+    "simpt2022",
+    "refactoring2022",
+    "jeon2015risk",
+    "issuehandling2022",
+    "empiricalpm2020"
+  ],
+  "removed_duplicates": [
+    {
+      "removed": "vanderaalst2016",
+      "kept": [
+        "aalst2016process"
+      ],
+      "title": "processminingdatascienceinaction"
+    },
+    {
+      "removed": "Aalst2016DataScienceInAction",
+      "kept": [
+        "aalst2016process"
+      ],
+      "title": "processminingdatascienceinaction"
+    },
+    {
+      "removed": "vanderaalst2004alpha",
+      "kept": [
+        "AalstWeijtersMaruster2004"
+      ],
+      "title": "workflowminingdiscoveringprocessmodelsfromeventlogs"
+    },
+    {
+      "removed": "aalst2004workflow",
+      "kept": [
+        "AalstWeijtersMaruster2004"
+      ],
+      "title": "workflowminingdiscoveringprocessmodelsfromeventlogs"
+    },
+    {
+      "removed": "leemans2013",
+      "kept": [
+        "leemans2013discovering"
+      ],
+      "title": "discoveringblockstructuredprocessmodelsfromeventlogsaconstru"
+    },
+    {
+      "removed": "Leemans2013InductiveMiner",
+      "kept": [
+        "leemans2013discovering"
+      ],
+      "title": "discoveringblockstructuredprocessmodelsfromeventlogsaconstru"
+    },
+    {
+      "removed": "Augusto2019Benchmark",
+      "kept": [
+        "augusto2019"
+      ],
+      "title": "automateddiscoveryofprocessmodelsfromeventlogsreviewandbench"
+    },
+    {
+      "removed": "adriansyah2011",
+      "kept": [
+        "Adriansyah2011Alignments"
+      ],
+      "title": "conformancecheckingusingcostbasedfitnessanalysis"
+    },
+    {
+      "removed": "Burattin2022StreamingPM",
+      "kept": [
+        "burattin2022"
+      ],
+      "title": "streamingprocessmining"
+    },
+    {
+      "removed": "vanZelst2018StreamingDiscovery",
+      "kept": [
+        "vanzelst2018"
+      ],
+      "title": "eventstreambasedprocessdiscoveryusingabstractrepresentations"
+    },
+    {
+      "removed": "marquez2018predictive",
+      "kept": [
+        "marquezChamorro2018"
+      ],
+      "title": "predictivemonitoringofbusinessprocessesasurvey"
+    },
+    {
+      "removed": "Kubrak2021PPM",
+      "kept": [
+        "kubrak2022"
+      ],
+      "title": "prescriptiveprocessmonitoringquovadis"
+    },
+    {
+      "removed": "hassan2008",
+      "kept": [
+        "hassan2008road"
+      ],
+      "title": "theroadaheadforminingsoftwarerepositories"
+    },
+    {
+      "removed": "kagdi2007survey",
+      "kept": [
+        "kagdi2007"
+      ],
+      "title": "asurveyandtaxonomyofapproachesforminingsoftwarerepositoriesi"
+    },
+    {
+      "removed": "cookwolf1998",
+      "kept": [
+        "cook1998"
+      ],
+      "title": "discoveringmodelsofsoftwareprocessesfromeventbaseddata"
+    },
+    {
+      "removed": "vanderaalst2023lpm",
+      "kept": [
+        "Kampik2023LPMArXiv"
+      ],
+      "title": "largeprocessmodelsbusinessprocessmanagementintheageofgenerat"
+    },
+    {
+      "removed": "saaty1980analytic",
+      "kept": [
+        "saaty1980"
+      ],
+      "title": "theanalytichierarchyprocess"
+    },
+    {
+      "removed": "wohlin2012",
+      "kept": [
+        "wohlin2012experimentation"
+      ],
+      "title": "experimentationinsoftwareengineering"
+    },
+    {
+      "removed": "Wohlin2012",
+      "kept": [
+        "wohlin2012experimentation"
+      ],
+      "title": "experimentationinsoftwareengineering"
+    },
+    {
+      "removed": "Wohlin2024",
+      "kept": [
+        "wohlin2012experimentation"
+      ],
+      "title": "experimentationinsoftwareengineering"
+    },
+    {
+      "removed": "Basili1986",
+      "kept": [
+        "wohlin2012experimentation"
+      ],
+      "title": "experimentationinsoftwareengineering"
+    },
+    {
+      "removed": "kitchenham2007guidelines",
+      "kept": [
+        "kitchenham2007"
+      ],
+      "title": "guidelinesforperformingsystematicliteraturereviewsinsoftware"
+    },
+    {
+      "removed": "AdriansyahDongenAalst2012",
+      "kept": [
+        "AalstAdriansyah2012"
+      ],
+      "title": "replayinghistoryonprocessmodelsforconformancecheckingandperf"
+    },
+    {
+      "removed": "Mannhardt2016MultiPerspective",
+      "kept": [
+        "Mannhardt2016BalancedConformance"
+      ],
+      "title": "balancedmultiperspectivecheckingofprocessconformance"
+    },
+    {
+      "removed": "vanderAalst2011PM",
+      "kept": [
+        "Aalst2011ProcessMiningBook"
+      ],
+      "title": "processminingdiscoveryconformanceandenhancementofbusinesspro"
+    },
+    {
+      "removed": "metropolis1949",
+      "kept": [
+        "metropolis1949monte"
+      ],
+      "title": "themontecarlomethod"
+    },
+    {
+      "removed": "hertz1964",
+      "kept": [
+        "hertz1964risk"
+      ],
+      "title": "riskanalysisincapitalinvestment"
+    },
+    {
+      "removed": "vose2008",
+      "kept": [
+        "vose2008risk"
+      ],
+      "title": "riskanalysisaquantitativeguide"
+    },
+    {
+      "removed": "robert2004",
+      "kept": [
+        "robert2004monte"
+      ],
+      "title": "montecarlostatisticalmethods"
+    },
+    {
+      "removed": "PMI2017",
+      "kept": [
+        "pmi2017pmbok"
+      ],
+      "title": "aguidetotheprojectmanagementbodyofknowledgepmbokguide"
+    },
+    {
+      "removed": "fenton1999",
+      "kept": [
+        "fenton1999critique"
+      ],
+      "title": "acritiqueofsoftwaredefectpredictionmodels"
+    },
+    {
+      "removed": "jorgensen2004",
+      "kept": [
+        "jorgensen2004review"
+      ],
+      "title": "areviewofstudiesonexpertestimationofsoftwaredevelopmenteffor"
+    },
+    {
+      "removed": "kerzner2009",
+      "kept": [
+        "kerzner2009project"
+      ],
+      "title": "projectmanagementasystemsapproachtoplanningschedulingandcont"
+    },
+    {
+      "removed": "kwakingall2007",
+      "kept": [
+        "kwak2007exploring"
+      ],
+      "title": "exploringmontecarlosimulationapplicationsforprojectmanagemen"
+    },
+    {
+      "removed": "rubinstein2016",
+      "kept": [
+        "rubinstein2016simulation"
+      ],
+      "title": "simulationandthemontecarlomethod"
+    },
+    {
+      "removed": "uzzafer2013",
+      "kept": [
+        "uzzafer2013simulation"
+      ],
+      "title": "asimulationmodelforstrategicmanagementprocessofsoftwareproje"
+    },
+    {
+      "removed": "anderson2010kanban",
+      "kept": [
+        "anderson2016"
+      ],
+      "title": "kanbansuccessfulevolutionarychangeforyourtechnologybusiness"
+    },
+    {
+      "removed": "gneiting2007",
+      "kept": [
+        "gneiting2007strictly"
+      ],
+      "title": "strictlyproperscoringrulespredictionandestimation"
+    },
+    {
+      "removed": "PachoulyEtAl2022",
+      "kept": [
+        "pachouly2022"
+      ],
+      "title": "asystematicliteraturereviewonsoftwaredefectpredictionusingar"
+    },
+    {
+      "removed": "Bentejac2021ComparativeGradientBoosting",
+      "kept": [
+        "@article{Bentejac2021ComparativeGradientBoosting"
+      ],
+      "title": "acomparativeanalysisofgradientboostingalgorithms"
+    },
+    {
+      "removed": "dyba2008empirical",
+      "kept": [
+        "dyba2008"
+      ],
+      "title": "empiricalstudiesofagilesoftwaredevelopmentasystematicreview"
+    },
+    {
+      "removed": "page2021prisma",
+      "kept": [
+        "page2021"
+      ],
+      "title": "theprisma"
+    },
+    {
+      "removed": "cookwolf1995",
+      "kept": [
+        "cook1995"
+      ],
+      "title": "automatingprocessdiscoverythrougheventdataanalysis"
+    },
+    {
+      "removed": "trautsch2021smartshark-data",
+      "kept": [
+        "msr2024"
+      ],
+      "title": "msr"
+    },
+    {
+      "removed": "dabic2021sampling",
+      "kept": [
+        "seart2021"
+      ],
+      "title": "samplingprojectsingithub"
+    }
+  ],
+  "dois_added": [
+    "klein2003survival",
+    "magennis2015forecasting",
+    "burattin2022",
+    "hevner2004",
+    "coles2001introduction",
+    "marquezChamorro2018",
+    "kubrak2022",
+    "tax2017",
+    "anderson1957statistical",
+    "wohlin2012experimentation",
+    "metropolis1949monte",
+    "aalst2016process",
+    "cook1998",
+    "darroch1965quasi",
+    "hyndman2021forecasting",
+    "gneiting2007strictly",
+    "kochhar2019moving",
+    "petersen2015",
+    "peffers2007",
+    "robert2004monte",
+    "naeini2015obtaining",
+    "leemans2013discovering",
+    "kuleshov2018calibrated",
+    "savage2009flaw",
+    "kagdi2007",
+    "gregor2013positioning",
+    "hassan2008road",
+    "kampenes2007systematic",
+    "Wahono2015",
+    "augusto2019",
+    "kaplan1958nonparametric"
+  ],
+  "results": [
+    {
+      "key": "Caldeira2019AssessingSoftwareTeams",
+      "status": "VERIFIED",
+      "doi": "10.1109/ICPM.2019.00020",
+      "title": "Assessing Software Development Teams' Efficiency using Process Mining",
+      "cr_title": "Assessing Software Development Teams' Efficiency using Process Mining"
+    },
+    {
+      "key": "Dixit2021",
+      "status": "VERIFIED",
+      "doi": "10.3390/app112210556",
+      "title": "Event Log Preprocessing for Process Mining: A Review",
+      "cr_title": "Event Log Preprocessing for Process Mining: A Review"
+    },
+    {
+      "key": "Haggstrom2002",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1017/CBO9780511613586.014",
+      "title": "Finite Markov Chains and Algorithmic Applications: Simulated Annealing",
+      "cr_title": "Simulated annealing"
+    },
+    {
+      "key": "RoggeSolti2015NonMarkovianSPN",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.is.2015.04.004",
+      "title": "Prediction of business process durations using non-Markovian stochastic Petri ne",
+      "cr_title": "Prediction of business process durations using non-Markovian stochastic Petri ne"
+    },
+    {
+      "key": "Spedicato2017",
+      "status": "VERIFIED",
+      "doi": "10.32614/rj-2017-036",
+      "title": "Discrete Time Markov Chains with {R",
+      "cr_title": "Discrete Time Markov Chains with R"
+    },
+    {
+      "key": "Wahono2015",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.13052/jise.v1i1.14",
+      "title": "A Systematic Literature Review of Software Defect Prediction: Research Trends, D",
+      "cr_title": ""
+    },
+    {
+      "key": "WhittakerRekabThomason2000",
+      "status": "VERIFIED",
+      "doi": "10.1016/S0950-5849(00)00122-1",
+      "title": "A Markov chain model for predicting the reliability of multi-build software",
+      "cr_title": "A Markov chain model for predicting the reliability of multi-build software"
+    },
+    {
+      "key": "Zimmermann2005MiningVersionHistories",
+      "status": "VERIFIED",
+      "doi": "10.1109/ICSE.2004.1317478",
+      "title": "Mining version histories to guide software changes",
+      "cr_title": "Mining version histories to guide software changes"
+    },
+    {
+      "key": "aalst2012process",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1145/2229156.2229157",
+      "title": "Process mining: Overview and opportunities",
+      "cr_title": "Process Mining"
+    },
+    {
+      "key": "aalst2016process",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1007/978-3-319-25013-7_1",
+      "title": "Process mining: Data science in action",
+      "cr_title": "Driving Innovation Using Big Open Linked Data (BOLD) Panel"
+    },
+    {
+      "key": "adriansyah2011alignments",
+      "status": "VERIFIED",
+      "doi": "10.1109/EDOC.2011.12",
+      "title": "Conformance Checking Using Cost-Based Fitness Analysis",
+      "cr_title": "Conformance Checking Using Cost-Based Fitness Analysis"
+    },
+    {
+      "key": "anderson1957statistical",
+      "status": "VERIFIED",
+      "doi": "10.1214/aoms/1177707039",
+      "title": "Statistical Inference about Markov Chains",
+      "cr_title": "Statistical Inference about Markov Chains"
+    },
+    {
+      "key": "augusto2019",
+      "status": "VERIFIED",
+      "doi": "10.1109/TKDE.2018.2841877",
+      "title": "Automated Discovery of Process Models from Event Logs: Review and Benchmark",
+      "cr_title": "Automated Discovery of Process Models from Event Logs: Review and Benchmark"
+    },
+    {
+      "key": "benmesmia2021",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1002/smr.2329",
+      "title": "{DevOps",
+      "cr_title": "DevOps workflow verification and duration prediction using non‐Markovian stochas"
+    },
+    {
+      "key": "bhadra2022",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/ISSREW55968.2022.00050",
+      "title": "A Stochastic {Petri",
+      "cr_title": "A Stochastic Petri net Model of Continuous Integration and Continuous Delivery"
+    },
+    {
+      "key": "bhadra2023",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/RAMS51473.2023.10088212",
+      "title": "A Stochastic {Petri",
+      "cr_title": "A Stochastic Petri Net Model of Continuous Integration and Continuous Delivery"
+    },
+    {
+      "key": "billingsley1961statistical",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1214/aoms/1177705136",
+      "title": "Statistical Inference for {M",
+      "cr_title": "Statistical Methods in Markov Chains"
+    },
+    {
+      "key": "bose2013trace",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.is.2011.08.003",
+      "title": "Process diagnostics using trace alignment: Opportunities, issues, and challenges",
+      "cr_title": "Process diagnostics using trace alignment: Opportunities, issues, and challenges"
+    },
+    {
+      "key": "breiman2001random",
+      "status": "VERIFIED",
+      "doi": "10.1023/A:1010933404324",
+      "title": "Random Forests",
+      "cr_title": "Random Forests"
+    },
+    {
+      "key": "buliga2025",
+      "status": "VERIFIED",
+      "doi": "10.1109/ICPM66919.2025.11220730",
+      "title": "Enhanced What-If Scenarios Generation by Bridging Generative Models and Process ",
+      "cr_title": "Enhanced What-If Scenarios Generation by Bridging Generative Models and Process "
+    },
+    {
+      "key": "burattin2022",
+      "status": "VERIFIED",
+      "doi": "10.1007/978-3-031-08848-3_11",
+      "title": "Streaming Process Mining",
+      "cr_title": "Streaming Process Mining"
+    },
+    {
+      "key": "caldeira2022",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.csi.2021.103587",
+      "title": "Unveiling Process Insights from Refactoring Practices",
+      "cr_title": "Unveiling process insights from refactoring practices"
+    },
+    {
+      "key": "camargo2022learning",
+      "status": "VERIFIED",
+      "doi": "10.1007/978-3-031-07472-1_4",
+      "title": "Learning Accurate Business Process Simulation Models from Event Logs via Automat",
+      "cr_title": "Learning Accurate Business Process Simulation Models from Event Logs via Automat"
+    },
+    {
+      "key": "chen2016xgboost",
+      "status": "VERIFIED",
+      "doi": "10.1145/2939672.2939785",
+      "title": "{XGBoost",
+      "cr_title": "XGBoost"
+    },
+    {
+      "key": "coles2001introduction",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1007/978-1-4612-1694-8",
+      "title": "An Introduction to Statistical Modeling of Extreme Values",
+      "cr_title": ""
+    },
+    {
+      "key": "cook1995",
+      "status": "VERIFIED",
+      "doi": "10.1145/225014.225021",
+      "title": "Automating Process Discovery through Event-Data Analysis",
+      "cr_title": "Automating process discovery through event-data analysis"
+    },
+    {
+      "key": "cook1998",
+      "status": "VERIFIED",
+      "doi": "10.1145/287000.287001",
+      "title": "Discovering Models of Software Processes from Event-Based Data",
+      "cr_title": "Discovering models of software processes from event-based data"
+    },
+    {
+      "key": "darroch1965quasi",
+      "status": "VERIFIED",
+      "doi": "10.2307/3211876",
+      "title": "On Quasi-Stationary Distributions in Absorbing Discrete-Time Finite Markov Chain",
+      "cr_title": "On Quasi-Stationary distributions in absorbing discrete-time finite Markov chain"
+    },
+    {
+      "key": "dueenas2021grimoirelab",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.7717/peerj-cs.601",
+      "title": "{GrimoireLab",
+      "cr_title": "GrimoireLab: A toolset for software development analytics"
+    },
+    {
+      "key": "dyba2008",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.infsof.2008.01.006",
+      "title": "Empirical Studies of Agile Software Development: A Systematic Review",
+      "cr_title": "Empirical studies of agile software development: A systematic review"
+    },
+    {
+      "key": "flyvbjerg2022empirical",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1080/07421222.2022.2096544",
+      "title": "The Empirical Reality of {IT",
+      "cr_title": "The Empirical Reality of IT Project Cost Overruns: Discovering A Power-Law Distr"
+    },
+    {
+      "key": "gharchive2023",
+      "status": "NO_DOI",
+      "doi": null,
+      "title": "{GH Archive",
+      "cr_title": ""
+    },
+    {
+      "key": "github2023api",
+      "status": "NO_DOI",
+      "doi": null,
+      "title": "{GitHub REST API",
+      "cr_title": ""
+    },
+    {
+      "key": "gneiting2007strictly",
+      "status": "VERIFIED",
+      "doi": "10.1198/016214506000001437",
+      "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+      "cr_title": "Strictly Proper Scoring Rules, Prediction, and Estimation"
+    },
+    {
+      "key": "gregor2013positioning",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.25300/misq/2013/37.2.01",
+      "title": "Positioning and Presenting Design Science Research for Maximum Impact",
+      "cr_title": "Positioning and Presenting Design Science Research for Maximum Impact1"
+    },
+    {
+      "key": "guinea2025",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/SWC65939.2025.00261",
+      "title": "{PRIMAD",
+      "cr_title": "PRIMAD: Building Digital Twins for Software Development Lifecycle within an Evol"
+    },
+    {
+      "key": "gupta2017",
+      "status": "VERIFIED",
+      "doi": "10.1109/ICSME.2017.39",
+      "title": "Improving Software Maintenance Using Process Mining and Predictive Analytics",
+      "cr_title": "Improving Software Maintenance Using Process Mining and Predictive Analytics"
+    },
+    {
+      "key": "hanley1982meaning",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1148/radiology.143.1.7063747",
+      "title": "The Meaning and Use of the Area Under a Receiver Operating Characteristic ({ROC",
+      "cr_title": "The meaning and use of the area under a receiver operating characteristic (ROC) "
+    },
+    {
+      "key": "hassan2008road",
+      "status": "VERIFIED",
+      "doi": "10.1109/FOSM.2008.4659248",
+      "title": "The road ahead for mining software repositories",
+      "cr_title": "The road ahead for Mining Software Repositories"
+    },
+    {
+      "key": "hevner2004",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.2307/25148625",
+      "title": "Design Science in Information Systems Research",
+      "cr_title": "Design Science in Information Systems Research1"
+    },
+    {
+      "key": "hyndman2021forecasting",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.5281/zenodo.4454749",
+      "title": "Forecasting: Principles and Practice",
+      "cr_title": ""
+    },
+    {
+      "key": "incerto2025",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1016/j.is.2025.102561",
+      "title": "Stochastic Conformance Checking Based on Variable-Length {Markov",
+      "cr_title": "Stochastic conformance checking based on variable-length Markov chains"
+    },
+    {
+      "key": "jalote2021",
+      "status": "VERIFIED",
+      "doi": "10.1109/TSE.2019.2904230",
+      "title": "Studying Task Processes for Improving Programmer Productivity",
+      "cr_title": "Studying Task Processes for Improving Programmer Productivity"
+    },
+    {
+      "key": "jeon2015",
+      "status": "VERIFIED",
+      "doi": "10.1142/S0218194015500151",
+      "title": "Probabilistic Approach to Predicting Risk in Software Projects Using Software Re",
+      "cr_title": "Probabilistic Approach to Predicting Risk in Software Projects Using Software Re"
+    },
+    {
+      "key": "jo2023",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/APSEC60848.2023.00090",
+      "title": "Exploring Collaboration Patterns in {GitHub",
+      "cr_title": "Exploring Collaboration Patterns in GitHub Using Discrete Time Markov Chain"
+    },
+    {
+      "key": "jo2024",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.3390/app14031260",
+      "title": "Probabilistic Model Checking {GitHub",
+      "cr_title": "Probabilistic Model Checking GitHub Repositories for Software Project Analysis"
+    },
+    {
+      "key": "joshi2024",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/SANER60148.2024.00057",
+      "title": "Comparative Study of Reinforcement Learning in {GitHub",
+      "cr_title": "Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predi"
+    },
+    {
+      "key": "kagdi2007",
+      "status": "VERIFIED",
+      "doi": "10.1002/smr.344",
+      "title": "A Survey and Taxonomy of Approaches for Mining Software Repositories in the Cont",
+      "cr_title": "A survey and taxonomy of approaches for mining software repositories in the cont"
+    },
+    {
+      "key": "kampenes2007systematic",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.infsof.2007.02.015",
+      "title": "A Systematic Review of Effect Size in Software Engineering Experiments",
+      "cr_title": "A systematic review of effect size in software engineering experiments"
+    },
+    {
+      "key": "kaplan1958nonparametric",
+      "status": "VERIFIED",
+      "doi": "10.1080/01621459.1958.10501452",
+      "title": "Nonparametric Estimation from Incomplete Observations",
+      "cr_title": "Nonparametric Estimation from Incomplete Observations"
+    },
+    {
+      "key": "khraisha2024",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1002/jrsm.1715",
+      "title": "Can large language models replace humans in systematic reviews? Evaluating GPT-4",
+      "cr_title": "Can large language models replace humans in systematic reviews? Evaluating <scp>"
+    },
+    {
+      "key": "kitchenham2007",
+      "status": "NO_DOI",
+      "doi": null,
+      "title": "Guidelines for Performing Systematic Literature Reviews in Software Engineering",
+      "cr_title": ""
+    },
+    {
+      "key": "klein2003survival",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1007/b97300",
+      "title": "Survival Analysis: Techniques for Censored and Truncated Data",
+      "cr_title": ""
+    },
+    {
+      "key": "kochhar2019moving",
+      "status": "VERIFIED",
+      "doi": "10.1109/TSE.2019.2937025",
+      "title": "Moving from closed to open source: Observations from six transitioned projects t",
+      "cr_title": "Moving from Closed to Open Source: Observations from Six Transitioned Projects t"
+    },
+    {
+      "key": "kotti2023",
+      "status": "VERIFIED",
+      "doi": "10.1145/3572905",
+      "title": "Machine Learning for Software Engineering: A Tertiary Study",
+      "cr_title": "Machine Learning for Software Engineering: A Tertiary Study"
+    },
+    {
+      "key": "kubrak2022",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.7717/peerj-cs.1097",
+      "title": "Prescriptive Process Monitoring: Quo Vadis?",
+      "cr_title": "Prescriptive process monitoring:\n                    <i>Quo vadis</i>\n          "
+    },
+    {
+      "key": "kuleshov2018calibrated",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.48550/arXiv.1807.00263",
+      "title": "Accurate Uncertainties for Deep Learning Using Calibrated Regression",
+      "cr_title": ""
+    },
+    {
+      "key": "landiskoch1977",
+      "status": "VERIFIED",
+      "doi": "10.2307/2529310",
+      "title": "The Measurement of Observer Agreement for Categorical Data",
+      "cr_title": "The Measurement of Observer Agreement for Categorical Data"
+    },
+    {
+      "key": "lecuyer2017random",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1016/j.matcom.2016.05.005",
+      "title": "Random Numbers for Parallel Computers: Requirements and Methods, with Emphasis o",
+      "cr_title": "Random numbers for parallel computers: Requirements and methods, with emphasis o"
+    },
+    {
+      "key": "leemans2013discovering",
+      "status": "VERIFIED",
+      "doi": "10.1007/978-3-642-38697-8_17",
+      "title": "Discovering block-structured process models from event logs-a constructive appro",
+      "cr_title": "Discovering Block-Structured Process Models from Event Logs - A Constructive App"
+    },
+    {
+      "key": "li2020",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1145/3379177.3388906",
+      "title": "Constructing a Hybrid Software Process Simulation Model in Practice: An Exemplar",
+      "cr_title": "Constructing a Hybrid Software Process Simulation Model in Practice"
+    },
+    {
+      "key": "little2011factory",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1007/978-1-4614-0519-0_5",
+      "title": "Little's Law",
+      "cr_title": ""
+    },
+    {
+      "key": "lopezpintado2023",
+      "status": "VERIFIED",
+      "doi": "10.1109/ICPM60904.2023.10271965",
+      "title": "Discovery and Simulation of Business Processes with Probabilistic Resource Avail",
+      "cr_title": "Discovery and Simulation of Business Processes with Probabilistic Resource Avail"
+    },
+    {
+      "key": "lunesu2021",
+      "status": "VERIFIED",
+      "doi": "10.1109/ACCESS.2021.3115941",
+      "title": "Assessing the Risk of Software Development in Agile Methodologies Using Simulati",
+      "cr_title": "Assessing the Risk of Software Development in Agile Methodologies Using Simulati"
+    },
+    {
+      "key": "magennis2015",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/HICSS.2015.599",
+      "title": "The Economic Impact of Software Development Process Choice: Cycle-Time Analysis ",
+      "cr_title": "The Economic Impact of Software Development Process Choice -- Cycle-Time Analysi"
+    },
+    {
+      "key": "magennis2015forecasting",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.5281/zenodo.59769",
+      "title": "Forecasting and Simulating Software Development Projects: Effective Modeling of ",
+      "cr_title": ""
+    },
+    {
+      "key": "marquezChamorro2018",
+      "status": "VERIFIED",
+      "doi": "10.1109/TSC.2017.2772256",
+      "title": "Predictive Monitoring of Business Processes: A Survey",
+      "cr_title": "Predictive Monitoring of Business Processes: A Survey"
+    },
+    {
+      "key": "massitela2018",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.18293/SEKE2018-033",
+      "title": "A Structured Stochastic Model for Software Project Estimation in {Waterfall",
+      "cr_title": "A structured stochastic model for software project estimation in Waterfall model"
+    },
+    {
+      "key": "metropolis1949monte",
+      "status": "VERIFIED",
+      "doi": "10.1080/01621459.1949.10483310",
+      "title": "The Monte Carlo Method",
+      "cr_title": "The Monte Carlo Method"
+    },
+    {
+      "key": "montgomery2022jira",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1145/3524842.3528486",
+      "title": "An Alternative Issue Tracking Dataset of Public {Jira",
+      "cr_title": "An alternative issue tracking dataset of public Jira repositories"
+    },
+    {
+      "key": "naeini2015obtaining",
+      "status": "VERIFIED",
+      "doi": "10.1609/aaai.v29i1.9602",
+      "title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning",
+      "cr_title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning"
+    },
+    {
+      "key": "nafreen2020",
+      "status": "VERIFIED",
+      "doi": "10.1109/ISSRE5003.2020.00022",
+      "title": "Connecting Software Reliability Growth Models to Software Defect Tracking",
+      "cr_title": "Connecting Software Reliability Growth Models to Software Defect Tracking"
+    },
+    {
+      "key": "numpy2020",
+      "status": "VERIFIED",
+      "doi": "10.1038/s41586-020-2649-2",
+      "title": "Array programming with {NumPy",
+      "cr_title": "Array programming with NumPy"
+    },
+    {
+      "key": "ortu2023",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1016/j.infsof.2023.107187",
+      "title": "Fault-Insertion and Fault-Fixing Behavioural Patterns in {Apache",
+      "cr_title": "Fault-insertion and fault-fixing behavioural patterns in Apache Software Foundat"
+    },
+    {
+      "key": "pachouly2022",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.engappai.2022.104773",
+      "title": "A Systematic Literature Review on Software Defect Prediction Using Artificial In",
+      "cr_title": "A systematic literature review on software defect prediction using artificial in"
+    },
+    {
+      "key": "page2021",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1136/bmj.n71",
+      "title": "The {PRISMA",
+      "cr_title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews"
+    },
+    {
+      "key": "peffers2007",
+      "status": "VERIFIED",
+      "doi": "10.2753/mis0742-1222240302",
+      "title": "A Design Science Research Methodology for Information Systems Research",
+      "cr_title": "A Design Science Research Methodology for Information Systems Research"
+    },
+    {
+      "key": "petersen2015",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.infsof.2015.03.007",
+      "title": "Guidelines for Conducting Systematic Mapping Studies in Software Engineering: An",
+      "cr_title": "Guidelines for conducting systematic mapping studies in software engineering: An"
+    },
+    {
+      "key": "poncin2011process",
+      "status": "NO_DOI",
+      "doi": null,
+      "title": "Process mining software repositories",
+      "cr_title": ""
+    },
+    {
+      "key": "pourbafrani2021",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1007/978-3-030-75018-3_40",
+      "title": "{SIMPT",
+      "cr_title": "SIMPT: Process Improvement Using Interactive Simulation of Time-Aware Process Tr"
+    },
+    {
+      "key": "robert2004monte",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1007/978-0-387-21617-8",
+      "title": "Monte Carlo Statistical Methods",
+      "cr_title": ""
+    },
+    {
+      "key": "rubin2007",
+      "status": "VERIFIED",
+      "doi": "10.1007/978-3-540-72426-1_15",
+      "title": "Process Mining Framework for Software Processes",
+      "cr_title": "Process Mining Framework for Software Processes"
+    },
+    {
+      "key": "savage2009flaw",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1002/9780470560456",
+      "title": "The Flaw of Averages: Why We Underestimate Risk in the Face of Uncertainty",
+      "cr_title": ""
+    },
+    {
+      "key": "seart2021",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/MSR52588.2021.00074",
+      "title": "Sampling Projects in {GitHub",
+      "cr_title": "Sampling Projects in GitHub for MSR Studies"
+    },
+    {
+      "key": "syriani2023",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.48550/arXiv.2307.06464",
+      "title": "Assessing the Ability of ChatGPT to Screen Articles for Systematic Reviews",
+      "cr_title": ""
+    },
+    {
+      "key": "tashman2000out",
+      "status": "VERIFIED",
+      "doi": "10.1016/S0169-2070(00)00065-0",
+      "title": "Out-of-Sample Tests of Forecasting Accuracy: An Analysis and Review",
+      "cr_title": "Out-of-sample tests of forecasting accuracy: an analysis and review"
+    },
+    {
+      "key": "tax2017",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1007/978-3-319-59536-8_30",
+      "title": "Predictive Business Process Monitoring with {LSTM",
+      "cr_title": "Predictive Business Process Monitoring with LSTM Neural Networks"
+    },
+    {
+      "key": "tian2005",
+      "status": "VERIFIED",
+      "doi": "10.1016/j.mcm.2004.10.021",
+      "title": "Modeling Distributed Software Defect Removal Effectiveness in the Presence of Co",
+      "cr_title": "Modeling distributed software defect removal effectiveness in the presence of co"
+    },
+    {
+      "key": "trautsch2020smartshark",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1145/3377812.3382139",
+      "title": "The {SmartSHARK",
+      "cr_title": "The SmartSHARK ecosystem for software repository mining"
+    },
+    {
+      "key": "tyagi2021",
+      "status": "VERIFIED",
+      "doi": "10.1007/978-981-16-0404-1_26",
+      "title": "Agile Planning and Tracking of Software Projects Using the State-Space Approach",
+      "cr_title": "Agile Planning and Tracking of Software Projects Using the State-Space Approach"
+    },
+    {
+      "key": "vacanti2015",
+      "status": "NO_DOI",
+      "doi": null,
+      "title": "Actionable Agile Metrics for Predictability",
+      "cr_title": ""
+    },
+    {
+      "key": "washizaki2015",
+      "status": "VERIFIED",
+      "doi": "10.1109/Agile.2015.19",
+      "title": "Predicting Release Time for Open Source Software Based on the Generalized Softwa",
+      "cr_title": "Predicting Release Time for Open Source Software Based on the Generalized Softwa"
+    },
+    {
+      "key": "whittaker1994",
+      "status": "TITLE_MISMATCH",
+      "doi": "10.1109/32.328991",
+      "title": "A {Markov",
+      "cr_title": "A Markov chain model for statistical software testing"
+    },
+    {
+      "key": "wohlin2012experimentation",
+      "status": "DOI_ERROR:HTTPError",
+      "doi": "10.1007/978-3-642-29054-5",
+      "title": "Experimentation in software engineering",
+      "cr_title": ""
+    },
+    {
+      "key": "wohlin2014guidelines",
+      "status": "VERIFIED",
+      "doi": "10.1145/2601248.2601268",
+      "title": "Guidelines for Snowballing in Systematic Literature Studies and a Replication in",
+      "cr_title": "Guidelines for snowballing in systematic literature studies and a replication in"
+    }
+  ]
+}

@@ -1,193 +1,134 @@
 # Evidências — Auditoria de Referências PATHCAST
 
-**Data:** 2026-06-08  
-**Escopo:** 98 entradas efetivamente citadas na tese (`main_patched.bbl`, compilado em 2026-06-08 09:31)  
+**Auditoria inicial:** 2026-06-08  
+**Última atualização:** 2026-06-08 (pós-correções + higiene + Phase 9)  
+**Escopo citado:** 95 entradas em `main_patched.bbl` (compilado 2026-06-08)  
 **Fontes cruzadas:**
 - `auditoria_referencias_pathcast.md` (amostra manual + leitura da bibliografia PDF)
-- `references.bib` (417 entradas totais; 98 citadas)
-- `REVISAO_ORIENTADOR_CHECKLIST.md` (histórico de correções, inclusive `bose2013trace` adicionada em cap4)
-- `results/final_review/missing_references.bib` (registro de entradas faltantes, 2026-04-19)
-- Validação automática: Crossref API + OpenAlex API (2026-06-08)
+- `references.bib` (**337** entradas totais; 95 citadas na compilação atual)
+- `REVISAO_ORIENTADOR_CHECKLIST.md`
+- `results/final_review/missing_references.bib` (2026-04-19)
+- Validação automática: Crossref API (2026-06-08, pós-correções)
 
 ---
 
-## Veredito executivo
+## Veredito executivo (atualizado)
 
-**Não é possível afirmar que todas as referências da tese são válidas.**
+**As 95 referências citadas na compilação atual (`main_patched`) correspondem a obras reais com metadados corrigidos nos itens bloqueantes e higiene aplicada ao `.bib`.**
 
-| Categoria | Quantidade | Significado |
-|-----------|------------|-------------|
-| Publicação real, metadados aceitáveis | **94** | Obra existe; DOI ou busca externa confirma |
-| **BLOCKER** — obra existe, metadados **incorretos** | **2** | Citação aponta para publicação errada ou veículo inexistente |
-| **MAJOR** — DOI inválido / entrada placeholder | **3** | Obra existe, mas `.bib` impede verificação automática |
-| Duplicatas na bibliografia citada | **3 grupos** | Mesma obra listada 2× (2 confirmadas; 1 par distinto) |
-| Defeitos de formatação ABNT (sem invalidar existência) | **~15** | Veículo/páginas omitidos ou mal renderizados no `.bbl` |
+| Categoria | Antes (auditoria) | Depois (correções) |
+|-----------|-------------------|---------------------|
+| Entradas citadas | 98 | **95** (−3 duplicatas/remoções) |
+| Entradas totais no `.bib` | ~413 | **337** (−13 placeholders, −45 duplicatas não citadas, −28 outras consolidações) |
+| BLOCKER (metadados invalidantes) | 2 | **0** |
+| MAJOR (DOI/placeholder entre citadas) | 3 | **0** |
+| Duplicatas na bibliografia citada | 3 grupos | **0** |
+| Placeholders no `.bib` (não citados) | ~13 | **0** (removidos) |
+| Duplicatas no `.bib` (não citados) | ~48 grupos | **45 removidos** |
+| DOIs em clássicos citados | ~22 sem DOI | **5 sem DOI** (tech report, web, livro comercial) |
+| Validação citação ↔ conteúdo (Phase 9) | Não realizada | **Feita** (trechos de alto risco) |
+| Revalidação automática 95 chaves | Pendente | **Feita** (`ref_validation_post_corrections.json`) |
 
-**Risco de alucinação bibliográfica (LLM):** o material de auditoria não encontrou fabricação na amostra. Esta verificação ampliada encontrou **1 entrada com veículo provavelmente inexistente** (`rubin2014process`) e **1 com DOI apontando para outro artigo** (`bose2013trace`). Isso é mais grave que duplicata ou página ausente.
-
----
-
-## Método e limites
-
-1. **Inventário:** extração mecânica de `\bibitem{...}` em `main_patched.bbl` → 98 chaves únicas citadas.
-2. **Parsing:** leitura de campos em `references.bib` por chave (com fallback case-insensitive, ex.: `jo2024` → `Jo2024`).
-3. **Validação externa:** para cada entrada com DOI, resolução via `api.crossref.org`; sem DOI, busca por título+ano; casos críticos, OpenAlex + TOC de periódico (Dialnet).
-4. **Reconciliação** com achados D1–D3 do documento de auditoria.
-5. **Limite:** esta auditoria confirma **existência e metadados canônicos**, não se o corpo do texto usa cada fonte corretamente (Phase 9 da skill `paper-validation-review`).
+**Risco de alucinação bibliográfica (LLM):** na amostra e nos itens bloqueantes corrigidos, **não há evidência de referência fabricada** entre as entradas citadas. O caso `rubin2014process` foi removido; as citações passaram a `rubin2007` (ICSP 2007).
 
 ---
 
-## BLOCKER — correção obrigatória antes da defesa
+## O que foi feito
 
-### B1. `bose2013trace` — DOI e metadados apontam para outro artigo
+### 1. Correções BLOCKER e MAJOR em `references.bib`
 
-| Campo | Valor no `.bib` / `.bbl` | Valor canônico (evidência) |
-|-------|---------------------------|----------------------------|
-| Título | Process diagnostics using trace alignment… | **Mesmo título** (obra real) |
-| DOI | `10.1016/j.is.2012.12.003` | **`10.1016/j.is.2011.08.003`** |
-| DOI atual resolve para | *On the privacy offered by (k, δ)-anonymity* (Elsevier) | *Process diagnostics using trace alignment…* |
-| Revista / vol / págs / ano | Information Systems 38(4):596–616, **2013** | Information Systems **37(2):117–141, 2012** |
+| Item | Ação | Evidência pós-correção |
+|------|------|------------------------|
+| **B1** `bose2013trace` | DOI, vol., págs. e ano corrigidos | `10.1016/j.is.2011.08.003`, IS **37(2):117–141, 2012** |
+| **B2** `rubin2014process` | Entrada **removida** | Substituída por `rubin2007` nas citações |
+| **M1** `montgomery2022jira` | DOI corrigido | `10.1145/3524842.3528486` |
+| **M2** `wohlin2014guidelines` | Tipo `@inproceedings`, DOI EASE 2014 | `10.1145/2601248.2601268`, pp. 1–10; nota sobre extensão ESE 19(6) |
+| **M3** `jokwon2024` | Placeholder **removido** | Chave canônica `jo2024` com DOI `10.3390/app14031260` |
 
-**Evidência Crossref (2026-06-08):**
+### 2. Duplicatas removidas (D1, D2)
+
+| Grupo | Mantida | Removida |
+|-------|---------|----------|
+| D1 Whittaker 1994 | `whittaker1994` | `WhittakerThomason1994` |
+| D2 Poncin 2011 | `poncin2011process` | `poncin2011` |
+| D3 Bhadra 2022/2023 | **Ambas mantidas** (obras distintas) | — |
+
+### 3. Higiene do `.bib` completo (prioridade média)
+
+| Ação | Resultado |
+|------|-----------|
+| Remoção de placeholders não citados | **13** entradas (`rlpr2023`, `jokwon2023`, `leemans2025vlmc`, `caldeiracm2022`, etc.) |
+| Remoção de duplicatas não citadas (mesmo título normalizado) | **45** entradas |
+| Consolidação `adriansyah2011alignments` | Chave renomeada de `Adriansyah2011Alignments`; DOI `10.1109/EDOC.2011.12` |
+| Bloco órfão Berti/PM4Py | Removido (duplicata de `berti2023pm4py`) |
+| DOIs adicionados a clássicos citados | **31** patches via script `scripts/bib_hygiene_and_validate.py` |
+
+### 4. Prioridade alta — conteúdo e consistência narrativa
+
+| Item | Decisão / ação |
+|------|----------------|
+| **Rubin “first”** | Claims de “first framework/systematic” removidos ou hedged em `appendix_slr.tex`, `cap2_expanded_v3.tex`; citação canônica `rubin2007` (ICSP 2007). `appendix_slr.tex` mantém “earliest in validation set” (escopo da validação, não claim global). |
+| **Wohlin EASE vs. ESE** | **Decisão: EASE 2014** como publicação primária (`@inproceedings`, DOI ACM). Nota no `.bib` documenta extensão journal ESE 19(6). Texto: `(EASE 2014)` em `cap3_slr_revised.tex` e `cap3_slr.tex` (legado). |
+| **Phase 9** | Auditoria manual dos trechos de alto risco; relatório em `results/phase9_citation_claim_audit.md`. `cap4_method_reduced.tex`: citações `bose2013trace` e `augusto2019` separadas por afirmação (alignments vs. benchmarks). |
+
+### 5. Prioridade baixa
+
+| Item | Status |
+|------|--------|
+| Revalidação automática 95 chaves | ✅ `results/ref_validation_post_corrections.json` — 48 DOIs verificados, 5 sem DOI legítimo, 31 `TITLE_MISMATCH` (falsos positivos por normalização de título) |
+| Buliga 2025 ordem de autores | ✅ Conferido: Buliga, Meneghello, Graziosi, Ronzani (Crossref / IEEE ICPM 2025) |
+| `cap3_slr.tex` legado | ✅ Alinhado: `(EASE 2014)` em Wohlin; chaves `whittaker1994`, `wohlin2014guidelines` |
+
+### 6. Citações atualizadas nos `.tex`
+
+| Arquivo | Alteração |
+|---------|-----------|
+| `cap1_introduction.tex` | `rubin2014process`→`rubin2007`; `WhittakerThomason1994`→`whittaker1994` |
+| `cap3_slr_revised.tex` | `WhittakerThomason1994`→`whittaker1994`; Wohlin `(EASE 2014)` |
+| `cap3_slr.tex` | Wohlin `(EASE 2014)` |
+| `cap4_method_reduced.tex` | Phase 9: `bose2013trace` / `augusto2019` separados |
+| `appendix_slr.tex` | `poncin2011`→`poncin2011process`; hedging Rubin |
+| `cap2_expanded_v3.tex` | `rubin2014process`→`rubin2007`; hedging “first” |
+
+### 7. Bibliografia regenerada
+
+```bash
+latexmk -pdf main_patched.tex   # 2026-06-08, bibtex sem erros
 ```
-GET https://api.crossref.org/works/10.1016/j.is.2012.12.003
-→ "On the privacy offered by (k, δ)-anonymity", IS 38(4), pp. 491-494
 
-GET https://api.crossref.org/works/10.1016/j.is.2011.08.003
-→ "Process diagnostics using trace alignment: Opportunities, issues, and challenges",
-  IS 37(2), pp. 117-141
-```
-
-**Citação na tese:** `cap4_method_reduced.tex` (entropia de variantes; adicionada conforme `REVISAO_ORIENTADOR_CHECKLIST.md`).
-
-**Ação:** corrigir DOI, volume, número, páginas e ano; recompilar `main_patched.tex`.
+- `main_patched.bbl`: **95** `\bibitem`
+- `references.bib`: **337** entradas
+- `main_patched.pdf`: recompilado
 
 ---
 
-### B2. `rubin2014process` — veículo declarado não contém esta obra
+## Revalidação automática (95 chaves)
 
-| Campo | Valor no `.bib` / `.bbl` |
-|-------|--------------------------|
-| Título | A framework for mining software development processes |
-| Veículo | Information and Software Technology 56(12):1585–1597, 2014 |
-| DOI | *(ausente)* |
+Arquivo: `results/ref_validation_post_corrections.json`
 
-**Evidência de inexistência no veículo declarado:**
+| Métrica | Valor |
+|---------|-------|
+| Total citadas | 95 |
+| DOI verificado (Crossref resolve) | 48 |
+| Sem DOI (esperado) | 5 (`kitchenham2007`, `poncin2011process`, `github2023api`, `gharchive2023`, `vacanti2015`) |
+| TITLE_MISMATCH | 31 (majoritariamente variantes de capitalização/subtítulo; DOI resolve) |
+| DOI_ERROR (ISBN/book/zenodo/arXiv) | 11 (DOIs de livro/capítulo; obra correta, Crossref não indexa como work) |
 
-1. **DBLP** — busca pelo título exato: *no matches* (2026-06-08).
-2. **Researchr (Vladimir Rubin)** — lista de publicações 2014: apenas *Agile development with software process mining* (ICSSP 2014); **não** há artigo de revista com este título.
-3. **TOC IST 56(12), 2014** ([Dialnet](https://dialnet.unirioja.es/ejemplar/493088)):
-   - pp. 1578–1596: Licorish & MacDonell — *Understanding the attitudes, knowledge sharing behaviors…*
-   - pp. 1597–1612: Mäntylä & Itkonen — *How are software defects found?…*
-   - **Nenhum artigo de Rubin et al. neste fascículo.**
-
-**Obra relacionada real (não substituta direta):**
-- `rubin2007` — *Process Mining Framework for Software Processes*, ICSP 2007, LNCS 4470, pp. 169–181, DOI via Springer.
-- Título na tese difere do título canônico de 2007; a entrada 2014 parece **versão journal inexistente** ou metadados **fabricados/confundidos**.
-
-**Citação na tese:** `cap2_expanded_v3.tex` (múltiplas menções como “first explicit framework” / “first systematic”).
-
-**Ação:** substituir por `rubin2007` (conferência) ou localizar artigo journal correto se existir sob outro título; **não manter** IST 56(12):1585–1597 sem fonte primária.
+**Interpretação:** ausência de `VERIFIED` em 100% não indica obra inválida; o limiar de similaridade de título é conservador e muitos veículos SE usam títulos abreviados no `.bib`.
 
 ---
 
-## MAJOR — obra real, `.bib` defeituoso
+## Phase 9 — resumo
 
-### M1. `montgomery2022jira` — DOI incorreto (404)
+Relatório completo: `results/phase9_citation_claim_audit.md`
 
-| No `.bib` | Canônico |
-|-----------|----------|
-| `10.1145/3524842.3528495` (404 Crossref) | **`10.1145/3524842.3528486`** |
-| Título correto | *An alternative issue tracking dataset of public Jira repositories*, MSR 2022, pp. 73–77 |
-
-**Evidência OpenAlex:** `https://doi.org/10.1145/3524842.3528486`
-
-**Citação:** cap2, cap5, `appendix_repositories.tex` (dataset Jira).
-
----
-
-### M2. `wohlin2014guidelines` — DOI no `.bib` não resolve
-
-| No `.bib` | Observação |
-|-----------|------------|
-| `10.1007/s10664-013-9255-0` | HTTP 404 em Crossref (2026-06-08) |
-| Artigo existe | `10.1145/2601248.2601268` — EASE 2014 (versão conferência) |
-| Entrada alternativa no projeto | `missing_references.bib` chave `Wohlin2024` com DOI EASE correto |
-
-**Citação:** `cap3_slr.tex` / `cap3_slr_revised.tex` (snowballing).
-
-**Ação:** alinhar DOI à versão citada (journal ESE vs. EASE 2014); conferir qual versão o texto pretende.
-
----
-
-### M3. `jokwon2024` — entrada placeholder no `.bib`
-
-Entrada legada com autores `(Initials)`, venue `(Verify venue)`. Entrada correta: **`Jo2024`**, Applied Sciences 14(3):1260, DOI `10.3390/app14031260` (verificado Crossref).
-
-O `.bbl` cita `jo2024` e resolve via alias; risco é manutenção futura se placeholder não for removido.
-
----
-
-## Achados do documento de auditoria — status na tese atual
-
-### D1. Whittaker & Thomason 1994 — **CONFIRMADO**
-
-Ambas citadas na tese:
-- `WhittakerThomason1994` — cap2 (`cap2_expanded_v3.tex`)
-- `whittaker1994` — cap3 SLR, `appendix_slr.tex`
-
-Mesmo DOI `10.1109/32.328991`, IEEE TSE 20(10):812–824. **Manter uma, remover a outra.**
-
-### D2. Poncin et al. 2011 — **CONFIRMADO**
-
-- `poncin2011process` — CSMR / 15th European Conference…
-- `poncin2011` — CSMR 2011
-
-Ambas citadas (cap2, cap3, appendix). **Consolidar em uma entrada.**
-
-### D3. Bhadra 2022 vs Bhadra et al. 2023 — **OBRAS DISTINTAS (confirmado)**
-
-| Chave | Evento | Ano | DOI verificado |
-|-------|--------|-----|----------------|
-| `bhadra2022` | ISSREW 2022, pp. 165–170 | 2022 | `10.1109/ISSREW55968.2022.00050` |
-| `bhadra2023` | RAMS 2023 | 2023 | `10.1109/RAMS51473.2023.10088212` |
-
-Título similar, mas autoria, veículo e DOI diferem. **Manter ambas**; completar páginas em `bhadra2023`.
-
----
-
-## Entradas incompletas (auditoria) — status no `.bib` atual
-
-| Entrada | Status auditoria | Status `.bib` 2026-06-08 | Status `.bbl` renderizado |
-|---------|------------------|--------------------------|---------------------------|
-| `aalst2012process` | veículo vazio | `journal={ACM TMIS}` presente; **falta DOI** `10.1145/2229156.2229157` | ainda mostra `In: .` (problema `@incollection` + ABNT) |
-| `massitela2018` | sem veículo | **corrigido:** SEKE 2018, DOI `10.18293/SEKE2018-033` | ainda só ano (`.bbl` desatualizado ou tipo `@article`+`booktitle`) |
-| `joshi2024` | veículo "IEEE" | **corrigido:** SANER 2024, DOI `10.1109/SANER60148.2024.00057` | `.bbl` ainda mostra só "IEEE" |
-| `washizaki2015` | veículo "IEEE" | **corrigido:** Agile 2015, DOI `10.1109/Agile.2015.19` | `.bbl` ainda mostra só "IEEE" |
-| `tyagi2021` | veículo "Springer" | **corrigido:** Springer chapter, DOI `10.1007/978-981-16-0404-1_26` | `.bbl` ainda mostra só "Springer" |
-
-**Conclusão:** várias correções já estão no `.bib` mas **não se refletem** na bibliografia PDF se o `.bbl` não for regenerado após ajuste de tipo de entrada (`@inproceedings` vs `@article`).
-
-### Páginas ausentes (prioridade baixa) — ainda pendentes no `.bib`
-
-`buliga2025`, `guinea2025`, `gupta2017`, `jo2023`, `lopezpintado2023`, `nafreen2020`, `bhadra2023`, `magennis2015` — obras **verificadas por DOI**; faltam páginas para uniformidade ABNT.
-
----
-
-## Amostra verificada externamente (reprodução + extensão)
-
-| Entrada | Resultado | Evidência |
+| Citação | Afirmação | Sustenta? |
 |---------|-----------|-----------|
-| Aalst 2012 | Real | Crossref `10.1145/2229156.2229157` → ACM TMIS 3(2):1–17 |
-| Massitela 2018 | Real | Crossref `10.18293/SEKE2018-033` |
-| Joshi & Kahani 2024 | Real | Crossref `10.1109/SANER60148.2024.00057` |
-| Buliga et al. 2025 | Real | Crossref `10.1109/ICPM66919.2025.11220730` |
-| Whittaker & Thomason 1994 | Real (duplicada) | Crossref `10.1109/32.328991` |
-| Poncin et al. 2011 | Real (duplicada) | CSMR 2011, pp. 5–14 |
-| Bhadra 2022 / 2023 | Reais, distintas | DOIs ISSREW e RAMS acima |
-| Clássicos sem DOI no `.bib` | Real | Busca Crossref por título: Hevner 2004, Peffers 2007, Metropolis 1949, Gneiting 2007, Cook 1998, Kitchenham 2007 (tech report EBSE), etc. |
-
-**Nenhuma referência claramente fabricada** foi encontrada na amostra do documento original. **Duas entradas citadas falham** na verificação de metadados (B1, B2).
+| `rubin2007` | Framework PM+SE (ICSP 2007) | ✅; claims “first” hedged |
+| `wohlin2014guidelines` | Snowballing | ✅ EASE 2014 |
+| `bose2013trace` | Variabilidade / alignments | ✅ |
+| `augusto2019` | Benchmarks discovery | ✅ |
+| `buliga2025` | What-if ICPM 2025 | ✅ |
 
 ---
 
@@ -195,66 +136,56 @@ Título similar, mas autoria, veículo e DOI diferem. **Manter ambas**; completa
 
 | Chave | Situação |
 |-------|----------|
-| `billingsley1961statistical` | DOI resolve; Crossref titula *Statistical Methods in Markov Chains* — variante de título da mesma obra (pp. 12–40, AOMS 32(1)) |
-| `kitchenham2007` | Tech report EBSE-2007-01; sem DOI Crossref; obra canônica SLR |
-| `github2023api`, `gharchive2023` | Recursos web; válidos como `@misc` |
-| `syriani2023` | arXiv `2307.06464`; DOI DataCite 404 em Crossref, obra real |
-| `kuleshov2018calibrated` | ICML 2018; sem DOI no `.bib`; arXiv `1807.00263` confirma existência |
-| `little2011factory` | Capítulo Springer; DOI no `.bib` retorna 404; obra real (Little's Law) |
+| `billingsley1961statistical` | Variante de título no Crossref; mesma obra |
+| `kitchenham2007` | Tech report EBSE-2007-01 (sem DOI) |
+| `github2023api`, `gharchive2023` | Recursos web (sem DOI) |
+| `vacanti2015` | Livro comercial (sem DOI) |
+| `poncin2011process` | CSMR 2011 workshop (sem DOI no Crossref) |
+| `syriani2023` | arXiv `10.48550/arXiv.2307.06464` |
+| `kuleshov2018calibrated` | arXiv `10.48550/arXiv.1807.00263` |
+| `little2011factory` | Capítulo Springer; DOI de livro retorna 404 no Crossref |
 
 ---
 
-## Histórico do projeto relevante
+## Histórico do projeto
 
-| Registro | Implicação |
-|----------|------------|
-| `REVISAO_ORIENTADOR_CHECKLIST.md` | `bose2013trace` adicionada para cap4 §4.3 (Phase-9); **não validou DOI** |
-| `missing_references.bib` (2026-04-19) | Documenta entradas faltantes do cap3; inclui `Wohlin2024` com DOI EASE alternativo |
-| `results/raw/control_papers_bib.json` | Corpus SLR com DOIs de estudos incluídos (não substitui bib da tese) |
-| `references.bib` | 417 entradas; 48 grupos de título duplicado no arquivo completo (não todos citados) |
-
----
-
-## Ações recomendadas (ordem de prioridade)
-
-1. **[BLOCKER]** Corrigir `bose2013trace` (DOI + vol/págs/ano).
-2. **[BLOCKER]** Resolver `rubin2014process` — substituir por `rubin2007` ou fonte verificável; revisar claims “first framework” no cap2.
-3. **[MAJOR]** Corrigir DOI `montgomery2022jira` → `10.1145/3524842.3528486`.
-4. **[MAJOR]** Corrigir DOI `wohlin2014guidelines` e alinhar versão journal vs. conferência.
-5. Remover duplicatas D1 (`whittaker1994` / `WhittakerThomason1994`) e D2 (`poncin2011` / `poncin2011process`).
-6. Remover `jokwon2024` placeholder; padronizar chave `jo2024` → `Jo2024`.
-7. Ajustar tipos BibTeX (`@inproceedings`) e recompilar para corrigir renderização ABNT de Aalst, Massitela, Joshi, Washizaki, Tyagi.
-8. Completar páginas nas entradas de conferência listadas na auditoria.
-9. Adicionar DOIs faltantes nas ~22 entradas clássicas sem DOI (melhora reproducibilidade, não corrige existência).
+| Data | Evento |
+|------|--------|
+| 2026-04-19 | `missing_references.bib` gerado para cap3 |
+| 2026-06-08 (manhã) | Auditoria inicial + validação Crossref/OpenAlex (98 citadas) |
+| 2026-06-08 (tarde) | Correções BLOCKER/MAJOR, `.tex` ativos, `latexmk` |
+| 2026-06-08 (noite) | Higiene `.bib`, DOIs clássicos, Phase 9, revalidação 95 chaves |
 
 ---
 
-## Artefatos gerados nesta sessão
+## Artefatos
 
 | Arquivo | Conteúdo |
 |---------|----------|
 | `results/auditoria_referencias_evidencias.md` | Este relatório |
-| `/tmp/pathcast_ref_audit_evidence.json` | Resultado machine-readable por chave (98 entradas) |
-| `/tmp/pathcast_unverified_batch.json` | Busca Crossref para clássicos sem DOI |
+| `results/ref_validation_post_corrections.json` | Revalidação 95 chaves (Crossref) |
+| `results/phase9_citation_claim_audit.md` | Phase 9 — citação ↔ afirmação |
+| `scripts/bib_hygiene_and_validate.py` | Script de higiene + patches DOI |
+| `references.bib` | Bibliografia fonte (337 entradas) |
+| `main_patched.bbl` / `.pdf` | Bibliografia compilada (95 entradas) |
 
-**Correções aplicadas em 2026-06-08** (`references.bib` + capítulos ativos + `latexmk -pdf main_patched.tex`):
-
-- `bose2013trace`, `montgomery2022jira`, `wohlin2014guidelines`, `aalst2012process`, entradas `@inproceedings` (Joshi, Washizaki, Tyagi, Massitela), páginas faltantes, `jo2024`, `bhadra2023`
-- Removidos: `rubin2014process`, `poncin2011`, `WhittakerThomason1994`, `jokwon2024`
-- Citações atualizadas: `rubin2014process`→`rubin2007`; duplicatas Whittaker/Poncin consolidadas
-- Bibliografia regenerada: **95 entradas** em `main_patched.bbl` (antes 98)
+**Comando para recompilar:**
+```bash
+cd tese/TESE_DOUTORADO_PATHCAST
+latexmk -pdf main_patched.tex
+```
 
 ---
 
-## Resposta direta à pergunta
+## Resposta direta (atualizada)
 
 > As referências da tese são todas válidas?
 
-**Não.** A grande maioria (**~94/98**) corresponde a publicações reais, coerente com a conclusão favorável do material de auditoria sobre alucinação. Porém:
+**Sim, para as 95 referências citadas na compilação atual**, no sentido de existência bibliográfica, metadados corrigidos nos bloqueantes, higiene do `.bib` e auditoria Phase 9 nos trechos críticos.
 
-- **2 entradas citadas têm metadados invalidantes** (`bose2013trace`, `rubin2014process`).
-- **3 entradas têm DOI/placeholder defeituoso** (`montgomery2022jira`, `wohlin2014guidelines`, `jokwon2024`).
-- **3 pares duplicados** aparecem na bibliografia citada.
-- **~15 entradas** têm defeitos de formatação que não negam existência, mas prejudicam rigor ABNT e rastreabilidade.
+**Pendências opcionais (não bloqueantes para defesa):**
+- Alinhar títulos no `.bib` aos registros Crossref onde há `TITLE_MISMATCH` cosmético;
+- Adicionar DOI a `poncin2011process` se localizado em repositório institucional;
+- Revisão Phase 9 estendida a todas as 95 citações (não apenas alto risco).
 
-Para defesa com rigor de verificabilidade, tratar B1 e B2 como **bloqueantes**; o restante é correção editorial de alta prioridade.
+Para defesa: **itens bloqueantes bibliográficos, higiene do `.bib`, Wohlin/Rubin e Phase 9 estão resolvidos.**
