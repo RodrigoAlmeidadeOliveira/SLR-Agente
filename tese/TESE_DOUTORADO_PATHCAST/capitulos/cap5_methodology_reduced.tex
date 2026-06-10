@@ -380,7 +380,7 @@ analysis scripts are documented in the replication package.
     \node[rectangle, draw, fill=green!8, rounded corners=2pt,
           minimum width=3cm, font=\scriptsize, align=center,
           left=1.5cm of e1, yshift=-0.75cm] (data) {
-        48 Repositories\\227K commits\\Dataset $\mathcal{R}$
+        48 Repositories\\3.5M commits\\Dataset $\mathcal{R}$
     };
     \draw[arrow] (data) |- (e1);
     \draw[arrow] (data) |- (e2);
@@ -876,9 +876,12 @@ The dataset is adequately powered for medium-to-large effects at the
 adjusted level. Low power for small effects ($r \leq 0.2$) is accepted
 since hypotheses concern practically meaningful improvements.
 
-\textbf{RQ3 — Within-repository ML.} Median expected test-set size
-80--120 cases (227K commits, 1:4 issue ratio); sufficient for AUC-ROC
-which stabilises above $n \approx 50$~\cite{hanley1982meaning}.
+\textbf{RQ3 — Within-repository ML.} For repositories satisfying
+$|\mathcal{L}_{\text{test}}| \geq 50$, the median expected test-set size
+is approximately 80--120 mapped cases, consistent with the harvested
+corpus (3.5M commits, 115K closed issues;
+Table~\ref{tab:dataset-summary}); sufficient for AUC-ROC which
+stabilises above $n \approx 50$~\cite{hanley1982meaning}.
 
 
 \subsection{Reporting Standards}

@@ -274,32 +274,24 @@ construction in Stage~1 of the PATHCAST pipeline.
 
 The dataset construction strategy balances statistical power, process observability, and diversity, ensuring both internal validity for stochastic modeling and external validity for generalization across different SDLC contexts.
 
-Table~\ref{tab:dataset-summary} presents aggregate statistics for the 
-48-repository dataset.
+The aggregate statistics in Table~\ref{tab:dataset-summary} are computed from
+the Stage-1 GitHub event log (\texttt{github\_event\_log.parquet}) and commit
+totals in \texttt{repo\_metadata.json}. Both inputs are consumed by
+\texttt{scripts/generate\_dataset\_summary\_tex.py}, which regenerates the
+LaTeX table after each harvest run (June~2026 snapshot).
 
-\begin{table}[htbp]
-\centering
-\caption{Aggregate dataset statistics (48 repositories).}
-\label{tab:dataset-summary}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Metric} & \textbf{Total} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
-\midrule
-Commits & 227{,}000 & 4{,}729 & 3{,}215 & -- \\
-Closed issues & -- & -- & -- & -- \\
-Pull requests & -- & -- & -- & -- \\
-Contributors & -- & -- & -- & -- \\
-Activity span (months) & -- & -- & -- & -- \\
-\bottomrule
-\multicolumn{5}{l}{\parbox{13cm}{\footnotesize Note: Cells marked ``--'' are
-    populated upon completion of data collection
-    (Chapter~\ref{ch:evaluation}). Of the 48 planned repositories,
-    45 have been confirmed at the time of writing; three slots remain
-    pending stratified selection (Step~3,
-    Section~\ref{sec:selection-process}). The 227K commits figure
-    is confirmed from the SEART candidate-generation phase.}}
-\end{tabular}
-\end{table}
+\input{results/auxiliary/aux_dataset_summary}
+
+Across the 47 usable repositories recorded in \texttt{repo\_manifest.json},
+mapped process-case counts are highly skewed (median 109 cases; mean
+3{,}076). Three repositories harvested in June~2026
+(\texttt{pandas-dev/pandas}, \texttt{nestjs/nest}, \texttt{vitejs/vite})
+dominate volume; 15 repositories yield fewer than 50 mapped cases and 23
+yield fewer than 100 despite satisfying the $\geq 100$ closed-issue
+selection criterion (C2) at repository freeze time---for example,
+\texttt{django/django} (62 cases) and \texttt{postgres/postgres} (2 cases)
+in the Stage-1 log. Repository-level reporting and the minimum-case guard in
+Equation~\eqref{eq:acceptance} mitigate this heterogeneity in E1/E2.
 
 Table~\ref{tab:dataset-diversity} characterizes the diversity of the 
 dataset across dimensions relevant to generalizability.
@@ -398,7 +390,7 @@ illustrates the experimental design.
     \node[rectangle, draw, fill=green!8, rounded corners=2pt, 
           minimum width=3cm, font=\scriptsize, align=center,
           left=1.5cm of e1, yshift=-0.75cm] (data) {
-        48 Repositories\\227K commits\\Dataset $\mathcal{R}$
+        48 Repositories\\3.5M commits\\Dataset $\mathcal{R}$
     };
     \draw[arrow] (data) |- (e1);
     \draw[arrow] (data) |- (e2);
@@ -1139,8 +1131,9 @@ medium or large effect sizes to be scientifically credible.
 \textbf{RQ3 — ML within-repository comparison.}
 For the repositories satisfying
 $|\mathcal{L}_{\text{test}}| \geq 50$, the median expected test-set
-size is approximately 80--120 cases, based on the confirmed 227K
-commits and a conservative issue-to-commit ratio of~1:4. This is
+size is approximately 80--120 mapped cases, consistent with the harvested
+corpus (3.5M commits, 115K closed issues;
+Table~\ref{tab:dataset-summary}). This is
 sufficient for reliable AUC-ROC estimation, which stabilises above
 $n \approx 50$ for approximately balanced
 datasets~\cite{hanley1982meaning}. Repositories near the threshold are
