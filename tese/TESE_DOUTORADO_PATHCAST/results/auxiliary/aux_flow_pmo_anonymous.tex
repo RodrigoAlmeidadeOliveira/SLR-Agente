@@ -1,0 +1,36 @@
+% Auto-generated summary — confidential flow_pmo corpus (fully anonymised labels).
+% Source: PathCast data/processed/anonymization/anonymous_corpus_summary.json
+\begin{table}[htbp]
+\centering
+\caption{Anonymised aggregate statistics for four confidential organisational
+projects (denoted P\textsubscript{1}--P\textsubscript{4}). Jira transition
+volumes are available for P\textsubscript{1} only; E1 preview metrics use the
+PATHCAST Bitbucket activity alphabet (PR/commit lifecycle, no author or title
+fields).}
+\label{tab:flow-pmo-anonymous}
+\small
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{\textbf{Repository snapshot}} &
+\multicolumn{3}{c}{\textbf{Jira log (P\textsubscript{1} only)}} &
+\multicolumn{4}{c}{\textbf{E1 preview (Bitbucket log)}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-11}
+\textbf{Proj.} & \textbf{Commits} & \textbf{PRs} & \textbf{Downstream rows$^{\dagger}$}
+& \textbf{Cases} & \textbf{Events} & \textbf{Activ.}
+& \textbf{Cases} & \textbf{Fit.} & \textbf{Prec.} & \textbf{Pass} \\
+\midrule
+P\textsubscript{1} & 424 & 150 & 2{,}067 & 987 & 6{,}916 & 36 & 150 & 0.991 & 1.000 & Yes \\
+P\textsubscript{2} & 210 &  56 & 1{,}790 & --- & --- & --- &  56 & 0.976 & 1.000 & Yes \\
+P\textsubscript{3} & 500 & 188 &   194 & --- & --- & --- &  50 & 0.967 & 0.740 & Yes \\
+P\textsubscript{4} &   9 &   0 &   357 & --- & --- & --- & --- & --- & --- & n/a \\
+\midrule
+\textbf{Total} & 1{,}143 & 394 & 4{,}408 & 987 & 6{,}916 & 36 & 256 & --- & --- & 3/3 \\
+\bottomrule
+\multicolumn{11}{l}{\parbox{14cm}{\footnotesize $^{\dagger}$Rows in the
+downstream issue snapshot (column counts only; no titles or keys exported).
+E1: Inductive Miner (IMf), $\theta_{\text{noise}} = 0.2$, up to 800 PR cases;
+Pass = preview criteria of Eq.~\eqref{eq:acceptance}. P\textsubscript{4} has
+no pull-request traces under PATHCAST mapping. Custom Jira status names,
+issue titles, URLs, and author identities are \emph{not} reported.}}
+\end{tabular}
+\end{table}

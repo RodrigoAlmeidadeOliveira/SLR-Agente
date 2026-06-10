@@ -21,13 +21,17 @@ GitHub REST API~\cite{github2023api}, and stratification across primary
 language, project scale, governance model, and workflow maturity
 (Table~\ref{tab:dataset-diversity}).
 
-Forty-four of forty-eight evaluation repositories had usable event logs at
-writing (see \texttt{repo\_manifest.json}); the remaining four
-(\texttt{nestjs/nest}, \texttt{vitejs/vite}, \texttt{pandas-dev/pandas},
-\texttt{torvalds/linux}) require GitHub Issues harvest with a valid token.
+Forty-seven of forty-eight evaluation repositories had usable event logs after
+the June 2026 harvest (see \texttt{repo\_manifest.json}).
+\texttt{torvalds/linux} was collected but yields no process cases under the
+Stage-1 filter (\texttt{min\_events=2}): the kernel project maintains issue
+tracking on the Linux Kernel Mailing List rather than GitHub Issues.
 Apache and Spring projects use Jira issue
 transition history from Montgomery et al.~\cite{montgomery2022jira} in
-place of GitHub Issues where noted.
+place of GitHub Issues where noted. Table~\ref{tab:repo-manifest-summary}
+lists per-repository Stage-1 case and event counts from the June~2026 harvest.
+
+\input{results/auxiliary/aux_repo_manifest}
 
 \section{Stratification Summary}
 \label{app:repo-strata}
@@ -112,11 +116,11 @@ St\,=\,Standard, A\,=\,Advanced.}
 24  & microsoft/TypeScript         & JS/TS  & Language           & L & Corp & A  & GitHub \\
 25  & microsoft/vscode             & JS/TS  & IDE                & L & Corp & A  & GitHub \\
 26  & neovim/neovim                & C      & Editor             & L & Comm & St & GitHub \\
-27  & nestjs/nest                  & JS/TS  & Web framework      & M & Comm & St & GitHub$^{\dagger}$ \\
+27  & nestjs/nest                  & JS/TS  & Web framework      & M & Comm & St & GitHub \\
 28  & openssl/openssl              & C      & Security library   & L & Comm & St & GitHub \\
 29  & pallets/click                & Python & CLI library        & M & Comm & St & GitHub \\
 30  & pallets/flask                & Python & Web framework      & M & Comm & St & GitHub \\
-31  & pandas-dev/pandas            & Python & Data processing    & L & Fdn  & A  & GitHub$^{\dagger}$ \\
+31  & pandas-dev/pandas            & Python & Data processing    & L & Fdn  & A  & GitHub \\
 32  & postgres/postgres            & C      & Database           & L & Comm & St & GitHub \\
 33  & prometheus/prometheus        & Go     & DevOps / monitoring& L & Fdn  & A  & GitHub \\
 34  & psf/requests                 & Python & Library            & M & Fdn  & St & GitHub \\
@@ -127,19 +131,21 @@ St\,=\,Standard, A\,=\,Advanced.}
 39  & scipy/scipy                  & Python & Scientific comp.   & L & Fdn  & St & GitHub \\
 40  & serde-rs/serde               & Rust   & Library            & M & Comm & St & GitHub \\
 41  & sharkdp/bat                  & Rust   & CLI                & S & Comm & St & GitHub \\
-42  & spring-projects/spring-boot  & Java   & Web framework      & L & Corp & A  & Jira$^{\dagger}$ \\
+42  & spring-projects/spring-boot  & Java   & Web framework      & L & Corp & A  & Jira$^{\ddagger}$ \\
 43  & spring-projects/spring-framework & Java & Web framework  & L & Corp & A  & Jira \\
 44  & sveltejs/svelte              & JS/TS  & Web framework      & M & Comm & A  & GitHub \\
 45  & tokio-rs/tokio               & Rust   & Async runtime      & M & Comm & A  & GitHub \\
 46  & torvalds/linux               & C      & OS kernel          & L & Fdn  & A  & GitHub \\
-47  & vitejs/vite                  & JS/TS  & Build tool         & M & Comm & A  & GitHub$^{\dagger}$ \\
+47  & vitejs/vite                  & JS/TS  & Build tool         & M & Comm & A  & GitHub \\
 48  & vuejs/vue                    & JS/TS  & Web framework      & L & Comm & A  & GitHub \\
 
 \end{longtable}
 
 \vspace{0.5em}
 \noindent\footnotesize
-$^{\dagger}$~\textit{Pending}: selected by stratified sampling; data
-collection scheduled prior to the empirical evaluation (in preparation). The remaining
-44 repositories have confirmed data in the evaluation pipeline.
+$^{\ddagger}$~Jira transition history supplemented from an external XLSX export
+(not present in the Montgomery bulk parquet); mapped in
+\texttt{jira\_event\_log\_tagged.parquet}.
+Harvest snapshot: June~2026 (GitHub REST completion batch ending 9~June~2026;
+see Table~\ref{tab:repo-manifest-summary}).
 \end{landscape}

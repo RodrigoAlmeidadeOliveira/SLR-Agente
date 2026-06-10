@@ -1,7 +1,7 @@
 % =============================================================================
 % CHAPTER 6 — IMPLEMENTATION
 % Thesis: PATHCAST
-% Status: preliminary draft grounded in PathCast v0.1.0 harvest (Apr 2026)
+% Status: preliminary draft grounded in PathCast v0.1.0 harvest (Jun 2026)
 % =============================================================================
 
 \chapter{Implementation}
@@ -9,14 +9,15 @@
 
 This chapter documents the software instantiation of PATHCAST
 (Definition~\ref{def:pipeline}). At the time of writing, Stage~1 (event log
-construction) is implemented and exercised on the evaluation corpus described
-in Chapter~\ref{ch:methodology}; Stages~2--4 and the ML component remain
-specified but not yet integrated into the executable pipeline
+construction) and a preliminary Stage~2 E1 module (process discovery and
+conformance) are implemented on the evaluation corpus described in
+Chapter~\ref{ch:methodology}; Stages~3--4 and the ML component remain
+specified but not yet integrated into the end-to-end executable pipeline
 (Section~\ref{sec:impl-roadmap}).
 
 Section~\ref{sec:impl-architecture} presents the repository layout and
 technology stack. Section~\ref{sec:impl-stage1} details the Stage~1 modules
-and reports harvest-scale statistics from the April~2026 snapshot.
+and reports harvest-scale statistics from the June~2026 snapshot.
 Section~\ref{sec:impl-artifacts} lists the interim data products.
 Section~\ref{sec:impl-e1-pilot} reports a single-repository E1 feasibility
 pilot. Section~\ref{sec:impl-confidential} discusses the handling of
@@ -82,43 +83,50 @@ Stage~1 implements the signature $\mathcal{S}_1 : \mathcal{R} \to \mathcal{L}$
 
 For Jira-backed repositories (Apache and Spring projects), \texttt{jira\_collector.py}
 reads transition histories from the Montgomery et al.\ public Jira dataset and
-produces a separate interim log (\texttt{jira\_event\_log.parquet}, 1.37~M events).
+produces a separate interim log (\texttt{jira\_event\_log.parquet}, 37~MB;
+tagged variant \texttt{jira\_event\_log\_tagged.parquet}, 27~MB).
 
 \subsection{Preliminary harvest statistics}
 \label{sec:impl-stage1-stats}
 
-Table~\ref{tab:impl-harvest} summarises the GitHub Stage-1 harvest executed in
-April~2026 over 43 of the 48 evaluation repositories (five repositories
-pending or empty at harvest time; see Appendix~\ref{app:repository-list}).
+Table~\ref{tab:impl-harvest} summarises the June~2026 GitHub Stage-1 harvest stored in
+\texttt{github\_event\_log.parquet} ($n = 46$ evaluation repositories with
+GitHub-derived traces). Per-repository coverage across GitHub Issues and Jira
+sources is recorded in \texttt{repo\_manifest.json}: 47 of 48 evaluation
+repositories yield usable process logs; only \texttt{torvalds/linux} remains
+empty under Stage~1 filtering (Appendix~\ref{app:repository-list}).
 
 \begin{table}[htbp]
 \centering
-\caption{Stage-1 GitHub harvest snapshot (April 2026, $n = 43$ repositories).}
+\caption{Stage-1 GitHub harvest snapshot (June 2026, $n = 46$ repositories).}
 \label{tab:impl-harvest}
 \begin{tabular}{lr}
 \toprule
 \textbf{Quantity} & \textbf{Value} \\
 \midrule
-Total events                         & 174{,}036 \\
-Total process cases (issues + PRs)   & 24{,}066 \\
+Total events                         & 959{,}822 \\
+Total process cases (issues + PRs)   & 120{,}617 \\
 Distinct activity types (global)     & 18 \\
-Mean events per repository         & 4{,}047 \\
-Median events per repository       & 164 \\
-Mean cases per repository          & 560 \\
-Median cases per repository        & 82 \\
+Mean events per repository         & 20{,}865.7 \\
+Median events per repository       & 173 \\
+Mean cases per repository          & 2{,}622.1 \\
+Median cases per repository        & 84.5 \\
 \midrule
-Largest repository by cases          & \texttt{cli/cli} (9{,}548 cases) \\
-Second largest                       & \texttt{fastapi/fastapi} (8{,}693) \\
+Largest repository by cases          & \texttt{pandas-dev/pandas} (63{,}404 cases) \\
+Second largest                       & \texttt{nestjs/nest} (16{,}606) \\
+Third largest                        & \texttt{vitejs/vite} (16{,}541) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The highly skewed distribution (median $\ll$ mean) reflects the stratified
-corpus: a few high-activity repositories (\texttt{cli/cli},
-\texttt{fastapi/fastapi}) dominate event volume, while many medium-scale
-projects contribute fewer than 200 cases each. This heterogeneity is intentional
-(Section~\ref{sec:dataset-rationale}) and will be preserved in the full E1/E2
-reporting by repository-level aggregation.
+The distribution is highly skewed (median $\ll$ mean): three repositories
+collected in the June~2026 completion harvest
+(\texttt{pandas-dev/pandas}, \texttt{nestjs/nest}, \texttt{vitejs/vite})
+account for most case volume, while 15 of the 47 usable repositories
+yield fewer than 50 process cases and 23 yield fewer than 100 under
+Stage~1 filtering. This
+heterogeneity is intentional (Section~\ref{sec:dataset-rationale}) and will be
+preserved in the full E1/E2 reporting by repository-level aggregation.
 
 
 % =============================================================================
@@ -141,9 +149,12 @@ the current implementation. Raw API downloads reside under
 \toprule
 \textbf{File} & \textbf{Description} & \textbf{Size (approx.)} \\
 \midrule
-\texttt{github\_event\_log.parquet} & GitHub Stage-1 log (43 repos) & 2.9~MB \\
-\texttt{jira\_event\_log.parquet}   & Montgomery Jira transitions  & 35~MB \\
+\texttt{github\_event\_log.parquet} & GitHub Stage-1 log (46 repos) & 17~MB \\
+\texttt{jira\_event\_log.parquet}   & Montgomery Jira transitions  & 37~MB \\
+\texttt{jira\_event\_log\_tagged.parquet} & Jira log with repo tags & 27~MB \\
 \texttt{jira\_event\_log.xes}       & XES export (Jira)            & 645~MB \\
+\texttt{repo\_manifest.json}        & Per-repo harvest status      & $<$10~KB \\
+\texttt{repo\_metadata.json}        & Commit counts (REST harvest) & $<$10~KB \\
 \texttt{dataset\_summary\_stats.json}& Auto-computed table inputs  & $<$1~KB \\
 \bottomrule
 \end{tabular}
@@ -159,15 +170,21 @@ Table~\ref{tab:dataset-summary} (Chapter~\ref{ch:methodology}).
 \section{Preliminary E1 Feasibility Pilot}
 \label{sec:impl-e1-pilot}
 
-Although Stage~2 is not yet packaged as a library module, a standalone pilot
-script (\texttt{scripts/run\_e1\_pilot\_pm4py.py}) exercises the E1 protocol of
-Section~\ref{sec:e1-design} on a single public repository using PM4Py directly.
+The \texttt{stage2\_mining} module and pilot script
+(\texttt{scripts/run\_e1\_pilot\_pm4py.py}) exercise the E1 protocol of
+Section~\ref{sec:e1-design} on a single public repository using PM4Py.
 The pilot filters the 800 most recent cases from \texttt{fastapi/fastapi},
 discovers a Petri net with the Inductive Miner at
 $\theta_{\text{noise}} = 0.2$, and computes alignment-based fitness and
 precision plus token-based-replay generalization.
 
 \input{results/auxiliary/aux_e1_pilot}
+
+For \texttt{fastapi/fastapi}, all four preview acceptance checks of
+Equation~\eqref{eq:acceptance} are satisfied (fitness $= 0.911$,
+precision $= 0.817$, coverage $= 1.00$, cases $= 800$), demonstrating
+feasibility on a high-activity GitHub Issues workflow before the stratified
+batch below.
 
 \subsection{E1 batch on ten representative repositories}
 \label{sec:impl-e1-batch}
@@ -179,13 +196,19 @@ the preview acceptance criteria of Equation~\eqref{eq:acceptance}.
 
 \input{results/auxiliary/aux_e1_representative}
 
-All four preview acceptance checks of Equation~\eqref{eq:acceptance} are
-satisfied for this repository (fitness $= 0.911$, precision $= 0.817$,
-coverage $= 1.00$, cases $= 800$). This result supports the \emph{feasibility}
-of the E1 design on a high-activity GitHub Issues workflow but must not be
-extrapolated to the full 48-repository evaluation: a single pilot cannot
-establish external validity, and several repositories in the corpus use Jira
-workflows with different activity alphabets.
+All ten repositories pass every preview acceptance check in
+Equation~\eqref{eq:acceptance}. Alignment-based fitness ranges from
+0.886 (\texttt{cli/cli}) to 1.000 (\texttt{django/django},
+\texttt{facebook/react}); the two Jira-backed entries
+(\texttt{apache/kafka}, \texttt{spring-projects/spring-framework}) lie at
+0.911--0.916. Precision is lowest on those Jira workflows (0.583--0.620),
+consistent with richer transition alphabets, whereas several GitHub Issues
+repositories reach 1.000. These outcomes support the \emph{feasibility} of
+the E1 protocol on both issue-tracking backends in the stratified sample,
+but they must not be extrapolated to the full 48-repository evaluation: the
+batch caps at 800 cases per repository, several GitHub projects still yield
+fewer than 100 traces under Stage~1 filtering, and external validity requires
+the complete E1 aggregate defined in Section~\ref{sec:e1-design}.
 
 
 % =============================================================================
@@ -217,22 +240,37 @@ re-identification risks if published without transformation:
 
 \paragraph{Thesis reporting policy.}
 Unless explicit written authorisation is obtained from the data controller,
-\emph{no record from the confidential corpus appears in this thesis or in the
-public replication package}. Permitted uses without authorisation are limited to:
+\emph{no record-level export from the confidential corpus appears in this thesis
+or in the public replication package}. Permitted uses without authorisation are:
 \begin{enumerate}
-    \item methodological prose describing how confidential logs \emph{would} be
-    handled (pseudonymisation, URL removal, date shifting);
-    \item fully synthetic or publicly available substitute logs for figures; and
-    \item aggregate-only statistics that cannot be linked to the organisation
-    (e.g.\ ``a private Jira project with 987 cases and 36 activities yielded
-    fitness $\geq 0.7$''), provided no workflow/status names unique to that
-    organisation are quoted.
+    \item methodological prose describing pseudonymisation (URL removal, author
+    hashing, title redaction, date shifting);
+    \item fully synthetic substitute logs (generated internally by
+    \texttt{assess\_flow\_pmo\_anonymization.py}); and
+    \item \emph{aggregate-only} statistics that cannot reasonably identify the
+    organisation, provided custom workflow status names and deliverable titles
+    are omitted (Table~\ref{tab:flow-pmo-anonymous}).
 \end{enumerate}
 
-Even when individual status labels appear generic, the combination of labels,
-volumes, and timing could still fingerprint the organisation; therefore the
-conservative default is non-disclosure until a formal anonymisation protocol
-and legal review are completed.
+\paragraph{Anonymised aggregate statistics.}
+Four confidential Bitbucket/Jira projects from a single industrial partner are
+denoted P\textsubscript{1}--P\textsubscript{4}. Table~\ref{tab:flow-pmo-anonymous}
+reports volume counts and E1 preview conformance on the PATHCAST Bitbucket
+activity alphabet only (commit and pull-request lifecycle events; author and
+title fields stripped before mining). A full Jira transition log is available
+for P\textsubscript{1} (987 cases, 6{,}916 events, 36 activities); the
+remaining projects contribute Bitbucket snapshots and downstream issue tables
+without exported transition histories. Across the three projects with pull-request
+traces, the E1 preview acceptance criteria of Equation~\eqref{eq:acceptance}
+are satisfied (fitness $0.967$--$0.991$; precision $0.740$--$1.000$).
+
+\input{results/auxiliary/aux_flow_pmo_anonymous}
+
+Even when status labels appear generic, the combination of labels, volumes, and
+timing could fingerprint the organisation; Table~\ref{tab:flow-pmo-anonymous}
+therefore excludes workflow status names, DFG edges, bottleneck stage labels, and
+variant strings. A formal anonymisation protocol and legal review remain
+prerequisites for any richer disclosure.
 
 
 % =============================================================================
@@ -242,9 +280,11 @@ and legal review are completed.
 \label{sec:impl-roadmap}
 
 The remaining milestones follow the PathCast development roadmap (v0.2--v0.6):
-Stage~2 process discovery and conformance as a library module; Stage~3 Markov
-estimation with Laplace smoothing for sparse transitions; Stage~4 Monte Carlo
-simulation with percentile extraction; orchestrating CLI; and the full E1/E2
-evaluation harness. Upon completion, this chapter will be expanded with
+Stage~3 Markov estimation with Laplace smoothing for sparse transitions;
+Stage~4 Monte Carlo simulation with percentile extraction; end-to-end CLI
+orchestration; full E1 over all qualifying repositories and complete E2
+forecasting evaluation. Upon completion, this chapter will be expanded with
 end-to-end runtime metrics, replication-package DOI, and PostgreSQL persistence
-(Section~\ref{sec:data-collection}).
+(Section~\ref{sec:data-collection}). Stage~2 E1 mining
+(\texttt{stage2\_mining}) and the preliminary batch reported in
+Section~\ref{sec:impl-e1-batch} are already implemented at v0.1.0.

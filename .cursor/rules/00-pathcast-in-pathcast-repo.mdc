@@ -1,0 +1,26 @@
+---
+description: Pipeline PATHCAST — implementação e BMAD ficam no repositório PathCast, não aqui
+alwaysApply: true
+---
+
+# PATHCAST não se desenvolve neste repositório
+
+Este workspace é **SLR-Agente** (tese, SLR, LaTeX).
+
+**Repositório canônico do PATHCAST** (código + BMAD + dados):
+
+`/Users/rodrigoalmeidadeoliveira/Library/CloudStorage/GoogleDrive-rodrigoalmeidadeoliveira@gmail.com/Outros computadores/Notebook/Python/Projetos/PathCast`
+
+## Neste repo (SLR-Agente) — permitido
+
+- Capítulos e apêndices LaTeX: `tese/TESE_DOUTORADO_PATHCAST/`
+- Consumir tabelas `aux_*.tex` **geradas** a partir de PathCast
+- Revisão de texto científico (skill `paper-validation-review`)
+
+## Neste repo — proibido
+
+- Criar ou editar `src/pathcast/`, specs SPEC-*, épicos BMAD, REASONS Canvas
+- Duplicar `docs/bmad/` aqui
+- Implementar S2–S4, evaluation, CLI
+
+Se a tarefa for implementação ou BMAD do pipeline, **mude para o workspace PathCast** ou indique explicitamente que arquivos devem ser criados lá.

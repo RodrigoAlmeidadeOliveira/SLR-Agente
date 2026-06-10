@@ -1875,6 +1875,25 @@ value used in all combined-tier analyses.
 
 \input{results/auxiliary/aux_qa_summary}
 
+Table~\ref{tab:qa-combined} reports a counterintuitive pattern: the auxiliary
+tier's mean QA score ($5.09$) exceeds that of the working set ($4.88$),
+even though auxiliary inclusions were screened with weaker textual evidence.
+This ordering is a \emph{selection effect}, not evidence that the auxiliary
+corpus is methodologically superior. The auxiliary inclusion set retains only
+studies that survived full-text or enriched-abstract screening under the same
+eight-criterion rubric; papers closed under EC6 (insufficient metadata) or
+EC7 (unresolvable disagreement) never enter the denominator, biasing the
+retained pool toward publications with richer abstracts that explicitly
+document objectives (QA1), data sources (QA3), and formal technique
+definitions (QA4). The working set, by contrast, includes the full analytical
+core regardless of abstract richness, and therefore retains a larger share of
+short workshop papers, position papers, and legacy publications with sparse
+methodology reporting---precisely the studies that depress the per-item QA
+profile (Section~\ref{sec:slr-qa}, Table~\ref{tab:qa-peritem}). The higher
+auxiliary mean thus confirms that screening quality co-varies with metadata
+availability, and reinforces why F1--F5 are anchored on the working set while
+the auxiliary tier serves recall-bounding only.
+
 A residual conclusion-validity threat is the LLM-based extraction of
 PM-technique, stochastic-technique, and SDLC-phase fields. To mitigate this,
 the 73-PDF triangulation subset was used to spot-check the extracted fields

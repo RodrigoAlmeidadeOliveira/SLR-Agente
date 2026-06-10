@@ -25,7 +25,7 @@
 \contentsline {table}{\numberline {3.20}{\ignorespaces Re-FT screening of aux-pending papers that gained an abstract through the post-hoc enrichment cascade.}}{56}{table.caption.48}%
 \contentsline {table}{\numberline {3.21}{\ignorespaces EC5 recovery attempt against four open-access discovery APIs.}}{57}{table.caption.49}%
 \contentsline {table}{\numberline {3.22}{\ignorespaces Quality assessment combined across working-set and auxiliary tiers, after cross-tier de-duplication ($n = 319$). The auxiliary tier is reported as unique studies (150) after removing 60 cross-tier and 2 internal duplicates from the 212 raw first-pass inclusions.}}{58}{table.caption.50}%
-\contentsline {table}{\numberline {3.23}{\ignorespaces Process mining applied to software development.}}{59}{table.caption.51}%
+\contentsline {table}{\numberline {3.23}{\ignorespaces Process mining applied to software development.}}{60}{table.caption.51}%
 \contentsline {table}{\numberline {3.24}{\ignorespaces Technique integration ($\text {$\mathsurround \z@ \mathchar "5D8$}$) across studies. To the best of the author's knowledge, no reviewed study occupies the full intersection targeted by PATHCAST.}}{61}{table.caption.52}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {4.1}{\ignorespaces Event extraction mapping per data source.}}{70}{table.caption.55}%
@@ -38,42 +38,44 @@
 \contentsline {table}{\numberline {4.8}{\ignorespaces Method components vs.\ research questions.}}{95}{table.caption.62}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {5.1}{\ignorespaces Mapping of DSRM activities to thesis components.}}{97}{table.caption.63}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Aggregate dataset statistics (Stage-1 harvest of 43/48 GitHub repositories with event logs; 48/48 evaluation repositories confirmed; see \texttt {repo\_manifest.json}).}}{102}{table.caption.65}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Aggregate dataset statistics (Stage-1 harvest of 46/48 GitHub repositories with event logs; 47/48 evaluation repositories confirmed; see \texttt {repo\_manifest.json}).}}{102}{table.caption.65}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Dataset diversity profile.}}{102}{table.caption.66}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics for RQ1.}}{107}{table.caption.68}%
 \contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics for RQ2.}}{108}{table.caption.69}%
 \contentsline {table}{\numberline {5.6}{\ignorespaces Evaluation metrics for RQ3.}}{109}{table.caption.70}%
 \contentsline {table}{\numberline {5.7}{\ignorespaces Baseline methods.}}{110}{table.caption.71}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces A priori power estimates ($n = 48$, four baselines).}}{112}{table.caption.72}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Summary: research questions, evaluation stages, metrics, baselines.}}{115}{table.caption.73}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces A priori power estimates ($n = 48$, four baselines).}}{113}{table.caption.72}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Summary: research questions, evaluation stages, metrics, baselines.}}{116}{table.caption.73}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces PATHCAST implementation modules (v0.1.0).}}{118}{table.caption.74}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Stage-1 GitHub harvest snapshot (April 2026, $n = 43$ repositories).}}{119}{table.caption.75}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Interim artefacts at v0.1.0.}}{119}{table.caption.76}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces Preliminary E1 pilot on \texttt {fastapi/fastapi} (800 most recent cases; Inductive Miner, $\theta _{\text {noise}} = 0.2$). Not the full 48-repository E1.}}{120}{table.caption.77}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces E1 preliminary batch on ten representative repositories (IMf, $\theta _{\text {noise}} = 0.2$, up to 800 cases each).}}{120}{table.caption.78}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces PATHCAST implementation modules (v0.1.0).}}{119}{table.caption.74}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Stage-1 GitHub harvest snapshot (June 2026, $n = 46$ repositories).}}{120}{table.caption.75}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Interim artefacts at v0.1.0.}}{120}{table.caption.76}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Preliminary E1 pilot on \texttt {fastapi/fastapi} (800 most recent cases; Inductive Miner, $\theta _{\text {noise}} = 0.2$). Not the full 48-repository E1.}}{121}{table.caption.77}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces E1 preliminary batch on ten representative repositories (IMf, $\theta _{\text {noise}} = 0.2$, up to 800 cases each).}}{122}{table.caption.78}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces Anonymised aggregate statistics for four confidential organisational projects (denoted P\textsubscript {1}--P\textsubscript {4}). Jira transition volumes are available for P\textsubscript {1} only; E1 preview metrics use the PATHCAST Bitbucket activity alphabet (PR/commit lifecycle, no author or title fields).}}{124}{table.caption.79}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {E.1}{\ignorespaces Search strings by database and field scope.}}{149}{table.caption.82}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {F.1}{\ignorespaces LLM parameters in each screening phase.}}{155}{table.caption.83}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {G.1}{\ignorespaces Data extraction form: all fields in \texttt {extraction\_template.csv}.}}{158}{table.caption.84}%
-\contentsline {table}{\numberline {G.2}{\ignorespaces Controlled vocabulary for LLM structured output.}}{159}{table.caption.85}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {H.1}{\ignorespaces Priority-band definitions for the full-text review queue.}}{161}{table.caption.86}%
-\contentsline {table}{\numberline {H.2}{\ignorespaces Abstract enrichment results by priority band.}}{162}{table.caption.88}%
-\contentsline {table}{\numberline {H.3}{\ignorespaces Quality assessment checklist with scoring guide.}}{163}{table.caption.89}%
-\contentsline {table}{\numberline {H.4}{\ignorespaces Complete control-paper set for string validation.}}{164}{table.caption.90}%
-\contentsline {table}{\numberline {H.5}{\ignorespaces SPMF taxonomy: three dimensions with level definitions.}}{165}{table.caption.91}%
+\contentsline {table}{\numberline {E.1}{\ignorespaces Search strings by database and field scope.}}{151}{table.caption.83}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {I.1}{\ignorespaces Multi-criterion scoring rubric for the top-32 reading list.}}{166}{table.caption.92}%
-\contentsline {table}{\numberline {I.2}{\ignorespaces Top-32 reading list with score, year, IC cluster, and summary of the main finding. Papers marked with $\dagger $ are forced inclusions due to seminal status.}}{168}{table.caption.93}%
-\contentsline {table}{\numberline {I.3}{\ignorespaces Review pipeline scripts and their functions.}}{169}{table.caption.94}%
-\contentsline {table}{\numberline {I.4}{\ignorespaces Persistent review artefacts.}}{169}{table.caption.95}%
+\contentsline {table}{\numberline {F.1}{\ignorespaces LLM parameters in each screening phase.}}{157}{table.caption.84}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {J.1}{\ignorespaces Repository count by primary language stratum ($n = 48$).}}{171}{table.caption.96}%
-\contentsline {table}{\numberline {J.2}{\ignorespaces Complete list of 48 evaluation repositories with stratification metadata. Abbreviations: Scale --- S\,=\,Small ($<5$K commits), M\,=\,Medium (5--20K), L\,=\,Large ($>20$K); Gov. --- Fdn\,=\,Foundation, Corp\,=\,Corporate, Comm\,=\,Community; WF --- B\,=\,Basic, St\,=\,Standard, A\,=\,Advanced.}}{172}{table.J.2}%
+\contentsline {table}{\numberline {G.1}{\ignorespaces Data extraction form: all fields in \texttt {extraction\_template.csv}.}}{160}{table.caption.85}%
+\contentsline {table}{\numberline {G.2}{\ignorespaces Controlled vocabulary for LLM structured output.}}{161}{table.caption.86}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {H.1}{\ignorespaces Priority-band definitions for the full-text review queue.}}{163}{table.caption.87}%
+\contentsline {table}{\numberline {H.2}{\ignorespaces Abstract enrichment results by priority band.}}{164}{table.caption.89}%
+\contentsline {table}{\numberline {H.3}{\ignorespaces Quality assessment checklist with scoring guide.}}{165}{table.caption.90}%
+\contentsline {table}{\numberline {H.4}{\ignorespaces Complete control-paper set for string validation.}}{166}{table.caption.91}%
+\contentsline {table}{\numberline {H.5}{\ignorespaces SPMF taxonomy: three dimensions with level definitions.}}{167}{table.caption.92}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Multi-criterion scoring rubric for the top-32 reading list.}}{168}{table.caption.93}%
+\contentsline {table}{\numberline {I.2}{\ignorespaces Top-32 reading list with score, year, IC cluster, and summary of the main finding. Papers marked with $\dagger $ are forced inclusions due to seminal status.}}{170}{table.caption.94}%
+\contentsline {table}{\numberline {I.3}{\ignorespaces Review pipeline scripts and their functions.}}{171}{table.caption.95}%
+\contentsline {table}{\numberline {I.4}{\ignorespaces Persistent review artefacts.}}{171}{table.caption.96}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {J.1}{\ignorespaces Stage-1 harvest coverage by evaluation repository (47/48 with usable logs; snapshot June~2026).}}{173}{table.caption.97}%
+\contentsline {table}{\numberline {J.2}{\ignorespaces Repository count by primary language stratum ($n = 48$).}}{174}{table.caption.98}%
+\contentsline {table}{\numberline {J.3}{\ignorespaces Complete list of 48 evaluation repositories with stratification metadata. Abbreviations: Scale --- S\,=\,Small ($<5$K commits), M\,=\,Medium (5--20K), L\,=\,Large ($>20$K); Gov. --- Fdn\,=\,Foundation, Corp\,=\,Corporate, Comm\,=\,Community; WF --- B\,=\,Basic, St\,=\,Standard, A\,=\,Advanced.}}{175}{table.J.3}%

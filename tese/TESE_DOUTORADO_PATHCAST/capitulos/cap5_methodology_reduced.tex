@@ -74,11 +74,11 @@ empirically (the experiments designed in this chapter).
 2 & Objectives Definition  & Ch.~\ref{ch:introduction} & 3 RQs, 4 objectives, 5 contributions \\
 \midrule
 3 & Design \& Development  & Ch.~\ref{ch:method}        & PATHCAST method \\
-  &                        & (in preparation)            & Python tool \\
+  &                        & Ch.~\ref{ch:implementation} & Python tool (v0.1.0, partial) \\
 \midrule
-4 & Demonstration          & (in preparation)           & 48 repositories \\
+4 & Demonstration          & Ch.~\ref{ch:implementation} & 47/48 repositories (Stage~1) \\
 \midrule
-5 & Evaluation             & (in preparation)           & E1: Pipeline; E2: Forecasting \\
+5 & Evaluation             & Ch.~\ref{ch:implementation} & E1 pilot + 10-repo batch (partial) \\
 \midrule
 6 & Communication          & This thesis                & Conference/journal papers \\
 \bottomrule
@@ -251,9 +251,20 @@ $R^{(t)}$ denotes the immutable state of $r$ observed at $t$: the set of
 commits, issues, pull requests, and CI/CD events with timestamp $\leq t$.
 All analyses in this thesis are conducted over snapshots
 $\{R_r^{(t_r)}\}_{r \in \mathcal{D}}$ collected within the window
-$[t_{\text{start}}, t_{\text{end}}]$; per-repository collection dates $t_r$
-are recorded in Appendix~\ref{app:repository-list}.
+$[t_{\text{start}}, t_{\text{end}}]$; per-repository case counts and harvest
+status are recorded in Table~\ref{tab:repo-manifest-summary} and
+\texttt{repo\_manifest.json}.
 \end{definition}
+
+The PathCast v0.1.0 harvest executed in June~2026 treats this window as a
+single freeze. GitHub Issues timeline collection used an authenticated REST
+token with rate-limit backoff; the completion batch
+(\texttt{nestjs/nest}, \texttt{vitejs/vite}, \texttt{pandas-dev/pandas})
+required approximately 28~hours of wall-clock time, of which
+\texttt{pandas-dev/pandas} alone (65{,}634 issues $\times$ timeline events)
+accounted for roughly 20~hours. The batch finished on 9~June~2026; commit
+totals were refreshed on 8~June~2026; remaining repositories retain
+snapshots from the April--June~2026 development cycle.
 
 Each snapshot is stored in PostgreSQL for Stage~1 ingestion.
 
@@ -262,13 +273,23 @@ Each snapshot is stored in PostgreSQL for Stage~1 ingestion.
 \label{sec:dataset-stats}
 
 The aggregate statistics in Table~\ref{tab:dataset-summary} are computed from
-the Stage-1 GitHub event log (\texttt{github\_event\_log.parquet}) produced by
-the PathCast harvest pipeline. The table is regenerated automatically by
-\texttt{scripts/generate\_dataset\_summary\_tex.py}; cells marked
-\textit{pending} await completion of the commit-level API harvest described
-in Section~\ref{sec:data-collection}.
+the Stage-1 GitHub event log (\texttt{github\_event\_log.parquet}) and commit
+totals in \texttt{repo\_metadata.json}. Both inputs are consumed by
+\texttt{scripts/generate\_dataset\_summary\_tex.py}, which regenerates the
+LaTeX table after each harvest run (June~2026 snapshot).
 
 \input{results/auxiliary/aux_dataset_summary}
+
+Across the 47 usable repositories recorded in \texttt{repo\_manifest.json},
+mapped process-case counts are highly skewed (median 109 cases; mean
+3{,}076). Three repositories harvested in June~2026
+(\texttt{pandas-dev/pandas}, \texttt{nestjs/nest}, \texttt{vitejs/vite})
+dominate volume; 15 repositories yield fewer than 50 mapped cases and 23
+yield fewer than 100 despite satisfying the $\geq 100$ closed-issue
+selection criterion (C2) at repository freeze time---for example,
+\texttt{django/django} (62 cases) and \texttt{postgres/postgres} (2 cases)
+in the Stage-1 log. Repository-level reporting and the minimum-case guard in
+Equation~\eqref{eq:acceptance} mitigate this heterogeneity in E1/E2.
 
 \begin{table}[htbp]
 \centering
@@ -419,10 +440,18 @@ The fitness and precision thresholds are imposed jointly so that an accepted
 model both replays the observed behaviour ($\text{fitness} \geq 0.7$) and does
 not overgeneralize into a flower-like model admitting arbitrary behaviour
 ($\text{precision} \geq 0.5$); the values are consistent with process-mining
-practice on noisy, real-world logs. The final condition reflects the variance
-threshold for empirical percentiles and CRPS~\cite{gneiting2007strictly}.
-Repositories satisfying the quality conditions but failing the case-count
-threshold are reported as
+practice on noisy, real-world logs. The fifth condition,
+$|\mathcal{L}_{\text{test}}| \geq 50$, requires that the temporal hold-out
+test set (Definition~\ref{def:temporal-holdout}) contain at least 50
+completed cases. Below this threshold, empirical percentile estimates exhibit
+high sampling variance---the standard error of a sample quantile scales as
+$O(1/\sqrt{n})$---and CRPS, which integrates calibration across the full
+predictive distribution, becomes unreliable for tail quantiles
+~\cite{gneiting2007strictly}. The threshold is consistent with simulation
+practice for proper scoring rules and with AUC estimation, which stabilises
+near $n \approx 50$ for approximately balanced outcomes
+~\cite{hanley1982meaning}. Repositories satisfying the quality conditions but
+failing the case-count threshold are reported as
 \emph{quality-validated but statistically insufficient for E2} and
 excluded from E2 only.
 
@@ -461,9 +490,13 @@ t_{\text{cut}} &= t_{\min} + 0.7 \cdot (t_{\max} - t_{\min})
 \end{align}
 \end{definition}
 
-The 70/30 split follows
-convention~\cite{tashman2000out}; sensitivity to 60/40 and 80/20 is
-assessed on a representative subset.
+Random case-level splits are deliberately avoided: assigning cases to train
+and test without regard to event chronology would violate temporal causality
+by allowing training traces to include events that post-date the forecast
+origin, thereby leaking future information into the estimators
+~\cite{tashman2000out}. The 70/30 temporal split follows the same
+convention; sensitivity to 60/40 and 80/20 is assessed on a representative
+subset.
 
 \textbf{Model estimation:} $P$, $\hat{F}$, ML models estimated from
 $\mathcal{L}_{\text{train}}$ only.
@@ -916,6 +949,21 @@ evaluation is conducted exclusively on GitHub-derived traces, whose
 event vocabulary and workflow conventions are GitHub-specific, and this
 extensibility is not empirically validated here.
 
+\textbf{Event-log coverage vs.\ selection criteria.} The June~2026 harvest
+confirms usable Stage-1 logs for 47 of 48 evaluation repositories
+(\texttt{repo\_manifest.json}). \texttt{torvalds/linux} was collected but
+yields zero process cases because the kernel project tracks issues outside
+GitHub Issues. Although every candidate satisfied $\geq 100$ closed issues at
+selection time (criterion~C2), the mapped PATHCAST log contains fewer than
+50 cases in 15 repositories and fewer than 100 in 23 repositories---for
+instance, \texttt{django/django} (62 cases) and \texttt{postgres/postgres}
+(2 cases) versus \texttt{pandas-dev/pandas} (63{,}404 cases)---reflecting
+Stage~1 filtering (\texttt{min\_events=2}), partial PR lifecycle capture on
+low-activity projects, and divergence between SEART metadata and the live
+API snapshot. E1 acceptance (Equation~\eqref{eq:acceptance}) is therefore
+applied repository-wise; low-volume projects may be excluded from aggregate
+conformance summaries even though they remain in the stratified corpus.
+
 \textbf{Industrial vs.\ open-source settings.} The evaluation uses public
 OSS repositories, which may differ from industrial projects in governance,
 reporting discipline, and process maturity. Results should therefore be
@@ -1030,5 +1078,5 @@ contributions claimed by PATHCAST: event-log construction, process-aware
 stochastic modeling, distributional forecasting, process-derived
 machine-learning features, and end-to-end pipeline integration. The
 implementation architecture used to instantiate the method, and the
-empirical results obtained on the 48-repository dataset, are presented in
-the subsequent chapters (in preparation).
+preliminary empirical results on the 48-repository dataset, are presented in
+Chapter~\ref{ch:implementation} (Stage~1 harvest and E1 pilot/batch).
