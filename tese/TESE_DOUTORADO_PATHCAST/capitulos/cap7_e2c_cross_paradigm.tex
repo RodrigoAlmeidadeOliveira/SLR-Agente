@@ -1,0 +1,63 @@
+% cap6_e2c.tex — Seção Cap. 6 E2-C (copiar/adaptar para SLR-Agente)
+% Fonte: PathCast docs/thesis/cap6_e2c.tex
+% Tabelas: \input a partir de docs/thesis/tables/e2c_*.tex
+
+\section{Experimento cross-paradigma (E2-C)}
+\label{sec:e2c}
+
+O experimento E2-C complementa a avaliação interna E2 (RQ1--RQ3) com duas comparações
+cross-paradigma sobre o subconjunto de 58 projetos Jira com crosswalk validado para o
+audit IJF do MCS\_ML~\cite{...}. A análise primária de throughput restringe-se ao
+\emph{evaluation pool} pré-registrado ($n=20$); a análise secundária reporta os 58 projetos.
+
+\subsection{Throughput semanal (RQ4)}
+\label{sec:e2c-throughput}
+
+Derivamos a série semanal de conclusões via simulação Markov+Monte Carlo
+(B\_TH-Markov), agregada por semana ISO com zeros explícitos, e avaliamos CRPS
+(itens/semana) fold-a-fold conforme o protocolo IJF. A métrica legada
+\texttt{crps\_weeks} do E2 \emph{não} é comparável ao painel IJF.
+
+\input{results/auxiliary/aux_e2c_throughput_overview}
+
+\subsection{Lead time em dias (RQ4b)}
+\label{sec:e2c-leadtime}
+
+O ground truth canônico é o \emph{span} do event log convertido para dias.
+Comparamos PathCast Markov+MC com a baseline B6 (ML-LT refatorado, sem \emph{leakage}
+de features temporais pós-abertura).
+
+\input{results/auxiliary/aux_e2c_leadtime_overview}
+
+\subsection{Inferência estatística}
+\label{sec:e2c-stats}
+
+Aplicamos Wilcoxon pareado com correção de Holm no pool evaluation ($n=20$),
+separadamente para throughput e lead time.
+
+\input{results/auxiliary/aux_e2c_wilcoxon}
+
+\subsection{Análise estratificada (sensibilidade)}
+\label{sec:e2c-stratified}
+
+O corpus PathCast E2 Jira apresenta \texttt{risk\_level}=HIGH homogêneo (58/58).
+Como análise de sensibilidade, estratificamos por quartis de throughput médio do
+catálogo MCS\_ML (proxy de intensidade processual; ver Q6 em MCSML-Q-PERTINENCE).
+
+\input{results/auxiliary/aux_e2c_stratified}
+
+\subsection{Detalhe por projeto}
+\label{sec:e2c-per-project}
+
+% Requires \usepackage{longtable}
+\input{results/auxiliary/aux_e2c_per_project}
+
+\subsection{Limitações}
+\label{sec:e2c-limitations}
+
+\begin{itemize}
+  \item Unidades distintas: throughput (itens/semana) vs lead time (dias).
+  \item Pool evaluation ($n=20$) vs corpus completo ($n=58$).
+  \item B6 depende de \texttt{issue\_features.parquet} local (MCS\_ML\_LT).
+  \item Reprodutibilidade: bundle Zenodo v0.8.0 (DOI pendente).
+\end{itemize}
