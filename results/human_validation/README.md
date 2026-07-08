@@ -36,11 +36,16 @@ ou não tratar de processos de SW; terminologia ambígua.
 Para cada linha, localize o texto completo (via `doi`, `url`, `ft_oa_url` ou,
 quando preenchida, `local_pdf_path`) e:
 
-**Coluna `local_pdf_path` (adicionada em 07/jul/2026):** aponta para um PDF já
-baixado localmente em `results/pdfs/`, `results/extraction/pdfs/` ou
-`results/final_review/top30_pdfs/`, cruzado por DOI (13 casos) ou por título
-(3 casos, conferidos manualmente). Preenchida em apenas **16 de 177 linhas
-(9%)** — nos outros 161 casos, abra o texto via `doi`/`url`/`ft_oa_url`.
+**Coluna `local_pdf_path` (adicionada em 07/jul/2026, atualizada em 08/jul/2026):**
+aponta para um PDF já baixado localmente. Preenchida em **37 de 177 linhas
+(21%)**: 16 já existiam no repositório (13 por DOI, 3 por título, conferidos
+manualmente) + 21 baixados automaticamente via cascata Unpaywall/Semantic
+Scholar/OpenAlex/CORE (`pipeline/pdf_downloader.py`) para os que faltavam.
+Dos 161 que não tinham PDF local, mais 19 tiveram uma URL open-access
+encontrada mas o download automático falhou — vale tentar `results/pdfs/download_manifest.csv`
+(coluna `oa_url`, status `oa_found`) antes de recorrer ao `doi`/`url`/`ft_oa_url`
+manual. Os **120 restantes** não têm fonte automática (provavelmente pagos) —
+use `doi`/`url`/`ft_oa_url` diretamente.
 
 Dois títulos ficaram **deliberadamente sem match** por ambiguidade: "Analysis
 of software repositories using process mining" e "Mining Software Process
