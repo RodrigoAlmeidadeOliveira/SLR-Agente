@@ -1,0 +1,58 @@
+SLR PATHCAST — Abstract Recovery + T/A Re-screening Summary (Fase A, Reviewer 2 M2)
+==============================================================================
+
+1. COBERTURA DE ABSTRACT POR SOURCE_DB
+----------------------------------------
+  acm        antes: 10/46 (21.7%)
+  ieee       antes: 97/97 (100.0%)
+  scopus     antes: 538/2197 (24.5%)
+
+  acm        depois: 41/46 (89.1%)
+  ieee       depois: 97/97 (100.0%)
+  scopus     depois: 1638/2197 (74.6%)
+
+  TOTAL antes: 645/2340 (27.6%)
+  TOTAL depois: 1776/2340 (75.9%)
+  Recuperados nesta rodada: 1131
+
+2. RECUPERAÇÃO POR FONTE DA CASCATA (abstract_source, entre os recuperados)
+----------------------------------------
+  openalex                         745 (65.9% dos recuperados)
+  core                             177 (15.6% dos recuperados)
+  semanticscholar                  128 (11.3% dos recuperados)
+  crossref                          81 (7.2% dos recuperados)
+
+3. TABELA DE TRANSIÇÃO DE DECISÕES (antiga → nova, só re-triados)
+----------------------------------------
+  exclude→exclude             659 (58.3%)
+  maybe→exclude               294 (26.0%)
+  maybe→include               102 (9.0%)
+  maybe→maybe                  71 (6.3%)
+  exclude→include               2 (0.2%)
+  exclude→maybe                 2 (0.2%)
+  include→include               1 (0.1%)
+
+  Total re-triado: 1131 | Decisão mudou: 400 (35.4%)
+  Especificamente exclude→include/maybe (evidência potencialmente recuperada): 4
+
+4. QUALIDADE DO PARSING
+----------------------------------------
+  6/1131 (0.5%) respostas do LLM vieram com JSON truncado (provavelmente por exceder
+  MAX_TOKENS=512 com um abstract real mais longo para justificar a decisão — só
+  acontece após enriquecimento, nunca no título-only original). A decisão real foi
+  recuperada via regex do JSON parcial antes de fechar a tabela de transição acima
+  (5 desses 6 eram "exclude"→"exclude" de verdade, não "exclude"→"maybe" como o
+  fallback ingênuo teria registrado). Ver `ta_rationale_rescreened` com o prefixo
+  "[RECUPERADO DE JSON TRUNCADO]" para identificar essas 6 linhas.
+
+FILES WRITTEN:
+  results/screening/working_set_enriched_full_cascade.csv
+  results/screening/ta_rescreen_full_cascade_results.csv
+  results/screening/abstract_recovery_rescreen_batches.json
+
+ACTION REQUIRED / NOTE:
+  Estes resultados NÃO foram propagados para ta_screening_results.csv (oficial),
+  nem para a fila de full-text, QA, extração, ou para os números 169/381/404 do
+  artigo. Adotar oficialmente exige uma Fase B separada: reconstruir a fila de FT
+  (pipeline/fulltext.py --export), FT-triar os papers promovidos, QA/extração dos
+  novos includes, e só então atualizar o texto do artigo. Decisão explícita do autor.

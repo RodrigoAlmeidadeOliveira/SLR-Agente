@@ -25,6 +25,43 @@ Ordem de execução: por criticidade × esforço.
 **Esforço:** alto se validação real (dias); médio se for reformular como limitação + plano formalizado com cronograma concreto — mas nesse caso o risco de rejeição no round 2 permanece alto segundo a leitura do próprio revisor.
 **Bloqueia resubmissão:** Sim — é o único item que o revisor qualifica como "não sustenta ainda os achados".
 
+**ATUALIZAÇÃO (09/jul/2026) — evidência quantificada real de Lost Evidence no T/A (Fase A, não-destrutiva):**
+
+Identificamos e corrigimos a causa raiz de por que 72,4% do working set (1.695/2.340,
+principalmente Scopus e ACM) foi triado pelo LLM só com título: `extractors/scopus.py` usa a
+Scopus Search API (`dc:description`), que a Elsevier deixa vazia na maioria dos registros — o
+abstract real só sai por uma API separada (Abstract Retrieval), nunca chamada pelo pipeline
+original.
+
+Rodamos a cascata completa de 8 fontes (`pipeline/enrich.py`, já usada no corpus auxiliar) no
+working set inteiro e depois **re-triamos via o mesmo protocolo, modelo e prompt do LLM
+original** (`claude-haiku-4-5-20251001`, ver `pipeline/abstract_recovery_rescreen.py`) só o
+subconjunto que ganhou abstract nesta rodada — sem tocar `ta_screening_results.csv` oficial
+(hash conferido idêntico antes/depois) nem qualquer contagem já reportada no artigo:
+
+- Cobertura de abstract: **27,6% → 75,9%** (645→1.776 de 2.340); Scopus 24,5%→74,6%, ACM
+  21,7%→89,1%, IEEE já era 100%.
+- 1.131 papers re-triados com o abstract real. **35,4% mudaram de decisão** (400/1.131).
+- Tabela de transição completa: `results/screening/ta_rescreen_full_cascade_results.csv`;
+  resumo em `results/screening/abstract_recovery_rescreen_summary.txt`.
+- Especificamente `exclude→include`/`exclude→maybe` (evidência que tinha sido perdida por
+  triagem só-por-título e foi recuperada com o abstract real): **4 de 1.131** — pequeno em
+  proporção, mas é evidência **medida e nomeável**, não hipotética, exatamente o tipo de dado
+  que M2 exige. (Nota metodológica: 6/1.131 respostas vieram com JSON truncado por exceder
+  `MAX_TOKENS=512` com abstracts reais mais longos — corrigido via extração regex do JSON
+  parcial antes de fechar a tabela; documentado em `abstract_recovery_rescreen_summary.txt`,
+  seção 4.)
+- **Isto NÃO foi propagado** para a fila de full-text, QA, extração, nem para 169/381/404 —
+  é uma "Fase B" separada (reconstruir fila de FT, FT-triar os promovidos, QA/extração dos
+  novos includes) que exige decisão explícita do autor antes de tocar os números oficiais do
+  artigo.
+
+**Uso recomendado na carta de resposta:** substituir a discussão hipotética de Lost Evidence
+por este achado real — não resolve M2 por completo (ainda falta o double-screening humano
+real, item 1 permanece bloqueador), mas fortalece a resposta com uma causa raiz identificada,
+corrigida no nível de T/A, e uma medição concreta do tamanho do problema (pequeno em % mas
+real e documentado) em vez de um reconhecimento genérico da limitação.
+
 ---
 
 ## 2. [BLOQUEADOR / TRIVIAL] M12 — Contradição direta Tabela 13 vs. texto (IC1∩IC2∩IC3)

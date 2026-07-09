@@ -33,5 +33,26 @@
     "n_papers": 340,
     "model": "claude-haiku-4-5-20251001",
     "status": "in_progress"
+  },
+  {
+    "batch_id": "msgbatch_01AQqu9FZ2tfPZnwcQKRSTQq",
+    "created_at": "2026-07-09T10:22:04.895605+00:00",
+    "n_papers": 500,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress"
+  },
+  {
+    "batch_id": "msgbatch_01NCJJ1Z1iqGMswhm172ZhKd",
+    "created_at": "2026-07-09T10:33:12.269521+00:00",
+    "n_papers": 500,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress"
+  },
+  {
+    "batch_id": "msgbatch_01LBK6srNRUJJK4vxd7UvPdu",
+    "created_at": "2026-07-09T10:36:16.176172+00:00",
+    "n_papers": 131,
+    "model": "claude-haiku-4-5-20251001",
+    "status": "in_progress"
   }
 ]
