@@ -1,0 +1,43 @@
+32b39476	Understanding Student Interactions in Capstone Courses to Improve Learning Experiences
+14f16002	How does code readability change during software evolution?
+7b9dcf5f	SMARTINSUR: A platform for digitizing business transactions in the insurance industry
+ee37291c	Generalized technique for simulating software reliability
+ba2ff831	A stochastic model for optimizing the patching time of software bugs
+231b32a3	NHPP models with Markov switching for software reliability
+63ddd5f6	Software reliability test case generation using temporal motifs recovery and configuration
+6d83b874	Software reliability modelling and prediction with hidden Markov chains
+5f66b602	Reliability estimation and prediction of SA producing process based on Markov chain
+395ecf52	Change your history: Learning from event logs to improve processes
+13130186	Process discovery: Automated approach for block discovery
+068ca8c2	Mining Logs to Model the Use of a System
+4eeb076b	Big software on the run: In vivo software analytics based on process mining (Keynote)
+3691dee1	Constructing hybrid software process simulation models
+12343eec	Efficient secure DevOps using process mining and Attack Defense Trees
+1e0b84e9	Approach for parameter estimation in Markov model of software reliability for early prediction: A case study
+6795e33c	Discovering the software process by means of stochastic workflow analysis
+0d072e53	Sequence Mining for Automatic Generation of Software Tests from GUI Event Traces
+3f2a99a4	Anomaly detection algorithms in business process logs
+61048559	Predicting build outcomes in continuous integration using textual analysis of source code commits
+109bed40	Mining declarative models using time intervals
+bc39e52a	Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration
+a9220982	Studying the impact of uncertainty in operational release planning - An integrated method and its initial evaluation
+b269731f	Stochastic performance analysis of global software development teams
+c49662aa	Conformance checking using formal methods
+c4269b60	Empirical validation of human factors in predicting issue lead time in open source projects
+989891c5	An improved approach to adaptive testing
+9f7789a4	Is your upgrade worth it? process mining can tell
+80f879d4	Process mining and verification of properties: An approach based on temporal logic
+7a3abb2f	Model-based scheduling analysis for software projects
+7742dd7b	Quantifying software test process and product reliability simultaneously
+c6bb741f	Cost-Effective Build Outcome Prediction Using Cascaded Classifiers
+d9920ad0	Measuring reliability growth of open source software by applying Stochastic Differential Equations
+88ee1d90	Predicting time range of development based on generalized software reliability model
+bb0a0a15	A software testing-progress evaluation model based on a digestion process of test-cases
+dcb45687	Mining constraints for event-based monitoring in systems of systems
+f2c78b19	Dependability approach for evaluating software development risks
+fe44d1be	Markov analysis of software specifications
+e7335cc3	CkTail: Model learning of communicating systems
+e5fa7505	Adaptive software testing in the context of an improved controlled Markov chain model
+e8907efa	Generalizing evolutionary coupling with stochastic dependencies
+ed81f924	A general modeling and analysis framework for software fault detection and correction process
+fcc830f6	Software development of a globally distributed multicomponent project: A theoretical model and simulations

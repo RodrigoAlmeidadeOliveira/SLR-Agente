@@ -136,7 +136,7 @@ def _load_ft_csv() -> list[dict]:
     from pipeline.fulltext import FT_COLUMNS
     if not FT_CSV.exists():
         raise FileNotFoundError(f"ft_screening_results.csv não encontrado em {FT_CSV}")
-    with open(FT_CSV, encoding="utf-8", newline="") as f:
+    with open(FT_CSV, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 
 

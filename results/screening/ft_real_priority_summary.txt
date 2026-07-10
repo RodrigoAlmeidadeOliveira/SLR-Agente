@@ -1,0 +1,24 @@
+SLR PATHCAST — FT real (PDF) para os 50 papers prioritários
+============================================================
+
+Total prioritário: 50
+Re-triados com PDF real: 8
+Sem PDF disponível (decisão anterior mantida): 42
+
+Comparação: T/A+abstract (Fase A) -> FT abstract-only (existente) -> FT+PDF real
+  ba2ff831 | A stochastic model for optimizing the patching time of softw
+    T/A+abstract: exclude | FT abstract-only: include | FT+PDF real: include
+  ee562777 | Mining project-oriented business processes
+    T/A+abstract: exclude | FT abstract-only: include | FT+PDF real: include
+  56d5020d | Mining software repositories for predictive modelling of def
+    T/A+abstract: include | FT abstract-only: exclude | FT+PDF real: exclude
+  9100fc88 | The Dance of Classes - A Stochastic Model for Software Struc
+    T/A+abstract: include | FT abstract-only: exclude | FT+PDF real: exclude
+  9188583f | Planning and improving global software development process u
+    T/A+abstract: include | FT abstract-only: exclude | FT+PDF real: include
+  f5eef87b | Statistical Bayesian Inference for Stochastic Process Discov
+    T/A+abstract: include | FT abstract-only: exclude | FT+PDF real: exclude
+  fa132b7b | A stratification and sampling model for bellwether moving wi
+    T/A+abstract: include | FT abstract-only: exclude | FT+PDF real: exclude
+  d4a1d75c | Mining projects from structured and unstructured data
+    T/A+abstract: maybe | FT abstract-only: include | FT+PDF real: include

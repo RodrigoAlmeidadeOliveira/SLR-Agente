@@ -667,7 +667,7 @@ def cmd_download_pdfs(args):
             )
             sys.exit(1)
 
-        with open(FT_RESULTS_CSV, encoding="utf-8", newline="") as f:
+        with open(FT_RESULTS_CSV, encoding="utf-8-sig", newline="") as f:
             papers = list(csv.DictReader(f))
 
         # Filtra: ft_decision=include  OU  (ta_decision=include E ft_decision em branco)

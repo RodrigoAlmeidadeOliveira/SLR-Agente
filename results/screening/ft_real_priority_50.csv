@@ -1,0 +1,51 @@
+internal_id,doi,title,ta_decision_original,ta_decision_rescreened,ft_decision_existing
+32b39476,10.1145/3017680.3017716,Understanding Student Interactions in Capstone Courses to Improve Learning Experiences,exclude,include,
+14f16002,10.1007/s10664-020-09886-9,How does code readability change during software evolution?,exclude,include,
+7b9dcf5f,,SMARTINSUR: A platform for digitizing business transactions in the insurance industry,exclude,maybe,
+ee37291c,,Generalized technique for simulating software reliability,exclude,maybe,
+ba2ff831,,A stochastic model for optimizing the patching time of software bugs,maybe,exclude,include
+ee562777,10.1007/978-3-319-23063-4_28,Mining project-oriented business processes,maybe,exclude,include
+231b32a3,10.1016/j.csda.2008.01.010,NHPP models with Markov switching for software reliability,maybe,include,exclude
+63ddd5f6,10.23940/ijpe.18.06.p9.11811189,Software reliability test case generation using temporal motifs recovery and configuration,maybe,include,exclude
+6d83b874,10.1191/1471082X05st087oa,Software reliability modelling and prediction with hidden Markov chains,maybe,include,exclude
+5f66b602,10.1109/ICCASM.2010.5620017,Reliability estimation and prediction of SA producing process based on Markov chain,maybe,include,exclude
+395ecf52,10.1109/CSCWD.2015.7230925,Change your history: Learning from event logs to improve processes,maybe,include,exclude
+56d5020d,,Mining software repositories for predictive modelling of defects in SDN controller,maybe,include,exclude
+13130186,10.5220/0004896402040211,Process discovery: Automated approach for block discovery,maybe,include,exclude
+068ca8c2,10.1109/ESEM.2017.47,Mining Logs to Model the Use of a System,maybe,include,exclude
+4eeb076b,10.1145/2785592.2785593,Big software on the run: In vivo software analytics based on process mining (Keynote),maybe,include,exclude
+3691dee1,10.1145/2785592.2785610,Constructing hybrid software process simulation models,maybe,include,exclude
+12343eec,10.1016/j.procs.2022.09.079,Efficient secure DevOps using process mining and Attack Defense Trees,maybe,include,exclude
+1e0b84e9,10.1049/iet-sen.2014.0108,Approach for parameter estimation in Markov model of software reliability for early prediction: A case study,maybe,include,exclude
+6795e33c,10.1016/j.sysarc.2006.06.012,Discovering the software process by means of stochastic workflow analysis,maybe,include,exclude
+0d072e53,10.1007/978-3-030-62365-4_49,Sequence Mining for Automatic Generation of Software Tests from GUI Event Traces,maybe,include,exclude
+3f2a99a4,,Anomaly detection algorithms in business process logs,maybe,include,exclude
+61048559,10.1145/3558489.3559070,Predicting build outcomes in continuous integration using textual analysis of source code commits,maybe,include,exclude
+109bed40,,Mining declarative models using time intervals,maybe,include,exclude
+bc39e52a,10.1109/ESEM.2017.23,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,maybe,include,exclude
+a9220982,10.1016/j.infsof.2009.11.003,Studying the impact of uncertainty in operational release planning - An integrated method and its initial evaluation,maybe,include,exclude
+b269731f,10.1145/2955093,Stochastic performance analysis of global software development teams,maybe,include,exclude
+c49662aa,10.5220/0005993402580263,Conformance checking using formal methods,maybe,include,exclude
+c4269b60,10.1145/2020390.2020403,Empirical validation of human factors in predicting issue lead time in open source projects,maybe,include,exclude
+989891c5,10.1142/S0218194009004349,An improved approach to adaptive testing,maybe,include,exclude
+9100fc88,10.1109/WETSoM.2017.5,The Dance of Classes - A Stochastic Model for Software Structure Evolution,maybe,include,exclude
+9f7789a4,10.1109/MS.2014.20,Is your upgrade worth it? process mining can tell,maybe,include,exclude
+9188583f,10.1145/1138506.1138510,Planning and improving global software development process using simulation,maybe,include,exclude
+80f879d4,10.1007/11575771_11,Process mining and verification of properties: An approach based on temporal logic,maybe,include,exclude
+7a3abb2f,10.1109/COMPSACW.2011.57,Model-based scheduling analysis for software projects,maybe,include,exclude
+7742dd7b,10.1109/ISSRE.2013.6698910,Quantifying software test process and product reliability simultaneously,maybe,include,exclude
+c6bb741f,10.1109/MSR.2017.26,Cost-Effective Build Outcome Prediction Using Cascaded Classifiers,maybe,include,exclude
+d9920ad0,10.1109/WCSE.2010.149,Measuring reliability growth of open source software by applying Stochastic Differential Equations,maybe,include,exclude
+88ee1d90,10.1109/APSEC.2014.59,Predicting time range of development based on generalized software reliability model,maybe,include,exclude
+bb0a0a15,10.1142/S0218539397000163,A software testing-progress evaluation model based on a digestion process of test-cases,maybe,include,exclude
+dcb45687,10.1109/ASE.2017.8115693,Mining constraints for event-based monitoring in systems of systems,maybe,include,exclude
+f5eef87b,10.1007/978-3-032-05792-1_22,Statistical Bayesian Inference for Stochastic Process Discovery,maybe,include,exclude
+f2c78b19,10.1049/iet-sen.2013.0196,Dependability approach for evaluating software development risks,maybe,include,exclude
+fa132b7b,10.18293/SEKE2017-126,A stratification and sampling model for bellwether moving window,maybe,include,exclude
+fe44d1be,10.1145/151299.151326,Markov analysis of software specifications,maybe,include,exclude
+e7335cc3,,CkTail: Model learning of communicating systems,maybe,include,exclude
+e5fa7505,10.1109/COMPSAC.2008.186,Adaptive software testing in the context of an improved controlled Markov chain model,maybe,include,exclude
+e8907efa,10.1109/ASE.2011.6100065,Generalizing evolutionary coupling with stochastic dependencies,maybe,include,exclude
+ed81f924,10.1002/stvr.1600,A general modeling and analysis framework for software fault detection and correction process,maybe,include,exclude
+d4a1d75c,,Mining projects from structured and unstructured data,maybe,maybe,include
+fcc830f6,10.1080/1097198X.2009.10856496,Software development of a globally distributed multicomponent project: A theoretical model and simulations,maybe,maybe,include

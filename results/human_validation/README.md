@@ -104,3 +104,21 @@ Pode ser feito em múltiplas sessões — o script de build não sobrescreve
 respostas já preenchidas se você rodar `--build-sheets` de novo com os mesmos
 arquivos (mas evite rodar de novo depois de começar a preencher: ele regenera
 o CSV do zero). Salve backups incrementais se for parar e retomar depois.
+
+## Pendências (10/jul/2026)
+
+- **`53ed8ac4`** ("International Workshops on Business Process Management, BPM 2020")
+  — você já decidiu `exclude` quando o abstract ainda era o texto errado sobre
+  "family firms/SMFFs" (contaminação de fuzzy match, já corrigida — ver
+  `article_ist/response_to_reviewers/audit_log_abstract_recovery_2026-07-09.md`,
+  Seção 3). O título é um volume de proceedings inteiro, não um paper — `exclude`
+  provavelmente continua certo, mas por outro motivo. Reconfirme quando revisar
+  essa linha.
+- **`9fe435f5`** ("AtomPy: An open atomic data curation environment for
+  astrophysical applications") — o abstract atual parece ser de outro paper
+  (bloco de afiliação de "Department of Mechanical and Aeronautical
+  Engineering", não sobre astrofísica/curadoria de dados). Ainda sem decisão
+  sua nessa linha — cheque o DOI/título antes de decidir.
+- Cópia de trabalho `ta_blind_review_sheet_wip.xlsx` já está sincronizada com
+  as correções acima (ver log de auditoria) — se você mantém o fluxo de
+  trabalho nela, as duas pendências acima também se aplicam lá.

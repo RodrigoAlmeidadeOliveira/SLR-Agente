@@ -57,6 +57,52 @@ subconjunto que ganhou abstract nesta rodada — sem tocar `ta_screening_results
   novos includes) que exige decisão explícita do autor antes de tocar os números oficiais do
   artigo.
 
+**ATUALIZAÇÃO (10/jul/2026) — Fase B: FT real (leitura de PDF) para os papers mais
+divergentes, achado forte e concreto para M2:**
+
+Identificamos que a etapa de "FT screening" do pipeline original, para 99,5% dos casos, não lê
+o PDF de verdade — alimenta o LLM com o mesmo abstract, só com prompt mais estrito
+(`pipeline/fulltext.py::_build_ft_prompt`). Isolamos os **50 papers** onde isso mais importa: 4
+nunca passaram por FT nenhuma (excluídos ainda no T/A), e 46 têm decisões divergentes entre a
+re-triagem T/A com abstract real (Fase A) e o "FT screening" existente (também abstract-only).
+
+No caminho, achamos e corrigimos outro bug real: `results/screening/ft_screening_results.csv`
+tinha a coluna `internal_id` **100% vazia nas 886 linhas** (causa raiz confirmada via git
+archaeology: um BOM UTF-8 introduzido ao abrir/salvar o arquivo em Excel/Numbers em algum
+ponto, nunca stripado por `load_ft_queue()` — corrigido em `pipeline/fulltext.py` e
+`pipeline/pdf_band_d_review.py`, mais o backfill das 886 linhas).
+
+De 50 papers, conseguimos PDF real para **8** (os outros 42 são majoritariamente pagos/sem
+acesso automático). Resultado da leitura de full-text de verdade
+(`pipeline/ft_real_priority_review.py`, reaproveitando `extract_pdf_text`/`_build_prompt` de
+`pipeline/pdf_band_d_review.py`):
+
+| internal_id | T/A+abstract (Fase A) | FT abstract-only (existente) | **FT+PDF real** |
+|---|---|---|---|
+| ba2ff831 | exclude | include | **include** |
+| ee562777 | exclude | include | **include** |
+| 9188583f | include | exclude | **include** |
+| 56d5020d | include | exclude | exclude |
+| 9100fc88 | include | exclude | exclude |
+| f5eef87b | include | exclude | exclude |
+| fa132b7b | include | exclude | exclude |
+| d4a1d75c | maybe | include | include |
+
+**3 papers (`ba2ff831`, `ee562777`, `9188583f`) são evidência de Lost Evidence recuperada e
+verificada com texto completo real** — não abstract, não hipótese. `9188583f` é o caso mais
+forte: nem a re-triagem T/A nem o "FT screening" abstract-only original o capturaram como
+include — só a leitura real do PDF revelou que atende IC2/IC3. Isso é uma prova empírica direta
+e concreta da falha de Lost Evidence que o Reviewer 2 (M2) cobra, obtida com o método mais
+rigoroso possível (full-text de verdade), não uma estimativa.
+
+Detalhes completos, script e dados em
+`results/screening/ft_real_priority_summary.txt`/`ft_real_priority_50.csv` e no log de
+auditoria `article_ist/response_to_reviewers/audit_log_abstract_recovery_2026-07-09.md`.
+
+**Pendente:** os outros 42 dos 50 continuam sem PDF (decisão anterior abstract-only mantida) —
+precisam de acesso manual (institucional/paywall) para fechar a auditoria completa. Nenhuma
+dessas mudanças foi propagada para 169/381/404 — decisão de adoção oficial ainda em aberto.
+
 **ATUALIZAÇÃO (09/jul/2026) — auditoria de qualidade encontrou e corrigiu contaminação real,
 inclusive no corpus JÁ SUBMETIDO ao Reviewer 2:**
 
@@ -328,20 +374,20 @@ Ou seja: 63 dos 381 registros do subset analítico combinado (e 64 dos 404) são
 
 ## Resumo executivo (ordem de execução recomendada)
 
-| # | Item | Criticidade | Esforço | Bloqueia resubmissão? |
-|---|------|------|------|------|
-| 1 | M2–M6 — recall/gold-standard humano | Bloqueador | Alto (dias) ou médio (plano+parcial) | Sim |
-| 2 | M12 — Tabela 13 vs. texto (IC1∩IC2∩IC3) | Bloqueador | Trivial (30min) | Sim |
-| 3 | M14 — Zenodo restrito + DOI único | Bloqueador | Baixo-médio (ação externa) | Sim |
-| 4 | W3(r1)/m4 — datas de busca ainda erradas | Estrutural | Baixo (~1h) | Sim, se reaparecer |
-| 5 | W4+W6(r1)/M1/m3 — dominância e status de PATHCAST | Estrutural | Médio (~3-4h) | Parcial |
-| 6 | W2+W5(r1)/M11/M13/m11/m16 — funil e reconciliação de números | Estrutural | Médio-alto | Não isoladamente, mas padrão recorrente |
-| 7 | M15/título — SEGRESS + mapping study | Reenquadramento | Médio (~1 dia) | Não isoladamente, mas habilita #8 |
-| 8 | M9 — QA/RoB terminologia e threshold | Reenquadramento | Baixo-médio | Não |
-| 9 | M7,M8,m1,m2,m9,m10 — papel humano/protocolo/rationale/histórico | Apresentação | Baixo-médio | Não |
-| 10 | m11,M11 — referências e rótulos | Apresentação | Médio | Não |
-| 11 | m7,M10,m8 — IC, paradoxo kappa, independência | Estatístico | Baixo-médio | Não |
-| — | m5, m6 — snowballing, validação de busca | Menor | Baixo | Não |
+| # | Item | Criticidade | Esforço | Bloqueia resubmissão? | Status (10/jul/2026) |
+|---|------|------|------|------|------|
+| 1 | M2–M6 — recall/gold-standard humano | Bloqueador | Alto (dias) ou médio (plano+parcial) | Sim | **Em andamento.** Double-screening humano (T/A 468, FT 177) em progresso pelo autor. Fase A (re-screening com abstract real, 1.087 papers) e Fase B (FT real/PDF, 8 de 50 prioritários) concluídas com achados concretos — ver item 1 abaixo. Faltam: terminar double-screening humano, conseguir PDF para 42 dos 50 prioritários. |
+| 2 | M12 — Tabela 13 vs. texto (IC1∩IC2∩IC3) | Bloqueador | Trivial (30min) | Sim | Não iniciado — correção textual simples, ainda pendente. |
+| 3 | M14 — Zenodo restrito + DOI único | Bloqueador | Baixo-médio (ação externa) | Sim | Não iniciado — depende de ação sua fora do repositório. |
+| 4 | W3(r1)/m4 — datas de busca ainda erradas | Estrutural | Baixo (~1h) | Sim, se reaparecer | Não iniciado. |
+| 5 | W4+W6(r1)/M1/m3 — dominância e status de PATHCAST | Estrutural | Médio (~3-4h) | Parcial | Não iniciado — depende de decisão sobre `article_method/`. |
+| 6 | W2+W5(r1)/M11/M13/m11/m16 — funil e reconciliação de números | Estrutural | Médio-alto | Não isoladamente, mas padrão recorrente | **RESOLVIDO** (dedup cross-tier) — ver "ATUALIZAÇÃO" no item 6; falta só o texto/tabela de funil no artigo. |
+| 7 | M15/título — SEGRESS + mapping study | Reenquadramento | Médio (~1 dia) | Não isoladamente, mas habilita #8 | Não iniciado — depende de decisão sobre título. |
+| 8 | M9 — QA/RoB terminologia e threshold | Reenquadramento | Baixo-médio | Não | Não iniciado. |
+| 9 | M7,M8,m1,m2,m9,m10 — papel humano/protocolo/rationale/histórico | Apresentação | Baixo-médio | Não | Não iniciado. |
+| 10 | m11,M11 — referências e rótulos | Apresentação | Médio | Não | Não iniciado. |
+| 11 | m7,M10,m8 — IC, paradoxo kappa, independência | Estatístico | Baixo-médio | Não | Não iniciado. |
+| — | m5, m6 — snowballing, validação de busca | Menor | Baixo | Não | Não iniciado. |
 
 ---
 
@@ -352,3 +398,12 @@ Ou seja: 63 dos 381 registros do subset analítico combinado (e 64 dos 404) são
 3. **Item 5 (M1):** o `article_method/` (o paper metodológico do PATHCAST) tem conteúdo real e completo mas nenhum identificador citável. Ele será submetido/depositado como preprint antes desta resubmissão (permitindo citação real), ou as menções devem ser reformuladas como "future work not yet published"?
 4. **Item 7 (M15/título):** aceitar reclassificar o artigo como "Systematic Mapping Study" (recomendado, resolve M9 e a crítica de tipo de estudo de uma vez) ou manter "SLR" e assumir o custo de adicionar síntese de resultados?
 5. ~~Item 6 (6a/6b — dedup cross-tier)~~ — **RESOLVIDO (07/jul/2026):** checagem automatizada read-only (working set 2.340 vs. auxiliar 3.807 completos) confirmou que os 404/340 não têm duplicatas ocultas além das 63/64 já corrigidas. Fix mínimo (nota de rodapé) é suficiente; fix estrutural não é necessário. Ver detalhes na "ATUALIZAÇÃO" dentro do item 6.
+6. **NOVA (10/jul/2026) — Item 1 (M2), adoção oficial da Fase A+B:** temos 3 papers (`ba2ff831`, `ee562777`, `9188583f`) com evidência de Lost Evidence recuperada e **confirmada com PDF real**, prontos para virar `include` oficial. Quer que eu já promova esses 3 especificamente para 169/381/404 (QA + extração + atualização de contagem), ou prefere esperar fechar os 42 papers prioritários restantes (pendentes de PDF) antes de tocar qualquer número oficial, para reportar tudo de uma vez?
+7. **NOVA (10/jul/2026) — Item 1 (M2), os 42 papers prioritários sem PDF:** a maioria exige acesso institucional/pago que eu não tenho automatizado. Você tem acesso (biblioteca da PUC-PR, ResearchGate, contato com autores) para conseguir PDF de pelo menos uma parte deles? A lista está em `results/screening/ft_real_priority_50.csv` (coluna indicando quem já tem PDF).
+
+## Pendências de verificação (não bloqueiam a carta, mas precisam fechar antes da resubmissão)
+
+- Checar `SIMKIT` (`d50fcf26`) e `43977ab5` contra o DOI real — item 1, Seção 3 do audit log.
+- Auditar os 12 suspeitos em `results/auxiliary/fuzzy_match_audit/` (só o Grupo 1 precisa investigação de verdade).
+- No double-screening humano: reconfirmar `53ed8ac4` (decisão tomada sob abstract errado, já corrigido) e decidir `9fe435f5` ("AtomPy...", abstract suspeito de ser de outro paper).
+- Ver lista completa e cronológica em `article_ist/response_to_reviewers/audit_log_abstract_recovery_2026-07-09.md`, Seção 6.

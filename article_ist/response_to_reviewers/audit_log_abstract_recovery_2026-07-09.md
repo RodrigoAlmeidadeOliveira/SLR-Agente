@@ -1,9 +1,10 @@
-# Log de auditoria — Recuperação de abstracts, re-screening e dedup cross-tier
+# Log de auditoria — Recuperação de abstracts, re-screening, dedup cross-tier e FT real
 
-Data: 07–09/jul/2026. Contexto: preparação da resposta ao Reviewer 2 (M2 — Recall/Lost
+Data: 07–10/jul/2026. Contexto: preparação da resposta ao Reviewer 2 (M2 — Recall/Lost
 Evidence; item 6 — dedup cross-tier Tabela 9/10). Este documento consolida achados e ações
 que estão espalhados por vários arquivos (`revision_plan_round1_reviewer2.md`,
 `results/screening/abstract_recovery_rescreen_summary.txt`,
+`results/screening/ft_real_priority_summary.txt`,
 `results/auxiliary/fuzzy_match_audit/README.md`) num único registro cronológico.
 
 ---
@@ -155,19 +156,68 @@ do working set completo) — vale checagem manual antes de decidir essa linha.
 
 ---
 
-## 5. Pendências e decisões em aberto
+## 5. Fase B — bug do `internal_id` corrigido + FT real (PDF) para os 50 papers prioritários
 
-1. **Fase B** (propagar Fase A para os números oficiais): reconstruir fila de FT
-   (`pipeline/fulltext.py --export`), FT-triar os papers promovidos (exige full-text/PDF), QA
-   e extração dos novos includes, só então atualizar 169/381/404 e o texto do artigo. Decisão
-   do autor sobre executar ou não — ver próxima seção deste log para o início da execução.
-2. Checar `SIMKIT` (`d50fcf26`) e `43977ab5` contra o DOI real (Seção 3).
-3. Auditar os 12 suspeitos em `results/auxiliary/fuzzy_match_audit/` (só o Grupo 1 precisa
+**Achado:** a etapa de "FT screening" do pipeline original, para 99,5% dos casos, não lê o PDF
+— alimenta o LLM com o mesmo abstract (`pipeline/fulltext.py::_build_ft_prompt`), só com prompt
+mais estrito. "Propagar a Fase A" não é um merge simples; o que precisa de atenção real é um
+conjunto específico de 50 papers: 4 nunca passaram por FT nenhuma (excluídos ainda no T/A), e
+46 têm decisão divergente entre a re-triagem T/A com abstract real (Fase A) e o "FT screening"
+existente (também abstract-only).
+
+**Bug encontrado no caminho, corrigido:** `results/screening/ft_screening_results.csv` tinha a
+coluna `internal_id` 100% vazia nas 886 linhas. Causa raiz confirmada via `git log`/`git show`:
+um BOM UTF-8 entrou no arquivo (aberto/salvo em Excel ou Numbers em algum momento — mesma
+classe de problema já vista com `ta_blind_review_sheet.csv`), e `pipeline/fulltext.py::load_ft_queue()`
+(e `pipeline/pdf_band_d_review.py::_load_ft_csv()`) liam com `encoding="utf-8"` (não
+`utf-8-sig`), fazendo o BOM virar parte da chave `internal_id` do dict — `save_ft_csv()` então
+gravava a coluna vazia silenciosamente (`DictWriter` com `restval=''` padrão). Corrigido: 4
+pontos de leitura trocados para `utf-8-sig` (`pipeline/fulltext.py` ×2, `pipeline/pdf_band_d_review.py`,
+`main.py`, `pipeline/qa_llm.py`), backfill das 886 linhas via join DOI/título contra
+`ta_screening_results.csv`, e 4 duplicatas de `internal_id` reveladas pelo backfill (títulos
+genéricos sem DOI — "CEUR Workshop Proceedings" ×3, "ACM International Conference Proceeding
+Series" ×2 — mesmo padrão da Seção 3) resolvidas com sufixo `_ambiguous_dupN`.
+
+**FT real executado** (`pipeline/ft_real_priority_review.py`, reaproveita `extract_pdf_text`/
+`_build_prompt` de `pipeline/pdf_band_d_review.py`): de 50 papers, **8 tinham PDF disponível**
+(2 já localmente, 5 baixados via cascata de OA, 1 já do Band D). Resultado:
+
+| internal_id | T/A+abstract | FT abstract-only | **FT+PDF real** |
+|---|---|---|---|
+| ba2ff831 | exclude | include | **include** |
+| ee562777 | exclude | include | **include** |
+| 9188583f | include | exclude | **include** |
+| 56d5020d | include | exclude | exclude |
+| 9100fc88 | include | exclude | exclude |
+| f5eef87b | include | exclude | exclude |
+| fa132b7b | include | exclude | exclude |
+| d4a1d75c | maybe | include | include |
+
+**3 papers (`ba2ff831`, `ee562777`, `9188583f`) são Lost Evidence recuperada e verificada com
+texto completo real** — não abstract, não hipótese. `9188583f` é o caso mais forte: nem a
+re-triagem T/A nem o "FT screening" abstract-only original o capturaram como include — só a
+leitura real do PDF revelou que atende IC2/IC3.
+
+Status: **Concluído para os 8 com PDF disponível.** Os outros 42 dos 50 continuam sem PDF
+(decisão anterior mantida) — precisam de acesso manual (institucional/paywall). Nenhuma
+mudança foi propagada para 169/381/404 — decisão de adoção oficial ainda em aberto.
+
+---
+
+## 6. Pendências e decisões em aberto
+
+1. **Adoção oficial da Fase A+B** (atualizar 169/381/404 no texto do artigo com base nos 3
+   papers de evidência recuperada e confirmada + qualquer resultado dos 42 pendentes de PDF):
+   decisão explícita do autor, ainda não feita.
+2. Conseguir PDF para os 42 papers prioritários restantes (acesso institucional/manual) e
+   rodar `pipeline/ft_real_priority_review.py --match`/`--run`/`--collect` para eles.
+3. Checar `SIMKIT` (`d50fcf26`) e `43977ab5` contra o DOI real (Seção 3).
+4. Auditar os 12 suspeitos em `results/auxiliary/fuzzy_match_audit/` (só o Grupo 1 precisa
    investigação de verdade; Grupos 0/2/4 são prováveis duplicatas de estudo, Grupo 3 é lixo
    de metadado confirmado).
-4. Reconfirmar a decisão de `53ed8ac4` no double-screening humano (era `exclude` sob abstract
+5. Reconfirmar a decisão de `53ed8ac4` no double-screening humano (era `exclude` sob abstract
    errado — título continua justificando `exclude`, mas por outro motivo).
-5. Checar `9fe435f5` no double-screening humano.
-6. As 3 decisões pendentes registradas no fim de `revision_plan_round1_reviewer2.md` (M2:
+6. Checar `9fe435f5` no double-screening humano.
+7. As 3 decisões pendentes registradas no fim de `revision_plan_round1_reviewer2.md` (M2:
    rota de validação humana; M14: status do Zenodo; M1: citar ou não `article_method/`; M15:
    reclassificar título para "Mapping Study").

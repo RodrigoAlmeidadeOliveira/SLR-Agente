@@ -173,7 +173,7 @@ def load_includes() -> list[dict]:
     # FT screening: index by DOI and by title for fuzzy enrichment
     ft_by_doi: dict[str, dict] = {}
     ft_by_title: dict[str, dict] = {}
-    with open(FT_CSV, encoding="utf-8", newline="") as f:
+    with open(FT_CSV, encoding="utf-8-sig", newline="") as f:
         for r in csv.DictReader(f):
             doi_n = _norm_doi(r.get("doi", ""))
             title_n = _norm_title(r.get("title", ""))

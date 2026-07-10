@@ -254,7 +254,7 @@ def load_ft_queue() -> list[dict]:
     """Carrega ft_screening_results.csv existente."""
     if not FT_RESULTS_CSV.exists():
         return []
-    with open(FT_RESULTS_CSV, encoding="utf-8", newline="") as f:
+    with open(FT_RESULTS_CSV, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 
 
@@ -389,7 +389,7 @@ def build_ft_queue(force: bool = False) -> list[dict]:
         raise FileNotFoundError(f"Arquivo de triagem T/A não encontrado: {TA_RESULTS_CSV}")
 
     # Carrega T/A completo
-    with open(TA_RESULTS_CSV, encoding="utf-8", newline="") as f:
+    with open(TA_RESULTS_CSV, encoding="utf-8-sig", newline="") as f:
         all_ta = {row["internal_id"]: row for row in csv.DictReader(f)}
 
     # Decisões FT já existentes (preservar progresso)
