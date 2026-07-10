@@ -57,7 +57,55 @@ CORE_MAX_RETRIES = 4
 # ── Configuração geral ──────────────────────────────────────────────
 REQUEST_DELAY = 3.0
 BATCH_SIZE = S2_BATCH_SIZE
-TITLE_MATCH_MIN_SCORE = 92
+TITLE_MATCH_MIN_SCORE = 95  # elevado de 92 (07/jul/2026): auditoria manual de 102 recuperações
+                            # fuzzy encontrou ~43% de matches errados no limiar antigo.
+CONTENT_WORD_JACCARD_MIN = 0.5  # segunda checagem: exige overlap real de palavras de conteúdo,
+                                 # não só token_set_ratio (que é lenient com títulos curtos/genéricos
+                                 # e permitiu, por ex., "Classification of models" casar com um
+                                 # abstract sobre altruísmo evolutivo).
+
+# Títulos que representam um volume inteiro de conferência/workshop (não um paper
+# individual) nunca têm um abstract real para casar — mas geralmente pontuam alto no
+# fuzzy match por causa da repetição de termos genéricos do domínio ("International
+# Conference on Business Process Management" etc.). Achado real: um único abstract
+# errado foi reaproveitado em 9 volumes de proceedings da BPM diferentes antes desta
+# correção. Bloquear fallback por título inteiramente para esses casos.
+_PROCEEDINGS_STOPWORDS = {
+    "the", "a", "an", "of", "on", "at", "in", "and", "for", "to", "with",
+}
+_PROCEEDINGS_KEYWORDS_RE = re.compile(r"\bproceedings?\b", re.IGNORECASE)
+_ORDINAL_CONFERENCE_RE = re.compile(
+    r"^\d+(st|nd|rd|th)\s+.{0,60}\b(conference|workshop|symposium)\b",
+    re.IGNORECASE,
+)
+_CONFERENCE_YEAR_SUFFIX_RE = re.compile(
+    r"\b(international|joint|annual)\b.{0,100}\b(conference|workshop)s?\b.{0,100},"
+    r"\s*[A-Za-z][A-Za-z\-\s]{0,20}(19|20)\d{2}",
+    re.IGNORECASE,
+)
+
+
+def _is_proceedings_volume_title(title: str) -> bool:
+    """True se o título parece representar um volume inteiro (conferência/workshop),
+    não um paper individual — não tenta fallback por título nesses casos."""
+    t = (title or "").strip()
+    if not t:
+        return False
+    if _PROCEEDINGS_KEYWORDS_RE.search(t):
+        return True
+    if _ORDINAL_CONFERENCE_RE.search(t):
+        return True
+    if _CONFERENCE_YEAR_SUFFIX_RE.search(t):
+        return True
+    return False
+
+
+def _content_word_jaccard(a_norm: str, b_norm: str) -> float:
+    a_words = {w for w in a_norm.split() if w not in _PROCEEDINGS_STOPWORDS and len(w) > 2}
+    b_words = {w for w in b_norm.split() if w not in _PROCEEDINGS_STOPWORDS and len(w) > 2}
+    if not a_words or not b_words:
+        return 0.0
+    return len(a_words & b_words) / len(a_words | b_words)
 
 
 def enrich_abstracts(papers: list, delay: float = REQUEST_DELAY) -> tuple[list, int]:
@@ -417,6 +465,16 @@ def _enrich_by_title_cascade(papers: list, delay: float, after_source=None) -> i
     )
 
     remaining = [paper for paper in papers if not (_get(paper, "abstract") or "").strip()]
+    n_before_guard = len(remaining)
+    remaining = [paper for paper in remaining if not _is_proceedings_volume_title(_get(paper, "title"))]
+    n_skipped = n_before_guard - len(remaining)
+    if n_skipped:
+        logger.info(
+            "[Enrich] %s papers com título de volume de proceedings (conferência/workshop) "
+            "pulados no fallback por título — nunca têm abstract real para casar.",
+            f"{n_skipped:,}",
+        )
+
     for source_name, fetcher in title_sources:
         if not remaining:
             break
@@ -659,6 +717,11 @@ def _pick_best_title_match(
             score += 3
 
         if score > best_score:
+            # token_set_ratio é lenient com títulos curtos/genéricos (repetição de termos
+            # de domínio pode inflar o score entre papers não relacionados) — exige também
+            # overlap real de palavras de conteúdo antes de aceitar como candidato.
+            if _content_word_jaccard(target_norm, cand_norm) < CONTENT_WORD_JACCARD_MIN:
+                continue
             best_score = score
             best_abstract = candidate_abstract
             best_match_type = "title_fuzzy"

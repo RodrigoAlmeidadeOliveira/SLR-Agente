@@ -9,41 +9,70 @@ SLR PATHCAST — Abstract Recovery + T/A Re-screening Summary (Fase A, Reviewer 
 
   acm        depois: 41/46 (89.1%)
   ieee       depois: 97/97 (100.0%)
-  scopus     depois: 1638/2197 (74.6%)
+  scopus     depois: 1594/2197 (72.6%)
 
   TOTAL antes: 645/2340 (27.6%)
-  TOTAL depois: 1776/2340 (75.9%)
-  Recuperados nesta rodada: 1131
+  TOTAL depois: 1732/2340 (74.0%)
+  Recuperados nesta rodada: 1087
 
 2. RECUPERAÇÃO POR FONTE DA CASCATA (abstract_source, entre os recuperados)
 ----------------------------------------
-  openalex                         745 (65.9% dos recuperados)
-  core                             177 (15.6% dos recuperados)
-  semanticscholar                  128 (11.3% dos recuperados)
-  crossref                          81 (7.2% dos recuperados)
+  openalex                         743 (68.4% dos recuperados)
+  core                             169 (15.5% dos recuperados)
+  semanticscholar                  124 (11.4% dos recuperados)
+  crossref                          51 (4.7% dos recuperados)
 
 3. TABELA DE TRANSIÇÃO DE DECISÕES (antiga → nova, só re-triados)
 ----------------------------------------
-  exclude→exclude             659 (58.3%)
-  maybe→exclude               294 (26.0%)
-  maybe→include               102 (9.0%)
-  maybe→maybe                  71 (6.3%)
+  exclude→exclude             644 (59.2%)
+  maybe→exclude               267 (24.6%)
+  maybe→include               101 (9.3%)
+  maybe→maybe                  70 (6.4%)
   exclude→include               2 (0.2%)
   exclude→maybe                 2 (0.2%)
   include→include               1 (0.1%)
 
-  Total re-triado: 1131 | Decisão mudou: 400 (35.4%)
+  Total re-triado: 1087 | Decisão mudou: 372 (34.2%)
   Especificamente exclude→include/maybe (evidência potencialmente recuperada): 4
 
 4. QUALIDADE DO PARSING
 ----------------------------------------
-  6/1131 (0.5%) respostas do LLM vieram com JSON truncado (provavelmente por exceder
-  MAX_TOKENS=512 com um abstract real mais longo para justificar a decisão — só
-  acontece após enriquecimento, nunca no título-only original). A decisão real foi
-  recuperada via regex do JSON parcial antes de fechar a tabela de transição acima
-  (5 desses 6 eram "exclude"→"exclude" de verdade, não "exclude"→"maybe" como o
-  fallback ingênuo teria registrado). Ver `ta_rationale_rescreened` com o prefixo
-  "[RECUPERADO DE JSON TRUNCADO]" para identificar essas 6 linhas.
+  6/1131 respostas do LLM (na rodada original, antes da auditoria abaixo) vieram com
+  JSON truncado (provavelmente por exceder MAX_TOKENS=512 com um abstract real mais
+  longo para justificar a decisão — só acontece após enriquecimento, nunca no
+  título-only original). A decisão real foi recuperada via regex do JSON parcial
+  antes de fechar a tabela de transição (5 desses 6 eram "exclude"→"exclude" de
+  verdade, não "exclude"→"maybe" como o fallback ingênuo teria registrado).
+
+5. AUDITORIA DE QUALIDADE DO FUZZY MATCH POR TÍTULO (09/jul/2026)
+----------------------------------------
+  Dos 1.131 abstracts recuperados nesta rodada, 102 (9%) vieram de fuzzy match por
+  título (score >=92, sem match exato de DOI/título). Auditoria manual das 102
+  linhas, uma por uma, encontrou 44 (43%) com o abstract do paper ERRADO — causa
+  raiz: títulos genéricos de "volume de proceedings" (ex. "14th International
+  Conference on Business Process Management, BPM 2016") não têm abstract real, mas
+  pontuavam alto no fuzzy match por repetição de termos genéricos do domínio. Um
+  único abstract errado (sobre "family firms/SMFFs") foi reaproveitado em 9 volumes
+  de proceedings da BPM diferentes antes desta correção.
+
+  Ação tomada: as 44 linhas foram revertidas (abstract removido de volta ao estado
+  "sem abstract", re-triagem correspondente removida de
+  ta_rescreen_full_cascade_results.csv) — números acima já refletem a correção
+  (1.131 → 1.087 confiáveis). Causa raiz corrigida em pipeline/enrich.py: (a) títulos
+  de volume de proceedings agora são bloqueados no fallback por título inteiramente
+  (_is_proceedings_volume_title), (b) limiar de similaridade elevado de 92 para 95,
+  (c) checagem adicional de overlap de palavras de conteúdo (Jaccard >= 0.5) exigida
+  além do token_set_ratio, que sozinho é lenient demais para títulos curtos/genéricos.
+
+  IMPORTANTE: a mesma função (pipeline.enrich.enrich_abstracts) já era usada, antes
+  desta sessão, para enriquecer o corpus AUXILIAR (results/auxiliary/aux_pending_enriched.csv,
+  aux_reft_enriched.csv) que alimenta a triagem de full-text já reportada no artigo
+  submetido (212+23=235 estudos auxiliares confirmados). Detecção automática (abstract
+  duplicado entre títulos diferentes) já encontrou pelo menos 12 registros com o mesmo
+  padrão de contaminação nesse corpus — ainda NÃO auditados individualmente como os
+  102 acima. Isto é uma ameaça à validade do artigo já submetido e revisado duas
+  vezes, não só desta exploração — ver revision_plan_round1_reviewer2.md para
+  acompanhamento.
 
 FILES WRITTEN:
   results/screening/working_set_enriched_full_cascade.csv

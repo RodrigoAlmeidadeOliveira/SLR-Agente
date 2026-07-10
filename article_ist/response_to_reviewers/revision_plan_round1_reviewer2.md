@@ -39,15 +39,16 @@ original** (`claude-haiku-4-5-20251001`, ver `pipeline/abstract_recovery_rescree
 subconjunto que ganhou abstract nesta rodada — sem tocar `ta_screening_results.csv` oficial
 (hash conferido idêntico antes/depois) nem qualquer contagem já reportada no artigo:
 
-- Cobertura de abstract: **27,6% → 75,9%** (645→1.776 de 2.340); Scopus 24,5%→74,6%, ACM
+- Cobertura de abstract: **27,6% → 74,0%** (645→1.732 de 2.340); Scopus 24,5%→72,6%, ACM
   21,7%→89,1%, IEEE já era 100%.
-- 1.131 papers re-triados com o abstract real. **35,4% mudaram de decisão** (400/1.131).
+- **1.087 papers re-triados de forma confiável** com o abstract real (número já líquido,
+  pós-auditoria — ver abaixo). **34,2% mudaram de decisão** (372/1.087).
 - Tabela de transição completa: `results/screening/ta_rescreen_full_cascade_results.csv`;
   resumo em `results/screening/abstract_recovery_rescreen_summary.txt`.
 - Especificamente `exclude→include`/`exclude→maybe` (evidência que tinha sido perdida por
-  triagem só-por-título e foi recuperada com o abstract real): **4 de 1.131** — pequeno em
+  triagem só-por-título e foi recuperada com o abstract real): **4 de 1.087** — pequeno em
   proporção, mas é evidência **medida e nomeável**, não hipotética, exatamente o tipo de dado
-  que M2 exige. (Nota metodológica: 6/1.131 respostas vieram com JSON truncado por exceder
+  que M2 exige. (Nota metodológica: 6 respostas vieram com JSON truncado por exceder
   `MAX_TOKENS=512` com abstracts reais mais longos — corrigido via extração regex do JSON
   parcial antes de fechar a tabela; documentado em `abstract_recovery_rescreen_summary.txt`,
   seção 4.)
@@ -55,6 +56,56 @@ subconjunto que ganhou abstract nesta rodada — sem tocar `ta_screening_results
   é uma "Fase B" separada (reconstruir fila de FT, FT-triar os promovidos, QA/extração dos
   novos includes) que exige decisão explícita do autor antes de tocar os números oficiais do
   artigo.
+
+**ATUALIZAÇÃO (09/jul/2026) — auditoria de qualidade encontrou e corrigiu contaminação real,
+inclusive no corpus JÁ SUBMETIDO ao Reviewer 2:**
+
+Antes de aceitar os números acima, auditamos manualmente os 102 (de 1.131) abstracts
+recuperados via **fuzzy match por título** (score ≥92, sem match exato de DOI/título) — o
+método de maior risco da cascata. **44 de 102 (43%) eram o abstract do paper ERRADO.** Causa
+raiz: títulos que representam um **volume inteiro de proceedings** (ex.: "14th International
+Conference on Business Process Management, BPM 2016") não têm abstract real, mas pontuam alto
+no fuzzy match por repetição de termos genéricos do domínio. Um único abstract errado (sobre
+"family firms/SMFFs") foi reaproveitado em **9 volumes de proceedings da BPM diferentes**
+antes da correção.
+
+Ações tomadas:
+- As 44 linhas contaminadas foram revertidas (números acima já refletem isso: 1.131→1.087).
+- Causa raiz corrigida em `pipeline/enrich.py`: títulos de volume de proceedings agora são
+  bloqueados no fallback por título; limiar de similaridade elevado de 92→95; nova checagem de
+  overlap de palavras de conteúdo (Jaccard ≥0,5) além do `token_set_ratio` (que sozinho é
+  lenient demais para títulos curtos/genéricos).
+- 5 linhas com a mesma contaminação foram encontradas e corrigidas na planilha de
+  double-screening humano (`results/human_validation/ta_blind_review_sheet.csv`/`.xlsx`) —
+  nenhuma tinha decisão humana registrada ainda, nada foi perdido.
+
+**Achado mais sério: a mesma função de enriquecimento já era usada, antes desta sessão, para
+enriquecer o corpus auxiliar que alimenta o artigo SUBMETIDO** (`results/auxiliary/aux_pending_enriched.csv`,
+`aux_reft_enriched.csv` — abstracts usados na triagem de full-text dos 880 papers auxiliares).
+Auditamos especificamente os **173 estudos auxiliares confirmados** (tier 404, `origin !=
+working_set` em `qa_combined_404_dedup.csv`): apenas **3 têm abstract via fuzzy match por
+título** (os outros 22 com enriquecimento vieram de DOI/título exato, confiáveis). Dos 3:
+- `d50fcf26` ("SIMKIT – a software process simulation model construction kit...") — abstract
+  recuperado é sobre economia da indústria de software, **não menciona SIMKIT nem construction
+  kit** — **provável match errado**, precisa checagem manual contra o DOI antes de confiar na
+  extração/QA já feita para este estudo.
+- `43977ab5` ("Execution-Based Model Profiling") — abstract em **alemão** sobre modelos
+  descritivos derivados de dados de execução — tematicamente compatível apesar do idioma
+  inesperado; plausível mas vale checagem manual.
+- `0de90ff4` ("Handling Concept Drift in Process Mining") — abstract menciona concept drift
+  explicitamente — correto.
+
+Ou seja: o impacto direto nos 173 estudos já confirmados é pequeno (**1 provável erro, 1
+duvidoso, de 173** — não os 44/102 do working set), mas é real e já está no material entregue
+ao revisor. Detecção automática (abstract duplicado entre títulos diferentes) também achou
+12 registros com o mesmo padrão de contaminação no pool de 880 papers auxiliares mais amplo
+(além dos 173 confirmados) — esses ainda não foram auditados individualmente.
+
+**Ação recomendada:** verificar manualmente `d50fcf26` e `43977ab5` contra o DOI/full-text real
+antes da resubmissão — se `d50fcf26` for de fato um match errado, o estudo precisa ser
+re-extraído/re-QA'd com o abstract correto (ou reavaliado com full-text direto), o que pode
+mudar minimamente a contagem de 404/340 (redução de no máximo 1 estudo, se a decisão de
+inclusão dependeu do abstract errado).
 
 **Uso recomendado na carta de resposta:** substituir a discussão hipotética de Lost Evidence
 por este achado real — não resolve M2 por completo (ainda falta o double-screening humano
