@@ -1,0 +1,16 @@
+SLR PATHCAST — Human-vs-LLM Inter-rater Agreement Report
+============================================================
+Primary screener (rater 1): claude-haiku-4-5-20251001
+Independent rater 2:        human (blind double-screening)
+
+[TA] n=468
+  Cohen's kappa (multi-class): 0.250 (fair)
+  Observed agreement (Po): 64.7%  Expected (Pe): 53.0%
+  Categories: ['exclude', 'include', 'maybe']
+  Cohen's kappa (binary include/not-include): 0.335 (fair)
+    Po=87.6%, Pe=81.4%
+
+[FT] no filled decisions yet (0/177); fill human_ft_decision first
+
+Interpretation thresholds (Landis & Koch 1977):
+  <0.00 poor | 0-0.20 slight | 0.21-0.40 fair | 0.41-0.60 moderate | 0.61-0.80 substantial | >0.80 almost perfect
