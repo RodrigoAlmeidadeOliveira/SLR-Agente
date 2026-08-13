@@ -69,7 +69,7 @@ RQ2 & RQ2.2 & Which predictive and stochastic techniques have been used? &
 RQ3 & RQ3.1 & What is the level of integration between PM and stochastic
   methods? & Integration level (L0--L3; Table~\ref{tab:il-def}) \\
 RQ3 & RQ3.2 & What gaps exist for process-aware forecasting in the SDLC? &
-  Gap analysis matrix \\
+  G1--G3: empty L3; F1 ceiling; F2/QA7 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1454,8 +1454,27 @@ Table~\ref{tab:il-def}) in the 73-paper PDF triangulation subset.}
 \end{figure}
 
 \subsubsection{RQ3.2: Gap Analysis}
+\label{sec:slr-rq32}
 
-Three structural observations emerge from the 169-study extraction. First,
+A \emph{gap} in this mapping study is not a missing citation. It is a
+pattern that meets the three operational criteria G1--G3 jointly:
+
+\begin{enumerate}
+\item[G1] \textbf{Empty L3.} No included study occupies L3 Unified
+  (Table~\ref{tab:il-def}) on SDLC event logs.
+\item[G2] \textbf{Descriptive ceiling.} The working set recovers process
+  structure more often than it uses that structure to forecast
+  (TF-PM without TF-FC; Finding~F1, Section~\ref{sec:slr-gaps}).
+\item[G3] \textbf{Reproducibility deficit.} Event logs and code are rarely
+  reconstructible (Finding~F2; QA7 satisfied in $11/169 = 6.5\%$).
+\end{enumerate}
+
+Related work therefore already presents isolated and partially chained
+techniques (L0--L2). The remaining challenge---the one PATHCAST is designed
+to address---is L3 composition validated on SDLC logs, not the invention of
+yet another miner, Markov model, or regressor.
+
+The 169-study extraction supplies the evidence for G1--G3. First,
 the field is \textbf{descriptively strong but forecastively weak}: 121
 papers (71.6\%) discover or assess process behavior, but only 29 (17.2\%)
 estimate future paths or probabilistic completion distributions. Second,
@@ -1478,19 +1497,18 @@ process-mining tool, and among those that do, ProM dominates; and
 \textbf{39\%} ($66/169$) do not even specify whether their dataset is
 industrial, open-source, academic, or synthetic. These three item-level
 deficits---reproducibility (QA7), validity reflection (QA6), and tooling
-transparency---are the concrete face of the maturity gap that motivates
+transparency---instantiate G3 and sharpen G2; they motivate
 PATHCAST's emphasis on a determinism-and-replication-first design.
 
 \input{results/qa_peritem_summary}
 
-Taken together, these patterns explain why PATHCAST requires both a formal
-pipeline and an evaluation strategy grounded in real SDLC traces. The gap is
-not the absence of isolated techniques, but the absence of robust,
-end-to-end, process-aware forecasting workflows validated on heterogeneous
-software engineering data. The evidence-type distribution observed in the
-73-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
-consistent with the full-set characterization above and is reported here as
-an analytical view, not as a separate selection layer.
+Taken together, G1--G3 hold: L3 Unified is empty, the field stops at
+description, and the traces needed to close that composition are seldom
+reproducible. PATHCAST therefore requires both a formally contracted
+pipeline and an evaluation on real SDLC traces. The evidence-type
+distribution observed in the 73-PDF triangulation subset
+(Figure~\ref{fig:pdf-evidence-dist}) is consistent with that reading and is
+reported here as an analytical view, not as a separate selection layer.
 
 \begin{figure}[tbp]
 \centering
@@ -1659,48 +1677,65 @@ challenge that PATHCAST addresses through Stage~1 (Event Log Construction).
 \subsection{Positioning of PATHCAST}
 \label{sec:slr-positioning}
 
-Table~\ref{tab:positioning} places PATHCAST on the \emph{same} Integration
-Level scale as Table~\ref{tab:il-def}. The 73-PDF column is operational IL
-coding. The 169-set column is \emph{not} an IC count relabelled as L0--L3;
-it repeats the operational reading of the working set only where a study
-could be coded from the extraction sheet (family co-occurrence is reported
-in RQ3.1, separately). PATHCAST is a proposed L3 Unified instance, not a
-row in the included corpus.
+Table~\ref{tab:positioning} uses the \emph{same} operational definitions as
+Table~\ref{tab:il-def}. Counts in the main body are the 73-PDF operational
+IL coding. Family co-occurrence on the 169 working set is a different
+measure and is reported underneath, not relabelled as L0--L3.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels (Table~\ref{tab:il-def}) in the confirmed set.
-PATHCAST is listed as a proposed L3 instance, not as an included study.}
+\begin{threeparttable}
+\caption{Integration levels in the confirmed set. Operational definitions
+are copied from Table~\ref{tab:il-def}. The 73-PDF column is IL coding;
+the 169 working-set block is family overlap, not an Integration Level.}
 \label{tab:positioning}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.05}
+\renewcommand{\arraystretch}{1.08}
 \begin{tabularx}{\linewidth}{@{}c l >{\raggedright\arraybackslash}X
-    >{\centering\arraybackslash}p{1.15cm} >{\raggedright\arraybackslash}p{2.5cm}@{}}
+    >{\centering\arraybackslash}p{1.35cm} >{\raggedright\arraybackslash}p{2.7cm}@{}}
 \toprule
 \textbf{Level} & \textbf{Name} & \textbf{Operational definition} &
-  \makecell[c]{\textbf{73-PDF}\\\textbf{(operational)}} &
+  \makecell[c]{\textbf{$n$}\\\textbf{73-PDF}\\\textbf{(IL)}} &
   \makecell[l]{\textbf{Example in}\\\textbf{the corpus}} \\
 \midrule
-L0 & Isolated & One technique family; no chaining
+L0 & Isolated & One technique family; no chaining across families.
   & 13 & Single-family studies \\
-L1 & Sequential & Two families, no inter-stage contract
+L1 & Sequential & Two families in the same study, without an inter-stage
+  contract (output of one stage is not a specified input of the next).
   & 54 & Stochastic SDLC models without discovery \\
-L2 & Pipeline & Three families; partial bridge, missing contract or ML closure
+L2 & Pipeline & Three families with a partial bridge: a discovered or
+  stochastic structure is reused downstream, but a formal contract or the
+  ML closure is missing.
   & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025} \\
-L3 & Unified & PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML
-  with contracts, validated on SDLC logs
-  & 0 & --- (none in corpus) \\
+L3 & Unified & Process mining $\rightarrow$ absorbing Markov $\rightarrow$
+  Monte Carlo $\rightarrow$ ML with declared inter-stage contracts,
+  validated on SDLC event logs.
+  & 0 & --- (none in corpus)\tnote{a} \\
 \midrule
 \textbf{Total} & --- & --- & \textbf{73} & --- \\
 \bottomrule
 \end{tabularx}
+
+\vspace{0.7em}
+\noindent\textbf{169 working set --- family overlap (not IL).}
+TF-PM$\cap$TF-ST $=10$ (5.9\%);
+TF-PM$\cap$TF-FC $=7$ (4.1\%);
+TF-ST$\cap$TF-FC $=18$ (10.7\%);
+TF-PM$\cap$TF-ST$\cap$TF-FC $=1$ (0.6\%, PRIMAD).
+L3 Unified $=0$ on both denominators.
+
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item[a] PATHCAST is proposed at L3 Unified
+  (Chapter~\ref{ch:method}). It is not a row of this corpus and is not an
+  example in the table above.
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
-PATHCAST is proposed at L3 Unified: process mining, absorbing Markov
-analysis, Monte Carlo forecasting, and ML enhancement composed under
-inter-stage contracts on SDLC event logs. That claim is a research-agenda
-positioning, not an empirically validated result of this mapping study.
+The PATHCAST L3 positioning in note~(a) is a research agenda, not an
+empirically validated result of this mapping study.
 
 
 \subsection{Proposed Taxonomy: SPMF}

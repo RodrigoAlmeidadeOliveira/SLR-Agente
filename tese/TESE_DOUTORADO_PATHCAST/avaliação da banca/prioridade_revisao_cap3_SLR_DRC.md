@@ -4,7 +4,7 @@ Fonte: anotações `drdrc` em `TESE_DOUTORADO_PATHCAST_20260610_DRC.pdf`
 Arquivo a editar: `capitulos/cap3_slr_revised.tex`  
 Regra: um eixo por vez. P0 destrava P1; não reeditar a Tabela 3.15 antes de fechar L0–L3.
 
-**Estado (2026-08-13):** P0-1, P0-2, P0-3 e P1-1…P1-5 aplicados em `capitulos/cap3_slr_revised.tex`. P2 (siglas, critério operacional de lacuna, restyle da Tabela 3.15) ainda aberto.
+**Estado (2026-08-13):** P0, P1, P2-1, **P2-2** e **P2-3** aplicados em `capitulos/cap3_slr_revised.tex` e `frontmatter/glossary.tex`. Itens da banca fora do Cap. 3 (A12/A15/A24, A1, A7) continuam fora deste plano.
 
 Critério de prioridade:
 - **P0** — ataca a tese do capítulo (“PATHCAST preenche L3”) ou foi marcado com `******` *e* o texto atual é inconsistente.
@@ -188,7 +188,7 @@ Estes itens da banca **não** são do Cap. 3, mas P0-3 fica incompleto sem eles:
 | A28 | critério de classificação | **DONE** (três eixos em `\ref{sec:slr-il-def}`) |
 | A29 | RQs bem definidas | **DONE** (RQ3.1 aponta para `tab:il-def`) |
 | A30 | grau vs nível | **DONE** (degree → level; tabela L0–L3) |
-| A31 | critério de lacuna | PARTIAL (P0-3 ponte dor feita; P2-2 operacionalização RQ3.2 ainda aberta) |
+| A31 | critério de lacuna | **DONE** (G1--G3 na tabela de RQs e em `\ref{sec:slr-rq32}`) |
 | A32 | PICO C | **DONE** |
 | A33 | tipos de MP na busca | **DONE** (`tab:block-i-pm-types`) |
 | A34 | IC/EC na seção errada | **DONE** (`[H]` + `\FloatBarrier`) |
@@ -198,5 +198,5 @@ Estes itens da banca **não** são do Cap. 3, mas P0-3 fica incompleto sem eles:
 | A38 | Unified / RQ3.1 | **DONE** |
 | A39 | L3 architecture | **DONE** (definição única; frase proibida) |
 | A40 | gap ↔ dor | **DONE** (abertura de F1–F5) |
-| A41 | Tabela 3.15 | **PARTIAL** — definição alinhada a `tab:il-def`; coluna IC-count removida (não relabel). Layout P2-3 (169 vs 73 densos) ainda pode ser refinado. |
-| A11 | SPMF na lista de siglas | NOT-DONE (P2-1) |
+| A41 | Tabela 3.15 | **DONE** (`tab:positioning`: definição = `tab:il-def`; 73-PDF IL vs 169 overlap; PATHCAST em nota, não na grade) |
+| A11 | SPMF na lista de siglas | **DONE** (`frontmatter/glossary.tex`: SPMF, PPM, CRPS, IC/EC, L0–L3, AD1–AD4, QA, TF-*) |
