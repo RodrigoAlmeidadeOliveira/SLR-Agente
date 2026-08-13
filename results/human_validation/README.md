@@ -85,11 +85,13 @@ Extração de dados:
   `results/auxiliary/extraction_combined_381.csv` para exemplos de granularidade
   esperada, SEM abrir a linha correspondente a este paper).
 
-## 3. Third-rater QA/extraction (108 papers com PDF local, 2026-08-13)
+## 3. Third-rater QA/extraction (130 papers com PDF local, 2026-08-13)
 
-Avaliação independente adicional (QA1–QA8 + extração) sobre os **108 papers
-LLM-included com PDF em `ft_pdfs_local/ok/`**, lida em texto completo
-(`pdftotext -layout`, com fallback OCR quando necessário).
+Avaliação independente adicional (QA1–QA8 + extração) sobre os papers com PDF
+em `ft_pdfs_local/ok/`, lida em texto completo (`pdftotext -layout`, com
+fallback de decode quando necessário). Lote inicial: 108. Lote extra
+(`batch_09.csv`): 22 PDFs catalogados no mesmo dia (6 LLM-include + 16
+LLM-exclude da amostra FT).
 
 | Artefato | Descrição |
 |----------|-----------|

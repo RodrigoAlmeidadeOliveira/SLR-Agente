@@ -1,0 +1,1247 @@
+                                         Mining Issue Trackers: Concepts and Techniques
+
+                                                         Lloyd Montgomery, Clara Lüders, Walid Maalej
+
+                                                                      University of Hamburg
+                                                                    Department of Informatics
+                                                          Vogt-Kölln-Str. 30, Hamburg 22527, Germany
+                                             {lloyd.montgomery,clara.marie.lueders,walid.maalej}@uni-hamburg.de
+arXiv:2403.05716v2 [cs.SE] 11 Jul 2024
+
+
+
+
+                                               Abstract. An issue tracker is a software tool used by organisations to
+                                               interact with users and manage various aspects of the software develop-
+                                               ment lifecycle. With the rise of agile methodologies, issue trackers have
+                                               become popular in open and closed-source settings alike. Internal and
+                                               external stakeholders report, manage, and discuss “issues”, which repre-
+                                               sent different information such as requirements and maintenance tasks.
+                                               Issue trackers can quickly become complex ecosystems, with dozens of
+                                               projects, hundreds of users, thousands of issues, and often millions of is-
+                                               sue evolutions. Finding and understanding the relevant issues for the task
+                                               at hand and keeping an overview becomes difficult with time. Moreover,
+                                               managing issue workflows for diverse projects becomes more difficult as
+                                               organisations grow, and more stakeholders get involved. To help address
+                                               these difficulties, software and requirements engineering research have
+                                               suggested automated techniques based on mining issue tracking data.
+                                               Given the vast amount of textual data in issue trackers, many of these
+                                               techniques leverage natural language processing. This chapter discusses
+                                               four major use cases for algorithmically analysing issue data to assist
+                                               stakeholders with the complexity and heterogeneity of information in
+                                               issue trackers. The chapter is accompanied by a follow-along demonstra-
+                                               tion package with JupyterNotebooks.
+
+                                               Keywords: Natural language processing · Issue trackers · Software en-
+                                               gineering · Requirements engineering · Mining software repositories
+
+
+                                         1   Introduction
+
+                                         It is rare to find a software organisation today that does not use an issue tracker
+                                         to support some—if not all—of their processes. Users, developers, testers, and
+                                         managers use issue trackers to report and collect issues such as bug reports.
+                                         Subsequently, the issues get discussed, prioritised, assigned as a unit of work,
+                                         tracked, and eventually resolved, thereby resulting in updated software. In ad-
+                                         dition to bug reports, issue trackers nowadays often collect other issue types
+                                         including epics, user stories, tasks, and change requests. This diversity of in-
+                                         formation types makes these tools indispensable for various software processes
+                                         including requirements elicitation, bug fixing, product design, user support, and
+                                         quality assurance. Issue trackers are so adaptive that, in reality, they can store
+2       Montgomery et al.
+
+anything that needs to be tracked and that can fit into the schema of a title,
+description, and metadata.
+    Once filed, issues can contain several supported fields such as issue type,
+status, comments, severity, priority, project, components, labels, issue links, sub-
+tasks, creator, reporter, assignee, etc. What makes issues so powerful is that they
+are atomic units separated from the rest of the project (and can thus be created,
+viewed, and edited in isolation). When desired, issues can also be linked to the
+project or the corresponding product in different ways. They can be grouped
+together under components, share a set of labels with other issues, be directly
+structured under other issues as sub-issues, or be linked to other issues denoting
+various types of dependencies. Figure 1 shows an example of an issue in the
+Qt Jira issue tracker: QTBUG-76315.1 The title is displayed across the top.
+The other fields are scattered around the interface, including the issue “Type”
+(Suggestion), the short description, and the comments at the bottom.
+
+
+
+
+                   Fig. 1. An example of an issue report in Jira.
+
+1
+    https://bugreports.qt.io/browse/QTBUG-76315
+                            Mining Issue Trackers: Concepts and Techniques         3
+
+    One fundamental defining difference between issues is the chosen value for
+the “Issue Type” field, which can, for example, be “Bug Report”, “Epic”, “User
+Story”, “User Support”, etc. The description for an Epic is to be interpreted
+differently than the description for a User Story, which is to be interpreted dif-
+ferently than a Bug Report, etc. In other words, the Issue Type clearly separates
+issues into different functions for the software development lifecycle and how the
+issues should be tracked and managed. Montgomery et al. [36] performed a the-
+matic analysis of unique issue types across various public Jira issue trackers and
+found that the majority of them can be grouped into four issue categories:
+
+ – Requirements issues including epics, user stories, as well as feature re-
+   quests and change requests.
+ – Development issues document the development work breakdown into as-
+   signed tasks, including technical tasks, development tasks, and sub-tasks.
+ – Maintenance issues including reported bugs, defects, incidents, technical
+   debts, or documentation issues.
+ – User support issues representing dialogues between developers and users,
+   as support requests, problem tickets, IT help requests, or questions.
+
+    With time, the vast amount of generated and continuously evolving software
+project data gets reflected in issue trackers and often overwhelms their users [3,1].
+Issue trackers can accumulate thousands or even millions of reports throughout
+the lifetime of a project [1,43]. Such overload of issue information might itself im-
+pact productivity and decision-making [23,13]. Moreover, the flexibility of issue
+trackers and the low usage barrier for stakeholders with different backgrounds,
+skills, and motivations can lead to redundant [52], ambiguous [12], or conflicting
+issue data [55]. Possible consequences include poor issue report quality, intricate
+issue triage, delayed issue resolution, and communication difficulties [4,8,56,51].
+    To address the challenges of an overwhelming amount of heterogeneous and
+often ambiguous issue-related information, Natural Language Processing (NLP)
+techniques bear a large potential [53]. This chapter delivers a detailed overview
+of issue tracking data, along with algorithmic approaches to support stakehold-
+ers dealing with these challenges. We first discuss popular issue trackers, their
+main usage, as well as the structure and semantic of data that is normally main-
+tained therein. Then, we discuss four use cases for using NLP techniques on issue
+tracking for the analysis of requirements quality, issue evolution, discussions, as
+well as link and traceability analysis. The common enabler is to combine text
+data with meta and historical data.
+
+
+2   Fundamentals of Issue Trackers
+
+In this section, we discuss the importance of issue tracking for software organi-
+sations and compare popular issue trackers and publicly available issue datasets.
+We also describe the data normally found in most issue trackers.
+4       Montgomery et al.
+
+2.1   Roles of Issue Trackers
+Issue trackers are designed to assist stakeholders in communicating, document-
+ing, and collaborating on project-related issues during the entire software devel-
+opment lifecycle. It is difficult to think about a software organisation or an open-
+source community without also thinking about their Jira, GitHub, Bugzilla, or
+Redmine repository. These tools play an important role from the Requirements
+Engineering (RE) and Software Engineering (SE) perspective:
+
+Issue Elicitation and Just-In-Time RE. The primary goal of issue trackers
+is to collect issues as they arise. Usually, issues can be reported by various stake-
+holders: both by the core software team including developers, managers, and
+product owners, as well as by users, customers, and other stakeholders. From an
+RE perspective, issue trackers created a direct avenue for just-in-time require-
+ments [11] and crowd-based requirements [18,19]. With properly managed and
+maintained issue trackers, a constant stream of just-in-time “requirements” can
+emerge from the community: first filed as requests or reports and then discussed,
+clarified, and eventually accepted as requirements. Recent approaches also bring
+user feedback and community data (e.g. such as tweets and product reviews) into
+the issue trackers [19]. In addition, requirements elicited through conventional
+activities such as interviews and workshops can be added by analysts and prod-
+uct owners, e.g. as epics, user stories, features, or use cases. Overall, issue trackers
+support both traditional and fast, just-in-time, crowd-based requirements elici-
+tation and management through features such as ease-of-use reporting, attaching
+and linking additional information, and open discussions in the comments.
+
+User Support. Issue trackers are sometimes also called ticket systems: denoting
+user requests being processed. One reason issue trackers have gained popular-
+ity is their ability to directly support users alongside other related development
+activities. User support differs from other tasks such as managing bug and secu-
+rity reports in that it primarily involves the questions, concerns, thoughts, and
+feelings of the users. This is a central component of customer relationship man-
+agement [44]. In other words, user support is as concerned with the user’s state of
+mind as with the software issue they are experiencing. Issue trackers can support
+this workflow—publicly or privately, and allow the communication, notification,
+and direct linking to related bug reports, requests, release schedules, etc. This
+creates forward traceability (and accountability) from user concerns to organi-
+sational action, and backwards traceability (rationale) for related organisational
+decisions.
+
+Communication and Collaboration. Organisations, particularly open-source
+communities, use issue trackers as a central place for communication and col-
+laboration [5,34]. The central communication tools for communities were once
+mailing lists and forums, where each thread represented a single discussion about
+a bug, feature, or wider topic. Now, many of those discussions are held in the
+                            Mining Issue Trackers: Concepts and Techniques        5
+
+comments sections of corresponding issues, assisted by further features such as
+labelling, linking, or watching certain issues and their discussions [2]. Beyond
+communication, the workflow management built around issues facilitates collab-
+oration within teams and with external stakeholders. For instance, once an issue
+gets resolved by a developer, a workflow can be configured to notify someone to
+review, integrate, or conduct manual acceptance test (and activate corresponding
+issues). Similarly, once a task gets blocked or certain actions and clarifications
+are needed, particular discussions or workflows can be triggered, e.g. based on
+issue status, priority, or component that has changed.
+
+
+
+Git-Extended Knowledge Repository. Modern issue trackers can be con-
+sidered extended knowledge repositories for software organisations. New mem-
+bers joining the project or the organisation can start familiarising themselves by
+checking current issues, as well as the overall state of the issue tracker [46]. In
+addition to information about the projects, organisation, and people, issue track-
+ers include other integrated information about the systems under development
+including the code, versions, documentation, and binaries [32,33]. While code
+repositories using Git or SVN capture most of what is necessary when it comes
+to versioning the code and software components, it rarely captures or links the
+other project artefacts such as requirements, bug reports, or a roadmap. On the
+other hand, issue trackers enable a rich knowledge repository accessible by dif-
+ferent stakeholders due to their low technical barrier. For instance, code changes
+resulting from an issue are usually traced to Git commits and the rationale be-
+hind them (whether for bug fixing, feature enhancement, or any other reason).
+Similarly, binaries, release notes, tests and quality artefacts are either managed
+or linked to issues and projects as well.
+
+
+
+Project and Workflow Management. Modern issue trackers usually offer
+functionality to plan and manage projects, releases, and roadmaps based on the
+issues. Some issue trackers also offer advanced features to implement a Kanban or
+a Scrum process. Since the issues are already in the repository, this is a pragmatic
+step instead of using a separate project management tool. Issue trackers have
+also enabled a transparent and configurable approach to managing stakeholders’
+workflows through issue statuses and conversations. The community involved in
+(or just interested in) the development of a particular product can, for example,
+see the workflow of requirements as they are created, discussed, assigned to
+sprints, worked on, tested, and delivered. This transparency allows interested
+stakeholders to directly identify the software version a particular requirement
+is attached to, and know when and how the outcomes of that requirement will
+be delivered. Similarly, stakeholders interested in particular bug reports can see
+if their problem is already reported, if similar bug reports have similar details,
+they can check the status and know if it is being addressed or ignored, and they
+can also see when the finalised fix for that bug is released.
+6       Montgomery et al.
+
+              Table 1. Comparison across popular issue trackers [41].
+
+         High-level feature      JIRA Redmine Mantis Bugzilla GitHub
+         Custom fields             X        X        X       X          X
+         Custom dashboards         X        X        -       X          X
+         Custom workflows          X        -        X       X          -
+         Issue links               X        X        X       X          X
+         Link typology             X        X        X       X*         -
+         Duplicate management      X        X        X       X          X
+         Release management        X        -        -        -         X
+         Add-ons/plugins           X        X        X       X          -
+         API integration           X        X        X       X          X
+          * Except depends-on, blocks, see-also, and duplicate, link types
+          are difficult to customise.
+
+
+
+2.2   Examples of Issue Trackers
+
+Among advanced issue trackers known for their extensive features such as cus-
+tomisable issue fields, release planning, and project management, notable options
+include Jira,2 Redmine,3 Mantis,4 Bugzilla,5 and GitHub.6 Table 1 presents a
+comparative analysis based on high-level feature coverage. These issue trackers
+manage diverse issue types such as “Epic”, “Bug Report”, “User Story”, and
+“Task”, allowing users to categorise and structure their issues effectively. Addi-
+tionally, they enable users to define the scope of issues within the product or
+specific components while offering a spectrum of statuses. However, it’s worth
+noting that disparities exist among these platforms. Bugzilla and Mantis, for in-
+stance, lack support for custom issue types or statuses, constraining their users
+to the predefined “Bug” type. In contrast, both Redmine and Jira provide the
+flexibility of defining custom issue types and statuses, catering to the nuanced
+requirements of diverse projects.
+    Karre et al. [25] conducted an in-depth analysis of 31 prominent issue-tracking
+tools to identify their features and distinctions. The authors classified these 31
+OSS issue-tracking tools into four distinct clusters based on various features in-
+cluding API support, test plan integration, customisable workflows, and custom
+field support. Jira was not included in this analysis [25]. Cluster 1 includes tools
+that offer a wide range of features, such as test plan integration, customisable
+workflows, and product roadmap planning. Notable tools in this cluster includes
+Bugzilla, Mantis, and Redmine. Cluster 2 consists of simpler yet highly effec-
+tive tools known for their strong support for code repositories and localisation.
+Prominent tools in this cluster includes GitHub and BitBucket. Cluster 3 excels
+2
+  https://www.atlassian.com/software/jira
+3
+  https://redmine.org/
+4
+  https://www.mantisbt.org/
+5
+  https://www.bugzilla.org/
+6
+  https://github.com/
+                                  Mining Issue Trackers: Concepts and Techniques                                7
+
+                                Table 2. Issue Tracker Datsets
+
+Dataset                 Year Tracker        # Issues URL
+Lamkanfi et al.         2013   Bugzilla   214,908 https://github.com/ansymo/msr2013- bug_dataset
+Lazar et al.            2014   Bugzilla 1,674,985 †http://www.csis.ysu.edu/~alazar/msr14data
+Zhu et al.              2016   Bugzilla   774,809 https://github.com/jxshin/mzdata
+Rahim et al.            2017   Redmine     13,820 †https://github.com/shamsurrahim/RedmineDataset
+Gousios                 2013   GitHub          — https://github.com/ghtorrent
+Kallis et al.           2022   GitHub     803,417 —
+Nikeghbal et al.        2023   GitHub          — https://github.com/kargaranamir/girt- data
+Ortu et al.             2015   Jira       700,000 †http://openscience.us/repo/social- analysis/socialaspects.html
+Tawosi et al.           2022   Jira       508,963 https://github.com/SOLAR- group/TAWOS
+Montgomery et al.       2022   Jira     2,686,282 https://zenodo.org/doi/10.5281/zenodo.5882881
+Diamantopoulos et al.   2023   Jira            — —
+ †These URLs were already broken at the time of publishing this chapter.
+
+
+
+
+in providing robust authentication features and standard reporting capabilities.
+Noteworthy tools in this cluster includes BugTraq and JTrac. Cluster 4 focuses
+on features related to notifications and command-line support, including Trac,
+among others.
+
+
+2.3    Issue Tracking Datasets
+
+Despite the large amount of research in the area of issue trackers, access to
+large and rich issue tracker datasets remains rather limited. The GitHub7 issue
+tracker hosts millions of public repositories. The status quo for most other issue
+trackers, however, is private hosting, often locally hosted on institutional servers,
+accessed through hidden or intranet domains. While GitHub is a good source
+of issue repositories, it also represents only one specific issue tracker, lacking
+some common features such as custom linking, issue types, workflows, etc. Over
+the last decade, researchers have collected and released several issue tracker
+datasets—most of the time to address a specific research goal.
+    Lamkanfi et al. [26] built a Bugzilla dataset containing only genuine bug
+reports from Eclipse and Mozilla projects. The dataset covers the complete life-
+time of each bug report, including the updates for each field. This dataset can
+be used for severity prediction, studying bug-fixing time, or wrongly assigned
+components. Lazar et al. [28] built a dataset for duplicate detection that encom-
+passes data from the Bugzilla repositories of Eclipse, Open Office, NetBeans, and
+Mozilla. The dataset contains duplicate issues as well as random non-duplicates.
+It is used for researching duplicate detection models. Zhu et al. [54] also built a
+dataset from Mozilla’s issue tracker. Their dataset contains issue reports proper-
+ties, activities, and comments. They used the dataset for issue assignment, issue
+fixing time, and developer participation prediction.
+    Rahim et al. [42] built a dataset from Redmine to examine issue starvation,
+meaning that issues with lower severity or priority do not get enough resources
+to be resolved. Their dataset encompasses issues and issue-report properties.
+7
+    https://github.com/
+8       Montgomery et al.
+
+    Gousios [17] created the popular and extensive GHTorent dataset of GitHub
+data, which encompasses various projects, issues, users, commits, and pull-
+request information. The dataset can be used for collaboration and network
+analysis studies. Kallis et al. [24] created a GitHub dataset with 803,417 issues
+reports extracted from 127,595 open-source GitHub projects for a research com-
+petition hosted by the Natural Language-based Software Engineering Workshop
+(NLBSE). The dataset encompasses issue report information, which was used
+for issue type classification. Nikeghbal et al. [39] also mined data from GitHub
+to create an issue dataset that enable examining the usage of issue templates.
+    Ortu et al. [40] created a Jira dataset for Apache, Spring, JBoss, and Code-
+Haus communities to analyse the communication processes. This dataset con-
+tains issue reports and corresponding comments. Tawosi et al. [47] crawled public
+Jira repositories that use agile approaches. They mined more than half a million
+issues from 44 open-source projects. This dataset can be used, e.g., for effort es-
+timation, issue prioritisation, or issue assignment. Montgomery et al. [36] built
+a large Jira dataset with the issue reports from 16 different organisations and
+all their projects, resulting in 2.7 million issues, 32 million changes, 9 million
+comments, and 1 million issue links. This is a rather general purpose dataset,
+which can be used for various goals including issue link prediction, discussion,
+or evolution analysis. Diamantopoulos et al. [10] mined the Jira repository of
+Apache in 2023 and used topic modelling to enhance the dataset.
+
+2.4    Issue Tracking Data
+Issue trackers contain an assortment of data from natural language text to struc-
+tured meta-data. We summarise five different types of data found in issue track-
+ers and which can be used for different purposes. Figure 2 gives an overview of
+the data usually available in a Jira repository. To discuss the data structure, we
+use Jira as an example, as it is one of the most popular and functionality-rich
+issue trackers in practice.
+
+Core Issue Data (Content). An issue has two primary fields capturing it
+core information: Summary, Description. While the data is usually natural text,
+description can also include formatted text as well as attachments and images.
+The core issue data is usually available at the issue creation time
+    The Summary (or title) provides a brief overview of the information contained
+in the issue. For example: “Allow toggling every single projector’s ability to
+cast a shadow separately” is a summary of STORM-2147 from SecondLife.8
+The Summary field alone is often used for tasks such as searching for issues,
+prioritising issues, assigning issues to people, and managing backlogs. Therefore,
+ideally, the Summary should enable a good quick interpretation of the issue
+overall. When written effectively, the Summary should touch on all important
+high-level aspects of the issue and be informative for automated analysis. In
+most cases, however, the Summary is not enough for a complete understanding
+8
+    https://jira.secondlife.com/browse/STORM-2147
+                            Mining Issue Trackers: Concepts and Techniques         9
+
+
+          issue                        fields                    comment
+      id INT                     summary STR                    id INT
+      fields                     description STR                body STR
+      changelog                  comments                       author
+                                 issuetype                      updateAuthor
+                                 project.name STR               created DATETIME
+      changelog
+                                 components LIST<STR>           updated DATETIME
+      startAt INT
+                                 labels LIST<STR>
+      maxResults INT
+                                 issuelinks                      issueType
+      total INT
+                                 subtasks                       id INT
+      histories
+                                 fixVersions LIST<STR>          description STR
+                                 status.name STR
+                                                                name STR
+        history                  priority.name STR
+      created DATETIME           resolution.name STR
+                                 timeestimate INT                issuelink
+      author
+      items                      timespent INT                  id INT
+                                 creator                        inwardIssue
+                                                                /outwardissue
+                                 reporter
+          item                   assignee                       type.name STR
+      field STR                  votes.votes INT
+      fieldtype STR              watches.watchCount INT
+      from INT                   created DATETIME                 person
+      fromString STR             updated DATETIME               key STR
+      to INT                     duedate DATETIME               name STR
+      toString STR               resolutiondate DATETIME        active BOOL
+
+
+
+ Fig. 2. Constructed Jira MongoDB database scheme (from Montgomery et al. [36])
+
+
+
+of the ticket. For this reason, accurate analysis and prediction and should be
+combined and corroborated with the other fields such as the Description.
+    The Description field contains the full details of the issue. When stakeholders
+want a detailed understanding of the issue (e.g., to be able to resolve it), they
+will go to the Description. Using NLP to interpret the Description is essential
+and difficult, as descriptions come in many forms, from simple small paragraphs
+to multi-section deep dives. Additionally, the form of information in Descriptions
+is not always natural language prose but can also include headers, code blocks,
+log outputs, steps-to-reproduce, screenshots and more. In principle, all necessary
+information should be listed in the Description, but in reality, some information
+might be listed elsewhere in the issue, and some information might not be listed
+at all. Additional information is often contained in the Comments.
+
+
+Metadata and Workflow. Issue Metadata covers fields that enhance the is-
+sue content and enable batch processing, retrieval, and workflow automation.
+Metadata information is typically categorical data shared across the issues in a
+certain project or organisation (shared labels, environments, priority levels etc.),
+whereas Content information is unique. The Labels field contains tag-like infor-
+mation. For instance, MCPE-318879 has multiple labels referring to Minecraft
+9
+    https://bugs.mojang.com/browse/MCPE-31887
+10      Montgomery et al.
+
+items. The Environment field is label-like but focuses on hardware- or software-
+related information. This is often a text field, such as STL-169910 with the
+Environment set to “On a MacBook Pro, using docker containers”, but it can
+be more technical, such as “AWS Marketplace 1.1.4 AMI” on STL-1618.11 The
+VersionsAffected field contains the software version(s) affected by the content
+described in the issue. The VersionsFixed field contains the software version(s)
+fixed by the content described in the issue. For example QTBUG-11745412 , its
+VersionsAffected is “6.6.0 Beta4” while its VersionsFixed is “6.6.0 RC”.
+    Some metadata fields can be specific to the issue workflow, supporting and
+guiding issues in their lifecycle from creation to resolution. The Status field
+marks the current stage of the lifecycle an issue is in. The Priority field marks
+the importance of an issue in relation to other issues. The Resolution field marks
+the reason for closing an issue. The CreatedDate and ResolvedDate mark the
+beginning and end of an issue lifecycle. In Jira, the CreatedDate cannot change,
+and any changes to the ResolvedDate are not tracked in the evolutions.
+    Metadata and workflow fields contain short, possibly categorical natural lan-
+guage text, but sometimes with numbers as well. These fields can either be
+learned and predicted based on historic data or they might enrich and extend
+the Summary and Description. For example, a script could check for duplicate
+or inconsistent information in the Comments based on the current issue La-
+bels. Metadata should mostly be correct and consistent, but trackers often do
+not enforce validating their values. Users might be able to, for example, change
+metadata without updating previous versions accordingly.
+
+Issue Tracker Structure. The Structure fields provide structure to issue track-
+ers, beyond simply annotating individual issues. The IssueType field describes
+the role this issue plays within the issue tracker: epic, story, bug, feature request,
+etc. (see Montgomery et al. [36] for a comprehensive breakdown of issue types).
+The Project and Components fields provide a top-down structure to issue track-
+ers that work roughly as mutually exclusive bins, e.g., every issue is under a
+Jira, Project, and Component(s). The Parent field contains a link to the parent
+issue that this issue is under. The IssueLinks field contains several links to other
+internal issues, resources, and even external issues in other issue repositories.
+    Many issue trackers offer the ability to link issues together via specialised
+link types. These links relate issues to each other, allowing stakeholders to un-
+derstand and capture the relationships between different issues, making it easier
+to find information, and structuring overall project knowledge [45]. For exam-
+ple, a reported issue might be part of a major bug, a bug might contribute to
+a specific requirement, or two issues might refer to the same feature request.
+Issue linking can be considered horizontal traceability as the links relate arte-
+facts (issues) on the same level [21,16]. Issue links are listed either directly as
+an attribute on the corresponding issue (e.g. in JIRA and Bugzilla) or in the
+10
+   https://jira.hyperledger.org/browse/STL-1699
+11
+   https://jira.hyperledger.org/browse/STL-1618
+12
+   https://bugreports.qt.io/browse/QTBUG-117454
+                           Mining Issue Trackers: Concepts and Techniques       11
+
+comments sections (e.g. in GitHub Issues). There are different link types, such
+as Duplicate, Relate, Block, and Subtask [30], which serve different purposes and
+can be used to indicate various relationships between issues.
+
+
+Discussion and Community. A significant part of issue trackers and their
+data is the community of stakeholders and their involvement with the evolution
+of issues. The Creator field lists the person who opened the issue. The Reporter
+field contains the person who initially brought up the issue, which might be a
+different person than the creator. The Assignee field lists the person responsible
+for resolving the issue, which can change during the lifetime of the issue. Other
+stakeholders might also register to simply Watch the issue, to be notified when
+issue changes occur. These fields can be combined with profiles of individuals or
+artefacts to being additional value to automated analysis.
+    One significant field is the Comments field, which lists all the comments made
+on an issue. For example, “that could be fun to implement, although I won’t
+have time for it for a while” is a comment on QTBUG-76315.13 In this case, the
+developer is conveying interest, but also their relative time constraints (which is
+the likely reason for this issue still being open, despite being over 4 years old).
+Another example is: “I think you are right and since three months have passed,
+I can fix it for you; thank you for the issue and the suggested code changes”
+on ZOOKEEPER-4703.14 In most issue trackers, the comments are displayed
+in ascending chronological order after the Description. Each comment tends to
+be just a few sentences long, but it can also be multiple paragraphs. Comments
+might include questions, personal updates, or requests for information.
+    Some comments may contain relevant information not included in the De-
+scription. For example, a comment could contain the log output of the error
+mentioned in the Description. A comment could also include conflicting infor-
+mation relative to the Description or other fields. For example, someone could
+comment that an open issue should have a status of “Closed”. Therefore, for a
+stakeholder to have up-to-date precise information about an issue, they might
+have to read all comments in addition to the Summary and Description. When
+constructing machine representations of an issue (e.g. a vector embedding), it
+may benefit the algorithm to include information listed in the comments—in
+addition to the Summary and Description fields.
+
+
+Evolution Data. Some issue trackers like Jira also track the history of changes
+to the issue, on a per-field basis, with timestamps. In Jira, each change is stored
+as a before and after of a field, including who changed it and when. This data
+is described in Fig. 2 under “item”, where the “field” evolution is described
+as a “fromString” and “toString”. Anything can change after the creation of
+an issue, including its core data and its metadata. Some fields, e.g. Status or
+Comments are more likely to change. Evolution data can be used to understand
+13
+     https://bugreports.qt.io/browse/QTBUG-76315
+14
+     https://issues.apache.org/jira/browse/ZOOKEEPER-4703
+12        Montgomery et al.
+
+what happened to single issues, to predict values that are likely to change, or
+to understand a bigger picture in a project or organisation about what changes
+might occur in what context, why, and are they rather “good or bad” changes.
+
+
+3      Use Cases and Techniques for Mining Issue Trackers
+
+We present four major use cases for leveraging data mining and NLP to sup-
+port stakeholders use their issue trackers. For each use case, we introduce the
+underlying motivation, data analysis algorithms applied, and general pitfalls.
+We focus our discussion on Jira, while the use cases are likely relevant for any
+modern issue tracker. Jira is one of the more popular issue trackers, and we have
+a large public dataset available to analyse [36]. We share a JupyterNotebook on
+Zenodo15 with source code for three of the use cases.16
+
+
+3.1     Issue Quality Analysis
+
+Requirements quality research aims to define, improve, and evaluate quality fac-
+tors for natural language requirements. These quality factors include ambiguity,
+completeness, consistency, correctness, and many more [35]. Research has pro-
+duced techniques to automatically detect problems with such quality factors.
+Issue trackers offer a well-suited environment to apply these techniques, as there
+is a diverse and plentiful set of requirements-related knowledge to analyse.
+     For this use case, we analyse User Story issues since they tend to be concise
+and atomic, making them easier to analyse than other requirements forms. In
+the “RedHat” Jira Repository, there is a considerable number of user stories
+(∼12,000 issues with the type “Story”). Not all 12,000 are strictly user stories,
+given the fluid nature of how issue trackers are used in practice. Therefore, we
+filter out issues where the Description does not contain “as a” to remove issues
+that are not user stories. This produces a table where each row is an issue, and
+the columns are the Jira issue ID and the Description. User this data, we then
+detect the following ambiguities: subjective language and nominalisations. We
+do this by applying different NLP techniques, including lexical lookups, regu-
+lar expressions, part-of-speech tagging, parse trees, and hypernyms. Generative
+Artificial Intelligence (GenAI) and Large Language Models (LLMs) have shown
+increasing promise as powerful tools for NLP applications. These algorithms can
+likely be applied for language translation, grammar and spell checking, text clas-
+sification, summarisation of long texts, and even full Description generation. For
+this use case involving specific types of ambiguity, however, we will be focusing
+on traditional NLP techniques designed to target specific structural aspects of
+language.
+15
+     https://zenodo.org/doi/10.5281/zenodo.10779206
+16
+     The fourth use case already has a replication available at
+     https://github.com/RegenKordel/LYNX-BeyondDuplicates
+                            Mining Issue Trackers: Concepts and Techniques       13
+
+Subjective Language. There are multiple types of subjective language that
+are considered ambiguous. Tjong et al. [48] and Gleich et al. [14] suggest algo-
+rithms to detect various types of ambiguous subjective language.
+    Tjong et al. addressed “dangerous plurals” and “inside behaviour” [48]. Dan-
+gerous plurals are subjective due to the lack of clarity regarding boundary condi-
+tions on words such as “few”, “little”, and “many”. Here is an example from our
+dataset: “of course there’s no need to provide every single detail of the proposed
+architecture in the design document”, where the use of “every” here is ambigu-
+ous, and left to stakeholders to interpret. Inside behaviour is subjective due to
+the lack of specificity regarding the outside behaviour of functional elements,
+such as with the use of words like “until”, “during”, and “after”. Here is an
+example from our dataset: “specific releases experience reliability issues during
+regular Motions”, where “during” here lacks a description of when these relia-
+bility issues start and stop. Both types of subjective language can be detected
+using lexical lookups (searching for individual words).
+    Gleich et al. addressed “unclear inclusion” and “passive voice” [14]. Unclear
+inclusions are ambiguous due to the use of “up to” without the use of “including”
+or “excluding”. It is then unclear whether the described values are to be included
+or not in the definition of that functionality. Here is an example from our dataset:
+“the engine returns up to 10 fired events”, where it is unclear if the engine can
+return 10 events. We can identify this ambiguity using the following regular
+expression:
+    up\\sto\\s(?!.*including|excluding)
+
+    Gleich et al. [14] constructed a technique to detect “passive voice” with the
+use of part-of-speech (POS) tagging and regular expressions. Passive voice leads
+to ambiguity where the actor of a verb is omitted, e.g., “the gate was opened”
+(but we do not know who opened the gate). To detect such an ambiguity, we need
+POS tags. POS tagging is the process of assigning a word a tag that represents its
+role within the sentence, e.g., noun, verb, adjective, etc. These tags are assigned
+based on the word itself and its context within the sentence. Using POS tags
+allows us to search for more than just the literal words. It allows us to search
+for classes of words and also words being used in specific ways (e.g., “brush”
+can be both a noun and a verb). To detect passive voice, Gleich et al. [14] apply
+POS tagging to the requirement, searching for the verb “to be”, followed by the
+past participle verb form (most often verbs ending with “ed”), and no additional
+verbs between the two preceding parts. You can see this three-part approach in
+the regular expression below (each part separated by a space).
+    \\b\\w+?°V[^°]*°be (\\W[^°]+?°(?!VB.)[^°]*°[^ ]+?)* \\W\\w+?°VBN°\\w+
+
+
+Nominalisations. Nominalisation is the transformation of a verb phrase into a
+noun phrase, which reduces a complex process into a single noun word or phrase.
+An alternative definition is given by Lapata where nominalisations are seen as
+“a particular class of compound nouns whose head noun is derived from a verb
+and whose modifier is interpreted as an argument of this verb” [27]. Ambiguity
+can arise from nominalising a complex process since a different meaning (or
+14     Montgomery et al.
+
+meaning containing less information) is communicated [15]. According to Goetz
+and Rupp [15], nominalisations can manifest in requirements from distortions—
+i.e., the constant re-organisation of previously acquired knowledge. For example,
+“Powering down the cab radio ...” can be ambiguous because the complexity of
+“Powering” is hidden behind a noun and not adequately described.
+     To detect nominalisations, Bouraffa uses simple NLP methods, without the
+need of ad-hoc lookup tables [7]. They distinguish between two types of nominal-
+isations: derived nominals and gerundive nominals. Derived nominals originate
+from adverbs, adjectives, and verbs that are simplifying a complex process using
+additional derived components, such as “-tion” or “-ism.” Gerundive nominals
+are verbs in the “-ing” form that are not being used as proper verbs in a sentence.
+An example of a derived nominal and a gerundive nominal, is “Powering down
+the cab radio shall cause the disconnection from the mobile network”. “Power-
+ing” is the gerundive nominal and “disconnection” is the derived nominal. Both
+cases present complex processes that are simplified to single words.
+     Bouraffa identifies derived nominals using POS tags, special suffixes, and hy-
+pernyms [7]. A word suffix is a set of characters appended to the end of a word
+stem, such as “-tion”, “-ism”, or “-ty”. Hypernyms organize words in an is-a
+relationship, creating a tree hierarchy that relates words to each other. First,
+we retrieve nouns (i.e., POS tag “NN” and “NNS”). Then, we look for specific
+suffixes signalling a derived nominal. Finally, since we are interested in the nom-
+inalisation of actions, we only retain words having “EVENT”, “PROCESS”, or
+“ACT” in their hypernym path. These hypernyms indicate a noun that usually
+acts as a verb; hence, they have been nominalised. Here is an example from our
+dataset: “During default deployments (without user-specific configuration) TLS
+termination is managed by the Route”. “Default deployments” is a nominalisa-
+tion that hides a complex process and therefore introduces ambiguity, which is
+likely why the user had to add a qualifier in braces right after it.
+     Bouraffa identifies gerundive nominals using POS tags and dependency trees [7].
+Dependency trees describe how words in a sentence are related to each other,
+for example, “root”, “compound”, and “direct object.” Using POS tags, we first
+retrieve terms tagged as “VBG” (i.e., a gerundive verb) and then check whether
+it is a gerundive nominal (nominalisation). To this end, we parse the dependency
+tree and check if the VBG term is not labelled as root verb of a sentence, auxil-
+iary of a verb, adverbial modifier, compound, or clausal modifier of a noun. These
+labels signify situations in which the gerundive verb is being used as an actual
+verb, and therefore is not a nominalisation. Here is an example from our dataset:
+“Specific information about the persistence implementation should not be in the
+CR attributes”. The nominalisation is in “persistence implementation”, which
+is a complex process that has reduced to a two-noun phrase, thereby hiding the
+details and creating ambiguity.
+
+
+Pitfalls and Takeaways. Issue trackers provide access to plenty of require-
+ments data created by stakeholders with different backgrounds and expertises.
+Before applying a mining or a machine learning technique to the core textual
+                           Mining Issue Trackers: Concepts and Techniques       15
+
+information, a manual checking and advanced preprocessing might be needed.
+Issues labelled “User Story”, for example, might not strictly follow User Story
+templates, and might contain surrounding context such as acceptance criteria.
+    Applying NLP techniques is then a matter of extracting the natural language
+text with the desired algorithms. Some algorithms, such as Subjective Language
+algorithms, can produce false positives (requirements that are labelled as ambi-
+guities but are actually not). This is partly due to the nature of some algorithms
+using simple heuristics, partly due to the nature of ambiguity itself, and partly
+due to the heterogeneous data. Research into ambiguity is still ongoing and even
+defining what is ambiguous, in which contexts, to whom, is not trivial.
+
+3.2   Evolution Analysis
+Evolution data is powerful as it facilitates viewing the data at any point in time
+and understanding what has changed (and possibly why). This can be used as a
+tool for predictive modelling and grounded investigations, among other things.
+Research into requirements evolution is limited mainly to change management,
+which is more about processes than data. The concept of using requirements
+histories is not entirely novel, but it is rather understudied.
+    Requirements evolution data is quite rare since pre-finalised requirements
+are either not public, or non-systematically versioned. Additionally, even when
+requirements do have evolution data, it is often in the form of requirements doc-
+uments with multiple versions over time. This can be challenging to unpack and
+utilise in research since tracing between requirements is frequently lost, and it
+is not trivial to write automatic extraction scripts. Thus, issue trackers offer a
+unique source of requirements evolution data since issues and their evolutions
+are well-structured. Additionally, issues are designed to be atomic units of infor-
+mation, so individual requirements tend to be in individual issues.
+    Analysing the evolution depends on the particular evolving field being anal-
+ysed. In particular, the evolution of issue metadata, issue structure, and issue
+content might require different techniques and might lead to different insights.
+Concerning metadata and structure, there is a large body of work from the last
+decade. The overall approach is usually the same: predict the value of a certain
+issue field based on learning from past data. For instance, we could train a ma-
+chine learning classifier on past issue data to predict which priority an issue is
+likely to have, who should be the assignee [46], or what link to other issue is
+should have [31]. Most of these works use the last snapshot of previous issues to
+predict the field of a new issue (or just randomly split issues into training and
+testing sets without considering the time). The evolutions of the issues in the
+training set are typically ignored. This might, however, bear useful information
+about false positive predictions or of what fields are likely to change.
+    Applying evolution analysis on core textual data of the issues might lead to
+insight about when an issue (or a requirement) changes and why. One such a
+reason could be that the text was ambiguous in the original text, contextual
+information was missing, or the language is “too emotional”. Sentiment analysis
+rates the affective nature of the text as either positive, negative, or neutral. In
+16       Montgomery et al.
+
+other words, is the writer of the text conveying positive, negative, or neutral
+emotion through their words. Certain sentiment analysis tools extract more in-
+formation than that, including specific emotions such as happiness, sadness, or
+anger. However, these tools often require more input data for a confident predic-
+tion and the results are often less accurate than sentiment polarity alone. One
+objective is to investigate sentiment across evolutions and uncover the dynamics
+of issue descriptions through time. In particular, we are interested to see if ed-
+its make descriptions rather neutral in sentiment. Issue descriptions should be
+strictly informational, so perhaps over time the sentiment trends to zero.
+    Any requirement type from any Jira repository can fit to this analysis. We
+thus sample issues from all available repositories. We first gather 10,000 issues per
+repository, randomly, and then perform several cleaning steps to remove defects
+such as missing and impossible data (e.g., closed date before open date). There
+are then 64,840 issues left, with most Jira repos containing ∼5–7k issues, and
+some smaller repos such as SecondLife and Sonatype contributing ∼500 issues.
+We first want to consider how many evolutions each issue has. At a minimum,
+each issue should have at least one evolution where the description changes.
+Finally, we filter the data down to just the Description field, since we are only
+analysing that text. Our final dataset is a table with 35k rows, where each row
+is an evolution to an issue’s Description field.
+    Now that we have a table with a row for every evolution to Descriptions,
+we extract the sentiment score and track that over time as an issue evolves.
+For simplicity, we compare the sentiment of the first version of the description
+to the last version. We extract the sentiment score using SpaCy spacytextblob
+package.17 Finally, we calculate the description sentiment “trend” and store that
+alongside the descriptions themselves, to allow for manual analysis.
+    Here are two examples of issue descriptions at the start and end, and the
+sentiment trend between them. The description at creation was: “Chef has been
+identified as a suitable option to create the automatic deployment mechanism.
+The architecture of the mechanism needs to be specified, and then implement
+in Chef”. The final description simply had “suitable” removed, leading to a 0.55
+drop in sentiment, which means the sentiment became more negative. This makes
+sense, since “suitable” is a positive word, and removing it made the description
+more technical and without pleasantry. Another issue description started as:
+“The Wss4jSecurityInterceptor has no X509 Binary security token support yet. It
+would be great if we could add it.” The description at the end was “Document the
+X509 Binary security token support for Wss4j.”, which resulted in a sentiment
+drop of 0.8. This appears, again, to be a matter of removing positive words such
+as “great” in favour of a more literal and to-the-point description.
+
+Pitfalls and Takeaways. Issue trackers offer a specifically powerful perspec-
+tive on requirements with their full evolutionary history. We have showcased one
+such analysis of this data, but there are many more opportunities. For sentiment
+analysis, it appears that the sentiment model is very sensitive to non-textual
+17
+     https://spacy.io/universe/project/spacy-textblob
+                            Mining Issue Trackers: Concepts and Techniques       17
+
+elements, such as URLs. For this reason, it is important to filter the data appro-
+priately and do many manual checks of the results before coming to conclusions.
+Additionally, issue trackers have many unexplainable data points that can break
+even robust analysis tools. This data includes strings that are too long, likely
+due to log dumps or copy-paste content from software output.
+
+3.3   Discussion Analysis
+Requirements engineering is a collaborative process involving multiple stakehold-
+ers who interact to clarify, prioritize, and implement requirements. Issue trackers
+offer a central place for analysing and assisting this collaboration [5]. It is com-
+mon that each issue has a running list of comments just below the description.
+Even in more restrictive issue trackers where only certain people can create or
+edit issues, the ability to comment is often left open to the public.
+    There are various objectives for such analysis. First, discussion analysis can
+monitor the overall activity intensity, as some issues tend to receive more com-
+ments than others. Here similar sentiment analysis can be applied as to the issue
+description evolution, e.g. to detect and possibly steer escalations. Second, com-
+ments might include different types of information which can be useful for dif-
+ferent tasks and different stakeholders, such as steps to reproduce, workarounds,
+background knowledge and rationale why a certain feature is needed etc. Dis-
+cussion analysis can aim at classifying or retrieving such specific information to
+support an easier access to the information [2]. Third, information in the com-
+ments that should be propagated to the issue fields can be extracted, and the
+fields updated. For example, situations where someone has commented that the
+status should be updated, but it has yet to be. To demonstrate such analysis, we
+use the same dataset that we generated for the last use case: a sample of issues
+from all Jira repositories in the dataset. However, we do not filter the issues or
+evolutions on a particular condition.
+    Our objective is to find cases where the comments or description mention
+attributes that should be changed in their respective fields. This task is quite
+difficult with high precision, so we aim for high recall and do some fast manual
+analysis to find what we are really looking for. The first step towards our ob-
+jective is to gather a list of all field names to search for in the comments and
+descriptions. This is trivial: we gather a unique set of all “field” names from our
+table leading to 26 unique fields. We can already search for these field names in
+comments and descriptions, which are likely candidates for related discussions.
+However, to further reduce the dataset and increase precision (while maintain-
+ing high recall) we require that the comment or description mentions one of the
+values for this field (we call these states). For example, “I think the status is
+wrong” would not be enough, it would have to say something like “I think the
+status should be set to closed ”. To find all possible states for a given field, we
+gather a unique set of all values that field has ever been set to. To keep the lists
+manageable and realistic, we limit each list to all states that field has ever been,
+in the Jira it is in. The result is a multi-level dictionary item where for a given
+Jira and field, all states are listed.
+18     Montgomery et al.
+
+    We then mine all comments and description evolutions, searching for cases
+where both a field name has been mentioned, and at least one of the field states
+that it could be in. Our analysis finds many results; however, as previously
+mentioned, we now need to manually filter through them to identify situations
+where there is really an explicit suggestion for a field to have a different value.
+Here is an example of a false positive: “Sorry, this is not a Major Priority,
+so I cannot demote”. They happen to use the words Priority (field name) and
+Major (possible field state), but they are not recommending that the priority
+field be changed to major. There are also many close but still false positives
+where a comment retroactively comments that a field has been changed, e.g.,
+“Changed Priority to Major”. One example of a true positive is: “I do not know
+why the Priority is changed to P2-High”, which is discussion point where the
+author thinks the priority should be changed to something else. Here is a true
+positive we aimed at identifying: “We need to fix this issue ASAP. [...] Please
+mark this issue as High Priority”. Here is another true positive: “That’s not a
+Low Priority ticket because our workflow is completely blocked right now”. With
+such a simple lookup, we can filter down the set to a reasonably sized set with
+pre-conditions we assume are necessary to find the right data.
+
+
+Pitfalls and Takeaways. Analysing issue discussions does not require ad-
+vanced NLP techniques. Already, word matching to find terms reflecting issue
+statuses, priorities, or related issues can lead to identifying relevant comments
+with a satisfying precision. Certainly, more advance information retrieval tech-
+niques, text classification, and semantic reasoning could improve the output.
+
+
+3.4   Link and Structure Analysis
+
+Link analysis serves as an approach for gaining insights into the relationships
+between two issues. When applied recursively, more coarse-grained structure
+analysis can be achieved, e.g. to identify issue sub-graphs in a project denoting
+workflow, organisational or architectural dependency [30].
+    Issue trackers enable users to connect the various pieces of information they
+store in issues. Therefore, issue trackers are good sources for conducting link
+analysis due to their comprehensive tracking of both issues and the links be-
+tween them. One of the most prominent research problems is duplicate detec-
+tion [9,1,20,50], which involves determining whether two issues essentially de-
+scribe the same problem or feature. This task can be approached using NLP
+techniques that assess textual or semantic similarity between issues, analyse dif-
+ferences in text length, or consider the combined length of text. However, beyond
+duplicate detection, issue trackers encompass various link types providing an ex-
+tensive landscape for exploration. This type of analysis is particularly beneficial
+for users navigating large issue trackers with substantial backlogs, as it aids in
+the discovery of relevant issues amid the vast array of available data.
+    One primary objective in conducting this analysis is to gain insights into the
+similarities and distinctions among linked texts based on their types. For the
+                                                     Mining Issue Trackers: Concepts and Techniques                                 19
+
+purposes of the demonstration, we focus on issues that are created within the year
+of 2021 and that have established links to other issues. Furthermore, we focus on
+repositories with include prevalent links and multiple link types. The first step
+for issue link analysis is to represent the issues as vectors which can compared in
+a particular space: a technique that is called embedding. Embeddings take words
+or sentences and try to embed them into a vector space. Words or sentences with
+similar meanings should be close to each other and words or sentences with very
+dissimilar meanings should be far away from each other. The textual similarity
+between pairs of linked issue texts can be measured using the cosine similarity:
+that is the angle between two vectors divided by the product of their lengths.
+This results in a similarity score from [−1, 1].
+    We can employ two embedding techniques: TF-IDF and BERT. We embed
+the text content, encompassing both the issue titles and their respective descrip-
+tions. We can compare the cosine similarity scores derived from the TF-IDF
+embeddings with those produced by the BERT embeddings, with a specific fo-
+cus on various link types identified within the Hyperledger repository. Figure 3
+shows the distribution of the cosine similarities per link type.
+
+
+                                                    Cosine Similarity of Embeddings per Link Type
+                    1.0                                                                                 texttype
+                                                                                              tfidf_cosine_similarity_whole_issue
+                    0.8                                                                       sentence_embedding_whole_issue
+Cosine Similarity
+
+
+
+
+                    0.6
+
+                    0.4
+
+                    0.2
+
+                    0.0
+                          Epic-Relation   Relates   Subtask      Blocks      Cloners     Issue split   Duplicate Git Code Review
+                                                                      Linktype
+
+
+Fig. 3. Link analysis with TF-IDF and BERT embeddings and their cosine similarity
+of issue texts of linked issues per link type.
+
+
+   In our analysis, we have made several observations. First, we noticed a consis-
+tent trend: the cosine similarity of TF-IDF embeddings tends to be consistently
+lower than that of BERT embeddings. This can be attributed to the inherent
+limitations of TF-IDF in capturing nuanced semantic meanings and synonyms
+when compared to BERT. BERT, being a contextual language model, excels in
+comprehending contextual and semantic information within text. Consequently,
+BERT embeddings often yield higher cosine similarity scores, indicating a more
+thorough grasp of the underlying semantics of the text.
+   Second, within our dataset, we identified a distinct category known as the
+Cloners. These issues exhibit the highest similarity, regardless of whether TF-
+IDF or BERT embeddings are used. This elevated similarity is largely attributed
+20      Montgomery et al.
+
+to the nature of Cloners. These issues are typically created with Jira’s clone fea-
+ture, allowing users to generate new issues based on existing ones while retain-
+ing the flexibility to modify specific attributes. Consequently, Cloners inherit a
+substantial portion of content from the original issue, particularly in terms of
+TF-IDF vectorisation, which contributes to their high TF-IDF similarity.
+    Third, beyond the Cloners, we found that other link types display relatively
+similar cosine similarity scores, regardless of the embedding technique employed.
+For TF-IDF, the scores range from 0.12 to 0.25, while for BERT, they span from
+0.36 to 0.60. Interestingly, the Duplicate link type does not significantly differ
+in its cosine similarity compared to other link types. This observation raises
+questions about the effectiveness of models solely relying on text similarity in
+distinguishing Duplicate links from other types, as noted by Lüders et al. [30].
+    General typed link detection remains an active research area. Previous stud-
+ies, such as those by Lüders et al. [31] (macro F1-scores ranging from 0.41 to 0.88
+and weighted F1-scores of 0.64 to 0.95) and Nicholson et al. [37,38] (weighted
+F1-scores from 0.56 to 0.70) showcasing the ongoing challenges. Lüders et al. [31]
+used the same Jira dataset. Their replication package can be used to demonstrate
+link classification. Borg et al. [6] categorised explicit links in two issue-tracking
+systems into four categories: “Related”, “Duplicate”, “Clone”, and “Miscella-
+neous”, highlighting that “Clone” links represent a stronger form of “Duplicate”
+links due to their issues sharing identical textual content. Li et al. [29] delved
+into issue linking practices on GitHub, categorising link types into six categories,
+including “Dependent”, “Duplicate”, “Relevant”, “Referenced”, “Fixed”, and
+“Enhanced”. Their findings emphasised the need for automated classification,
+where “Referenced” links often referred to historical comments with essential
+knowledge, and “Duplicate” links were frequently marked within the same day.
+Finally, Tomova et al. [49] investigated seven open-source systems, revealing that
+the rationale behind selecting a specific link type is not always obvious. Addition-
+ally, they noted that Clone links are indicative of textual similarity, while issues
+connected through a Relate link exhibit varying degrees of textual similarity,
+often necessitating additional contextual information for accurate identification.
+
+
+4    Discussion and Summary
+
+Issue trackers have emerged as a new key place where requirements knowledge
+is crafted, delivered, and maintained—along with bugs, tasks and other system
+and project knowledge. What makes issue repository even more interesting is
+that issues usually are connected to source code repository and other resources.
+Therefore, mining issue trackers as a rich and integrated knowledge base for
+software repositories bears a large potential to assist various stakeholders in-
+cluding analysis, product owners, developers, and users. Capturing, managing
+and sharing requirements knowledge has been an ongoing challenge and area of
+research for decades [33]. With issue trackers, requirements knowledge is directly
+connected in complex linked graphs, traceable directly to code, and explained
+through rationale links back to feature requests. The capability of these systems
+                             Mining Issue Trackers: Concepts and Techniques           21
+
+is not just contained to what can be extracted from them, issue trackers are also
+a rich platform for embedded recommender systems [22] in the form of browser
+extensions and tool plugins.
+    Issue trackers continue to fill up with information over time, which inevitably
+causes information overload and makes navigating these systems challenging.
+Managing and extracting insights from the vast amount of heterogeneous data
+can be overwhelming. Moreover, the quality of textual information within issue
+trackers often varies widely. Inconsistent information, low-quality text, and too
+large “knowledge graphs” can hinder the effectiveness of mining efforts and using
+the data. We demonstrated how properly leveraging NLP techniques, even as
+simple as term look-ups, can help unpacking, utilising, and even correcting the
+information stored in issue trackers.
+    NLP can help in addressing many RE-related use cases, but the essential
+component of this lies in the linked meta-data. Traditional NLP and modern
+machine learning techniques, such embeddings, semantic similarity, and language
+generation offer effective methods to analyse, extract, and correct information
+from textual data in issue trackers. Alongside the textual data, issue trackers
+offer a rich set of meta-data that can enhance solutions beyond just the insights
+available in the text. Holistic approaches combining NLP with the meta-data
+can offer much more value in approaching more complex problems.
+
+References
+ 1. Anvik, J., Hiew, L., Murphy, G.C.: Coping with an open bug repository. In:
+    Storey, M.D., Burke, M.G., Cheng, L., van der Hoek, A. (eds.) Proceedings
+    of the 2005 OOPSLA workshop on Eclipse Technology eXchange, ETX 2005,
+    San Diego, California, USA, October 16-17, 2005. pp. 35–39. ACM (2005).
+    https://doi.org/10.1145/1117696.1117704
+ 2. Arya, D.M., Wang, W., Guo, J.L.C., Cheng, J.: Analysis and detection of infor-
+    mation types of open source software issue discussions. In: Atlee, J.M., Bultan, T.,
+    Whittle, J. (eds.) Proceedings of the 41st International Conference on Software
+    Engineering, ICSE 2019, Montreal, QC, Canada, May 25-31, 2019. pp. 454–464.
+    IEEE / ACM (2019). https://doi.org/10.1109/ICSE.2019.00058
+ 3. Baysal, O.: Informing development decisions: from data to information. In: Notkin,
+    D., Cheng, B.H.C., Pohl, K. (eds.) 35th International Conference on Software En-
+    gineering, ICSE ’13, San Francisco, CA, USA, May 18-26, 2013. pp. 1407–1410.
+    IEEE Computer Society (2013). https://doi.org/10.1109/ICSE.2013.6606729
+ 4. Baysal, O., Holmes, R., Godfrey, M.W.: No issue left behind: reducing information
+    overload in issue tracking. In: Cheung, S., Orso, A., Storey, M.D. (eds.) Proceedings
+    of the 22nd ACM SIGSOFT International Symposium on Foundations of Software
+    Engineering, (FSE-22), Hong Kong, China, November 16 - 22, 2014. pp. 666–677.
+    ACM (2014). https://doi.org/10.1145/2635868.2635887
+ 5. Bertram, D., Voida, A., Greenberg, S., Walker, R.J.: Communication, collab-
+    oration, and bugs: the social nature of issue tracking in small, collocated
+    teams. In: Inkpen, K., Gutwin, C., Tang, J.C. (eds.) Proceedings of the 2010
+    ACM Conference on Computer Supported Cooperative Work, CSCW 2010,
+    Savannah, Georgia, USA, February 6-10, 2010. pp. 291–300. ACM (2010).
+    https://doi.org/10.1145/1718918.1718972
+22      Montgomery et al.
+
+ 6. Borg, M., Pfahl, D., Runeson, P.: Analyzing networks of issue reports. In: Cleve, A.,
+    Ricca, F., Cerioli, M. (eds.) 17th European Conference on Software Maintenance
+    and Reengineering, CSMR 2013, Genova, Italy, March 5-8, 2013. pp. 79–88. IEEE
+    Computer Society (2013). https://doi.org/10.1109/CSMR.2013.18
+ 7. Bouraffa, A.: Improving The Quality of Requirement Specifications Using Auto-
+    matic Ambiguity Detection Tools. Msc thesis, TU Hamburg (April 2019), https:
+    //www.sts.tuhh.de/pw-and-m-theses/2019/bouraffa19.pdf
+ 8. Cavalcanti, Y.C., da Mota Silveira Neto, P.A., do Carmo Machado, I., Vale, T.F.,
+    de Almeida, E.S., de Lemos Meira, S.R.: Challenges and opportunities for software
+    change request repositories: a systematic mapping study. J. Softw. Evol. Process.
+    26(7), 620–653 (2014). https://doi.org/10.1002/SMR.1639
+ 9. Deshmukh, J., Annervaz, K.M., Podder, S., Sengupta, S., Dubash, N.: Towards
+    accurate duplicate bug retrieval using deep learning techniques. In: 2017 IEEE
+    International Conference on Software Maintenance and Evolution, ICSME 2017,
+    Shanghai, China, September 17-22, 2017. pp. 115–124. IEEE Computer Society
+    (2017). https://doi.org/10.1109/ICSME.2017.69
+10. Diamantopoulos, T., Nastos, D., Symeonidis, A.L.: Semantically-enriched jira issue
+    tracking data. In: 20th IEEE/ACM International Conference on Mining Software
+    Repositories, MSR 2023, Melbourne, Australia, May 15-16, 2023. pp. 218–222.
+    IEEE (2023). https://doi.org/10.1109/MSR59073.2023.00039
+11. Ernst, N.A., Murphy, G.C.: Case studies in just-in-time requirements analysis.
+    In: Second IEEE International Workshop on Empirical Requirements Engineering,
+    EmpiRE 2012, Chicago, IL, USA, September 25, 2012. pp. 25–32. IEEE Computer
+    Society (2012). https://doi.org/10.1109/EMPIRE.2012.6347678
+12. Ferrari, A., Esuli, A.: An NLP approach for cross-domain ambiguity detec-
+    tion in requirements engineering. Autom. Softw. Eng. 26(3), 559–598 (2019).
+    https://doi.org/10.1007/S10515-019-00261-7
+13. Fucci, D., Palomares, C., Franch, X., Costal, D., Raatikainen, M., Stettinger,
+    M., Kurtanovic, Z., Kojo, T., Koenig, L., Falkner, A.A., Schenner, G., Brasca,
+    F., Männistö, T., Felfernig, A., Maalej, W.: Needs and challenges for a platform
+    to support large-scale requirements engineering: a multiple-case study. In: Oivo,
+    M., Fernández, D.M., Mockus, A. (eds.) Proceedings of the 12th ACM/IEEE
+    International Symposium on Empirical Software Engineering and Measurement,
+    ESEM 2018, Oulu, Finland, October 11-12, 2018. pp. 19:1–19:10. ACM (2018).
+    https://doi.org/10.1145/3239235.3240498
+14. Gleich, B., Creighton, O., Kof, L.: Ambiguity detection: Towards a tool ex-
+    plaining ambiguity sources. In: Wieringa, R.J., Persson, A. (eds.) Requirements
+    Engineering: Foundation for Software Quality, 16th International Working Con-
+    ference, REFSQ 2010, Essen, Germany, June 30 - July 2, 2010. Proceedings.
+    Lecture Notes in Computer Science, vol. 6182, pp. 218–232. Springer (2010).
+    https://doi.org/10.1007/978-3-642-14192-8 20
+15. Goetz, R., Rupp, C.: Psychotherapy for system requirements. In: Patel, D., Patel,
+    S., Wang, Y. (eds.) Proceedings of the 2nd IEEE International Conference on
+    Cognitive Informatics (ICCI 2003), 18-20 August 2003, London, UK. pp. 75–80.
+    IEEE Computer Society (2003). https://doi.org/10.1109/COGINF.2003.1225956
+16. Gotel, O., Cleland-Huang, J., Hayes, J.H., Zisman, A., Egyed, A., Grünbacher, P.,
+    Dekhtyar, A., Antoniol, G., Maletic, J.I., Mäder, P.: Traceability fundamentals. In:
+    Cleland-Huang, J., Gotel, O., Zisman, A. (eds.) Software and Systems Traceability,
+    pp. 3–22. Springer (2012). https://doi.org/10.1007/978-1-4471-2239-5 1
+                              Mining Issue Trackers: Concepts and Techniques           23
+
+17. Gousios, G.: The ghtorent dataset and tool suite. In: Zimmermann, T., Penta,
+    M.D., Kim, S. (eds.) Proceedings of the 10th Working Conference on Mining Soft-
+    ware Repositories, MSR ’13, San Francisco, CA, USA, May 18-19, 2013. pp. 233–
+    236. IEEE Computer Society (2013). https://doi.org/10.1109/MSR.2013.6624034
+18. Groen, E.C., Seyff, N., Ali, R., Dalpiaz, F., Dörr, J., Guzman, E., Hosseini,
+    M., Marco, J., Oriol, M., Perini, A., Stade, M.J.C.: The crowd in requirements
+    engineering: The landscape and challenges. IEEE Softw. 34(2), 44–52 (2017).
+    https://doi.org/10.1109/MS.2017.33
+19. Haering, M., Stanik, C., Maalej, W.: Automatically matching bug reports with re-
+    lated app reviews. In: 43rd IEEE/ACM International Conference on Software En-
+    gineering, ICSE 2021, Madrid, Spain, 22-30 May 2021. pp. 970–981. IEEE (2021).
+    https://doi.org/10.1109/ICSE43902.2021.00092
+20. He, J., Xu, L., Yan, M., Xia, X., Lei, Y.: Duplicate bug report detection using dual-
+    channel convolutional neural networks. In: ICPC ’20: 28th International Conference
+    on Program Comprehension, Seoul, Republic of Korea, July 13-15, 2020. pp. 117–
+    127. ACM (2020). https://doi.org/10.1145/3387904.3389263
+21. Heck, P., Zaidman, A.: Horizontal traceability for just-in-time requirements: the
+    case for open source feature requests. J. Softw. Evol. Process. 26(12), 1280–1296
+    (2014). https://doi.org/10.1002/SMR.1678
+22. Herzig, K., Zeller, A.: Mining bug data - A practitioner’s guide. In: Robillard, M.P.,
+    Maalej, W., Walker, R.J., Zimmermann, T. (eds.) Recommendation Systems in
+    Software Engineering, pp. 131–171. Springer (2014). https://doi.org/10.1007/978-
+    3-642-45135-5 6
+23. Ho, J., Tang, R.: Towards an optimal resolution to information overload: an in-
+    fomediary approach. In: Proceedings of GROUP 2001, ACM 2001 International
+    Conference on Supporting Group Work, September 30 - October 3, 2001, Boulder,
+    Colorado, USA. pp. 91–96. ACM (2001). https://doi.org/10.1145/500286.500302
+24. Kallis, R., Chaparro, O., Sorbo, A.D., Panichella, S.: Nlbse’22 tool competition.
+    In: Sorbo, A.D., Panichella, S. (eds.) 2022 IEEE/ACM 1st International Workshop
+    on Natural Language-Based Software Engineering (NLBSE 2022), Co-located with
+    ICSE 2022, Pittsburgh, PA, USA, May 8, 2022. pp. 25–28. ACM/IEEE (2022).
+    https://doi.org/10.1145/3528588.3528664
+25. Karre, S.A., Shukla, A., Reddy, Y.R.: Does your bug tracking tool suit your needs?
+    A study on open source bug tracking tools. CoRR abs/1706.06799 (2017), http:
+    //arxiv.org/abs/1706.06799
+26. Lamkanfi, A., Pérez, J., Demeyer, S.: The eclipse and mozilla defect tracking
+    dataset: a genuine dataset for mining bug information. In: Zimmermann, T., Penta,
+    M.D., Kim, S. (eds.) Proceedings of the 10th Working Conference on Mining Soft-
+    ware Repositories, MSR ’13, San Francisco, CA, USA, May 18-19, 2013. pp. 203–
+    206. IEEE Computer Society (2013). https://doi.org/10.1109/MSR.2013.6624028
+27. Lapata, M.: The disambiguation of nominalizations. Comput. Linguistics 28(3),
+    357–388 (2002). https://doi.org/10.1162/089120102760276018
+28. Lazar, A., Ritchey, S., Sharif, B.: Generating duplicate bug datasets. In: Devanbu,
+    P.T., Kim, S., Pinzger, M. (eds.) 11th Working Conference on Mining Software
+    Repositories, MSR 2014, Proceedings, May 31 - June 1, 2014, Hyderabad, India.
+    pp. 392–395. ACM (2014). https://doi.org/10.1145/2597073.2597128
+29. Li, L., Ren, Z., Li, X., Zou, W., Jiang, H.: How are issue units linked? empirical
+    study on the linking behavior in github. In: 25th Asia-Pacific Software Engineering
+    Conference, APSEC 2018, Nara, Japan, December 4-7, 2018. pp. 386–395. IEEE
+    (2018). https://doi.org/10.1109/APSEC.2018.00053
+24      Montgomery et al.
+
+30. Lüders, C.M., Bouraffa, A., Maalej, W.: Beyond duplicates: Towards un-
+    derstanding and predicting link types in issue tracking systems. In: 19th
+    IEEE/ACM International Conference on Mining Software Repositories, MSR
+    2022, Pittsburgh, PA, USA, May 23-24, 2022. pp. 48–60. ACM (2022).
+    https://doi.org/10.1145/3524842.3528457
+31. Lüders, C.M., Pietz, T., Maalej, W.: On understanding and predicting issue links.
+    Requir. Eng. 28(4), 541–565 (2023). https://doi.org/10.1007/S00766-023-00406-X
+32. Maalej, W.: Task-first or context-first? tool integration revisited. In: ASE 2009,
+    24th IEEE/ACM International Conference on Automated Software Engineering,
+    Auckland, New Zealand, November 16-20, 2009. pp. 344–355. IEEE Computer
+    Society (2009). https://doi.org/10.1109/ASE.2009.36
+33. Maalej, W., Thurimella, A.K. (eds.): Managing Requirements Knowledge. Springer
+    (2013). https://doi.org/10.1007/978-3-642-34419-0
+34. Mockus, A., Fielding, R.T., Herbsleb, J.D.: Two case studies of open source soft-
+    ware development: Apache and mozilla. ACM Trans. Softw. Eng. Methodol. 11(3),
+    309–346 (2002). https://doi.org/10.1145/567793.567795
+35. Montgomery, L., Fucci, D., Bouraffa, A., Scholz, L., Maalej, W.: Empirical research
+    on requirements quality: a systematic mapping study. Requir. Eng. 27(2), 183–209
+    (2022). https://doi.org/10.1007/S00766-021-00367-Z
+36. Montgomery, L., Lüders, C.M., Maalej, W.: An alternative issue tracking dataset of
+    public jira repositories. In: 19th IEEE/ACM International Conference on Mining
+    Software Repositories, MSR 2022, Pittsburgh, PA, USA, May 23-24, 2022. pp.
+    73–77. ACM (2022). https://doi.org/10.1145/3524842.3528486
+37. Nicholson, A., Arya, D.M., Guo, J.L.C.: Traceability network analysis: A
+    case study of links in issue tracking systems. In: 7th IEEE International
+    Workshop on Artificial Intelligence for Requirements Engineering, AIRE@RE
+    2020, Zurich, Switzerland, September 1, 2020. pp. 39–47. IEEE (2020).
+    https://doi.org/10.1109/AIRE51212.2020.00013
+38. Nicholson, A., Guo, J.L.C.: Issue link label recovery and prediction for
+    open source software. In: Yue, T., Mirakhorli, M. (eds.) 29th IEEE Interna-
+    tional Requirements Engineering Conference Workshops, RE 2021 Workshops,
+    Notre Dame, IN, USA, September 20-24, 2021. pp. 126–135. IEEE (2021).
+    https://doi.org/10.1109/REW53955.2021.00024
+39. Nikeghbal, N., Kargaran, A.H., Heydarnoori, A., Schütze, H.: Girt-data: Sampling
+    github issue report templates. In: 20th IEEE/ACM International Conference on
+    Mining Software Repositories, MSR 2023, Melbourne, Australia, May 15-16, 2023.
+    pp. 104–108. IEEE (2023). https://doi.org/10.1109/MSR59073.2023.00026
+40. Ortu, M., Destefanis, G., Adams, B., Murgia, A., Marchesi, M., Tonelli, R.: The
+    JIRA repository dataset: Understanding social aspects of software development.
+    In: Bener, A., Minku, L.L., Turhan, B. (eds.) Proceedings of the 11th Interna-
+    tional Conference on Predictive Models and Data Analytics in Software Engineer-
+    ing, PROMISE 2015, Beijing, China, October 21, 2015. pp. 1:1–1:4. ACM (2015).
+    https://doi.org/10.1145/2810146.2810147
+41. Raatikainen, M., Motger, Q., Lüders, C.M., Franch, X., Myllyaho, L., Kettunen, E.,
+    Marco, J., Tiihonen, J., Halonen, M., Männistö, T.: Improved management of issue
+    dependencies in issue trackers of large collaborative projects. IEEE Trans. Software
+    Eng. 49(4), 2128–2148 (2023). https://doi.org/10.1109/TSE.2022.3212166
+42. Rahim, M.S., Chowdhury, A.E., Nandi, D., Rahman, M.: Issue starvation in soft-
+    ware development: A case study on the redmine issue tracking system dataset.
+    Journal of Telecommunication, Electronic and Computer Engineering (JTEC) 9(3-
+    3), 185–189 (2017)
+                             Mining Issue Trackers: Concepts and Techniques          25
+
+43. Regnell, B., Berntsson-Svensson, R., Wnuk, K.: Can we beat the complexity of very
+    large-scale requirements engineering? In: Paech, B., Rolland, C. (eds.) Require-
+    ments Engineering: Foundation for Software Quality, 14th International Work-
+    ing Conference, REFSQ 2008, Montpellier, France, June 16-17, 2008, Proceed-
+    ings. Lecture Notes in Computer Science, vol. 5025, pp. 123–128. Springer (2008).
+    https://doi.org/10.1007/978-3-540-69062-7 11
+44. Reinartz, W., Krafft, M., Hoyer, W.D.: The customer relationship management
+    process: Its measurement and impact on performance. Journal of marketing re-
+    search 41(3), 293–305 (2004)
+45. Sandusky, R.J., Gasser, L., Ripoche, G.: Bug report networks: Varieties, strategies,
+    and impacts in a F/OSS development community. In: Hassan, A.E., Holt, R.C.,
+    Mockus, A. (eds.) Proceedings of the 1st International Workshop on Mining Soft-
+    ware Repositories, MSR@ICSE 2004, Edinburgh, Scotland, UK, 25th May 2004.
+    pp. 80–84 (2004)
+46. Stanik, C., Montgomery, L., Martens, D., Fucci, D., Maalej, W.: A simple nlp-
+    based approach to support onboarding and retention in open source communities.
+    In: 2018 IEEE International Conference on Software Maintenance and Evolution,
+    ICSME 2018, Madrid, Spain, September 23-29, 2018. pp. 172–182. IEEE Computer
+    Society (2018). https://doi.org/10.1109/ICSME.2018.00027
+47. Tawosi, V., Al-Subaihin, A.A., Moussa, R., Sarro, F.: A versatile dataset of agile
+    open source software projects. In: 19th IEEE/ACM International Conference on
+    Mining Software Repositories, MSR 2022, Pittsburgh, PA, USA, May 23-24, 2022.
+    pp. 707–711. ACM (2022). https://doi.org/10.1145/3524842.3528029
+48. Tjong, S.F., Berry, D.M.: The design of SREE - A prototype potential ambiguity
+    finder for requirements specifications and lessons learned. In: Dörr, J., Opdahl,
+    A.L. (eds.) Requirements Engineering: Foundation for Software Quality - 19th In-
+    ternational Working Conference, REFSQ 2013, Essen, Germany, April 8-11, 2013.
+    Proceedings. Lecture Notes in Computer Science, vol. 7830, pp. 80–95. Springer
+    (2013). https://doi.org/10.1007/978-3-642-37422-7 6
+49. Tomova, M.T., Rath, M., Mäder, P.: Use of trace link types in issue tracking sys-
+    tems. In: Chaudron, M., Crnkovic, I., Chechik, M., Harman, M. (eds.) Proceedings
+    of the 40th International Conference on Software Engineering: Companion Pro-
+    ceeedings, ICSE 2018, Gothenburg, Sweden, May 27 - June 03, 2018. pp. 181–182.
+    ACM (2018). https://doi.org/10.1145/3183440.3195086
+50. Wang, X., Zhang, L., Xie, T., Anvik, J., Sun, J.: An approach to detecting du-
+    plicate bug reports using natural language and execution information. In: Schäfer,
+    W., Dwyer, M.B., Gruhn, V. (eds.) 30th International Conference on Software En-
+    gineering (ICSE 2008), Leipzig, Germany, May 10-18, 2008. pp. 461–470. ACM
+    (2008). https://doi.org/10.1145/1368088.1368151
+51. Zhang, J., Wang, X., Hao, D., Xie, B., Zhang, L., Mei, H.: A survey on bug-report
+    analysis. Sci. China Inf. Sci. 58(2), 1–24 (2015). https://doi.org/10.1007/S11432-
+    014-5241-2
+52. Zhang, T., Han, D., Vinayakarao, V., Irsan, I.C., Xu, B., Thung, F., Lo, D., Jiang,
+    L.: Duplicate bug report detection: How far are we? ACM Trans. Softw. Eng.
+    Methodol. 32(4), 97:1–97:32 (2023). https://doi.org/10.1145/3576042
+53. Zhao, L., Alhoshan, W., Ferrari, A., Letsholo, K.J., Ajagbe, M.A., Chioasca, E.,
+    Batista-Navarro, R.T.: Natural language processing for requirements engineer-
+    ing: A systematic mapping study. ACM Comput. Surv. 54(3), 55:1–55:41 (2022).
+    https://doi.org/10.1145/3444689
+26      Montgomery et al.
+
+54. Zhu, J., Zhou, M., Mei, H.: Multi-extract and multi-level dataset of mozilla
+    issue tracking history. In: Kim, M., Robbes, R., Bird, C. (eds.) Proceed-
+    ings of the 13th International Conference on Mining Software Repositories,
+    MSR 2016, Austin, TX, USA, May 14-22, 2016. pp. 472–475. ACM (2016).
+    https://doi.org/10.1145/2901739.2903502
+55. Zimmermann, T., Premraj, R., Bettenburg, N., Just, S., Schröter, A., Weiss, C.:
+    What makes a good bug report? IEEE Trans. Software Eng. 36(5), 618–643 (2010).
+    https://doi.org/10.1109/TSE.2010.63
+56. Zou, W., Lo, D., Chen, Z., Xia, X., Feng, Y., Xu, B.: How practitioners perceive
+    automated bug report management techniques. IEEE Trans. Software Eng. 46(8),
+    836–862 (2020). https://doi.org/10.1109/TSE.2018.2870414
+

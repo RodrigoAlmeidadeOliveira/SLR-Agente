@@ -19,6 +19,10 @@
 %%   results/ec5_recovery/ec5_recovery_report.tex
 %%   results/sensitivity/sensitivity_report.tex
 %%   results/final_review/missing_references.bib
+%%   results/included_studies_appendix.tex
+%%   results/segress_checklist.tex
+%%   results/human_validation/human_kappa_report.tex
+%%   results/human_validation/human_confusion_report.tex
 %% =============================================================================
 
 \documentclass[review,3p,times]{elsarticle}
@@ -64,7 +68,7 @@
 \begin{frontmatter}
 
 \title{Process Mining and Stochastic Modeling for Software Process
-       Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol}
+       Forecasting: A Systematic Mapping Study with an LLM-Assisted Protocol}
 
 %% Authors
 \author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}\fnref{orcid1}}
@@ -102,33 +106,44 @@ To map the state of the art at the intersection of process mining,
 stochastic modeling, and machine-learning forecasting applied to software
 processes; to identify research gaps; and to propose a research agenda.
 \textbf{Method.}
-We executed a systematic literature review following Kitchenham and Charters
-(2007), Petersen et~al. (2015) for mapping, and Wohlin (2014) for
+We executed a systematic mapping study reported against SEGRESS
+\cite{kitchenham2023segress}, following Kitchenham and Charters
+(2007), Petersen et~al. (2015), and Wohlin (2014) for search and
 snowballing, augmented with an LLM-assisted screening protocol
 (\textit{claude-haiku-4-5} as primary screener, \textit{claude-sonnet-4-6}
-as cross-model verifier). From 5{,}783 deduplicated records plus 364 control
-and manually imported items, the protocol screened two corpus tiers: a
-2{,}340-paper working-set tier and a 3{,}807-paper auxiliary tier
-(6{,}147 papers screened in total). Cohen's $\kappa$ inter-rater agreement was computed on
-stratified 20\% samples; 8-criterion quality assessment (Dyba and Dingsoyr,
-2008) was applied to all confirmed includes.
+as cross-model verifier). Searches were executed on 12~April~2026 over
+January~1994--December~2025 (full calendar years). From 5{,}783 deduplicated
+records plus 364 control and manually imported items, the protocol screened
+two corpus tiers: a 2{,}340-paper working-set tier and a 3{,}807-paper
+auxiliary tier (6{,}147 papers screened in total). Cohen's $\kappa$ was
+computed on stratified 20\% LLM--LLM samples and on an independent blind
+human double-screening sample ($n=468$ T/A, $n=177$ FT). An 8-criterion
+reporting-quality checklist (Dyba and Dingsoyr, 2008) was applied to all
+confirmed includes.
 \textbf{Results.}
-404 primary studies were confirmed (169 working-set + 212 first-pass auxiliary + 23 second-pass auxiliary after abstract enrichment).
-Inter-rater agreement was substantial in the working-set tier
-($\kappa_{\text{binary}} = 0.695$ T/A, $0.694$ FT). Five findings emerge:
-F1 a descriptive ceiling (PM dominant, forecasting minority); F2 ad-hoc
-event-log construction; F3 weak stochastic--PM integration; F4 pipeline
-fragmentation (only 1 of 404 papers jointly satisfies PM + stochastic +
-forecasting); F5 process-derived ML features unexplored.
+340 distinct primary studies were confirmed after cross-tier deduplication
+(404 raw confirmations: 169 working-set + 212 + 23 auxiliary). LLM--LLM
+agreement was substantial in the working-set tier
+($\kappa_{\text{binary}} = 0.695$ T/A, $0.694$ FT); human--LLM agreement
+was fair at T/A ($\kappa_{\text{binary}} = 0.335$) and slight at FT
+($\kappa_{\text{binary}} = 0.122$), with measured Lost Evidence of 75\%
+under strict binary include matching (95\% Wilson CI: 0.18--0.33 recall at
+FT). Five findings emerge: F1 a descriptive ceiling; F2 ad-hoc event-log
+construction; F3 weak stochastic--PM integration; F4 pipeline fragmentation
+(only 1 of 340 papers jointly satisfies PM + stochastic + forecasting in the
+LLM-confirmed corpus); F5 process-derived ML features unexplored.
 \textbf{Conclusion.}
-The literature is descriptively rich but predictively fragmented. We
-propose the SPMF taxonomy and a four-direction research agenda; PATHCAST is
-introduced as the first formally specified L3 pipeline for SDLC
-forecasting.
+The literature is descriptively rich but predictively fragmented. We propose
+the SPMF taxonomy and a four-direction research agenda. PATHCAST is sketched
+as a future-work hypothesis, not as an empirically validated pipeline.
+\textbf{Limitations.}
+Structural scarcity claims depend on an LLM selection protocol whose recall
+against a human gold standard remains limited at full-text screening; cross-tier
+deduplication reduced the combined corpus from 404 to 340 studies.
 \end{abstract}
 
 \begin{keyword}
-Systematic Literature Review \sep
+Systematic Mapping Study \sep
 Process Mining \sep
 Stochastic Modeling \sep
 Software Process Forecasting \sep
@@ -138,9 +153,9 @@ Mining Software Repositories
 
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
-\item LLM-assisted SLR protocol screens 6{,}147 software-process papers across two corpus tiers.
-\item Cross-model Cohen's $\kappa = 0.695$ inter-rater agreement on a 20\% stratified sample.
-\item 404 primary studies confirmed; only 1 jointly satisfies PM, stochastic, and forecasting.
+\item LLM-assisted mapping protocol screens 6{,}147 software-process papers across two corpus tiers.
+\item Independent human double-screening ($n=468$ T/A, $n=177$ FT) reports measured Lost Evidence.
+\item 340 distinct primary studies confirmed after deduplication; 1 jointly satisfies PM, stochastic, and forecasting.
 \item Five findings (F1--F5) and SPMF taxonomy proposed; four-direction research agenda.
 \item Full replication package (prompts, scripts, decisions) deposited at Zenodo.
 \end{highlights}
@@ -198,7 +213,9 @@ and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
 the cross-model $\kappa$ verification scripts, all decision CSVs at every
 pipeline stage, the QA-scored 169-study and 212-study tables, the
 structured extraction tables (working-set and auxiliary), the inter-rater
-agreement reports, and a PRISMA flow snapshot.
+agreement reports, the 340-study included list
+(\texttt{included\_studies\_340.csv}), a completed SEGRESS checklist, and a
+PRISMA flow snapshot.
 
 %% --- Bibliography ---
 \bibliography{results/final_review/missing_references}

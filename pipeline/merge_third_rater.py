@@ -2,9 +2,10 @@
 
 Reads batch files from results/human_validation/third_rater_batches/:
   - batch_00.json (or batch_00.csv)
-  - batch_01.csv … batch_08.csv
+  - batch_01.csv … batch_08.csv (12 papers each)
+  - batch_09.csv (22 newly catalogued PDFs, 2026-08-13)
 
-Writes results/human_validation/third_rater_qa_extraction.csv (108 rows).
+Writes results/human_validation/third_rater_qa_extraction.csv (130 rows).
 
 Usage:
     python -m pipeline.merge_third_rater
@@ -50,27 +51,30 @@ def _load_batch(path: Path) -> list[dict]:
 
 def load_all_batches(batch_dir: Path = BATCH_DIR) -> list[dict]:
     all_rows: list[dict] = []
-    for i in range(9):
+    expected_n = {**{i: 12 for i in range(9)}, 9: 22}
+    for i, n_expected in expected_n.items():
         stem = f"batch_{i:02d}"
         json_path = batch_dir / f"{stem}.json"
         csv_path = batch_dir / f"{stem}.csv"
-        if json_path.exists():
+        if json_path.exists() and i == 0:
             path = json_path
         elif csv_path.exists():
             path = csv_path
+        elif json_path.exists():
+            path = json_path
         else:
             raise FileNotFoundError(f"Missing {stem}.json or {stem}.csv in {batch_dir}")
         rows = _load_batch(path)
-        if len(rows) != 12:
-            raise ValueError(f"{path.name}: expected 12 rows, got {len(rows)}")
+        if len(rows) != n_expected:
+            raise ValueError(f"{path.name}: expected {n_expected} rows, got {len(rows)}")
         all_rows.extend(rows)
     return all_rows
 
 
 def validate_rows(rows: list[dict]) -> list[str]:
     issues: list[str] = []
-    if len(rows) != 108:
-        issues.append(f"expected 108 rows, got {len(rows)}")
+    if len(rows) != 130:
+        issues.append(f"expected 130 rows, got {len(rows)}")
 
     ids = [r["review_id"] for r in rows]
     dupes = [k for k, v in Counter(ids).items() if v > 1]

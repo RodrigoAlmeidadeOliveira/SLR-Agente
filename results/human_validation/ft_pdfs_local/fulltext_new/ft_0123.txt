@@ -1,0 +1,906 @@
+                            Uncertainty, Risk, and Information Value
+                          in Software Requirements and Architecture
+
+                                             Emmanuel Letier                               David Stefan                    Earl T. Barr
+                                                                     Department of Computer Science
+                                                                        University College London
+                                                                        London, United Kingdom
+                                                             {e.letier, d.stefan, e.barr}@ucl.ac.uk
+
+ABSTRACT                                                                                                the feasibility, cost, and duration of implementing the alternatives,
+Uncertainty complicates early requirements and architecture de-                                         about future changes in stakeholders’ goals, business context and
+cisions and may expose a software project to significant risk. Yet                                      technological environments, and finally uncertainty about whether
+software architects lack support for evaluating uncertainty, its impact                                 the right questions about decisions are even being asked and all their
+on risk, and the value of reducing uncertainty before making critical                                   options identified.
+decisions. We propose to apply decision analysis and multi-objective                                       In a decision problem, uncertainty is a lack of complete knowl-
+optimisation techniques to provide such support. We present a sys-                                      edge about the actual consequences of alternatives. For example,
+tematic method allowing software architects to describe uncertainty                                     software architects may be uncertain about the cost and performance
+about the impact of alternatives on stakeholders’ goals; to calculate                                   impact of a proposed software architecture. Given their current
+the consequences of uncertainty through Monte-Carlo simulation;                                         knowledge, they might estimate the cost to be between £1m to £3m
+to shortlist candidate architectures based on expected costs, benefits                                  and the achievable response time to be between 1 and 10 seconds.
+and risks; and to assess the value of obtaining additional information                                  A risk exists when the possible consequences of a decision include
+before deciding. We demonstrate our method on the design of a                                           undesirable outcomes, like loss or disaster [40]. Continuing the
+system for coordinating emergency response teams. Our approach                                          example, selecting the proposed architecture might carry the risks
+highlights the need for requirements engineering and software cost                                      of the development costs exceeding £2m and the response time not
+estimation methods to disclose uncertainty instead of hiding it.                                        achieving the minimally acceptable target of 2 seconds. In software
+                                                                                                        architecture decisions, the risks include selecting an architecture that
+                                                                                                        is too expensive to develop, operate, and maintain, that is delivered
+Categories and Subject Descriptors                                                                      too late and, most importantly, that fails to deliver the expected
+D2.11 [Software Engineering]: Software Architectures                                                    benefits to its stakeholders. Numerous studies have shown that
+                                                                                                        these risks are severely underestimated [29]. This is not surprising:
+                                                                                                        uncertainty and risks are rarely considered explicitly in software
+General Terms                                                                                           engineering decisions and the software engineering literature offers
+Design, Economics, Theory                                                                               no principled approaches to deal with them.
+                                                                                                           In this paper, we focus on early requirements and architecture
+Keywords                                                                                                decisions, i.e. decisions about the functionality the software should
+                                                                                                        provide, the quality requirements it should satisfy, its organisation
+Software engineering decision analysis                                                                  into components and connectors, and its deployment topology. We
+                                                                                                        assume stakeholders’ goals and the alternatives have been identified
+1. INTRODUCTION                                                                                         using appropriate requirements engineering and software architec-
+   Uncertainty is inevitable in software engineering. It is partic-                                     ture methods [45, 47, 63, 65]. Our objective is to support reasoning
+ularly present in the early stages of software development when                                         about uncertainty concerning the impact of alternatives on stake-
+an organisation needs to make strategic decisions about which IT                                        holders’ goals.
+projects to fund, or when software architects need to make decisions                                       Previous work dealing with uncertainty in early requirements and
+about the overall organisation of a software system. In general, these                                  architecture decisions [21, 42, 49, 62] suffers important limitations:
+decisions aim at maximising the benefits that the software system                                       they use unreliable methods for eliciting uncertainties (some confuse
+will bring to its stakeholders, subject to cost and time constraints.                                   group consensus with certainty); they tend to evaluate alternatives
+Uncertainty includes uncertainty about stakeholders’ goals and their                                    against vague, unfalsifiable criteria; they provide no information
+priorities, about the impact of alternatives on these goals, about                                      about the risks that accompany uncertainty; and they provide no
+                                                                                                        support for assessing to what extent obtaining additional information
+Permission to make digital or hard copies of all or part of this work for personal or
+                                                                                                        before making a decision could reduce these risks.
+classroom use is granted without fee provided that copies are not made or distributed                      We address these limitations by adapting concepts and techniques
+for profit or commercial advantage and that copies bear this notice and the full citation               from statistical decision analysis to the problems of early require-
+Permission to make digital or hard copies of all or part of this work for
+on the first page. Copyrights for components of this work owned by others than ACM
+personal
+must        or classroom
+      be honored.            usewith
+                   Abstracting    is granted
+                                      credit is without
+                                                 permitted.fee
+                                                            To provided      that copies
+                                                                copy otherwise,           are
+                                                                                  or republish,         ments and architecture design decisions. Decision analysis is a
+notpost
+to   made    or distributed
+        on servers            for profit
+                    or to redistribute    or commercial
+                                       to lists,              advantage
+                                                 requires prior             and that and/or
+                                                                 specific permission   copiesa          discipline aiming at supporting complex decisions under uncertainty
+fee.
+bearRequest    permissions
+      this notice  and thefromfullPermissions@acm.org.
+                                   citation on the first page. To copy otherwise, to                    with systematic methods and mathematical tools for understanding,
+Copyright
+republish,istoheld byon
+                 post  theservers
+                           author/owner(s).    Publication
+                                    or to redistribute   torights
+                                                             lists, licensed
+                                                                     requirestoprior
+                                                                                ACM.specific
+permissionMay
+            and/or
+                                                                                                        formalising, analysing, and providing insights about the decision
+ICSE’14,        31 –a June
+                      fee. 7, 2014, Hyderabad, India
+                                                                                                        problem [38]. Decision analysis is used notably in the health care
+ICSE ’14,
+ACM        May 31 – June 7, 2014, Hyderabad, India
+       978-1-4503-2756-5/14/05
+Copyright 14 ACM 978-1-4503-2756-5/14/05 ...$15.00.
+http://dx.doi.org/10.1145/2568225.2568239
+
+
+
+                                                                                                  883
+domain to inform decisions about the cost-effectiveness of new med-               flow, and discount factors [14, 16]. The model parameters are the
+ical treatments based on the results of clinical trials [7]. There are            variables in these equations, i.e. those that are not further defined
+exceptional uses of these methods in the context of IT investment                 in terms of other variables. To keep our illustrative example simple,
+decisions [14, 41], but despite their relevance to early requirements             we will hide the details of the cost and benefit functions and discuss
+engineering and architecture decisions, they have been largely ig-                decisions based on the results of these functions only.
+nored by the software engineering community.
+   Our approach to early requirements and architecture decisions                  2.1    Computing Expected Net Benefit and Risk
+consists in formalising the decision problem in terms domain-specific                Traditional Cost-Benefit Anlysis (CBA) computes the net benefit
+measurable goals, to elicit and represent uncertainties as probability            of each alternative using point estimates (exact numbers instead of
+distributions, to simulate the impact of alternatives on goals through            ranges) for each of a model’s parameter. Such approaches therefore
+Monte-Carlo (MC) simulations, and to shortlist a set of alternatives              ignore the often large uncertainty about parameter values. Uncer-
+using Pareto-based multi-objective optimisation techniques. We                    tainty about cost and benefit exists but is hidden. In a statistical
+introduce the software engineering community to the value of in-                  CBA, uncertainty about the model parameters is modelled explic-
+formation, a powerful notion from decision analysis, that allows a                itly as probability distributions and used to compute the probability
+decision maker faced with uncertainty to measure those uncertainties              distribution of net benefit for each alternative.
+and determine which would be most profitably reduced.                                Simple, effective methods exist for eliciting the model parameters’
+   The paper’s main contribution is a systematic method for applying              probability distributions from decision makers [52]. These methods
+statistical decision analysis techniques to early requirements and                have sound mathematical foundations and are based on significant
+architecture decision problems (Section 3). By developing this                    empirical studies of how uncertainty can be reliably elicited from
+method, we were also led to make the following contributions:                     humans. We will not be concerned with these methods in this paper
+    1. We define novel decision risk metrics tailored for require-                beyond noting that they can and should be used to elicit reliable
+       ments and architecture decision problems (Section 3.3);                    probability distributions from domain experts and decision makers.
+    2. We extend the concept of value of information, tradition-                     Once the model parameters probability distributions have been
+       ally defined in terms of impact of additional information on               estimated, one needs to compute the probability distributions for the
+       expected outcomes only, by considering how additional infor-               cost, benefit and net benefit of each alternative. It is generally not
+       mation reduces risk (Section 2.3).                                         possible to compute these probability distributions analytically be-
+    3. We introduce the concept of Pareto-optimal strip, a generali-              cause the model equations and parameters’ probability distributions
+       sation of a Pareto-optimal front, designed to resist modelling             can be arbitrarily complicated. Monte-Carlo (MC) simulations can,
+       and measurement errors present in multi-objective decisoin                 however, compute good approximations. The underlying principle
+       problem under uncertainty (Section 3.5);                                   is to sample a large number of simulation scenarios generated by
+   We have developed a tool supporting our approach and have                      model parameter values drawn from their probability distributions
+applied it to data from a real system from the literature [21]. Our               and use them to compute the net benefit in that scenario. The result
+tool and all models discussed in this paper are available at www.cs.              of a MC simulation of a cost-benefit decision model is a M × N
+                                                                                  matrix NBc where M is the number of simulated scenarios and N is
+ucl.ac.uk/staff/e.letier/sdda.
+                                                                                  the number of alternatives in A. The element NB[i, c j] denotes the
+2. COST-BENEFIT ANALYSIS                                                          net benefit for alternative j in the ith scenario.
+                                                                                     From the result of a MC simulation, one can, for each alterna-
+   UNDER UNCERTAINTY                                                              tive, estimate measures of interest to decision makers such as the
+   Before considering early requirements and architecture decision                expected net benefit (ENB), loss probability (LP), and probable loss
+problems, we first consider the simpler problem of selecting one                  magnitude (PLM), defined as follows:
+alternative among a set of alternatives based on their costs and
+benefits. Such problem assume a model exists to calculate the costs                                 ENB(a) = E[NB(a)]
+and benefits of all alternatives in a common unit, which is usually                                  LP(a) = P(NB(a) < 0)
+monetary (e.g. Pound, Euro, Dollar, Yen or Rupee) [7]:                                              PLM(a) = E[NB(a)|NB(a) < 0]
+Definition. A cost-benefit decision model comprises a set A of alter-
+natives, a set Ω of model parameters, and two functions, cost(a, ω)               where E[X] denotes the expectation of a random variable X.
+and benefit(a, ω), that return the cost and benefit of alternative a              Example.        Figure 1 shows the results of a statistical CBA for
+given the parameter values ω. The net benefit of an alternative is                our illustrative example. We assume cost and benefit have a normal
+then NB(a, ω) = benefit(a, ω) − cost(a, ω). To simplify the nota-                 distribution truncated at zero. Figure 1a shows the mean and 90%
+tion, we sometimes leave the model parameters implicit and write                  confidence interval of these distributions. A 90% confidence interval
+NB(a) for NB(a, ω), and similarly benefit(a) and cost(a).                         means that decision makers believe there is a 90% chance that the
+Example. An engineering firm is considering replacing an ageing                   actual costs and benefits will fall within these ranges. Figure 1b
+Computer-Aided Design (CAD) application with a new system. The                    shows the resulting expected net benefit, loss probability, and proba-
+set of alternatives is A = {legacy, new}. The CAD application helps               ble loss magnitude of each alternative. It shows developing the new
+the firm design complicated engineering artefacts (e.g. turbines,                 CAD has a high expected net benefit but also high risks in terms of
+aircraft engines, etc.) that it sells to clients. The benefits associated         loss probability and probable loss magnitude. In a traditional CBA,
+with each alternative a ∈ A is a function of several variables such               these risks would not have been quantified and would, most likely,
+as the market size, the market share that each alternative might                  have been underestimated if not entirely ignored.
+help achieving, which itself is a function of features of each CAD.
+Likewise, the cost associated with each alternative is a function                 2.2    The Expected Value of Information
+of several parameters such as the development, maintenance and                       If, before making a decision, decision makers could pay someone
+operational costs. The cost and benefit functions would typically                 to obtain additional information that reduce uncertainty about the
+also include concerns related to incremental benefit delivery, cash               cost and benefits of alternatives, how much would that information
+
+
+
+                                                                            884
+                    mean           90% CI                                                                                         EVPPI       ∆PPI (LP)
+                                                                         new       legacy
+ benefit(new)        £5m        [£1m–£9m]                                                                    bene f it(new)       £0.54m             8%
+ cost(new)           £3m        [£1m–£5m]                      ENB        £2m        £1m                     cost(new)            £0.14m             4%
+ benefit(legacy)     £1m      [£0.9m–£1.1m]                    LP        23%          0%                     bene f it(legacy)         £0            0%
+ cost(legacy)          0         [0m–0m]                       PLM      £1.4m          0                     cost(legacy)              £0            0%
+ (a) Mean and 90% Confidence Intervals (CI).       (b) Expected Net Benefit (ENB), Loss Probability       (c) Information Value Analysis. The value of total
+                                                   (LP), and Probable Loss Magnitude (PLM).               perfect information (EV T PI) is £0.64m.
+                    Figure 1: Statistical Cost-Benefit Analysis for deciding whether to replace a legacy application by a new system.
+
+be worth to them? It is possible to answer this question by computing           a small MC simulation with 5 scenarios (the actual MC simulation
+the expected value of information [37]. Intuitively, information that           used to produce the results in Figure 1 consists of 104 scenarios).
+reduces uncertainty may lead decision makers to select an other                    Information value theory also defines the expected value of partial
+alternative with highest expected net benefit than the alternative they         perfect information, i.e. perfect information about a subset of the
+would select without additional information. The expected value of              model parameters [25, 58], and the expected value of (partial or total)
+information is the expected gain in net benefit between the selected            imperfect information, i.e. information that reduces uncertainty but
+alternatives with and without the additional information.                       without completely eliminating it [41]. In this paper, we only use
+   The expected value of information for the different model vari-              the expected value of perfect information either in total, over all
+ables tells decision makers to focus on reducing uncertainty about              parameters, or about a single model parameter. The expected value
+information with high expected value and to avoid wasting effort                of imperfect information and of perfect information about sets of
+reducing uncertainty about information with low expected value (or              parameters are harder to compute, and they may not yield substantial
+at least not pay more for information than its expected value). Com-            practical benefits over simpler information value analysis.
+puting the expected value of information can yield surprising results.             The expected value of partial perfect information about a single
+Hubbard reports he has applied information value theory to 20 IT                model parameter Θ, noted EVPPI(Θ), is the expected gain in net
+project business cases (each having between 40 to 80 variables) and             benefit from using perfect information about Θ:
+observed the following pattern: (1) the majority of variables had an
+information value of zero; (2) the variables that had high information                      EVPPI(Θ) = E[max f (a, θ )] − max E[NB(a, ω)],
+                                                                                                             a∈A               a∈A
+value were routinely those that the client never measured; (3) the
+variables that clients used to spend the most time measuring were               where f (a, θ ) = EΩ−Θ NB(a, ω) is the expected NB of alternative
+usually those with a very low (even zero) information value [41].               a, conditioned on the parameter Θ fixed at θ , and EΩ−Θ denotes
+The contrast between the second and third observations constitutes              the expectation with respect to all model parameters in Ω except
+what Hubbard has called the IT measurement inversion paradox [39].              Θ [58]. The intuition of this definition is similar to that of EVTPI.
+He cites the large effort spent by one of his clients on function point         As EVTPI, it can be shown that EVPPI is always positive or zero.
+analysis [4] — a popular software development productivity and                     Computing EVPPI(Θ) is harder than computing EVTPI. In this
+cost estimation method — as an example of measurement with very                 paper, we rely on a recent efficient algorithm that computes EVPPI
+low information value because its cost estimation were not more                                                   b NBi
+                                                                                by taking as input only the pair hΘ, c of simulations for the model
+accurate or precise than the project managers’ initial estimates.               parameter Θ and the corresponding matrix of NB simulations gener-
+   The expected value of information is defined with respect to an              ated by the MC simulation [58]. This algorithm first finds a suitable
+outcome to be maximised and assumes a default decision strategy                 segmentation of values in Θ b such that, within each segment, the dif-
+of maximising expected outcome. In this section, the outcome to                 ferences in maximal expected NB remain small. For each segment,
+be maximised is the net benefit NB but the definition applies to any            it computes the average gain in NB from knowing θ , then averages
+other outcome, e.g. maximising software reliability. Information is             these average gains weighted by the proportion of simulation that
+valued in the same units as the outcome that it measures. This makes            falls into each segment.
+measuring information value with respect to net benefit particularly               Note that EVTPI and EVPPI compute the expected value of infor-
+attractive as it assigns a financial value to information.                      mation about some parameters before the value for these parameters
+   The expected value of total perfect information (EVTPI) is the               are revealed. Once the actual values are revealed, they may increase
+expected gain in net benefit from using perfect information about               or decrease expected net benefit. The EVTPI and EVPPI merely
+all model parameters:                                                           compute how much the expected net benefit will change on average.
+          EVTPI = E[max NB(a, ω)] − max E[NB(a, ω)].                            It is these averages that are always positive or zero. The revelation
+                       a∈A                  a∈A                                 of new information can also both increase or decrease uncertainty
+   In this definition, the second term denotes the highest expected net         about the parameters’ true values. When this happens, an increase
+benefit given the current uncertainty about the model parameters Ω,             of uncertainty is most likely caused by a failure to mitigate over-
+and the first term the expectation over all possible values ω for the           confidence biases during the elicitation of probability distributions.
+parameters Ω of the highest net benefit when the parameter values               For example, decision makers with overconfidence biases will ex-
+are ω (in other words, the expected net benefit from obtaining perfect          press 90% confidence intervals that are narrower than their true
+information). Observe how the two terms invert the application of               uncertainty. Overconfidence bias is a serious problem because the
+the expectation and maximisation operators. It can be shown that                computations of expected net benefit, risk, and information value
+EVTPI is always positive or zero. The EVTPI can be estimated from               all assume the initial probability distributions are accurate. This ob-
+the output NBc of a MC simulation:                                              servation reinforces the importance of using appropriate uncertainty
+                                                                                elicitation techniques designed to reduce the effects of overconfi-
+                         c j] − max meanNB[i,
+        EVTPI = mean max NB[i,          c j].                                   dence and other biases [52].
+                   i:1..N j:1..M            j:1..M i:1..N
+                                                                                   Measuring expected information value is an alternative to sen-
+  As an illustration, Figure 2 shows how EVTPI is computed from                 sitivity analysis. There are several variants of sensitivity analysis.
+
+
+
+                                                                          885
+           Scenarios      c
+                          NB(new)       c
+                                        NB(legacy)         Max                         ated during the Monte-Carlo simulation:
+                     1      £1.33m           £1.03m      £1.33m                                                    b
+                                                                                                ∆TPI (Risk) = mean[F(which.max        c
+                                                                                                                               j:1..M NB[i, j])]
+                     2      £0.13m           £0.96m      £0.96m                                                 i:1..N
+                     3      £4.05m           £1.00m      £4.05m                                                            c a⋆ ]].
+                                                                                                                − mean[0 > NB[i,
+                                                                                                                   i:1..N
+                     4      £6.13m           £1.06m      £6.13m
+                     5     -£1.39m           £1.07m      £1.07m                                                c j] denotes the column indices of the
+                                                                                       where which.max j:1..M NB[i,
+                Mean        £2.05m           £1.02m      £2.71m                        alternative with highest benefit in row i.
+                                                                                          To compute ∆PPI(Θ) (Risk), we have extended the algorithm for
+Figure 2: Illustration of a MC simulation and computation of EVTPI. The                computing EVPPI from the Monte-Carlo simulation data hΘ,  b NB,
+                                                                                                                                                     c Fi.
+                                                                                                                                                       b
+second and third columns show the NB c for the new and legacy applications
+                                                                                       Our extension applies the same principle as the one used to compute
+in 5 random scenarios. Over these five scenarios, the new application has
+                                                                                       ∆TPI (Risk)) to compute the ∆ in Risk in each segment of Θ values,
+the highest expected net benefit (£2.05m). The fourth column show the
+maximal possible net benefit in each scenario and its mean value over all five         then returns the weighted average of those ∆ over all segments.
+scenarios (£2.71m). We thus have EVTPI = £2.71m - £2.05m = £0.66m.                     Example Figure 1-c shows the expected value of information in our
+                                                                                       illustrative example. The EVTPI is £0.64m, 32% of expected net
+                                                                                       benefit. Measuring EVPPI shows that reducing uncertainty about
+Possibly the most common in software engineering consists in mea-                      the new application’s benefits has high value and reduces most of
+suring, for each model parameter taken individually, the change of                     the risks, whereas reducing uncertainty about its cost has almost no
+NB (or other objective of interest) for a selected alternative when the                value and little impact in reducing loss probability.
+parameter varies between some low and high value [49]. A parame-
+ter is then said to have high sensitivity if the changes in NB are high.               3. SOFTWARE DESIGN DECISIONS
+The expected value of information differs from sensitivity analysis
+in that it takes into account the probability of changes in parameters’                   UNDER UNCERTAINTY
+values and possible changes of alternatives to optimise net benefit.                      Software design decisions are usually more complex than the
+These differences have important implications: a parameter with                        simple cost-benefit decision problems of the previous section. Com-
+high sensitivity may have low information value if it has a low prob-                  plexity arises in the solution space, in the objective space, and in the
+ability of change; and vice-versa, a parameter with low sensitivity                    models that relate the two.
+may have high information value if a highly probable change for                           In the solution space, instead of involving the selection of one
+this parameter leads to selecting a different alternative with much                    alternative from a set, they typically involve a multitude of inter-
+higher NB. Felli and Hazen provide a more detailed analysis of the                     related design decisions concerning choices among alternative ar-
+benefits of measuring expected value of perfect information over                       chitectural styles, design patterns, technologies, and responsibility
+sensitivity analysis [25].                                                             assignments [63, 65]. This leads to an exponential increase in the
+                                                                                       number of candidate solutions; for example, if the problem involves
+                                                                                       10 design decisions with 3 options each, the number of candidate
+2.3     The Impact of Information on Risk                                              architectures is 310 (around 60,000). The solution space for software
+   Using additional information to maximise expected NB impacts                        design decisions is therefore several orders of magnitudes larger
+risk, sometimes favourably, as when selecting an alternative with                      than the solution spaces of other domains applying decision analysis
+highest expected NB also reduces risk, or unfavourably, as when                        techniques — for example, in healthcare economics the solution
+selecting an alternative with highest NB increases risk. Measuring                     space rarely exceeds 5 different treatment options [7].
+this impact gives decision makers additional information about the                        In the objective space, software design decisions typically involve
+value of seeking additional information.                                               multiple goals that are generally conflicting, hard to define precisely,
+   We have thus defined a new measure of the expected impact of                        and not easily comparable (unlike cost and benefit, they have differ-
+perfect information on risk. In our cost-benefit analysis, risk is                     ent units of measure). Examples of goals include concerns related to
+measured by the loss probability and the probable loss magnitude.                      security, performance, reliability, usability, and the improved busi-
+To keep the exposition simple, we define the impact of perfect infor-                  ness outcomes generated by the software. Clarifying these goals and
+mation on risk with respect the a risk measure Risk(a) = P(F(a, ω))                    understanding their trade-offs is a significant part of supporting soft-
+where F(a, ω) is true when alternative a fails when parameter val-                     ware design decisions. The goals in healthcare decision problems
+ues are ω. For example, for LP(a), F(a, ω) is NB(a, ω) < 0. Our                        are at least as complex as software design decision goals. There has,
+definition can easily be extended to risk measures, such as PLM,                       however, been a much greater effort at defining these goals and their
+defined over real-valued rather than boolean F functions.                              trade-offs than for software engineering problems. This has resulted
+   Let a⋆ be an alternative that maximises expected NB. If there is                    in measures such as the quality-adjusted life year used to compare
+more than one alternative with equal highest expected NB, a⋆ is one                    alternative treatment options [7].
+with minimal risk. Let a⋆ (ω) and a⋆ (θ ) be alternatives that max-                       The models relating the design decision options to stakeholders’
+imise NB when Ω = ω or Θ = θ , respectively. The expected impact                       goals are often hard to build, validate, and include a very large
+of total (respectively, partial) perfect information on Risk is the ex-                number of parameters. They are typically composed of models of the
+pected difference between Risk(a⋆ (ω)) (respectively, Risk(a⋆ (θ )))                   software system (to evaluate the impact of software design decisions
+and Risk(a⋆ ):                                                                         on software qualities such as its performance and reliability) and
+                                                                                       models of the application domain (to evaluate the impact of software
+                ∆TPI (Risk) = E[Risk(a⋆ (ω))] − Risk(a⋆ )                              and system design decisions on stakeholders goals).
+                                                                                          To deal with this complexity, we propose the following process:
+             ∆PPI(Θ) (Risk) = E[Risk(a⋆ (θ ))] − Risk(a⋆ ).
+                                                                                           1. Defining the architecture decision model
+                                                                                           2. Defining a cost-benefit decision model
+                                                 c and Fb gener-
+  The ∆TPI (Risk) can be estimated from matrices NB                                        3. Defining the decision risks
+
+
+
+                                                                                 886
+    4. Eliciting parameters values                                                Decisions           Options
+    5. Shortlisting candidate architectures                                       Location            GPS
+    6. Identifying closed and open design decisions                               Finding             Radio Triangulation
+    7. Computing expected information value                                       File Sharing        OpenIntents
+   Steps 1 and 2 correspond to standard model elaboration activ-                                      In house
+ities performed notably in the ATAM [45] and CBAM [42, 49]                        Report Syncing      Explicit
+approaches. Steps 3 and 4 are specific to architecture decisions                                      Implicit
+under uncertainty. Step 5 extends Pareto-based muliobjective opti-                                    XMPP (Open Fire)
+                                                                                  Chat Protocol
+misation techniques to decisions under uncertainty. Step 6 identifies                                 In house
+closed and open design decisions from this shortlist. Step 7 com-                                     On demand (Google)        Goals
+putes expected information values. At the end of these steps, if                  Map Access          Cached on server          Battery Usage
+some model parameters or variables have high expected information                                     Preloaded (ESRI)          Response Time
+value, software architects may choose to elicit further information               Hardware            Nexus I (HTC)             Reliability
+and refine corresponding parts of their models to improve their deci-             Platform            Droid (Motorola)          Ramp Up Time
+sions and reduce their risks. In practice, some of these steps may                                                              Cost
+                                                                                                      Wi-FI                     Development Time
+be intertwined. For example, the elaboration of the architecture                                      3G on Nexus I             Deployment Time
+decision model and the cost benefit model in steps 1 and 2 are likely             Connectivity
+                                                                                                      3G on Droid
+to be interleaved rather than performed sequentially [51].                                            Bluetooth
+   SAS Case Study. We apply our method on a case study of soft-                                       MySQL
+ware architecture decisions presented at ICSE 2013 [21].                          Database
+                                                                                                      sqLite
+   The software to be designed is a Situational Awarness System                                       Facade
+(SAS) whose purpose is to support the deployment of personnel                     Architectural       Peer-to-peer
+in emergency response scenarios such as natural disasters or large                Pattern             Push-based
+scale riots. SAS applications would run on Android devices carried                                    XML
+by emergency crews and would allow them to share and obtain an                    Data Exchange
+                                                                                  Format              Compressed XML
+assessment of the situation in real-time (e.g., interactive overlay on                                Unformatted data
+maps), and to coordinate with one another (e.g., send reports, chat,
+and share video streams).
+   A team of academics and engineers from a government agency                              Figure 3: Overview of the SAS Case Study [21].
+previously identified a set of design decisions, options and goals to
+be achieved by this system (see Figure 3). They also defined models                   denoting goals to be maximised and minimized, respectively;
+for computing the impact of options on the goals and documented                    • v is a goal evaluation function such that v(g, a, ω) is a real
+uncertainty about model parameters using three point estimates, a                     value denoting the level of attainment of goal g by candidate
+method commonly used by engineers and project managers that                           architecture a when the model parameters have the concrete
+consists in eliciting a pessimistic, most likely, and optimistic value                values ω.
+for each model parameter. They then applied a fuzzy-logic based                   Optimisation goals include software quality attributes such as per-
+approach, called GuideArch, to support design decisions under                  formance, reliability, etc. and stakeholders goals such as the number
+uncertainty [21].                                                              of lives saved and property damage avoided during an emergency
+   To facilitate comparison between the approaches, we will ap-                response. Software quality evaluation models (e.g. performance and
+ply our method on the same model and data as those used by the                 reliability models) and quantitative goal-oriented requirements mod-
+GuideArch method [20].                                                         els [35, 47] are typical examples of goal evaluation functions. These
+                                                                               models have parameters, such as the reliability of each component
+3.1    Defining the Architecture Decision Model                                in a reliability block diagram or the likelihoods of different types of
+   The first step consists in identifying the decisions to be taken            events requiring a coordinated emergency response in a quantitative
+together with their options, defining the goals against which to               goal model. In the standard use of these models, each parameter
+evaluate the decisions, and developing a decision model relating               is assigned a point-based estimate. In step 4 of our method, the
+alternative options to the goals [35, 45]. The result is a multi-              parameters are assigned probability distributions.
+objective architecture decision model (MOADM).                                    In goal-oriented requirements models [35, 47], candidate archi-
+   Definition. A multi-objective architecture decision model is a              tectures describe socio-technical systems, i.e. systems for which
+tuple (D,C, Ω, G, v), where                                                    components include human agents and hardware devices, as well
+    • D is a set of design decisions where each decision d ∈ D has             as software components. The design decisions include decisions
+       several options Od ; a candidate architecture is a function             about alternative goal refinements, alternative assignments of goals
+       a : D → ∪d∈D Od that maps each decision d to a single option            to agents, and alternative resolutions of conflicts and obstacles [65].
+       in Od ; the set of all candidate architectures is noted A1 ;               SAS Case Study. The SAS design team identified the design deci-
+    • C is a set predicates capturing dependency constraints be-               sions, options and optimisation goals shown in Figure 3. Following
+       tween design decisions such as prerequisite, mutual exclusion,          an approach similar to that used in many goal-oriented decision
+       and mutual inclusion relations [59, 69]);                               models [3, 5, 24, 32, 64], they defined the goal evaluation func-
+    • Ω is a set of model parameters;                                          tions as the sum of the contributions of each option composing an
+    • G is a set of optimisation goals, partitioned into G+ and G-             architecture:
+
+1 Throughout the paper, we use the term option to denote an alter-
+                                                                                                  v(g, a, ω) = ∑ contrib(g, a(d))
+                                                                                                                 d∈D
+native for a design decision and the term alternative to denote an
+alternative candidate architecture in the design space A.                      where contrib(g, o) are model parameters denoting the contribution
+
+
+
+                                                                         887
+of option o to goal g. For example, contrib(BatteryUsage, GPS)                   is the response time of a web application, a preference of 1 may be
+denotes the contribution of GPS to battery usage. Since the model                given to an average response time of 1 second or less and of 0 to an
+has 25 options and 7 goals, we have 25 × 7 (175) parameters.                     average response time of 10 seconds or above. Preference functions
+   Like all models, this model is imperfect. For example, evaluating             are often constructed as linear or s-shape functions between the goal
+the response time of an architecture by summing up the response                  attainments corresponding to the lowest and highest preference [56].
+time of its individual component is a basic performance model that               This approach, or a close variant, is found in many requirements
+will only give a rough approximation of an architecture response                 engineering methods [3, 5, 24, 32, 64].
+time. Evaluating the reliability of an architecture by summing                      An advantage of defining utility as a weighted sums of goal prefer-
+the reliability of its components is most likely to be an inaccurate             ences is that it is extremely easy to apply. Its biggest inconvenience,
+measure of the true reliability. Another significant problem with this           however, is that the utility scores correspond to no physical char-
+model is that the goals have no clear definition. For example, what              acteristics in the application domain making them hard to interpret
+is meant by reliability and battery usage?. Similarly, the levels of             and impossible to validate empirically. In other words, the utility
+contribution of each option to each goal have no clear semantics (for            functions are not falsifiable [55]. In contrast, in other domains,
+example, what does the contribution of the GPS to battery usage,                 e.g. in healthcare economics, utility functions are not restricted to
+contrib(BatteryUsage, GPS), actually measure?).                                  weighted sums and they denote domain-specific measures — such
+   In order to separate issues concerning the validity of the SAS de-            as the quality-adjusted life year — making it possible to refute and
+cision model from discussions concerning the benefits of alternative             improve them based on empirical evidences [7].
+decision support methods, we temporarily assume this MOADM to                       When a utility function exists, whether the utility is falsifiable or
+be valid. We revisit this assumption after having compared the two               not, it is possible to convert a utility score into financial units using
+decision methods on the same model.                                              a willingness-to-pay ratio K such that the benefit of an alternative is
+                                                                                 the product of its utility and K [7]: benefit(a, ω) = K ×U(a, omega)
+3.2     Defining the Cost-Benefit Model                                          This approach allows us to apply our statistical cost-benefit analysis
+   Multi-objective decision problems increase in difficulty as the               method on any requirements and architecture models developed
+number of objectives increases [34]. Since a MOADM could have a                  using a utility-based approach.
+large number of optimisation goals, one way to simplify the prob-                   SAS Case Study. The GuideArch method uses the equivalent of
+lem is to convert the MOADM into a simpler cost-benefit decision                 a weighted sum approach to define a utility score for each candidate
+model [42, 49]. The cost-benefit model allows software architects                architecture2 . The goal preferences are defined as linear functions
+to relate design decisions and levels of goal satisfaction to financial          where the preference 0 and 1 are associated to the lowest and high-
+goals of direct interest to the project clients and stakeholders.                est possible values for that goal among all candidate architectures
+   The set of alternatives of the cost-benefit decision model is the set         and all possible parameters’ values. Therefore, instead of defining
+of candidate architectures in A satisfying the constraints in C. Soft-           the goal preference functions in terms of stakeholder’s preferences,
+ware architects, in collaboration with project stakeholders, define              the GuideArch model views these functions as normalisation func-
+the cost and benefit functions. The parameters of the cost-benefit               tions expressing the percentage of goal attainment relative to the
+decision model include the parameters Ω of the architecture deci-                highest attainment achievable within the model. The SAS model
+sion model plus additional parameters involved in the definition of              utility score mixes both cost and benefit factors. For our experi-
+the cost and benefit functions. The cost function would typically                ment, we have thus assumed this utility score corresponds to the net
+include software development, deployment, operation and mainte-                  benefit of our cost-benefit model, i.e. NB(a, ω) = U(a, ω), without
+nance costs but possibly also other costs incurred in the application            distinguishing the cost and benefit parts of the utility function.
+domain such as salary, material, legal, environmental, and reputation
+costs. The benefit function would model estimated financial values               3.3     Defining Design Decision Risks
+associated with achieved levels of goal attainment.                                 Software design decisions should take into consideration the risks
+   A problem with many cost-benefit models is that they exclude                  associated to each candidate architecture.
+from their equations costs and benefits that are perceived to be too                In a cost-benefit model, these risks can be measured using the
+hard to quantify and measure. For example, they omit the cost and                loss probability and probable loss magnitude introduced in Section
+benefit related to security, usability, company reputation, etc. To              2. Decision makers can introduce additional risk measures related
+be useful, cost-benefit models should include the hard-to-measure                to net benefits, for example measuring the probability that the net
+factors that are important to the decision so that their uncertainty             benefit or return-on-investment (i.e. the ratio between net benefit
+can be assessed and analysed instead of being ignored. Systematic                and cost) are below some thresholds.
+methods for transforming vague qualitative goals into meaningful                    In addition to risk measures related to net benefits, software
+measurable objectives exist and have been used successfully in many              architects may be interested in risks relative to the goals of the
+industrial projects [1, 31, 41].                                                 multi-objective architecture decision model:
+   Many other projects however ignore these methods. A popular                      Goal Failure Risks. The risk for an architecture a to fail to
+alternative is to compute for each alternative a utility score defined           satisfy a goal g, noted GRisk(g, a) is the probability that a fails to
+as the weighted sum of the stakeholders’ preferences for each goal:              achieve some minimum level of goal attainment:
+              U(a, ω) = ∑ w(g) × Pref g (v(g, a, ω))                                            GRisk(g, a) = P(v(g, a, ω) < must(g))
+                          g∈G
+                                                                                 2 The GuideArch approach assigns to each architecture a a score s(a)
+where the goal weights w(g) and preferences functions Pref g (x) are
+elicited from stakeholders using appropriate techniques [61]. The                to be minimized rather than maximised. To facilitate exposition and
+goal preference values Pref g (x) are real numbers in [0, 1] denoting            relation to other work, we convert the GuideArch score to a utility
+                                                                                 score to be maximised. We reproduced the GuideArch method
+the level of preference stakeholders associate with a value x for                on the SAS case study and verified our change did not affect the
+goal g. A preference of 1 denotes the highest possible stakeholders’             results; our findings are available at www.cs.ucl.ac.uk/staff/
+satisfaction, a preference of 0 denotes the worst. For example, if g             e.letier/sdda.
+
+
+
+                                                                           888
+where must(g) is the level of goal attainment below which stake-                       Our tool then computes the shortlist as the set of Pareto-optimal
+holders would consider the goal to be unrealized. This definition                   candidature architectures for the chosen criteria and resolution mar-
+assumes g is to be maximised; a symmetric definition can be given                   gins. More precisely, a candidate architecture a is shortlisted if there
+for goals to be minimized. Eliciting the must(g) values is part of                  is no other candidate architecture a′ that outperforms a by the reso-
+many requirements engineering methods [31, 47, 56]).                                lution margins on all criteria. If the MOADM includes a non-empty
+   Project Failure Risk. The risk for an architecture a to fail the                 set C of dependency constraints between design decisions, any ar-
+whole project, noted PRisk(a) is defined as the risk of failing to sat-             chitecture that violates these constraints is automatically excluded.
+isfy at least one of its goals. If the goals are statistically independent,         Our shortlisting approach is an extension of the standard notion
+we have                                                                             of Pareto-optimality [34] used to deal with optimisation problems
+                                                                                    involving uncertainty. In the objective space, the outcomes of each
+                PRisk(a) = 1 − ∏ (1 − GRisk(g, a)).                                 candidate architecture for each criteria forms a Pareto-optimal strip,
+                                  g∈G
+                                                                                    or a Pareto-optimal front with margins.
+   The project failure risk is defined with respect to goals are defined               Our implementation identifies the Pareto-optimal alternatives
+in the multi-objective architecture decision model. These goals may                 through an exhaustive exploration of the design space. It first com-
+include concerns related to development costs and schedule.                         putes the NBc matrix for the full design space using MC simulation
+   SAS Case Study. The original SAS model has no definition                         then uses a classic algorithm for extracting Pareto-optimal sets [46]
+of risk and does not specify must values for any of its goals. We                   that we have extended to deal with resolution margins. Our imple-
+thus decided to define the must(g) values relative to the goal level                mentation is in R, an interpreted programming language for statisti-
+attainment of a baseline architecture whose goal attainments would                  cal computing.
+be equal to those of the existing system. The new system has to be                     For the SAS model, on a standard laptop, the MC simulations of
+at least as good as the current system on all goals, otherwise the                  all 6912 alternatives takes around 5 minutes (for a MC simulation
+project would be a failure. We selected as baseline the architecture                with 104 scenarios) and the identification of the Pareto-optimal strip
+with the lowest expected net benefit from among the top 5%.                         less than a second. Other industrial architecture decision problems
+                                                                                    have a design space whose size is similar or smaller to that of
+3.4     Eliciting Parameters Values                                                 the SAS [9, 43, 44]. For example, the application of CBAM to
+   The following step consists in eliciting probability distributions               NASA Earth Observation Core System (ECS) [43] involves 10
+(or single value in case a parameter is known with certainty) for                   binary decisions (thus 1024 alternative architectures against 6912
+all parameters in the architecture and cost benefit decision mod-                   for the SAS). Our exhaustive search approach is thus likely to be
+els. As mentioned in Section 2, simple, reliable methods exist for                  applicable to most architecture decision problems.
+performing this elicitation [52].                                                      The scalability bottleneck of our approach is more likely to be
+   SAS Case Study. The SAS design team elicited uncertainty for                     related to the elaboration of the decision models (steps 1 and 2) and
+all 175 model parameters through a three-point estimation method                    the number of parameters to be elicited from stakeholders (step 3)
+that consist in eliciting for each parameter its most likely, lowest                than to the automated shortlisting step. If, however, a need to in-
+and highest values. They interpreted these three points estimates                   crease the performance and scalability of our shortlisting technique
+as triangular fuzzy value functions which are equivalent to triangu-                appears, one could port our implementation to a faster complied
+lar probability distributions. They also elicited point-based values                programming language and use evolutionary algorithms commonly
+for each of the 7 goal weights parameters (unlike our approach,                     used in search-based software engineering [33] such as NSGA2 [15]
+GuideArch does not allow these weights to be uncertain).                            to deal with much larger design spaces (but at the cost of losing the
+                                                                                    guarantee of finding the true Pareto-optimal strip).
+3.5     Shortlisting Candidate Architectures                                           SAS Case Study. Figure 4 shows the Pareto-optimal strip for
+   The next step consists in shortlisting candidate architectures to                the SAS candidate architectures evaluated with respect to expected
+be presented to software architects for the final decision and for                  net benefit and project failure risk. The resolution margins for each
+computing expected information value.                                               criteria are set at 0.1 and 1%, respectively. The red crosses show the
+   For this step, software architects have to decide what shortlisting              9 architectures shortlisted by our approach, the blue squares the top
+criteria to use. The default is to shortlist candidate architectures                10 architectures of the GuideArch approach, and the grey circles all
+that maximise expected net benefit and minimise project failure                     other candidate architectures. In our shortlist, 5 out of 9 candidate
+risk. Software architects may, however, select other risk-related                   architectures are in the Pareto-strip but not on the Pareto-front; they
+criteria such as the probabilities that the project costs and schedule              would have groundlessly been excluded from the shortlist if we
+exceed some threshold, or that the loss probability or probable                     had followed the traditional approach of retaining solutions in the
+loss magnitude do. Software architects may select any number of                     Pareto-optimal front only.
+criteria. However, keeping the number of criteria below 3 facilities                   We observe important differences between our shortlist and top 10
+the generation and visualisation of the shortlist.                                  architectures GuideArch identifies: our shortlists identifies candidate
+   Architects may also specify, for each criteria, a resolution margin              architectures with slightly higher expected net benefit and much
+to resist specious differentiation when comparing alternatives. For                 lower project risk than GuideArch’s top 10 architectures. We explain
+example, setting the resolution margins for financial objectives, such              the difference between the two shortlists as follows. GuideArch
+as expected net benefit, to £10,000 causes the shortlisting process                 did not consider project failure risk as we defined it in Section 3.3
+to ignore differences of less then £10,000 when comparing candi-                    (or any other risk) in their architecture evaluations. It is therefore
+date architectures net benefit. These margins make our shortlisting                 not surprising that its top 10 architectures perform weakly with
+process robust against statistical error in the MC simulation and                   respect to this criterion. Instead of evaluating criteria against their
+modelling error due to simplifications in the model equations. Short-               expected net benefit (or equivalently their utility score) and some
+listing candidate architectures based on strict Pareto-optimality with-             measure of risk, GuideArch ranks candidate architectures according
+out our resolution margin can cause a priori rejection of a candidate               to a single criterion corresponding to an uncertainty-adjusted score
+architecture due to insignificant differences in objective attainment.              defined as the weighted sum of an architecture’s pessimistic, most
+
+
+
+                                                                              889
+                        20
+                                                                                                                                     EVPPI/EVTPI         ∆PPIP/T PI (Risk)
+                                                                                                             Ramp up time (1)                    10%                     5%
+Expected Net Benefit
+
+
+                                                                                                             Battery Usage (1)                   10%                     5%
+                        18
+
+                                                                                                            Ramp up time (14)                    10%                     5%
+                                                                                                            Battery Usage (20)                   10%                     4%
+                                                                                                             Ramp up time(11)                    10%                     4%
+                        16
+
+
+
+
+                                                                                                             Ramp up time(20)                    10%                     4%
+                                                                                                            Battery Usage (11)                   10%                     5%
+                                                                                                        Development Time (20)                     9%                     5%
+                        14
+
+
+
+
+                                                                                                         Development Time (1)                     4%                     5%
+                                                                                                        Development Time (14)                     3%                     5%
+                                                                                                        Development Time (11)                     3%                     5%
+                        12
+
+
+
+
+                             0.0         0.2          0.4         0.6         0.8         1.0                 Figure 6: Expected Value of Partial Perfect Information.
+                                                   Project Failure risk
+Figure 4: Comparing our shortlisted architectures (red crosses) against                               3.7     Computing Information Value
+GuideArch top 10 (blue triangles). The grey circles denote all other candidate
+architectures.                                                                                           The last step consists in computing the expected value of perfect
+                                                                                                      information and its impact on risks. The expected value of total
+                          Open Decisions                          Options                             perfect information and its impact on risk, EVTPI and ERITPI,
+                                                                                                      give upper bounds on the value that additional information could
+                                File Sharing       OpenIntents              In house                  bring to the decision. If EVTPI is small and the impact on risk low,
+                                        Chat       XMPP (Open File)         In house                  there is little value in reducing model parameters uncertainty. The
+                               Connectivity        3G on Nexus 1            3G on Droid               expected value of partial perfect information about a single model
+                        Architectural Pattern      Facade                   Psuh-based                parameter Θ and its impact on risk, EVPPI(Θ) and ERIPPI(Θ), help
+                                                                                                      software architects to distinguish model parameters with high and
+                                                                                                      low expected information value. We also found it useful to measure
+                                   Closed Decisions                Option                             the expected value of partial perfect information about the level
+                                     Location Finding        Radio                                    of attainment of each goal and its impact on risk, EVPPI(v(g, a))
+                                   Hardware Platform         Nexus 1                                  and ERIPPI(v(g, a)). This gives software architects a mean of
+                                      Report Syncing         Explicit                                 separating high and low information value at the levels of goals
+                                         Map Access          Preloaded (ESRI)                         instead of individual parameters which can be too numerous (the
+                                            Database         MySQL                                    SAS model has 175 parameters) and fine-grained.
+                                Data Exchange Format         Unformatted Data                            To ease computations of expected information values, we limit the
+                                                                                                      alternatives to those in the shortlist. In our case study, this reduces
+                       Figure 5: Open and closed decisions in our shortlisted architectures.               c matrix from which EVTPI and EVPPI are computed from
+                                                                                                      the NB
+                                                                                                      a size of 6912 by 104 (the number of alternatives by the number of
+likely, and optimistic net benefit in fuzzy logic. The weights in the                                 simulation scenarios) to a size of 9 by 104 .
+uncertainty-adjusted score capture the importance decision makers                                        One should be careful in interpreting EVTPI and EVPPI values
+give to pessimistic, most likely, and optimistic outcomes. In other                                   to remember that their accuracy is conditional on the validity of the
+words, GuideArch scores architectures by taking into account the                                      decision model. They only measure the value of reducing uncer-
+most likely net benefits (in probabilistic terms, the mode of the                                     tainty about model parameters, not about the model equations. We
+distribution) and what its authors call the positive and negative                                     come back to this issue below.
+consequences of uncertainty. In our probabilistic approach, both                                         SAS Case Study. Using the shortlisted architectures identified in
+types of consequences are already taken into account by computing                                     Section 3.5 and NB c matrix for those architectures, we compute that
+the expected net benefit. We argue our shortlisting approach has                                      EVTPI is 0.05 which represents only 0.25% of the highest expected
+two advantages over the GuideArch uncertainty-adjusted scores: (1)                                    net benefit. EIRTPI is 9% which is the full project failure risk of
+it informs decision makers of both expected net benefit and risks;                                    the highest benefit architecture in our shortlist. This means that the
+and (2) it does not require decision makers to specify uncertainty-                                   impact of perfect information is to reduce project failure risk to zero.
+adjusting weights whose impacts on the architectures ranking are                                      Figure 6 shows all non-zero EVPPI for all goals and architectures.
+difficult to interpret.                                                                               Since these EVPPI are small, the table shows the ratio of EVPPI to
+                                                                                                      EVTPI instead of absolute values. The ramp up time and battery
+3.6                          Open and Closed Design Decisions                                         usage of 4 of the 9 shortlisted architectures are shown to have, in
+   Shortlisting a set of candidate architectures may conclude a set                                   relative terms, much higher information value than other goals and
+of design decisions. A design decision is closed if all shortlisted                                   architectures. However, in absolute terms, these values remain low.
+architectures agree on the option to be selected for this decision;                                      In order to experiment with the use of EVTPI and EVPPI, we have
+a design decision is open if the shortlisted architecture contains                                    artificially extended uncertainty in the SAS model and observed the
+alternative options for that option. Presenting the open and closed                                   effect on EVTPI and EVPPI. We have, for example, given uncer-
+design decisions gives decision makers a useful view of the short-                                    tainty to the goal weights in the definition of the utility function.
+listed architectures. If the shortlist is large, it can also be organised                             We have assumed that the SAS design team is likely to have over-
+into clusters based on design decisions similarities [66].                                            estimated the goal weights and have therefore replaced their con-
+   SAS Case Study. Figure 5 shows the open and closed design                                          stant value by a triangular distribution of parameters (0, w(g), w(g))
+decisions in our shortlisted candidate architectures.                                                 where w(g) is the initial goal weight estimated by the SAS design
+
+
+
+                                                                                                890
+team. This distribution resulting in a linearly decreasing probability         architectures expected net benefits, risks, and expected information
+distribution function from w(g) to 0. We observed that this uncer-             value assuming validity of the decision models and accuracy of the
+tainty roughly doubled EVTPI. However, in our all experiments,                 parameters’ probability distributions3 . Not all decision methods
+EVTPI remains small. This is mostly due to the small differences in            can make this correctness claim. For example, GuideArch computes
+net benefit that exist among the shortlisted architectures even when           for each architecture a score that, unlike our expected net benefit
+most of the model parameters uncertainties are increased.                      and risk, makes no falsifiable predictions about the architecture and
+   If we had confidence in the validity of the model utility function,         has therefore no notion of correctness.
+this result would mean that, for this particular decision problem,                The lack of validity and falsifiability of the decision model we
+there is no value in reducing uncertainty before deciding among                used in the SAS case study is an important weakness of our evalua-
+the shortlisted architectures. However, we have identified important           tion. All models are wrong, but some are useful [13]. Unfortunately,
+limitations in the SAS MOADM and utility models that severely                  today no scientific method exists to help software architects evaluate
+question their validity, the most important problem being that these           how useful a model actually is to inform decisions. As mentioned
+models are not falsifiable, making it impossible to validate and               in the closing of the previous section, we intend to address this
+improve them based on empirical evidence. The project client should            shortcoming by extending our approach to deal with model uncer-
+thus be sceptical of the choice of architecture, risk assessment, and          tainty so as the be able to estimate modelling errors, their impact on
+information value generated using these models whatever decision               decisions, and support an incremental modelling process guided by
+support method is used.                                                        information value analysis.
+   In order to deal with such difficulties, it would be desirable to              Our method assumes it is possible to elicit accurate probabil-
+be able to explicitly describe and reason not only about parameters            ity distributions for all model parameters. Such elicitation can be
+uncertainty, but also about model uncertainty (also called structural          hampered by important cognitive biases. For example, software
+uncertainty) [17]. Requirements and architecture decision problems             estimations have been shown to be affected by anchoring [6]. Sig-
+would especially benefit from this capability. It would enable an              nificant research in uncertainty elicitation has show it is possible to
+incremental approach where software architects could start from an             counter the effects of such biases using appropriate methods [52].
+inexpensive, coarse-grained decision model with large uncertainty,             However, these methods have to our knowledge not yet been ap-
+then use expected information value about model uncertainty to                 plied in a software engineering context and further evaluation is thus
+decide whether and where to reduce uncertainty by refining parts               required in this area.
+of the model. They could for example start with a coarse-grained                  2. Performance and scalability. With the SAS case study, we
+software performance model similar to the one used in the SAS case             have shown our method is fast enough to analyse a real software
+study, estimate their uncertainty about the model error (the deviation         design decision problem whose size and complexity is similar to
+between its predicted performance and the software’s actual per-               those of other published industrial architecture decision problems [9,
+formance) and compute the expected value of perfect information                43, 44]. The manual steps of elaborating the decision models and
+about this error to decide whether to refine this model into a more            eliciting all parameters probability distributions will most likely
+fine-grained performance model. We have started exploring how to               be the first scalability bottleneck of applying our method to more
+extend our method to deal with model uncertainty by converting it              complex problems. If our automated shortlisting step becomes a
+to parameter uncertainty, but the approach is still tentative and our          bottleneck, its performance and scalability can be improved notably
+method does not currently supports this.                                       by using by using evolutionary search-based algorithms to reduce
+                                                                               the number of candidate architectures to evaluate. In the near future,
+4. EVALUATION AND FUTURE WORK                                                  we intend to conduct a systematic scalability analysis [19] of the
+                                                                               whole approach on real case studies before attempting to improve
+   Evaluating decision support methods is hard. Often, authors argue
+                                                                               its performance.
+that their method is systematic, liked by its users, triggers useful
+                                                                                  3. Applicability. The next evaluation criteria is to show the
+discussions and generates insights into the decision problem [21, 34,
+                                                                               method is applicable by its intended users (not just the method de-
+49]. None of these claims, however, consider whether a decision
+                                                                               signers) in actual software engineering projects. We distinguish
+method is correct and produces better outcomes than another method,
+                                                                               technical applicability, the extent to which the method is under-
+or even than no method at all (i.e.. decisions based on intuition
+                                                                               standable and applicable by software architects in an ideal (fictive)
+alone). The popular AHP method [57], for example, is criticised by
+                                                                               project where actors do not intentionally or unintentionally game the
+decision experts for its mathematical flaws [8, 10, 53] and lack of
+                                                                               decision making process, from contextual applicability, the extent to
+evidence that it leads to better decisions than intuition alone [40].
+                                                                               which the method is applicable in the context of real projects where
+   Evaluation of software engineering decision methods should go
+                                                                               the project governance, incentives, and political relations might
+beyond vague claims of usefulness. In this section, we propose to
+                                                                               affect the decision making process and reporting of uncertainty.
+evaluate software engineering decision support methods according
+                                                                                  At the moment, we see no critical threats to the technical appli-
+to their correctness, performance and scalability, applicability, and
+                                                                               cability of our method. Our method takes as input decision models
+cost-effectiveness. Inspired by an adaptation of Moslow’s pyramid
+                                                                               that correspond to those already produced by other requirements
+of human needs to software quality [2], we visualize these criteria in
+                                                                               engineering and architecture methods [22, 45, 47, 49]. The only
+a pyramid where the lower-level criteria are necessary foundations
+                                                                               other required inputs are probability distributions modelling the deci-
+for higher-level ones. We discuss the extent to which we can claim
+                                                                               sion makers uncertainty about the model parameters. As mentioned
+our method meets these criteria and outline a roadmap of future
+                                                                               earlier, simple, reliable methods exist to elicit such probability distri-
+research to extend our evaluation and improve our method against
+                                                                               butions [52]. Our analysis outputs need to be easily interpretable by
+those criteria.
+   1. Correctness. The first level is to establish what correctness            3 Our approach actually computes these quantities using MC sim-
+properties can be claimed of the method. One must distinguish                  ulation which introduces bounded and measurable simulations er-
+correctness of the decision method from correctness of the decision            rors [48, 54]. In our case study, with simulations of 105 scenarios,
+models to which the method is applied. Our method is correct                   these errors are negligible, particularly when compared to the much
+in the sense that its produces correct estimations of the candidate            wider modelling and parameter uncertainty.
+
+
+
+                                                                         891
+decision makers. Although the concepts of risk, Pareto-optimality               tecture using a single risk-adjusted score whose interpretation is
+and information value can be misunderstood, we see no insurmount-               problematic. Finally, GuideArch has no support for assessing the
+able obstacle here.                                                             value of information. Because GuideArch does not require the elab-
+   Even if the method is technically applicable, the political context          oration of problem-specific models, it may be simpler to apply than
+and governance structure of a project may create obstacles to the               CBAM and our approach; however, the lack of validity of the fixed
+accurate reporting of uncertainty and analysis of risks [40, 50].               equations used to score alternatives should raise concerns regarding
+Important research in this area will be needed to identify incentives           the validity of the rankings it produces.
+and governance structures that are favourable to sound decision                    Our decision support method deals with design time knowledge
+making under uncertainty.                                                       uncertainty and should not be confused with the large body of
+   4. Cost-effectiveness The next evaluation stage is to demonstrate            software engineering research dealing with run-time physical un-
+the cost-effectiveness of decision analysis methods in requirements             certainty (e.g. [30, 35, 36, 47]). Philosophers and statisticians use
+and architecture decisions. A method can be applicable without be-              the terms epistemic and aleatory uncertainty, respectively [52]. A
+ing cost-effective. Showing cost-effectiveness of a decision method             probabilistic transition system may for example describe variations
+dealing with uncertainty is hard. One must distinguish a good de-               in the response time of a web service as an exponential distribution
+cision from a good outcome. A good decision may by the effect                   with a mean λ . This models a run-time physical uncertainty. Such
+of chance lead to a bad outcome, and vice-versa a bad decision                  probabilistic model could be part of a decision model where the
+may also by the effect of chance lead to a good outcome. How-                   mean λ is an uncertain model parameter. The decision makers’
+ever, when analysed over many decisions, a good decision support                uncertainty about λ is a knowledge uncertainty.
+method should on average lead to better outcomes, which for soft-                  Other software engineering research streams are concerned with
+ware engineering projects means higher business benefits from IT                uncertainty during the elaboration of partial models [23] and uncer-
+projects and less costly project failures. We believe that by setting           tainty in requirements definitions for adaptive systems [67]. These
+expected benefits and risks as explicit decision criteria and by using          are different concerns and meanings of uncertainty than those stud-
+falsifiable models that can be incrementally improved from empir-               ied in this paper.
+ical evidence, our method has a better chance of achieving these                   Graphical decision-theoretic models [18] and Bayesian networks
+goals than other methods relying on unfalsifiable models and utility            [28] provide general tools for decision making under uncertainty.
+scores not clearly related to benefits and risks.                               They have supported software decisions regarding development
+                                                                                resources, costs, and safety risks [26, 27] but not requirements and
+5. RELATED WORK                                                                 architecture decisions. We did not used these tools to support our
+                                                                                method because they deal with discrete variables only; their use
+    Most requirements and architecture decision methods ignore un-
+                                                                                would have required transforming our continuous variables such as
+certainty and rely on point-based estimates of their models param-
+                                                                                cost, benefit and goal attainment levels into discrete variables.
+eters [5, 22, 24, 32, 47, 64, 68]. By simply replacing point-based
+                                                                                   Boehm’s seminal book on software engineering economics de-
+estimates by probability distributions, our method can be directly ap-
+                                                                                votes a chapter to statistical decision theory and the value of infor-
+plied to any previous decision model because the MC simulations at
+                                                                                mation [11]. The chapter illustrates the expected information value
+the heart of the method merely consist of evaluating the point-based
+                                                                                on a simple example of deciding between two alternative develop-
+models on many different possible parameters values.
+                                                                                ment strategies. To our knowledge, this is the only reference to
+    Our method builds on previous methods for dealing the uncer-
+                                                                                information value in the software engineering literature, including
+tainty in software architecture decisions, notably CBAM [42, 49]
+                                                                                in Boehm’s subsequent work. This concept thus appears to have
+and GuideArch [21].
+                                                                                been forgotten by our community.
+    The first two steps of our method are equivalent to CBAM’s model
+                                                                                   Software cost estimation methods [4, 12, 26, 60] could be used
+elaboration steps. Our method differs from CBAM in that it relies
+                                                                                to provide inputs to our decision method. Many already rely on sta-
+on sound, reliable techniques for eliciting probability distributions;
+                                                                                tistical and Bayesian methods to provide cost estimates; they could
+it includes explicit definition of risks against which alternatives are
+                                                                                easily generate cost estimates in the form of probability distributions
+evaluated; it shortlists candidate architectures based on multiple
+                                                                                instead of point-based estimates.
+objectives (e.g. ENB and Risk) instead of assuming a single rank-
+ing criterion; and it measures expected information value whereas
+CBAM uses deterministic sensitivity analysis whose limitations                  6. CONCLUSION
+were described in Section 2.2. Elaborating on the first point, CBAM                Requirements and architecture decisions are essentially decisions
+infers probability distributions from divergences between stakehold-            under uncertainty. We have argued that modelling uncertainty and
+ers’ single-point estimates; this confuses consensus about the most             mathematically analysing its consequences leads to better decisions
+likely value with uncertainty about the possible ranges of values.              than either hiding uncertainty behind point-based estimates or treat-
+    Our method differs from GuideArch in the following ways. In step            ing uncertainty qualitatively as an inherently uncontrollable aspect
+1 and 2, our method allows decision makers to elaborate problem-                of software development. We believe that statistical decision analy-
+specific decision models whereas GuideArch relies on fixed equa-                sis provide the right set of tools to manage uncertainty in complex
+tions for computing a score for each candidate architecture. The                requirements and architecture decisions. These tools may be useful
+GuideArch equations are not falsifiable and therefore not amenable              to other areas of software engineering, e.g. testing, where critical
+to empirical validation. Likewise, unlike step 3 of our method,                 decisions must be made by analysing risks arising out of incomplete
+GuideArch does not allow decision makers to define domain-specific              knowledge. In future work, we intend to validate and refine our
+measures of risks. In step 4, we model uncertainty about parameters’            method on a series of industrial case studies and address the problem
+values as probability distributions for which sound uncertainty elic-           of reasoning about model uncertainty.
+itation techniques exist [52] whereas GuideArch uses fuzzy logic
+values that cannot be empirically validated and calibrated. In step 5,
+we allow decision makers to shortlist candidate architecture based
+on expected net benefit and risks whereas GuideArch ranks archi-
+
+
+
+                                                                          892
+7. REFERENCES                                                                     exploration of architectural solution space under uncertainty.
+ [1] G. Adzic. Impact Mapping: Making a big impact with                           In Proceedings of the 2013 International Conference on
+     software products and projects. Provoking Thoughts, 2012.                    Software Engineering, pages 43–52. IEEE Press, 2013.
+ [2] G. Adzic. Redefining software quality. http://gojko.net/                [22] D. Falessi, G. Cantone, R. Kazman, and P. Kruchten.
+     2012/05/08/redefining-software-quality, 2012.                                Decision-making techniques for software architecture design:
+     Last Accessed: 28 Feb 2014.                                                  A comparative survey. ACM Computing Surveys (CSUR),
+ [3] Y. Akao. Quality function deployment: integrating customer                   43(4):33, 2011.
+     requirements into product design. Productivity Press, 1990.             [23] M. Famelis, R. Salay, and M. Chechik. Partial models:
+ [4] A. J. Albrecht. Measuring application development                            Towards modeling and reasoning with uncertainty. In 34th
+     productivity. In Proceedings of the Joint SHARE/GUIDE/IBM                    International Conference on Software Engineering (ICSE
+     Application Development Symposium, volume 10, pages                          2012), pages 573–583. IEEE, 2012.
+     83–92, 1979.                                                            [24] M. S. Feather and S. L. Cornford. Quantitative risk-based
+ [5] D. Amyot, S. Ghanavati, J. Horkoff, G. Mussbacher,                           requirements reasoning. Requirements Engineering,
+     L. Peyton, and E. Yu. Evaluating goal models within the                      8(4):248–265, 2003.
+     goal-oriented requirement language. International Journal of            [25] J. C. Felli, G. B. Hazen, P. D, and P. D. Sensitivity analysis
+     Intelligent Systems, 25(8):841–877, 2010.                                    and expected value of perfect information. Medical Decision
+ [6] J. Aranda and S. Easterbrook. Anchoring and adjustment in                    Making, 18:95–109, 1997.
+     software estimation. In Proceedings of the 10th European                [26] N. Fenton, W. Marsh, M. Neil, P. Cates, S. Forey, and
+     Software Engineering Conference Held Jointly with 13th ACM                   M. Tailor. Making resource decisions for software projects. In
+     SIGSOFT International Symposium on Foundations of                            26th International Conference on Software Engineering (ICSE
+     Software Engineering, ESEC/FSE-13, pages 346–355. ACM,                       2004), pages 397–406. IEEE, 2004.
+     2005.                                                                   [27] N. Fenton and M. Neil. Making decisions: using bayesian nets
+ [7] G. Baio. Bayesian Methods in Health Economics. CRC Press,                    and MCDA. Knowledge-Based Systems, 14(7):307–325, 2001.
+     2012.                                                                   [28] N. Fenton and M. Neil. Risk Assessment and Decision
+ [8] C. A. Bana e Costa and J.-C. Vansnick. A critical analysis of                Analysis with Bayesian Networks. CRC Press, 2012.
+     the eigenvalue method used to derive priorities in AHP.                 [29] B. Flyvbjerg and A. Budzier. Why your IT project may be
+     European Journal of Operational Research,                                    riskier than you think. Harvard Business Review, 89(9):23–25,
+     187(3):1422–1428, 2008.                                                      2011.
+ [9] L. Bass, P. Clements, and R. Kazman. Software architecture in           [30] C. Ghezzi, L. S. Pinto, P. Spoletini, and G. Tamburrelli.
+     practice. Addison-Wesley Professional, 2003.                                 Managing non-functional uncertainty via model-driven
+[10] V. Belton and T. Gear. On a short-coming of saaty’s method of                adaptivity. In 35th International Conference on Software
+     analytic hierarchies. Omega, 11(3):228–230, 1983.                            Engineering (ICSE 2013), pages 33–42. IEEE Press, 2013.
+[11] B. W. Boehm. Software Engineering Economics. Prentice                   [31] T. Gilb. Competitive engineering: : A handbook for systems
+     Hall, Englewood Cliffs, NJ, 1981.                                            engineering, requirements engineering, and software
+[12] B. W. Boehm, R. Madachy, B. Steece, et al. Software Cost                     engineering using Planguage. Butterworth-Heinemann Ltd,
+     Estimation with Cocomo II. Prentice Hall PTR, 2000.                          2005.
+[13] G. E. Box and N. R. Draper. Empirical model-building and                [32] P. Giorgini, J. Mylopoulos, E. Nicchiarelli, and R. Sebastiani.
+     response surfaces. John Wiley & Sons, 1987.                                  Reasoning with goal models. In Conceptual Modeling – ER
+[14] M. Cantor. Calculating and improving ROI in software and                     2002, pages 167–181. Springer, 2002.
+     system programs. Commun. ACM, 54(9):121–130, Sept. 2011.                [33] M. Harman, S. A. Mansouri, and Y. Zhang. Search-based
+[15] K. Deb, S. Agrawal, A. Pratap, and T. Meyarivan. A fast elitist              software engineering: Trends, techniques and applications.
+     non-dominated sorting genetic algorithm for multi-objective                  ACM Computing Surveys, 45(1):11, 2012.
+     optimization: Nsga-II. Lecture notes in computer science,               [34] M. Harman, P. McMinn, J. T. de Souza, and S. Yoo. Search
+     1917:849–858, 2000.                                                          based software engineering: Techniques, taxonomy, tutorial.
+[16] M. Denne and J. Cleland-Huang. The incremental funding                       In Empirical Software Engineering and Verification, pages
+     method: Data-driven software development. IEEE Software,                     1–59. Springer, 2012.
+     21(3):39–47, 2004.                                                      [35] W. Heaven and E. Letier. Simulating and optimising design
+[17] D. Draper. Assessment and propagation of model uncertainty.                  decisions in quantitative goal models. In 19th IEEE
+     Journal of the Royal Statistical Society. Series B                           International Requirements Engineering Conference (RE
+     (Methodological), pages 45–97, 1995.                                         2011), pages 79–88. IEEE, 2011.
+[18] M. J. Druzdzel. Smile: Structural modeling, inference, and              [36] A. Hinton, M. Kwiatkowska, G. Norman, and D. Parker.
+     learning engine and genie: a development environment for                     PRISM: A tool for automatic verification of probabilistic
+     graphical decision-theoretic models. In AAAI/IAAI, pages                     systems. In Tools and Algorithms for the Construction and
+     902–903, 1999.                                                               Analysis of Systems, pages 441–444. Springer, 2006.
+[19] L. Duboc, E. Letier, and D. S. Rosenblum. Systematic                    [37] R. Howard. Information value theory. IEEE Transactions on
+     elaboration of scalability requirements through goal-obstacle                Systems Science and Cybernetics, 2(1):22–26, 1966.
+     analysis. IEEE Transactions on Software Engineering,                    [38] R. A. Howard. Readings on the principles and applications of
+     39(1):119–140, 2013.                                                         decision analysis, volume 1. Strategic Decisions Group, 1983.
+[20] N. Esfahani and S. Malek. Guided exploration of the                     [39] D. Hubbard. The IT measurement inversion. CIO Enterprise
+     architectural solution space in the face of uncertainty.                     Magazine, 1999.
+     Technical report, 2011.                                                 [40] D. Hubbard. The Failure of Risk Management: Why It’s
+[21] N. Esfahani, S. Malek, and K. Razavi. GuideArch: guiding the
+
+
+
+                                                                       893
+     Broken and How to Fix It. Wiley, 2009.                                   [56] B. Regnell, R. B. Svensson, and T. Olsson. Supporting
+[41] D. Hubbard. How to measure anything: Finding the value of                     roadmapping of quality requirements. IEEE Software,
+     intangibles in business. Wiley, 2010.                                         25(2):42–47, 2008.
+[42] R. Kazman, J. Asundi, and M. Klein. Quantifying the costs                [57] T. L. Saaty. How to make a decision: the analytic hierarchy
+     and benefits of architectural decisions. In 23rd International                process. European journal of operational research,
+     Conference on Software Engineering (ICSE 2001), pages                         48(1):9–26, 1990.
+     297–306. IEEE Computer Society, 2001.                                    [58] M. Sadatsafavi, N. Bansback, Z. Zafari, M. Najafzadeh, and
+[43] R. Kazman, J. Asundi, and M. Klien. Making architecture                       C. Marra. Need for speed: an efficient algorithm for
+     design decisions: An economic approach. Technical report,                     calculation of single-parameter expected value of partial
+     DTIC Document, 2002.                                                          perfect information. Value in Health, 2013.
+[44] R. Kazman, M. Barbacci, M. Klein, S. Jeromy Carriere, and                [59] P.-Y. Schobbens, P. Heymans, and J.-C. Trigaux. Feature
+     S. G. Woods. Experience with performing architecture                          diagrams: A survey and a formal semantics. In 14th IEEE
+     tradeoff analysis. In 21st International Conference on                        International Requirements Engineering Conference (RE
+     Software Engineering (ICSE 1999), pages 54–63. IEEE, 1999.                    2006), pages 139–148. IEEE, 2006.
+[45] R. Kazman, M. Klein, M. Barbacci, T. Longstaff, H. Lipson,               [60] M. Shepperd. Software project economics: a roadmap. In
+     and J. Carriere. The architecture tradeoff analysis method. In                Future of Software Engineering, 2007. FOSE’07, pages
+     Fourth IEEE International Conference on Engineering of                        304–315. IEEE, 2007.
+     Complex Computer Systems (ICECCS’98), pages 68–78.                       [61] T. J. Stewart. Dealing with uncertainties in MCDA. In
+     IEEE, 1998.                                                                   Multiple criteria decision analysis: State of the art surveys,
+[46] H.-T. Kung, F. Luccio, and F. P. Preparata. On finding the                    pages 445–466. Springer, 2005.
+     maxima of a set of vectors. Journal of the ACM,                          [62] M. Svahnberg, C. Wohlin, L. Lundberg, and M. Mattsson. A
+     22(4):469–476, 1975.                                                          quality-driven decision-support method for identifying
+[47] E. Letier and A. van Lamsweerde. Reasoning about partial                      software architecture candidates. International Journal of
+     goal satisfaction for requirements and design engineering. In                 Software Engineering and Knowledge Engineering,
+     12th International Symposium on the Foundation of Software                    13(5):547–573, 2003.
+     Engineering (FSE 2004), volume 29, pages 53–62. ACM,                     [63] R. N. Taylor, N. Medvidovic, and E. M. Dashofy. Software
+     2004.                                                                         architecture: foundations, theory, and practice. Wiley, 2009.
+[48] D. Lunn, C. Jackson, D. J. Spiegelhalter, N. Best, and                   [64] A. van Lamsweerde. Reasoning about alternative
+     A. Thomas. The BUGS book: A practical introduction to                         requirements options. In Conceptual Modeling: Foundations
+     Bayesian analysis, volume 98. CRC Press, 2012.                                and Applications, pages 380–397. Springer, 2009.
+[49] M. Moore, R. Kazman, M. Klein, and J. Asundi. Quantifying                [65] A. van Lamsweerde. Requirements engineering: from system
+     the value of architecture design decisions: lessons from the                  goals to UML models to software specifications. Wiley, 2009.
+     field. In 25th International Conference on Software                      [66] V. Veerappa and E. Letier. Understanding clusters of optimal
+     Engineering (ICSE 2003), pages 557–562, 2003.                                 solutions in multi-objective decision problems. In 19th IEEE
+[50] National Audit Office. Over-optimism in government projects,                  International Requirements Engineering Conference (RE
+     2013.                                                                         2011), pages 89–98. IEEE, 2011.
+[51] B. Nuseibeh. Weaving together requirements and                           [67] J. Whittle, P. Sawyer, N. Bencomo, B. H. Cheng, and J.-M.
+     architectures. IEEE Computer, 34(3):115–119, 2001.                            Bruel. Relax: Incorporating uncertainty into the specification
+[52] A. O’Hagan, C. Buck, A. Daneshkhah, J. Eiser, P. Garthwaite,                  of self-adaptive systems. In 17th IEEE International
+     D. Jenkinson, J. Oakley, and T. Rakow. Uncertain Judgements:                  Requirements Engineering Conference (RE 2009), pages
+     Eliciting Experts’ Probabilities. Statistics in Practice. Wiley,              79–88. IEEE, 2009.
+     2006.                                                                    [68] Y. Zhang, A. Finkelstein, and M. Harman. Search based
+[53] J. Pérez, J. L. Jimeno, and E. Mokotoff. Another potential                    requirements optimisation: Existing work and challenges. In
+     shortcoming of AHP. Top, 14(1):99–111, 2006.                                  Requirements Engineering: Foundation for Software Quality,
+[54] M. Plummer. Jags: A program for analysis of bayesian                          pages 88–94. Springer, 2008.
+     graphical models using Gibbs sampling. In Proceedings of the             [69] Y. Zhang and M. Harman. Search based optimization of
+     3rd International Workshop on Distributed Statistical                         requirements interaction management. In Second
+     Computing (DSC 2003). March, pages 20–22, 2003.                               International Symposium on Search Based Software
+[55] K. Popper. The logic of scientific discovery. Routledge, 1959.                Engineering (SSBSE 2010), pages 47–56, 2010.
+
+
+
+
+                                                                        894
+

@@ -1,0 +1,369 @@
+  Proceedings of the 2008 IEEE Systems and Information                                                                                   FPM1Sim,DM.1
+  Engineering Design Symposium, University of Virginia,
+  Charlottesville, VA, USA, April 25, 2008
+
+  A Method for Stochastic Modeling the Software Development Process in
+                  Constrained Resource Environments
+                       Fernando Machado Lima Ferreira, Eber Assis Schmitz, Antonio Juarez Alencar,
+                                        Fabio Protti and Carlos Henrique Alves
+
+     Abstract— Process Improvement requires a formal process                       [5]. Nevertheless, every software development improvement
+  definition and associated measures of performance. Processes                     project starts with a diagnostic phase, proceeds to an eval-
+  can then be diagnosed in order to formulate hypotheses on                        uation of possible alternatives, which includes the selection
+  where changes should be made. Subsequently, new processes
+  can be conceived, and developers can check whether the                           of the best course of action to be taken, and concludes with
+  desired improvements have actually been achieved. Simulation                     the presentation of the proposed solution [6].
+  is a powerful low-cost tool for diagnosis and test of several                        Software process improvement entails substantial risk as
+  improvement alternatives, prior to field tests.                                  it is, usually, very difficult to predict the outcome of changes
+     This paper presents a UML-based method to obtain the                          before they are put into practice, and it is evident that
+  probability distribution of the execution time of a large variety
+  of business processes, including software development. Such a                    the failure rates of software development process change
+  method, which is based on Monte Carlo simulation, allows for                     related project are high. So, it seems reasonable to claim
+  the identification of factors that most strongly influence process               that simulation could offer a great potential in modeling and
+  execution time, favoring changes that increase process efficiency                analyzing SDP, and therefore reduce the risks associated with
+  with considerable impact on the deployment of business tactics                   process change. Simulation models can provide a graphical
+  and strategies.
+                                                                                   display of process models that can be interactively edited and
+                            I. T HE P ROBLEM                                       animated to show process dynamics. Most important, such
+     Adopting a process view is a revolutionary change on how                      models enable conducting of ”what if” analysis that can be
+  the work is performed in the organizational environment,                         used to evaluate the consequences of changes before they are
+  contrasting with the emphasis on products. A process is a set                    implemented.
+  of structured and measurable activities that yields a product                        Over the years simulation has revealed itself to be an
+  or service to a determined client or market. A process is also                   important tool to speed up software development improve-
+  an ordering of activities in time and space, with start and                      ment both in the diagnostic and the alternative evaluation
+  end, and inputs and outputs clearly defined, in other terms,                     phases. In the former, the simulation model is fed with
+  an action-oriented structure [1].                                                data from the current software development process, whose
+     Software development processes (SDP) are the business                         analysis indicate the steps that require attention. In the latter,
+  processes of Software Companies. Software development                            a proposed new model of the process is fed with estimated
+  process models are created to attend many objectives: un-                        parameters. The analysis of the data collected during the
+  derstanding the key mechanisms of the existing business, to                      simulation of the new model reveals the cycle time reduction
+  create information systems to support the business, to act as                    achieved by modifying the current process [7].
+  a basis for improving the business, to show the structure of                         SDPs are a form of stochastic process. The implication
+  an innovated business, to experiment with a new concept and                      is that the process metrics will be random variables, in
+  identify outsourcing opportunities [2].                                          particular duration of a process, will be described by its
+     Since the publication of Royce on the management of                           Probability Distribution Function (PDF). This paper presents
+  software development in [3], software development processes                      a new method for obtaining the PDF of the duration of
+  have been the subject of an extensive number of studies.                         a software processes. First a UML-based process model is
+  Also, software process improvement model has been defined                        created using Activity Diagrams, from this informal model
+  in the CMMI [4] which provides a guide for the continuous                        a formal model is generated and simulated. The simulation
+  improvement of the development processes.                                        results are then used to obtain an approximation to the PDF
+     In a world of increasingly shorter time to market, where                      of the process duration.
+  companies are required to innovate constantly, project cycle                         This paper introduces a method for obtaining the probabil-
+  time has become one of the most critical software devel-                         ity distribution function (PDF) of the duration of a software
+  opment parameters. If one cannot deliver the software that                       development process. The method, which is based upon
+  is required in the allowed time frame, someone else will                         stochastic modeling, Monte Carlo simulation and the Unified
+                                                                                   Modeling Language (UML), allows managers to foresee
+    Fernando M. L. Ferreira is a student with the Informatics Graduate             more easily and quickly the consequences of changes in
+  Program at Federal University of Rio de Janeiro. Professors Eber A.              the software development process, even when resources are
+  Schmitz, an affiliate of IEEE, and Fabio Protti are Mr. Ferreiras’s faculty
+  supervisors. Dr. Antonio J. Alencar is a researcher with the Federeal            constrained and activities are carried out in finite loops.
+  University of Rio de Janeiro.                                                        This paper is organized as follows: section 2 describes the
+
+  1-4244-2366-8/©2008 IEEE                                                    129
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+  process modeling using UML Activity Diagrams, section 3                          each one devised to represent a different view of the in-
+  presents a method for estimating the duration of processes.                      formation system. The UML Activity Diagram (AD) is a
+  Section 4 describes an example. Section 5 presents a discus-                     simple yet effective modeling notation. Its main uses range
+  sion of our findings. Finally section 6 shows the conclusions.                   from describing a simple activity to a complex organizational
+                                                                                   workflow. The AD emphasizes the flow of control between
+                     II. R ELEVANT L ITERATURE                                     activities. Also, the resources required and the products
+                                                                                   generated by each activity have an explicit representation.
+     The inadequacy of the use of averages in project schedul-
+                                                                                   In summary, the AD is able to describe the dynamics of
+  ing is discussed in detail by Elmaghra [8]. Nelson [9] pro-
+                                                                                   software development processes. In this respect, the AD is
+  vides a comprehensive introduction to stochastic modeling,
+                                                                                   similar to the flow graph and the EPC (Event-driven Process
+  simulation and analysis. The state of the art of methods to
+                                                                                   Chain) [16].
+  deal with project scheduling under uncertainty is discussed
+  by Herroelen and Leus [10]. This includes software devel-                           Throughout this paper a subset of the UML AD symbols is
+  opment improvements projects. It is important to mention                         used to describe process models. This subset comprises: pro-
+  that none of the methods mentioned in [10] allows for loops                      cess delimiter (Start/End), activity, transition, branch (Deci-
+  of activities. The software development improvement model                        sion/Join), synchronism bar (Fork/Join). Figure 1 introduces
+  has been defined in the Capability Maturity Model Integra-                       these symbols.
+  tion (CMMI), which provides a guide for the continuous
+  improvement of the development process [4].
+     An activity network (AN) is a graph where the nodes
+  represent activities and edges represent precedence among
+  activities. The most common precedence relation between
+  two activities is the finish-to-start (FS), which restricts the
+  start of execution of one activity to the termination of
+  another. There are two main types of ANs: deterministic and
+  non-deterministic. The deterministic activity network (DAN)
+  is represented by a graph whose topology remains fixed as
+  the activities are being executed. Examples of DANs include
+  the widely known CPM and PERT networks.
+     On the other hand, an activity network contains decision
+  and repetition nodes which allow for constructions that, not
+  only restrict the order of the activities, but also whether they
+  are going to be executed or not and the number of times
+                                                                                                        Fig. 1.   UML Process elements.
+  it can be executed. Other examples of activity networks in
+  this class are Markov chains, Generalized Activity Networks
+  (GAN) [11] and networks used in the Graphic Evaluation and                                                 IV. T HE M ETHOD
+  Review Technique (GERT) [12] and Controlled Alternative
+  Activity Networks (CAAN) [13].                                                      In formal terms, to obtain the PDF of a software devel-
+     The UML owes its origins to the work of Booch, Rum-                           opment process in a constrained resource environment one
+  baugh and Jacobson in the 1990’s on the unification of                           should
+  their respective object-oriented system specification method-                       1) Create a well formed process model (WFP-model)
+  ologies. Nowadays, the UML is maintained and further                                    using the UML AD;
+  developed by the Object Management Group (www.uml.org).                             2) Simulate the WFP by repeating the following activities:
+  Although the UML is a widely recognized and used standard,                                a) Generate randomly a possible scenario (which is
+  it has been criticized for imprecise semantics leading to                                    expressed as an RC-DAN) and
+  subjective interpretation and, consequently, difficulties in                              b) Generate a schedule of its activities using a
+  formal business process modeling [14]. Hence a restricted                                    predefined business priority rule.
+  form of UML is used throughout this paper.                                       The set of schedules generated by simulation provides an
+                                                                                   estimate of the PDF of the process execution time. The
+       III. P ROCESS M ODELING U SING UML ACTIVITY                                 number of times Step 3 is executed can be calculated with
+                         D IAGRAMS                                                 the support of the Kolmogorov-Smirnov (KS) limit theorem
+     In the extremely competitive markets where software                           for empirical distributions [17]. The paper proceeds by
+  is developed these days, the Unified Modeling Language                           describing each one of the steps above.
+  (UML) is becoming the de facto standard for describing
+  software specification, structure, behavior and architecture                     A. Well Formed UML Process models
+  [15]. The UML is also being used as a language to describe                         Before discussing the execution simulation a WFP some
+  business models. The UML comprises several diagram types,                        definitions are needed.
+
+  1-4244-2366-8/©2008 IEEE                                                    130
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+     Definition 1: A well defined activity is an activity in
+  which the PDF of its duration and the resources that it
+  requires to be executed are specified
+     Definition 2: A well defined decision node is a decision
+  node in which the discrete probability distribution associated
+  to each branch node is specified
+     Definition 3: A well defined loop node is a loop node
+  where the probability distribution of the number of times it
+  is executed is specified
+     Definition 4: A well defined activity is a well formed
+  process or WFP. If WFP1 ,WFP2 , · · · , WFPn are well formed
+  processes then the network shown in Figure 2 is a WFP
+     Definition 5: If WFP1 ,WFP2 , · · · , WFPn are well formed
+  processes, then the network shown in Figure 2 is a WFP 
+
+
+
+                                                                                                    Fig. 3.     Decision combination of WFPs.
+
+
+
+
+                                                                                                      Fig. 4.    Loop combination of WFPs.
+                    Fig. 2.   Series combination of WFPs.
+
+
+    Definition 6: If WFP1 ,WFP2 , · · · , WFPn are well formed                        The execution of a WFP requires the definition of a
+  processes and D1 is a well defined decision node, then the                       priority rule H, which is a function that associates to each
+  network in Figure 3 is a WFP                                                    activity ai a unique number H(ai ), such that if H(ai ) >
+    Definition 7: If WFP1 ,WFP2 , · · · , WFPn are well formed                     H(aj ) then ai has a preference to be executed before aj .
+  processes and D1 is a well formed loop node, then the                               The problem of estimating the duration of a software
+  network in Figure 4 is a WFP                                                    development process can be seen as a variant of the heuristic
+    Definition 8: A resource constrained deterministic activity                    solution for the Stochastic Resource Constrained Project
+  network (RC-DAN) is an instance of a WFP, where the                              Scheduling Problem (Stochastic RCPSP) where the objec-
+  outcome of all loop and single decision nodes have already                       tive function is the minimization of total project duration
+  been determined                                                                 (makespan) [18], [19].
+                                                                                      The heuristic approach to the solution of the RCPSP
+  B. Simulating the execution of a WFP                                             minimum makespan consists of the use of a decision policy
+     A WFP contains decision and repetition nodes which allow                      when deciding the priority of execution of a set of tasks
+  for constructions that, not only restrict the order of the                       competing for the same resources. Examples of decision
+  activities, but also whether they are going to be executed                       policies are: LST (least start time), GRU (great resource
+  or not and the number of times they can be executed.                             utilization) and FCFS (first-come first-server). See [20] for
+     WFPs restrain the execution of an activity to the availabil-                  an empirical study of the performance of these policies on
+  ity of the required amount of resources. The total amount                        makespan minimization.
+  of resources required for the execution of the process is                           This paper proposes the use of the same heuristic method
+  defined by the resource vector: R [1..q], where R [i] is the                     for the solution of the minimization of makespan in determin-
+  total availability of resource of type i.                                        istic project networks to obtain the PDF of the execution time
+
+  1-4244-2366-8/©2008 IEEE                                                    131
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+  of a SDP. To use this method one must take two elements into
+  consideration: (1) the business policy for resource allocation
+  can be converted into a priority rule (heuristic) and (2) the
+  SDP can be modeled as a WFP.
+     These two assumptions allow the determination of the
+  execution time of software development processes described
+  by WFPs with the same algorithm used in the solution of
+  RCPSPs. The algorithm is used in conjunction with the
+  Monte Carlo (MC) method to obtain an approximation of
+  the distribution of a process execution time.
+     The MC method is basically a sampling procedure over
+  the universe of all possible executions of the process. Each
+  sample is called a scenario. Hence a scenario is an instance
+  of the WFP where every activity has a known duration and
+  the outcoming branch of all decision nodes are defined. The
+  application of the decision policy to a given instance allows
+  us to determine, in a unique manner, the total execution time
+  of the process instance.
+     The simulation method presented is based on the
+  repetitive execution of two main algorithms: GenerateDAN                                                 Fig. 5.   WFP into a DAN
+  and ScheduleDAN. The number of repetitions is defined by
+  a constant NumScenarios.
+                                                                                     In the Figure 6, the WFP contains a loop. Suppose that
+     SimulateWFP (WFP, R, H, NumScenarios)                                         loop L1 is executed just once, then both J1 and L1 are
+     CountScenarios = 0;                                                           removed and one gets the DAN with a1[1] followed by the
+     repeat                                                                        sequence a2[1] a1[2].
+       dan = GenerateDAN(WFP);
+       ScheduleDAN(dan, R, H);
+       inc(CountScenarios);
+     Until CountScenarios > NumScenarios
+  C. The algorithm GenerateDAN
+     This algorithm is responsible for obtaining a determin-
+  istic instance of the WFP by selecting one of its possible
+  execution paths. This procedure first transforms the WFP
+  into one of the possible RC-DANs, by replacing all decision
+  nodes with a single branch, representing the realization of
+  the decision. In a subsequent step, a constant duration value
+  is sampled for each activity from the its duration PDF. The
+  definition of a RC-DAN is exactly the same of a WFP, except
+  for the fact that all decision nodes have been instantiated.
+     GenerateDAN basically has to deal with two types of
+  nodes, i.e. decision and loop. Initially consider the graph
+  introduced in Figure 3. In this case one of the branching
+  WFPs emanating from the decision node D1 is selected
+  and replaces the whole subgraph connecting D1 to J1. Now
+  consider the graph introduced in Figure 4. In this case replace
+  graph connecting J1 to L1 is replaced by WPF1 followed by
+  a number of sequences WFP1 WFP2.
+     Figure 5 shows two examples of transformation of a WFP                                                Fig. 6.   WFP into a DAN
+  into a RC-DAN. In the figure to the left, the WFP contains
+  a decision node D1 and two mutually exclusive activities
+  a1 and a2 followed by the node J1. In order to get its                           D. The algorithm ScheduleDAN
+  instantiated DAN, one must choose the branch to the taken.                         The second of these algorithms is the standard RCPS
+  Suppose that the Y branch is selected, then both D1 and J1                       parallel algorithm described by [20] to the application of
+  are removed and yielding the DAN that contains one instance                      a heuristic for the solution of the deterministic RCPSP
+  of the activity a1 called a1[1].                                                 (RC-DAN) generated by the GenerateDAN Algorithm. The
+
+  1-4244-2366-8/©2008 IEEE                                                    132
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+  application of this algorithm evaluates the process execution                    (P). Table I shows the process activities, the resources
+  duration, for the selected scenario. This set of values, can be                  required to its execution and the parameters (Minimum, Most
+  used to obtain both the PDF and the Cumulative Distribution                      likely and Maximum, in hours) of the triangular PDF of its
+  Function (CDF)of the process execution duration.                                 duration.
+
+                      V. P RELIMINARY R ESULTS                                                                     TABLE I
+                                                                                                   ACTIVITIES , RESOURCES AND DURATION .
+     To illustrate the method consider the estimation of the
+                                                                                            Activity    Resource      Min      Most Likely      Max
+  execution time of a software development process which
+                                                                                              PR        1 M, 1 D      88.0           110.0     132.0
+  is based on the Incremental Development Method [21].                                        PI        1 M, 1 D     138.0           172.5     143.7
+  A simplified process, including only technical activities, is                               RA        1 M, 1 D      27.6            34.5      41.4
+  shown in Figure 7                                                                           TD        1 M, 1 D      83.6           104.5     125.4
+                                                                                             MC         1 M, 2 P     65.06            81.3      97.6
+                                                                                             MT         1 M, 1 P      23.6            29.5      35.4
+                                                                                              ST        1 M, 2 P      34.4            43.0      51.6
+                                                                                              EC        1 M, 2 P     17.06           21.33      25.6
+
+
+                                                                                      According to the KS limit theorem [17], to obtain a
+                                                                                   maximum error of Dn ,α of 2% with 95% of confidence
+                                                                                   level it is necessary to generate at least 4,649 observations.
+                                                                                   Assuming a 80/20 threshold, where 80% of the scenarios
+                                                                                   are covered, the process execution time is estimated to be
+                                                                                   1,810 ± 36.2 hours with 95% confidence level and 2% of
+                                                                                   maximum error. Considering a working day of 8 hours, the
+                                                                                   process execution time is estimated to be 227 ± 5 calendar
+                                                                                   days.
+
+
+
+
+                       Fig. 7.   Software process model.
+                                                                                                 Fig. 8.   Frequency and Cumulative Functions
+
+     The process starts with a preliminary requirements analy-
+  sis (PR), followed by the package identification (PI) whose
+                                                                                                              VI. D ISCUSSION
+  objective is partitioning the system into packages, which are
+  implemented one at a time. Each package is then subjected                           Below we answer some of the key questions regarding the
+  to a thorough detailed analysis of requirements (RA), fol-                       use of the method and techniques described in this article to
+  lowed by a technical design phase (TD). The design phase,                        estimate the duration of a software development process.
+  produces a set of software modules which are coded (MC)                             How does the method proposed in this article favor
+  concurrently with their testing (MT). In the next phase the                      the improvement of process execution time?
+  set of modules is tested as a whole (ST), and there is a finite                     The method is built upon a mathematical model that more
+  probability that they will fail, requiring some rework to the                    realistically reflects the complex and dynamic environment in
+  package error correction (EC).                                                   which the software development process takes place, where
+     The decision node D1 has two possible transitions (yes                        activity execution time, availability of resources and the
+  or no) with equal probability of being used. Moreover, the                       execution of some activities are uncertain.
+  decision node D2 is set to loop four times. Hence the project                       By making it easier for developers to model, analyze and
+  will be divided into four packages. The resources available                      change processes in a more realistic way, the method pro-
+  are one manager (M) one designer (D) and two programmers                         posed in this article favors the continuous shortening of time
+
+  1-4244-2366-8/©2008 IEEE                                                    133
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+  spent on the development of software and in the improvement                      a predefined business policy. Defining the number of samples
+  of process execution time in many other industries.                              allows us to estimate the cumulative distribution time of the
+     How does one choose among several improvement                                 process, within a given confidence interval, with a required
+  alternatives?                                                                    confidence level.
+     Because, in general, each conceived process improvement
+                                                                                                                R EFERENCES
+  alternative has to be simulated and each one yield a different
+  probability distribution function, it is likely that software                     [1] M. Hammer and J. Champy, Reengenharia: revolucionando a empresa,
+                                                                                        5th ed. Rio de Janeiro, RJ: Campus, 1994.
+  developers end up in a situation where they have to choose                        [2] H. E. Eriksson and M. Penker, Business Modeling With UML: Business
+  one among several possible PDFs, where each one has its                               Patterns at Work, 1st ed. USA: Wiley, 2000.
+  own mean and standard deviation                                                   [3] W. W. Royce, “Managing the developement of large software systems:
+                                                                                        Concepts and techiniques,” Proceedings WesCon, August 1970.
+     Although, this problem falls into the realm of decision                        [4] M. B. Chrissis, M. Konrad, and S. Shrum, CMMI Guidelines for
+  theory, if one establishes a maximum variation from the mean                          Process Integration and Product Improvement. Addison Wesly, 2004.
+  that is acceptable, i.e. a maximum risk that one is willing                       [5] R. Baskerville and J. Pries-Heje, “Short cycle time systems devel-
+                                                                                        opment,” Information Systems Journal, vol. 14, no. 3, pp. 237–264,
+  to take that the processes actually finishes within a given                           2004.
+  interval, the obvious choice among the alternatives is the                        [6] B. Hansena, J. Roseb, and G. Tjørnehøjb, “Prescription, description,
+  improvement that has the smallest mean.                                               reflection: the shape of the software process improvement field,”
+                                                                                        International Journal of Information Management, vol. 24, no. 6, pp.
+     What are the implication of such method to a software                              457–472, 2004.
+  company tactics and strategies?                                                   [7] M. Ruiz, I. Ramos, and M. Toro, New Trends in Software Process
+     If a company has processes that are efficient and yield                            Modelling. World Scientific, 2006, ch. 2: Software Process Dynamics:
+                                                                                        Modeling, Simulation and Improvement, pp. 21–56.
+  some meaningful savings is cost, it may use this savings                          [8] S. E. Elmaghra, “On the fallacy of averages in project risk manage-
+  either to open new markets that could not be reached due to                           ment,” European Journal of Operational Research, vol. 165, no. 2,
+  cost restriction or to conquer additional market share in the                         pp. 307–313, September 2005.
+                                                                                    [9] B. L. Nelson, Stochastic Modeling: Analysis & Simulation. Dover
+  environment in which it does business. Alternatively, such a                          Publications, February 2003.
+  company can pass on some of the saving it earned as a result                     [10] W. Herroelen and R. Leus, “Project scheduling under uncertainty:
+  of process improvement to some of its clients, with the view                          Survey and research potentials,” European Journal of Operational
+                                                                                        Research, vol. 165, no. 2, pp. 289–306, September 2005.
+  of making the process of those clients more efficient and as                     [11] S. E. Elmaghraby, Activity networks : project planning and control by
+  a means of establishing a stronger relationship with those                            network models. New York: Wiley, 1997.
+  who are important to business.                                                   [12] L. J. Moore and E. R. Clayton, GERT Modeling and Simulation:
+                                                                                        Fundamentals and Applications. Melbourne: Krieger Publishing Co.,
+     Therefore, by favoring process improvement, the method                             1976.
+  present in this article favors the conception and deployment                     [13] D. Golenko-Ginzburg, A. Gonik, and Z. Laslo, “Resource con-
+  of many business tactics and strategies that could not be done                        strained scheduling simulation model for alternative stochastic network
+                                                                                        projects,” Mathematics and Computers in Simulation, vol. 63, pp. 105–
+  otherwise.                                                                            117, 2003.
+                                                                                   [14] H. Eshuis and R. J. Wieringa, “A formal semantics for UML activity
+                          VII. C ONCLUSIONS                                             diagrams - formalising workflow models,” University of Twente,
+                                                                                        Enschede, The Netherlands, Tech. Rep., 2001.
+     Cycle time is one of the most important business param-                       [15] UML Resource Page, Object Management group, 2006, access at:
+  eters today. All business improvement projects start with a                           March 23rd, 2006. [Online]. Available: http://www.uml.org/
+  diagnosis phase, proceed to an evaluation of possible alter-                     [16] W. M. P. Aalst, “Formalization and verification of event-driven process
+                                                                                        chains,” Information and Software Technology, vol. 41, no. 10, pp.
+  natives and conclude with the presentation of the proposed                            639–650, 1999.
+  solution.                                                                        [17] W. Feller, “On the Kolmogorov-Smirnov limit theorems for empirical
+     Simulation is an important tool both in the diagnostic and                         distributions,” The Annals of Mathematical Statistics, vol. 19, no. 2,
+                                                                                        pp. 177–189, June 1948.
+  in the alternative evaluation phases. In the diagnostic phase,                   [18] E. L. Demeulemeester and W. S. Herroelen, Stochastic project schedul-
+  the model is fed with actual data from the business processes.                        ing, 1st ed. USA: Springer, January 2002.
+  The simulation results can be used to diagnose the process                       [19] B. Yang, J. Geunes, and W. O’Brien, “Resource constrained project
+                                                                                        scheduling: Past work and new directions,” University of Florida,
+  steps, which require attention.                                                       Enschede, The Netherlands, Tech. Rep., April 2001.
+     In the alternatives evaluation phase, the proposed new                        [20] R. A. V. Olaguibel and J. M. T. Goerlich, Heuristic Algorithms for
+  model of the process is fed with the new estimated parame-                            Recource-Constrained Project Scheduling: A Review and Empirical
+                                                                                        Analysis, R. Stowinski and J. Weglarz, Eds.           Elsevier Science
+  ters. An analysis of the simulation data will reveal the cycle                        Publishers B. V., 1989.
+  time reduction achieved by the new process.                                      [21] R. S. Pressman, Software Engineering: A Practitioner’s Approach,
+     This paper introduced a method for obtaining the proba-                            6th ed. McGraw-Hill, 2004.
+  bility distribution of the duration of a software development
+  process. The method starts with a description of the pro-
+  cess using the UML notation according to some formation
+  rules (WFP). The simulation is based on the Monte Carlo
+  approach. It starts by sampling one possible instance of
+  WFP, which is then expressed as a Resource Constrained
+  Deterministic Network (RC-DAN). The execution time of the
+  RC-DAN is obtained by scheduling its activities according to
+
+  1-4244-2366-8/©2008 IEEE                                                    134
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:45:15 UTC from IEEE Xplore. Restrictions apply.
+

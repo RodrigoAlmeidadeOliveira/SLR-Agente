@@ -1,0 +1,521 @@
+                  Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+
+
+
+            Cutting the Software Building Efforts in Continuous Integration by
+                       Semi-Supervised Online AUC Optimization∗
+                                         Zheng Xie and Ming Li
+                National Key Laboratory for Novel Software Technology, Nanjing University
+            Collaborative Innovation Center for Novel Software Technology and Industrialization
+                                          Nanjing 210023, China
+                                      {xiez, lim}@lamda.nju.edu.cn
+
+                          Abstract                                       hours for large projects. Since the successful builds do not
+                                                                         provide any guidance on immediate action of the developers,
+     Continuous Integration (CI) systems aim to provide                  most of the build efforts are wasted.
+     quick feedback on the success of the code changes                      In this circumstance, predicting whether a build will pass
+     by keeping on building the entire systems upon                      or fail can help to reduce the building efforts, since we can
+     code changes are committed. However, building                       cut the building efforts on those successful builds and pri-
+     the entire software system is usually resource and                  oritize the resources for the failed builds. Such a task is
+     time consuming. Thus, build outcome prediction                      known as continuous build outcome prediction [Hassan and
+     is usually employed to distinguish the successful                   Zhang, 2006] or continuous defect prediction [Madeyski and
+     builds from the failed ones to cut the building ef-                 Kawalerowicz, 2017]. Efforts have been made on this task,
+     forts on those successful builds that do not result                 e.g., Finlay et al. [2014] and Hassan and Zhang [2006] used
+     in any immediate action of the developer. Never-                    tree-based methods with different group of features for pre-
+     theless, build outcome prediction in CI is challeng-                diction, Ni and Li [2017] used cascaded classifiers to improve
+     ing since the learner should be able to learn from                  the accuracy of finding failed builds.
+     a stream of build events with and without the build                    However, although previous attempts have indicated that
+     outcome labels and provide immediate prediction                     predicting software build outcome is possible and beneficial,
+     on the next build event. Also, the distribution of                  few of them actually construct the learning model that per-
+     the successful and the failed builds are often highly               fectly fits the following characteristics of the CI build out-
+     imbalanced. Unfortunately, the existing methods                     come prediction task:
+     fail to address these challenges well. In this pa-
+     per, we address these challenges by proposing a                       • Streaming data. As the development of the software sys-
+     semi-supervised online AUC optimization method                          tem goes on, every commit would trigger a CI event. The
+     for CI build outcome prediction. Experiments in-                        prediction model is supposed to learn from the series of
+     dicate that our method is able to cut the software                      CI events from scratch and at the same time predict the
+     building efforts by effectively identify the success-                   build outcome for each arrived CI event.
+     ful builds, and it outperforms the existing methods                   • Few build outcome label. Due to the heavy computa-
+     that elaborate to address part of these challenges.                     tional cost for CI builds and limited resources, the build
+                                                                             will be actually conducted on a tiny little portion of the
+                                                                             commits to get the build outcome labels. The learner
+1   Introduction                                                             has to exploit the unlabeled build records for model con-
+Accurately identifying defective modules in software systems                 struction.
+is crucial for software development. Continuous Integration                • Imbalance in build outcomes. In most cases, the devel-
+(CI) [Booch, 1991; Duvall et al., 2007] is an effective mech-                opers will commit the code that are considered as correct
+anism to get quick feedbacks on whether the committed code                   for CI, which makes the builds more likely to success.
+changes are problematic that result in a failure of system                 • Suspiciousness of build event required. To make the
+build. If the committed code fails the build or test, the devel-             build outcome prediction flexible in practice, the suspi-
+opers can be warned immediately so that they can re-check                    ciousness of the outcome prediction for each build event
+or revise the code before plugging the defective code into the               is required, such that the workload of the CI server can
+systems. However, in most cases, the successful builds make                  be configured and adjust as required based on the pro-
+up the majority of the build events, and usually take several                vided suspiciousness.
+   ∗                                                                      These characteristics have place great challenges to the
+     This research was supported by National Key Research and De-
+velopment Program (2017YFB1001903) and NSFC (61422304).                  model construction for CI build outcome prediction. Unfortu-
+
+
+
+
+                                                                  2875
+                  Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+                                                                                                  Feedback
+nately, few existing studies, to our best knowledge, have ever
+address all these challenges simultaneously in model con-
+struction.                                                                                                                   CI Report
+   In this paper, we propose a novel semi-supervised on-                                                                     Build: Fail
+
+line AUC optimization method, named S OLA, for continuous                        Developer   Developer   Developer             xxxxx
+                                                                                                                               xxxxx
+build outcome prediction, which is capable of handling all
+the challenges mentioned above. Optimizing AUC makes the                       Commit    Commit       Commit
+classifier intrinsically insensitive to the imbalanced data, and                                                        Generate
+have the ability of ranking the build events according to the
+suspiciousness. To enable AUC optimization to exploit both
+labeled and unlabeled data in an online situation, we lever-
+age the nature of semi-supervised AUC optimization that the
+unlabeled data can be used without estimating their possible                            Version Control System         Continuous Integration
+labels, and formulate the problem into a saddle point problem                                                                 System
+                                                                                                               Pull Codes
+to solve it online. Experiments show that our method can cut
+the building efforts in CI by accurately identifying the failed                     Figure 1: Continuous Integration Pipeline.
+builds, and outperforms the existing methods that only par-
+tially address the challenges.
+                                                                         cost by improving the unit test in CI. For example, Cam-
+2     Background and Related Work                                        pos et al. [2014] leveraged the historical data to help the
+                                                                         budget allocation among code units and the seeding process
+2.1    Continuous Integration                                            for the test case generation. All existing researches that aim
+Continuous Integration was first proposed by Booch to pre-               to improve the prediction accuracy tried to utilize different
+vent integration problems in extreme programming [Booch,                 machine learning techniques to address different challenges.
+1991]. Together with automated system build and test, it                 However, none of them pointed all of the four challenges in
+can avoid the risk of one developer’s defective work affect-             CI build outcome prediction, and they can only partially ad-
+ing another developer’s copy. Nowadays, CI systems provide               dress the challenges.
+multiple services including testing, deploying, feedback, etc.              A related task of continuous build outcome prediction is
+Besides CI systems like Jenkins and Microsoft Team Founda-               called just-in-time defect prediction, which aims to conduct
+tion Server that can be deployed locally, CI cloud platforms             accurate defect prediction on change level. Just-in-time de-
+like Travis CI have drawn much attention, especially among               fect prediction can also be deployed on CI systems, making
+open-source projects.                                                    predictions after the changes are made with commit infor-
+   A typical continuous integration pipeline is shown in Fig-            mation. Existing researches on just-in-time defect prediction
+ure 1. Once a developer commits his change to the version                mainly focus on building learning pipelines to improve the
+control system, the CI server will pull the latest code and              prediction performance, but do not consider about exploiting
+execute the build script, which usually consist of compila-              the unlabeled data or updating model efficiently and incre-
+tion, testing, inspection, and deployment. The build results             mentally [Kamei et al., 2016; Yang et al., 2017].
+are returned to all the related developers, to help them local-
+ize the software defects. CI saves a lot of human efforts, as            2.2   AUC Optimization
+well as reduces risk, by automatically executing the repetitive          AUC is a widely-used performance measure for classifiers,
+testing and deployment process. According to [Hilton et al.,             especially for problems that are highly imbalanced. Optimiz-
+2016], CI increases the software release frequency by more               ing AUC is a common method to learn classifiers that rank
+than 200%.                                                               the positive data before the negative data. Due to the nature
+   However, a major drawback of using CI is unproductive                 of AUC optimization, it is a suitable way to handle the last
+time [Hilton et al., 2016], that is, the developers have to wait         two challenges, i.e., handling the imbalance and providing
+the CI system’s feedback to determine whether to re-check                the suspiciousness. However, none of the methods of AUC
+the code, which may takes hours to days. In this circum-                 optimization proposed so far can exploit the unlabeled data
+stance, build outcome prediction is employed to distinguish              in an online situation.
+the successful builds from the failed ones to cut the build-                Owing to the non-convexity and discontinuousness of AUC
+ing efforts on those successful builds that do not result in any         risk, many surrogate losses are proposed to simplify the op-
+immediate action of the developer.                                       timization. Gao and Zhou [2015] studied the consistency of
+   Researchers have proposed different approaches for build              the surrogate losses theoretically. For online AUC optimiza-
+outcome prediction. Finlay et al. [2014] used a tree-based               tion, Zhao et al. [2011] first attempted to extend AUC op-
+method with a group of features for build outcome prediction,            timization into online circumstance by maintaining a reser-
+and Hassan and Zhang [2006] used Hoeffding Tree to enable                voir. Later, Gao et al. [2013] proposed a method that main-
+the build outcome prediction in an online circumstance. Ni               tains a covariance matrix to optimize AUC online, and Ying et
+and Li [2017] used cost-sensitive cascaded classifiers to im-            al. [2016] formulated the online AUC optimization problem
+prove the accuracy of finding failed builds and reduce the CI            as a stochastic saddle point problem to solve it with stochastic
+cost. There are also researches attempting to reduce the time            gradient based algorithm.
+
+
+
+
+                                                                  2876
+                 Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+   For AUC optimization in semi-supervised circumstance,                unbiased AUC optimization [Xie and Li, 2018]. With this na-
+Amini et al. [2008] extended the RankBoost algorithm to                 ture, to exploit the unlabeled data, the semi-supervised AUC
+semi-supervised case to learn a ranking function. Fujino and            optimization can be formulated as a minimization problem of
+Ueda [2016] used a generative model based algorithm to ex-              the following loss function consisting of three risk estimators:
+ploit unlabeled data to optimize AUC. Sakai et al. [2018]
+proposed a semi-supervised AUC optimization method by                                 min       γRPN + (1 − γ)(RPU + RNU ) ,            (4)
+                                                                                  ||w||<R
+reweighting the unlabeled data, from a positive-unlabeled
+learning perspective. Xie and Li [2018] proved that in semi-            where γ ∈ [0, 1] is the trade-off parameter of supervised risk
+supervised AUC optimization problem, directly using unla-               and semi-supervised risk, and
+beled data as both positive and negative data can lead to un-                     RPU = E              E    `(w> (x − x00 )) , and      (5)
+biased AUC optimization.                                                                     x∈XP x00 ∈XU
+   Although there are researches that extend the AUC opti-                        RNU = 00 E            E       `(w> (x00 − x0 ))       (6)
+mization into online or semi-supervised learning, none of the                                x ∈XU x0 ∈XN
+researches combines them up since it is difficult to estimate           are semi-supervised risk estimators.
+the distribution of the data when the instances come sequen-               Directly applying Eq. (4) is still not scalable for streaming
+tially. We overcome this obstacle by leveraging the nature              data, but it provides us a way to exploit the unlabeled data
+of semi-supervised AUC optimization that the unlabeled data             without estimating the data distribution. Another obstacle to
+can be used without estimating their possible label [Xie and            extending Eq. (4) into online circumstance is that the risk of
+Li, 2018], and propose the first semi-supervised online AUC             AUC is defined over instance pairs, so it is infeasible to solve
+optimization method.                                                    the problem by directly using stochastic gradient descent. To
+                                                                        overcome this problem, we rewrite Eq. (4) into a saddle point
+3   Semi-Supervised Online AUC Optimization                             problem, and propose an algorithm that can update the model
+To address the continuous build outcome prediction problem,             online by a mini-max procedure.
+in this section, we describe our S OLA (Semi-Supervised On-                We construct the following saddle point problem, which is
+line AUC Optimization) method.                                          equivalent to Eq. (4):
+   Let XP and XN denote the set of failed and successful build                                       γfPN (w, a1 , b1 , α1 )
+events, respectively. Since not all of the build events are ex-            min            max
+                                                                         ||w||<R,       α1 ,α2 ,α3
+ecuted due to the limited computational resources, we also                 a1 ,b1 ,                     + (1 − γ) fPU (w, a2 , b2 , α2 ) (7)
+                                                                           a2 ,b2 ,
+have a set of unlabeled instances, XU . AUC over labeled in-
+                                                                                                                                
+                                                                           a3 ,b3                       + fNU (w, a3 , b3 , α3 ) ,
+stances can be formalized as:
+                                                                        where
+        AUC = 1 − E [ 0 E [`01 (w> (x − x0 ))]] .             (1)
+                     x∈XP x ∈XN                                                       fPN (w, a, b, α) = E[FPN (w, a, b, α; x)] ,
+                                                                                                            x
+And thus the AUC optimization problem can be formulated                               fPU (w, a, b, α) = E[FPU (w, a, b, α; x)] ,
+as an empirical risk minimization problem. With an `2 regu-                                                 x
+larizer, the minimization of AUC risk can be formulated as:                       fNU (w, a, b, α) = E[FNU (w, a, b, α; x)] ,
+                                                                                                            x
+                      min          RPN (w) ,                  (2)       and
+                     ||w||<R
+                                                                                                       nP nN 2
+where                                                                         FPN (w, a, b, α; x) = −          α
+                                                                                                      nP + n N
+            RPN =      E       E     `(w> (x − x0 ))          (3)                                           2
+                                                                                                                          
+                     x∈XP x0 ∈XN                                                   + nN I[x∈XP ] (w> x − a) − 2(1 + α)w> x
+is the supervised (positive vs. negative) AUC risk. Here                                                   2
+                                                                                                                          
+nP and nN are the number of failed and successful build                            + nP I[x∈XN ] (w> x − b) + 2(1 + α)w> x ,
+events, respectively. In practice, we use the square loss                                              nP nU 2
+                2                                                             FPU (w, a, b, α; x) = −          α
+`(z) = (1 − z) instead of the 0-1 loss, because the 0-1 loss
+                                                                                                      nP + n U
+is discrete and difficult to optimize. It has been proved that                                              2
+                                                                                                                          
+the square loss is consistent with AUC risk [Gao and Zhou,                         + nU I[x∈XP ] (w> x − a) − 2(1 + α)w> x
+2015]. The AUC can be regarded as a pairwise ranking loss,                                                 2
+                                                                                                                          
+which makes it naturally suitable for handling imbalanced                          + nP I[x∈XU ] (w> x − b) + 2(1 + α)w> x ,
+data and ranking the build events by suspiciousness.                                                   nU nN 2
+   Since the estimation of the data distribution can be hard                  FNU (w, a, b, α; x) = −          α
+when data comes sequentially, it is difficult to exploit the                                          nU + n N
+                                                                                                            2
+                                                                                                                           
+unlabeled data for online AUC optimization. We try to                              + nN I[x∈XU ] (w> x − a) − 2(1 + α)w> x
+overcome this obstacle by leveraging the nature of semi-                                                                 
+                                                                                                            2
+supervised AUC optimization that optimizing the probability                        + nU I[x∈XN ] (w> x − b) + 2(1 + α)w> x .
+of a randomly drawn positive instance being ranked before a
+randomly drawn unlabeled instance (or an unlabeled instance                Next, we prove the equivalency of Eq. (4) and Eq. (7) and
+being ranked before a negative instance) is equivalent to an            then give the algorithm to solve the Eq. (7).
+
+
+
+
+                                                                 2877
+                       Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+  The proof of the equivalency of Eq. (4) and Eq. (7) is                                                    variables and gradient ascent in the dual variables. The up-
+based on [Ying et al., 2016]. We first prove that RPN =                                                     date rule for the model weight w is:
+min||w||<R,a,b maxα Ex [FPN (w, a, b, α; x)]. The AUC risk
+RPN can be rewritten as:                                                                                                                         ∂FPN (x(t) )
+                                                                                                              w(t+1) ← w(t) − η (t) γ
+                                                                                                                                                    ∂w(t)
+      RPN =           E       E       `(w> (x − x0 ))                                                                                               ∂F      (t)
+                                                                                                                                                                  ∂FNU (x(t) )
+                  x∈XP x0 ∈XN                                                                                                                          PU (x )
+                                                                                                                                   − η (t) (1 − γ)(       (t)
+                                                                                                                                                                +              ),
+              =       E [(w> x)2 ] +                      E [(w> x0 )2 ]−                                                                             ∂w            ∂w(t)
+                  x∈XP                            x0 ∈XN                                                                                                                       (11)
+                  2 E [w> x] + 2 0 E [w> x0 ]−                                                              For other optimization variables, the update rule for FPN is:
+                      x∈XP                        x ∈XN
+
+                  2 E [w> x] 0 E [w> x0 ] + 1                                                                        (t+1)         (t+1)             (t)        (t)               ∂FPN (x(t) )
+                      x∈XP                x ∈XN                                                                   (a1        , b1          ) ← (a1 , b1 ) − η (t) γ                     (t)    (t)
+                                                                                                                                                                                                      ,      (12)
+                                                                                                                                                                                  ∂(a1 , b1 )
+                                                                                        2
+              = 1 + ( E [(w> x)2 ] − ( E [w> x]) )+                                                                                 (t+1)            (t)               ∂FPN
+                          x∈XP                                  x∈XP                                                              α1        ← α1 + η (t) γ                  (t)
+                                                                                                                                                                                  .                          (13)
+                                  >       0 2                             >     0   2                                                                                  ∂α1
+                  ( 0 E [(w x ) ] − ( 0 E [w x ]) )−
+                  x ∈XN                                       x ∈XN                                         The update rule for FPU is:
+                  2 E [w> x] + 2 0 E [w> x0 ]+                                                                                                                                          ∂FPU (x(t) )
+                                                  x ∈XN                                                           (t+1)     (t+1)              (t)        (t)
+                      x∈XP
+                                                                                                              (a2         , b2       ) ← (a2 , b2 ) − η (t) (1 − γ)                           (t)    (t)
+                                                                                                                                                                                                           , (14)
+                                                                          2                                                                                                             ∂(a2 , b2 )
+                  ( E [w> x] −                  0
+                                                  E [w> x0 ]) .
+                  x∈XP                        x ∈XN                                                                              (t+1)        (t)                           ∂FPU
+                                                                                                                            α2           ← α2 + η (t) (1 − γ)                     (t)
+                                                                                                                                                                                        .                    (15)
+Notice that                                                                                                                                                                 ∂α2
+                                                  2
+   E [(w> x)2 ] − ( E [w> x]) = min E [(w> x − a) ] ,
+                                                                                            2               And the update rule for FNU is:
+ x∈XP                     x∈XP                                 a       x∈XP
+                                                                                                                  (t+1)     (t+1)              (t)        (t)                           ∂FNU (x(t) )
+                                                      2
+   E [(w> x0 )2 ] − ( 0 E [w> x0 ]) = min 0 E [(w> x0 − b) ] ,
+                                                                                                 2
+                                                                                                             (a3          , b3       ) ← (a3 , b3 ) − η (t) (1 − γ)                           (t)    (t)
+                                                                                                                                                                                                           , (16)
+ 0
+x ∈XN                     x ∈XN                                    b    x ∈XN                                                                                                           ∂(a3 , b3 )
+                                                                                                                             (t+1)            (t)                           ∂FNU
+where the minimization is achieved by a = Ex∈XP [w> x],                                                                    α3            ← α3 + η (t) (1 − γ)                     (t)
+                                                                                                                                                                                        .                    (17)
+and b = Ex0 ∈XN [w> x0 ]. Also we have                                                                                                                                      ∂α3
+
+                                                          2                                                    The procedure of the algorithm is shown in Algorithm 1. It
+   ( E [w> x] −              0
+                               E [w> x0 ]) =                                                                is noteworthy that even if one of the three types (i.e., positive,
+    x∈XP                  x ∈XN
+                                                                                                            negative, and unlabeled) of data is missing, S OLA can still
+              max 2α( 0 E [w> x0 ] − E [w> x]) − α2 ,                                                       work and learn meaningful models, since it is updated over
+                  α          x ∈XN                             x∈XP
+                                                                                                            single instances.
+the maximization is achieved by α = Ex0 ∈XN [w> x0 ] −
+Ex∈XP [w> x]. Above all, we have                                                                            Algorithm 1 S OLA
+                                                                                                                                               (0)                    (0)               (0)
+        RPN = 1 + min max E[FPN (w, a, b, α; x)] .                                              (8)          1: Initialize t ← 0, nP ← 0, nN ← 0, nU ← 0
+                          ||w||<R,        α       x
+                             a,b                                                                             2: Initialize optimization variables at random
+                                                                                                             3: for each x(t+1) available do
+With a similar proof, we have                                                                                4:     if x(t+1) is a positive labeled instance then
+                                                                                                                                  (t+1)             (t)
+    RPU = 1 + min max E[FPU (w, a, b, α; x)] ,                                                  (9)          5:              nP     ← nP + 1
+                      ||w||<R,        α       x                                                              6:              Update (a1 , b1 , α1 ) by Eq. (12) and Eq. (13)
+                         a,b
+                                                                                                             7:              Update (a2 , b2 , α2 ) by Eq. (14) and Eq. (15)
+    RNU = 1 + min max E[FNU (w, a, b, α; x)] ,                                              (10)             8:         if x(t+1) is a negative labeled instance then
+                      ||w||<R,        α       x
+                         a,b                                                                                                  (t+1)      (t)
+                                                                                                             9:              nN     ← nN + 1
+and thus Eq. (4) equivalent to Eq. (7).                                                                     10:              Update (a1 , b1 , α1 ) by Eq. (12) and Eq. (13)
+   Since function fPN , fPU , and fNU is convex in primal vari-                                             11:              Update (a3 , b3 , α3 ) by Eq. (16) and Eq. (17)
+ables (w, a, b) and concave in dual variable α, Eq. (7) can be                                              12:         if x(t+1) is an unlabeled instance then
+                                                                                                                              (t+1)      (t)
+solved by gradient descent in (w, a1 , b1 , a2 , b2 , a3 , b3 ) and                                         13:              nU     ← nU + 1
+gradient ascent in (α1 , α2 , α3 ). Instead of using a full gra-                                            14:              Update (a2 , b2 , α2 ) by Eq. (14) and Eq. (15)
+dient of fPN , fPU , and fNU , we use the gradient of FPN ,                                                 15:              Update (a3 , b3 , α3 ) by Eq. (16) and Eq. (17)
+FPU , and FNU as an unbiased gradient estimator to update                                                   16:         Calculate w(t+1) by Eq. (11)
+the model with each instance, which can be calculated on ev-                                                17:         if ||w(t+1) || > R then
+ery single instance.                                                                                        18:              w(t+1) ← Rw(t+1) /||w(t+1) ||
+   Each labeled or unlabeled instance effects two of FPN ,
+                                                                                                            19:         t←t+1
+FPU , and FNU . Thus, at each iteration, the gradient of two
+functions should be computed, gradient descent in the primal
+
+
+
+
+                                                                                                     2878
+                     Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+4     Experiments                                                           that irrelevant to the learning like commit ID and build time
+                                                                            are removed. Table 2 shows the features used to build the
+4.1     Datasets                                                            model.
+To conduct continuous build outcome prediction, two source
+of data should be used: continuous integration systems and                  4.2   Compared Methods
+version control systems. The former provides build results                  We compare our method with a number of competing base-
+and the other build information with corresponding commit                   line methods to demonstrate that it is necessary to handle the
+ID, while we can obtain the information about the project,                  four challenges simultaneously. The compared methods are:
+code changes and developers from the latter. Madeyski and
+Kawalerowicz [2017] proposed a dataset for continuous build                   • Hoeffding Tree [Finlay et al., 2014]: a Hoeffding Tree
+outcome prediction, which consists of 1265 open source                          based method for handling streaming data of software
+projects using CI and being hosted on GitHub. Those projects                    build outcome. This method is capable for handling
+use CI services provided by three mainstream CI platforms:                      streaming data, but fails to handle the other three chal-
+Jenkins, Travis CI, and TeamCity. Besides the build records                     lenges.
+with clear outcome label, i.e., success and failure, all of the               • OMR [Goldberg et al., 2008]: a semi-supervised method
+three platforms provide unclear build outcome labels includ-                    that learns from sequential labeled and unlabeled data,
+ing “not build”, “aborted”, “unstable” on Jenkins, “errored”                    by conducting online manifold regularization. It does
+on Travis CI, and “error”, “warning”, “unknown” on Team-                        not take the imbalance of data into consideration, which
+City. Build records with unclear labels are marked as “un-                      may harm the performance.
+known” in the dataset, which can be regarded as unlabeled
+instances during learning process.                                            • SOLAM [Ying et al., 2016]: an online AUC optimiza-
+   The data of different project varies significantly in terms of               tion method. By leveraging AUC optimization, SOLAM
+the total number of build records, the percentage of labeled                    can also handle the imbalanced data, as well as provid-
+records, and the ratio of successful build to failed build. To                  ing the suspiciousness of the build events. However, it
+study the performance of the methods in different cases, we                     cannot exploit the unlabeled data.
+choose 8 projects with different imbalanced ratio and size to                 • S AMULT [Xie and Li, 2018]: a batch semi-supervised
+evaluate our method and compared methods. Projects with                         AUC optimization method. Although it cannot handle
+less than 200 labeled records are not chosen since we have to                   the streaming data and can be ineffective in practice, we
+hold some labeled records out for evaluation. The statistics                    use it as an upper bound reference of our method in the
+of the projects are shown in Table 1. We use the features                       experiments.
+provided in [Madeyski and Kawalerowicz, 2017], as well as
+some other features computed from the commit log. Features                  4.3   Performance
+                                                                            We evaluate the performance of compared methods. For each
+    Project Name       #Success #Failure #Unknown S:F                       project, the last 100 labeled instances are used as test set, and
+                                                                            the instances before the 100th last labeled instance are used
+    deeplearning4j        5          426         422         0.01           as training data. The unlabeled instances after the 100th last
+    capybara             173         185         106         0.94           labeled instance are ignored. We use the AUC as performance
+    killbill             841         332         790         2.53           measure, which reflects the ranking ability of the methods.
+    rails               8,048       2,792        805         2.88           The performance of compared methods are shown in Table 3.
+    codetriage           242         32          15         7.56
+    oryx                 346         40          31         8.65
+    phony                332         29          24         11.45           Compared with the method designed for build outcome
+    stringer             293          9           9         32.56           prediction. S OLA beats Hoeffding Tree on most of the
+                                                                            projects. It is noteworthy that when the data is highly im-
+Table 1: Statistics of the projects. For each project, the numbers of
+                                                                            balanced, e.g., deeplearning4j, phony, stringer, and so on,
+successful, failed, and unknown build records are shown. S:F refers         Hoeffding Tree fails to learn meaningful models, which leads
+to the ratio of successful builds to failed builds.                         to a 0.5 AUC score or lower. When the dataset is relatively
+                                                                            balanced, Hoeffding Tree can learn a reasonable model from
+                                                                            relative sufficient positive and negative data. However, by op-
+    Abbr.      Feature                                                      timizing AUC, S OLA can learn meaningful models whether
+    LBO        Last Build Outcome                                           the data is balanced or not. S OLA achieves 42.1% higher
+    NR         Number of Revisions                                          AUC than Hoeffding Tree on average.
+    NRC        Number of Revised Code Files
+    NML        Number of Modified Lines                                     Compared with the method without imbalance handling.
+    NMLC       Number of Modified Lines in Code Files                       OMR is not designed for imbalance case either, so it fails to
+    NDC        Number of Distinct Committers                                generate meaningful output when the data is highly imbal-
+    NC         Number of Commits                                            anced, just like Hoeffding tree. Only on the relative balanced
+                                                                            projects like capybara and killbill, OMR can learn a reason-
+            Table 2: Used features of each build record.                    able model, but the performance is still poor. S OLA achieves
+
+
+
+
+                                                                     2879
+                   Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+                                                                  Online Methods                                             Batch Method
+      Methods                 Hoeffding Tree             OMR                       SOLAM                  S OLA                 S AMULT
+                                     —                    Semi.                     AUC-Opt.            AUC-Opt./Semi.         AUC-Opt./Semi.
+
+      deeplearning4j               0.429                 0.500†                     0.832                  0.832                  0.848
+      capybara                     0.612                 0.604                      0.718                  0.727                  0.658
+      killbill                     0.692                 0.686                      0.688                  0.688                  0.710
+      rails                        0.531                 0.529                      0.611                  0.616                  0.627
+      codetriage                   0.640                 0.495                      0.648                  0.707                  0.704
+      oryx                         0.500†                0.500†                     0.665                  0.737                  0.757
+      phony                        0.500†                0.500†                     0.808                  0.980                  0.979
+      stringer                     0.500†                0.500†                     0.954                  0.975                  0.975
+      Average                      0.551                 0.539                      0.741                  0.783                  0.782
+
+Table 3: Average AUC of compared methods on different projects. The boldfaces denote the best or comparable methods on each dataset,
+according to pairwise t-test at the significance level 5%. The daggers (†) denote the methods that fail to output any meaningful predictions
+by classifying all instances into one class or assigning them with a same score.
+
+
+45.3% higher AUC than Hoeffding Tree on average. Com-                             Hoeffding
+paring OMR and Hoeffding Tree to S OLA, we can conclude                                Tree
+that AUC optimization is crucial for learning models from                            OMR
+imbalanced data.
+                                                                                   SOLAM
+Compared with the method without exploiting unlabeled
+                                                                                     Sola
+data. Since SOLAM handles imbalance by optimizing
+AUC, it can learn meaningful models in all the projects.                                  0.0%   2.5%   5.0%     7.5%    10.0% 12.5% 15.0%
+S OLA outperforms SOLAM in most of the case due to the
+                                                                            Figure 2: Average relative model updating time of the online models
+unlabeled data. Note that SOLAM achieves comparable per-
+                                                                            w.r.t. the batch method, S AMULT, on rails dataset.
+formance to S OLA on deeplearning4j, killbill, and rails, the
+reason might be there are enough labeled data for learning
+the model. However, by exploiting the unlabeled data, S OLA                 updating process is repeated 100 times to eliminates the im-
+achieves 5.7% improvement than SOLAM on average.                            pact of the randomness. We record the average relative model
+                                                                            updating time of each method w.r.t. the batch method, S A -
+                                                                            MULT , to show how much time is saved by formulating the
+Compared with the batch method. S AMULT is a batch                          continuous build outcome prediction as an online problem.
+method, which can be regarded as a upper bound of proposed                  Due to the space limitation, we only report the results on the
+online method. As shown in Table 3, S OLA achieves simi-                    largest dataset, rails, in Figure 2. Similar trends can be find
+lar performance to S AMULT, which means that S OLA learns                   on the other datasets.
+well from sequential data by just processing each instance                     It can be observed in Figure 2 that S OLA saves more than
+once. However, by leveraging an online updating algorithm,                  97% of the time during model updating, compared with the
+the running time of S OLA is significantly reduced, which is                batch method S AMULT. Only SOLAM achieves a slightly
+discussed in the next subsection.                                           better time consumption than S OLA, since SOLAM simply
+                                                                            dismisses the unlabeled data while S OLA uses them to update
+  In summary, the experimental results show that S OLA out-                 the model. By adopting an online algorithm, much time for
+performs the existing online method by handling imbalanced                  model updating is saved.
+data, learning suspiciousness of the events, and exploit the
+unlabeled data. S OLA also saves significant amount of time                 4.5     Threats to Validity
+by using an online algorithm. Such results suggest that ad-                 We have only evaluated our method on open-source projects,
+dressing four challenges simultaneously in CI build outcome                 and only 8 projects are used. Evaluation on more projects,
+prediction is beneficial.                                                   including closed-source projects may lead to more reliable
+                                                                            results. Also, the projects are all Java projects. In the future,
+4.4    Running Time                                                         we plan to reduce these threats by experimenting on more
+To study the running time reduced by adapting the semi-                     software projects.
+supervised AUC optimization method into an online situa-
+tion, we evaluate the running time of S OLA and other com-                  5     Conclusion
+petitive methods. We update the model every time a new in-                  Continuous build outcome prediction can be applied to cut
+stance arrives, and measure the time of model updating. The                 the effort in Continuous Integration. In this paper, we ar-
+
+
+
+
+                                                                     2880
+                  Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence (IJCAI-18)
+
+gue that four challenges, including streaming data, few build            [Goldberg et al., 2008] Andrew B. Goldberg, Ming Li, and
+outcome label, imbalance in build outcomes, and suspicious-                 Xiaojin Zhu. Online manifold regularization: A new learn-
+ness of build event required, should be properly handled. We                ing setting and empirical study. In Machine Learning
+propose S OLA, a semi-supervised online AUC optimization                    and Knowledge Discovery in Databases, pages 393–407,
+method, to address the continuous build outcome prediction                  Berlin, Heidelberg, 2008.
+problem by handling the four challenges simultaneously. Ex-              [Hassan and Zhang, 2006] Ahmed E. Hassan and Ken
+periments show that S OLA can reduce the building efforts by                Zhang. Using decision trees to predict the certifica-
+accurately identifying the successful and failed builds, and                tion result of a build. In Proceedings of the Twenty-
+outperforms the existing methods in terms of performance                    First IEEE/ACM International Conference on Automated
+and running time.                                                           Software Engineering, pages 189–198, Washington, DC,
+   It is worth mentioning that S OLA is not closely coupled                 2006.
+with the features used in this paper. By using a better group of
+features or features learned by deep models, the performance             [Hilton et al., 2016] Michael Hilton, Timothy Tunnell, Kai
+may be further improved, which may be further explored in                   Huang, Darko Marinov, and Danny Dig. Usage, costs, and
+the future. Besides, S OLA may be adapted to other tasks with               benefits of continuous integration in open-source projects.
+similar settings, such as just-in-time defect prediction.                   In Proceedings of the Thiry-First IEEE/ACM International
+                                                                            Conference on Automated Software Engineering, pages
+                                                                            426–437, New York, New York, 2016.
+References                                                               [Kamei et al., 2016] Yasutaka Kamei, Takafumi Fukushima,
+[Amini et al., 2008] Massih Reza Amini, Tuong Vinh                          Shane McIntosh, Kazuhiro Yamashita, Naoyasu Ubayashi,
+  Truong, and Cyril Goutte. A boosting algorithm for learn-                 and Ahmed E. Hassan. Studying just-in-time defect pre-
+  ing bipartite ranking functions with partially labeled data.              diction using cross-project models. Empirical Software
+  In Proceedings of the Thirty-First Annual International                   Engineering, 21(5):2072–2106, 2016.
+  ACM SIGIR Conference on Research and Development in                    [Madeyski and Kawalerowicz, 2017] Lech Madeyski and
+  Information Retrieval, pages 99–106, 2008.                                Marcin Kawalerowicz. Continuous defect prediction: The
+[Booch, 1991] Grady Booch. Object Oriented Design with                      idea and a related dataset. In Proceedings of the Fourteenth
+  Applications. Benjamin-Cummings Publishing Co., Inc.,                     International Conference on Mining Software Reposito-
+  Redwood City, California, 1991.                                           ries, pages 515–518, Piscataway, New Jersey, 2017.
+                                                                         [Ni and Li, 2017] Ansong Ni and Ming Li. Cost-effective
+[Campos et al., 2014] José Campos, Andrea Arcuri, Gordon
+                                                                            build outcome prediction using cascaded classifiers. In
+  Fraser, and Rui Abreu. Continuous test generation: En-                    Proceedings of the Fourteenth International Conference
+  hancing continuous integration with automated test gener-                 on Mining Software Repositories, pages 455–458, Piscat-
+  ation. In Proceedings of the Twenty-Ninth ACM/IEEE In-                    away, New Jersey, 2017.
+  ternational Conference on Automated Software Engineer-
+  ing, pages 55–66, New York, New York, 2014.                            [Sakai et al., 2018] Tomoya Sakai, Gang Niu, and Masashi
+                                                                            Sugiyama. Semi-supervised AUC optimization based
+[Duvall et al., 2007] Paul Duvall, Stephen M. Matyas, and                   on positive-unlabeled learning.        Machine Learning,
+  Andrew Glover. Continuous Integration: Improving Soft-                    107(4):767–794, 2018.
+  ware Quality and Reducing Risk. Addison-Wesley Profes-
+                                                                         [Xie and Li, 2018] Zheng Xie and Ming Li. Semi-supervised
+  sional, 2007.
+                                                                            AUC optimization without guessing labels of unlabeled
+[Finlay et al., 2014] Jacqui Finlay, Russel Pears, and                      data. In Proceedings of the Thirty-Second AAAI Confer-
+   Andy M. Connor. Data stream mining for predicting                        ence on Artificial Intelligence, 2018.
+   software build outcomes using source code metrics.                    [Yang et al., 2017] Xinli Yang, David Lo, Xin Xia, and Jian-
+   Information and Software Technology, 56(2):183 – 198,                    ling Sun. TLEL: A two-layer ensemble learning approach
+   2014.                                                                    for just-in-time defect prediction. Information and Soft-
+[Fujino and Ueda, 2016] Akinori Fujino and Naonori Ueda.                    ware Technology, 87:206 – 220, 2017.
+   A semi-supervised AUC optimization method with gener-                 [Ying et al., 2016] Yiming Ying, Longyin Wen, and Siwei
+   ative models. In IEEE Sixteenth International Conference                 Lyu. Stochastic online AUC maximization. In Advances
+   on Data Mining, pages 883–888, 2016.                                     in Neural Information Processing Systems 29, pages 451–
+[Gao and Zhou, 2015] Wei Gao and Zhi-Hua Zhou. On the                       459. Curran Associates, Inc., 2016.
+  consistency of AUC pairwise optimization. In Proceed-                  [Zhao et al., 2011] Peilin Zhao, Steven C. H. Hoi, Rong Jin,
+  ings of the Twenty-Fourth International Joint Conference                  and Tianbao Yang. Online AUC maximization. In Pro-
+  on Artificial Intelligence, pages 939–945, 2015.                          ceedings of the Twenty-Eighth International Conference
+                                                                            on International Conference on Machine Learning, pages
+[Gao et al., 2013] Wei Gao, Rong Jin, Shenghuo Zhu, and
+                                                                            233–240, 2011.
+  Zhi-Hua Zhou. One-pass AUC optimization. In Proceed-
+  ings of the Thirtieth International Conference on Machine
+  Learning, volume 28, pages 906–914, 2013.
+
+
+
+
+                                                                  2881
+

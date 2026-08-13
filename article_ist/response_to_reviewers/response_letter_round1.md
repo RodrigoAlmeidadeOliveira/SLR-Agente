@@ -1,6 +1,6 @@
 Response to Reviewer 1
 
-Manuscript: "Process Mining and Stochastic Modeling for Software Process Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol"
+Manuscript: "Process Mining and Stochastic Modeling for Software Process Forecasting: **A Systematic Mapping Study** with an LLM-Assisted Protocol"
 
 We thank the reviewer for a careful and constructive reading of the manuscript. The comments identified real issues in both the reporting and the framing of the study, and we have revised the manuscript accordingly. Below we respond to each point in turn; page/line references are to the revised manuscript.
 
@@ -10,13 +10,12 @@ We thank the reviewer for a careful and constructive reading of the manuscript. 
 
 **Response.** We agree. On reflection, the validation reported in the original submission (Section "LLM-Assisted Screening Methodology") was cross-model — a second LLM (claude-sonnet-4-6) re-rating a stratified sample originally screened by claude-haiku-4-5 — and we did not report an independent human-vs-LLM agreement figure. We have now added:
 
-- An independent human double-screening pass on a stratified random sample of 20% of the title/abstract decisions (n = 468) and 20% of the full-text decisions (n = 177), conducted blind to the LLM's decision (the human rater sees only bibliographic metadata, never the LLM's decision or rationale). Cohen's κ between the human rater and the LLM screener is now reported alongside the pre-existing cross-model κ (Section [X], Table [X]): κ_human-LLM(T/A) = [VALUE], κ_human-LLM(FT) = [VALUE].
-- A manual re-scoring of the quality-assessment rubric (QA1–QA8), performed in the same reading pass as the full-text double-screening for every paper the human rater judged "include" (avoiding a second read of the same paper), with agreement reported against the LLM-assigned scores per criterion (Section [X]).
-- A manual re-extraction of the data-extraction fields most exposed to interpretation risk (research question, PM technique, stochastic technique, software-process phase), on the same sample, with exact-match agreement reported in Section [X].
+- An independent human double-screening pass on a stratified random sample of 20% of the title/abstract decisions (n = 468) and 20% of the full-text decisions (n = 177), conducted blind to the LLM's decision. Cohen's κ between the human rater and the LLM screener is now reported alongside the pre-existing cross-model κ (Section 6.2, Tables `\ref{tab:human-kappa-results}` and `\ref{tab:human-confusion}`): κ_human-LLM(T/A, binary) = **0.335** (fair; multi-class 0.250); κ_human-LLM(FT, binary) = **0.122** (slight). Against the human rater as gold standard, strict Recall = **0.250** (T/A) and **0.246** (FT), with Lost Evidence = **75%** at both stages (Wilson 95% CIs in Table `\ref{tab:human-confusion}`). We report these figures honestly: they do **not** validate the screener at the same level as the cross-model κ (0.695/0.694), and the low FT κ reflects real criteria disagreement (the human rater included 126/177 sample papers vs. 34 LLM includes), not merely prevalence effects.
+- All 54 T/A false negatives in the human sample were LLM **`maybe`** decisions, not hard **`exclude`** decisions. Treating **`maybe`** as a positive referral (LLM4SCREENLIT R6), T/A Recall rises to **1.000** in this sample — confirming that the original EC5-extended closure of uncertain cases, not LLM blindness, drove most T/A Lost Evidence. The revised protocol routes **`maybe`/`pending`** to human review (Section 2.3).
+- Manual re-scoring of QA1–QA8 on the 31 papers included by both human and LLM: per-criterion agreement **67.7–100%**; `qa_total` MAE = **1.19**.
+- Manual re-extraction on the same 31 papers: categorical fields **29–81%** exact-match agreement; free-text fields (**research_question**, **main_finding**, **limitations**) **0%** exact-match — we now interpret F1–F5 fields from abstract-only auxiliary extraction cautiously (Section 6.4).
 
-We have retained the cross-model verification as a complementary, lower-cost signal used during the full working-set screening (where full human double-screening at n = 2,340 was not feasible), but the paper's validity claims now rest primarily on the human-vs-LLM figures above, reported explicitly in Section [X].
-
-*[Nota interna — não incluir na carta final: preencher os valores em colchetes após a leitura humana ser concluída — planilhas já geradas e prontas para preenchimento (`results/human_validation/`), cálculo automático via `python -m pipeline.human_kappa --compute` assim que finalizado.]*
+We retain cross-model verification as a secondary signal from the full working-set run, but validity claims for selection now rest primarily on the human-vs-LLM figures above.
 
 ---
 
@@ -52,7 +51,7 @@ We have also added an explicit statement (Section [X]) explaining why RQ1–RQ3 
 
 **Comment 6.** *PATHCAST is essentially a research agenda rather than a fully verified contribution. [...] Otherwise, it should be framed more cautiously as a future research agenda rather than an empirically validated contribution.*
 
-**Response.** We agree, and we have chosen the more cautious framing rather than attempting to fully formalize PATHCAST within this SLR. The section formerly titled "Positioning of PATHCAST" has been retitled and rewritten to state explicitly, in its opening sentences, that PATHCAST is proposed as an emerging research agenda motivated by the findings (F1–F5), not as a contribution validated in this paper. We have added an explicit statement of what would be required for PATHCAST to mature into a validated framework (formal stage contracts, defined inputs/outputs per stage, an evaluation protocol, and a comparison against existing process-mining-plus-forecasting frameworks), framed as future work rather than as a gap in the current paper's scope. The Research Agenda items (RA1–RA4) have been reworded to read as proposals for the community rather than an implementation roadmap owned by the authors. A full technical specification of PATHCAST remains out of scope for this SLR and is being developed in a separate methodological paper.
+**Response.** We have chosen the more cautious framing. The section is retitled **"PATHCAST as an Emerging Research Agenda"**; RA1–RA4 are tied to F1–F5 with study counts and no longer end with "Maps to Stage N of PATHCAST." A full technical specification remains **future work by the authors**, not companion work cited from this paper.
 
 ---
 

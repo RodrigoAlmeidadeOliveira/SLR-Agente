@@ -1,0 +1,299 @@
+                                          2010 Second WRI World Congress on Software Engineering
+
+
+
+
+                    Simplifying Software Metric Models via Hierarchical LASSO with
+                                       Incomplete Data Samples
+                     Tianfa Xie                                  W. Eric Wong                                        Wenxing Ding
+          College of Applied Sciences                 Department of Computer Science                   China National Institute of Standardization
+        Beijing University of Technology                University of Texas at Dallas                      4 Zhichun Road, Haidian District,
+          Beijing 100124, P.R. China                   Richardson, TX 75083, U.S.A.                           Beijing 100088, P.R. China
+          e-mail: xtianfa@amss.ac.cn                    e-mail: ewong@utdallas.edu                           e-mail: dingwx@cnis.gov.cn
+
+  Abstract—Software metric models can be used in predicting the                     procedures ignore stochastic errors inherited in the stages of
+  interested target software metric(s) for future software project                  variable selections. Hence, their theoretical properties are
+  based on certain related metric(s). However, during the                           somewhat hard to understand. Furthermore, the best subset
+  construction of such a model, incomplete data often appear in                     variable selection suffers from several drawbacks, and the
+  data sample gained from analogous past projects. In addition,
+                                                                                    most severe one is its lack of stability [5]. Recent study shows
+  whether a particular continuous predictor metric or a particular
+  category for a certain categorical predictor metric should be                     that regularized methods such as BRIDGE, LASSO and
+  included in the model must be determined in practice. To solve                    SCAD, are much more favorable in variable selection [6].
+  these problems, this paper introduces a methodology integrating                   They do estimation and variable selection at the same time
+  the k-nearest neighbors (k-NN) multiple imputation method,                        through some constrained optimization criteria. In theory, such
+  kernel smoothing, Monte Carlo simulation, and a latest variable                   method can obtain the true model provided that it was known,
+  selection method. Thus, a more flexible model is constructed. A                   which is called Oracle property [6]. Thus we will take one of
+  case study is given to illustrate the proposed procedures.                        such variable selection approaches instead of stepwise
+                                                                                    regression in this paper.
+    Keywords-software metrics; model simplification; missing data;
+  multiple imputation; variable selection
+                                                                                        As in [2], this paper adopts dummy variables to represent
+                                                                                    categorical predictors. In that way, level combination or
+                                                                                    collapse for categorical predictors turns into dummy variable
+                                   I. INTRODUCTION                                  selection. Thus, both continuous predictor selection and
+      Software metrics are measurements or indications of some                      categorical level combination can be treated simultaneously
+  properties of a software system, its specifications, and/or the                   under the variable selection framework. Moreover, previous
+  software project that developed it. Typical examples are the                      work shows that linear regression often lacks of fit, in other
+  program size of a system (e.g., in number of lines of code), the                  words, produce large prediction error [2]. Scatter plot also
+  number of defects in a system found during initial live-run, the                  indicates that there may be nonlinear relations between target
+  project team size, the project work effort (e.g., in number of                    metric and predictors. It is a good way to include high order
+  person-hours), etc.[1].                                                           polynomial terms of continuous predictors in the regression
+      To explore the possible relationship among these metrics,                     model, because such models make linear regression model as
+  appropriate models have been constructed. All such models                         its sub-model. In the following, variable selection for both
+  are known as software metric models, although other                               continuous and categorical predictors is properly implemented
+  terminologies have also been used. In general, each model                         via adaptive hierarchical LASSO which will be addressed in
+  gives a relationship between a specific target metric (a                          detail in section II.C.
+  dependent variable) and one or more predictor metrics                                 The remainder of this paper is organized as follows. The
+  (independent variables).                                                          new methodology is explained in Section II. Focus goes to
+      Construction of software metric models invariably makes                       hierarchical LASSO (HLASSO). A case study to illustrate the
+  use of data samples of metrics from analogous past projects.                      applicability of this new methodology is given in Section III.
+  Some problems will be encountered, which include incomplete                       Comparison with stepwise regression is also given. Finally,
+  data in data sample, variable selection and level collapse                        the conclusion appears in Section IV.
+  during model construction. Details of such problems are
+  described in [2]. To cope with these problems, maximum                                         II.      THE NEW METHODOLOGY
+  likelihood (ML) method was developed [3], [4], and stepwise
+  regression along with other techniques was also used [2].                            Basically, the new methodology of this paper uses ‘linear’
+  Unfortunately, the ML methods assuming multivariate normal                        regression analysis to determine the relationship of a target
+  distribution of data, which may not be the case for software                      metric (or dependent variable) with one or more predictor
+  metric data samples [4]. Meanwhile, although stepwise                             metrics (or independent variables). The general form of such a
+  deletion and other subset selection procedures are practically                    model is at least initially a regression equation as follows:
+  useful to select significant variables, these selection                                 y = β 0 + β1 x1 + + β p x p + β p +1 x p +1 + + β q xq + ε (1)
+
+
+978-0-7695-4303-1/10 $26.00 © 2010 IEEE                                       161
+                                                                              148
+DOI 10.1109/WCSE.2010.117
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:40:15 UTC from IEEE Xplore. Restrictions apply.
+  where     y is the target metric,                                                 respectively, then this categorical predictor metric is said to
+            x1, …, xp are the continuous predictor metrics,                         have three levels given its being able to take on either one of
+            xp+1, …, xq are the categorical predictor metrics that                  these three values. Two dummy variables can thus be
+            take on values of discrete levels, for example, the                     introduced for this 3-level categorical predictor metric as
+            categorical predictor metric “development type”                         follows:
+            taking on values 1, 2, and 3 which correspond to                                            ⎧⎪1 if x p +1 = 2
+                                                                                             x p +1,1 = ⎨
+            “enhancement,”          “new   development,”      and                                        ⎪⎩0 otherwise
+            “redevelopment,” respectively,
+                                                                                                         ⎧⎪1 if x p +1 = 3
+            β0, β1, …, βq are the regression coefficients to be                               x p +1,2 = ⎨
+            estimated during the model construction, and                                                  ⎪⎩ 0 otherwise
+            ε is the error term.                                                    In other words, ( x p +1,1 , x p +1,2 ) = (0, 0) if xp+1 = 1, which is often
+                                                                                    referred to as the base level. Assuming that in general,
+  A. The k-NN Multiple Imputation                                                   categorical predictor metric xj takes on values (or levels) 1, 2,
+      Since regression model needs complete data, incomplete                        …, nj for j = p + 1, p + 2, …, q, that is to say, xj has nj levels,
+  data in data samples that are used to construct software metric                   by introducing nj - 1 dummy variables for xj , (1) is
+  models should first be tackled. The same k-NN multiple                            reformulated as the following regression equation:
+  imputation method is implemented as [7].                                             y = β 0 + β1 x1 + + β p x p
+      By independently sampling from estimated density                                    + β p +1,1 x p +1,1 +        + β p +1, n p+1 −1 x p +1, nP+1 −1   (2)
+  function for any missing continuous metric in any incomplete
+  observation and by independently sampling from estimated                                +
+  distribution function for any missing categorical metric in any                         + β q ,1 xq ,1 +        + β q , nq −1 xq , nq −1 + ε
+  incomplete observation, a Monte Carlo simulation is actually
+  done to generate a large number of, say, N “completed” data                       Where x       ⎧1 if x j = k + 1 for j = p + 1, p + 2, …, q,
+                                                                                                =⎨
+                                                                                                j ,k
+  samples. These N “completed” data samples are the same as                                       ⎩0 otherwise
+  the original data sample but with the missing metrics filled in                   k = 1, 2, …, nj - 1 and β p+1,1, , β p+1,n −1, , βq,1, , βq,n −1 are the
+  through such sampling. For each of these N “completed” data                                                                                    p+1        q
+
+
+  samples, HLASSO variable selection is applied to simplify (1)                     new regression coefficients to be estimated during the model
+  by omitting redundant predictor metric(s) and combining                           construction. For certain continuous predictor metrics xl for l =
+  categories for categorical predictor metrics. The details of                      1, 2, …, p or dummy variables xj,k for j = p + 1, p + 2, …, q
+  such variable selection method are left to Section II.C.                          and k = 1, 2, …, nj - 1 may not matter to the target metric y
+                                                                                    with sufficiently high statistical significance, the equation (2)
+                                                                                    can be simplified. If that happens to continuous predictor
+  B. Most Probable Multinomial Event Selection and the                              metric xl for l = 1, 2, …, p, then xl should be omitted from (2) .
+      Sequential Procedure                                                          If that happens to dummy variable xj,k for j = p + 1, p + 2, …, q
+      Now that the new methodology is to generate N different                       and k = 1, 2, …, nj - 1, this means that categorical variable xj
+  “completed” data samples to which HLASSO is applied, such                         taking on the value (or level) k + 1 is not distinguishable from
+  data samples could result in probably different and conflicting                   its taking on the value (or level) 1 or its base level, and thus
+  selection results, each being characterized by omitting                           these two levels can be combined. In this way, (2) can be
+  different redundant predictor metric(s) and combining                             simplified to some extent.
+  different categories for the categorical predictor metrics. The                      Note that in regression equations (2), some of the
+  problem now is how to select the most possibly optimal result                     explanatory variables are factors where each factor may be
+  out of, say, m different HLASSO selection results. This can be                    represented by a group of dummy variables. The dummy
+  solved by most probable multinomial event selection                               variables associated with a factor are called as grouped
+  procedure. Details of the procedure are omitted here.                             variable.      ( x p +1,1 ,       , x p +1,nP+1 −1 ) and ( x1 , x12 ,   , x1d ) are
+  Interested readers please refer to [2].
+                                                                                    examples of grouped variable. For the regression with group
+                                                                                    predictors such as in ANOVA or the additive model with
+  C. Variable Selection by HLASSO                                                   polynomial components, several recent papers have
+     Prior to the application of variable selection to each of the                  considered selecting important groups of variables using
+  N “completed” data samples generated by the k-NN multiple                         penalized methods, see [8] and references therein. These
+  imputation method, dummy variables are introduced into (1)                        papers only considered group selection, but did not address the
+  to replace the categorical predictor metrics therein. For                         question of individual selection within groups. In our
+  example, if categorical predictor metric xp+1 in (1) actually                     regression model, we also want to select the variable within
+  represents the categorical predictor metric “development type”                    the groups, especially for the dummy variables representing
+  such that xp+1 = 1, 2, and 3 when the “development type” is                       categorical predictors. Fortunately, to our knowledge, Huang
+  “enhancement,” “new development,” and “redevelopment”                             et al. proposed group BRIDGE [9] and Zhou and Zhu [10]
+
+
+
+
+                                                                              162
+                                                                              149
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:40:15 UTC from IEEE Xplore. Restrictions apply.
+  developed Hierarchical LASSO to tackle this issue. There are                                              1 n             K     pk
+
+  some similarities between these two papers. For ease of                                  m ax
+                                                                                           d k ,α k j
+                                                                                                        −     ∑
+                                                                                                            2 i =1
+                                                                                                                   ( y i − ∑ d k ∑ α kj x i ,kj ) 2
+                                                                                                                           k =1  j =1
+  understanding and implement, HLASSO is introduced in detail
+  and used afterward.                                                                                        K               K     pk
+
+    We assume that the prediction variables can be divided into                                         − ∑ d k − λ ∑ ∑ | α kj | ,                      (5 )
+                                                                                                            k =1            k =1   j =1
+  K groups and the k-th group contains pk variables.
+                                                                                           s u b je c t to         d k ≥ 0 , k = 1, … , K ,
+  When pk = 1, k = 1, 2,… , K , it is to say that there is no
+                                                                                    To estimate the d k and α kj in (5), the iterative algorithm is
+  group structure in prediction metrics. Specifically, the linear
+  model (2) is now written as                                                       given in [10]. The adaptive idea in [11] can be used to
+                                 K    pk                                            improve the HLASSO method. For choosing the tuning
+                  y = β 0 + ∑∑ β kj xkj + ε                (3)                      parameter λ in (5), cross validation is often used. Thanks
+                                 k =1 j =1                                          professor Zhu, adaptive HLASSO is readily implemented by
+                                                                                    his codes written by free statistical software R [12].
+  where ( x11,…, x1p1 ), (x21,…, x2 p2 ), …, ( xK1,…, xKpK ) are all K
+  group variables which may stand for a single variable or a
+  single variable with its polynomial terms to certain order or                                                     III.      A CASE STUDY
+  dummy variables corresponding to a categorical predictor. We                          The data sample used in this case study is the “Repository
+  are interested in finding out which variables, especially which                   Data Disk-Release 9” which is from the International Software
+  “groups,” have an important effect on the response. If we find                    Benchmarking Standards Group (ISBSG). It is recognized as
+  that k-th group is important, we are further interested in which                  one of the most comprehensive, reliable, systematic and
+  variables in this group are important.                                            representative data samples of its kind [13], [14], [15]. This
+     For equation (3), reparamterize β kj as                                        data sample consists of 100 metrics for a collection of 3024
+                                                                                    software projects. However, most of these metrics suffer from
+              β kj = d kα kj , k = 1,…, K ; j = 1,…, pk                             incomplete data for some of the projects.
+  where d k ≥ 0 . This decomposition reflects the information                           The data sample was used to construct a software quality
+                                                                                    metric model. Table 1 gives the details of the target metric y
+  that β kj , j = 1,… , pk all belong to the k-th group, by treating                and all predictor metrics x1, x2, …, x5 included in this software
+                                                                                    quality metric model which initially is in the form of (1). The
+  each   β kj hierarchically. d k is at the first level of the                      five predictor metrics x1, x2, …, x5 were initially selected based
+  hierarchy, controlling β kj , j = 1, … , pk , as a group; α kj ’s                 on [15]. Please note that in order to demonstrate the usefulness
+                                                                                    of the new methodology of this paper, this case study added
+  are at the second level of the hierarchy, reflecting differences                  the predictor metrics x3 which, from the authors’ experience-
+  within the k-th group. For the purpose of variable selection,                     based intuition, is evidently redundant for models of similar
+  the following penalized least squares criterion is considered:                    purposes.
+                                         pk
+                    1 n           K
+         m ax − ∑ ( y i − ∑ d k ∑ α kj x i , kj ) 2                                 TABLE I.      THE TARGET AND PREDICTOR METRICS OF THE SOFTWARE
+         d k ,α k j 2 i =1       k =1   j =1                                        QUALITY METRIC MODEL
+                           K                 K     pk
+                    − λ1 ∑ d k − λ 2 ∑ ∑ | α kj | ,              (4)                          Name of Metric                          Description
+                          k =1               k =1 j =1
+                                                                                      y       Extreme defects        Extreme defects reported in the first month of
+                                                                                                                        software use. The only target metric or
+         sub ject to        d k ≥ 0, k = 1, … , K ,                                                                              dependent variable.
+                                                                                      x1        Major defects         Major defects reported in the first month of
+  Where λ1 ≥ 0 and λ2 ≥ 0 are tuning parameters. λ1 controls                                                                         software use.
+  the estimates at the group level, and it can effectively remove                     x2        Minor defects         Minor defects reported in the first month of
+                                                                                                                                     software use.
+  unimportant groups: if d k is shrunken to zero, all β kj in the                     x3        User base –         Number of physical locations being served by
+                                                                                                 locations                  the installed software system.
+  k-th group will be equal to zero. λ2 controls the estimates at                      x4      Function points             The adjusted function point count.
+                                                                                      x5     Development type          Specifies whether the development is an
+  the variable-specific level: if d k is not equal to zero, some of                                                       enhancement, new development, or
+                                                                                                                        redevelopment. Three categories: 1 for
+  the α kj hence some of the β kj , j = 1,… , pk , still have the                                                   “enhancement,” 2 for “new development,” and
+                                                                                                                               3 for “ redevelopment”
+  possibility of being zero; in this sense, the hierarchical penalty
+  keeps the flexibility of the L1-norm penalty. It is proved that                      In order to make the result more reliable, the data sample
+                                                                                    was preprocessed as in [2]. Thus, there were only 669
+  that the two tuning parameters λ1 and λ2 in (4) can be                            observations left.
+  simplified into one. Specifically, let λ = λ1 ⋅ λ2 , (4) is                          Therefore, corresponding to (5), the new methodology
+                                                                                    reformulates the following regression equation.
+  equivalent to
+
+
+
+
+                                                                              163
+                                                                              150
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:40:15 UTC from IEEE Xplore. Restrictions apply.
+       y = β 0 + β1,1 x1,1 + β1,2 x1,2 + β1,3 x1,3                                       also highlights the usefulness of this new methodology.
+            + β 2,1 x2,1 + β 2,2 x2,2 + β 2,3 x2,3
+                                                                       (6)                                     ACKNOWLEDGMENTS
+            + β 3,1 x3,1 + β 3,2 x3,2 + β 3,3 x3,3
+            + β 4,1 x4,1 + β 4,2 x4,2 + β 4,3 x4,3                                        We greatly appreciate Professor Victor K. Y. Chan's
+                                                                                         insightful ideas and financial support from the Science and
+            + β 5,1 x5,1 + β 5,2 x5,2 + ε                                                Technology Development Fund of the Government of the
+  where        xi , j = xi j , i = 1,    , 4; j = 1, 2,3 ,                               Macao Special Administrative Region (No. 045/2005/A),
+                                                                                         Specialized Research Fund for the Doctoral Program of
+                   ⎧1 if x5 = 2 and            ⎧1 if x5 = 3 .                            Higher Education (No. 20091103120012) and National
+            x5,1 = ⎨                    x5,2 = ⎨
+                   ⎩ 0 otherwise               ⎩0 otherwise                              Natural Science Foundation of China (No. 10971007).
+      Stepwise regression and HLASSO variable selection are
+  used respectively. For both methods, we set k = 5 and use the
+                                                                                                                     REFERENCES
+  Epanechnikov kernel function [16] in the k-NN density
+  estimation, and the bandwidth h = 5-0.2 = 0.72478. The values                          [1]  Y. Zhou and H. Leung, “Empirical Analysis of Object-Oriented Design
+                                                                                              Metrics for Predicting High and Low Severity Faults,” IEEE Trans.
+  of P* and θ* for the sequential procedure [17] were set to 0.99                             Software Eng., vol. 32, no. 10, pp. 771-789, Oct. 2006.
+  and 1.005 respectively which guarantee a confidence level of                           [2] Tianfa Xie and W. Eric Wong, An Improved Method to Simplify Metric
+  correct selection at 99% which is practically high enough.                                  Models Constructed with Incomplete Data Samples, IEEE computer
+  Likewise, θ* = 1.005 is practically small enough. Upon                                      society, Fuzzy Systems and knowledge discovery 2010,1682-1687.
+                                                                                         [3] I. Myrtveit, E. Stensrud, and U.H. Olsson, “Analyzing Data Sets with
+  generating N = 2000 “completed” and using the notations as                                  Missing Data: An Empirical Evaluation of Imputation Methods and
+  [2], then Y[m]N to Y[m-3]N are shown in the following Table II.                             Likelihood-Based Methods,” IEEE Trans. Software Eng., vol. 27, no.
+                                                                                              11, pp. 999-1013, Nov. 2001.
+  TABLE II.          Y[M]N TO Y[M-3]N FOR THE SOFTWARE QUALITY METRIC MODEL              [4] V. Chan and W. E. Wong, “Optimizing and Simplifying Software Metric
+                                                                                              Models Constructed Using Maximum Likelihood Methods,” Proc. 29th
+                         Y[m]N                Y[m-1]N        Y[m-2]N     Y[m-3]N              IEEE Int’l Computer Software and Applications Conf., pp. 65-70,
+  Stepwise               799                     1             0           0                  Edinburgh, UK, Jul. 2005.
+                                                                                         [5] Breiman, L. (1996), “Heuristics of Instability and Stabilization in Model
+  HLASSO                 748                    29             15          7                  Selection,” The Annals of Statistics, 24, 2350–2383.
+                                                                                         [6] Fan, J., and Li, R. (2001), “Variable Selection via Nonconcave Penalized
+    The following summarizes the selection results of stepwise                                Likelihood and Its Oracle
+                                                                                              Properties,” Journal of the American Statistical Association, 96, 1348–
+  regression and HLASSO that corresponds to Y[m]N in Table II.
+                                                                                              1360.
+  Common result is                                                                       [7] Victor K.Y. Chan, W. Eric Wong, and T.F. Xie, “A Statistical
+       • The continuous predictor metrics “User base –                                        Methodology to Simplify Software Metric Models Constructed Using
+            location” (x3) should be omitted.                                                 Incomplete Data Samples: Its Procedure and Two Case Studies,”
+                                                                                              International Journal of Software Engineering and Knowledge
+       • The categories “enhancement” (1) and “new                                            Engineering, vol. 17, no. 6, pp. 689-707, 2007.
+            development” (2) for the categorical predictor metric                        [8] Zhao, P, Rocha, G. and Yu, B. (2006). Grouped and hierarchical model
+                                                                                              selection through composite absolute penalties. Annals of Statistics (to
+            “development type” (x5) should be combined.                                       appear).
+    The difference is for “Function points” (x4), in stepwise all                        [9] Jian Huang et. al. “A group bridge approach for variable selection” ,
+  three terms are reserved while for HLASSO only second order                                 Biometrika 2009 96(2):339-355
+                                                                                         [10] Zhou, N. and Zhu, J. (2007) Group variable selection via a hierarchical
+  is retained.                                                                                lasso and its oracle property. Unpublished manuscript.
+      We also report the comparison results for different selected                            http://arxiv.org/abs/1006.2871
+  models by estimated mean square error (MSE) and mean                                   [11] Zou, H. (2006), “The Adaptive Lasso and Its Oracle Properties,” Journal
+  relative error (MRE) through K-fold Cross Validation.                                       of the American Statistical Association, 101, 1418–1429.
+                                                                                         [12] W.N. Venables and B.D. Ripley, Modern Applied Statistics with S. New
+                                                                                              York: Springer, 2002.
+  TABLE III.       ERRORS FOR FINAL MODEL GAINED BY STEPWISE OR HLASSO
+                                                                                         [13] I. Myrtveit, E. Stensrud, and U.H. Olsson, “Assessing the Benefits of
+                                                                                              Imputing ERP projects with Missing Data,” Proc. 7th IEEE Int’l
+       Type of error           MSE                MRE
+                                                                                              Software Metrics Symp., pp. 78-84, London, UK, Apr. 2001.
+         Stepwise           73.86343            522744.1                                 [14] R. Jeffery, M. Ruhe, and I. Wieczorek, “Using Public Domain Metrics to
+         HLASSO             71.50511            432703.1                                      Estimate Software Development Effort,” Proc. 7th IEEE Int’l Software
+     MRE is much large here for both methods. This may lies in                                Metrics Symp., pp16-27, London, UK, April 2001.
+                                                                                         [15] B.J. Milne and K.B.G. Luxford, Worldwide Software Development: the
+  that for those dependent metric “Extreme defects” whose true                                Benchmark, Release 5. Warrandyte, Australia: International Software
+  values are zero, a very small constant say 10−6 was used as                                 Benchmarking Standards Group Limited, 1998.
+  denominator instead of zero.                                                           [16] J. Simonoff, Smoothing Methods in Statistics. New York: Spring-
+                                                                                              Verlag, 1996.
+                                        IV.        CONCLUSION                            [17] D. Goldsman, S.-H. Kim, and B.L. Nelson, “Statistical Selection of the
+                                                                                              Best System,” Proc. 2005 Winter Simulation Conf., pp. 178-187, M.E.
+    This paper introduces a more flexible model and integrates                                Kuhl, N.M. Steiger, F.B. Armstrong, and J.A. Joines, eds,2005.
+  a more advanced variable selection method. The case study
+  shows that it performs better than stepwise regression. This
+
+
+
+
+                                                                                   164
+                                                                                   151
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:40:15 UTC from IEEE Xplore. Restrictions apply.
+

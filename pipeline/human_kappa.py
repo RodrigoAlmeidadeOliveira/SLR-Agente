@@ -50,6 +50,7 @@ TA_ANSWER_KEY = ANSWER_KEY_DIR / "ta_answer_key.csv"
 FT_ANSWER_KEY = ANSWER_KEY_DIR / "ft_qa_extraction_answer_key.csv"
 HUMAN_KAPPA_REPORT_TXT = HUMAN_DIR / "human_kappa_report.txt"
 HUMAN_KAPPA_REPORT_TEX = HUMAN_DIR / "human_kappa_report.tex"
+HUMAN_CONFUSION_REPORT_TEX = HUMAN_DIR / "human_confusion_report.tex"
 
 QA_FIELDS = [f"QA{i}" for i in range(1, 9)]
 EXTRACTION_FIELDS = [
@@ -245,6 +246,88 @@ def build_sheets() -> None:
     logger.info(f"Instructions: {HUMAN_DIR / 'README.md'}")
 
 
+def _wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float | None, float | None]:
+    if n == 0:
+        return None, None
+    from math import sqrt
+
+    p = k / n
+    den = 1 + z**2 / n
+    centre = (p + z**2 / (2 * n)) / den
+    half = z * sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / den
+    return centre - half, centre + half
+
+
+def _mcc(tp: int, fp: int, fn: int, tn: int) -> float | None:
+    from math import sqrt
+
+    num = tp * tn - fp * fn
+    den = sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
+    return None if den == 0 else num / den
+
+
+def _wmcc(tp: int, fp: int, fn: int, tn: int, fn_cost: int = 10) -> float | None:
+    """Weighted MCC: weight false negatives by fn_cost (LLM4SCREENLIT-style cost ratio)."""
+    return _mcc(tp, fp, fn_cost * fn, tn)
+
+
+def _llm_positive(decision: str, maybe_as_include: bool = False) -> bool:
+    d = str(decision).strip().lower()
+    if maybe_as_include:
+        return d in ("include", "maybe", "pending")
+    return d == "include"
+
+
+def _human_positive(decision: str) -> bool:
+    return str(decision).strip().lower() == "include"
+
+
+def _confusion_matrix(y_llm, y_human, maybe_as_include: bool = False) -> dict:
+    tp = fp = fn = tn = 0
+    for llm_d, human_d in zip(y_llm, y_human):
+        lp = _llm_positive(llm_d, maybe_as_include)
+        hp = _human_positive(human_d)
+        if lp and hp:
+            tp += 1
+        elif lp and not hp:
+            fp += 1
+        elif not lp and hp:
+            fn += 1
+        else:
+            tn += 1
+    n = tp + fp + fn + tn
+    rec_denom = tp + fn
+    recall = tp / rec_denom if rec_denom else None
+    rec_ci = _wilson_ci(tp, rec_denom) if rec_denom else (None, None)
+    lost = (1 - recall) if recall is not None else None
+    return {
+        "tp": tp, "fp": fp, "fn": fn, "tn": tn, "n": n,
+        "recall": recall, "lost": lost, "rec_ci": rec_ci,
+        "mcc": _mcc(tp, fp, fn, tn),
+        "wmcc_10": _wmcc(tp, fp, fn, tn, 10),
+    }
+
+
+def _report_confusion(name: str, y_llm, y_human, lines: list[str],
+                     maybe_as_include: bool = False) -> dict:
+    cm = _confusion_matrix(y_llm, y_human, maybe_as_include)
+    label = f"{name} (LLM maybe/pending as include)" if maybe_as_include else name
+    lines.append(f"[{label}] confusion matrix (human = gold standard, counts not %):")
+    lines.append(f"  TP={cm['tp']}  FP={cm['fp']}  FN={cm['fn']}  TN={cm['tn']}  (n={cm['n']})")
+    if cm["recall"] is not None:
+        lo, hi = cm["rec_ci"]
+        lines.append(
+            f"  Recall={cm['recall']:.3f}  95% Wilson CI=({lo:.3f}, {hi:.3f})"
+        )
+        lines.append(f"  Lost Evidence (1-Recall)={cm['lost']:.3f}  ({cm['fn']}/{cm['tp']+cm['fn']} human-relevant missed)")
+    mcc_s = f"{cm['mcc']:.3f}" if cm["mcc"] is not None else "n/a"
+    wmcc_s = f"{cm['wmcc_10']:.3f}" if cm["wmcc_10"] is not None else "n/a"
+    lines.append(f"  MCC={mcc_s}")
+    lines.append(f"  WMCC (FN:FP=10:1)={wmcc_s}")
+    lines.append("")
+    return cm
+
+
 def _report_binary_and_multiclass(name: str, y_llm, y_human, lines: list[str]) -> tuple[str, str]:
     k, info = _kappa(y_llm, y_human)
     lines.append(f"[{name}] n={info.get('n', 0)}")
@@ -269,6 +352,7 @@ def compute() -> None:
              "Primary screener (rater 1): claude-haiku-4-5-20251001",
              "Independent rater 2:        human (blind double-screening)", ""]
     tex_rows = []
+    confusion_tex_rows = []
 
     if not TA_SHEET.exists() or not TA_ANSWER_KEY.exists():
         lines.append("[TA] sheet or answer key missing; run --build-sheets first")
@@ -285,9 +369,22 @@ def compute() -> None:
         else:
             if len(valid) < n_total:
                 lines.append(f"[TA] WARNING: only {len(valid)}/{n_total} rows filled — partial result")
-            multi, binary = _report_binary_and_multiclass(
-                "TA", valid["ta_decision"].tolist(), valid["human_ta_decision"].tolist(), lines)
+            y_llm = valid["ta_decision"].tolist()
+            y_human = valid["human_ta_decision"].tolist()
+            multi, binary = _report_binary_and_multiclass("TA", y_llm, y_human, lines)
             tex_rows.append(f"T/A & {len(valid)} & {multi} & {binary} \\\\")
+            cm = _report_confusion("TA strict include", y_llm, y_human, lines, maybe_as_include=False)
+            cm_maybe = _report_confusion("TA", y_llm, y_human, lines, maybe_as_include=True)
+            lo, hi = cm["rec_ci"]
+            confusion_tex_rows.append(
+                f"T/A (strict) & {cm['tp']} & {cm['fp']} & {cm['fn']} & {cm['tn']} "
+                f"& {cm['recall']:.3f} & ({lo:.3f}, {hi:.3f}) & {cm['lost']:.3f} \\\\"
+            )
+            lo_m, hi_m = cm_maybe["rec_ci"]
+            confusion_tex_rows.append(
+                f"T/A (maybe$\\rightarrow$pos.) & {cm_maybe['tp']} & {cm_maybe['fp']} & {cm_maybe['fn']} & {cm_maybe['tn']} "
+                f"& {cm_maybe['recall']:.3f} & ({lo_m:.3f}, {hi_m:.3f}) & {cm_maybe['lost']:.3f} \\\\"
+            )
 
     if not FT_SHEET.exists() or not FT_ANSWER_KEY.exists():
         lines.append("[FT] sheet or answer key missing; run --build-sheets first")
@@ -304,9 +401,16 @@ def compute() -> None:
         else:
             if len(valid) < n_total:
                 lines.append(f"[FT] WARNING: only {len(valid)}/{n_total} rows filled — partial result")
-            multi, binary = _report_binary_and_multiclass(
-                "FT", valid["ft_decision"].tolist(), valid["human_ft_decision"].tolist(), lines)
+            y_llm = valid["ft_decision"].tolist()
+            y_human = valid["human_ft_decision"].tolist()
+            multi, binary = _report_binary_and_multiclass("FT", y_llm, y_human, lines)
             tex_rows.append(f"FT & {len(valid)} & {multi} & {binary} \\\\")
+            cm = _report_confusion("FT", y_llm, y_human, lines, maybe_as_include=False)
+            lo, hi = cm["rec_ci"]
+            confusion_tex_rows.append(
+                f"FT & {cm['tp']} & {cm['fp']} & {cm['fn']} & {cm['tn']} "
+                f"& {cm['recall']:.3f} & ({lo:.3f}, {hi:.3f}) & {cm['lost']:.3f} \\\\"
+            )
 
             both_include = valid[(valid["human_ft_decision"] == "include") & (valid["ft_decision"] == "include")]
             lines.append(f"[QA] {len(both_include)} papers included by both human and LLM — QA/extraction comparison base")
@@ -354,6 +458,25 @@ def compute() -> None:
            "Stage & $N$ & $\\kappa_{\\text{multi}}$ (interpretation) & $\\kappa_{\\text{binary}}$ (interpretation) \\\\",
            "\\midrule", *tex_rows, "\\bottomrule", "\\end{tabular}", "\\end{table}"]
     HUMAN_KAPPA_REPORT_TEX.write_text("\n".join(tex), encoding="utf-8")
+
+    if confusion_tex_rows:
+        conf_tex = [
+            "\\begin{table}[htbp]", "\\centering",
+            "\\caption{Human-vs-LLM confusion matrices on a stratified random 20\\% sample "
+            "(human rater as gold standard; counts, not percentages). "
+            "Recall and Lost Evidence (1$-$Recall) use Wilson 95\\% confidence intervals. "
+            "The T/A row labelled ``maybe$\\rightarrow$positive'' treats LLM \\texttt{maybe} "
+            "decisions as positive referrals, matching LLM4SCREENLIT~R6.}",
+            "\\label{tab:human-confusion}",
+            "\\small", "\\setlength{\\tabcolsep}{3pt}",
+            "\\begin{tabular}{l rrrr c c c}",
+            "\\toprule",
+            "Stage & TP & FP & FN & TN & Recall & 95\\% CI & Lost Ev. \\\\",
+            "\\midrule", *confusion_tex_rows, "\\bottomrule",
+            "\\end{tabular}", "\\end{table}",
+        ]
+        HUMAN_CONFUSION_REPORT_TEX.write_text("\n".join(conf_tex), encoding="utf-8")
+        logger.info(f"Confusion report saved: {HUMAN_CONFUSION_REPORT_TEX}")
 
     print("\n".join(lines))
     logger.info(f"Reports saved: {HUMAN_KAPPA_REPORT_TXT}, {HUMAN_KAPPA_REPORT_TEX}")

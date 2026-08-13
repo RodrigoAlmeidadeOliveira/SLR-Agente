@@ -1,0 +1,150 @@
+Predicting the Release Time Based on a Generalized
+        Software Reliability Model (GSRM)
+
+                   Kiyoshi Honda                               Hironori Washizaki                           Yoshiaki Fukazawa
+                Waseda University                             Waseda University                            Waseda University
+                   Tokyo, Japan                                  Tokyo, Japan                                 Tokyo, Japan
+           Email: khonda@ruri.waseda.jp                   Email: washizaki@waseda.jp                   Email: fukazawa@waseda.jp
+
+
+    Abstract—Development environments have changed drastical-              versions, and apply our model(GSRM). The reason for sepa-
+ly, development periods are shorter than ever and the number               rating them is to approximate GSRM more precisely and treat
+of team members has increased. Especially in open source                   more naturally. and predict the release dates and the numbers
+software(OSS), a large number of developers contribute to OSS.             of issues.
+OSS have difficulties in predicting or deciding when it will release.
+In order to assess recent software developments, we proposed
+a generalized software reliability model (GSRM) based on a
+stochastic process, and compared GSRM with other models. In
+this paper, we focus on the release dates of OSS and the growth
+of faults(issues).
+
+                        I.   I NTRODUCTION
+    Software reliability is a critical component of computer
+system availability. Software reliability growth models can
+be used as an indication of whether enough faults have
+been removed to release the software. The logistic curve
+and Gompertz curve[4] are well-known software reliability
+growth curves. However, these curves cannot account for the
+dynamics of software development. Developments are affected
+by various elements of the development environment, such as
+the skills of the development team and changing requirements.
+    Here, we propose a model (GSRM) that can describe                      Fig. 1.   The number of issues and development days about ”foundation.”
+several development situations that involve random factors,
+such as the skills of teams and development environments,
+to provide a time range in which the development will end.                 B. Generalized Software Reliability Model
+Earlier studies only use linear stochastic differential equations;
+                                                                               For our software reliability model, we extend a nonlinear
+however, our research indicates that non-linear stochastic dif-
+                                                                           differential equation that describes fault content as a logistic
+ferential equations lead to more elaborate equations that can
+                                                                           curve to an Ito type stochastic differential equation. We start
+model situations more realistically. Moreover, we aim to reveal
+                                                                           with the following equation, which is called the logistic
+the development of open source software(OSS).
+                                                                           differential equation.
+                    II. P ROPOSAL METHOD
+    We focus on the determination when OSS release in the                                     dN (t)/dt = N (t)(a + bN (t))                      (1)
+point of view of the growth of issues. Especially we use two               N (t) is the number of detected faults by time t, a defines
+methods which are below.                                                   the growth rate, and b is the carrying capacity. If b = 0, then
+      A. Separating development terms into each versions.                  the solutions of this equation become exponential functions.
+      B. Using GSRM and predicting the number of issues and                We extend equation (1) to a stochastic differential equation
+              release dates.                                               because actual developments do not correctly obey equation
+                                                                           (1) due to numerous uncertainties and dynamic changes. We
+A. Separating terms                                                        consider such dynamic elements to be time-dependent and
+    The upper side graph of figure 1 indicate the growth of                to contain uncertainty, and express them using a. The time-
+issues about ”foundation,”[5] which is a front-end framework,              dependence of a can be used to describe situations such as
+divided by each versions. The shapes of curves are significantly           skill improvements of development members and increases of
+sharped when the new version released. Therefore we scope                  growth rate. The uncertainty of a can describe parameters such
+the changing points of versions and separate them into each                as the variability of development members and environment.
+   0 In our paper[2] we merely given proposal only generalized software    We analyze the growth of software with a focus on the test
+reliability model (GSRM) and applied to empirical software. On the other   phase by simulating the number of detected faults. We assume
+hand, in this paper we target open source software and apply it.           software development to have the following properties.
+                                                     TABLE I.          T HIS COMBINATIONS OF α(t) AND γ(t).
+
+                              γ1 (t) = N (t)σdw(t)                             γ2 (t) = σdw(t)                                     γ3 (t) = 1/N (t)σdw(t)
+   α1 (t) = a1 (const.)       The number of detected faults per unit time      The number of detected faults per unit time         The number of detected faults per unit time
+                              is constant, and the uncertainty increase near   is constant, and the uncertainty is constant at     is constant, and the uncertainty is greater at
+                              the end. This model is similar to a logistic     any given time. (Model 1-2)                         the start of the project than at the end (e.g.
+                              curve. (Model 1-1)                                                                                   the team matures over time). (Model 1-3)
+   α2 (t) = a2 (t < t1 )      The number of detected faults per unit time      The number of detected faults per unit time         The number of detected faults per unit time
+   α2 (t) = a3 (t ≥ t1 )      changes at t1 , and the uncertainty increases    changes at t1 , and the uncertainty is constant     changes at t1 , and the uncertainty is greater
+                              near the end (e.g. new members join the          at any given time. (Model 2-2)                      at the start of the project than at the end.
+                              project at time t1 ). (Model 2-1)                                                                    (Model 2-3)
+   α3 (t) ∝ t                 Both the number of detected faults per unit      The number of detected faults per unit time         The number of detected faults per unit time
+                              time and the uncertainty increase near the       increases, and the uncertainty is constant at       increases, and the uncertainty is greater at the
+                              end (e.g. increasing manpower with time).        any given time. (Model 3-2)                         start of project than at the end. (Model 3-3)
+                              (Model 3-1)
+
+
+
+
+   1)      The total number of faults is constant.                                      issues and days by GSRM are more precisely than those of
+   2)      The number of faults that can be found varies de-                            NHPP.
+           pending on time.
+                                                                                                TABLE II.           C OMPARISON OF GSRM WITH OTHER MODELS .
+   3)      The number of faults that can be found contains
+           uncertainty, that can be simulated with Gaussian                                                                       Actual Data      NHPP        GSRM
+           white noise.                                                                                 Version 2      Issue          536            526        899
+                                                                                                                       Days           258            245        854
+                                                                                                                       RSS             -            50388      25929
+Considering these properties, we extend equation (1) to an Ito                                                         AIC             -            2108        1936
+type stochastic differential equation with a(t) = α(t)+σdw(t)                                           Version 3      Issue         1066           1170       32555
+                                                                                                                       Days           242            306       23102
+as shown below.                                                                                                        RSS             -           182119      44708
+ dN (t) = (α(t) + σ 2 /2 + βN (t))N (t)dt + N (t)σdw(t) (2)                                             Version 4
+                                                                                                                       AIC
+                                                                                                                       Issue
+                                                                                                                                       -
+                                                                                                                                     1974
+                                                                                                                                                    2306
+                                                                                                                                                    2203
+                                                                                                                                                                1965
+                                                                                                                                                                5897
+α(t) + σ 2 /2 + σdw(t) is the differential of the number of                                                            Days           265            323        2017
+                                                                                                                       RSS             -           720089      302405
+detected faults per unit time, γ(t) = N (t)σdw(t) is the                                                               AIC             -            2865        2634
+uncertainty term, σ is the dispersion, and β is the non-linear
+carrying capacity term. This equation has two significant terms,
+α and dw; α affects the end point of development, and dw                                                             IV.         R ELATED WORKS
+affects the growth curve through uncertainties. In particular,
+                                                                                           The software reliability models had ever been used on
+the stochastic term is dependent on N (t), which means that
+                                                                                        water fall development, however Fujii et al. developed a
+uncertainties depend on the number of detected faults. We
+                                                                                        quantitative software reliability assessment method in incre-
+compare 3 different types of dependencies of γ(t) on N (t).
+                                                                                        mental development processes, which is one of agile software
+(a):γ1 (t) = N (t)σdw(t). (b):γ2 (t) = σdw(t)(γ(t) does not
+                                                                                        developments, based on the familiar non-homogeneous Poisson
+depend on N (t)). (c):γ3 (t) = 1/N (t)σdw(t)(γ(t) depends on
+                                                                                        processes.[1] Fujii et al. did not use only the number of faults
+the inverse ofN (t)). We summarize the types of α(t) and of
+                                                                                        but also the software metrics and showed software reliability
+the coefficient of dw(t) and the corresponding situations in
+                                                                                        prediction through a case study.
+Table I.
+    Summarizing the above, we can apply the reliability growth                                                           V.       C ONCLUSION
+models to nine types of development situations. Existing mod-
+els can describe only one of these situations with additional                               Using GSRM, we were able to successfully predict the re-
+limitations, but GSRM can describe several of these situations.                         lease dates and the number of issues about OSS. However NH-
+This is primarily because existing models cannot handle time-                           PP can more precisely approximate the growth of issues than
+dependent growth rates without any limitations, while GSRM                              GSRM. For future work, we will adjust the time-dependence
+can handle the time-dependence, and only the appropriate type                           of models. In this paper, for comparing GSRM with NHPP and
+of situation needs to be selected as input.                                             the lack of data we limited time-dependence of development,
+                                                                                        thus GSRM could not more precisely approximate the growth
+                                                                                        of issues.
+                     III.   A PPLICATION TO OSS
+    We discuss the differences between GSRM and the NHPP                                                                       R EFERENCES
+models using actual development data of OSS named as                                    [1] T. Fujii, et al. Towards quantitative software reliability assessment in
+”foundation”[5] in a given situation as the growth rate is                                  incremental development processes. ICSE ’11, 2011.
+time-independent. The reason for this limitation is because                             [2] K. Honda, et al. A generalized software reliability model considering
+the NHPP model cannot be applied to other time-dependent                                    uncertainty and dynamics in development. PROFES ’13 2013.
+situations. We compare GSRM with a general NHPP model                                   [3] C. Stringfellow et al. An empirical method for selecting software
+on data sets obtained from a github site[6]. In Table II, we                                reliability growth models. ISSRE ’07, 2007.
+show the issues and the days each versions and the residual                             [4] S. Yamada, et al. S-shaped reliability growth modeling for software error
+                                                                                            detection. Reliability, IEEE Transactions on 1983.
+sum of squares(RSS) and the Akaike’s Information Criterion
+                                                                                        [5] http://foundation.zurb.com/
+(AIC) about models. This results show GSRM is better than
+NHPP in the view point of predictions. Predicted numbers of                             [6] https://github.com/zurb/foundation
+

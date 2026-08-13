@@ -1,0 +1,343 @@
+  Towards Automated Conformance Checking of ebBP-ST Choreographies and
+              Corresponding WS-BPEL Based Orchestrations
+
+                            Matthias Geiger, Andreas Schönberger and Guido Wirtz
+                    Distributed and Mobile Systems Group, University of Bamberg
+                             Feldkirchenstr. 21, 96052 Bamberg, Germany
+         E-mail: {matthias.geiger | andreas.schoenberger | guido.wirtz}
+                                        @uni-bamberg.de
+
+                        Abstract                               integrating the cross-organizational business processes. As
+                                                               in B2Bi scenarios a global coordinator cannot be assumed,
+   Web Services technologies are a natural candidate           the distinction between choreographies and orchestrations
+for Business-to-Business integration (B2Bi). For cross-        is important: Choreographies deﬁne a process from a global
+organizational processes, the concepts of “choreography”       perspective which may be seen as a communication con-
+and “orchestration” are important. The term choreogra-         tract between the integration partners involved. Orchestra-
+phy denotes a model of a global view over message ex-          tions describe the local, executable implementation for each
+change scenarios, whereas the term orchestration focuses       of the partners. In the B2Bi domain the ebXML Business
+on models of the local implementation. While WS-BPEL is        Process Speciﬁcation Schema (ebXML BPSS or ebBP; [8])
+already kind of a de-facto standard in the ﬁeld of orches-     is a suitable choice for choreography modeling as it pro-
+tration languages, there does not exist a standard chore-      vides several features that are well-suited for the business
+ography language. We propose the usage of ebXML BPSS           domain. One core concept of ebBP is the usage of so-called
+(ebBP) in order to provide choreography modeling at the        Business Transactions (BTs) to model the exchange of a
+business level. A frequent problem is to ensure and en-        single business document from a sending to a receiving role
+force the consistency and conformance of choreography and      - optionally followed by a response document and so-called
+orchestration models which is often referred to as “con-       Business Signals which notify the senders about the pro-
+formance checking”. In this paper we examine a way to          cessing status of the exchanged documents. More complex
+check the conformance between ebBP-ST (a subset of ebBP)       scenarios composed of more document exchanges may be
+choreographies and corresponding WS-BPEL based imple-          modeled as Business Collaborations (BCs). Within BCs,
+mentations. To achieve this check well-known and approved      Business Transaction Activities (BTAs) are used to require
+model checking methods and tools are used: First ebBP-ST       the execution of BTs and to map BC roles to the roles of the
+choreographies are directly transformed into the process al-   previously deﬁned BTs. The control ﬂow and the ordering
+gebra CCS. Second, the low level WS-BPEL processes are         between BTAs is modeled in BCs using basic control ﬂow
+analyzed for code blocks that implement choreography ele-      constructs like Transitions, Decisions, Forks and Joins.
+ments and the sequence of these code blocks is then mapped         In [9], an ebBP dialect called ebBP-ST is presented to
+to CCS, too. Afterwards these formalized representations       introduce explicitly modeled Shared States (STs) into ebBP
+will be checked for bisimulation equivalence in order to       choreographies which leads to clearer models in complex
+reveal inconsistencies between the choreography and their      scenarios by providing control ﬂow synchronization points.
+implementations.                                                   In order to execute the choreography models deﬁned in
+                                                               ebBP-ST, they have to be transformed into executable or-
+  Keywords: SOA, choreography, orchestration, confor-          chestrations. In the area of Web Services technologies the
+mance checking                                                 Web Services Business Process Execution Language (WS-
+                                                               BPEL; [7]) is the de-facto standard for realizing orchestra-
+                                                               tions which is also used in [9] to implement ebBP-ST chore-
+1. Introduction                                                ographies.
+                                                                   For enabling executable orchestrations the integration ar-
+  In the domain of Business-2-Business integration (B2Bi)      chitecture depicted in ﬁgure 1 is assumed between two part-
+Web Services technologies provide a suitable solution for      ners A and B. These partners use backend components to
+encapsulate business logic and control processes to enforce     be reset, but shall be reentered with resetting the timer in
+the correct sequence of message exchanges as deﬁned in          case of a “BusinessSuccess”. Note that this fact is not re-
+ebBP-ST choreographies. In this paper, we investigate au-       spected in the visualization of the use case in Fig. 2. The
+tomated conformance checking of WS-BPEL based control           last aspect to consider is that a ST may be left by a timeout
+process implementations and ebBP-ST choreography deﬁ-           event. Here, a timeout occuring in ST “initPurchase” and
+nitions.                                                        “receivedQuote” will terminate the process in the end state
+                                                                “TechnicalFailure”. The further progress of the purchase
+                                                                scenario, e.g., shipment and billing is left out here.
+
+
+
+
+   Figure 1. Integration Architecture (adapted
+   from [9])
+
+   The paper proceeds as follows: First, in Sec. 2 a use case
+which serves as a running example is introduced. In section
+3, the approach of checking ebBT-ST choreographies and
+WS-BPEL orchestrations is presented by clarifying which
+process models are supported, choosing a suitable confor-
+mance notion, introducing algorithms to transform ebBP-
+ST resp. WS-BPEL to the process algebra CCS [5], and
+describing the actual conformance check. The paper con-
+cludes with a discussion of related work and an outlook on
+ongoing research.
+
+2. Use Case
+
+   Throughout the paper an excerpt of a purchasing use case
+between two partners shall be used to clarify the proposed
+approach. A visual representation of this ebBP-ST chore-             Figure 2. ebBP Structure of the Use Case
+ography is given in Fig. 2. The use case consists of three
+different STs and BTAs: The process starts with the ST          3. Conformance Checking ebBP and WS-
+“initPurchase” in which the BTA “requestQuote” has to be           BPEL
+performed. This BTA deﬁnes the exchange of a business
+document containing a quote request. In the subsequent de-          Figure 3 gives a brief overview of the proposed confor-
+cision it is checked whether the request could be success-      mance checking approach: First, the given ebBP-ST chore-
+fully transfered to the receiver (“BusinessSuccess”) or not     ography model and the corresponding WS-BPEL orchestra-
+(“TechnicalFailure”). In case of a “TechnicalFailure”, the      tions which should be checked have to be transformed into a
+current ST “initPurchase” is not left and the BTA has to be     common formal representation. The process algebra CCS is
+repeated. Otherwise, if the result is “BusinessSuccess” the     appropriate for the scope of our analysis. After transform-
+process enters the new ST “receivedQuote”.                      ing ebBP resp. WS-BPEL into CCS models, the orches-
+   When a quote has been received successfully it may be        tration CCS models can be checked for conformance to the
+accepted by a corresponding BTA “acceptQuote” which             choreography model successively. As conformance is seen
+leads to another ST “concludedContract” in case this BTA        as a binary decision in our work, the conformance check re-
+ﬁnished with a “BusinessSuccess”, otherwise the BTA shall       turns whether the checked orchestration model conforms to
+be repeated. The other option in ST “receivedQuote”             the choreography speciﬁcation or not.
+is to request another quote by performing the BTA “re-
+questQuote” again. The decision afterwards evaluates            3.1. Supported Process Deﬁnitions
+whether the BTA has been executed successfully or not.
+Here in both cases the process will be resumed in ST “re-          Before describing the approach of checking the confor-
+ceivedQuote”. The difference between both paths is that the     mance between ebBP and WS-BPEL it has to be clariﬁed
+ST shall not be left in case the BTA ﬁnished with a “Tech-      which kind of processes are supported. As mentioned in the
+nicalFailure”, i.e., the timer deﬁned for the BTA shall not     previous section, ebBP-ST models are used to model ebBP
+                                                                  of the term conformance. A straightforward informal def-
+                                                                  inition is: An orchestration should be declared as conform
+                                                                  to a choreography if all orchestration executions do not vi-
+                                                                  olate the predeﬁned protocol. As conformance checking
+                                                                  problems are a specialization of the widely researched pro-
+                                                                  cess equivalence problem, solutions from this domain can
+                                                                  be used in order to specify the conformance notion more
+                                                                  precisely. When looking at the message level, it is widely
+                                                                  accepted that so-called trace equivalence which only ana-
+                                                                  lyzes the ﬂow of exchanged messages is too weak to check
+     Figure 3. Proposed Approach (Overview)                       conformance (e.g., [4]). Bisimulation equivalence [6], as
+                                                                  another classical process equivalence notion, frequently is
+choreographies. Our approach supports arbitrary ebBP-ST           regarded as too strict for conformance checks. In most of
+models which are valid regarding the formal deﬁnitions and        the related work, the conformance notion distinguishes be-
+rules for well-formedness in [9]: ebBP-ST models may be           tween incoming and outgoing message ﬂows. An orches-
+formalized as a 5-tuple (R, N, G, φ, θ) where R is a set of       tration has to respect all incoming messages in order to be
+participants, N is a set of allowed ebBP nodes, G is a set        conform to the choreography. In case of outgoing commu-
+of guards, φ is a function that assigns timeouts to each ST       nication, at least one (of possibly more) alternatives has to
+and θ is a transition relation which deﬁnes all allowed tran-     be implemented in the orchestration. An example is the
+sitions. The set of nodes N = {s0 } ∪ ST ∪ SBT A ∪                ST “receivedQuote” in our use case, as two different BTAs
+DEC ∪ T contains the ebBP concepts of a starting node,            (“acceptQuote” and “requestQuote”) may be initiated by
+shared states, business transaction activities, decisions and     the potential customer here. The customer does not have
+end states which are used to model choreographies. Some           to implement the possibility of performing the BTA “re-
+important restrictions of ebBP-ST models are that only bi-        questQuote” which means that he always performs “accep-
+nary collaborations are supported, ebBP Forks and Joins are       tQuote” and therefore all quotes have to be accepted (or the
+not allowed and STs may not overlap. The introduced use           process is left by a timeout). Conversely the seller has to im-
+case is an example of a rather simple, well-formed model          plement both execution possibilities as from his viewpoint
+which uses all main aspects of ebBP-ST.                           it is not clear which BTA may be performed next.
+    While a formal model of ebBP-ST and its semantics, is
+given in [9], such a formalization is not provided for the cor-      However, for our conformance checking scenarios this
+responding WS-BPEL implementations. There exist vari-             conformance notion is not suitable as it cannot be applied
+ous formalisms for WS-BPEL (see [10]) but all of them are         to our integration architecture: We differentiate between the
+intended to directly formalize low level WS-BPEL language         actual orchestration implementations in the so-called con-
+constructs, which would create much too detailed models           trol processes and the existing backend systems that encap-
+for our use cases as we are only interested in a formal rep-      sulate business logic. Regarding the incoming information
+resentation of the control ﬂow between WS-BPEL patterns           the already proposed conformance condition is not critical:
+that realize ebBP choreography concepts. For this purpose         The control processes must be able to react to all possible
+the ebBP formalization is adapted to the WS-BPEL realiza-         incoming events as they do not know how the partner will
+tions: With respect to the set of nodes N it is obvious that      react. But the less strict requirements for outgoing informa-
+all of these aspects have to be represented in WS-BPEL.           tion are only possible if the orchestration is directly decid-
+Concepts such as BTAs may not be directly mapped to WS-           ing which steps should be performed next. In our architec-
+BPEL but need to be expressed by more complex combi-              ture (cf. Fig. 1), the control processes delegate this decision
+nations of various elements. Possible WS-BPEL patterns            to the backend systems which trigger the subsequent pro-
+to implement a given ebBP-ST choreography are also intro-         cess ﬂow. So, the control processes must be able to react
+duced in [9].                                                     to all possible backend decisions and must also be able to
+                                                                  produce all allowed outgoing communication speciﬁed in
+3.2. Conformance Notion - Why Bisimulation?                       the choreography. Therefore the conformance requires the
+                                                                  rather strict notion of weak bisimulation equivalence.
+   Conformance checking is not a new problem in the ﬁeld              The formal model used to perform conformance checks
+of Web Services technologies, in fact, conformance check-         is the process algebra Calculus of Communicating Systems
+ing techniques have been proposed for various combina-            (CCS) developed by Milner [5]. For our purposes, the main
+tions of choreography and orchestration languages. But as         aspects of CCS are sufﬁcient to express our integration
+the notion of conformance is highly dependent on the con-         models: Processes (starting with a capital letter) are
+text there does not exist a commonly accepted deﬁnition           deﬁned by an assignment. Linking to processes is done by
+using the name of a predeﬁned process in a process body.          the inner process deﬁnition of the subsequent ST.
+Sequences are built using the “.” operator and choices                Applying the algorithm to our use case will clar-
+may be created with the operator “+”. Therefore, e.g., “P1        ify the output of the algorithm which is presented in
+= action1.((action2.P2)+(action3.P3))”                            listing 1: Line 1 shows the outer process deﬁnition
+deﬁnes the process P1 in which after performing action            “ST receivedQuote”, the following lines 2-11 describe
+“action1” either “action2” is performed followed by               the actual control ﬂow logic: The two BTAs allowed and
+the execution of the process “P2” or “P3” is performed            the timeout event are combined as a CCS choice. The
+after “action3”.                                                  execution of a BTA is represented by a CCS action (e.g.,
+                                                                  “bta requestQuote” in line 7). The decision after
+3.3. ebBP-ST to CCS Transformation                                this BTA evaluates whether the BTA has been a “Busi-
+                                                                  nessSuccess” (BS) or a “TechnicalFailure”. If the BTA
+                                                                  was successful the ST “receivedQuote” should be reen-
+    The basic principle of transforming an ebBP-ST chore-
+                                                                  tered and the timer should be reset. Therefore the ref-
+ography model into a CCS representation is to deﬁne a CCS
+                                                                  erenced CCS process is “ST receivedQuote” (line 9
+process for each ST and each end state used in the choreog-
+                                                                  in List. 1). As the timer should not be reset in case
+raphy whereas timeout events, the execution of BTAs and
+                                                                  of a “TechnicalFailure”, the internal process deﬁnition
+their evaluation in decisions will be represented by CCS ac-
+                                                                  “INNER ST receivedQuote” is referenced in line 8.
+tions. Algorithm 1 shows the concrete steps needed in order
+to transform ebBP-ST choreographies to CCS.                           The other STs in the use case are transformed in the same
+                                                                  way.
+    As shown in line 1-3, for each end state t ∈ T a process
+is deﬁned using the preﬁx “END ” followed by the name
+of the state. The process body simply contains a single
+action named by the corresponding end state in order to                 Listing 1. CCS Representation of the Use
+distinguish different end states and the CCS empty element              Case (Excerpt)
+“0”. The actual creation of the process is performed
+                                                                    1   ST_receivedQuote = start_timer.INNER_ST_receivedQuote
+by the method CreateProcess(processName,                            2   INNER_ST_receivedQuote =
+processBody) which creates a CCS process with the                   3   (bta_acceptQuote.(
+name processName containing the processBody.                        4     (dec_acceptQuote_TF.INNER_ST_receivedQuote)+
+                                                                    5     (dec_acceptQuote_BS.ST_concludedContract)
+    In comparison to this, the transformation rules for STs         6     )
+are much more complex: As described before and in [9]               7   )+(bta_requestQuote.(
+a timer should be started when entering a ST. But it also           8     (dec_requestQuote_TF.INNER_ST_receivedQuote)+
+                                                                    9     (dec_requestQuote_BS.ST_receivedQuote)
+should be possible to reenter an already visited ST without        10     )
+resetting this timer. In order to describe this behavioral dif-    11   )+(timeout.END_TechnicalFailure)
+ference, two different CCS processes for each shared state
+are created. An outer process deﬁnition “ST STname”
+simply performs a start timer action and then links to            3.4. WS-BPEL to CCS Transformation
+an inner process deﬁnition (named “INNER ST STname”)
+which contains the actual control ﬂow logic (stored in vari-         The aim of transforming WS-BPEL to CCS is to check
+able processBody) of a shared state (ll. 28/29, Alg. 1).          whether the WS-BPEL implementations conform to the
+    BTAs, Decisions and Timeouts are realized in CCS              predeﬁned ebBP-ST choreography models. As mentioned
+using actions. Therefore each possible BTA in each                before, we are not interested in low-level formal models but
+ST followed by the decision evaluation is added to                in a representation which allows for this check. For exam-
+the ST process body (Alg.            1, line 20) using the        ple, there is no need to model the concrete implementation
+method AddBTA(processBody, btaToAdd) which                        of a BTA including all WS-BPEL sequences, scopes, in-
+combines the allowed BTAs with the “+” operator. BTAs             vokes, etc. in CCS because for our purposes it is only rele-
+are simply mapped by a single CCS action named like the           vant whether a BTA may be performed in a ST or not. So,
+BTA sequentially followed by the decision. The different          the most important task for transforming WS-BPEL to CCS
+decision branches are realized using the CCS choice oper-         is to detect the used patterns which express the different
+ator (“+”): First, each guard is translated to a CCS action       concepts of ebBP and afterwards transforming the sequence
+followed by a link to the CCS process of the subsequent ST        of patterns into CCS. When looking at an ebBP decision, a
+and afterwards all of these constructs are combined using         possible WS-BPEL implementation pattern may send the
+the AddDec method. A ﬂag f indicates whether a timeout            previously exchanged Business Document to the backend
+should be reset or not: If f == {tt} (l.10) the outer pro-        systems (invoke statement) which analyze the outcome and
+cess deﬁnition will be used, otherwise it will be linked to       the result is stored in a variable (assign). Afterwards in a
+ Algorithm 1: ebBP to CCS Transformation
+  Input: A valid ebBP-ST choreography (R, ({s0 } ∪ ST ∪ SBT A ∪ DEC ∪ T ), G, φ, θ) to be transformed
+  Output: A CCS representation of this choreography
+  Algorithm:
+1 foreach t in T do
+2     CreateProcess(“END ” + t.name, “end ”+t.name+“.0”)
+3 end
+
+4  foreach st in ST do
+5      processBody = “ ”;
+ 6     foreach (st, {tt}, bta) in θ do
+ 7         decisions = “ ”;
+ 8         foreach (bta, {tt}, dec) in θ do
+ 9              foreach (dec, g, f, nextST ) in θ do
+10                    if (f == {tt}) then
+11                         AddDec(decisions, “(dec ”+dec.name+“ ”+g.name+“.ST ”+nextST.name+“)”)
+12                    else
+13                         AddDec(decisions, “(dec ”+dec.name+“ ”+g.name+“.INNER ST ”+nextST.name+“)”)
+14                    end
+15              end
+16              foreach (dec, g, t) in θ do
+17                    AddDec(decisions, “(dec ”+dec.name+“ ”+g.name+“.END .”+t.name+“)”)
+18              end
+19         end
+20         AddBTA(processBody, “(bta ”+bta.name+“.(”+decision+“))”)
+21     end
+22     if ∃(st, g to , nextST ) in θ then
+23         processBody += “+(timeout.ST ”+nextST.name+“)”
+24     end
+25     if ∃(st, g to , t) in θ then
+26         processBody += “+(timeout.END ”+t.name+“)”
+27     end
+28     CreateProcess(“ST ”+st.name, “start timer.INNER ST”+st.name))
+29     CreateProcess(“INNER ST ”+st.name, processBody)
+30 end
+31 CreateProcess(“Start”, “ST ”+ﬁrstST.name)
+
+
+
+
+series of if statements it is checked which result has been     Therefore each CCS orchestration model has to be checked
+evaluated and the switch to the next state is initiated.        against the choreography representation for bisimulation
+   After all such patterns and their ordering have been iden-   equivalence. The result of each bisimulation equivalence
+tiﬁed, the transformation to CCS is similar as for ebBP-ST.     check is (see Fig. 3) the binary answer whether an orches-
+In case of the decision example, each decision branch is        tration is conform to the choreography deﬁnition or not.
+transformed to a CCS sequence, containing an action in-             An advantage of this checking approach is that the two
+dicating the decision, followed by a reference to the CCS       different implementations may be analyzed independently,
+process of the next state.                                      i.e., it is not necessary to analyze the implementation of a
+                                                                partner who possibly does not want to publish his internal
+3.5. Checking the Conformance                                   orchestration models.
+                                                                    Note that CCS is supported by various model checking
+                                                                tools (e.g. the Edinburgh Concurrency Workbench (CWB)1 )
+   After transforming the ebBP-ST choreography model
+and the two corresponding WS-BPEL orchestrations to               1 available at: http://homepages.inf.ed.ac.uk/perdita/
+
+CCS, the actual conformance checks can be performed.            cwb/
+and therefore the check can be automatically executed using       conformance check by a bisimulation equivalence check.
+such a tool. Using the proposed CWB model checker we are          Preliminary results show the general applicability and cor-
+able to prove the conformance of the WS-BPEL implemen-            rectness of our approach.
+tations as well as to detect various intentionally produced          Ongoing research now concentrates on relaxing the re-
+faults in orchestrations.                                         quirements concerning the structure of the WS-BPEL pro-
+                                                                  cesses by using existing WS-BPEL semantics. Furthermore
+                                                                  we are working on better usability, such as integrating the
+4. Related Work
+                                                                  proposed tool chain to improve the work ﬂow and direct
+                                                                  highlighting of detected conformance issues in the original
+    Conformance checking problems have been investigated          ebBP-ST and WS-BPEL deﬁnitions.
+for various choreography and orchestration languages:
+    For example the work of Baldoni et al. (i.a.,[1]) is rather
+                                                                  References
+generic and uses automata representations to model chore-
+ographies and orchestrations. Martens ([4]) discusses rather
+                                                                   [1] M. Baldoni, C. Baroglio, A. K. Chopra, N. Desai, V. Patti,
+extensively suitable conformance notions for conformance
+                                                                       and M. P. Singh. Choice, interoperability, and conformance
+checking problems and proposes a formalization of abstract             in interaction protocols and service choreographies. In 8th
+and executable WS-BPEL processes using Petri Nets. A                   Int. Joint Conf. on Autonomous Agents and Multiagent Sys-
+proposal for the Web Services Choreography Description                 tems (AAMAS 2009), Budapest, Hungary, May, 2009, pages
+Language (WS-CDL) has been developed by Foster et al.                  843–850. IFAAMAS, 2009.
+([3]) who use Finite State Processes (FSP) to represent WS-        [2] J. Cámara, C. Canal, J. Cubo, and A. Vallecillo. Formaliz-
+CDL and WS-BPEL. The actual check is based on trace                    ing wsbpel business processes using process algebra. Electr.
+equivalence. The only work that we are aware of which is               Notes Theor. Comput. Sci., 154(1):159–173, 2006.
+                                                                   [3] H. Foster, S. Uchitel, J. Magee, and J. Kramer. WS-
+dealing with conformance checking ebBP and WS-BPEL
+                                                                       Engineer: A Model-Based Approach to Engineering Web
+is [12] which uses the process algebra Communicating Se-
+                                                                       Service Compositions and Choreography. In Test and Anal-
+quential Processes (CSP) to perform so-called traces reﬁne-            ysis of Web Services, pages 87–119. Springer, 2007.
+ment to check the conformance. The common problem of               [4] A. Martens. Consistency between Executable and Abstract
+all these approaches is that they do not use the strict confor-        Processes. In 2005 IEEE Int. Conf. on e-Technology, e-
+mance notion we propose in this work. As we have shown                 Commerce, and e-Services (EEE 2005), Hong Kong, China,
+above the proposed weaker notions are suitable for the con-            pages 60–67. IEEE Computer Society, 2005.
+texts considered in the various papers, but it is not appropri-    [5] R. Milner. A Calculus of Communicating Systems, vol-
+ate for the integration scenario we assume.                            ume 92 of Lecture Notes in Computer Science. Springer,
+                                                                       Berlin, Heidelberg, 1980.
+    Another approach which uses a stricter conformance no-
+                                                                   [6] R. Milner. Communication and concurrency. Prentice Hall,
+tion when checking WS-CDL choreographies is presented                  Harlow, 1989.
+in [11]: The authors derive a new formalism called piX-            [7] OASIS. Web Services Business Process Execution Lan-
+Model to formally represent WS-CDL choreographies. The                 guage Version 2.0 (WSBPEL), 2.0 edition, April 2007.
+piX-Model is based on the well-known π-calculus and open           [8] OASIS. ebXML Business Process Speciﬁcation Schema
+bisimulation is used as conformance notion.                            Technical Speciﬁcation, v2.0.4 edition, Oktober 2006.
+    Apart from conformance checking there exist various ap-        [9] A. Schönberger, C. Pﬂügler, and G. Wirtz. Translating
+                                                                       shared state based ebXML BPSS models to WS-BPEL.
+proaches to formalize WS-BPEL (see [10] for an overview).
+                                                                       Int. Journal of Business Intelligence and Data Mining,
+A WS-BPEL formalization using CCS is presented in [2].
+                                                                       5(4):398–442, 2010.
+Generally these formalizations are not perfectly suitable for     [10] F. van Breugel and M. Koshkina.          Models and Ver-
+our approach because they provide direct mappings for ba-              iﬁcation of BPEL.          Unpublished Draft, Available
+sic WS-BPEL constructs while we concentrate on those pat-              at:          http://www.cse.yorku.ca/˜franck/
+terns that realize ebBP concepts.                                      research/drafts/tutorial.pdf,                    September
+                                                                       2006.
+                                                                  [11] G. van Seghbroeck, B. Volckaert, F. D. Turck, B. Dhoedt,
+5. Conclusion and Future Work                                          and P. Demeester. Web service choreography conformance
+                                                                       veriﬁcation through the pix-model. Int. J. Cooperative Inf.
+   In this paper, we have introduced an approach for check-            Syst., 19(1-2):1–30, 2010.
+ing the conformance between ebBT-ST choreographies and            [12] W. L. Yeung. A Formal Basis for Cross-Checking ebXML
+                                                                       BPSS Choreography and Web Service Orchestration. In
+corresponding WS-BPEL based orchestrations. The key el-
+                                                                       APSCC ’08: Proc. of the 2008 IEEE Asia-Paciﬁc Services
+ements of this approach are the proposed transformation al-            Computing Conf., pages 524–529, Washington, DC, USA,
+gorithms to CCS which allow for a common representation                2008.
+of ebBP-ST and WS-BPEL in order to perform the actual
+

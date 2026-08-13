@@ -1,0 +1,586 @@
+                                                                                                                                                Modeling Extraneous Activity Delays in Business
+                                                                                                                                                             Process Simulation
+                                                                                                                                                                             1st David Chapela-Campa                                              2nd Marlon Dumas
+                                                                                                                                                                                  University of Tartu                                            University of Tartu
+                                                                                                                                                                                    Tartu, Estonia                                                 Tartu, Estonia
+2022 4th International Conference on Process Mining (ICPM) | 979-8-3503-9714-7/22/$31.00 ©2022 IEEE | DOI: 10.1109/ICPM57379.2022.9980544
+
+
+
+
+                                                                                                                                                                                  david.chapela@ut.ee                                            marlon.dumas@ut.ee
+
+
+
+                                                                                                                                               Abstract—Business Process Simulation (BPS) is a common                           is not caused by the availability or capacity of resources, but
+                                                                                                                                            approach to estimate the impact of changes to a business process                    by other factors, such as waiting for a customer to respond.
+                                                                                                                                            on its performance measures. For example, BPS allows us to                          Moreover, it is often the case that these waiting times, herein
+                                                                                                                                            estimate what would be the cycle time of a process if we
+                                                                                                                                            automated one of its activities. The starting point of BPS is a                     called extraneous delays, are not explicitly recorded in the log.
+                                                                                                                                            business process model annotated with simulation parameters (a                         In this setting, this paper studies the hypothesis that taking
+                                                                                                                                            BPS model). Several studies have proposed methods to automat-                       into account extraneous waiting times during automated BPS
+                                                                                                                                            ically discover BPS models from event logs via process mining.                      model discovery, leads to BPS models that better reflect
+                                                                                                                                            However, current techniques in this space discover BPS models                       the temporal performance of the process. Specifically, the
+                                                                                                                                            that only capture waiting times caused by resource contention or
+                                                                                                                                            resource unavailability. Oftentimes, a considerable portion of the                  paper addresses the following problem: given an event log
+                                                                                                                                            waiting time in a business process is caused by extraneous delays,                  L (wherein each activity instance has a resource, start time,
+                                                                                                                                            e.g. a resource waits for the customer to return a phone call. This                 and end time) and a BPS model M of a process, compute an
+                                                                                                                                            paper proposes a method that discovers extraneous delays from                       enhanced BPS model M 0 by including waiting times caused
+                                                                                                                                            input data, and injects timer events into a BPS model to capture                    by extraneous factors observed in the event log, such that M 0
+                                                                                                                                            the discovered delays. An empirical evaluation involving synthetic
+                                                                                                                                            and real-life logs shows that the approach produces BPS models                      replicates the behavior recorded in L more accurately than M .
+                                                                                                                                            that better reflect the temporal dynamics of the process, relative                  To address this problem, we propose a technique that performs
+                                                                                                                                            to BPS models that do not capture extraneous delays.                                this enhancement by adding, to the BPS model, a timer event
+                                                                                                                                               Index Terms—Business process simulation, process mining                          before each activity that has delays that cannot be explained
+                                                                                                                                                                                                                                by resource contention. To model the extraneous delay of each
+                                                                                                                                                                       I. I NTRODUCTION                                         activity, our proposal first estimates the instant in time in
+                                                                                                                                               Business Process Simulation (BPS) is an analysis technique                       which its activity instances could have started (henceforth, its
+                                                                                                                                            that enables users to address “what-if” analysis questions, such                    optimal start) using the control-flow and resource allocation
+                                                                                                                                            as “what would be the cycle time of the process if the rate                         information available in L. Then, we consider as extraneous
+                                                                                                                                            of arrival of new cases doubles?” or “what if 10% of the                            waiting time the interval between the earliest start and the
+                                                                                                                                            workforce becomes unavailable for an extended time period?”.                        recorded start of each activity instance. Finally, based on these
+                                                                                                                                            The starting point of BPS is a process model (e.g. in the                           extraneous delay estimations, we fit a probability distribution
+                                                                                                                                            Business Process Model and Notation – BPMN)1 enhanced                               function to capture the duration of the injected timer event.
+                                                                                                                                            with simulation parameters (a BPS model). Traditionally, BPS                           The paper reports on an evaluation that assesses: i) the
+                                                                                                                                            models are manually created by modeling experts. This task                          ability of the proposed technique to accurately discover ex-
+                                                                                                                                            is time-consuming and error-prone [1]. To tackle this short-                        traneous delays known to be present in a log; and ii) the
+                                                                                                                                            coming, several studies have advocated for the use of process                       extent to which a BPS model that incorporates the extraneous
+                                                                                                                                            mining techniques to automatically discover BPS models from                         delays discovered by the technique, more closely replicates the
+                                                                                                                                            business process event logs [2], [3], [4].                                          temporal dynamics in a log, relative to a baseline BPS model.
+                                                                                                                                               Current approaches for automated BPS model discovery                                The rest of the paper is structured as follows. Sec. II intro-
+                                                                                                                                            produce BPS models under the assumption that all waiting                            duces basic notions of process mining and business process
+                                                                                                                                            times are caused either by unavailability of resources (e.g. re-                    simulation, and gives an overview of prior related research.
+                                                                                                                                            sources being off-duty) or by resource contention (all resources                    Sec. III describes the proposed approach. Sec. IV discusses
+                                                                                                                                            who can perform an activity instance are busy). In practice,                        the empirical evaluation, and Sec. V draws conclusions and
+                                                                                                                                            there are other sources of waiting times in business processes.                     sketches future work.
+                                                                                                                                            For example, Andrews et al. [5] found that a large proportion                                  II. BACKGROUND AND R ELATED W ORK
+                                                                                                                                            of waiting time (a.k.a. “shelf time”) in real business processes
+                                                                                                                                                                                                                                   This section introduces basic notions of process mining
+                                                                                                                                              This research is funded by the European Research Council (PIX Project).           related to the problem that is being addressed, and describes
+                                                                                                                                              1 https://www.bpmn.org/                                                           existent techniques related to the enhancement of BPS models.
+
+
+
+                                                                                                                                                                                                                           72
+                                                                                                                                            Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+A. Event Log and Process Mining                                                                                    Table I
+                                                                                    RUNNING EXAMPLE : FRACTION OF AN ACTIVITY INSTANCE LOG WITH 10
+   We consider a business process that involves a set of                            ACTIVITY INSTANCES STORING THE TRACE (ϕ), THE EXECUTED ACTIVITY
+activities A. We denote each of these activities with α. An                           (α), THE START (τs ) AND END (τe ) TIMES , AND THE RESOURCE (ρ).
+activity instance ε = (ϕ, α, τs , τe , ρ) denotes an execution
+                                                                                        trace              activity        start time   end time      resource
+of the activity α, where ϕ identifies the process trace (i.e.
+the execution of the process) to which this event belongs                                                                    .
+                                                                                                                             ..
+to, τs and τe denote, respectively, the instants in time in                              512        Register invoice        10:00:00    10:19:11       BoJack
+which this activity instance started and ended, and ρ identifies                         513        Register invoice        10:19:11    10:34:51       BoJack
+the resource that performed the event. Accordingly, we write                             514        Register invoice        10:34:51    10:43:12       BoJack
+                                                                                         512       Notify acceptance        10:29:11    11:31:45       Carolyn
+ϕ(εi ), α(εi ), τs (εi ), τe (εi ), and ρ(εi ) to denote, respectively,                  512         Post invoice           11:15:43    12:08:01        Sarah
+the process trace, the activity, the start time, the end time, and                       513         Post invoice           12:08:01    13:01:09        Sarah
+the resource associated with the activity instance εi . We denote                        514       Notify acceptance        11:31:45    13:05:36       Carolyn
+                                                                                         514         Post invoice           11:31:45    13:16:43        Todd
+with ω(εi ) the waiting time of εi , representing the time since                         513       Notify acceptance        13:05:36    13:39:29       Carolyn
+εi became available for processing, until its recorded start                             512          Pay invoice           18:08:01    18:14:11       BoJack
+(τs (εi )). The cycle time of a trace (a.k.a. the trace duration)                                                             ..
+                                                                                                                               .
+is the difference between the largest τe and the smallest τs
+of the activity instances observed in the trace. An activity
+                                                                                                                         Post
+instance log L is a collection of activity instances recording the                                                     invoice
+information of the execution of a set of traces of a business                                   Register                                             Pay
+process. Table I shown an example of 10 activity instances                                      invoice                                            invoice
+                                                                                                                                        6h
+from an activity instance log.                                                                                          Notify
+                                                                                                                      acceptance
+   It must be noted that, usually, the process execution infor-
+mation is recorded in event logs, containing the information of
+each activity instance as independent events, one representing                      Figure 1. BPS model example formed by 4 activities, two AND gateways,
+                                                                                    and a timer event, corresponding the event log of Table I.
+its start, and another one representing its end. Furthermore,
+there are cases in which event logs also store events recording
+other stages of the activity instances’ lifecycle, e.g. schedule.                   produces, based on the information it stores, an event log that
+In this paper, we work with the concept of activity instance                        replicate the process’ behavior.
+log to group the information of each activity instance in a                            Figure 1 shows an example of a BPS model corresponding
+single element. The transformation from a typical event log                         to the event log example from Table I, formed by 4 activities
+to an activity instance log is straightforward, and it has been                     and one timer event. As we can see in Table I, the information
+already described in other research [6]. Nevertheless, we will                      about the waiting time is not explicitly present in the event log,
+use both terms: event log and activity instance log, to refer to                    but can be represented in the BPS model with a timer event.
+the recorded process information used as starting point; and
+                                                                                    C. Related Work
+event and activity instance, to refer to the recording of an
+activity execution.                                                                    Since the apparition of the first approaches for automated
+                                                                                    BPS model discovery [2], many techniques have been pre-
+B. Business Process Simulation                                                      sented focusing on the enhancement of BPS models to improve
+   A process model is a diagrammatic representation of a                            the accuracy and precision of the simulation. Camargo et al.
+process, commonly used to model its control-flow dimension.                         presented SIMOD [4], a tool to discover a BPS model from an
+In this article, we consider process models represented in the                      event log and, using hyperparameter optimization, tune it in
+Business Process Model and Notation (BPMN). To model the                            order to minimize a loss function and obtain an enhanced BPS
+control-flow of a process, a BPMN model consists of i) a set                        model that reproduce more faithfully the process behavior.
+of nodes representing the activities of the process; ii) a set of                   Following with the aim of enhancing simulation models,
+gateways modelling the flow of the process, splitting or joining                    Pourbafrani et al. [7] proposed to use coarse-grained BPS
+the flow through one or many paths; and iii) a set of directed                      models to simulate processes at a higher abstraction level,
+edges relating the activities and gateways between them.                            claiming that it eases the discovery of models mimicking
+   However, a process model can also be extended with infor-                        the real behavior, and the exploration of alternative scenarios.
+mation about the execution of the process (e.g. the distribution                    Estrada-Torres et al. proposed in [8] a method to discover
+of activities’ processing times) or about the resources that can                    BPS models in the presence of multitasking, and enhanced
+perform each specific activity. Such enhanced process models                        with support to resource unavailability. Finally, Meneghello et
+are called business process simulation models. Furthermore, in                      al. [9] presented a framework to evaluate the accuracy of a BPS
+the BPMN formalism, other type of elements can be added to                          model w.r.t. the original event log, and give insights to improve
+enrich the simulation, such as timer events (i.e. elements that                     this accuracy. Nevertheless, none of these techniques address
+force the process to wait an amount of time before continuing                       the problem of enhancing the BPS model by considering
+with the simulation). When a BPS model is simulated it                              extraneous activity delays.
+
+
+
+                                                                               73
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+                                                                                    observation does not hold if there are concurrency relations
+                                                                                    between activities in a process (a common situation in real-life
+          BPS model
+                                                                                    processes). A concurrency relation between two activities A
+                                                                                    and B means that these activities can be executed in any order,
+                                     Calculate    Enhance
+                       Estimate
+                                    extraneous   BPS model                          i.e. sometimes A following B and other times B following
+  Event                 optimal
+                                      activity    with timer
+   log                start times
+                                      delays       events      Enhanced BPS         A, thus no one enables the other2 . For example, in Table I,
+                                                                  model
+                                                                                    activities “Post invoice” and “Notify acceptance” are executed
+                                                                                    in any order (and sometimes even in parallel), as no one is
+           Figure 2. Overview of the approach presented in this paper.
+                                                                                    required to start the other.
+                                                                                       Hence, in order to precisely measure the enablement time
+   Regarding the presence of waiting times caused by extrane-                       of an activity, we need to detect the concurrency relations
+ous factors, Camargo et al. find out in [10] that current data-                     between the activities of a process. In order to do this,
+driven BPS models have problems simulating waiting times.                           we propose to use the concurrency oracle of the Heuristics
+The reason behind this is that, currently, BPS models can only                      Miner [12]. This method computes a degree of confidence
+reproduce waiting times related to resource contention and                          for each relation that it is a concurrent or directly-follows
+resource unavailability, while a great amount of waiting time                       relation, based on the percentage of occurrences of each
+is, in reality, caused by extraneous factors [5]. Camargo et al.                    order. Then, based on a set of defined thresholds, it retrieves
+advocate for modeling waiting times by using deep learning                          the concurrent relations of the process. In this way, once
+simulation models, and compare their performance against                            the concurrency relation between the activities is known, the
+data-driven BPS models. Nevertheless, although the results                          enablement time of an activity instance is set to the end
+show that deep learning BPS models are more accurate, they                          time of the closest previous activity instance not overlapping
+cannot be used to perform ”what-if“ analysis, as these models                       and not being concurrent to the current one. Accordingly, the
+work as a black box. On the contrary, we aim to produce data-                       enablement time (τent ) of an activity instance can be defined
+driven BPS models that can be used for ”what-if“ analysis.                          as follows:
+
+      III. E XTRANEOUS ACTIVITY D ELAYS M ODELING                                   Definition 1 (Enablement Time). Given an activity instance
+                                                                                    log L, and a concurrency oracle that states if two activities
+   This section describes the proposed approach to enhance a
+                                                                                    αi , αj ∈ L have (αi k αj ) or do not have (αi ∦ αj )
+BPS model by adding timer events that capture the waiting
+                                                                                    a concurrent relation, the enablement time of an activity
+times caused by extraneous factors. Figure 2 depicts the main
+                                                                                    instance ε = (ϕ, α, τs , τe , ρ), such that ε ∈ L, is defined as
+structure of our proposal. With the information recorded in
+                                                                                    τent (ε) = max({τe (εi ) | εi ∈ L ∧ ϕ(εi ) = ϕ(ε) ∧ τe (εi ) <
+the event log as input, our approach estimates the optimal
+                                                                                    τe (ε) ∧ τe (εi ) ≤ τs (ε) ∧ α(εi ) ∦ α(ε)}), i.e., the largest
+start times (c.f. Sec. III-A) of each activity instance. Then,
+                                                                                    end time of those activity instances of L, belonging to the
+combining this value with the start times recorded in the
+                                                                                    same process trace, being previous to ε’s end time, previous
+event log, the waiting time associated to extraneous factors
+                                                                                    or similar to ε’s start time (i.e. not overlapping), and which
+is calculated (c.f. Sec. III-B). Finally, for each activity with
+                                                                                    activity does not have a concurrent relation with ε’s activity.
+discovered extraneous delays, a timer event is added previous
+to it in the BPS model received as input, with the duration                            Figure 3 shows the timeline for one process trace, depicting
+distribution result of the observed extraneous delays (c.f.                         the enablement relations between the activities. As it can be
+Sec. III-C).                                                                        seen, both “Post invoice” and “Notify acceptance”, which
+                                                                                    have a concurrency relation between them, are enabled by
+A. Optimal start time estimation
+                                                                                    “Register invoice”. It must be noted that, in this example,
+   Enablement time: To calculate the extraneous waiting time                        the fact that the activities overlap each other already sets
+associated to each activity instance, we need first to identify                     their enablement time as the end time of “Register invoice”.
+its enablement time. The enablement time (ent) of an activity                       Nevertheless, the use of the concurrency oracle prevent a
+instance is the instant in time at which it became available                        wrong calculation in cases where they do not overlap (e.g.
+for processing. For example, in the event log from Table I,                         trace 513 from Table I). Finally, “Pay invoice” is enabled by
+an invoice is first registered, then it is posted and notified as                   “Post invoice”, its previous non-overlapping activity not being
+accepted (both in parallel) and, after that, the invoice is paid.                   concurrent to it.
+In this case, the payment of the invoice cannot be done until                          Resource availability time: Once the enablement time of
+it is both posted and notified as accepted. Thus, activity “Pay                     an activity instance is known, its waiting time can be easily
+invoice” is not enabled for processing until both activities
+(“Post invoice” and “Notify acceptance”) finish.                                       2 We note that other notions of concurrency have been proposed in the field
+   In a sequential process, an activity instance is enabled when                    of process mining. An in-depth treatment of concurrency notions in process
+the previous activity instance completes. In other words, the                       mining is provided by Armas-Cervantes et al. in [11]. In this paper, we adopt
+                                                                                    a basic notion of interleaved concurrency between pairs of activities as defined
+enablement time of an activity instance is the end time of                          above. The proposed approach is, however, modular and could be adapted to
+the chronologically preceding activity instance. However, this                      exploit more sophisticated notions of concurrency.
+
+
+
+
+                                                                               74
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+                 Register           Notify                      Pay
+                 invoice          acceptance                  invoice
+                                                    Post
+  Trace                                           invoice
+   512                                                                                              Process                                                                     Process
+                                                                                                            10:           10:        10: 10          18:          18:
+                 10:   1         10:      1   1      12:       18: 18:                 BoJack         start     00:
+                                                                                                                    0
+                                                                                                                              19:
+                                                                                                                                  11
+                                                                                                                                        34: :43
+                                                                                                                                           51 :12
+                                                                                                                                                          08:
+                                                                                                                                                             01
+                                                                                                                                                                        14:
+                                                                                                                                                                           11
+                                                                                                                                                                                  end
+                    10: 0:19:        29: 1:31: 1:15:     08:      08: 14:                                            0
+                       10     11        11    45 43         01       01   11
+
+                                                                                    Figure 4. Individual timeline for the resource “BoJack” corresponding to the
+Figure 3. Timeline of trace 512 corresponding to the example in Table I,            example in Table I, where each blue box represents each activity instance
+where each blue box represents each activity instance, and each dotted arrow        performed by this resource.
+connects an activity instance (source) with an activity instance it enables
+(target).
+                                                                                                              Resource          Enablement                        Pay
+                                                                                                              availability         time                         invoice
+
+                                                                                                                                             Extraneous
+                                                                                      Pay Invoice
+computed as the interval from its enablement time until it                                                                                      delay
+
+started being processed. Nevertheless, not all this waiting                            Trace 512                  10:               12:                         18:   1
+                                                                                                                        43:            08:                         08: 8:14:
+                                                                                                                           12             01                          01     11
+time is caused by extraneous factors. For example, if there
+are no resources available, an enabled activity instance must
+wait until a resource can be assigned to them. To exclude                           Figure 5. Timeline denoting the start and end times, resource availability, and
+                                                                                    enablement time for the activity instance “Pay invoice”, of the process trace
+this waiting times associated to resource contention from the                       512, corresponding to the example in Table I. The red striped box denotes
+extraneous delays, we propose to also calculate the time in                         the estimated waiting time due to extraneous factors.
+which the resource became available to process the activity
+instance (i.e. the resource availability time).
+   To develop on this idea, we assume that when a resource                          Definition 3 (Optimal start time). Given an activity in-
+ends an activity and becomes available, she/he will start                           stance log L, the optimal start time of an activity instance
+working in the next one, and that there is no multitasking                          ε = (ϕ, α, τs , τe , ρ), such that ε ∈ L, is defined as τopt (ε) =
+(i.e. the resources only work in one activity at a time). This                      max(τrat (ε), τent (ε)), i.e., the largest of its enablement time
+reasoning is also used in [13] to calculate activity durations in                   and its resource availability time.
+order to check if the workforce of a process has decreased
+or increased after the pandemic. We propose to build a                              B. Extraneous activity delays calculation
+timeline for each resource by adding all the registered activity                       Once the optimal start time of all activity instances in the
+instances that she/he performed. Figure 4 shows an example                          event log is known, their waiting time caused by extraneous
+of this timeline. The resource availability time of an activity                     factors can be easily computed as the difference between their
+instance corresponds to the end time of the latest activity                         recorded start time and their optimal start time.
+instance performed by its resource. Accordingly, the resource
+availability time (τrat ) of an activity instance is defined as                     Definition 4 (Extraneous activity delay). Given an activity
+follows:                                                                            instance log L of a process with a set of activities A, the
+                                                                                    extraneous delay of an activity instance ε = (ϕ, α, τs , τe , ρ),
+Definition 2 (Resource Availability Time). Given an activity                        such that ε ∈ L, is defined as ωextr (ε) = τs (ε) − τopt (ε).
+instance log L, the resource availability time of an activity                       Accordingly, the set of extraneous waiting times of an activity
+instance ε = (ϕ, α, τs , τe , ρ), such that ε ∈ L, is defined as                    αi ∈ A is defined as Ωextr (αi ) = {ωextr (ε) | ε ∈ L ∧ α(ε) =
+τrat (ε) = max({τe (εi ) | εi ∈ L ∧ ρ(εi ) = ρ(ε) ∧ τe (εi ) <                      αi ∧ τent (ε) 6= null }, i.e. the set of extraneous waiting times
+τe (ε) ∧ τe (εi ) ≤ τs (ε)}), i.e., the largest end time of those                   of αi ’s activity instances with a valid enabled time.
+activity instances of L, processed by the same resource as ε,
+being previous to its end, and not overlapping.                                        Figure 5 depicts an example of the estimation of the extra-
+                                                                                    neous delays. It must be noted that, to compute the set of ex-
+   Optimal start time: In order to discard the waiting times                        traneous delays of an activity, we discard its activity instances
+due to resource contention from the extraneous waiting time                         with no valid enablement time. These cases correspond to two
+calculation, we propose to consider the earliest instant at which                   types of activity instances: i) the first activity instance of each
+an activity instance could have started, i.e. its optimal start,                    trace, and ii) the activity instances with all predecessors being
+instead of its enablement time. We do so by combining its                           concurrent or overlapping them. In both cases, the activity
+enablement time with the availability of its resource. In this                      instance is enabled by their trace arrival. Martin et al. [14] and
+way, we consider that an activity instance could have started                       Berkenstadt et al. [15] have presented different techniques to
+as soon as its activity is enabled, and its resource is available                   estimate the arrival times of process traces that could be used
+to process it. Figure 5 shows an example of this estimation,                        as enablement time for this activity instances. Nevertheless,
+where the optimal start corresponds to the enablement time.                         this is out of the scope of this paper. Therefore, only the delays
+Accordingly, the estimation of an activity instance’s optimal                       of those activity instances being enabled by a previous activity
+start time (τopt ) can be defined as follows:                                       instance are used in the estimation of extraneous delays.
+
+
+
+                                                                               75
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+C. BPS model enhancement                                                                 Ω0extr of each activity are computed based on the set of γ
+   The final stage of our proposal is to enhance the original                            given by the hyperparameter optimization algorithm, and the
+BPS model with the information of the discovered extraneous                              original BPS model is enhanced with the scaled extraneous
+activity delays. To do this, we take all the observed extraneous                         delays. To evaluate the iteration, we run 10 simulations of the
+waiting times previous to each activity, and compute the                                 enhanced BPS model for the same number of traces than the
+probabilistic distribution that best fit them. Then, we inject                           validation set, and compute the mean of the distances between
+in the BPS model a (durational) timer event previous to                                  the simulated logs and the validation set.4 In this way, the
+each activity with the discovered duration distribution. In                              TPE hyperparameter optimizer returns the set of γ values that
+this way, the simulation will mimic the extraneous waiting                               lead to the enhanced BPS model that more closely reflects the
+times by delaying the execution of the activities based on                               temporal behavior of the log.
+the timer event that precedes them. It is possible that not all                                                  IV. E VALUATION
+activities in the process present delays caused by extraneous
+factors, or that the number of delays is scarce w.r.t. their total                          This section reports on an experimental evaluation of
+number of executions. For this reason, we consider an outlier                            the proposed approach to evaluate its accuracy when re-
+threshold (δ) to inject a timer event only to those activities in                        discovering already known extraneous activity delays from a
+which the proportion of positive extraneous delays discovered                            simulated process, and the impact of its enhancement in the
+(|{ωextr | ωextr ∈ Ωextr (α) ∧ ωextr > 0}| / |Ωextr (α)|) is                             simulation of real-life event logs.
+higher than δ.                                                                              With this purpose, two research questions are presented.
+   Although the presented approach already includes timer                                The first one is related to the accuracy of the extraneous
+events to mimic the extraneous activity delays, the duration of                          activity delay discovery in simulated scenarios in which they
+the discovered extraneous waiting times might be smaller than                            are known. Research Question 1 (RQ1): Is the proposed
+the real ones. This is caused by the interaction between waiting                         technique able to re-discover extraneous activity delays that
+times caused by resource contention and extraneous factors.                              are known to be present in the process from which the log
+There are some scenarios in which the waiting time caused                                was produced? Regarding this research question, we expect
+by resource contention may eclipse, either partially or totally,                         that our proposal re-discovers all the extraneous activity delays
+the waiting time due to extraneous factors. For example, an                              with variations in their duration due to, as we have explained in
+enabled activity instance that is waiting due to both extraneous                         Sec. III-C, partial eclipses caused by the resource contention
+and resource contention factors. Two types of interaction can                            waiting time. The second research question focuses on the
+happen in these cases, i) there is extraneous waiting time after                         impact that including the discovered extraneous activity delays
+the resource finishes the previous activity, so the discovered                           has in the simulation. Research Question 2 (RQ2): In the
+delay has a duration lower than the real one (partial eclipse),                          context of real-life processes, given an event log and a BPS
+and ii) the extraneous waiting time ends before the resource                             model of the process, does the proposed technique improve the
+contention, so the activity starts as soon as its resource is                            temporal accuracy of the BPS model? Regarding this research
+available to process it, and no extraneous delay is discovered                           question, our proposal is enhancing the original BPS model
+(total eclipse).                                                                         by adding existent waiting times that are not being modeled.
+   To correct this deviation, we propose to establish a scale                            For this reason, we expect the enhancement of our proposal
+factor γi for each activity αi , such that all its discovered                            to improve the temporal accuracy of the simulation w.r.t. the
+extraneous delays are scaled as Ω0extr (αi ) = {γi × ωextr |                             simulation using the original BPS model.
+ωextr ∈ Ωextr (αi )}. Then, given a set of {γ0 , γ1 , ..., γn},                          A. Datasets
+corresponding to the set of activities {α0 , α1 , ..., αn } ∈ A with
+                                                                                            In order to evaluate the accuracy of the re-discovery of
+discovered extraneous delays, we launch a Tree-structured
+                                                                                         already known extraneous activity delays (RQ1), we selected
+Parzen Estimator [16] (TPE) hyperparameter optimization
+                                                                                         a set of five BPS models. Four of these BPS models (with no
+process to obtain the set of γ that leads to a better simulation.
+                                                                                         timer events) are extracted from the examples of the book Fun-
+To avoid the possibility of overfitting, we split the event log
+                                                                                         damentals of Business Process Management [17]: a pharmacy
+in two partitions, training and validation sets, discovering
+                                                                                         prescription fulfillment process (CVS), an insurance process
+the extraneous delays from the former, and evaluating each
+                                                                                         (INS), a loan application process (LAP), and a procure to
+solution in the latter. To perform this split, we order the activity
+                                                                                         pay process (P2P). The other BPS model has been discovered
+instances by end time and take the first 50% for the train set,
+                                                                                         from a confidential real process already containing several
+and the other 50% for the validation set.3 Before the start of
+                                                                                         message and timer events (CF). For each of the CVS, INS,
+the optimization process, the Ωextr are estimated using the
+                                                                                         LAP and P2P processes, we added timer events previous to
+training set. Then, in each iteration of the optimization, the
+                                                                                         some activities (in sequential, parallel, and loop scenarios) to
+   3 We perform a strict split considering partial traces to minimize the                mimic the existence of extraneous activity delays. For each
+impact in the training-validation process. If we exclude complete traces, some
+resources might appear to be available in the training set, when actually they’re          4 We use the Wasserstein Distance (described in Sec. IV-B) between
+busy working on a previous activity of a trace that is in the validation set,            the cycle time distribution as distance measure to minimize by the TPE
+and that would affect the calculation of the τrat .                                      optimization.
+
+
+
+
+                                                                                    76
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+                              Table II                                              those activities for which the amount of positive extraneous
+     C HARACTERISTICS OF THE REAL - LIFE EVENT LOGS USED IN THE                     delays discovered were more than the 5% of observations), a
+                           EVALUATION .
+                                                                                    maximum scale factor of γ = 50, and set 200 iterations for
+                             Activity                                               the TPE hyperparameter optimization.
+   Event log     Traces                  Variants   Activities    Resources
+                            instances                                                  As measures of goodness to evaluate the accuracy in the
+  BPIC12TR        3,030       16,338         735             6            47        re-discovery of timer events from the simulated event logs
+  BPIC12TE        2,976       18,568         868             6            53        (RQ1), we use precision and recall. In this context, a true
+  BPIC17TR        7,402       53,332       1,843             7          105         positive stands for a discovered timer event that is present in
+  BPIC17TE        7,376       52,010       1,830             7          113         the BPS model from which the simulated log was created, a
+                                                                                    false positive stands for a discovered timer event that is not
+                                                                                    present in the BPS model, and a false negative stands for a
+dataset, we simulated an event log of 1,000 traces out of the                       timer event present in the BPS model that was not discovered.
+BPS model without timer events, another one with one timer                          We also report on the Symmetric Mean Absolute Percentage
+event, and another one with four timer events. Regarding the                        Error (SMAPE) comparing the mean of the discovered delays
+last process (CF), we simulated one event log of 1,000 traces                       (forecasted value) with the mean of the distribution of the
+with the original BPS model, to validate if our proposal could                      corresponding timer event (actual value). We use zero as the
+detect the already present timer events.                                            actual value in the case of false positives, and as the forecasted
+   To evaluate the improvement of our proposal in the temporal                      value in the case of false negatives. The symmetric nature of
+accuracy of a BPS model in real-life scenarios (RQ2), we                            the SMAPE metric gives a more robust value by fixing the
+selected the two real life event logs from the Business Process                     asymmetry of boundlessness, while giving the percentage error
+Intelligence Challenges (BPIC) of 2012 [18] and 2017 [19],                          allows performing inter-dataset comparisons.
+as they both have start and end timestamps, detailed resource                          Regarding the real-life event logs (RQ2), we compared the
+information, and low multitasking. We preprocessed the event                        accuracy of the simulations performed using the original BPS
+log from BPIC 2012 retaining only the events corresponding                          model and the BPS model enhanced with our proposal. To
+to activities performed by human resources (i.e. only activity                      do this, we run ten simulations of the same number of traces
+instances that have a duration), and the event log from BPIC                        than the test log with each of the BPS models, and computed
+2017 by following the recommendations reported by the                               the mean of their similarity w.r.t. the test log. In previous
+winning teams participating in the competition (https://www.                        work, the similarity between two event logs is made along two
+win.tue.nl/bpi/doku.php?id=2017:challenge). Then, in order to                       dimensions: the control-flow and the temporal dimensions [4],
+avoid data leakage in the evaluation of our approach, we split                      [20]. Given that the injection of timer events does not alter
+each event log in two sets (the training and the test set).                         the control-flow of the BPS model, we hereby focus on the
+For each dataset, we selected two temporal disjoint intervals                       temporal dimension. Specifically, we compared each simulated
+(i.e. non-overlapping) with similar trace and event intensity                       log against the corresponding test log in two ways: i) by
+(avoiding the concept change in the activity instances intensity                    comparing the distribution of cycle times of their traces; and
+in the BPIC 2017), and retained only the traces that were                           ii) by comparing the distributions of their timestamps (both
+fully contained in them. In this way, no events in the training                     start and end timestamps). To compare two distributions, we
+set overlap with events in the test set. Table II shows the                         use the Wasserstein Distance (a.k.a. Earth Movers’ Distance,
+characteristics of the two training (BPIC12TR and BPIC17TR)                         or EMD), which measures the amount of movements that have
+and two test (BPIC12TE and BPIC17TE) event logs. To obtain                          to be applied to one discretized distribution to obtain the other,
+the BPS model to enhance, we used SIMOD [4] to automati-                            penalizing the movements by their distance. In this way, a
+cally discover a BPS model from the training partitions. These                      higher EMD value denotes a lower similarity.
+datasets, as well as the results of the evaluation, are publicly                       The EMD is defined over a pair of discretized distributions
+available at https://doi.org/10.5281/zenodo.6719731.                                (i.e. histograms). To discretize the cycle times, we group the
+B. Experimental setup                                                               cycle times of the test log into 1000 equidistant bins. Let
+                                                                                    W be the width between these bins. Each simulated log is
+   We have evaluated both versions of our proposal: the                             then discretized into bins of width W . On the other hand, the
+enhancement with the discovered extraneous activity delays                          distribution of timestamps are discretized as follows. First, we
+(Naive proposal), and the enhancement with the delays ob-                           extract all the start and end timestamps in the log, and we
+tained after the TPE hyperparameter optimization (TPE Op-                           group them by date-hour. For example, all timestamps that
+timized proposal). Both versions were implemented as a                              fall between 27 May 2022 at 10:00:00 and the same day at
+Python package, and are publicly available, as well as the                          10:59:59 are placed in one group (bin). Having discretized
+code to reproduce the evaluation experiments, in GitHub.5                           the cycle times and the timestamps of the test log and its
+As configuration parameters of the approach, we used an                             simulated counterparts, we then calculate their EMD and use
+outlier threshold of δ = 0.05 (only injecting timer events to                       this measure to compare the simulation performed with the
+  5 https://github.com/AutomatedProcessImprovement/                                 original BPS model, with the two variants of our proposal.
+extraneous-activity-delays/tree/icpm-2022                                           Importantly, the magnitude of the EMD depends on the dataset
+
+
+
+                                                                               77
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+(e.g. larger datasets will naturally give rise to larger EMD                                                       Table III
+values). Accordingly, we use the EMD to make intra-dataset                                 P RECISION , RECALL , AND SMAPE FOR THE TIMER EVENT
+                                                                                     RE - DISCOVERY OF BOTH VERSIONS OF OUR PROPOSAL WITH THE CVS,
+comparisons only (i.e. to measure the relative performance of                         INS, LAP, AND P2P EVENT LOGS SIMULATED WITH ONE AND FOUR
+multiple techniques within the same dataset).                                                             INJECTED TIMER EVENTS .
+
+
+C. RQ1 - Accuracy of the extraneous delay discovery                                                     Naive proposal              TPE Optimized proposal
+                                                                                      Dataset
+   Regarding the results of the re-discovery of already known                                   Prec.     Recall   SMAPE           Prec.    Recall    SMAPE
+extraneous activity delays injected as timer events in the BPS                        CVS 1      1.00       1.00         1.69       1.00      1.00        0.18
+model, none of the proposals discovered any non-existent                              INS 1      1.00       1.00         1.95       1.00      1.00        0.13
+extraneous activity delays in the event logs simulated with                           LAP 1      1.00       1.00         1.53       1.00      1.00        0.81
+                                                                                      P2P 1      1.00       1.00         0.96       1.00      1.00        1.57
+no injected timer events (no false positives). Table III depicts
+                                                                                      CVS 4      1.00       1.00         1.43       1.00      1.00        0.40
+the results for the event logs simulated with one and four                            INS 4      1.00       1.00         1.57       1.00      1.00        1.08
+injected timer events. In those cases, both proposals discovered                      LAP 4      1.00       1.00         0.90       1.00      1.00        1.33
+all the injected timer events (recall of 100%) in all cases                           P2P 4      1.00       0.75         1.01       1.00      0.75        1.84
+except in the P2P process with 4 injected timer events, where
+both techniques miss one timer event (recall of 75%). This
+missing timer is explained by one of the activities experiencing                    the proposal, the small improvement can be explained by the
+a total eclipse in most of its activity instances. Due to resource                  partial eclipses due to resource contention. As explained be-
+contention, these activity instances had to wait more for their                     fore, the resource contention waiting time can partially eclipse
+resource to become available than because of the injected timer                     the extraneous activity delays’ durations, leading to shorter
+event, causing the discovered extraneous waiting time to be                         delays and, thus, to shorter cycle times. Nevertheless, the
+zero.                                                                               TPE hyperparameter optimizer tunes the delays and obtains an
+   Regarding the duration of the discovered delays, the TPE                         enhanced BPS model that considerably increases the similarity
+optimization gets values closer to the real ones in five out                        of the simulated event logs.
+of the eight cases (discarding the cases with no injected
+timer events). Although the TPE optimization leads to delay                         E. Threats to validity
+durations closer to the injected values in five out of the eight                       The evaluation reported above is potentially affected by
+cases, the naive proposal is closer in the other three. The                         the following threats to the validity. First, regarding internal
+reason behind this is that the TPE optimization is learning                         validity, the experiments rely only on five simulated and two
+the delay duration from a subset of the log, and optimizing                         real-life processes. The results could be different for other
+it by minimizing the distance of the simulated cycle time                           datasets. Second, regarding construct validity, we used two
+w.r.t. another subset of the log. This could add noise to the                       measures of goodness based on discretized distributions. The
+estimation, leading to the observed difference in some cases.                       results could be different with other measures, e.g. measures of
+Nevertheless, the impact of this difference in the simulation is                    similarity between time series based on dynamic time warping,
+analyzed in Sec. IV-D.                                                              which provides an alternative framework for capturing rhythms
+   In the experiments with CF, both versions of our proposal                        in time series. Finally, regarding ecological validity, the eval-
+discovered correctly the two timer events, and modeled the                          uation compares the simulation results against the original
+six message events as one single timer event. The reasoning                         log. While this allows us to measure how well the simulation
+behind this is that the six message events are placed at the                        models replicate the as-is process, it does not allow us to assess
+end of each branch in a six-branch parallel. In this structure,                     the goodness of the simulation models in a what-if setting, i.e.,
+the start of the succeeding activity only happens after the                         predicting the performance of the process after a change.
+latest message event finishes. As our proposal models the
+extraneous waiting time as a delay before an activity, the                                      V. C ONCLUSIONS AND F UTURE W ORK
+extraneous waiting time occurring after each parallel activity                         In this paper, we presented a technique to enhance a BPS
+will be modeled as a delay of the succeeding one. For this                          model by modeling the waiting times caused by extraneous
+reason, the approach discovers a single activity delay before                       factors (i.e. extraneous activity delay) as timer events. The
+the activity being executed after the six message events.                           proposal combines the activity’s resource and enablement in-
+                                                                                    formation available in the event log to estimate the extraneous
+D. RQ2 - Accuracy of the enhanced simulation                                        delay of each activity instance, and discover a distribution
+   Table IV shows the results of the simulation with the                            function of its duration. To improve the estimation, we pro-
+(original) BPS model discovered by SIMOD, and the BPS                               posed a TPE hyperparameter optimization process to tune the
+models enhanced with our proposal. As it can be seen, the                           discovered extraneous activity delays. Then, for each activity
+BPS model enhanced with both versions of our proposal leads,                        with discovered extraneous delays, our proposal adds a timer
+in both datasets, to simulated logs that more closely replicate                     event previous to it in the BPS model.
+the temporal dynamics recorded in the original log, relative to                        We evaluated the proposal with a set of event logs simulated
+the original BPS model. In the case of the naive version of                         from BPS models with and without timer events, to mimic
+
+
+
+                                                                               78
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+                                                              Table IV
+ EMD VALUES ( THE LOWER , THE BETTER ) BETWEEN THE TEST EVENT LOGS , AND THE EVENT LOGS SIMULATED WITH THE ORIGINAL AND ENHANCED
+                                                           BPS MODELS .
+
+                                                         Cycle time EMD                                    Timestamp EMD
+                               Dataset                     Naive      TPE optimized                          Naive      TPE optimized
+                                             Original                                           Original
+                                                          proposal      proposal                            proposal      proposal
+                            BPIC 2012          129.47      120.70                65.80           400.79       393.73             320.66
+                            BPIC 2017          136.85      133.19                20.03           508.20       501.30             344.42
+
+
+
+already known extraneous activity delays. The goal is to re-                           [5] R. Andrews and M. T. Wynn, “Shelf time analysis in CTP insurance
+discover the injected extraneous activity delays. Our approach                             claims processing,” in Workshops on Trends and Applications in Knowl-
+                                                                                           edge Discovery and Data Mining (PAKDD 2017), ser. LNCS, vol. 10526.
+re-discovered all the injected extraneous delays except one,                               Springer, 2017, pp. 151–162.
+and no non-existent ones. With this evaluation, we discovered                          [6] N. Martin, L. Pufahl, and F. Mannhardt, “Detection of batch activities
+an interaction between waiting time due to resource con-                                   from event logs,” Inf. Syst., vol. 95, p. 101642, 2021.
+                                                                                       [7] M. Pourbafrani and W. M. P. van der Aalst, “Extracting process features
+tention and the extraneous activity delays. While an activity                              from event logs to learn coarse-grained simulation models,” in Pro-
+is being delayed for extraneous reasons, its resource might                                ceedings of the 33rd International Conference on Advanced Information
+be working in other tasks. This working time is detected as                                Systems Engineering (CAiSE 2021), ser. LNCS, vol. 12751. Springer,
+                                                                                           2021, pp. 125–140.
+resource contention, partially eclipsing the extraneous delay                          [8] B. Estrada-Torres, M. Camargo, M. Dumas, L. García-Bañuelos,
+and reducing its detected duration. To counter this eclipses, the                          I. Mahdy, and M. Yerokhin, “Discovering business process simulation
+TPE optimization scales the discovered durations to minimize                               models in the presence of multitasking and availability constraints,” Data
+                                                                                           Knowl. Eng., vol. 134, p. 101897, 2021.
+the distance between the simulated log and the recorded one.                           [9] F. Meneghello, C. Fracca, M. de Leoni, F. Asnicar, and A. Turco,
+Nevertheless, if the resource contention is high enough, the                               “A framework to improve the accuracy of process simulation mod-
+eclipse might be total and no extraneous waiting time is                                   els,” in Proceedings of the 16th International Conference on Research
+                                                                                           Challenges in Information Science (RCIS 2022), ser. LNBIP, vol. 446.
+discovered. If this happens in all the instances of an activity,                           Springer, 2022, pp. 142–158.
+no extraneous activity delay is discovered.                                           [10] M. Camargo, M. Dumas, and O. G. Rojas, “Learning accurate business
+   We also evaluated the impact in the simulation of real-                                 process simulation models from event logs via automated process
+                                                                                           discovery and deep learning,” in Proceedings of the 34th International
+life processes, by enhancing already discovered BPS models                                 Conference on Advanced Information Systems Engineering (CAiSE
+with two real-life event logs. The evaluation shows that our                               2022), ser. LNCS, vol. 13295. Springer, 2022, pp. 55–71.
+approach improves the temporal accuracy of the BPS models,                            [11] A. Armas-Cervantes, M. Dumas, M. L. Rosa, and A. Maaradji, “Local
+                                                                                           concurrency detection in business process event logs,” ACM Trans.
+producing simulated event logs that more closely mimic the                                 Internet Techn., vol. 19, no. 1, pp. 16:1–16:23, 2019.
+behavior of the process recorded in the original event log.                           [12] A. J. M. M. Weijters and J. T. S. Ribeiro, “Flexible heuristics miner
+   As future work, we plan to extend our technique by es-                                  (FHM),” in Proceedings of the IEEE Symposium on Computational
+                                                                                           Intelligence and Data Mining (CIDM 2011). IEEE, 2011, pp. 310–
+timating the trace inter-arrival time [14], [15] to discover the                           317.
+extraneous waiting times associated to the first activity of each                     [13] W.-D. Zabka, P. Blank, and R. Accorsi, “Has the pandemic impacted my
+trace, which are currently being discarded. In addition, we plan                           workforce’s productivity? applying effort mining to identify productivity
+                                                                                           shifts during COVID-19 lockdown,” in Industry Forum - 19th Interna-
+to use the resource availability calendars in the BPS model (or                            tional Conference on Business Process Management (BPM 2021), 2021.
+discover them if not present), to also consider the resources                         [14] N. Martin, B. Depaire, and A. Caris, “Using event logs to model
+as unavailable when they are out of their working hours.                                   interarrival times in business process simulation,” in Workshops of the
+                                                                                           13th International Conference on Business Process Management (BPM
+   One limitation of our technique is that it associates the                               2015), ser. LNBIP, vol. 256. Springer, 2015, pp. 255–267.
+extraneous waiting time as a delay for the next activity. There                       [15] G. Berkenstadt, A. Gal, A. Senderovich, R. Shraga, and M. Weidlich,
+may be cases where the extraneous waiting time is caused                                   “Queueing inference for process performance analysis with missing life-
+                                                                                           cycle data,” in Proceedings of the 2nd International Conference on
+by the previous activity (e.g. rest time). A different approach,                           Process Mining (ICPM 2020). IEEE, 2020, pp. 57–64.
+considering the extraneous delays as being dependent on the                           [16] J. Bergstra, R. Bardenet, Y. Bengio, and B. Kégl, “Algorithms for
+previous and following activities, might improve the results.                              hyper-parameter optimization,” in Proceedings of the 24th International
+                                                                                           Conference on Neural Information Processing Systems (NIPS 2011),
+                              R EFERENCES                                                  2011, pp. 2546–2554.
+                                                                                      [17] M. Dumas, M. L. Rosa, J. Mendling, and H. A. Reijers, Fundamentals
+ [1] L. Maruster and N. R. T. P. van Beest, “Redesigning business processes:               of Business Process Management, Second Edition. Springer, 2018.
+     a methodology based on simulation and process mining techniques,”                [18] B. van Dongen, “Bpi challenge 2012,” Apr 2012. [Online]. Available:
+     Knowl. Inf. Syst., vol. 21, no. 3, pp. 267–297, 2009.                                 https://data.4tu.nl/articles/dataset/BPI_Challenge_2012/12689204/1
+ [2] A. Rozinat, R. S. Mans, M. Song, and W. M. P. van der Aalst,                     [19] ——, “Bpi challenge 2017,” Feb 2017. [Online]. Available: https:
+     “Discovering simulation models,” Inf. Syst., vol. 34, no. 3, pp. 305–327,             //data.4tu.nl/articles/dataset/BPI_Challenge_2017/12696884/1
+     2009.                                                                            [20] M. Camargo, M. Dumas, and O. G. Rojas, “Discovering generative
+ [3] N. Martin, B. Depaire, and A. Caris, “The use of process mining in                    models from event logs: data-driven simulation vs deep learning,” PeerJ
+     business process simulation model construction - structuring the field,”              Comput. Sci., vol. 7, p. e577, 2021.
+     Bus. Inf. Syst. Eng., vol. 58, no. 1, pp. 73–87, 2016.
+ [4] M. Camargo, M. Dumas, and O. González, “Automated discovery of
+     business process simulation models from event logs,” Decis. Support
+     Syst., vol. 134, p. 113284, 2020.
+
+
+
+
+                                                                                 79
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:30:11 UTC from IEEE Xplore. Restrictions apply.
+

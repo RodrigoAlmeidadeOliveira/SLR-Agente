@@ -1,0 +1,599 @@
+     Submitted to the 16th IEEE International Conference on Automated Software Engineering Nov 20-22, San Diego, USA.
+     http://sigart.acm.org/Conferences/ase/
+     WP ref: 01/choices/ June 29, 2001
+
+
+
+
+                               Better reasoning about software engineering activities
+                                                                                                                     
+                                        Tim Menzies                                        James D. Kiper
+                               University of British Comlumbia                            Miami University
+                                    tim@menzies.com                                    kiperjd@muohio.edu
+
+
+     ABSTRACT1                                                                    need data and, often, there has not been much data avail-
+                                                                                  able. For example, the majority of software development
+        Incomplete information may prevent software analysts                      organizations do not conduct systematic data collection. As
+     from making categorical decisions about software. This 40                    evidence for this, consider the Software Engineering Insti-
+     problem is particularly acute when discussing subjective                     tute’s capability maturity model (CMM [20]) which catego-
+     early life cycle issues in data-starved domains that lack an                 rizes software organizations into one of five levels based on
+     experience repository. This paper discusses JANE- a lan-                     the maturity of their software development process. Below
+     guage for better reasoning about subjective information in                   CMM level 4, there is no systematic data collection. Below
+     data starved domains. JANE uses stochastic search to gen-                    CMM level 3, there is not even a written definition of the
+     erate logs of behavior from models of subjective knowledge                   software process. Many organizations exist below CMM
+10   and inductive learning to summarize those logs. JANE can                     level 32 hence reliable data on SE projects is scarce, or hard
+     be used for (i) cost optimization, (ii) the semi-automatically               to interpret.
+     analysis of a very large number of choices; and (iii) han-                       Another explanation is that standard data mining an-
+     dling uncertainty about the extent to which sub-goals influ- 50              swers the wrong question. A standard output from a data
+     ence each other. In experiments with logs generated from                     miner is a classifier which converts some inputs into one of
+     an encoding of the SEI CMM level-2, JANE could find a                        a small number of distinct classes (e.g. lowFaultModule,
+     small number of control actions that could better achieve                    highFaultModule). Such a result may not be of interest to a
+     top-level goals of some software development task.                           software manager. As one manager told us:
+        LENGTH: 5900 words                                                              Don’t tell me I am heading for a cliff- rather, tell
+     1. Introduction                                                                    me how to avoid this cliff NOW and all cliffs like
+                                                                                        that in the future.
+20       Why is data mining not used more in software engineer-                   That is, software managers are less interested in assessment
+     ing (SE)? Recent reviews of the use of data mining in SE                     models which report the status of a current situation than in
+     (e.g. [15, 16]) report that data mining in SE is a mature 60                 controller models for changing the current and future situa-
+     technique based on widely-available tools using well under-                  tion.
+     stood algorithms (e.g. neural nets or decision tree learners                    When we protested to our software manager that we
+     or Bayes nets [3, 8, 11, 24]). Also, impressive results have                 don’t have the data required to answer her question, she
+     been reported in certain domains (e.g. cost-estimation [3]                   posed an alternate goal for data mining which we call the
+     or prediction of faulty modules [28]). Further, data min-                    minimal management question:
+     ing tools that can handle very large data sets now come                      The minimal management question: If you can’t tell me
+     bundled and integrated with standard commercial packages                          what to do, can you at least tell me what is not worth
+30   such as Microsoft’s SQL Server   [26]. Lastly,                           doing?
+     clear and simple methodological guidelines for data min-                     That is, given the huge range of tools and methodologies
+     ing in SE have existed for nearly a decade [22]. Never-
+                                                                  70              available in the commercial world, our manager wants to
+     theless, the total number of reported applications (as seen                  avoid wasting time on techniques that are not useful.
+     in [15, 16]) is not large.                                                      For example, Figure 1 shows the impacts of three differ-
+         One explanation for the lack of reported applications is
+                                                                                  ent sets of management decisions on a software project. The
+     the poor state-of-the-art in SE data collection. Data miners
+                                                                                    2 Personal communication with SEI researchers.
+        1 Note to reviewers:    the abstract originally submitted to ASE2001
+     stressed the comparative merits of this approach to the softgoals of Chung
+     et.al. [4] However, as the paper matured, other aspects became more im-
+     portant and softgoals are now only mentioned in the Related Work section.
+         1 Corresponding author. Department of Electrical & Computer Engi-
+
+     neering; 2356 Main Mall; Vancouver, B.C. Canada V6T1Z4. Phone: (604)
+     822-3381 Web: http://tim.menzies.com.
+         2 Dept. Computer Science & Systems Analysis, Miami University, Ox-
+
+     ford, Ohio, USA.
+                                                                                                              KEY:
+      70                        70                        70                           70                     Top-to-bottom = least
+      60                        60                        60                           60                     desirable to most desirable.
+      50                        50                        50                           50
+      40                        40                        40                           40
+      30                        30                        30                           30                                   = high cost, low chances;
+      20                        20                        20                           20                                   i.e. a very bad software
+                                                                                                                            project
+      10                        10                        10                           10
+       0                         0                         0                            0                                   = low cost, low chances
+           14 22 30 24               5 16 5 74                 7 13 19 60                   5 14 26 55
+                                                                                                                        = high cost, high chances
+               =current                                                                                                     = low cost, high chances;
+              worth=1                  worth=1.44                worth=1.31                   worth=1.28                    i.e. a good software
+                                                                                                                            project
+
+
+                         Figure 1. Ratios of different software project types seen in four situations.
+
+
+      left-hand-side histogram marked  shows the ratio of dif-             cerned with issues of (e.g.) which design pattern to ap-
+      ferent project types predicted by a software management or-             ply, than with what overall project structure should be im-
+      acle (described below). The other histograms (  ) show           plemented. Improving CMM2-style decisions is important
+      how those ratios change after applying treatments; i.e. man-            since in early software lifecycle, many CMM2-style deci-
+      agers taking certain actions to change their current situa-             sions effect the resource allocation for the rest of the project.
+      tion. The worth of each option is a reflection of the pro-                 Secondly, a syntax is required to encode the knowl-
+ 80   portion of good and bad projects, compared to  ; i.e.                edge source. This study uses the syntax of the JANE lan-
+      (!#"$ &%('*) ). Note that as worth increases, the pro-         guage [17] which is an extension to the ARRT system of
+      portion of preferred projects also increases.                   120     Feather et.al. [7].
+          Figure 2 shows some of the potential treatments known                  Thirdly, an interpreter is required to execute the syntax.
+      to the software management oracle. The underlined treat-                In the case of subjective software engineering knowledge,
+      ments in that figure show the treatments used in Figure 1.              this interpreter must be able to handle degrees of belief.
+      Note that most of the treatments are not underlined; i.e.               Hence, the system described below assigns a Chances
+      many treatments can be proposed in this domain, but only                weight to all of its propositions.
+      a very small subset appear in the best treatments shown in
+                                                                                 The core data structure in ARRT is a network of faults
+      Figure 1. Figure 2 is hence an answer to the minimal man-
+                                                                              and risk mitigation actions that effect a tree of requirements
+ 90   agement question since it identifies ignorable management
+                                                                              written by the stakeholders. Potential faults within a project
+      actions.
+          The rest of this paper describes how Figure 1 was gen-
+      erated using stochastic simulation followed by summariza-
+      tion. The software management oracle used in the this study
+                                                                                       baselineAudits,                   planRevised,
+      contains numerous subjective features. At each subjective
+                                                                                baselineChangesControlled,           requirementsReview,
+      point, a range of behaviors is possible. Each stochastic sim-
+                                                                                  changeRequestsHandled,              requirementsUsed,
+      ulation samples one possible behavior. After many such                       changesCommunicated,          reviewRequirementChanges,
+      stochastic simulations, it was possible to find treatments                  configurationItemStatus-         risksTracked, SCMplan,
+      that had (usually) the same impact despite the variability                           Recorded,                    SCMplanUsed,
+100   in the oracle. These treatments were found by summa-                     deviationsDocumented, docu-       SElifeCycleDefined, SEteam-
+      rizing a log of the simulations with the TAR2 treatment                     mentedDevelopmentPlan,           ParticipatesInPlanning,
+      learner. This paper presents the first use of TAR2 on a real-               documentedProjectPlan,          SEteamParticipatesOnPro-
+      world model (previous reports were focused on toy exam-                          earlyPlanning,             posal, SQAauditsProducts,
+      ples [17]).                                                               formalReviewsAtMilestones,         SQAplan, SQAplanUsed,
+                                                                                      goodUnitTesting,               SQAreviewActivities,
+      2. Building a Software Management Oracle                                     identifiedWorkProducts,          workProductsIdentified
+                                                                                  periodicSoftwareReviews
+         This section describes the software management oracle
+      used in the study. Three components are required for such
+      an oracle. Firstly, a knowledge source is required. This                   Figure 2. Management actions in the CMM2
+      study used a detailed description of CMM2 [21, p125-191].                  model. SQA= software quality assurance and
+110   We used CMM2 since, in our experience, many organiza-                      SCM= software configuration management)
+      tions can achieve at least this level. CMM2 is less con-
+
+                                                                          2
+                                                                                       Faces denote requirements;
+                                                                                       Toolboxes denote actions;
+                                         0.9
+                          require4                                                     Skulls denote faults;
+                                                               fault2
+                                                                0.4                    Conjunctions are marked with one arc; e.g. require1 if require2
+                           0.3
+                                                                   0.4 fault3              and require2.
+                   0.9                           fault1                                Disjunctions are marked with two arcs; e.g. fault1 if fault2 or
+        require1         require3    - 0.3                           - 0.1
+                                                                action2                     fault3.
+              1                              - 0.1        1
+                            1                                                          Numbers denote impacts; e.g. action5 reduces the contribution
+                                         action1              action3    1
+                   require2 require5                      1                               of fault3 to fault1, fault1 reduces the impact of require5,
+                                                                      1 action4           and action1 reduces the negative impact of fault1.
+                                                                    1
+                                                                   action5             Oval denotes structures that are expressible in JANE (under con-
+                                                                                           struction), but are not expressible in the current version of
+                                                                                           ARRT.
+
+         Figure 3. Left: an An ARRT/JANE-style [7] software management oracle. Right: explanation of
+         symbols.
+
+
+
+      are modelled as influences on the edges between require-                        defined later, after a tour of JANE.
+130   ments. Potential fixes are modelled as influences on the                        2.1. JANE
+      edges between faults and requirements edges.
+           In ARRT, (i) a requirement is reachable if the disjunction                    A JANE programmer enters in models in a propositional
+      of any of its children are reachable; (ii) faults and actions are               rule-based language of the form:
+      flat facts. Users of ARRT sometimes find these limitations                      conclusion if precondition.
+      to restrictive. For example:                                                    Internally, these rules are converted into a directed graph
+         + Hardware engineers often use fault trees.
+          + Software process engineers often describe processes                       with the following BNF3 :
+                                                                        170           Graph ::== Goal (Vertex)* (Edge)*
+             with some sequence to them; e.g. CMM-4 can’t be                          Goal   ::== Item
+             implemented till after CMM-3.                                            Vertex ::== Mix | Item
+                                                                                      Item   ::== Type Variable Value Label
+140       It would be useful if ARRT could be integrated with                         Type   ::== action | fault | requirement
+      these data structures. To support this, the JANE language al-                   Mix    ::== CombineRules Order
+      lows faults, actions, and requirements to exist in arbitrarily                  Note that each Graph has a special Goal Item. Concep-
+      complex networks of conjunctions and disjunctions. Fig-                         tually, JANE is a backward chainer that performs a recursive
+      ure 3 shows what can be expressed in ARRT and JANE:                             descent from the Goal.
+      the section marked with an oval is not expressible in ARRT                           In JANE, every vertex is either:
+      and contains dependencies between actions, between faults, 180                     + An Item where some Value is assigned to some
+      between actions and faults, and between requirements and                               Variable.
+      faults.                                                                             + Or a Mix vertex where influences are combined.
+          ARRT-style RE outputs a minimum set of “risk-
+150   mitigations”, a.k.a. treatments, which address the poten-                         Before we can explain Mixing, we must explain what is
+      tial faults. Specifically, the goal of a treatment is to maxi-                  mixed: i.e. Costs and Chances.
+      mize our coverage of the requirements while maximizing the                      2.2. Cost and Chances
+      ways the actions reduce the impact of the faults and mini-
+                                                                                        Each Vertex and Edge in JANE is augmented with a
+      mizing the costs of the actions. Optimizing on all these cri-
+                                                                                      Cost and a Chances weight:
+      teria is complicated by the interactions inside the model.
+                                                                                      Edge    ::== Vertex Label Vertex
+      For example, in Figure 3, fault2 and require4 are inter-                        Label   ::== Cost Chances
+      connected: if we cover require4 then that makes fault2 more 190                 Cost    ::== null | 0.00 .. infinity
+      likely which, in turn, makes fault1 more likely which re-                       Chances ::== null | 0.00 .. 1.00
+      duces the contribution of require5 to require3. Optimiza-
+160   tion within JANE is performed by summarizing multiple                           JANE’s Chances define the extent to which a belief in one
+      random searches over (e.g.) Figure 3 to find the key values                     vertex can propagate to another. Costs let an analyst model
+                                                                                          3 In this article’s BNF notation, W ::== X Y |Z denotes that the struc-
+      that most effect the system. This summarization process is
+                                                                                      ture , contains either the structures X and Y or the structure - . (X)*
+                                                                                      denotes zero or more repeats of X. (X)+ denotes one or more repeats of
+                                                                                  3   X. [X] denotes that X is optional. Terminals start with lower case, or are
+                                                                                      quoted
+      the common situation where some of the Cost of some                 The ors operator uses Sum(chances); and uses
+      procedure is amortized by reusing its results many times.           Product(chances); and not uses negate. Hence, if
+      Hence, the first time we use an action we incur that Cost           the Chances of fault2,fault3,action5 are all unity, then:
+      but afterwards, that action is free of charge.                         + If action5 is false, the Chances of fault1 is /. 0 12"$3. 054
+      2.3. Combine Rules                                            250          " )76  %8%9' /. : .
+                                                                              + If action5 is true, the Chances of fault1 is /. 0;1<"$3. 0=4
+          The Cost and Chances of Edges are provided by the                     " )76 3. > %8%9' /. 00@?A3. : .
+200   JANE programmer. The Cost and Chances of Vertexs
+                                                                          That is, using action5 significantly reduces the Chances of
+      are either provided by the JANE programmer or computed
+                                                                          fault1.
+      at runtime via a traversal of the edges. In JANE, this com-
+      putation is defined by the CombineRules at the Mix ver-
+                                                                          2.4. JANE and Random Search
+      tices. For each child of a Mix node, a recursive descent is
+      executed and the returned Cost and Chances values are                  JANE supports two mechanisms for random search.
+      combined according to the CombineRules:                             Firstly, when defining Costs and Chances, the program-
+      CombineRules   ::== CostCombine                                     mer can supply a range and a skew. For example:
+                          ChancesCombine                                  goodUnitTesting and cost = 1 to +5
+      CostCombine    ::== first(cost) | sum(cost)
+210   ChancesCombine ::== first(chances) |                          260   defines the cost of goodUnitTesting as being somewhere in
+                        | sum(chances) negate                             the range 1 to 5, with the mean skewed slightly towards 5
+                        | product(chances)                                (denoted by the “+”). During a simulation, the first time this
+                                                                          cost is accessed, it is assigned randomly according to the
+          Negate is used for negation. For example, when                  range and skew. The assignment is cached so that all sub-
+      searching X if not A, the Chances of X are 1-Chances(A).            sequent accesses use the same randomly generated value.
+          Product(chances) is used for conjunctions. For ex-              After each simulation, the cache is cleared. After thousands
+      ample, when searching X if A and B and C, the Chances               of simulations, JANE can sample the “what-if” behavior re-
+      of X is the product of the chances of A,B,C.                        sulting from different assignments within the range.
+          First(X) is used for simple disjunctive evidence. For              Secondly, JANE can randomized where it searches using
+      example, when testing X if A or B or C, then the Cost and 270       the Order of the Mix operators:
+220   Chances of X is taken from the first member of A,B,C that           Order      ::== Random | Left2Right
+      is satisficed.                                                      Left2Right ::== and | or | ors | any | not
+          Sum(X) is used for summing disjunctive evidence. For            Random     ::== rand | ror | rors | rany
+      example, JANE supports a special operator called ors that
+      is used for implementing disjunctive summing (JANE also             In the case where the child-order represents some se-
+      supports several other novel operators, described in the next       quence that must be persevered (e.g. ordering software pro-
+      section). Ors is like or except that when testing (e.g.) X if       cesses) JANE programmers can use Left2Right opera-
+      A ors B ors C, all members of A,B,C will tested. If at least        tors. However, repeatedly searching a graph in the same
+      one succeeds, the the Cost and Chances of X is summed               order may miss certain features. For example, in Figure 3,
+      from the satisficed members of A,B,C.                               either “action4” or “action4 and action5” could be used to
+230       Summing evidence is useful when several weak supports 280       achieve action1. Assuming all actions cost the same, then
+      for a goal can sum to a strong belief in that goal. JANE            ignoring action5 and merely performing action4 would be
+      supports both or and ors since summing is valid in some             cheaper method of achieving action1. However, this would
+      cases and invalid in others. Independent indicators such as         imply that action5 would no longer be disabling most of
+      moving and talking could be summed to form a stronger be-           fault3.
+      lief such as alive. Summing dependent indicators such as                 In order to not to miss such important interactions, JANE
+      hasBloodPressure and heartBeating implies alive is depre-           supports several random search operators: rand, ror,
+      cated.                                                              rors, and rany.
+                                                                             + For CBEDGFH&IKJML/N8KO , JANE tries to prove all of X op
+          Sum(X) and Product(X) can be combined to imple-
+      menting mitigation effects. For example, recall from Fig-                  Y op Z, but does so in some randomly selected order.
+                                                                              + Rany is best understood by comparison with ror.
+240   ure 3 that action5 disables most of the contribution of of 290
+      fault3 onto fault1. In the JANE syntax, this can be coded as               The expression X ror Y ror Z is exited when any one
+      fault1 if                                                                  of X,Y,Z is satisficed. In contrast, JANE tries to prove
+          fault2 @ 0.4                                                           one or more of X rany Y rany Z, and does so in some
+          ors (fault3 @ 0.4                                                      randomly selected order. Rany is useful when search-
+                and not action5 @ 0.9)                                           ing for subsets that contribute to some conclusion. For
+
+                                                                     4
+           example, the following JANE rule offers several es-                   Summarization of JANE output is performed by the
+           sential features of stableRequirements plus several op-          TAR2 treatment learner [17]. A treatment learner outputs
+           tional factors relating to monitoring change in evolving 350     a set of possible treatments (  ) using the process described
+           projects. The essential features are rand-ed together            below. Each treatment is assessed by the change it makes to
+300        while the optional factors are rany-ed together.                 the distribution of classes. A good treatment increases the
+           stableRequirements   if effectiveReviews @ 0.3
+                                                                            frequency of the better classes (where “better” is defined
+               rand requirementsUsed @ 0.3                                  below).
+               rand sEteamParticipatesInPlanning @ 0.3
+               rand documentedRequirements @ 0.3
+                                                                                 Treatment learners input a set of classified examples
+               rand sQAactivities @ 0.3                                     (T@U ). Each example is a conjunction of attribute ranges,
+               rand (reviewRequirementChanges @ 0.3
+                     rany softwareConfigurationManagement@0.3
+                                                                            plus one classification V . This classification comes from a
+                     rany baselineChangesControlled @ 0.3                   pre-defined set of classes W ; i.e. V@DEW . Each classification
+310                  rany workProductsIdentified @ 0.3
+                     rany softwareTracking @ 0.3).
+                                                                             V is associated with a numeric score i.e. some classifications
+                                                                      360   score better than others.
+        + Rors is useful for specifying the high-level goals of                  For the CMM model, after 2000 random walks, a
+          the system. While rany will search some subset of its             wide range of generated Costs and Changes in good-
+          parameters, rors will search all its parameters. For              Project were observed. These ranges were sub-divided
+          example, in this less-than-perfect world, it is unlikely          into high/low bands of roughly the same size. Comb-
+          we can be rich and happy and healthy, but that should             ing high/low Cost/Chances yields four classes. These
+          not stop us from trying; i.e.                                     classes were scored as follows:
+           goal if rich rors happy rors healthy                             Score=0: High cost, low chance
+                                                                            Score=1: Low cost, low chance
+      The operators rand, ror, rors and rany have the same                  Score=2: High cost, high chance
+320   satisficing criteria as and, or, ors and any respectively, 370        Score=4: Low cost, high chance.
+      but the latter search left-to-right while the former search in a           That is, our preferred projects are cheap and highly likely
+      randomly selected order. In terms of the CombineRules                 while expensive, low odds projects are to be avoided.
+      described above, And and rand are conjunctive operators;                   A treatment learner searches for candidate attribute
+      Or and ror are simple disjunctive operators; and the rest             ranges; i.e. ranges that are more common in the best classi-
+      are summing disjunctive operators.                                    fication than in the not-so-best classification. In the CMM
+      2.5. The CMM2 Model                                                   domain, such a candidate is an attribute range that would
+                                                                            tend to drive the system into low cost, high chance projects.
+            CMM2 written in JANE has 55 Items with Value D                       A heuristic ranking X is given to each candidate reflect-
+      FHPNRQ#O . Of the 55 Items, 27 were identified as management         ing (i) how much more common is the candidate in the best
+      actions that could be changed by managers (see Figure 2). 380         class than in some non-best-class V ; and (ii) how much bet-
+330   The top-level Goal was goodProject.                                   ter is the best class than class V :
+                                                                                                                                              Zyx       _Cjzk^m^rZycRbe^Cf
+            Within the model, Chances values were added to 79               Y[Z]\^C_8`HaHb&\dcCbe^Rfhg8i9_CjlkK^m^\d_Pgngho prq s7tvuw           u                       q
+                                                                                                                                                Zyx         _Cjzk^m^rZy_
+      edges of the 150 edges in the model. While each of these                                                                      q s[t7uw         u                   q|{
+      values are based on expert judgement, their precise value
+      is subjective. Hence, each such Chances value S was                     where }  '~ denotes an attribute } with range ~ and
+                                                                               T@US     denotes the size of the subset of examples that
+      altered to be a range
+                                                                            contain S .
+      chances = 0.7*X to 1.3*X
+                                                                                  Figure 4 shows the frequency counts of the X s seen in
+                                                                            2000 runs of the CMM-2 model. Candidates with a large X
+      so the simulator could experiment with values nearby the
+                                                                            score are attribute ranges that are far more frequent in the
+      stated Chances value.
+                                                                            best class (high chances, low cost projects) than in other
+         The full model is available via email from the authors.
+                                                                            classes. Looking at the right-hand-side of Figure 4, we
+340   3. Learning From JANE                                           390   see that there exist a small number of candidates with out-
+                                                                            standingly large X s. These are the attribute ranges that oc-
+         One execution of JANE can be summarized by the Cost                cur far more frequent in the best class (high chances, low
+      and Chances of the top-level goal goodProject, the 79 val-            cost projects) than in other classes. The treatments  are
+      ues assigned to the subjective edges, and the values assigned         all subsets of candidates with a ranking higher that some
+      to the 27 manager’s actions of Figure 2. Random walking               user-specified X threshold value X . Looking at Figure 4, at
+                                                                                                                   
+      over JANE models can hence generate an overwhelming                   X ' : , there 10+4+2=16 candidates.
+                                                                                
+      amount of data (79+27+2=108 data points per simulation,                     In reality, it is hard to change many aspects of a project
+      times the number of simulations).                                     and the wise software engineer seeks the smallest number of
+
+                                                                       5
+                                                                                                                   : requirementsUsed.Cost=lower and not periodicSoftware-
+                                                                                                                Reviews=no and formalReviewsAtMilestones.Cost=lower
+                                                                                                              
+             )                                                                                                    : requirementsUsed.Cost=lower and
+                                                                                                                     goodUnitTesting.Cost=middle and
+              )                                                                                                   formalReviewsAtMilestones.Cost=lower
+                                                                                                          
+                                                                                                                  : goodUnitTesting.Cost=lower and
+                                                                                                                    periodicSoftwareReviews.Cost=middle and
+                                  0                 :       )       )                                             formalReviewsAtMilestones.Cost=lower
+                                             
+                                                                                                                   Figure 5. The three best treatments found in
+         Figure 4. Frequency counts of X s seen in the                                                             the CMM-2 model.
+         CMM-2 model.
+
+                                                                                                   430   using requirements and formal reviews at milestones). Note
+      changes with the greatest impact. Assuming we seek three                                           that if periodicSoftwareReviews are conducted,  is saying
+400   changes, there are 560 possible treatments of size 3 in out                                        that there is no apparent need to reduce the cost of such
+      16 candidates. The best treatment is the one that offers the                                       reviews.
+      biggest improvement to the class distributions seen in the                                            The minimal management question in the introduction
+      untreated data. To find the best treatment, we compute fol-                                        can now be answered. The underlined terms in Figure 2 are
+      lowing ratio for all 560 treatments:                                                               the actions found in the best treatments. The un-underlined
+                                                                                                         terms in Figure 2 are the factors that were not found to usu-
+                                                          _Rjzk^e^rZ_ o;^C_8`HaHb&\d_Pg               ally change the Cost and Chances of a goodProject and
+         `eaef5\         gMZy!& q s[tvu            u                q
+                                                   cRk^Pbmjz/b  `Hamfn                 (1)         can be ignored by management.
+                                                                                                   440   4. External Validity
+       where baseline worth is the worth seen in the untreated
+      example set:
+                                                                                                              There are several threats to the external validity of the
+             cRk^Pbmjzb  `HamfnZ             _Cjzk^m^Z_ o;^C_R`eab&\d_Pg
+                                               q s[t7u               q                                   above conclusions. Firstly, while the knowledge source
+                                         8                                                           used in this study (CMM2) is widely accepted, it is hardly
+                                                                                                         universally accepted. Proponents of some other knowledge
+         Figure 5 shows the three best treatments ( 2NC(NR( )                                    source could reject the specifics of the above conclusions,
+      found using this technique (and Figure 1 compared the ef-                                          but still use the general technique; i.e. they could encode
+410   fects of these treatments to the untreated examples). Note                                         their preferred knowledge source in JANE and repeat the
+      that the values of each attribute are reported using the tags                                      above analysis.
+      no, lower, middle, or upper. In treatment learning, continu-                                            Secondly, numerous subjective choices were made when
+      ous attribute ranges are divided into N-descrete bands based 450                                   encoding JANE. While these choices were made using our
+      on percentile positions. For N=3, we can name the bands                                            best expert judgement, it is possible that our version of
+      lower, middle, upper for the lower, middle, and upper 33%                                          CMM2 is somehow different to the intent of the originally
+      percentile bands.                                                                                  CMM2. Fortunately, JANE gives us two facilities for rec-
+         In Figure 5,   and   are advising to lower the cost of:                                     ognizing and handling such anomalies:
+      Using requirements: This could be accomplished by                                                     + Figure 1 is a summary of the stable properties seen
+            (e.g.) by sharing them around the development team                                                  in 2000 runs of our encoding of CMM2. Our model
+420         in some searchable hypertext format                                                                 of CMM2 could be faulted if that summary does not
+                                                                                                                match expert intuitions in this domain. In fact, the
+      Performing formal reviews at milestones: This could be                                                    JANE method was originally devised as a validation
+          accomplished by (e.g.) using ultra-lightweight formal 460                                             tool for subjective knowledge; i.e. to test subjective
+          methods such as proposed by Leveson [14].                                                             knowledge, sample and summarize it’s behavior.
+                                                                                                             + If disputes arise between JANE programmers on the
+      Performing good unit testing: This could be accom-
+          plished by (e.g.) hiring better test engineers.                                                       appropriate encoding, all the possible resolutions to
+                                                                                                                the dispute could be added to a JANE program. If,
+      The value no refers to missing values; a report of X=no is a                                              after thousands of executions, these different resolu-
+      recommendation not to use S as part of a treatment. Such                                                  tions have no net impact on the overall behavior of the
+      a negative recommendation is seen in   which is advising                                                system (as summarized by displays such as Figure 1),
+      against periodicSoftwareReviews (plus lowering the costs of                                               then we need not resolve those particular disputes.
+
+                                                                                                    6
+             attribute1                              cluster1:
+                                                                         y-axis of Figure 6. Note that a prerequisite for treatment
+                                                     high zone           learning is that some attributes are control variables; i.e.
+                                     4 4     0                           they have some causal influence on the system. Candidate
+                                   0 4 43 4
+          treatment1      {        43 0
+                                   44
+                                          0 4
+                                         4 0
+                                           3
+                                                                         control variables for CMM2 were shown in Figure 2.
+                                                                             Our work could be characterized as lightweight require-
+                                                                   510   ments engineering for software process decisions. Goal hi-
+                                1 1                  cluster 2:          erarchies are a technique for heavyweight requirements en-
+                              04 4                   low zone
+                              0 0 130                                    gineering about software product decisions [29]. A goal
+                                  0
+                                    {            attribute2
+                                                                         hierarchy is a hierarchy of goals where every node contains
+                                                                         assertions about products in the domain, expressed as frag-
+                                   treatment2
+                                                                         ments in the UML syntax. As system goals change, parts
+                                                                         of this hierarchy are pruned and the implemented system
+                                                                         is designed from the remaining UML fragments. Artifacts
+            Figure 6. Treatments in attribute space.                     within the goal hierarchy are described in sufficient detail to
+                                                                         permit a formal analysis of (e.g.) the invariants within a sys-
+                                                                   520   tem. Goal hierarchies are inappropriate for subjective infor-
+          Thirdly, even if results like Figure 1 are applica-            mation such as our software management oracle since for-
+470   ble to general software development, a particular project          mal methods do not permit degrees of belief in some propo-
+      may have idiosyncracies that distance it from most other           sition. Also, the detail required for formal approaches may
+      projects. To handle such idiosyncracies, JANE lets a pro-          be unavailable, especially in the early parts of the software
+      grammer provide an initial set of fixed Variable, Value            lifecycle.
+      and Label bindings to a Vertex. Such initial bindings re-              When full formal methods is impractical, an alternative
+      strict the simulation to just executing scenarios relevant to      is to use formal tools on highly abstracted versions of the
+      a particular project and, hence, restrict the generated treat-     domain models. For example, Leveson [13] argues that the
+      ments to those relevant to a project.                              cost-effective safety testing of requirements can be accom-
+          Fourthly, the above conclusions were inferred from a 530       plished via an analysis of a lightweight model such as fault
+      random sampling of the possible behavior in the CMM-2              trees [14] or state machines [10]. Both heavyweight and
+480   model. One issue with random sampling is coverage; i.e.            lightweight formal tools require a systems description and
+      the random search may not have found everything of inter-          some formal properties to prove across those systems. In
+      est in the model. To protect against this, it is good practice     the software management literature we have seen, and in
+      in treatment learning to double the size of the sample and         our own work, the only property sought has been coverage
+      check that the treatments learnt from a sample of size  still     of some high-level goals. Such simple coverage properties
+      hold in a sample of size  . At 4000 runs of the CMM-2           may not require the intricacy of formal tools (applied either
+      model, only the candidates underlined in Figure 2 were in          in a lightweight or a heavyweight mode).
+      the top 3 treatments.                                                  Most formal methods focus on product features of soft-
+      5. Related Work                                              540   ware. An alternate approach are process programming lan-
+                                                                         guages such as Little-JIL [2, 30]. In Little-JIL, each soft-
+                                                                         ware task can include pre-conditions, post-conditions, ex-
+          Bayesian reasoning has been used to sketch out subjec-
+                                                                         ception handlers, and sub-tasks. The core data structure of
+490   tive knowledge (e.g. our software management oracle), then
+                                                                         Little-JIL is hence a top-down decomposition tree showing
+      assess and tune that knowledge based on available data.
+                                                                         sub-tasks inside tasks. An interpreter exists for Little-JIL
+      Success with this method includes the COCOMO-II effort
+                                                                         models [2] but in the available reports4 , there seems no em-
+      estimation tool [3] and defect prediction modelling [8]. In
+                                                                         phasis of the processing of subjective knowledge.
+      domains that lack the data required for the tuning (e.g. our
+                                                                             The softgoal framework of Chung, Nixon, Yu, and My-
+      test domains), Bayesian reasoning is impractical.
+                                                                         lopoulous [4] (hereafter, CNYM) was especially designed
+          Treatment learners solve a problem that is subtlety dif- 550   for the processing of subjective knowledge. In CNYM, soft-
+      ferent from the standard machine learning problem solved           goals are distinguished from goals as follows. A goal has a
+      by (e.g.) C4.5 [23]. Standard learners assume that all             well-defined non-optional feature of a system that must be
+      classes are of equal value while treatment learners assume         available. A softgoal is goal that has no clear cut criteria
+500   that some partial ordering exists between classes. Standard        for success. While goals can be conclusively demonstrated
+      learners output some descriptor of the clusters in attribute       to be satisfied or not satisfied, softgoals can only be satis-
+      space e.g. the circles on Figure 6. Treatment learners output      ficed to some qualitative degree. Softgoal label propagation
+      a treatment which select for examples from higher scoring          rules define how these qualitative values impact each other
+      classes; e.g. the two treatments shown on the x-axis and
+                                                                           4 I.e. [2, 30] and the papers accessible from http://laser.cs.
+
+                                                                         umass.edu/tools/littlejil.html
+                                                                     7
+      (JANE performs the same task using its CombineRules).                  ing in design [12]; minimal environments in the ATMS [6];
+      In CNYM, when two qualitative influences conflict, CNYM                and funnels in HT0 [17]. We predict that TAR2 would be a
+560   requests a resolution for the user. When the softgoal models           useful way to summarize logs of behavior seen in all these
+      are small, when the stakeholders all agree, and the issues are         domains.
+      clear-cut, then “ask the user” is a valid method of probing            6. CONCLUSION
+      a space of subjective options. However, when models get
+      large or more intricate, or when the stakeholders all argue               The specific goal of our case study is to give a software
+      about which models or goals are appropriate, then manually             project manager a way of addressing the minimal manage-
+      selected resolutions to individual conflicts become difficult.         ment question. We have described methods to guide man-
+      JANE enables the exploration of multiple sets of possible              agers through the dense forest of possible treatments to iso-
+      resolutions via numerous stochastic simulations.                 620   late those which are likely to have minimal effect of high-
+          Other research has explored simulation for making de-              level project goals, and those which are leverage points.
+570   sign decisions. Bricconi et.al. [9] built a simulator of a                The more general goal of this paper was to extend data
+      server on a network, then assessed different network de-               mining into early lifecycle software engineering where both
+      signs based on their impact on the server. Menzies and                 data and objective knowledge is scare. Data miners need
+      Sinsel assessed software project risk by running randomly              data and when data is absent, we can generate it using
+      selected combinations of inputs through a software risk as-            stochastic search. Generating logs using stochastic search
+      sessment model [19]. Josephson et.al. [12] executed all                from subjective knowledge (such as our CMM2 knowledge)
+      known options in a car design to find designs that were best           is particularly fruitful since each possibility generates an-
+      for city driving conditions. Bratko et.al. [1] built qualitative       other entry in the log. However, large logs have to be
+      models of electrical circuits and human cardiac function. 630          summarized using techniques such as the TAR2 treatment
+      Where uncertainty existed in the model, or in the propaga-             learner. Our experience with TAR2 has been that this pro-
+580   tion rules across the model, a Bratko-style system would               cess produces a very small number of sets of treatments that
+      backtrack over all possibilities.                                      are likely to be most effective in meeting overall project
+          Simulation is usually paired with some summariza-                  goals.
+      tion technique. Our research was prompted by certain                   References
+      short-comings with the summarization techniques of oth-
+      ers. Josephson et.al. used dominance filtering (a Pareto de-            [1] I. Bratko, I. Mozetic, and N. Lavrac. KARDIO: a Study in
+      cision technique) to reduce their millions of designs down                  Deep and Qualitative Knowledge for Expert Systems. MIT
+      to a few thousand options. However, their techniques are                    Press, 1989.
+      silent on automatic methods for determining the difference              [2] A. Cass, B. S. Lerner, E. McCall, L. Osterweil, S. M. S.
+      between dominated and undominated designs. Bratko et.al. 640                Jr., and A. Wise. Little-jil/juliette: A process definition lan-
+                                                                                  guage and interpreter. In Proceedings of the 22nd Inter-
+590   used standard machine learners to summarize their simula-
+                                                                                  national Conference on Software Engineering (ICSE 2000),
+      tions. Menzies and Sinsel attempted the same technique,                     pages 754–757, June 2000.
+      but found the learnt theories to be too large to manually               [3] S. Chulani, B. Boehm, and B. Steece. Bayesian analysis of
+      browse. Hence, they evolved a tree-query language (TAR1)                    empirical software engineering cost models. IEEE Transac-
+      to find attribute ranges that were of very different frequen-               tion on Software Engineerining, 25(4), July/August 1999.
+      cies on decision tree branches that lead to different clas-             [4] L. Chung, B. Nixon, E. Yu, and J. Mylopoulos. Non-
+      sifications. TAR2 grew out of the realization that all the                  Functional Requirements in Software Engineering. Kluwer
+      TAR1 search operations could be applied to the example set                  Academic Publishers, 2000.
+                                                                              [5] J. Crawford and A. Baker. Experimental results on the ap-
+      directly, without needing a decision tree learner as an inter- 650
+                                                                                  plication of satisfiability algorithms to scheduling problems.
+      mediary. TAR2 is hence much faster than TAR1 (seconds,
+                                                                                  In AAAI ’94, 1994.
+600   not hours).                                                             [6] J. DeKleer. An Assumption-Based TMS. Artificial Intelli-
+          A core premise of this work is that, within some system,                gence, 28:163–196, 1986.
+      there exists a small number of master attribute ranges that             [7] M. Feather, H. In, J. Kiper, J. Kurtz, and T. Menzies. First
+      can have a large impact on the overall behavior of a sys-                   contract: Better, earlier decisions for software projects. In
+      tem. In the literature, we have much anecdotal evidence                     Submitted to the ACM CIKM 2001: the Tenth International
+                                                                                  Conference on Information and Knowledge Management,
+      that many domains contain a small number of variables that
+                                                                                  2001. Available from http://tim.menzies.com/
+      are crucial in determining the behavior of the whole sys- 660               pdf/01first.pdf.
+      tem. Concepts analogous to master attribute ranges have                 [8] N. E. Fenton and M. Neil. A critique of software defect
+      been called a variety of names including master-variables                   prediction models. Software Engineering, 25(5):675–689,
+      in scheduling [5]; prime-implicants in model-based diagno-                  1999. Available from http://citeseer.nj.nec.
+610   sis [25]; backbones in satisfiability [27]; dominance filter-               com/fenton99critique.html.
+
+
+                                                                        8
+       [9] E. T. G. Bricconi, E. Di Nitto. Issues in analyzing the be-      [26] C. Seidman. Data Mining with Microsoft SQL Server. Mi-
+           havior of event dispatching systems. In Proceedings of the            crosoft Press, 2000.
+           10th International Workshop on Software Specification and        [27] J. Singer, I. P. Gent, and A. Smaill. Backbone fragility and
+           Design (IWSSD-10), San Diego, USA, November 2000.                     the local search cost peak. Journal of Artificial Intelligence
+      [10] M. Heimdahl and N. Leveson. Completeness and consis-                  Research, 12:235–270, 2000.
+670        tency analysis of state-based requirements. IEEE Transac-        [28] J. Tian and M. Zelkowitz. Complexity measure evaluation
+           tions on Software Engineering, May 1996.                              and selection. IEEE Transaction on Software Engineering,
+      [11] G. Hinton. How neural networks learn from experience. Sci- 730        21(8):641–649, Aug. 1995.
+           entific American, pages 144–151, September 1992.                 [29] A. van Lamsweerde. Requirements engineering in the year
+      [12] J. Josephson, B. Chandrasekaran, M. Carroll, N. Iyer,                 00: A research perspective. In Proceedings ICSE2000, Lim-
+           B. Wasacz, and G. Rizzoni. Exploration of large de-                   merick, Ireland, pages 5–19, 2000.
+           sign spaces: an architecture and preliminary results. In         [30] A. Wise, A. Cass, B. S. Lerner, E. McCall, L. Os-
+           AAAI ’98, 1998. Available from http://www.cis.                        terweil, and J. S.M. Sutton. Using little-jil to coor-
+           ohio-state.edu/˜jj/Explore.ps.                                        dinate agents in software engineering. In Proceedings
+      [13] N. Leveson. Safeware System Safety And Computers.                     of the Automated Software Engineering Conference (ASE
+680        Addison-Wesley, 1995.                                                 2000) Grenoble, France., September 2000. Available
+      [14] N. Leveson, S. Cha, and T. Shimall. Safety verification of            from ftp://ftp.cs.umass.edu/pub/techrept/
+           ada programs using software fault trees. IEEE Software, 740           techreport/2000/UM-CS-2000-045.ps.
+           8(7):48–59, July 1991.
+      [15] M. Mendonca and N. Sunderhaft. Mining software engineer-
+           ing data: A survey, September 1999. A DACS State-of-the-
+           Art Report. Available from http://www.dacs.dtic.
+           mil/techs/datamining/.
+      [16] T. Menzies.      Practical machine learning for software
+           engineering and knowledge engineering. In Handbook
+690        of Software Engineering and Knowledge Engineering,
+           2001. Available from http://tim.menzies.com/
+           pdf/00ml.pdf.
+      [17] T. Menzies and J. Kiper. How to argue less. In Sub-
+           mitted to the ACM CIKM 2001: the Tenth International
+           Conference on Information and Knowledge Management,
+           2001. Available from http://tim.menzies.com/
+           pdf/01jane.pdf.
+      [18] T. Menzies, J. Kiper, and Y. Hu. Machine learning for
+           requirements engineering. In Submitted to ASE-2001,
+700        2001. Available from http://tim.menzies.com/
+           pdf/01ml4re.pdf.
+      [19] T. Menzies and E. Sinsel. Practical large scale what-if
+           queries: Case studies with software risk assessment. In Pro-
+           ceedings ASE 2000, 2000. Available from http://tim.
+           menzies.com/pdf/00ase.pdf.
+      [20] M. Paulk, B. Curtis, M. Chrissis, and C. Weber. Capability
+           maturity model, version 1.1. IEEE Software, 10(4):18–27,
+           July 1993.
+      [21] M. Paulk, C. Weber, B. Curtis, and M. Chriss. The Capabil-
+710        ity Maturity Model: Guidelines for Improving the Software
+           Process. Addison-Wesley, 1995.
+      [22] A. Porter and R. Selby. Empirically guided software devel-
+           opment using metric-based classification trees. IEEE Soft-
+           ware, pages 46–54, March 1990.
+      [23] R. Quinlan. Induction of decision trees. Machine Learning,
+           1:81–106, 1986.
+      [24] R. Quinlan. C4.5: Programs for Machine Learning. Morgan
+           Kaufman, 1992. ISBN: 1558602380.
+      [25] R. Rymon. An se-tree-based prime implicant generation
+720        algorithm. In Annals of Math. and A.I., special issue on
+           Model-Based Diagnosis, volume 11, 1994. Available from
+           http://citeseer.nj.nec.com/193704.html.
+
+
+                                                                       9
+

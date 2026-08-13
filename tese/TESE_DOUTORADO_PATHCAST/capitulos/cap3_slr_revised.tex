@@ -15,12 +15,16 @@ al.~\cite{petersen2015}. The primary objective is to identify, classify, and
 synthesize existing approaches that combine process-aware techniques with
 predictive modeling for software development outcomes, establishing the
 research gap that motivates PATHCAST proposed in
-Chapter~\ref{ch:method}.
+Chapter~\ref{ch:method}. Classification is not an unspecified residual of
+screening: every included study is scored on the three axes stated in
+Section~\ref{sec:slr-il-def} (application landscape, analytical depth, and
+integration level L0--L3).
 
 The review addresses three overarching research questions, each decomposed
 into two sub-questions covering the application landscape of process mining in
-SDLC contexts, the techniques and prediction methods employed, and the degree
-of integration between process mining and stochastic forecasting methods.
+SDLC contexts, the techniques and prediction methods employed, and the
+\textbf{level} of integration between process mining and stochastic forecasting
+methods (L0--L3 as defined in Table~\ref{tab:il-def}).
 
 
 \section{Review Protocol}
@@ -63,12 +67,62 @@ RQ2 & RQ2.2 & Which predictive and stochastic techniques have been used? &
   Technique classification \\
 \midrule
 RQ3 & RQ3.1 & What is the level of integration between PM and stochastic
-  methods? & Integration maturity assessment \\
+  methods? & Integration level (L0--L3; Table~\ref{tab:il-def}) \\
 RQ3 & RQ3.2 & What gaps exist for process-aware forecasting in the SDLC? &
   Gap analysis matrix \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Classification axes and integration levels}
+\label{sec:slr-il-def}
+
+This mapping study classifies each included paper on three orthogonal axes,
+announced here so that later tables do not introduce a second vocabulary:
+
+\begin{enumerate}
+\item \textbf{Application landscape} (RQ1) $\rightarrow$ SDLC Coverage
+  (lifecycle phase and event-log source).
+\item \textbf{Techniques and forecasting methods} (RQ2) $\rightarrow$
+  Analytical Depth AD1--AD4 (descriptive, diagnostic, predictive,
+  distributional forecasting).
+\item \textbf{Methodological composition} (RQ3.1) $\rightarrow$
+  \textbf{Integration Level} L0--L3.
+\end{enumerate}
+
+Integration Level measures \emph{methodological composition} of technique
+families, not software architecture. The word used throughout is
+\textbf{level} (L0--L3), never ``degree.'' Table~\ref{tab:il-def} is the sole
+operational definition; extraction (Table~\ref{tab:extraction}), RQ3.1, and
+Table~\ref{tab:positioning} copy it verbatim.
+
+\begin{table}[htbp]
+\centering
+\caption{Sole operational definition of Integration Level (L0--L3).
+Technique families are TF-PM, TF-ST, TF-FC, and TF-ML
+(Section~\ref{sec:slr-criteria}), not the publication filters IC1--IC3.}
+\label{tab:il-def}
+\small
+\begin{tabular}{c l p{10.4cm}}
+\toprule
+\textbf{Level} & \textbf{Name} & \textbf{Operationalisation} \\
+\midrule
+L0 & Isolated & One technique family; no chaining across families. \\
+L1 & Sequential & Two families in the same study, without an inter-stage
+  contract (output of one stage is not a specified input of the next). \\
+L2 & Pipeline & Three families with a partial bridge: a discovered or
+  stochastic structure is reused downstream, but a formal contract or the ML
+  closure is missing. \\
+L3 & Unified & Process mining $\rightarrow$ absorbing Markov $\rightarrow$
+  Monte Carlo $\rightarrow$ ML with declared inter-stage contracts,
+  validated on SDLC event logs. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent PATHCAST is proposed as an L3 (Unified) instance. No sentence in this
+chapter uses ``L3 architecture''; where a pipeline is discussed, the referent
+is the L3 integration level of Table~\ref{tab:il-def}.
 
 
 \subsection{Search Strategy}
@@ -81,7 +135,15 @@ IEEE~Xplore, ACM Digital Library, Scopus, Web of Science, and SpringerLink.
 \subsubsection{PICO Decomposition}
 
 The search string construction follows the PICO framework adapted for
-software engineering, as shown in Table~\ref{tab:pico}.
+software engineering, as shown in Table~\ref{tab:pico}. Comparison (C) is
+omitted \emph{by design}: this chapter is a mapping of the landscape, not a
+comparative-effectiveness review, and Kitchenham/Petersen treat C as optional
+for mapping studies. Inventing a comparator at search time would either
+restrict the corpus to head-to-head experiments (almost none exist at L3) or
+pretend that heterogeneous techniques are alternatives. The empirical
+comparator---forecasts from traditional repository metrics versus
+process-derived features---belongs to the PATHCAST evaluation
+(Chapter~\ref{ch:method}), not to the search string.
 
 \begin{table}[htbp]
 \centering
@@ -95,7 +157,11 @@ Population    & Application domain    & Software engineering, SDLC, software pro
                                         DevOps, CI/CD \\
 Intervention  & Analytical technique  & Process mining, Markov chain, Monte Carlo,
                                         predictive PM, ML \\
-Comparison    & N/A                   & (omitted) \\
+Comparison    & Omitted by design      & Mapping study: no comparative
+                                        effectiveness question. The comparator
+                                        (repository-metric baselines vs.\
+                                        process-derived features) is deferred
+                                        to the PATHCAST evaluation. \\
 Outcome       & Result                & Forecasting, prediction, lead time, cycle time,
                                         process model \\
 \bottomrule
@@ -148,6 +214,28 @@ are recorded when they surface through the process-mining and forecasting
 terms already present in Blocks~I and~O. Predictive-monitoring terms such as
 \texttt{"predictive process monitoring"} and \texttt{"process prediction"}
 further ensure that the dominant ML-based PPM literature is retrieved.
+
+\begin{table}[htbp]
+\centering
+\caption{Block~I terms mapped to van der Aalst's process-mining types.
+Classical enhancement (performance/organisational extension of a discovered
+model) has no dedicated search synonym; it is captured in extraction
+(\textit{PM Technique Category}), not in the string.}
+\label{tab:block-i-pm-types}
+\small
+\begin{tabular}{p{3.2cm} p{6.2cm} p{3.8cm}}
+\toprule
+\textbf{Type} & \textbf{Terms in Block~I} & \textbf{Extraction field} \\
+\midrule
+Discovery & process discovery, workflow mining, process mining, event log &
+  PM Technique Category \\
+Conformance & conformance checking & PM Technique Category \\
+Enhancement / prediction & predictive process monitoring, remaining time,
+  process forecasting, process prediction, lead/cycle time prediction &
+  Prediction Target + Stochastic Method \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \paragraph{Complementary String (MSR $\rightarrow$ Process Modeling).}
 Captures studies using MSR terminology without canonical process mining terms:
@@ -212,10 +300,19 @@ inclusion and exclusion criteria defined in Section~\ref{sec:slr-criteria}.
 
 \subsubsection{Search String Validation}
 
-The search strings are validated against a control set of 10 papers that are
-known to be relevant to the review scope
-(Table~\ref{tab:validation-set}). The acceptance threshold is $\geq 8/10$
-papers found; the validation returned $10/10$ ($100\%$, PASS).
+The search strings are validated against a control set of 10 papers selected
+\emph{a priori} (before the strings were frozen), independently of retrieval
+hits (Table~\ref{tab:validation-set}). Selection aimed at (i)~coverage of the
+four content intersections later encoded as TF-PM, TF-ST, TF-FC, and TF-ML
+(PM$\times$SE, stochastic$\times$SE, predictive process monitoring, and the
+PM$\rightarrow$simulation bridge); (ii)~a mix of seminal and contemporary
+work; and (iii)~at least one paper per target library when a canonical
+exemplar existed there. The acceptance threshold is $\geq 8/10$ papers found;
+the validation returned $10/10$ ($100\%$, PASS). The retrieval table's
+``12 control records'' are bibliographic copies of this 10-paper set (plus
+duplicate imports); after internal deduplication against database hits,
+two residual control rows remain as unique records
+(Table~\ref{tab:retrieval}).
 
 \begin{table}[htbp]
 \centering
@@ -245,11 +342,18 @@ V10 & Gupta \& Sureka (2017)         & PM multi-repository in SE          & ACM 
 \subsection{Inclusion and Exclusion Criteria}
 \label{sec:slr-criteria}
 
-The inclusion criteria are organized in two tiers. Formal criteria
-(IC1--IC3) filter on publication attributes and are applied during the
+The inclusion criteria are organized in two tiers that must not be confused
+with Integration Level. Formal criteria (IC1--IC3) filter on publication
+attributes (period, language, peer review) and are applied during the
 database search configuration. Content criteria (IC4a--IC4d) require that the
-study's research contribution addresses at least one of four specific
-technique-domain intersections; they are applied during title/abstract and
+study's research contribution addresses at least one of four
+\textbf{technique families}, denoted in the synthesis as:
+TF-PM (IC4a, process mining on SE artifacts),
+TF-ST (IC4b, stochastic models of software processes),
+TF-FC (IC4c, forecasting of process metrics), and
+TF-ML (IC4d, repository mining for process models).
+An Integration Level (Table~\ref{tab:il-def}) is a composition of these
+families, not a count of matched inclusion codes. They are applied during title/abstract and
 full-text screening. Exclusion criteria (EC1--EC7) are applied cumulatively
 across both screening phases. Criteria EC1--EC4 are evaluated by the
 LLM-assisted screener; the access/quality criteria EC5--EC7 are applied
@@ -264,7 +368,7 @@ to open-ended human arbitration. This three-way split replaces the single
 umbrella ``EC5-extended'' code used in earlier drafts and improves the
 transparency of the PRISMA exclusion accounting.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Inclusion and exclusion criteria.}
 \label{tab:criteria}
@@ -318,6 +422,7 @@ transparency of the PRISMA exclusion accounting.
 \bottomrule
 \end{tabular}
 \end{table}
+\FloatBarrier
 
 At least one of IC4a--IC4d must be satisfied for inclusion. Criterion IC4b
 ensures that seminal works applying Markov chains to software processes---such
@@ -350,6 +455,18 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Operational anchors for the three criteria the DRC asked to make testable:
+
+\begin{itemize}
+\item QA2 $= 1$ iff the paper names an SDLC domain, a type of
+  organisation or project, and the software artifact that generated the
+  data.
+\item QA3 $= 1$ iff source, time window, and case notion are reconstructible
+  well enough to rebuild the event log.
+\item QA7 $= 1$ iff a public dataset and/or runnable code is indicated
+  (URL, DOI, or named replication package).
+\end{itemize}
 
 Studies scoring below 4.0/8 (50\%) are excluded from the evidence synthesis
 (Findings F1--F5) but are retained in the PRISMA included set as context.
@@ -405,7 +522,8 @@ Specific Algorithm(s)        & Alpha, Heuristics, Inductive Miner, etc. \\
 Stochastic Method            & Markov / Monte Carlo / Stochastic Petri Net / None \\
 ML Technique                 & RF, XGBoost, LSTM, etc. / None \\
 Prediction Target            & Remaining time, outcome, lead time, delay, etc. \\
-Integration Level            & L0 None / L1 Sequential / L2 Pipeline / L3 Unified \\
+Integration Level            & L0 Isolated / L1 Sequential / L2 Pipeline / L3 Unified
+                               (Table~\ref{tab:il-def}; not an IC count) \\
 Validation Type              & Case study / Experiment / Industrial / Simulation \\
 Tool/Platform                & PM4Py, ProM, Disco, custom, etc. \\
 Dataset Size                 & Number of events and cases analyzed \\
@@ -422,8 +540,9 @@ Process Model Quality        & Fitness, precision, generalization (if reported) 
 
 The three search strings executed across five databases returned 7{,}740
 records. Backward and forward snowballing from the control set yielded an
-additional 595 records. Together with 12 control papers maintained as a
-validation-only set, the initial corpus totaled 8{,}347 records.
+additional 595 records. Together with 12 bibliographic control-set \emph{records} (the 10 a priori
+validation papers plus duplicate imports; Table~\ref{tab:validation-set}),
+the initial corpus totaled 8{,}347 records.
 Table~\ref{tab:retrieval} summarizes the retrieval by source.
 
 \begin{table}[htbp]
@@ -838,9 +957,11 @@ coded in the triangulation subset) or abstract/title metadata (94/169).
 
 \subsection{Inclusion Criterion Coverage}
 
-Figure~\ref{fig:ic-dist} shows the distribution of inclusion criteria among
-the 169 confirmed papers (criteria are non-exclusive; a paper may satisfy
-multiple).
+Figure~\ref{fig:ic-dist} shows the distribution of technique families among
+the 169 confirmed papers (families are non-exclusive; a paper may match
+more than one). These bars are TF-PM/TF-ST/TF-FC/TF-ML
+(content criteria IC4a--IC4d), not the publication filters IC1--IC3
+and not Integration Levels.
 
 \begin{figure}[htbp]
 \centering
@@ -849,11 +970,11 @@ multiple).
   xbar,
   bar width=0.55cm,
   width=10cm, height=4.5cm,
-  xlabel={Papers matching criterion},
-  symbolic y coords={IC4 (MSR for process), IC3 (Forecasting), IC2 (Stochastic), IC1 (PM in SE)},
+  xlabel={Papers matching technique family},
+  symbolic y coords={TF-ML (MSR), TF-FC (Forecasting), TF-ST (Stochastic), TF-PM (Process mining)},
   ytick=data,
   y tick label style={font=\small},
-  xmin=0, xmax=115,
+  xmin=0, xmax=135,
   nodes near coords,
   nodes near coords align={horizontal},
   fill=gray!40,
@@ -861,24 +982,26 @@ multiple).
   enlarge y limits=0.25,
 ]
 \addplot coordinates {
-  (121,{IC1 (PM in SE)})
-  (52,{IC2 (Stochastic)})
-  (29,{IC3 (Forecasting)})
-  (45,{IC4 (MSR for process)})
+  (121,{TF-PM (Process mining)})
+  (52,{TF-ST (Stochastic)})
+  (29,{TF-FC (Forecasting)})
+  (45,{TF-ML (MSR)})
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Inclusion criteria matched by the confirmed set ($n = 169$;
-  non-exclusive; IC labels map to IC4a--IC4d in the protocol).}
+\caption{Technique families matched by the confirmed set ($n = 169$;
+  non-exclusive). TF-PM/TF-ST/TF-FC/TF-ML are the content criteria
+  IC4a--IC4d; they are not publication filters IC1--IC3 and they are
+  not Integration Levels.}
 \label{fig:ic-dist}
 \end{figure}
 
-IC1/IC4a (process mining applied to SE artifacts) is the dominant criterion,
-matched by 121 papers (71.6\%). IC4/IC4d (repository mining for process modeling)
+TF-PM (IC4a: process mining applied to SE artifacts) is the dominant family,
+matched by 121 papers (71.6\%). TF-ML (IC4d: repository mining for process modeling)
 is second at 45 papers (26.6\%), reflecting the MSR community's overlapping
-contributions. IC2/IC4b (stochastic modeling) appears in 52 papers (30.8\%) and
-IC3/IC4c (forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
-papers (40.2\%) match IC1 only, without stochastic or forecasting components,
+contributions. TF-ST (IC4b: stochastic modeling) appears in 52 papers (30.8\%) and
+TF-FC (IC4c: forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
+papers (40.2\%) match TF-PM only, without stochastic or forecasting components,
 providing direct empirical evidence for the ``Descriptive Ceiling'' identified
 in Finding~F1 below.
 
@@ -1069,12 +1192,12 @@ explicit, named framework for software engineering contexts was accomplished by
 \cite{rubin2007}, who applied the ProM toolkit to source code management logs
 and demonstrated multi-perspective analysis spanning control-flow, informational,
 and organisational dimensions. Together, these three works constitute the seminal
-arc of IC1, establishing automated discovery from SDLC event logs as both
+arc of TF-PM, establishing automated discovery from SDLC event logs as both
 technically feasible and analytically productive, and providing PATHCAST with
 its foundational methodological lineage.
 
 The complete extracted set confirms that \textbf{process mining remains the
-dominant analytical family}: 121 of 169 studies (71.6\%) match IC1 in the
+dominant analytical family}: 121 of 169 studies (71.6\%) match TF-PM in the
 form of discovery, conformance checking, or process-oriented repository
 analysis. At the technique level, the most frequently named PM algorithms
 across the 169 studies are the \textbf{inductive miner} (51 papers),
@@ -1082,7 +1205,7 @@ across the 169 studies are the \textbf{inductive miner} (51 papers),
 and \textbf{heuristic miner} (22 papers); 11 papers use social network
 analysis on developer interactions. The literature is markedly richer in
 \emph{process representation} than in probabilistic forecasting: only 29
-papers (17.2\%) match IC3 (forecasting of process metrics), and the dominant
+papers (17.2\%) match TF-FC (forecasting of process metrics), and the dominant
 contribution type is discovery or conformance checking rather than predictive
 analytics. This is the transition that PATHCAST targets: moving from
 discovered process structures to state-based probabilistic forecasting.
@@ -1193,21 +1316,22 @@ PRIMAD~\cite{guinea2025} (with empirical inter-event times far from
 exponential) justify a fully nonparametric sojourn estimator with explicit
 heavy-tail handling rather than a fitted parametric family.
 
-The closest published work to a fully integrated multi-stage architecture is
+The closest published work to L3 Unified composition is
 PRIMAD, proposed by Guinea-Cabrera~\cite{guinea2025}, which orchestrates
 pm4py-based process discovery, Akka actor-system simulation, and LightGBM
 supervised learning within an evolutionary Digital Twin framework for the SDLC.
-Nevertheless, PRIMAD remains at what may be characterised as Level~2 integration:
+Nevertheless, PRIMAD remains at \textbf{L2 Pipeline}
+(Table~\ref{tab:il-def}):
 validation is reported per component rather than across the assembled pipeline,
 no formal inter-stage contracts govern the handoffs between discovery,
-simulation, and learning modules, and the architecture incorporates no dedicated
+simulation, and learning modules, and the composition incorporates no dedicated
 Monte Carlo forecasting layer capable of propagating uncertainty estimates
-end-to-end. The present review therefore concludes that the Level~3 integration
-niche---a formally contracted, end-to-end pipeline combining process discovery,
+end-to-end. The present review therefore concludes that \textbf{L3 Unified}
+---a formally contracted pipeline combining process discovery,
 absorbing Markov chain construction, Monte Carlo simulation, and residual
-correction---remains unoccupied in the extant literature.
+correction, validated on SDLC logs---remains unoccupied in the extant literature.
 
-Studies that combine process mining with forecasting objectives (IC1~$\cap$~IC3)
+Studies that combine process mining with forecasting objectives (TF-PM~$\cap$~TF-FC)
 tend to approach prediction through \emph{process enhancement} rather than
 through explicit stochastic modelling. Gupta~\cite{gupta2017} demonstrated that
 combining inductive miner discovery with Markov chain-based predictive analytics
@@ -1239,43 +1363,41 @@ constitute a formally defined, queryable forecasting interface.
 
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
-Mapping the confirmed papers onto the L0--L3 integration scale reveals a clear
-stratification. The largest cluster, comprising papers that touch IC2 and IC3
-without IC1---including stochastic Petri net models of CI/CD pipelines
+Papers are scored against Table~\ref{tab:il-def}. Technique-family
+co-occurrence (TF-PM $\cap$ TF-ST $\cap$ TF-FC) is reported below as
+\emph{supporting evidence}, not as a definition of L2 or L3.
+
+The largest cluster---papers that use TF-ST and TF-FC without TF-PM,
+including stochastic Petri net models of CI/CD pipelines
 \cite{bhadra2022,bhadra2023}, Markov-based project estimation
 \cite{massitela2018,tyagi2021}, and Monte Carlo risk simulation
-\cite{lunesu2021,magennis2015}---operates almost entirely at \textbf{L1},
-applying stochastic modelling to software processes without any process
-discovery layer. Papers spanning IC1 and IC2, such as the VLMC conformance
-checker of \cite{incerto2025} and the probabilistic resource-calendar discoverer
-of \cite{lopezpintado2023}, reach \textbf{L2} by coupling discovered process
-structure with stochastic reasoning, yet neither closes the loop toward
-distributional schedule forecasting. Papers combining IC1 with IC3, such as
-\cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively to
-assess workflows but lack the stochastic machinery required for Monte Carlo
-distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
-antecedent, assembling elements from all three ICs---event-log discovery,
-simulation, and ML prediction---but its evaluation remains component-wise,
-placing it at L2 rather than a fully validated end-to-end pipeline. Notably,
-no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
-which process mining discovery feeds an absorbing Markov chain, whose transient
-distributions drive Monte Carlo forecasting, with residuals corrected by a
-learned model, all validated on SDLC event logs. PATHCAST is proposed to
-fill this gap; to the best of our knowledge, no study identified in this
-review implements such an L3 system.
+\cite{lunesu2021,magennis2015}---sits at \textbf{L1 Sequential}:
+stochastic modelling of software processes without a process-discovery
+stage or an inter-stage contract. Papers spanning TF-PM and TF-ST, such as
+the VLMC conformance checker of \cite{incerto2025} and the probabilistic
+resource-calendar discoverer of \cite{lopezpintado2023}, reach
+\textbf{L2 Pipeline} by coupling discovered structure with stochastic
+reasoning, yet neither closes Monte Carlo forecasting nor an ML residual
+model under a declared contract. Papers combining TF-PM with TF-FC, such as
+\cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively
+and lack the stochastic machinery required for distributional forecasts
+(L1 Sequential). The PRIMAD framework \cite{guinea2025} is the closest
+antecedent, assembling discovery, simulation, and ML prediction, but its
+evaluation remains component-wise, so it remains L2 Pipeline rather than
+L3 Unified. No paper in the reviewed corpus instantiates \textbf{L3 Unified}:
+process mining feeding an absorbing Markov chain, Monte Carlo forecasting,
+and a learned residual model, with inter-stage contracts, validated on SDLC
+event logs. PATHCAST is proposed to fill that L3 gap.
 
-Quantitative evidence over the full 169-study set confirms the pattern. Only
-1 of 169 papers (0.6\%) jointly satisfies IC1, IC2, and IC3---that is,
-combines process mining, stochastic modeling, and forecasting in the same
-study---and even that single paper does not specify a formal end-to-end
-pipeline contract. Pairwise convergence is also low: IC1$\cap$IC2 (PM and
-stochastic) appears in 10 papers (5.9\%), IC1$\cap$IC3 (PM and forecasting)
-in 7 papers (4.1\%), and IC2$\cap$IC3 (stochastic and forecasting) in 18
-papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
-\textbf{L3} architecture. The literature has many partial bridges but no
-end-to-end process-aware forecasting architecture for SDLC data. The
-operational coding of the 73-PDF triangulation subset is consistent with the
-full-set numbers and is summarized in
+Quantitative family overlap over the 169-study working set is consistent
+with that reading. Only 1 of 169 papers (0.6\%) jointly exhibits
+TF-PM $\cap$ TF-ST $\cap$ TF-FC, and even that paper does not declare
+end-to-end contracts (hence not L3). Pairwise overlap is also low:
+TF-PM $\cap$ TF-ST in 10 papers (5.9\%), TF-PM $\cap$ TF-FC in 7 (4.1\%),
+and TF-ST $\cap$ TF-FC in 18 (10.7\%). The literature has many partial
+bridges and no L3 Unified instance on SDLC data. The operational coding of
+the 73-PDF triangulation subset (L0 Isolated $=13$, L1 Sequential $=54$,
+L2 Pipeline $=6$, L3 Unified $=0$) is summarized in
 Figures~\ref{fig:pdf-integration} and~\ref{fig:pdf-priority}.
 
 \begin{figure}[htbp]
@@ -1300,7 +1422,8 @@ Figures~\ref{fig:pdf-integration} and~\ref{fig:pdf-priority}.
 \addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational integration-level distribution (L0--L3) in the 73-paper PDF triangulation subset.}
+\caption{Operational integration-level distribution (L0 Isolated -- L3 Unified;
+Table~\ref{tab:il-def}) in the 73-paper PDF triangulation subset.}
 \label{fig:pdf-integration}
 \end{figure}
 
@@ -1406,19 +1529,31 @@ an analytical view, not as a separate selection layer.
 \subsection{Research Gap Identification}
 \label{sec:slr-gaps}
 
+The operational pain that motivates PATHCAST is software-process forecasting
+done on repository metrics \emph{without} the structure of the flow. The five
+findings below show that this pain is not a shortage of isolated techniques;
+it persists because the literature never reaches L3 Unified composition
+(Table~\ref{tab:il-def}) on SDLC event logs. F1: the field stops at
+description (TF-PM without TF-FC). F2: even the event log is rarely a
+reproducible object. F3: stochastic models are common, but almost never
+coupled to mined process structure. F4: techniques are not chained under
+contracts, so L3 remains empty. F5: ML predictors ignore process-derived
+features. In short, the gap is composition, not invention of yet another
+standalone miner, Markov model, or regressor.
+
 The analysis of 2{,}340 screened records and 169 confirmed primary studies,
 together with the criterion coverage patterns, supports five key findings:
 
 \begin{description}
 
 \item[F1: Descriptive Ceiling.]
-In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match IC1/IC4a
-(process mining in SE) but only 29 (17.2\%) advance to IC3/IC4c (forecasting
+In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match TF-PM
+(IC4a) but only 29 (17.2\%) advance to TF-FC (IC4c; forecasting
 of process metrics). In the \textbf{de-duplicated combined analytical subset} (319 papers,
 working-set + 150 unique auxiliary studies), the proportion shifts because
 the auxiliary corpus pulled in more stochastic-only and forecasting-only
-studies that did not employ explicit process mining: 162 (50.8\%) match IC1,
-100 (31.3\%) match IC3, and 78 (24.5\%) match IC1 alone. In both tiers the dominant contribution
+studies that did not employ explicit process mining: 162 (50.8\%) match TF-PM,
+100 (31.3\%) match TF-FC, and 78 (24.5\%) match TF-PM alone. In both tiers the dominant contribution
 type is discovery or conformance checking, not predictive analytics or
 distributional forecasting; the descriptive ceiling identified in the
 working-set tier persists in the combined tier.
@@ -1441,20 +1576,20 @@ observed in the QA scoring of the working-set tier.
 
 \item[F3: Stochastic Integration Gap.]
 Working-set tier: 52 of 169 papers (30.8\%) apply stochastic models
-(IC2/IC4b); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
-stochastic Petri nets, 8 (4.7\%) system dynamics; IC2$\cap$IC3 covers 18
-papers (10.7\%); IC1$\cap$IC2 covers 10 (5.9\%). De-duplicated combined
+(TF-ST / IC4b); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
+stochastic Petri nets, 8 (4.7\%) system dynamics; TF-ST$\cap$TF-FC covers 18
+papers (10.7\%); TF-PM$\cap$TF-ST covers 10 (5.9\%). De-duplicated combined
 analytical subset: the
 auxiliary corpus contributes a substantial number of stochastic-only papers
 not previously surfaced by the working-set queries; 158 of 319 (49.5\%)
-match IC2 (with 85 Monte Carlo, 58 Markov, 62 system dynamics, 15 SPN), 81
-(25.4\%) combine IC2 with IC3 (forecasting), and 13 (4.1\%) combine IC2
-with IC1 (process mining). Markov chains and Monte Carlo simulation are
+match TF-ST (with 85 Monte Carlo, 58 Markov, 62 system dynamics, 15 SPN), 81
+(25.4\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
+with TF-PM (process mining). Markov chains and Monte Carlo simulation are
 therefore used extensively in BPM and software reliability engineering, and
 the auxiliary expansion confirms a broader stochastic literature than the
 working-set tier alone suggested; nevertheless, the integration with process
 mining for SDLC forecasting remains minimal in both tiers (5.9\% and 4.1\%
-respectively for IC1$\cap$IC2). EC3 being the largest exclusion reason at
+respectively for TF-PM$\cap$TF-ST). EC3 being the largest exclusion reason at
 FT in the working-set tier ($n=232$, 26.2\% of the 886-paper FT queue)
 reinforces the point: the stochastic modeling community has not converged
 on applying its techniques to software development process data.
@@ -1463,16 +1598,17 @@ on applying its techniques to software development process data.
 Studies apply techniques in isolation. The formal composition of a
 PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline with
 inter-stage data contracts was not identified in the reviewed literature for
-SDLC contexts. The IC-combination analysis is robust across both tiers.
+SDLC contexts. Family co-occurrence is supporting evidence for composition,
+not the definition of L2 or L3 (Table~\ref{tab:il-def}).
 Working-set tier (169 papers): the joint convergence
-IC1$\cap$IC2$\cap$IC3 appears in only 1 paper (0.6\%), and that single
+TF-PM$\cap$TF-ST$\cap$TF-FC appears in only 1 paper (0.6\%), and that single
 paper does not specify a formal end-to-end pipeline contract; pairwise
-convergences are IC1$\cap$IC2: 10 (5.9\%), IC1$\cap$IC3: 7 (4.1\%),
-IC2$\cap$IC3: 18 (10.7\%). De-duplicated combined analytical subset (319 papers): IC1$\cap$IC2$\cap$IC3
-remains 1 paper (0.3\%), with pairwise convergences IC1$\cap$IC2: 13
-(4.1\%), IC1$\cap$IC3: 10 (3.1\%), IC2$\cap$IC3: 81 (25.4\%). The
-auxiliary expansion increased the IC2$\cap$IC3 cluster substantially without
-producing any new IC1$\cap$IC2$\cap$IC3 paper, which is independent
+convergences are TF-PM$\cap$TF-ST: 10 (5.9\%), TF-PM$\cap$TF-FC: 7 (4.1\%),
+TF-ST$\cap$TF-FC: 18 (10.7\%). De-duplicated combined analytical subset (319 papers): TF-PM$\cap$TF-ST$\cap$TF-FC
+remains 1 paper (0.3\%), with pairwise convergences TF-PM$\cap$TF-ST: 13
+(4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%), TF-ST$\cap$TF-FC: 81 (25.4\%). The
+auxiliary expansion increased the TF-ST$\cap$TF-FC cluster substantially without
+producing any new TF-PM$\cap$TF-ST$\cap$TF-FC paper, which is independent
 empirical confirmation that the gap is not an artefact of the working-set
 queries but a structural property of the literature. The closest antecedent
 in the corpus is PRIMAD \cite{guinea2025}, which assembles discovery,
@@ -1482,7 +1618,7 @@ present, validation usually stops at process analysis or simulation without
 a downstream learning component.
 
 PRIMAD is the only paper in the corpus that simultaneously satisfies
-IC1$\cap$IC2$\cap$IC3. Its scope is explicitly SDLC-oriented: it builds a
+TF-PM$\cap$TF-ST$\cap$TF-FC. Its scope is explicitly SDLC-oriented: it builds a
 digital twin from issue-tracking flows in JIRA to analyze and improve value
 streams in software organizations. Methodologically, it combines empirical
 process discovery (\texttt{pm4py}), a Python-based simulation core, an Akka
@@ -1491,9 +1627,10 @@ for context-aware prediction. The reported results are preliminary and
 component-wise rather than end-to-end: the paper shows promising independent
 results for the process-mining, simulation, and prediction components, but it
 does not yet validate a formally coupled PM $\rightarrow$ stochastic
-simulation $\rightarrow$ ML pipeline as a unified operational architecture.
+simulation $\rightarrow$ ML pipeline at L3 Unified
+(Table~\ref{tab:il-def}).
 This is precisely why PRIMAD is adherent to the PATHCAST theme while still
-remaining an antecedent rather than a completed L3 instance.
+remaining an L2 Pipeline antecedent rather than an L3 Unified instance.
 
 \item[F5: Process-Derived Features Unexplored.]
 ML-based prediction studies in the confirmed set rely overwhelmingly on
@@ -1522,45 +1659,48 @@ challenge that PATHCAST addresses through Stage~1 (Event Log Construction).
 \subsection{Positioning of PATHCAST}
 \label{sec:slr-positioning}
 
-Table~\ref{tab:positioning} positions PATHCAST against the integration levels
-identified in the 169-study confirmed set, using both the IC-combination
-counts derived from the structured extraction and the operational coding
-obtained from the 73-PDF triangulation subset.
+Table~\ref{tab:positioning} places PATHCAST on the \emph{same} Integration
+Level scale as Table~\ref{tab:il-def}. The 73-PDF column is operational IL
+coding. The 169-set column is \emph{not} an IC count relabelled as L0--L3;
+it repeats the operational reading of the working set only where a study
+could be coded from the extraction sheet (family co-occurrence is reported
+in RQ3.1, separately). PATHCAST is a proposed L3 Unified instance, not a
+row in the included corpus.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels in the 169-study confirmed set and PATHCAST positioning.}
+\caption{Integration levels (Table~\ref{tab:il-def}) in the confirmed set.
+PATHCAST is listed as a proposed L3 instance, not as an included study.}
 \label{tab:positioning}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.05}
-\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}X
-    >{\centering\arraybackslash}p{0.85cm} >{\centering\arraybackslash}p{0.85cm}
-    >{\raggedright\arraybackslash}p{2.35cm}@{}}
+\begin{tabularx}{\linewidth}{@{}c l >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{1.15cm} >{\raggedright\arraybackslash}p{2.5cm}@{}}
 \toprule
-\textbf{Level} & \textbf{Description} &
-  \makecell[c]{\textbf{Papers}\\\textbf{(169-set,}\\\textbf{IC-based)}} &
-  \makecell[c]{\textbf{Papers}\\\textbf{(73-PDF}\\\textbf{subset, oper.)}} &
-  \makecell[l]{\textbf{Representative}\\\textbf{example}} \\
+\textbf{Level} & \textbf{Name} & \textbf{Operational definition} &
+  \makecell[c]{\textbf{73-PDF}\\\textbf{(operational)}} &
+  \makecell[l]{\textbf{Example in}\\\textbf{the corpus}} \\
 \midrule
-L0 & Single analytical family ($\leq$1 IC matched); no cross-technique chaining
-  & 95 & 13 & Contextual or single-technique studies \\
-L1 & Two ICs matched; two families present, but no explicit reproducible pipeline contract
-  & 70 & 54 & Stochastic models or PM without formal coupling \\
-L2 & Three ICs matched; partial bridge linking PM, stochastic, and forecasting, but incomplete pipeline or missing ML closure
-  & 4 & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025}; L\'opez-Pintado \cite{lopezpintado2023} \\
-L3 & Four ICs matched; unified framework: PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML with formal inter-stage contracts
-  & 0 & 0 & \textbf{PATHCAST} (proposed) \\
+L0 & Isolated & One technique family; no chaining
+  & 13 & Single-family studies \\
+L1 & Sequential & Two families, no inter-stage contract
+  & 54 & Stochastic SDLC models without discovery \\
+L2 & Pipeline & Three families; partial bridge, missing contract or ML closure
+  & 6 & PRIMAD \cite{guinea2025}; Incerto \cite{incerto2025} \\
+L3 & Unified & PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML
+  with contracts, validated on SDLC logs
+  & 0 & --- (none in corpus) \\
 \midrule
-\textbf{Total} & --- & \textbf{169} & \textbf{73} & --- \\
+\textbf{Total} & --- & --- & \textbf{73} & --- \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-PATHCAST is positioned at level L3---the first proposal, to the best of the
-author's knowledge, to formally compose process mining, absorbing Markov chain
-analysis, Monte Carlo forecasting, and ML enhancement into a single
-architecturally specified pipeline applied to SDLC data.
+PATHCAST is proposed at L3 Unified: process mining, absorbing Markov
+analysis, Monte Carlo forecasting, and ML enhancement composed under
+inter-stage contracts on SDLC event logs. That claim is a research-agenda
+positioning, not an empirically validated result of this mapping study.
 
 
 \subsection{Proposed Taxonomy: SPMF}
@@ -1571,8 +1711,8 @@ Mining and Forecasting (SPMF) taxonomy with three dimensions:
 
 \begin{description}
 \item[Analytical Depth] classifies studies along four levels, denoted
-  AD1--AD4 to avoid confusion with the architectural integration levels
-  L0--L3 used elsewhere in this chapter: AD1
+  AD1--AD4 so they cannot be confused with Integration Level
+  L0--L3 (Table~\ref{tab:il-def}): AD1
   (Descriptive: discovery, conformance), AD2 (Diagnostic: bottleneck, rework),
   AD3 (Predictive: outcome, remaining time), and AD4 (Forecasting:
   distributional, probabilistic).
@@ -1581,9 +1721,9 @@ Mining and Forecasting (SPMF) taxonomy with three dimensions:
   and Design, Development (coding, commits, PRs), Quality (testing, reviews,
   bugs), Delivery (CI/CD, release), and Operations (incidents, maintenance).
 
-\item[Technique Integration] classifies methodological combination:
-  Single (PM only, ML only, MC only), Dual (PM + ML, PM + Markov, Markov + MC),
-  and Pipeline (PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML).
+\item[Technique Integration] is the L0--L3 scale of Table~\ref{tab:il-def}
+  (Isolated, Sequential, Pipeline, Unified). Dual family presence without a
+  contract is L1 Sequential, not a separate taxonomy value.
 \end{description}
 
 
@@ -1919,7 +2059,11 @@ structured extraction table, the inter-rater agreement reports, and a
 PRISMA flow snapshot. The package is intended to be self-contained: any
 reviewer can re-run the LLM-assisted protocol on the same working set and
 reproduce the 169-study confirmed selection within the stated $\kappa$
-confidence band. AI tools were used as primary screeners under the manual
+confidence band. The PATHCAST replication artefacts (event-log construction,
+public datasets, and code) are designed to pass QA3 and QA7---the two
+weakest reporting-quality items in this corpus (public dataset declared in
+14.8\% of the working set; QA7 satisfied in a small minority of studies).
+AI tools were used as primary screeners under the manual
 verification protocol stated in the review-protocol preamble; they are
 not listed as authors and bear no responsibility for editorial
 judgements.
@@ -2081,33 +2225,32 @@ de-duplicated combined evidence base and the 319-study combined analytical
 subset, supports
 five key findings. First, the field exhibits a descriptive
 ceiling: 71.6\% of confirmed working-set papers (50.8\% combined) apply
-process mining to software artifacts (IC1), but only 17.2\% advance
+process mining to software artifacts (TF-PM), but only 17.2\% advance
 (working-set; 31.3\% combined) to forecasting of process metrics
-(IC3)~(F1). Second, event log construction from heterogeneous repository
+(TF-FC)~(F1). Second, event log construction from heterogeneous repository
 sources is a pervasive challenge, with ad hoc joins between issues, commits,
 and pipeline logs the norm~(F2). Third, the integration of stochastic models
 with process mining for SDLC forecasting is minimal: only 10.7\% of
-working-set papers (25.4\% combined) combine IC2 and IC3 ~(F3). Fourth, no
+working-set papers (25.4\% combined) combine TF-ST and TF-FC ~(F3). Fourth, no
 confirmed study implements
 a formally composed PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML
 pipeline for software processes; PRIMAD~\cite{guinea2025} is the closest
-antecedent at L2~(F4). Fifth, ML studies in SE rarely incorporate process-derived
+antecedent at L2 Pipeline~(F4). Fifth, ML studies in SE rarely incorporate process-derived
 features~(F5).
 
-Synthesis of the top-ranked papers by IC cluster sharpens the picture. The
-IC2+IC3 cluster (18 papers) concentrates at analytical depth AD1, parametrising stochastic models
-from aggregate statistics rather than mined transitions. The IC1+IC2 cluster
+Synthesis of the top-ranked papers by technique-family cluster sharpens the picture. The
+TF-ST$+$TF-FC cluster (18 papers) concentrates at analytical depth AD1, parametrising stochastic models
+from aggregate statistics rather than mined transitions. The TF-PM$+$TF-ST cluster
 reaches AD2 through stochastic conformance and simulation, but stops short of
-distributional forecasting. The IC1+IC3 cluster chains PM and prediction
-sequentially without a stochastic layer. The IC2+IC4 cluster demonstrates that
+distributional forecasting. The TF-PM$+$TF-FC cluster chains PM and prediction
+sequentially without a stochastic layer. The TF-ST$+$TF-ML cluster demonstrates that
 public repository traces support state-transition modelling, but event-to-state
-mapping remains unstandardised. No paper occupies L3.
+mapping remains unstandardised. No paper occupies L3 Unified.
 
 These five gaps directly motivate the PATHCAST method presented in
-Chapter~\ref{ch:method}. PATHCAST is positioned at integration level~L3 in
-the SPMF taxonomy; to the best of our knowledge, no study identified in this
-review composes all four technique families into a unified, architecturally
-specified framework for SDLC process forecasting.
+Chapter~\ref{ch:method}. PATHCAST is positioned at integration level L3
+Unified (Table~\ref{tab:il-def}); to the best of our knowledge, no study
+identified in this review occupies that level on SDLC event logs.
 
 Methodologically, the LLM-assisted protocol used in this review achieves
 substantial inter-rater agreement under cross-model verification (binary

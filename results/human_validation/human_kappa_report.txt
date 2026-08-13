@@ -10,7 +10,54 @@ Independent rater 2:        human (blind double-screening)
   Cohen's kappa (binary include/not-include): 0.335 (fair)
     Po=87.6%, Pe=81.4%
 
-[FT] no filled decisions yet (0/177); fill human_ft_decision first
+[TA strict include] confusion matrix (human = gold standard, counts not %):
+  TP=18  FP=4  FN=54  TN=392  (n=468)
+  Recall=0.250  95% Wilson CI=(0.164, 0.361)
+  Lost Evidence (1-Recall)=0.750  (54/72 human-relevant missed)
+  MCC=0.409
+  WMCC (FN:FP=10:1)=0.073
+
+[TA (LLM maybe/pending as include)] confusion matrix (human = gold standard, counts not %):
+  TP=72  FP=105  FN=0  TN=291  (n=468)
+  Recall=1.000  95% Wilson CI=(0.949, 1.000)
+  Lost Evidence (1-Recall)=0.000  (0/72 human-relevant missed)
+  MCC=0.547
+  WMCC (FN:FP=10:1)=0.547
+
+[FT] n=177
+  Cohen's kappa (multi-class): 0.122 (slight)
+  Observed agreement (Po): 44.6%  Expected (Pe): 37.0%
+  Categories: ['exclude', 'include']
+  Cohen's kappa (binary include/not-include): 0.122 (slight)
+    Po=44.6%, Pe=37.0%
+
+[FT] confusion matrix (human = gold standard, counts not %):
+  TP=31  FP=3  FN=95  TN=48  (n=177)
+  Recall=0.246  95% Wilson CI=(0.179, 0.328)
+  Lost Evidence (1-Recall)=0.754  (95/126 human-relevant missed)
+  MCC=0.215
+  WMCC (FN:FP=10:1)=-0.033
+
+[QA] 31 papers included by both human and LLM — QA/extraction comparison base
+  QA1 agreement: 100.0% (n=31)
+  QA2 agreement: 96.8% (n=31)
+  QA3 agreement: 67.7% (n=31)
+  QA4 agreement: 74.2% (n=31)
+  QA5 agreement: 80.6% (n=31)
+  QA6 agreement: 71.0% (n=31)
+  QA7 agreement: 90.3% (n=31)
+  QA8 agreement: 74.2% (n=31)
+  qa_total mean absolute difference: 1.19 (n=31)
+
+[Extraction] exact-match agreement (case/whitespace-insensitive):
+  research_question: 0.0% (n=31)
+  study_type: 45.2% (n=31)
+  pm_technique: 29.0% (n=31)
+  stochastic_technique: 80.6% (n=31)
+  software_process: 12.9% (n=31)
+  dataset_source: 54.8% (n=31)
+  main_finding: 0.0% (n=31)
+  limitations: 0.0% (n=31)
 
 Interpretation thresholds (Landis & Koch 1977):
   <0.00 poor | 0-0.20 slight | 0.21-0.40 fair | 0.41-0.60 moderate | 0.61-0.80 substantial | >0.80 almost perfect

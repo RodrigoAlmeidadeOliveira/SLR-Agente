@@ -1,0 +1,283 @@
+              Reconstructing Meaningful Workﬂow from
+                           Transaction Logs
+               Yutian Sun, Liang Zhang∗ , Zhengqi Zhou                                    Yangjun Cai, Zhencun Xie, Zhimin Yan
+               School of Computer Science, Fudan University                                  Hangzhou Real Estate Information Center
+                           Shanghai, 200433 China                                                   Hangzhou, 310006 China
+                 {ytsun, lzhang, 082024013}@fudan.edu.cn                                         {cyj, xzc, yzm}@fgj.hz.gov.cn
+
+
+
+                                                                                                                    TABLE I
+   Abstract—Enterprises today rely on workﬂow more and more                                     Transaction Logs in an E-Government Application
+to accomplish business goals. A well designed process can
+contribute to better business operation and working eﬃciency. In                        ID          Start Time              Entry
+practice, however, most organizations have no eﬃcient workﬂow,                          ...         ...                     ...
+either there is not at all from the very beginning, or lack domain                      1132449     2009/6/15 11:09:24      Building trading acceptance
+experts who equip with the comprehensive landscape about the
+                                                                                        1133917     2009/6/15 11:09:24      Building mortgage acceptance
+business. In order to conduct business more eﬀectively, it is neces-
+                                                                                        1133929     2009/6/15 11:09:25      Online registration application
+sary to reconstruct workﬂows from transaction logs, and further,
+                                                                                        1133929     2009/6/15 11:09:26      Registration approving
+optimize the business via meaningful representations of these
+                                                                                        1133856     2009/6/15 11:09:33      Sealing examining
+workﬂows. In this paper, we propose a method and corresponding
+                                                                                        1132040     2009/6/15 11:09:39      Photocopying
+toolbox to mine the workﬂows and vital patterns. Domain experts
+can use them in an interactive way to reconstruct meaningful                            ...         ...                     ...
+business processes. We got very promising experimental results
+on two real applications datasets                                                                                  TABLE II
+                                                                                                  Lifecycle of an Example Business Workflow
+  Keywords—process mining; sequence mining; GSP; meaningful
+workﬂow                                                                                 ID          Start Time              Entry
+                                                                                        1133917     2009/6/15 11:09:24      Building mortgage acceptance
+                                                                                        1133917     2009/6/15 11:10:51      Building mortgage examining
+                             I. Introduction                                                                                and approving
+                                                                                        1133917     2009/6/15 11:27:33      Sealing examining
+   Enterprises today emphasize more on workﬂow that as-
+                                                                                        1133917     2009/6/15 11:41:04      Certiﬁcate making
+semble tasks in order to accomplish business goals. A well                              1133917     2009/6/15 14:17:11      Charging
+designed workﬂow can contribute to better business operation                            1133917     2009/6/15 14:52:36      Certiﬁcate issuing
+and working eﬃciency. So, how to construct such work-                                   1133917     2009/6/15 14:55:38      Photocopying
+ﬂows becomes a concern for business personnel. In practice,                             1133917     2009/7/24 11:02:43      Filing
+however, many organizations conduct their routine business
+without any precisely deﬁned workﬂow. Even for those who
+have workﬂows designed in advance, business models will                              Process mining aims to discover information from trans-
+more or less deviate from their initials. In both situations, it                  action logs, and to rebuild and improve process models [1].
+is necessary for domain experts to have some eﬀective means                       Mining tools like ProM [2] nowadays are also gaining more
+to reconstruct and optimize workﬂows.                                             and more popularity due to its large quantity of mining
+   New insights can be gained from past experiences. For-                         algorithm as well as user-friendly interface.
+tunately, most enterprises save transaction logs for future                          However, some feedbacks from domain experts should not
+auditing or achiving. These logs reﬂect faithfully the business                   be overlooked in applying them to workﬂow reconstruction
+operations traces, and provide us essential information for                       and optimization. First, the results obtained from many tradi-
+reconstructing and optimizing workﬂows. For instance,Table I                      tional process mining algorithms are elusory to business per-
+and II respectively show a transaction log of an E-government                     sonnel. For example, one workﬂow from a real E-government
+application in China and a typical example workﬂow (ID =                          application is illustrated in Fig. 4(a), domain experts reported
+1133917) logged in it. Business personnel are eager to ﬁnd                        that they cannot understand it very well, letting alone getting
+them out by means of some automatic tools. Furthermore,                           insight from it. Second, even some tools, e.g. ProM [2], can
+identifying vital patterns in large numbers of workﬂows can                       produce comprehensive workﬂow, they can hardly tell what
+improve business signiﬁcantly. Merging these two tasks can,                       patterns are vital to the workﬂow, which is expected to improve
+to a great extend, shorten the execution period of workﬂows.                      business; Third, some outliers in logs are mostly neglected
+   The realize the dream, process mining is preferred.                            by traditional mining tools due to the nature that they are
+                                                                                  overwhelmed by other frequent tasks. As we all know, less by
+   ∗ To whom correspondence should be addressed.                                  no means implies meaningless. They should be identiﬁed and
+
+  _____________________________________
+ 978-1-4244-6055-7/10/$26.00 ©2010 IEEE
+
+
+
+                                                                              308
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:39:20 UTC from IEEE Xplore. Restrictions apply.
+                                                                                     Sequence s, = τ,1 , τ,2 , ..., τ,k  is called a sub-sequence of
+                                                                                  s = τ1 , τ2 , ..., τl , or s is said to contain s, , if {τ,1 , τ,2 , ..., τ,k } ⊆
+                                                                                  {τ1 , τ2 , ..., τl } with the same order.
+                                                                                     For example, s, = Charging, Photocopying, Filing is a
+                                                                                  sub-sequence of s1133917 . And s1133917 contains s, .
+                                                                                  A. Support and Conﬁdence
+                       Figure 1.   System Framework                                   In data mining, support and conﬁdence are two essential
+                                                                                  criteria to reveal the relationship of data. In our study, we
+                                                                                  deﬁne them as follows.
+presented to domain experts in order to reveal some knowledge
+                                                                                      Support: if S is a set of sequences, i.e. S={s} , for all
+about small probability events, either know-how or errors.
+                                                                                  sequence s, ∈S, The support of s in S, say s supp = P(s is a
+   The work in this paper deals with above shortcoming of
+                                                                                  sub-sequence of s, ). In another word, support denotes the
+traditional process mining methods. It treats business processes
+                                                                                  probability that a sequence occurs in workﬂows. Support gives
+as multiple execution threads. So here, we can take advantage
+                                                                                  us the quantitative deﬁnition of the term “frequency”.
+of GSP [3], a sequential pattern mining algorithm to advise
+                                                                                      For example, consider a sequence Photocopying, Filing
+domain experts: (1) what kind of processing patterns can be
+                                                                                  which appears in the workﬂow of Table II. If it occurs totally
+extracted as workﬂows; (2) which sequential patterns are most
+                                                                                  10 times among all 100 workﬂows in Table I, the support of
+frequently occurred in workﬂows; (3) what kinds of outliers
+                                                                                  this sequence is 10/100 = 0.1. Usually, support is compared
+can be aﬃliated to resulting workﬂows. By discovering these
+                                                                                  with a threshold given by users, called minimum support. If
+three factors, business people can not only reconstruct their
+                                                                                  it is no less than the minimum support, we call this sequence
+workﬂow from logs, but also optimize existing workﬂows
+                                                                                  “sequential pattern”.
+more easily.
+   Our work embodies its technical contributions in two folds:                        Conﬁdence: if S is a set of sequences, i.e. S={s}, for all
+                                                                                  sequence s, ∈S, the conﬁdence of s in S , say scon f = P (s = s, |s
+   1) A process mining method which can present meaningful
+                                                                                  is a sub-sequence of s, ), s, ∈S. So, conﬁdence is the conditional
+       results to domain experts;
+                                                                                  probability that a sequence s is the same as another sequence
+   2) Exposing vital patterns (both frequent ones and acciden-
+                                                                                  s, , under the condition that s is a sub-sequence of s, .
+       tals) aﬃliated to workﬂows.
+                                                                                      For example, given S and a sequence s, if in S, only s1 , s2
+   These beneﬁts are demonstrated by applying our method to                       and s3 contain s and s1 = s, s2 = s, s3  s. We can say that
+two real business transaction logs.                                               the conﬁdence of s in S is 0.67 (= 2/3).
+                         II. Framework
+                                                                                  B. GSP - A sequential pattern mining algorithm
+   The framework of our system is presented in Fig. 1. The
+log database maintains routine task instances with time-stamps                       GSP is a sequential pattern mining algorithm developed
+(Table I has shown a partial snapshot of the log). By reading                     by R Srikant et al. in 1996 [3]. The algorithm continues
+transaction log database, log extractor will rearrange log ﬁles                   to construct, trim and ﬁnd sequential patterns of length i by
+into threads just like the ordered tasks sequences in Table II.                   using sequential patterns of length i − 1 until no sequence’s
+Then sequence mining module discovers workﬂow candidates                          support is bigger than the minimum. Its objective is to ﬁnd
+according to the parameters assigned by domain experts.                           dominant sequences. We use the GSP as a base mining engine
+Successively, workﬂow ﬁlter and outlier searcher will polish                      in our study, but the output of GSP will then be translated into
+each result pattern with aﬃliated tasks. Finished workﬂows                        meaningful workﬂows, as described below.
+are presented to users. With these results, domain experts can                    C. Mining and Filtering Algorithm
+interactively adjust parameters, in order to obtain workﬂows
+that meet business criteria.                                                         After mining out all candidate sequential patterns using
+                                                                                  GSP, it is necessary to polish these sequences into useful ones.
+                III. Design and Implementation                                       The ﬁrst thing to do is to eliminate redundant sequences
+   Before technical details, it is necessary to deﬁne some                        from candidate sequential patterns. Given a sequence set S,
+relevant concepts.                                                                and two sequences s and s, which satisfy s, s, ∈S . If s, is a
+   A Sequence s = τ1 , τ2 , ..., τl  is an ordered list of tasks with           sub-sequence of s, we may regard s, as a redundant sequence
+length of l. A task τi is an activity in a workﬂow. Usually, a                    which should be removed from S. This step is important
+task τi should have a timestamp (denoted as τi .t) to record                      because if a sequence of length 8 is a candidate sequential
+                                                                                                              
+when it was start to execute. Generally, τi .t⩽τ j .t if 1⩽i⩽ j⩽l.                pattern, all of its 35 ( = 8i=2 i ) sub-sequences will also be
+   In our example, the activities in Table II can be regarded as a                candidates. If we return results without trimming, end users
+sequence: s1133917 = Building mortgage acceptance, Building                      may be overwhelmed by less informative data. The ﬁltering
+mortgage examining and approving, Sealing examining, Cer-                         algorithm is outlined in Alg. 1.
+tiﬁcate making, Charging, Certiﬁcate issuing, Photocopying,                          However, a trimmed candidate sequence set may be still too
+Filing.                                                                          large for Users to grasp. So, another parameter RoC ( range of
+
+
+
+
+                                                                              309
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:39:20 UTC from IEEE Xplore. Restrictions apply.
+Algorithm 1 Workﬂow Filtering                                                     Algorithm 2 Outlier Searching
+Require: sequential pattern set seqPatSet                                         Require: sequence set seqSet ∨ sequential pattern seq ∨
+Ensure: sequential pattern set Result                                               sequence set outlierSet
+  sort seqPatSet order by sequence length desc                                    Ensure: sequential pattern set Result
+  move the ﬁrst sequence in seqPatSet to Result                                     for all sequence seqPatCand in seqSet do
+  for all sequence seqPat in seqPatSet do                                             if seq is a sub sequence of seqPatCand∧ seqPatCand
+    for all sequence s in seqPatSet do                                                seq then
+       if seqPat is not a sub sequence of s then                                         add seq to outlierSet
+          add seqPat to Result                                                        end if
+       end if                                                                       end for
+    end for                                                                         Result ⇐ GSP mining (outlierSet)
+  end for
+
+                                                                                  collected from a hospital. It contains 52237 entries, 11702
+conﬁdence) is needed. The RoC classiﬁes sequential patterns                       instances of processes and 18 diﬀerent tasks. No any process
+into diﬀerent groups. Only those sequences whose conﬁdence                        deﬁned in advanced. Doctors want to get some insight about
+is within the given interval should be returned. For example,                     business process from the logs.
+if an end user is willing to ﬁnd out what are the most frequent
+workﬂows in the logs, he may set the range of conﬁdence close                     B. Experiment Results
+to 1,say [0.9, 1]. Thus the returned sequential patterns, to a                       Fig. 2 shows mining results on the E-government’s dataset.
+great extend, are real workﬂows. However, if an end user wants                    In order to give more informative result, we use arcs with
+to discover the common knots in most workﬂows, he may set                         diﬀerent width proportional to the support indicators. The
+the range of conﬁdence close to 0, say [0, 0.1]. The system                       thicker the arc presents, the larger the support is. The sequen-
+will provide him results with sub-sequences of workﬂows.                          tial pattern of the graph on the left means Building mort-
+                                                                                  gage acceptance, Building mortgage examining and approving,
+D. Searching for Outliers                                                         Sealing examining, Certiﬁcate making, Charging, Certiﬁcate
+   Sometimes, business personnel will also be keen on ﬁnd-                        issuing... should be identiﬁed as a workﬂow, so does the right
+ing some small probability events, called outliers. In most                       one.
+frequency-based mining algorithms, outliers are regarded as                          Due to the layout concern, only 2 out of 5 sequential
+noise that should be eliminated. But from the feedback from                       patterns are shown in Fig. 2. The solid arcs in the graph
+domain experts, they want to probe into these outliers to gain                    represent regular sequential patterns and dotted ones are outlier
+know-how, or to ﬁnd the ﬂaw in business practices. What we                        tasks. All of the regular sequential patterns occur at least 3%
+need is a smart treatment of such outliers.                                       among all workﬂows and 95% of which are real workﬂows.
+   In this context, when a sequence pattern we ﬁnd is close to                    So business personnel may regard these workﬂows as frequent
+a real workﬂow, its outlier tasks are assumed to be attached                      ones and optimize their structures. Meanwhile, the abnormal
+to the sequence to handle some unexpected situations such as                      tasks here may be regarded as rollback activities. Checking
+rollback or further charging. With this concern, we know that                     against given process deﬁnitions, domain experts are highly
+the length of an outlier sequence is longer than the normal one.                  satisﬁed with the functionality.
+The main idea to ﬁnd outliers of a sequence is again relied on                       Fig. 3 shows a mining result on the hospitals dataset, the
+the GSP algorithm. The mining target is a set of sequences S                      support is 0.03, conﬁdence ranges from 0.1 to 0.2. Numbers in
+which satisﬁes: for all s, ∈ S, where target sequential pattern s                 boxes are tasks IDs. It seems trivial, but reﬂects the simplicity
+is a sub-sequence of s and ss, . Then the mining algorithm                      nature of ambulatory treatment in hospitals. To serve as a tool
+will return outliers aﬃliated to corresponding workﬂows. The                      to reconstruct and optimize work.
+outlier searching algorithm is shown in Alg. 2.
+                                                                                  C. Compare with ProM
+                   IV. Experiments and Discussion                                    Fig. 4 shows a comparison between our system and ProM in
+  To justify our method, we built a prototype(can be got on                       terms of meaningfulness. The experiment dataset is the same
+request.) using Java and GraphViz [4].                                            as the E-government one. Fig. 4(a) is the process generated
+                                                                                  by using Alpha [5] algorithm in ProM [2]. Apparently, it is
+A. Dataset                                                                        too heavy and complicated to understand, even for its part
+   We employed two real datasets to test the system. One is                       depicted as Fig. 4(b) . Since the plug-in fails to support the
+a one year log from an E-government application in China.                         Chinese characters, we use task IDs to denote diﬀerent tasks.
+It contains 656952 entries, 150853 instances of processes and                     Fig. 4(c) shows the result of our system.
+568 diﬀerent tasks. Since the application is process-aware, we                       From the feedbacks from domain experts, it is almost
+can verify reconstructed workﬂows against original process                        impossible for to understand what Alpha Algorithm mines
+deﬁnitions. Another dataset is a one year routine activities                      out. The mass relationship among tasks made the whole graph
+
+
+
+
+                                                                              310
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:39:20 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                              V. Related Work
+                                                                                     Process mining has been extensively researched [6], [7], [8]
+                                                                                  over the last two decades, which was surveyed by van der Aalst
+                                                                                  et al in [1]. In concurrency, the alpha algorithm [5] made the
+                                                                                  ﬁrst step. Under the framework of ProM [2], more techniques
+                                                                                  [5], [8] were approached.
+                                                                                     Sequence mining [9] is a part of process mining. Many
+                                                                                  works of it are also under research [7]. The study of sequential
+                                                                                  pattern mining basically started from the traditional data
+                                                                                  mining. R Agrawal et al. proposed AprioriAll, AprioriSome
+                                                                                  and GSP [3] methods on the base of a classic data mining
+                                                                                  algorithm Apriori. Then M. Zaki et al. also proposed SPADE
+                                                                                  [10] as a Apriori-based method. J Pei, et al continue to work
+                                                                                  on this ﬁeld and PreﬁxSpan [11] ran as a representative.
+                                                                                                               VI. Conclusion
+Figure 2.    Mining result on e-government’s dataset. Support = 0.03,                In this study we explored an interactive way for business
+conﬁdence = [0.95, 1], outlier sequence enabled.                                  personnel to discover meaningful workﬂows from transaction
+                                                                                  logs. We suggest using sequential pattern mining method to
+                                                                                  ﬁnd the frequently used workﬂows or most common sub-
+                                                                                  sequences which can be fundamental for process optimization.
+                                                                                  In order to look for abnormal or aﬃliated tasks in workﬂows,
+                                                                                  we also developed a brand new method to polish workﬂow
+                                                                                  candidates. Experiments against two real datasets are very
+                                                                                  promising, especially for the meaningfulness factors.
+                                                                                                              Acknowledgment
+Figure 3. Mining result on hospital’s dataset. Support = 0.03, conﬁdence =
+[0.1, 0.2] , outlier sequence disabled.                                             Work partly supported by the NSF China grant 60873115,
+                                                                                  and the Chinese National Basic Rearch Program (973) grant
+                                                                                  2005CB321905.
+                                                                                                                  References
+                                                                                   [1] W. van der Aalst and A. Weijters, “Process mining: A research agenda,”
+                                                                                       Computers in Industry, vol. 53, pp. 231–244, 2004.
+                                                                                   [2] W. van der Aalst, B. van Dongen, C. Gnther, A. Rozinat,
+                                                                                       H. Verbeek, and A. Weijters, “Prom : the process mining toolkit,”
+                                                                                       2009. [Online]. Available: http://library.tue.nl/catalog/LinkToVubis.csp?
+                                                                                       DataBib=6:666570
+                                                                                   [3] R. Srikant and R. Agrawal, “Mining sequential patterns: Generalizations
+                                                                                       and performance improvements,” in Extending Database Technology,
+                                                        (b)                            vol. 1057, Mar 1996, pp. 3–17.
+                                                                                   [4] E. Gansner, E. Koutsoﬁos, and S. North, “Drawing graphs with dot,”
+                                                                                       2006. [Online]. Available: http://www.graphviz.org/Documentation/
+                                                                                       dotguide.pdf
+                                                                                   [5] A. de Medeiros, B. van Dongen, W. van der Aalst, and A. Weijters,
+                                                                                       “Process mining: Extending the alpha-algorithm to mine short loops,”
+                                                                                       in BETA Working Paper Series, WP 113, 2004.
+                                                                                   [6] W. van der Aalst, “Using process mining to generate accurate and inter-
+                                                                                       active business process maps,” Business Information Systems Workshops,
+                                                                                       vol. 37, pp. 1–14, 2009.
+               (a)
+                                                                                   [7] Q. Shao, Y. Chen, S. Tao, X. Yan, and N. Anerousis, “Eﬃcient ticket
+                                                                                       routing by resolution sequence mining,” in SIGKDD, 2008, pp. 605–613.
+                                                          (c)                      [8] W. van der Aalst, V. Rubin, H. Verbeek, B. van Dongen, E. Kindler, and
+                                                                                       C. Günther, “Process mining: A two-step approach to balance between
+Figure 4. Comparison between the graph of our result and the one generated             underﬁtting and overﬁtting,” Software and Systems Modeling, vol. 9, pp.
+by Alpha mining algorithm.                                                             87–111, 2010.
+                                                                                   [9] J. Pei, J. Han, and W. Wang, “Mining sequential patterns with constraints
+                                                                                       in large databases,” in CIKM, Nov 2002, pp. 18–25.
+                                                                                  [10] M. Zaki, “Spade: An eﬃcient algorithm for mining frequent sequences,”
+meaningless. Contrast to it, in our system, each mined process                         Machine Learning, vol. 40, no. 1-2, pp. 31–60, 2001.
+can be mapped to one or a group of meaningful workﬂows.                           [11] J. Pei, J. Han, B. Mortazavi-asl, H. Pinto, Q. Chen, U. Dayal, and
+                                                                                       M. chun Hsu, “Preﬁxspan: Mining sequential patterns eﬃciently by
+With such meaningful process, domain experts can improve                               preﬁx-projected pattern growth,” in ICDE, 2001, pp. 215–226.
+their workﬂows easily.
+
+
+
+
+                                                                              311
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:39:20 UTC from IEEE Xplore. Restrictions apply.
+

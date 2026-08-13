@@ -1,0 +1,640 @@
+                        2016 12th International ACM SIGSOFT Conference on Quality of Software Architectures
+
+
+
+
+                                   Modeling the Failure Pathology
+                                     of Software Components
+                                  João M. Franco, Frederico Cerveira, Raul Barbosa, Mário Zenha-Rela
+                                                 CISUC, Department of Informatics Engineering
+                                                              University of Coimbra
+                                                          P-3030 290, Coimbra, Portugal
+                                                Phone: +351 239 790 000 Fax: +351 239 701 266
+                                              Email: {jmfranco, fmduarte, rbarbosa, mzrela}@dei.uc.pt
+
+
+
+
+      Abstract—Reliability prediction methods support early deci-                   software component accounting for errors, failure recoveries,
+   sion on software development by offering means for architects                    propagation, error masking and different failure modes.
+   to reason and test their own designs. However, most of today’s                      Regarding the second contribution, the practical experiment
+   reliability prediction methods model the failure behavior as two
+   states: functioning properly or failed, neglecting other failure                 uses fault injection into a running system on a widely used
+   modes. In addition, the lack of realistic case-studies and actual                virtualization solution for cloud-based services – Xen. Xen
+   failure data make testing and validation difﬁcult tasks.                         supports the execution of multiple Operating Systems (OS)
+      With this in mind, we propose a reliability modeling approach                 on the same hardware allowing us to have a control group to
+   describing the behavior of a software component taking into                      identify if the fault injected in a particular OS is propagated
+   account error occurrences and their associated impacts in terms
+   of error masking, error propagation, error recovery and failures
+                                                                                    to another. In addition, Xen is distributed as an open-source
+   modes. To validate our approach we present a real case-study                     software providing us the means to inject faults directly to
+   based on Xen where we injected faults at different virtualization                the hypervisor by modifying its kernel extensions. The results
+   layers. The experiments show close results between our modeling                  allow to validate our approach with a realistic case-study
+   approach and the realistic values obtained from the experiment.                  showing that it achieves more accurate reliability predictions
+                                                                                    than classical studies. Moreover, the experimental testbed
+    Index Terms—Reliability, Software architecture, Stochastic
+   Modeling, Error, Failure, XEN                                                    and its failure data serve as a contribution to the research
+                                                                                    community, since they can be used by other research studies
+                                                                                    to test, validate and benchmark different reliability methods.
+                            I. I NTRODUCTION
+                                                                                       This paper is organized as follows. Section II describes
+      In past decades several methods [1]–[4] have been proposed                    the background and related work. Section III introduces the
+   to assess, predict and analyze reliability from software ar-                     proposed stochastic model to assess reliability from a software
+   chitectures. These methods promote early identiﬁcation and                       component and Section IV outlines the case-study of an actual
+   correction of reliability issues early in the software devel-                    cloud-based system. In Section V we discuss the experimental
+   opment life-cycle and also, support evolutive changes in the                     results obtained showing how they validate the proposed
+   architecture by providing analysis capabilities.                                 model, while Section VI concludes the paper.
+      However, these methods present limitations due to their
+   binary failure mode that only models correct and failure                                                II. R ELATED W ORK
+   states [5]. In more detail, these methods assume that when                          Software architecture provides a high-level of abstraction
+   an error occurs it manifests itself as an application failure,                   that allows designers to reason about the system and its
+   propagating to the application output. This assumption means                     topology through components and their interconnections [4].
+   that if an error occurs in one of the components, the whole ap-                  For this reason, software architecture has been used as a
+   plication fails without taking into account the likely possibility               source to model reliability through stochastic models [3], [7]–
+   of masking, recovery, or tolerate that error.                                    [9]. Cheung [2] was one of the ﬁrsts to propose reliability
+      To address this limitation, we propose: 1) a method to                        prediction from an architecture by using Deterministic-Time
+   increase the level of detail in traditional reliability modeling                 Markov Chains (DTMCs) and several surveys were presented
+   approaches, focusing on the software component, and 2) a                         since then [1], [10], [11].
+   practical experience that collects real reliability data to validate                These surveys overview the state-of-the-art pointing out
+   the proposed model.                                                              venues for future work and current limitations. From the
+      In the ﬁrst contribution, we model reliability through a                      outlined limitations, Gokhale [10] reminds the importance of
+   stochastic model expressing the failure mode presented by                        deﬁning component failure models and identiﬁes the area of
+   Avizienis et al. [6]. The model outlines the failure process of a                parameter estimation techniques as being in the infancy at
+
+978-1-5090-2567-1/16 $31.00 © 2016 IEEE                                        41
+DOI 10.1109/QoSA.2016.15
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+   that time (2007). Immonen and Niemelä [11] point out the                        system, but also provide a realistic, freely-accessible case-
+   lack of support for tools, weak reliability analysis of software                 study, and actual failure data which can be used by researchers
+   components, and weak validation of the methods and their                         and practitioners to compare and validate different reliability
+   results. Our work addresses the above limitations by proposing                   prediction methods.
+   a reliability prediction model that deﬁnes component failures                       In short, this paper proposes a novel modeling approach to
+   models as suggested by Gokhale. In addition, we propose a                        estimate reliability from a software architecture. It addresses
+   practical experiment which addresses the lack of parameter                       the shortcomings highlighted by research surveys by proposing
+   estimation techniques and also serves as a validation of our                     a more detailed failure behavior including masking, error
+   modeling method addressing the limitation raised by Immonen                      propagation, multiple failure modes and recoveries. As a
+   and Niemelä.                                                                    result, we validate our approach through a realistic case-study
+      Goseva-Popstojanova et al. [8] presented a comparison be-                     by collecting actual failure data and by asserting the adequacy
+   tween different architecture-based reliability prediction meth-                  of the proposed stochastic model.
+   ods based on an empirical, large scale and real case-study.
+                                                                                                              III. A PPROACH
+   Their work reveals that the literature assumes a too simplistic
+   relationship between faults and failures, leading to errors in the                  Reliability prediction from a software architecture descrip-
+   analysis. This seminal paper concludes that more work should                     tion has been largely studied and several methods have been
+   be conducted by the software testing and reliability research                    presented [1], [16]. These methods model reliability through
+   communities in order to explore more realistic relationships                     Continuous- or Discrete-Time Markov Chains (CTMCs or
+   between faults and failures. This was a strong motivator for                     DTMCs). In short, the former implies the notion of time where
+   the work presented in this paper.                                                reliability is denoted by the time elapsed since the start of the
+      Cortellessa and Grassi [12] proposed a method to predict the                  execution until a failure at time t occurs. The latter, deﬁnes
+   system reliability by encompassing error propagation. In their                   reliability as a probability of delivering the correct service
+   work, authors recognize that they faced the same difﬁculties                     when it is requested for use.
+   as other studies, namely the absence of reference values and a                      Our approach extends the classical reliability modeling
+   lack of parameter estimation techniques to obtain meaningful                     study of Cheung [2] by presenting a failure model more
+   probabilities of actual internal failures and error propagation.                 descriptive than the ones that encompass only two states: func-
+      Filieri et al. [5] present a novel approach that deals with                   tioning properly and failure. We use DMTCs to estimate the
+   multiple failure modes and error propagation among compo-                        reliability from a software architecture as Cheung proposes,
+   nents. Their approach supports the speciﬁcation of individual                    but we extend them by encompassing errors, error masking,
+   components’ attitude to produce, propagate, transform and                        propagation to another components, different failure modes
+   mask different failure modes. Again, as pointed out by the                       and failure recoveries.
+   authors in the concluding remarks, they are unable to assess                        A DTMC is a tuple MD = (S, s, P , L), where:
+   their approach effectiveness due to the lack of real case-studies                   • S is a ﬁnite set of states;
+   and actual values of reliability.                                                   • s ∈ S is the initial state;
+      The proposed reliability model also accounts for error                           • P : S × S → [0, 1] is the transition probability matrix
+   propagation which consists of an error occurring somewhere in                          where Σs ∈S P(s, s ) = 1 for all s ∈ S;
+                                                                                                       AP
+   the system. This error can be propagated to other components                        • L: S → 2          is a labeling function which assigns to each
+   or to the application output. Hiller et al. [13] introduced                            state s ∈ S the set L(s) of atomic propositions that are
+   the concept of error permeability and presented a framework                            valid in the state.
+   to analyze the propagation and severity of data errors in a                         The control is transferred from a state si to state sj through
+   software system.                                                                 a transition probability matrix which assigns to each pair of
+      To assess the error propagation between components, Ab-                       states (si , sj ) a probability P (si , sj ). A transition only occurs
+   delmoez et al. [14] proposed an analytical method using                          if the probability of transiting between states i and j is greater
+   fault-injection techniques to estimate the probability of error                  than zero: P (si , sj ) > 0. If there is more than one transition
+   propagation in a software architecture. Johansson and Suri [15]                  from a state si , like P (si , sj ) > 0 and P (si , sk ) > 0, their
+                                                                                                              k
+   also used fault-injection techniques to assess error propagation                 sum must total to 1, j=1 P (si , sj ) = 1.
+   in an Operating System (OS). The OS is assumed to be a                              Our approach models the failure process of a component as
+   black-box and it is proﬁled through a fault injection technique                  proposed by the dependability community and presented by
+   and data error propagation analysis. The results showed that                     Avizienis et al. [6]. This model encompasses errors, failures,
+   many errors do not propagate or propagate in a robust manner.                    recoveries, error propagation and different failure modes. To
+      In common with some of the above error propagation                            illustrate such model, Figure 1 presents a DTMC representing
+   studies, our approach relies on fault injection techniques to                    the failure process of a single software component.
+   estimate the system failure data. However, it differs in the                        In more detail, a software component represents a unit
+   fact that we use the collected data to study the reliability                     of computation and can be in either one of the eight states
+   impact and validate the proposed modeling approach. Thus,                        depicted in the modeled DTMC:
+   our goal is not only the estimation of the failure data of a
+
+
+
+                                                                               42
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+                           Componenti
+
+                                                                Rt                                       {Cont. Fail}
+
+                                                                                                              s=3
+
+                                                                       Rc
+
+                                                                                                          {Time Fail}
+                                                                                                    Fc                            1- Rc
+                                                                                                              s=4
+                                   {OK}                 {Error}                       {Fail}                              1- Rt            {Halt}
+                                                                     1 - (M+Ep)                  Ft
+                                                E
+                                    s=0                   s=1                          s=2                                                 s=7
+                                                M
+                                                                                                         {Hang Fail}
+                                                                                                Fh
+                                                                                                                           1- Rh
+
+                                                                                                              s=5
+
+                                                                                               Fe                                  1- Re
+                                                           Re
+                                                                                                         {Erratic Fail}
+                                                                            EP(i,j)
+                                                           Rh                                                 s=6
+
+
+
+
+                                Fig. 1: DTMC illustrating the failure process of a single software component
+
+
+      •   OK – the component is not in the presence of an error                                          (s = 5) and erratic (s = 6) to the state OK (s = 0) are
+          and executes as expected. When an error occurs with                                            given by Rc , Rt , Rh , Re , respectively.
+          probability E the control of execution exits the OK state
+          (s = 0) and enters in the error state (s = 1).                                            •    Halt – this state (s = 7) illustrates the complete stop of
+                                                                                                         the system and emulates a failure that leads the system
+      •   Error – represents when a fault is activated leading the                                       to a crash without the possibility of being recovered
+          component to enter in an error state. When an error                                            without human intervention.
+          occurs, one of the following possibilities can happen:
+           – the error is masked with probability M returning                                     To model the failure mode of a system, we use an absorbing
+             to the OK state (s = 0). An error can be masked                                   DTMC which encompasses two ﬁnal states with self-loop tran-
+             through fault tolerance mechanisms, including error                               sitions deﬁning the successful (Sc ) and failure states (sf ). The
+             detection or recovery techniques which bring the                                  rationale behind this approach is that each task is processed
+             system to a correct state;                                                        through the various states in the model and reaches one of two
+           – it can enter in a failed state (s = 2);                                           conditions: a successful (sc ) or a failure state (sf ).
+           – the error can be propagated to component j with                                      To obtain a probabilistic quantiﬁcation of the modeled
+             rate Ep(i,j) .                                                                    system reliability we specify a property in the Probabilistic
+                                                                                               Computation Tree Logic (PCTL) [17]. This property computes
+      •   Fail – this state (s = 2) denotes when an error is                                   the probabilities from the initial state s until the successful
+          activated, leading to a failure. When a component                                    absorbing state (state = sc ) has been reached.
+          fails, it can be categorized as content, timing, hang                                   To model the interactions of different software components,
+          or erratic [6] with rate probability Fc , Ft , Fh , Fe ,                             several studies adopt a user-oriented approach [1], [2] which
+          respectively.                                                                        assumes a sequential order in the execution. However, a system
+                                                                                               may encompass different architectural patterns in which com-
+      •   Content, Timing, Hang and Erratic Failure states –                                   ponents may for example execute in parallel or concurrently.
+          describe the multiple failure modes that follow into the                             To model such behaviors, Wang et al. [18] propose a method
+          categories of the failures proposed by Avizienis et al. [6].                         to solve a DTMC according to each applied pattern. In this
+          After entering in one of these failure modes, the system                             study we also assume a sequential order and other styles are
+          can recover due to, as an example, the implementation                                addressed as future work.
+          of failure handling techniques. The recovering rates from                               The above modeling approach encompasses errors, their
+          the failure states content (s = 3), timing (s = 4), hang                             masking and propagation, failure occurrence, their recoveries
+
+
+
+                                                                                         43
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+   and different failure modes. As a result, it provides a complete                          In this case-study the client is an external independent com-
+   model of the failure behavior of each component, allowing                             putation resource which performs HTTP requests concurrently
+   to produce more realistic and accurate models of a software                           to each VM through a Jmeter application. Each request is
+   system than classical reliability studies.                                            processed by the Apache webserver which is responsible for
+                                                                                         generating a ﬁle with a ﬁxed size (1024MB) and content
+                             IV. C ASE - STUDY                                           (zeroed ﬁle). Then, the webserver calculates a SHA1 hash
+                                                                                         of the generated ﬁle, resulting invariably in the same hash
+      To validate the accuracy of our model we implemented a                             result unless an error occurs. This hash is then reported in the
+   realistic case-study to compare the predicted reliability results                     HTML response which can be assessed by the client whether
+   with the ones obtained from real-world experiments. The                               it is the expected result or conclude that a failure has occurred.
+   case-study is based on a cloud infrastructure which deploys                           In this experiment we deﬁned the size of the generated ﬁle to
+   a set of HTTP servers responding to client requests. To                               be 1024 MB. The reason for this ﬁgure is that small ﬁle sizes
+   ensure that our experiments were reproducible we adopted                              would result in a short life span for processing the response
+   a widely known, freely available virtualization solution, the                         which might limit the effectiveness of an introduced error. As
+   Xen hypervisor [19]. In practical terms, Xen is used in real                          such, we opted for a large ﬁle size in order to increase the
+   world systems like the Amazon Elastic Compute Cloud (EC2),                            processing time to exercise CPU and memory, thus allowing
+   RackSpace Mosso or the CloudEx [20].                                                  the introduced error to be propagated and become noticeable.
+      Figure 2 illustrates our case-study where Xen is depicted
+                                                                                             This experiment includes a workload to simulate several
+   above the hardware layer and under the instanced virtual
+                                                                                         HTTP clients performing requests to the available webservers.
+   machines (VMs). The Dom0 is a privileged VM responsible
+                                                                                         Thus, we conﬁgured Jmeter to use 10 clients that start by
+   for managing the virtualization environment and having direct
+                                                                                         making requests during a 30 second ramp-up period and
+   access to the hardware. In this case-study we use two guest
+                                                                                         then to perform a request at each 600 milliseconds with
+                                                                                         100 millisecond deviation pause between them. As a result,
+                                                                                         each experiment run has the duration of approximately 420
+                                                                                         seconds (7 min) of which 330 seconds (5.5 min) concern
+                                                     VM 1                  VM 2
+                                                                                         the time where the workload is executed, and the remaining
+          Client                Dom 0
+                                                    Apache                 Apache        110 seconds are divided among the setup period before the
+          Jmeter
+                                                   webserver           webserver         experiment (i.e., launch probes and prepare the fault injection
+                                                                                         tool) and the cleanup period at the end (i.e., extract logs,
+                                                                                         clean temporary ﬁles and restart machines).
+                                                    XEN Hypervisor
+
+
+              HTTP                                Hardware
+                                        (CPU, Physical Memory, Ethernet)
+                                                                                         A. Fault Injection
+
+                                                                                            Estimating error propagation and failure occurrence prob-
+                   Fig. 2: Architecture of our case-study                                abilities can be a quite difﬁcult task due to the number of
+                                                                                         factors involved and to the inherent randomness of operational
+   virtual machines (VM1 and VM2) responsible for responding                             proﬁles, inputs, failure types, etc. Thus, we use fault injection
+   to client HTTP requests. Both VMs have the same system                                to artiﬁcially generate errors in the system as presented in the
+   image and the same workload. Our goal is to inject faults                             study of Cerveira et al. [21]. The goal is to collect relevant
+   in one of the VMs and monitor if the errors are propagated                            failure data and identify elements that are more prone to failure
+   to the other one, i.e. if the isolation between both VMs gets                         due to error propagation.
+   compromised.                                                                             A fault is injected during the execution of the workload in an
+      The edge depicted in Figure 2 from the Client to the                               interval between 30 seconds and 4 minutes randomly chosen
+   VMs passing through the different components, illustrates                             following a uniform distribution. This interval guarantees that
+   the connection used for communication between client and                              the fault is injected after the ramp-up period and that the target
+   servers. In addition, the format of the edge outlines the system                      system is working at its nominal throughput. It also provides
+   dependencies among architectural elements. The client sends a                         enough time before the end of the experiment for the fault to
+   request to a physical separated machine, where the case-study                         be propagated.
+   resides. This machine receives the request through its ethernet                          The injected faults emulate transient hardware faults, by
+   card (hardware), it is interpreted by the Xen hypervisor which                        ﬂipping bits in one of the available registers. Both the bit to
+   is responsible to redirect the requests to the appropriate VM.                        ﬂip and the register to target are chosen randomly following
+   Through the whole process, Dom0 is able to access the                                 a uniform distribution.
+   hardware and possibly monitor or modify this interconnection.
+
+
+
+                                                                                    44
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+   B. Failure Classiﬁcation                                                            information about the impact of a transient hardware fault into
+      To model multiple failure modes we require the                                   the virtualized system. The injected fault only targeted one
+   identiﬁcation of the different type of failures that an                             of the VMs (i.e., VM1), leaving the other intact (i.e., VM2).
+   error can lead to. With this in mind, we adapted the failure                        This aims to detect any breach in the isolation between both
+   classiﬁcation from Avizienis et al. [6] to our case-study as                        VMs which is usually assumed as guaranteed. The goal of
+   follow:                                                                             the latter is to study the effect of introducing faults directly
+                                                                                       into the hypervisor.
+      •   Content – a failure occurs when the content of the
+          received information deviates from the expected, correct                        1) Injection in VM1: The Xen hypervisor supports two
+          one. Since in our case-study, for each request we                            types of virtualization: Paravirtualization (PV) where guest
+          generate a ﬁle with always the same size and content, its                    OSes run efﬁciently without requiring virtual emulated hard-
+          hash will invariably be the same. As such, whenever we                       ware and Hardware Virtual Machine (HVM) (also known
+          receive a response with a different hash, we conclude                        as Full virtualization) in which guest OSes require the full
+          that a content failure has occurred.                                         emulation of hardware to run, such as BIOS, USB controllers
+                                                                                       or graphical adapters. The fault injection experiment in VM1
+      •   Timing – occurs when the amount of time between                              takes into consideration these types of virtualization by specif-
+          sending a request and waiting for a response falls                           ically making separate runs.
+          outside of a reasonable interval, leading to an early or                        Table I presents the results for the experiment with the HVM
+          late service failure. In this case-study, we assume that if                  virtualization type where we performed 1028 runs and injected
+          a request is not responded between 2 and 15.78 seconds,                      a fault in each one. In those runs we observed 876 injected
+          it is considered as a timing-failure. These values have                      errors that have been masked and 152 that led to failure.
+          been extracted from the actual testbed after a large                         Of those 152 failures, 4 manifested as content, 1 as timing,
+          number of runs without fault injections. The maximum                         147 as hang and 0 as erratic failures. Moreover, recovery
+          and minimum recorded response times were deﬁned to                           was possible in every content and timing failure. However,
+          be the upper and lower bounds of the acceptable time                         in 22 runs occurred hang failures that could not be recovered,
+          interval.                                                                    leaving the system in a complete inoperative state.
+
+      •   Halt – this failure mode arises when there is an                                 TABLE I: Hardware Virtual Machine (HVM) results
+          unexpected absence of system activity. In our                                                                                HVM
+          experimentation, we account for a halt-type failure
+                                                                                                                          VM 1                      VM2
+          when a connection is dropped, suddenly closed or the
+                                                                                                                Failure     Recovery      Failure        Recovery
+          server stops responding.
+                                                                                                Content           4              4            0             0
+      •   Erratic – when the service is not halted but suffers a                                 Timing           1              1            0             0
+          disruption in the delivered service, such as an arbitrary                               Hang           147             125          0             0
+          correct or incorrect response. In our case-study, we can                               Erratic          0              0            0             0
+          assume that a failure is erratic if both the response
+                                                                                                  Total          152             130          0             0
+          content and timing deviates from the expected ones or
+          the connection is still alive, but experiencing anomalies.                       Total Non-Failures             876                       1028
+                                                                                               Total Halts                 22                        0
+                                                                                             Total Injections                          1028
+                          V. E XPERIMENTATION
+     To prove the validity of the model proposed in Section III,
+                                                                                          Furthermore, the results show that from the 1028 faults
+   we conducted a realistic experimentation to compare both the
+                                                                                       injected in VM1, none has affected VM2. Thus, the experiment
+   modeled and the realistic reliability values. In this section
+                                                                                       shows that the integrity of the isolation layer between virtual
+   we present the gathered results1 , examine the validity of our
+                                                                                       machines is preserved by ﬂipping bits in CPU registers for the
+   approach and discuss the experimentation results.
+                                                                                       HVM virtualization type.
+   A. Gather Failure Data                                                                 Regarding Paravirtualization (PV) results, Table II depicts
+                                                                                       the failure data obtained after 968 fault-injections. In those 968
+      To validate our approach, we collected failure data by
+                                                                                       runs we observed 876 errors that have been masked and 92
+   injecting faults into the system. In particular, we injected
+                                                                                       injections that led to failure. More speciﬁcally, 7 failures have
+   through two means: directly into the VM1 and in the
+                                                                                       been assigned as content type, 0 as timing, 85 as hang and 0
+   Dom0. The goal of the former is to obtain relevant failure
+                                                                                       as erratic. The results show that all content failures have been
+     1 The raw data of the experiments can be found at: https://eden.dei.uc.pt/        successfully recovered, while 6 hang failures led the system
+   ∼fmduarte/article qosa rawdata.tar.gz                                               to become unresponsive.
+
+
+
+                                                                                  45
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+                TABLE II: Paravirtualization (PV) results                                     TABLE III: Fault Injection in the Dom0 in the Qemu extension
+                                                         PV                                                                                  Qemu
+                                         VM 1                            VM2                                                     VM 1                            VM 2
+                               Failure        Recovery         Failure        Recovery                                 Failure        Recovery         Failure        Recovery
+               Content           7               7               0               0                     Content           0               0               0               0
+               Timing            0               0               0               0                     Timing            0               0               0               0
+                Hang             85             79               0               0                      Hang             7               0               7               0
+               Erratic           0               0               0               0                     Erratic           0               0               0               0
+
+                Total            92             86               0               0                      Total            7               0               7               0
+          Total Non-Failures             876                             968                      Total Non-Failures              94                              94
+             Total Halts                  6                               0                          Total Halts                  7                               7
+           Total Injections                              968                                       Total Injections                              101
+
+
+                                                                                              TABLE IV: Fault Injection in the Dom0 in the XenWatchdogd
+      The results show that the injected faults in this virtualization                        extension
+   type also did not affect the isolation layer between the Virtual                                                                      XenWatchdogd
+   Machines (VMs). This allows us to conclude that Xen is
+                                                                                                                                 VM 1                            VM 2
+   capable of conﬁning error propagation between different
+                                                                                                                       Failure        Recovery         Failure        Recovery
+   guest VMs even when one VM is subject to fault-injection,
+   in both virtualization types (PV and HVM)                                                           Content           0               0               0               0
+                                                                                                       Timing            0               0               0               0
+      2) Injection in Dom0: The privileged virtual machine                                              Hang             17              0               17              0
+   Dom0 is responsible for managing the virtualization envi-                                           Erratic           0               0               0               0
+   ronment and has direct access to the hardware. Thus, we
+                                                                                                        Total            17              0               17              0
+   injected faults in this privileged VM aiming to analyze the
+   system behavior and identify error propagation to the hosted                                   Total Non-Failures              56                              56
+   VMs. To this end, we injected faults into the following kernel                                    Total Halts                  17                              17
+   extensions:                                                                                     Total Injections                              73
+      •   Qemu-system-i386: used by Xen to enable the dom0 to
+          access a virtual disk;
+                                                                                              by the fact that they share the same resources, system image,
+      •   Xenwatchdogd: allows actions to be triggered when                                   workload and are being subjected to the same fault-load.
+          certain guest VMs are detected as crashed.                                          B. Validation
+                                                                                                To validate the reliability model we propose two means:
+      Table III presents the results of injecting faults into the                             validate the model for each software component and then,
+   Qemu kernel extension. We ﬂipped bits in 101 runs in which                                 conﬁrm its accuracy regarding error propagation.
+   both guest VMs have been affected. In those 101 runs VM1
+   and VM2 masked 94 errors while 7 led to failures causing the                                  1) Single component validation: In this experiment we
+   system to halt. Only one type of failure has been registered                               apply the values collected from the fault injection to the VM1
+   (hang) and the guest VMs were affected in the same way.                                    while taking into consideration both virtualization types. Our
+      Table IV details the failure data of the injection in Xen-                              goal is to validate the proposed model and determine which
+   Watchdog extension. It can be observed that after the 73                                   virtualization type is more reliable. Table V depicts the failure
+   injection runs, 56 were masked errors in both VMs. After                                   data collected from the experiment results presented in Tables I
+   the 17 triggered failures, none could be recovered. As in the                              and II.
+   previous experiment with the Qemu extension, only one type                                    To conﬁrm the accuracy of the proposed model we compare
+   of failure has manifested, the hang-type failure, and again the                            its quantitative prediction with the real obtained values consid-
+   injected faults affect equally both guest VMs.                                             ering the following metrics: reliability, probability of entering
+      In short, the results show that errors can be propagated                                in a failed state and the probability of each failure type.
+   from Dom0 to guest Virtual Machines, leading to a failure                                     The reliability results are presented in Table VI. These
+   of a single type, the hang failure. It was also observed that                              results show similar values between the real and the modeled
+   when a failure occurs it cannot recover leading the system                                 one, bound by a 0.04% error margin. It can also be observed
+   to a complete inoperative state. The observation that both                                 that the modeling achieved a better accuracy for the Paravirtu-
+   guest VMs always display equal behavior can be explained                                   alization (PV) than for the Hardware Virtual Machine (HVM).
+
+
+
+                                                                                         46
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+                    TABLE V: Modeling Parameters                                     TABLE VIII: Probability of entering in each failure mode
+                                     HVM            PV                                                                          Real          Modeled        Diff
+                                     VM 1         VM 1                                                      Content            3.89%           3.79%         0.10%
+                             M       0.8522       0.9050                                                       Timing          0.09%           0.09%         0.00%
+                                                                                                 HVM
+                            Fc       0.0263       0.0761                                                        Hang           14.29%          12.51%        1.78%
+                             Ft      0.0065         0.0                                                        Erratic          0%              0%            0%
+                            Fh       0.9671       0.9239                                                    Content            0.72%           0.71%         0.01%
+                            Fe           0.0        0.0                                                        Timing           0%              0%            0%
+                                                                                                  PV
+                            Rc           1.0        1.0                                                         Hang           8.78%           8.07%         0.71%
+                            Rt           1.0        0.0                                                        Erratic          0%              0%            0%
+                            Rh       0.8503       0.9294
+                            Re           0          0
+                                                                                    the whole system to an inoperative condition, we modeled the
+                                                                                    transition from the halt state to the complete failure state.
+                           TABLE VI: Reliability                                    Moreover, the interaction between components Dom0 and
+                                  Real         Modeled     Diff                     VM1 is modeled through a sequential order, meaning that
+                                                                                    Dom0 executes and then passes the control to VM1.
+                     HVM      97.86%           97.90%      0.04%
+                                                                                       Table IX depicts the failure data collected from Tables III
+                      PV      99.38%           99.38%      0.0%
+                                                                                    and IV.
+                                                                                    TABLE IX: Modeling Parameters for the Dom0 experiment
+      The probability of entering in a failed state is deﬁned as
+                                                                                                                     Qemu                                 Xenwatchdogd
+   an error being activated and leading to a failure. Table VII
+                                                                                                         VM 1        VM 2            Dom0        VM 1        VM 2     Dom0
+   presents the reliability ﬁgures obtained from actual execution
+   and values that resulted from modeling the system. The                                  M              0.0            0.0         0.93         0.0         0.0        0.76
+   results depicted show a difference between both approaches                              Fc             0.0            0.0           0.0        0.0         0.0        0.0
+   of less than two percent. Regarding virtualization types, the                           Ft             0.0            0.0           0.0        0.0         0.0        0.0
+   PV presents better results since it has a lower probability of                          Fh             1.0            1.0           0.0        1.0         1.0        0.0
+   entering in a failed state.                                                             Fc             0.0            0.0           0.0        0.0         0.0        0.0
+                                                                                           Rc             0.0            0.0           0.0        0.0         0.0        0.0
+        TABLE VII: Probability of entering in a failed state
+                                                                                           Rt             0.0            0.0           0.0        0.0         0.0        0.0
+                                  Real         Modeled     Diff
+                                                                                           Rh             0.0            0.0           0.0        0.0         0.0        0.0
+                     HVM      14.78%           12.88%      1.9%
+                                                                                           Re             0.0            0.0           0.0        0.0         0.0        0.0
+                      PV       9.50%           8.67%       0.83%
+                                                                                      Ep (dom0, VM1)       -              -          0.035            -           -      0.12
+                                                                                      Ep (dom0, VM2)       -              -          0.035            -           -      0.12
+      The last metric to validate our proposed model is the
+   probability of occurrence of each failure type. Table VIII
+                                                                                       The results of this experiment and the estimations of our
+   illustrates the outcomes from the actual experimentation and
+                                                                                    model are illustrated in Table X. The reliability values are
+   from our model considering the two virtualization types, HVM
+                                                                                    almost identical in both approaches, with WatchDogD present-
+   and PV. The results differ from 0.1% to 1.78% between the real
+                                                                                    ing the higher deviation between real and modeled results, a
+   and the modeled values, but in the overall they achieve similar
+                                                                                    difference below 4%.
+   probabilities. As in previous experiments, the PV virtualization
+   type achieves better results than the HVM.                                       TABLE X: Dom0 Reliability as the probability of non-failure
+      2) Error propagation validation: In this section we detail
+   the validation of the proposed modeling approach taking into                                                               Real       Modeled           Diff
+   account error propagation. Figure 3 illustrates a Discrete-Time                                       Qemu             93.06%             93.51%       0.45%
+   Markov Chain (DTMC) which was simpliﬁed to highlight the                                            WatchDogD          76.71%             80.64%       3.93%
+   relevant states and omit the ones that do not have any transition
+   to, such as the content failure state (Fc ). Our approach models
+   the client performing requests to the VM1. These requests                        C. Comparison with Classical Methods
+   pass through the Dom0 which may raise an error that can                             Classical reliability prediction methods ignore error mask-
+   be propagated to other VMs. When an error is propagated                          ing, different failure modes, recoveries and error propagation
+   from the Dom0 to one of the VMs it leads to only one type of                     to another components. These methods assume that when an
+   failure, the hang. Since the occurrence of a hang failure brings                 error occurs, it immediately propagates as an application error.
+
+
+
+                                                                               47
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+                                Dom0
+                                          {OK}                     {Error}
+                                                              E
+                                           s=0                       s=1
+                                                             M
+                                                                                                            EP(dom0,vm2)
+
+
+
+
+                       1-E                                         EP(dom0,vm1)
+
+                                VM 1
+
+                                         {OK}                      {Error}             {Fail}            {Hang Fail}             {Halt}
+                                                                             1 - M'
+                                                             E'
+                                          s'=0                       s'=1               s'=2      F'h       s'=5       1- R'h    s'=7
+                                                             M'
+
+
+
+
+                       1 - E'
+
+
+                                VM 2
+
+                                         {OK}                      {Error}             {Fail}            {Hang Fail}             {Halt}
+                                                                             1 - M''
+                                                             E''
+                                          s''=0                      s''=1              s'=2      F''h      s'=5       1- R''h   s''=7
+                                                             M''
+
+
+
+                                       1 - E''
+
+
+
+
+                                                                                                                                  S
+                                                                                                                                      f
+                                                 S
+                                                     c
+
+
+
+
+                                                         Fig. 3: DTMC modeling the Dom0 Fault Injection scenario
+
+
+      As a short example of the accuracy loss from classical                                   results in a slower performance than the Paravirtualization
+   methods, we resort to the results presented in Table I. In                                  (PV) type, explaining the occurrence of timing failures in the
+   short, 1028 faults were injected into the VM1, resulting in 152                             HVM.
+   failures (≈ 14.78%). This means that the total reliability for                                 Furthermore, our experimental results show that the isola-
+   the VM1 component without taking into account recoveries,                                   tion layer between VMs is effective when a fault is injected
+   failure modes and propagation to another components would                                   in one of the VMs. However, when an error is injected in a
+   be of 85.22% which is 12.64% less than the real obtained                                    kernel extension the error is not only propagated to the guest
+   reliability and 12.68% less than the modeled one, as presented                              VMs, but it can also cause the system to fail and ultimately,
+   in Table VI. In short, classical reliability models can be un-                              lead it to a complete inoperative state.
+   realistic and less accurate than our proposed model, specially                                 Regarding the validity of our approach, both the estimations
+   in systems that employ failure recovery mechanisms.                                         from our model and the values obtained from the actual Xen
+   D. Discussion                                                                               system are similar. The difference between both approaches
+                                                                                               fall in the interval [0.0%, 3.9%], presenting in average a
+      The gathered failure data allow us to conclude that the
+                                                                                               difference of 0.69% and a median of 0.07%. These ﬁgures
+   Paravirtualization (PV) type presents better results than the
+                                                                                               support the validity our proposed modeling approach.
+   Hardware Virtual Machine (HVM). In addition, the HVM
+   experienced timing failures while PV did not. We assume that                                   To conclude, we show that classical reliability models
+   this difference is related to the nature of the virtualization                              present different reliability values when recoveries, different
+   type. HVM implements a full emulation of the hardware which                                 failure modes and error propagation are taken into account.
+
+
+
+
+                                                                                        48
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+                            VI. C ONCLUSIONS                                             [4] J. C. Munson, “Software faults, software failures and software reliability
+                                                                                             modeling,” Information & Software Technology, vol. 38, no. 11, pp. 687–
+      In this paper we propose a model to estimate the reliability                           699, 1996.
+   of a software component that increases the level of detail                            [5] A. Filieri, C. Ghezzi, V. Grassi, and R. Mirandola, “Reliability anal-
+   from traditional reliability modeling approaches. The proposed                            ysis of component-based systems with multiple failure modes,” in
+                                                                                             Component-Based Software Engineering, 13th International Symposium,
+   model accounts with error masking, error propagation, failure                             CBSE 2010, Prague, Czech Republic, June 23-25, 2010. Proceedings,
+   occurrence, failure recoveries and multiple failure modes. In                             2010, pp. 1–20.
+   a practical sense, it supports early and evolutive assessment                         [7] F. Brosch, B. Buhnova, H. Koziolek, and R. Reussner, “Reliability
+                                                                                             prediction for fault-tolerant software architectures,” in Proceedings of
+   of software architecture by offering means for designers to                               the joint ACM SIGSOFT conferenceQoSA and ACM SIGSOFT sympo-
+   reason and test and analyze their own designs in the presence                             siumISARCS on Quality of software architecturesQoSA and architecting
+   of faults.                                                                                critical systemsISARCS. ACM, 2011, pp. 75–84.
+                                                                                         [8] K. Goseva-Popstojanova, M. Hamill, and R. Perugupalli, “Large Empir-
+      Additionally, we address the lack of realistic case-studies                            ical Case Study of Architecture-Based Software Reliability,” in 16th
+   available in the research community to compare and validate                               IEEE International Symposium on Software Reliability Engineering
+   newly proposed reliability prediction methods. To this end, we                            (ISSRE’05). IEEE, 2005, pp. 43–52.
+   implemented a case-study based on a freely accessible widely                          [9] S. Yacoub, B. Cukic, and H. Ammar, “Scenario-based reliability analysis
+                                                                                             of component-based software,” Proceedings 10th International Sympo-
+   used cloud infrastructure platform, the Xen Hypervisor.                                   sium on Software Reliability Engineering (Cat. No.PR00443), pp. 22–31,
+      To validate our proposal, we conducted a set of experiments                            2000.
+   with a comprehensive series of fault injection runs to emulate                       [10] S. S. Gokhale, “Architecture-Based Software Reliability Analysis :
+                                                                                             Overview and Limitations,” IEEE Transactions On Dependable And
+   the presence of erroneous states in the system. The results                               Secure Computing, vol. 4, no. 1, pp. 32–40, 2007.
+   show that the ﬁgures obtained from our proposed model are                            [11] A. Immonen and E. Niemel, “Survey of reliability and availability pre-
+   identical with the actual values obtained from the running                                diction methods from the viewpoint of software architecture,” Software
+                                                                                             & Systems Modeling, vol. 7, no. 1, pp. 49–65, 2008.
+   system. In addition, we have been able to show that a cloud
+                                                                                        [12] V. Cortellessa and V. Grassi, “A modeling approach to analyze the
+   system may propagate errors from the hypervisor to the guest                              impact of error propagation on reliability of component-based systems,”
+   VMs, ultimately leading to their complete disruption. As a                                in Component-Based Software Engineering, ser. Lecture Notes in Com-
+   result, our approach was also able to accurately predict such                             puter Science. Springer Berlin Heidelberg, 2007, vol. 4608, pp. 140–
+                                                                                             156.
+   behavior, thus validating our error propagation modeling.                            [13] M. Hiller, A. Jhumka, and N. Suri, “An approach for analysing the
+      As for future work, we intend to extend one of our previous                            propagation of data errors in software,” Proceedings International Con-
+   work [22] to generate the proposed model in an automated                                  ference on Dependable Systems and Networks, pp. 161–170, 2001.
+   manner from a software architecture. The goal is to ease                             [14] W. Abdelmoez, D. Nassar, M. Shereshevsky, N. Gradetsky, R. Gunnalan,
+                                                                                             H. Ammar, B. Yu, and A. Mili, “Error propagation in software archi-
+   the reliability estimation process by performing an automated                             tectures,” in Software Metrics, 2004. Proceedings. 10th International
+   estimation and analysis on the proposed design. In addition,                              Symposium on, Sept 2004, pp. 384–393.
+   we plan to extend the execution order of our DTMC to account                         [15] A. Johansson and N. Suri, “Error propagation proﬁling of operating
+                                                                                             systems,” in Dependable Systems and Networks, 2005. DSN 2005.
+   with different styles like parallel or concurrent executions.                             Proceedings. International Conference on, June 2005, pp. 86–95.
+                                                                                        [16] S. Gokhale, “Analytical models for architecture-based software reliabil-
+                           ACKNOWLEDGMENTS                                                   ity prediction: A uniﬁcation framework,” Reliability, IEEE Transactions
+     This research was supported by a a doctoral grant                                       on, vol. 55, no. 4, pp. 578–590, 2006.
+   [SFRH/BD/89702/2012] and by the project DECAF: An                                    [17] M. Kwiatkowska, G. Norman, and D. Parker, “Stochastic model check-
+                                                                                             ing,” Formal Methods for Performance Evaluation, pp. 220–270, 2007.
+   Exploratory Study of Distributed Cloud Application Fail-                             [18] W.-l. Wang, D. Pan, and M.-H. Chen, “Architecture-based software
+   ures (reference EXPL/EEI-ESS/2542/2013), both from FCT                                    reliability modeling,” Journal of Systems and Software, vol. 79, no. 1,
+   – Fundação para a Ciência e a Tecnologia.                                              pp. 132–146, Jan. 2006.
+                                                                                        [19] P. Barham, B. Dragovic, K. Fraser, S. Hand, T. Harris, A. Ho, R. Neuge-
+                                R EFERENCES                                                  bauer, I. Pratt, and A. Warﬁeld, “Xen and the art of virtualization,”
+                                                                                             SIGOPS Oper. Syst. Rev., vol. 37, no. 5, pp. 164–177, Oct. 2003.
+    [1] K. Goseva-Popstojanova and K. S. Trivedi, “Architecture-based approach          [20] L. Qian, Z. Luo, Y. Du, and L. Guo, “Cloud computing: An overview,”
+        to reliability assessment of software systems,” Perform. Eval., vol. 45,             in Cloud Computing, ser. Lecture Notes in Computer Science, M. Jaatun,
+        no. 2-3, pp. 179–204, Jul. 2001.                                                     G. Zhao, and C. Rong, Eds. Springer Berlin Heidelberg, 2009, vol.
+    [2] R. Cheung, “A user-oriented software reliability model,” IEEE Trans-                 5931, pp. 626–631.
+        actions on Software Engineering, vol. 6, no. 2, pp. 118–125, 1980.
+                                                                                        [21] F. Cerveira, R. Barbosa, H. Madeira, and F. Araujo, “Recovery for
+    [3] R. Reussner, “Reliability prediction for component-based software archi-
+                                                                                             virtualized cloud environments,” in Proceedings of the 11TH European
+        tectures,” Journal of Systems and Software, vol. 66, no. 3, pp. 241–252,
+                                                                                             Dependable Computing Conference (EDCC), September 2015.
+        Jun. 2003.
+    [6] A. Avizienis, J.-C. Laprie, B. Randell, and C. Landwehr, “Basic concepts        [22] J. M. Franco, F. Correia, R. Barbosa, and M. Zenha-Rela, “Afﬁdavit: Au-
+        and taxonomy of dependable and secure computing,” IEEE Transactions                  tomated reliability prediction and analysis of software architectures,” in
+        on Dependable and Secure Computing, vol. 1, no. 1, pp. 11–33, Jan.                   INForum 2013. 5th Portuguese Symposium on Informatics, September
+        2004.                                                                           2013, pp. 54–65.
+
+
+
+
+                                                                                   49
+
+Authorized licensed use limited to: Pontifica Universidade Catolica do Parana. Downloaded on August 13,2026 at 13:24:23 UTC from IEEE Xplore. Restrictions apply.
+

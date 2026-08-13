@@ -1,0 +1,957 @@
+               The Review Linkage Graph for Code Review Analytics
+                                                       A Recovery Approach and Empirical Study
+
+                                    Toshiki Hirao                                                                         Shane McIntosh
+                 Nara Institute of Science and Technology                                                                McGill University
+                                Nara, Japan                                                                              Montréal, Canada
+                      hirao.toshiki.ho7@ais.naist.jp                                                                 shane.mcintosh@mcgill.ca
+
+                                    Akinori Ihara                                                                      Kenichi Matsumoto
+                             Wakayama University                                                            Nara Institute of Science and Technology
+                               Wakayama, Japan                                                                             Nara, Japan
+                          ihara@sys.wakayama-u.ac.jp                                                                 matumoto@is.naist.jp
+
+ABSTRACT                                                                                            ACM Reference Format:
+Modern Code Review (MCR) is a pillar of contemporary quality                                        Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto. 2019.
+                                                                                                    The Review Linkage Graph for Code Review Analytics: A Recovery Ap-
+assurance approaches, where developers discuss and improve code
+                                                                                                    proach and Empirical Study. In Proceedings of the 27th ACM Joint European
+changes prior to integration. Since review interactions (e.g., com-                                 Software Engineering Conference and Symposium on the Foundations of Soft-
+ments, revisions) are archived, analytics approaches like reviewer                                  ware Engineering (ESEC/FSE ’19), August 26ś30, 2019, Tallinn, Estonia. ACM,
+recommendation and review outcome prediction have been pro-                                         New York, NY, USA, 12 pages. https://doi.org/10.1145/3338906.3338949
+posed to support the MCR process. These approaches assume that
+reviews evolve and are adjudicated independently; yet in practice,                                  1    INTRODUCTION
+reviews can be interdependent.                                                                      Modern Code Review (MCR)Ða lightweight variant of traditional
+   In this paper, we set out to better understand the impact of re-                                 code inspections [14]Ðallows developers to discuss the premise,
+view linkage on code review analytics. To do so, we extract review                                  content, and structure of code changes. Many communities adopt a
+linkage graphs where nodes represent reviews, while edges rep-                                      Review-Then-Commit (RTC) philosophy, where each code change
+resent recovered links between reviews. Through a quantitative                                      must satisfy review-based criteria before integration into official
+analysis of six software communities, we observe that (a) linked                                    repositories is permitted. Since MCR tools archive reviewing activi-
+reviews occur regularly, with linked review rates of 25% in Open-                                   ties (e.g., patch revisions, review participants, discussion threads),
+Stack, 17% in Chromium, and 3%ś8% in Android, Qt, Eclipse, and                                      active development communities generate plenty of MCR data.
+Libreoffice; and (b) linkage has become more prevalent over time.                                      Researchers have proposed analytics approaches that leverage
+Through qualitative analysis, we discover that links span 16 types                                  MCR data to support practitioners. For example, reviewer recom-
+that belong to five categories. To automate link category recovery,                                 menders [4, 31, 42, 44, 48] help developers to select appropriate
+we train classifiers to label links according to the surrounding doc-                               reviewers and review outcome predictors [16, 22, 23] estimate the
+ument content. Those classifiers achieve F1-scores of 0.71ś0.79, at                                 likelihood of a code change eventually being integrated.
+least doubling the F1-scores of a ZeroR baseline. Finally, we show                                     When performing code review analytics, each review has tradi-
+that the F1-scores of reviewer recommenders can be improved by                                      tionally been treated as an independent observation; yet in prac-
+37%ś88% (5ś14 percentage points) by incorporating information                                       tice, reviews may be interdependent. By ignoring connections be-
+from linked reviews that is available at prediction time. Indeed,                                   tween reviews, review analytics approaches may underperform.
+review linkage should be exploited by future code review analytics.                                 For example, the discussion for Review #314319 (https://review.
+                                                                                                    openstack.org/#/c/314319/) of the OpenStack Neutron project
+CCS CONCEPTS                                                                                        occurred on its linked Review #225995. Without considering the
+• Software and its engineering → Software evolution.                                                comments on the linked review, a review outcome predictor would
+                                                                                                    mistakenly presume that Review #314319 had no discussion, and
+KEYWORDS                                                                                            would thus be unlikely to be integrated. Moreover, Review #134811
+Code review, software analytics, mining software repositories                                       (https://review.openstack.org/#/c/134811/) of the OpenStack Nova
+                                                                                                    project is abandoned because a competing solution in the linked
+                                                                                                    Review #134853 was integrated. To ensure a fair review process [15],
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed               reviewer lists of competing solutions may need to be synchronized;
+for profit or commercial advantage and that copies bear this notice and the full citation           yet links are not analyzed by today’s reviewer recommenders.
+on the first page. Copyrights for components of this work owned by others than ACM                     In this paper, we set out to better understand the impact of
+must be honored. Abstracting with credit is permitted. To copy otherwise, or republish,
+to post on servers or to redistribute to lists, requires prior specific permission and/or a         review linkage on code review analytics. To do so, we extract the
+fee. Request permissions from permissions@acm.org.                                                  review linkage graph from six active MCR communitiesÐa directed
+ESEC/FSE ’19, August 26ś30, 2019, Tallinn, Estonia                                                  graph where nodes represent reviews and edges represent links
+© 2019 Association for Computing Machinery.
+ACM ISBN 978-1-4503-5572-8/19/08. . . $15.00                                                        between reviews. We analyze and leverage those graphs to address
+https://doi.org/10.1145/3338906.3338949                                                             the following four research questions:
+
+
+
+
+                                                                                              578
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                       Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+(RQ1) To what degree are reviews linked?                                      work. Section 3 describes the studied communities and their MCR
+  Motivation: To gain an initial intuition about the connected-               processes. Sections 4ś7 present the experiments that we conducted
+  ness of reviews, we first set out to quantitatively analyze the             to address RQ1śRQ4, respectively. Section 8 discusses the broader
+  extracted review linkage graphs.                                            implications of our results. Section 9 discloses threats to the validity
+  Results: Linkage rates range from 3% to 25%. Linkage tends to               of our study. Finally, Section 10 draws conclusions.
+  be more common in the two largest communities (25% in Open-
+  Stack and 17% in Chromium), likely because they have invested               2     RELATED WORK
+  more heavily in code reviewing. Indeed, these communities have
+                                                                              Linkage of related software artifacts has long been considered an
+  significantly more comments and reviewers per review (pairwise
+                                                                              important phenomenon. Canfora et al. [11] found that links between
+  Mann-Whitney U tests with Bonferroni correction, α = 0.01;
+                                                                              issue reports of different software projects are not uncommon.
+  and non-negligible Cliff’s delta effect sizes).
+                                                                              Boisselle and Adams [8] reported that 44% of bug reports in Ubuntu
+(RQ2) Why are reviews being linked?                                           are linked to indicate duplicated work. Ma et al. [29] showed that
+  Motivation: The potential reasons for review linkage are mani-              linked issues delay the release cycle and increase maintenance costs.
+  fold. To explore these reasons, we set out to qualitatively analyze         Moreover, they found that recovering a link is a difficult task, often
+  recovered links between reviews.                                            taking developers more than one day to do by hand.
+  Results: Using open coding [12] and card sorting [30], we dis-                  To ease the recovery of links, researchers have proposed auto-
+  cover 16 types of review links that belong to five categories,              matic approaches. Antoniol et al. [2] applied Natural Language Pro-
+  i.e., Patch Dependency, Broader Context, Alternative Solution,              cessing (NLP) techniques to detect links between source code and
+  Version Control Issues, and Feedback Related. These different               related documents. Alqahtani et al. [1] proposed an automatic ap-
+  link types have different implications for review analytics tech-           proach to recover links between API vulnerabilities. Guo et al. [17]
+  niques. For example, while Broader Context links indicate that a            used deep learning techniques that exploit domain knowledge to
+  discussion may span across linked reviews, Alternative Solution             detect semantic links. Rath et al. [34] detect missing links between
+  links point out competing solutions.                                        commits and issues using process and text-related features.
+(RQ3) To what degree can link categories be automatically                         Linkage also appears in peer code review settings. Zampetti et
+  recovered?                                                                  al. [46] found that developers reference other resources in reviews
+  Motivation: The qualitative approach that we used to address                to enhance documentation of pull requests. Perhaps the most sim-
+  RQ2 is not scalable enough for large-scale analyses of link cat-            ilar prior work is that of Li et al. [27], who reported that 27% of
+  egories. Hence, we want to explore the feasibility of training              GitHub pull requests from 16,584 Python projects on GitHub have
+  automatic classifiers to identify link categories.                          links, which span six types. This paper expands upon the work of
+  Results: We train link category classifiers using five classifica-          Li et al. by studying linkage in six large and successful software
+  tion techniques. These classifiers at least double the performance          communities (rather than a broad sample of GitHub projects), and
+  of a ZeroR baseline, achieving a precision of 0.71ś0.77, a recall           the impact of linkage on review analytics approaches.
+  of 0.72ś0.92, and an F1-score of 0.71ś0.79.
+(RQ4) To what degree do linked reviews impact code review                     2.1    Reviewer Recommendation
+    analytics?                                                                Selecting appropriate reviewers plays an important role in the
+    Motivation: While RQ1śRQ3 suggest that linkage may impact                 value that is generated by a code review. Bosu et al. [9] found
+    reviewer analytics, the extent of that impact is unknown. We set          that the reviewer expertise is an important factor in determining
+    out to quantify that impact by comparing prior review analytics           whether Microsoft developers consider code review feedback useful.
+    techniques [16, 48] to extended versions that are link aware.             Kononenko et al. [25] also found that reviewer expertise is a key
+    Results: Code review analytics tend to underperform on linked             factor in developer perceptions of code review quality at Mozilla.
+    reviews. In 41%ś84% of linked reviews, reviewer recommenders                 To support authors in selecting appropriate reviewers, researchers
+    omit at least one shared reviewer. Moreover, review outcome               have proposed reviewer recommenders. For example, Balachan-
+    predictors misclassify 35%ś39% of linked reviews. Link-aware              dran [4] proposed ReviewBot, which recommends reviewers based
+    approaches improve the F1-score of reviewer recommenders by               on past contributions to the lines that were modified by the patch.
+    37%ś88% (5ś14 percentage points).                                         Thongtanunam et al. [42] proposed RevFinder, which recommends
+   Our empirical study indicates that linkage is a rich activity that         reviewers based on their prior contributions to files in similar
+should be taken into consideration in future MCR studies and tools.           locations within the codebase. More recent work has improved
+In addition, this paper contributes a replication package,1 which             reviewer recommendations by leveraging past review contribu-
+includes (a) review linkage graphs that feature 1,466,702 reviews and         tions [48], technological experience and experience with other
+231,341 links from the six studied communities; (b) 752 manually              related projects [31], and the content of the patch itself [44]. Ko-
+coded links spanning 16 types and five categories [RQ2]; and (c)              valenko et al. [26] question the value of recommending reviewers
+scripts that reproduce our statistical analyses [RQ1, RQ3, RQ4].              in cases where the best reviewers are already known.
+Paper Organization. The remainder of this paper is organized as                  Review links may also provide useful information for the re-
+follows. Section 2 situates this paper with respect to the related            viewer recommenders. Since links may indicate a (strong) relation-
+                                                                              ship between connected reviews, reviewers who are recommended
+    1 https://github.com/software-rebels/ReviewLinkageGraph                   for one of the linked reviews may also need to be recommended
+
+
+
+
+                                                                        579
+The Review Linkage Graph for Code Review Analytics                                                                    ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia
+
+
+        Table 1: An overview of our subject communities.                                  application framework. Eclipse is an Integrated Development Envi-
+                                                                                          ronment (IDE) and associated tools. Libreoffice is a free and open
+      Product      Language       Studied Period   #Reviews    #Revs    #Projects         implementation of the Office software suite.
+    OpenStack      Python        09/2011ś01/2018     533,050   12,359       1,804
+                                                                                             The studied communities use Gerrit for code review. To con-
+    Chromium       JavaScript    04/2011ś01/2018     364,079    7,442         410
+    Android        Java          10/2008ś01/2018     229,210    7,614       1,049         duct our study, we collect MCR data using the Gerrit API. Table 1
+    Qt             C++           07/2011ś01/2018     188,981    2,377         170         provides an overview of the collected data. Below, we provide an
+    Eclipse        Java          04/2012ś01/2018     106,515    2,191         380         overview of the Gerrit processes of the studied communities.
+    Libreoffice    Python        04/2012ś01/2018      44,867      822          34
+                                                                                          Gerrit Code Review Process. Gerrit is a popular, web-based code
+    Total                        31.8 years        1,466,702   32,805       3,847
+                                                                                          review management tool that tightly integrates with the Git version
+                                                                                          control system. Rather than pushing code changes directly to an
+for the others. For example, Review #109178 is another attempt at                         upstream Git repository, developers push changes to Gerrit, where
+tackling the underlying task of (the abandoned) Review #105238.2                          only after satisfying project-specific review criteria (e.g., a member
+To preserve continuity of the review discussion, the reviewers of                         of the core team approves the changes) may the author push their
+Review #105238 should also be recommended for Review #109178.                             changes into the upstream Git repository. Similar to other code
+                                                                                          reviewing processes (e.g., GitHub pull requests), each Gerrit review
+2.2       Code Review Outcome                                                             goes through the following phases:
+Not all changes that are submitted for code review end up being                           (1) Uploading a proposed set of changes. An author uploads
+integrated. Indeed, Weißgerber et al. [43] found that 39% and 42%                             a proposed set of changes to the Gerrit system and invites
+of OpenAFS and FLAC code changes were eventually integrated.                                  reviewers to critique it by leaving comments for the author to
+Jiang et al. [23] found that 33% of Linux code reviews were eventu-                           clarify, discuss, or address.
+ally integrated. Baysal et al. [5] found that 36%ś39% of code changes                     (2) Soliciting peer feedback. Reviewers critique the premise, con-
+in Mozilla Firefox were rejected and resubmitted at least once.                               tent, and structure of the proposed set of changes and provide
+   To better understand the chances of submissions being inte-                                feedback in the form of general or inline comments that corre-
+grated, researchers have studied the characteristics of code changes                          spond to the entire change and lines within it, respectively.
+(and their reviews) that were eventually integrated. For example,                         (3) Revising the proposed patch. Authors may revise their set
+Weißgerber et al. [43] found that small code changes are integrated                           of changes to address reviewer feedback. After revising, the
+more frequently than large ones. Jiang et al. [23] showed that prior                          review returns to phase 2.
+experience, patch maturity, and code churn significantly impact                           (4) Automated testing. Automated tests are executed on each set
+the likelihood of integration. Baysal et al. [6, 7] found that non-                           of changes to mitigate the risk of introducing regression issues.
+technical issues are a common reason for abandonment in WebKit                                If these tests fail, the set of changes is blocked from integration
+and Blink projects. Moreover, Tao et al. [41] found that patch de-                            until the author uploads a revision that addresses the issues.
+sign issues like suboptimal solutions and incomplete fixes are often                          When revisions are uploaded, the review returns to phase 2.
+raised during the reviews of the abandoned code changes of the                            (5) Final integration. Once the set of changes satisfies reviewer
+Eclipse and Mozilla projects.                                                                 and automated testing criteria, the author can integrate it into
+   Review links may affect or imply review outcomes. For example,                             upstream Git repositories.
+since reviews that supersede prior reviews have had the opportunity
+to improve the design of the code change, they may have a higher
+likelihood of being integrated than initial submissions. Moreover,
+                                                                                          4   REVIEW GRAPH EXTRACTION (RQ1)
+large tasks that have been divided into a series of reviews (e.g.,                        In this section, we set out to study the extent to which reviews are
+Reviews #1025323 and #1025434 of OpenStack) will have review                              linked to one another in our studied communities. To do so, we
+outcomes that are inherently linked.                                                      extract review graphs from the studied communities. The review
+                                                                                          graph RG = (R, L) is a directed graph with the following properties:
+    Prior work suggests that review linkage is important; however, the
+    extent of linkage in large communities and its impact on review                           • Graph nodes R represent review entries. Each review entry
+    analytics is unclear. In this paper, we set out to bridge these gaps.                       r ∈ R is comprised of a set of properties, such as IDr (a
+                                                                                                unique review identifier), D r (the change description), PRr
+                                                                                                (the set of patch revisions), REVr (the set of reviewers). GCr
+3      STUDIED COMMUNITIES                                                                      and ICr (general and inline comments, respectively).
+The goal of our study is to extract and analyze review graphs of                              • Graph edges L represent links between review entries. Each
+large software communities that have invested in their MCR pro-                                 edge l ∈ L has a type Tl that describes why the link was
+cesses. To do so, we focus on the six popular communities that                                  recorded, which we study in Sections 5ś7.
+appear in the recent related work [19, 42, 45]. OpenStack is a cloud
+computing platform. Chromium is an open source web browser.                                   The set of reviews R is what has typically been extracted and
+Android is a mobile software platform. Qt is a cross-platform                             analyzed by prior work on code review. In this section, we first
+                                                                                          propose a lightweight approach to recover graph edges L from the
+      2 https://review.openstack.org/#/c/105238/                                          D r , GCr , and ICr fields of each r ∈ R (4.1). Then, we apply that
+      3 https://review.openstack.org/#/c/102532/                                          approach to the studied communities and analyze the extracted
+      4 https://review.openstack.org/#/c/102543/                                          graphs to address RQ1 (4.2).
+
+
+
+
+                                                                                    580
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                                           Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+4.1     Link Recovery Approach                                                                                      Subject System
+                                                                                                                                     ●       OPENSTACK                     AOSP                ECLIPSE
+                                                                                                                                             CHROMIUM                  ●   QT                  LIBREOFFICE
+We perform a preliminary analysis of 410 randomly selected reviews
+to gain insight into the linkage habits within the studied commu-                                    50.0%
+nities. We observe that links appear in review description fields
+(D r ), as well as within general and inline comment threads (GCr
+and ICr ). Moreover, we observe two ways that links are recorded:                                    40.0%
+
+
+   (1) By Change ID (e.g., Ic8aaa0728a43936cd4c6e1ed590e01b-
+
+
+
+
+                                                                                Linked Review Rate
+       a8f0fbf5b), i.e., a 40-digit hexadecimal identifier assigned                                  30.0%                                                                                                                             ●
+
+
+       to each review at creation time (prefixed with an I to avoid                                                                                                    ●
+                                                                                                                                                                               ●
+                                                                                                                                                                                       ●       ●       ●
+                                                                                                                                                                                                               ●       ●
+                                                                                                                                                                                                                           ●
+                                                                                                                                                                                                                               ●
+                                                                                                                                                                                                                                   ●
+                                                                                                                                                                                                           ●
+       confusion with Git commit IDs).                                                                                                           ●                         ●       ●       ●       ●
+
+                                                                                                                                                                                                                   ●
+                                                                                                                                                                   ●
+   (2) By URL (e.g., https://review.openstack.org/#/c/1111).                                         20.0%                                                 ●
+                                                                                                                                                               ●
+
+                                                                                                                                                     ● ●
+
+
+   Thus, to recover links from a review r ∈ R, we scan its description                                                                                                             ●
+                                                                                                                                                                                           ● ● ●
+                                                                                                                                                                                                 ● ●               ●       ● ● ●
+                                                                                                                                                                                                                                 ●
+                                                                                                                                                                                       ●                       ●
+D r as well as all of the general and inline comments (GCr , ICr ) using                             10.0%
+                                                                                                                                                                                                                       ●
+
+
+                                                                                                                                                                               ●
+regular expressions. To detect Change IDs, our regular expression                                                                    ●
+                                                                                                                                         ●
+                                                                                                                                             ●
+
+
+scans for terms of the form I[0-9a-f]{40}. To detect URLs, our reg-                                                                  ●
+                                                                                                                                         ● ● ● ● ● ● ● ● ● ●
+
+ular expression is of the form https?://PROJ/#/c/[1-9]+[0-9]*,                                       0.0%
+                                                                                                                                 ●
+
+
+
+where PROJ is replaced with the base URL of the project (e.g.,
+
+
+
+
+                                                                                                                  −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+                                                                                                                   −10
+                                                                                                                   −04
+review.openstack.org). For the Chromium community, our regu-
+
+
+
+
+                                                                                                             2008
+                                                                                                              2009
+                                                                                                              2009
+                                                                                                              2010
+                                                                                                              2010
+                                                                                                              2011
+                                                                                                              2011
+                                                                                                              2012
+                                                                                                              2012
+                                                                                                              2013
+                                                                                                              2013
+                                                                                                              2014
+                                                                                                              2014
+                                                                                                              2015
+                                                                                                              2015
+                                                                                                              2016
+                                                                                                              2016
+                                                                                                              2017
+                                                                                                              2017
+                                                                                                              2018
+lar expressions needed to be adapted to: https?://chromium-revi-                                                                             Studied period
+ew.googlesource.com/c/REPO/+/[1-9]+[0-9]*, where REPO cor-
+responds to any of the 410 repositories within the Chromium com-              Figure 1: Monthly linkage rate in the studied communities.
+munity. The link recovery process is repeated ∀r ∈ R.
+
+                                                                              and large when compared to Android, Qt, Eclipse, and Libre-
+4.2     Results
+                                                                              office (0.474 ≤ δ = 0.553, 0.520, 0.703, 0.712). We also find that
+By applying our link recovery approach to the six studied commu-              there is no tendency where the larger systems are likely to re-
+nities, we set out to better understand (i) the prevalence of review          ceive more comments in terms of an individual contribution (i.e.,
+linkage and (ii) linkage trends over time. To do so, we measure a             2ś4 comments per reviewer on average across our studied sys-
+linkage rate for each studied system, i.e., the proportion of reviews         tems). Indeed, despite of the significant differences of unpaired
+that are connected by at least one link.                                      Mann-Whitney U tests across our six studied systems, Cliff’s delta
+Prevalence of Linkage. Table 2 shows that 17% and 25% of Chrom-               effect sizes are negligible when compared to Qt and Libreoffice
+ium and OpenStack reviews are connected by at least one link,                 (δ = 0.051, 0.020 < 0.147), small when compared to Android and
+respectively. Although the linkage rate in Qt, Eclipse, and An-               Eclipse (0.147 ≤ δ = 0.219, 0.213 < 0.330), and medium when
+droid reviews are lower (5%ś8%), linkage is not uncommon. How-                compared to Chromium (0.330 ≤ δ = 0.357 < 0.474).
+ever, the Libreoffice linkage rate is only 3%. We suspect that                   Table 2 also shows that the largest proportion of links are recov-
+this result is reflective of the differences in the importance that           ered from discussion threads (GC, IC). Indeed, 72%ś97% of links are
+the studied communities have placed on code review. Indeed, re-               recovered from GC and IC threads. This indicates that links tend
+views in the OpenStack and Chromium communities receive 17                    to emerge during the review rather than when it is created.
+and 12 comments on average, whereas reviews in other subject                     Furthermore, Table 2 shows that 5%ś40% of links connect re-
+communities receive 4ś8 comments on average. Two-tailed, un-                  views across project boundaries. For example, Review #1027045
+paired Mann-Whitney U tests between OpenStack and the other                   links from the Nova project to the Cinder project of OpenStack.
+studied communities (after Bonferroni correction to control for               Furthermore, OpenStack shows a greater rate of cross-project links
+family-wise errors, α = 0.05  5 = 0.01) indicate that OpenStack               than the other studied communities, likely because the OpenStack
+receives significantly more comments than the other studied com-              community develops more projects than the other studied commu-
+munities (p < 0.001) with Cliff’s delta effect sizes of negligible            nities. Indeed, Table 1 shows that OpenStack contains at least four
+when compared to Chromium (δ = 0.021 < 0.147), small when                     times as many projects as the other studied communities.
+compared to Android and Qt (0.147 ≤ δ = 0.288, 0.287 < 0.330),                Linkage Trends. Figure 1 shows that linkage rates in the four com-
+medium when compared to Eclipse (0.330 ≤ δ = 0.413 < 0.474),                  munities that have made the largest investments in code review (i.e.,
+and large when compared to Libreoffice (0.474 ≤ δ = 0.580).                   personnel and activity per review) have stabilized or peaked in the
+Furthermore, OpenStack reviews tend to involve more review-                   more recent studied periods. Indeed, the linkage rate in the Open-
+ers than the other studied communities, averaging two reviewers               Stack community has a rapidly increasing trend until late 2014 and
+per review more than the next highest community (Chromium).                   more gradual increases in recent months. The Chromium commu-
+Two-tailed, unpaired Mann-Whitney U tests indicate that Open-                 nity began with moderate linkage rates until mid-2014, when rates
+Stack reviews have significantly more reviewers than the other                dropped to below 5%. However, the rates have climbed above 30%
+studied communities (p < 0.001) with Cliff’s delta effect sizes of
+medium when compared to Chromium (0.330 ≤ δ = 0.407 < 0.474),                                5 https://review.openstack.org/#/c/102704/
+
+
+
+
+                                                                        581
+The Review Linkage Graph for Code Review Analytics                                                                              ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia
+
+
+                                          Table 2: Review graph characteristics in the subject communities.
+
+                      Linked Reviews           Per Review (Mean)     Per Reviewer      Description      General Comment Inline Comment             Cross-project
+     Product
+                   #Reviews %Reviews         Comments Reviewers       Comments      #Links %Links #Links           %Links #Links %Links          #Links %Links
+ OpenStack           133,650       25%               17          5              3   77,400       28% 151,411          54% 50,110         18% 110,964             40%
+ Chromium             62,065       17%               12          3              4   10,295        5% 182,929          93%     3,968       2%      44,869         23%
+ Android              11,584         5%               8          2              3 1/23/2019
+                                                                                     6,082       22%     21,491      Change
+                                                                                                                      77% I7b18b767:
+                                                                                                                                466 Fix wrong
+                                                                                                                                          2% exception
+                                                                                                                                                   2,508return in ﬁxed_ips
+                                                                                                                                                                  9%       v2 extention | revi
+ Qt                   14,266         8%               8          2              3       574       3%     19,450       87%
+                                                                                                 body = {"reserve": "None"}
+                                                                                                                              2,309      10%       4,353         19%
+ Eclipse               8,227         8%               6          2              3    1,255        6%     19,995       90%       917
+                                                                                                 self.assertRaises(exceptions.NotFound,   4%       1,359          6%
+                                                                                                                   self.client.reserve_fixed_ip,
+ Libreoffice           1,549         3%               4          2              2       211      10%      1,774       86%        88 body) 4%
+                                                                                                                   "my.invalid.ip",                  107          5%
+                                                                                            any suggestions?
+                                                                                            Eli.
+
+in mid-2017. This growth may be due to several factors (e.g., com-                          Ken'ichi
+                                                                                            Reviewer Ohmichi
+                                                                                                     1
+                                                                                            Patch Set 3:
+munity initiative, growth in task complexity). The Qt and Android                           @Eli
+                                                                                            @Author
+communities had linkage rates below 7% until mid-2014, when rates                           We faced this kind of problems, and we can change Tempest code before this like:
+                                                                                             -        self.assertRaises(exceptions.NotFound,
+roughly stabilized at 13% and 9%, respectively.                                              +        self.assertRaises((exceptions.NotFound, exceptions.BadRequest),
+                                                                                                                               self.client.reserve_fixed_ip,
+   On the other hand, linkage rates remain stable or are decreasing                                                            "my.invalid.ip", body)
+in the two studied communities that have made the least investment                          Eli Qiao
+                                                                                            Author
+                                                                                            Patch Set 3:
+in code review. Indeed, the Libreoffice community shows a stable                            hi Ken'ichi 1
+                                                                                            @Reviewer
+                                                                                            thanks, I'v post a patch to tempest at
+trend, while the Eclipse community’s trend is decreasing.
+                                                                                            https://review.openstack.org/#/c/127457/
+                                                                                            let's wait for it merged ﬁrst.
+    RQ1: Linked reviews occur regularly in communities that have
+                                                                                            Christopher Yeoh
+    made large investments in code review. Thus, code review analytics                      Patch Set 3: Code-Review+2
+    should look to linkage as a potential source of useful information.                     (pending tempest change merge)
+                                                                                       Figure 2: An example of a review link from Review #126831
+                                                                                          Alex Xu          Patch Set 3: Code-Review+1
+                                                                                       in Nova.
+                                                                                          Ken'ichi Ohmichi Patch Set 3: recheck
+                                                                                            Elastic Recheck          Patch Set 3: I noticed jenkins failed, I think you hit bug(s): - check-tempest-dsvm-ironic-pxe_ssh-nv
+5     QUALITATIVE ANALYSIS OF REVIEW                                                        Ken'ichi Ohmichi         Patch Set 3: Code-Review+2 Workﬂow+1
+                                                                                            Elastic Recheck          Patch Set 3: I noticed jenkins failed, I think you hit bug(s): - gate-grenade-dsvm: https://bugs.launc
+      LINKS (RQ2)                                                                          Ken'ichi Ohmichi
+                                                                                       Neutron        projects. Patch
+                                                                                                                Since Setcoding
+                                                                                                                          3: recheck of all of these links is impractical,
+
+Reviews may be linked to other reviews for several reasons. For                        we Eli Qiao
+                                                                                            randomly
+                                                                                           Jenkins
+                                                                                                          samplePatch Set 3: recheck
+                                                                                                                   Nova       and Neutron review links for coding.
+                                                                                                                Change has been successfully merged into the git repository.
+example, a link may express a dependency between reviews (e.g.,                           To   discover
+                                                                                           Jordan Pittier   as complete        of a set
+                                                                                                                Patch Set 3: Reverted      of linkwastypes
+                                                                                                                                      This patchset   reverted as    possible,
+                                                                                                                                                                 in change:         we
+                                                                                                                                                                             I191b626a471626f334e4835fab602a
+ł[Review #106918]6 is dependent on [Review #106274]ž) or the evolu-                    strive for saturation. Similar to prior work [47], we set                   ourbysaturation
+                                                                                                                                                             Powered       Gerrit Code Review (2.13.12-11-g1707
+tion of an earlier idea into its current form (e.g., ł[Review #475649]7                criterion to 50, i.e., we continue to code randomly selected links
+is a follow up patch to [Review #411830]ž).                                            until no new codes have been discovered for 50 consecutive links.
+   In this section, we set out to better understand the underlying                        To ensure that we analyze links that appear in descriptions and
+reasons for review linkage through a qualitative analysis. To under-                   comments, we aim to achieve saturation twiceÐonce when coding
+stand why a link has been recorded, we use a manually-intensive                        description-based links and again when coding comment-based
+research method, which creates practical limitations on the breadth                    links. We reach saturation after coding 340 comment-based links
+of communities that we can analyze. Thus, we elect to analyze the                      and 146 description-based links in Nova, and 161 comment-based
+OpenStack communityÐthe largest and most dynamic graph in                              links and 105 description-based links in Neutron.
+our set of studied communities (see Tables 1ś2 and Figure 1). The                      Coding. Coding was performed by the first and second authors
+OpenStack community is composed of several projects, of which,                         during collocated coding sessions. Both coders have experience
+we select the two largest for analysis, i.e., Nova (the provisioning                   with code reviews both in research and commercial software devel-
+management module) and Neutron (the networking abstraction                             opment settings (acting as both patch authors and reviewers). In
+interface). Below, we describe our approach to classify links in the                   total, these coding sessions took 56 hours (or 112 person-hours).
+studied projects (5.1) and present the results (5.2).                                     When coding links, the coders focused on the key reasons why
+                                                                                       the link was recorded. For example, Figure 2 shows that comments
+5.1      Approach                                                                      from Reviewer 1 on Nova Review #126831 have inspired the author
+We apply an open coding approach [12] to classify randomly sam-                        to create Review #127457. Both coders independently code and then
+pled links between reviews. Open coding is a qualitative data anal-                    discuss each link until a consensus is reached. We also record the
+ysis method by which artifacts under inspection (review links in                       direction of the link, e.g., Review #126831 links to Review #127457.
+our case) are classified according to emergent concepts (i.e., codes).                    In theory, multiple codes may apply to each link; yet in practice,
+After coding, we apply open card sorting [30] to lift low-level codes                  we find that multi-coded links are rare. Indeed, while a link may
+to higher level concepts. Below, we describe our sampling, coding,                     have different codes if interpreted in different directions, we do not
+and card sorting procedures in more detail.                                            find any multi-coded directional links.
+Sampling. Section 4 shows that there are 133,650 linked reviews in                        Since open coding is an exploratory data analysis technique,
+the OpenStack community, 16,144 of which appear in the Nova and                        it may be prone to errors. To mitigate errors, we code in three
+                                                                                       passes. First, since codes that emerge late in the process may apply
+     6 https://review.openstack.org/#/c/106918/                                        to earlier reviews, after completing an initial round of coding, we
+     7 https://review.openstack.org/#/c/475649/                                        perform a second pass over all of the links to correct miscoded
+
+
+
+
+                                                                                582
+
+                                                                                     https://review.openstack.org/#/c/126831/
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                       Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+Table 3: The frequency of the discovered types of review                      additional information sources. Below, we describe the discovered
+linkage in OpenStack Nova and Neutron.                                        codes according to the categories to which they belong.
+                                                                              Patch Dependency (C1). We find that 55% and 56% of the ana-
+                                                    Frequency                 lyzed links in Nova and Neutron connect reviews to others that
+        Category
+                                               Nova       Neutron             they depend upon. Patch Dependency links may influence inte-
+         C1: Patch Dependency                 269 (55%) 148 (56%)             gration decisions and the reviewers who should be recommended.
+        Patch Ordering                        124 (26%)    62 (24%)           Indeed, the integration decision in one review may be inherently
+        Root Cause                             50 (11%)    28 (11%)           linked to that of another if they share a dependency. For example,
+        Shallow Fix                              6 (2%)       4 (2%)          Review #1027045 of the Nova project was only abandoned because
+        Follow-up                               28 (6%)    29 (11%)           of its dependency on Review #102705, which was abandoned earlier.
+        Merge Related Reviews                   19 (4%)     13 (5%)           Moreover, reviewers of a dependent review may need to review its
+        Multi-part                              42 (9%)     12 (5%)           dependency as well. For example, a reviewer of Review #1027498
+         C2: Broader Context                   96 (20%)    50 (19%)           was added only because they reviewed its dependency (Review
+        Related Feedback                        43 (9%)     14 (6%)           #101424). We further explore the usefulness of these linkage-based
+        Demonstration                           29 (6%)    26 (10%)           reviewer invitations in Section 7 (RQ4).
+        Additional Evidence                     24 (5%)     10 (4%)
+         C3: Alternative Solution              69 (14%)    39 (15%)
+                                                                                            Linkage direction                 Patch Integration
+        Superseding                             35 (8%)     17 (7%)
+        Duplicated                              34 (7%)     22 (9%)              (C1) Patch Dependency
+                                                                                                                                                B
+         C4: Version Control Issues             27 (6%)     17 (6%)
+                                                                                  (1) Patch Ordering
+        Integration Concern                     15 (4%)     13 (5%)               (2) Root Cause
+        Gerrit Misuse                            5 (2%)       2 (1%)              (3) Shallow Fix                   A
+        Revert                                   7 (2%)       2 (1%)              (4) Follow-up
+         C5: Feedback Related                   23 (5%)     10 (4%)
+        Fix Related Issues                      11 (3%)       3 (2%)                                                A
+        Feedback Inspired Reviews               12 (3%)       7 (3%)              (5) Merge Related                             C              Code
+                                                                                                                                               Base
+                                                                                  Reviews
+                                                                                                                    B
+
+entries. During the first coding pass, we code only using the link
+source (description/comment). In several cases, more contextual                                                                 B
+information was needed. We coded such cases as łNeeds Additional                  (6) Multi-Part                    A
+Contextž during the first coding pass. During a third coding pass,                                                              C
+we check additional sources of information (e.g., the content of the
+patch, the linked review, comments in discussion threads) to code
+these cases more specifically. After the three coding passes, all of
+the sampled links have been assigned to a specific code.                               Figure 3: The Patch Dependency subgraphs.
+Card Sorting. Similar to prior studies [3, 18, 24, 39], we apply open
+card sorting to construct a taxonomy of codes. This taxonomy helps               Figure 3 shows three shapes that patch dependency links take.
+us to extrapolate general themes from our detailed coded data. The            First, Patch Ordering, Root Cause, Shallow Fix, and Follow-up take
+card sorting process is comprised of two steps. First, the coded              the shape of two eventually integrated (or abandoned) reviews that
+links are merged into cohesive groups that can be represented by              share a link. While they share a shape, the semantics of the patterns
+a similar subgraph. Second, the related subgraphs are merged to               differ, i.e., Patch Ordering links indicate a timing dependency that
+form categories that can be summarized by a short title.                      must be respected at integration time, while Follow-up, Root Cause,
+                                                                              and Shallow Fix links provide rationale for Review B by pointing to
+5.2     Results                                                               enabling enhancements or limitations in Review A. Second, Merge
+Table 3 provides an overview of the categories that summarize                 Related Reviews links merge two or more reviews into a more
+related labels (the complete table is available online1 ). We observe         cohesive whole. Finally, Multi-part links indicate that a large review
+that the frequencies at which the link labels appear are consistent           has been split into a series of smaller reviews.
+between the two studied projects. Moreover, we only coded two                    Weißgerber et al. [43] observed that smaller patches tend to
+of 486 links from Nova and two of 266 links from Neutron as                   be accepted in two large open source projects. Rigby et al. [35]
+false positives (i.e., spuriously detected links that do not indicate         argue that one of the statutes of an efficient and effective code
+a relationship between reviews), suggesting that our link extrac-             review process is the łearly, frequent review of small, independent,
+tion approach does not produce much noise (precision > 0.99 in                complete solutionsž. The frequency of the Multi-part pattern (i.e.,
+both cases). Furthermore, we required additional context informa-             the splitting of large patches into smaller ones) may be an indication
+tion (beyond the link source) to code 63 links, all of which were             that these prior observations still hold.
+more specifically coded during the third pass when we analyze                    8 https://review.openstack.org/#/c/102749/
+
+
+
+
+                                                                        583
+The Review Linkage Graph for Code Review Analytics                                                                    ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia
+
+
+Broader Context (C2). We find that 20% and 19% of the analyzed                          Figure 5 shows that our two codes within the Alternative Solu-
+links point to other reviews with relevant resources. The individual                 tion category share the same shape, yet differ in their semantics.
+analysis of reviews that are connected with Broader Context links                    Superseding links show that the solution in an earlier review has
+may not be valid. Indeed, analyses of review outcome prediction                      been replaced with an updated solution in the current review, while
+often compute the length of discussion threads [16, 23]. However, a                  Duplication links highlight the existence of another (competing)
+discussion may span across several reviews when Broader Context                      solution to the same underlying problem. In a large-scale, cross-
+links are present. For instance, a reviewer of Review #1552239 asks                  company software organization like OpenStack, it is difficult to
+the author to refer to a similar discussion on Review #215608.                       coordinate development effort. However, the frequency at which
+                                                                                     work is duplicated suggests that tooling [10, 49] may help.
+                                                                                     Version Control Issues (C4). We find that 6% of analyzed links
+      (C2) Broader Context                    (1) or (3)
+                                                                comment              point to reviews that introduced version control issues. Rigby and
+                                                                          B          Storey [36] also found such issues are often discussed during the
+     (1) Related Feedback                     (2) or (3)
+     (2) Demonstration                 A                         code                broadcast-based reviews in several open source systems. Shima-
+     (3) Additional Evidence                                            Code
+                                                                                     gaki et al. [38] found that 5% of commits in a large industrial system
+                                                                        Base         were reverted after being integrated. Since Revert is one of the codes
+                                                                                     within our category, our review graphs can complement version
+                                                                                     control data to better understand the practice of reverting commits.
+            Figure 4: The Broader Context subgraph.
+
+                                                                                           (C4) Version Control Issues
+   Figure 4 shows that our three codes within the Broader Con-
+text category share the same shape; however, the codes differ in                        (1) Integration Concerns                                B
+the artifact to which they refer. Related Feedback links connect                        (2) Gerrit Misuse
+                                                                                        (3) Revert                                     Conﬂict            Code
+discussions on one review to discussions in other reviews, while                                                           A                              Base
+Demonstration links point to example code from other reviews.
+Additional Evidence links point to other reviews as proof (code,
+discussions, specifications) of the existence, removal, or relevance
+                                                                                             Figure 6: The Version Control Issues subgraph.
+of the problems that are addressed by the review under inspection.
+Alternative Solution (C3). We find that 14% and 15% of the ana-
+lyzed links connect reviews to others that implement similar func-                      Figure 6 shows that our three codes within the Version Control
+tionality. Similar to Patch Dependency links, Alternative Solution                   Issues category share the same shape. Integration Conflict and
+links may also impact integration decisions and reviewer recom-                      Gerrit Misuse links expose technical integration or Gerrit issues,
+mendations. For example, Review #6743110 was abandoned because                       while Revert links indicate that a partial or complete rollback.
+another submitted solution for the same underlying issue (Review                     Feedback Related (C5). We find that 5% and 4% of analyzed links
+#61041) was preferred. Especially in such examples where an łei-                     in Nova and Neutron connect reviews to others that resolve or
+ther orž decision needs to be made, the same reviewers should                        were inspired by reviewer comments. Reviews that were inspired
+likely be invited to all of the competing reviews for the sake of                    by feedback in another review might be more likely to be accepted,
+fairness [15]. Furthermore, prior work has demonstrated that a lack                  since one reviewer is already in favour of the idea. For example, in
+of awareness of concurrently developed solutions may result in re-                   Review #167100,11 a reviewer’s feedback inspired the creation of
+dundant work [10, 49] and is a key source of software development                    the new Review #167082. Then, one of reviewers of #167100 joined
+waste [37]. These conflated integration decisions are not congruent                  Review #167082, and eventually approves it for integration. There
+with review outcome or reviewer recommendation models that                           are two possible ways to act upon C5-linked reviews. The reviewer
+assume each submission is independently adjudicated [21ś23].                         who inspired the change may be well suited to review the inspired
+                                                                                     change. Thus, reviewer recommenders may need to recommend
+                                                                                     them. On the other hand, since the reviewer who inspired the
+    (C3) Alternative Solution                                                        change may not be impartial when reviewing the inspired review,
+                                                           A’                        reviewer recommenders may need to recommend other reviewers.
+     (1) Superseding                    (1)                                             Figure 7 shows that our two codes within the Feedback Related
+     (2) Duplication
+                                                                                     category share the same shape. Fixed Related Issues links show that
+                              A                                         Code
+                                                           B                         (part of) a raised concern has been addressed by another review.
+                                        (2)                             Base
+                                                                                     Feedback-inspired links show a new contribution where feedback
+                                                                                     on Review A inspires the creation of a new patch.
+         Figure 5: The Alternative Solution subgraph.                                 RQ2: A broad variety of reasons for linkage exist. These differ-
+                                                                                      ent types of links may introduce noise in or opportunities for
+                                                                                      improvement of code review analytics.
+    9 https://review.openstack.org/#/c/155223/
+   10 https://review.openstack.org/#/c/67431/                                           11 https://review.openstack.org/#/c/167100/
+
+
+
+
+                                                                               584
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                         Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+                                                                                Classification Techniques. To train our classifiers, we experi-
+      (C5) Feedback Related                                                     ment with a broad selection of popular classification techniques.
+                                               (1)   B
+      (1) Feedback Inspired                                                     Support Vector Machines (SVM) use a hyperplane to classify docu-
+      (2) Fix Related Issues                                                    ments by first transforming feature values into a multidimensional
+                                               (2)         Code
+                                                     C     Base                 feature space. Random Forest is an ensemble learning technique
+                              A                                                 that builds a large number of decision trees, each using a subset of
+                                                                                the features, and then aggregates the results from each tree to clas-
+                                                                                sify documents. Multinomial Naïve Bayes (MNB) is a conditional
+                                                                                probability model that uses a multinomial distribution for each of
+            Figure 7: The Feedback Related subgraph.                            the features. Multi-Layer Perceptron (MLP) is a supervised learning
+                                                                                technique where weighted inputs are delivered through neurons in
+                                                                                sequential layers. Multinomial Logistic Regression (MLR) general-
+6     AUTOMATED LINK CLASSIFICATION (RQ3)                                       izes the logistic regression technique to the multi-class classifica-
+                                                                                tion setting. We use the Python Scikit-Learn implementations of
+In Section 5, we find that several types of links may impact reviewer
+                                                                                the classification techniques (svm.SVC, RandomForestClassifier,
+recommendation and outcome prediction. Since different review
+                                                                                MultinomialNB, MLPClassifier, and LogisticRegression).
+analytics techniques may need to traverse or ignore links depending
+                                                                                Hyperparameter Optimization. The classification techniques
+on the type, a more scalable approach to link type recovery is
+                                                                                that we use have configurable parameters that impact their per-
+needed. Indeed, it took the authors 112 person-hours to code 752
+                                                                                formance. Similar to prior work [40], we use a grid search to tune
+review links (see Coding in Section 5.1). If we continue to code at
+                                                                                the parameter settings. Grid search is an exhaustive searching tech-
+this rate, it would take an additional 19,793 person-hours to code
+                                                                                nique that examines all of the combinations of a specified set of
+the remaining 132,898 reviews in the OpenStack data set.
+                                                                                candidate settings to find the best combination. We explore the
+   In this section, we study the feasibility of using machine learning
+                                                                                same set of candidate settings as Tantithamthavorn et al. [40, p. 5].
+techniques to automatically classify links by categories. To do so,
+                                                                                We search for the optimal parameter settings for each classification
+we use the manually coded data from Section 5 as a sample on
+                                                                                technique in each bootstrap sample (i.e., without using the testing
+which to train and evaluate classifiers that identify the link category
+                                                                                data) using the Scikit-Learn GridSearchCV function.
+(C1śC5) based on the document that it appears within (i.e., the
+                                                                                Performance Evaluation. To evaluate our classifiers, we use com-
+review description field or the comment in the general or inline
+                                                                                mon performance measures. Precision is the proportion of links
+discussion thread). Below, we describe our approach to automated
+                                                                                that are classified as a given category that are correct. Recall is the
+link category classification (6.1) followed by the results (6.2).
+                                                                                proportion of links of a given category that a classifier can detect.
+                                                                                The F1-score is the harmonic mean of precision and recall. The
+6.1     Classification Approach                                                 Area Under the Curve (AUC) computes the area under the curve
+Feature Extraction. We apply standard text preprocessing tech-                  that plots the true positive rate against the false positive rate as
+niques to lessen the impact of noise on our classifiers. We first               the threshold that is used for classifying documents varies. AUC
+tokenize the document and remove stop words using the Python                    ranges from 0 to 1, where random guessing achieves an AUC of 0.5.
+NLTK stop word list. Next, we apply lemmatization to handle term                   Since our links have more than two categories, we need to use
+conjugation using the Python NLTK lemmatize function. Finally,                  multi-class generalizations of these performance measures. Each
+we convert each sampled description or comment to a vector of the               measure is computed for each category before being aggregated
+Term Frequency-Inverse Document Frequency (TF-IDF) weights                      into an overall score. Since the link categories are imbalanced (see
+of its terms. Broadly speaking, terms that appear rarely across doc-            Table 3), we weigh the category scores by their overall proportion.
+uments, and/or often within one document are of higher weight.                     We also compare our classifiers to a ZeroR classifier, which al-
+We use the Python Scikit-Learn TfidfVectorizer function to                      ways reports the most frequently occurring class. In our setting,
+compute TF-IDF scores for all documents in a training sample.                   a ZeroR classifier achieves a recall of one and a precision equal
+Classifier Validation Technique. To estimate classifier perfor-                 to the frequency of the most frequently occurring category (C1)
+mance on unseen data, we apply the out-of-sample bootstrap val-                 for that class, and a precision and recall of zero for the other cate-
+idation technique [13], which tends to yield more robust results                gories. Note that AUC does not apply to ZeroR classifiers because
+than other validation techniques (e.g., k-fold cross validation) [40].          likelihood estimates are not produced. We use the Scikit-Learn
+First, a bootstrap sample of size N is randomly drawn with replace-             metrics library to compute our performance measurements.
+ment from the original sample of the same size N. This bootstrap
+sample is used to train our classifiers, while the documents from
+the original sample that do not appear in the bootstrap sample are              6.2    Results
+set aside for testing. Since the bootstrap sample is selected with              Table 4 shows that while no classification technique consistently
+replacement, on average, 36.8% of the documents will not appear                 outperforms the others, the classifiers achieve a precision of 0.71ś
+in the bootstrap sample and can be used to evaluate classifier per-             0.77, a recall of 0.72ś0.92, and F1-scores of 0.71ś0.79. Since these
+formance. We perform 1,000 iterations of the bootstrap procedure                performance scores are on par with those of prior classification
+(reporting the mean performance scores across these iterations) to              studies [28, 32, 33], we believe that our classifiers show promise.
+ensure that our performance measurements are robust.                            Moreover, Table 4 shows that our classifiers outperform baseline
+
+
+
+
+                                                                          585
+The Review Linkage Graph for Code Review Analytics                                                          ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia
+
+
+Table 4: The performance of our five link category classi-                          A closer inspection reveals that cHRev misses at least one over-
+fiers, all of which outperform the ZeroR and random guess-                      lapping reviewer in 96%ś100% of linked reviews across Top 1ś5
+ing baselines in all cases.                                                     recommendation lists. Since medians of 12 and 15 reviewers par-
+                                                                                ticipate in Nova and Neutronreviews, respectively, missing at
+                        Nova                         Neutron                    least one overlapping reviewer is a concern. Moreover, none of the
+    Model
+             Prec.   Rec.   F1.     AUC      Prec.   Rec.  F1.   AUC            overlapping reviewers are recommended in 41%ś81% of Nova and
+    SVM       0.75   0.88 0.79       0.72     0.72   0.92 0.77    0.82          48%ś84% of Neutron reviews. When overlapping reviewers are
+    RF        0.77   0.72 0.71       0.57     0.76   0.84 0.72    0.89          omitted, they appear in 13thś15th place on average. Increasing the
+    MNB       0.71   0.80 0.74       0.72     0.71   0.82 0.75    0.76          weight of overlapping reviewers may improve recommendations.
+    MLP       0.74   0.81 0.76       0.61     0.75   0.84 0.74    0.68              Table 5 shows that the precision, recall, and F1-scores of cHRev
+    MLR       0.75   0.88 0.79       0.65     0.72   0.92 0.77    0.79          improve by 33%ś88% (3ś17 percentage points) if reviewers of a
+    ZeroR     0.26   0.50 0.34          ś     0.27   0.50 0.34       ś
+                                                                                linked review are recommended at the top of the list. Moreover,
+                                                                                the degree of the improvement remains consistent across the four
+approaches, achieving precision, recall, and F1-scores that are 22ś51           studied prediction time settings, indicating that no prediction delay
+percentage points better than the ZeroR baseline and AUC values                 is necessary to gain the bulk of the value. Longer delays may achieve
+above the 0.5 random guessing benchmark.                                        better results but would be less useful in practice, since waiting
+                                                                                more than six hours for reviewer recommendations is impractical.
+    RQ3: Despite the complexity of the five-class classification prob-
+    lem, our classifiers achieve precision, recall, and F1-scores that
+    exceed the ZeroR baseline by 22ś51 percentage points.                       7.2    Review Outcome
+                                                                                Approach. In Section 5, we report that C1, C2 (Broader Context),
+                                                                                and C3 links may impact review outcome prediction because the
+7     LINKAGE IMPACT ANALYSIS (RQ4)                                             integration decision in one review may be inherently linked to that
+Our analysis in RQ2 suggests that linkage can impact code review                of the other. Similar to the reviewer recommendation experiment
+analytics. In this section, we measure that impact on reviewer                  above, we apply our SVM classifier to identify C1, C2, and C3 links
+recommendation (7.1) and review outcome prediction (7.2).                       in the full Nova and Neutron data sets.
+                                                                                   For C1, C2, and C3 reviews, we compute the Identical Outcome
+7.1      Reviewer Recommendation                                                Rate (IOR), i.e., the rate at which linking and linked reviews result
+                                                                                in the same outcome (i.e., integration or abandonment). Moreover,
+Approach. In Section 5, we observe that Patch Dependency links
+                                                                                to study the extent to which state-of-the-art outcome predictors
+(C1), Alternative Solution links (C3), and Feedback Related links
+                                                                                misclassify identical outcomes, we apply the outcome prediction
+(C5) may impact reviewer recommendation because reviewers of a
+                                                                                approach of Gousios et al. [16]. More specifically, we train prediction
+linking review may need to review its linked review.
+                                                                                models that classify reviews as integrated or abandoned based on
+   To measure the degree to which reviewers contribute to both
+                                                                                review properties (e.g., # comments, # participants). In our setting,
+linking and linked reviews, we compute the Overlapping Reviewer
+                                                                                we train the predictors on unlabeled linked reviews and evaluate
+Rate (ORR), i.e., the proportion of reviewers from the linking review
+                                                                                them on our labeled samples.
+who also review the linked review. We compute the ORR rates on
+                                                                                Results. The IOR rates of integrated C1 and C2-linked reviews
+our sampled links from Section 5.
+                                                                                are 73%ś87% in Nova and 55%ś71% in Neutron, while the IOR
+   To study the extent to which state-of-the-art reviewer recom-
+                                                                                rates for abandonment are 57%ś86% and 45%ś75%, respectively.
+menders identify overlapping reviewers, we apply cHRev [48],
+                                                                                This suggests that reviews that are connected with C1 and C2 links
+which makes recommendations based on prior contribution and
+                                                                                tend to have the same outcome. Since C3 links connect competing
+working habits. We approximate data sets where C1, C3, and C5-
+                                                                                solutions, it is unlikely that they will have the same outcome. This is
+linked reviews are known by applying our top-performing classifier
+                                                                                reflected in lower IOR rates of 18%ś26% for integration, respectively.
+(SVM) from Section 6 to the linked Nova and Neutron reviews.
+                                                                                On the other hand, the IOR rates for abandonment are 46% in Nova
+We exclude C5-linked reviews from further analysis because we
+                                                                                and 62% in Neutron, indicating that it is not uncommon for both
+detect too few instances (i.e., five) to draw meaningful conclusions.
+                                                                                competing solutions to be abandoned.
+   We then compare the performance of cHRev to an extended ver-
+                                                                                   Outcome predictors may misclassify review outcomes for linked
+sion that ranks reviewers of linking reviews at the top of the list for
+                                                                                reviews when the feature values span multiple reviews (e.g., discus-
+linked reviews. Since links appear as reviews evolve, we select only
+                                                                                sion contexts, # participants). Indeed, we find that prior approach
+those links that are available at prediction times zero, one, three,
+                                                                                misclassifies 35% and 39% of C1, C2, and C3-linked reviews in Nova
+and six hours after the review has been created. Moreover, we only
+                                                                                and Neutron, respectively.
+identify candidate overlapping reviewers who have commented on
+linking reviews at or before those prediction time settings.                     RQ4: Reviewer recommenders tend to omit or poorly rank review-
+Results. The ORR rates of C1 and C3 are 50%ś51% and 65%ś77%,                     ers who participate in both linking and linked reviews. Moreover,
+respectively. By way of comparison, we find that the ORR rate is                 review outcome predictors tend to misclassify linked review out-
+less than 1% for randomly selected pairs of non-linked reviews. The              comes. Leveraging links that are available at prediction time can
+results indicate that reviewers are more likely to participate in both           yield considerable performance improvements.
+reviews when links are present.
+
+
+
+
+                                                                          586
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                                Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+Table 5: The mean performance scores of cHRev [48] and our proposed link-aware reviewer recommenders at different pre-
+diction delays. The bulk of the performance improvement is achieved in the no delay (0 hour) setting.
+
+                                                     Nova                                                             Neutron
+                           Top 1                     Top 3                 Top 5                  Top 1                Top 3                     Top 5
+     Model         Pre.     Rec.     F1.     Pre.     Rec.    F1.   Pre.    Rec.    F1.    Pre.    Rec.    F1.    Pre. Rec.   F1.         Pre.    Rec.     F1.
+     Baseline      0.25     0.06    0.09     0.28     0.18   0.22   0.30    0.32   0.30    0.24    0.05   0.08    0.26 0.17 0.20          0.28    0.31    0.29
+     0 hour        0.39     0.09    0.14     0.40     0.26   0.31   0.40    0.43   0.41    0.39    0.09   0.14    0.40 0.26 0.31          0.41    0.44    0.42
+     1 hour        0.39     0.09    0.14     0.40     0.26   0.31   0.40    0.43   0.41    0.41    0.09   0.14    0.41 0.26 0.32          0.42    0.44    0.43
+     3 hours       0.40     0.09    0.14     0.40     0.26   0.31   0.40    0.43   0.41    0.41    0.09   0.14    0.41 0.26 0.32          0.42    0.45    0.43
+     6 hours       0.40     0.09    0.14     0.40     0.26   0.31   0.40    0.43   0.41    0.41    0.09   0.15    0.41 0.27 0.32          0.42    0.45    0.43
+
+
+8    PRACTICAL IMPLICATIONS                                                           Internal validity. Internal validity is concerned with our ability
+Linkage should be taken into consideration in code review                             to draw conclusions from the relationship between study variables.
+analytics. Our quantitative study (Section 4) shows that up to                        Links may not be detected in all of the cases when they should
+25% of reviews in our subject communities link to at least one                        be, which may introduce noise in our linkage rate observations in
+other review. Moreover, in the four studied communities that have                     Section 4. Hence, our observations in Section 4 should be interpreted
+made the largest investment in reviewing (OpenStack, Chromium,                        as lower bounds rather than as exact linkage rate values.
+Android, and Qt), we observe increasing or stable trends in the                          If we stop coding too early during our qualitative analysis (Sec-
+monthly linkage rate. Prior work has shown that linked artifacts can                  tion 5), it may threaten the completeness of the discovered set of
+impact repository mining analytics [8, 20]. Indeed, our impact anal-                  link types. To mitigate the threat, we continue to code until our
+ysis (Section 7) shows that reviewer recommenders and outcome                         samples saturateÐa concept that we operationalized by continuing
+predictors can be improved by taking linkage into account.                            until we coded a span of 50 coded links without discovering any
+Duplicate detection would enhance review efficiency. Our qual-                        new codes. Others have used similar saturation criteria [36, 47].
+itative study shows that 14%ś15% of congruent links in Nova and                          Other classification techniques or hyperparameter settings may
+Neutron fall in the Alternative Solution category (i.e., superseding                  yield better results than the ones that we studied in Section 6. To
+and duplication). Duplicate contributions are a form of waste in                      combat this, we select a broad set of popular classification tech-
+software development [37]. Boisselle and Adams [8] argued that                        niques and use an automatic parameter optimization approach to
+automatic classification of bug reports that are linked due to dupli-                 select the best configuration of hyperparameter settings for each
+cation would be helpful. However, in large projects like OpenStack                    bootstrap iteration. Nonetheless, exploration of other classification
+and Chromium, it is difficult to keep track of duplicated work [49].                  techniques and hyperparameter settings may yield better results.
+Systematic detection of duplicates would be important from a re-                      External validity. External validity is concerned with our abil-
+view fairness [15] perspective as well, since the competing solutions                 ity to generalize based on our results. We extract review graphs
+should be subject to the same level of scrutiny.                                      (Section 4) from six communities that use the Gerrit code review
+Link category recovery may not be necessary. The majority of                          tool. Due to the manually intensive nature of our coding approach,
+links are of types that potentially impact reviewer recommendation                    we focus on an in-depth analysis of the two largest projects from
+(C1, C3, and C5) and outcome prediction (C1, C2, and C3). Since                       the OpenStack community. As such, our linkage types, classifiers,
+we find that all studied link categories are useful, future work may                  and impact analyses may not generalize to code reviewing envi-
+assume that all links are useful and omit link type classification.                   ronments in all software communities. Replication studies may be
+                                                                                      needed to arrive at more general conclusions. To simplify replica-
+9    THREATS TO VALIDITY                                                              tion, we have made our scripts and data publicly available.1
+Construct validity. Construct validity is concerned with the de-
+gree to which our measurements capture what we aim to study. We
+                                                                                      10     CONCLUSION
+recover links between reviews using regular expressions that detect                   Researchers have recently proposed several analytics-based tech-
+Change IDs and URLs of other reviews. However, these regular                          niques to support stakeholders in the MCR process. However, those
+expressions may extract Change IDs or URLs that are not intended                      techniques have tacitly or explicitly treated each review as an inde-
+to be links (false positives). On the other hand, Section 5 shows that                pendent observation, which overlooks relationships among reviews.
+the false positive rate in our manually analyzed sample is quite low                     Our empirical study suggests that linkage is not uncommon
+(<0.1%). Thus, we false positives do not appear to be of concern.                     in six studied software communities. Moreover, adding linkage
+   In our qualitative analysis, links may be miscoded due to the                      awareness to review analytics approaches yields considerable per-
+subjective nature of our open coding approach. We take several                        formance improvements. Thus, review linkage should be taken into
+precautions to mitigate the miscoding threat. First, the code for                     consideration in future MCR studies and tools.
+each link is agreed upon by two coders who have experience with
+code review in academic and commercial settings. Furthermore, we                      ACKNOWLEDGMENTS
+employ a three-pass approach, where each code is revisited at least                   This work was supported by the SCAT Technology Research Foun-
+once to ensure that the correct code was selected.                                    dation and JSPS KAKENHI Grants JP17J09333, 17H00731, 18KT0013.
+
+
+
+
+                                                                               587
+The Review Linkage Graph for Code Review Analytics                                                                                  ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia
+
+
+REFERENCES                                                                                            International Conference on Mining Software Repositories. 101ś110.
+ [1] Sultan S. Alqahtani, Ellis E. Eghan, and Juergen Rilling. 2017. Recovering Semantic         [24] Noureddine Kerzazi, Foutse Khomh, and Bram Adams. 2014. Why do Auto-
+     Traceability Links between APIs and Security Vulnerabilities: An Ontological                     mated Builds Break? An Empirical Study. In Proceedings of the 30th International
+     Modeling Approach. In Proceedings of International Conference on Software Testing,               Conference on Software Maintenance and Evolution. 41ś50.
+     Verification and Validation. 80ś91.                                                         [25] Oleksii Kononenko, Olga Baysal, and Michael W. Godfrey. 2016. Code Review
+ [2] Giuliano Antoniol, Gerardo Canfora, Gerardo Casazza, Andrea De Lucia, and Et-                    Quality: How Developers See It. In Proceedings of the 38th International Conference
+     tore Merlo. 2002. Recovering traceability links between code and documentation.                  on Software Engineering. 1028ś1038.
+     IEEE Transactions on Software Engineering 28, 10, 970ś983.                                  [26] Vladimir Kovalenko, Nava Tintarev, Evgeny Pasynkov, Christian Bird, and Al-
+ [3] Alberto Bacchelli and Christian Bird. 2013. Expectations, Outcomes, and Chal-                    berto Bacchelli. 2018. Does Reviewer Recommendation Help Developers? IEEE
+     lenges of Modern Code Review. In Proceedings of the 35th International Conference                Transactions on Software Engineering.
+     on Software Engineering. 712ś721.                                                           [27] Lisha Li, Zhilei Ren, Xiaochen Li, Weiqin Zou, and He Jiang. 2018. How are Issue
+ [4] Vipin Balachandran. 2013. Reducing Human Effort and Improving Quality in Peer                    Units Linked? Empirical Study on the Linking Behavior in GitHub. In Proceedings
+     Code Reviews Using Automatic Static Analysis and Reviewer Recommendation.                        of the 25th Asia-Pacific Software Engineering Conference. 386ś395.
+     In Proceedings of the 35th International Conference on Software Engineering. 931ś           [28] Zhixing Li, Yue Yu, Gang Yin, Tao Wang, Qiang Fan, and Huaimin Wang. 2017.
+     940.                                                                                             Automatic Classification of Review Comments in Pull-based Development Model.
+ [5] Olga Baysal, Oleksii Kononenko, Reid Holmes, and Michael W. Godfrey. 2012. The                   In Proceedings of the 29th International Conference on Software Engineering and
+     Secret Life of Patches: A Firefox Case Study. In Proceedings of the 19th Working                 Knowledge Engineering.
+     Conference on Reverse Engineering. 447ś455.                                                 [29] Wanwangying Ma, Lin Chen, Xiangyu Zhang, Yuming Zhou, and Baowen Xu.
+ [6] Olga Baysal, Oleksii Kononenko, Reid Holmes, and Michael W. Godfrey. 2013.                       2017. How Do Developers Fix Cross-Project Correlated Bugs? A Case Study on
+     The influence of non-technical factors on code review. In Proceedings of the 20th                the GitHub Scientific Python Ecosystem. In Proceedings of the 39th International
+     Working Conference on Reverse Engineering. 122ś131.                                              Conference on Software Engineering. 381ś392.
+ [7] Olga Baysal, Oleksii Kononenko, Reid Holmes, and Michael W. Godfrey. 2016.                  [30] Peter Morville and Louis Rosenfeld. 2006. Information Architecture for the World
+     Investigating Technical and Non-Technical Factors Influencing Modern Code                        Wide Web: Designing Large-Scale Web Sites. O’Reilly Media.
+     Review, In Empirical Software Engineering. Empirical Software Engineering 21, 3,            [31] Mohammad M. Rahman, Chanchal K. Roy, and Jason A. Collins. 2016. CORRECT:
+     932ś959.                                                                                         Code Reviewer Recommendation in GitHub Based on Cross-Project and Technol-
+ [8] Vincent Boisselle and Bram Adams. 2015. The impact of cross-distribution bug                     ogy Experience. In Proceedings of the 38th International Conference on Software
+     duplicates, empirical study on Debian and Ubuntu. In Proceedings of the 15th                     Engineering. 222ś231.
+     International Working Conference on Source Code Analysis and Manipulation. 131ś             [32] Mohammad Masudur Rahman, Chanchal K. Roy, and Raula G. Kula. 2017. Im-
+     140.                                                                                             pact of Continuous Integration on Code Reviews. In Proceedings of the 14th
+ [9] Amiangshu Bosu, Michaela Greiler, and Christian Bird. 2015. Characteristics of                   International Conference on Mining Software Repositories. 499ś502.
+     Useful Code Reviews: An Empirical Study at Microsoft. In Proceedings of the 12th            [33] Mohammad Masudur Rahman, Chanchal K. Roy, and Raula G. Kula. 2017. Predict-
+     International Conference on Mining Software Repositories. 146ś156.                               ing Usefulness of Code Review Comments Using Textual Features and Developer
+[10] Yuriy Brun, Reid Holmes, Michael D. Ernst, and David Notkin. 2011. Proactive                     Experience. In Proceedings of the 14th International Conference on Mining Software
+     Detection of Collaboration Conflicts. In Proceedings of the 8th Joint Meeting on                 Repositories. 215ś226.
+     European Software Engineering Conference and the Symposium on the Foundations               [34] Michael Rath, Jacob Rendall, Jin L. C. Guo, Jane Cleland-Huang, and Patrick Mäder.
+     of Software Engineering. 168ś178.                                                                2018. Traceability in the Wild: Automatically Augmenting Incomplete Trace
+[11] Gerardo Canfora, Luigi Cerulo, Marta Cimitile, and Massimiliano Di Penta. 2011.                  Links. In Proceedings of the 40th International Conference on Software Engineering.
+     Social Interactions Around Cross-system Bug Fixings: The Case of FreeBSD                         834ś845.
+     and OpenBSD. In Proceedings of the 8th Working Conference on Mining Software                [35] Peter C. Rigby, Daniel M. German, and Margaret-Anne Storey. 2008. Open source
+     Repositories. 143ś152.                                                                           software peer review practices: a case study of the apache server. In Proceedings
+[12] Kathy Charmaz. 2014. Constructing Grounded Theory. SAGE Publications.                            of the 30th International Conference on Software Engineering. 541ś550.
+[13] Bradley Efron and Robert J. Tibshirani. 1993. An Introduction to the Bootstrap.             [36] Peter C. Rigby and Margaret-Anne Storey. 2011. Understanding Broadcast Based
+     Chapman & Hall.                                                                                  Peer Review on Open Source Software Projects. In Proceedings of the 33rd Inter-
+[14] Michael E. Fagan. 1976. Design and Code Inspections to Reduce Errors in Program                  national Conference on Software Engineering. 541ś550.
+     Development. IBM Systems Journal 15, 3, 182ś211.                                            [37] Todd Sedano, Paul Ralph, and Cécile Péraire. 2017. Software Development Waste.
+[15] Daniel M. German, Gregorio Robles, Germán Poo-Caamaño, Xin Yang, Hajimu                          In Proceedings of the 39th International Conference on Software Engineering. 130ś
+     Iida, and Katsuro Inoue. 2018. łWas My Contribution Fairly Reviewed?ž: A                         140.
+     Framework to Study the Perception of Fairness in Modern Code Reviews. In                    [38] Junji Shimagaki, Yasutaka Kamei, Shane McIntosh, David Pursehouse, and Naoy-
+     Proceedings of the 40th International Conference on Software Engineering. 523ś534.               asu Ubayashi. 2016. Why are Commits being Reverted? A Comparative Study
+[16] Georgios Gousios, Martin Pinzger, and Arie van Deursen. 2014. An Exploratory                     of Industrial and Open Source Projects. In Proceedings of the 32nd International
+     Study of the Pull-based Software Development Model. In Proceedings of the 36th                   Conference on Software Maintenance and Evolution. 301ś311.
+     International Conference on Software Engineering. 345ś355.                                  [39] Mini Shridhar, Bram Adams, and Foutse Khomh. 2014. A Qualitative Analysis of
+[17] Jin L. C. Guo, Jinghui Cheng, and Jane Cleland-Huang. 2017. Semantically                         Software Build System Changes and Build Ownership Styles. In Proceedings of the
+     Enhanced Software Traceability Using Deep Learning Techniques. In Proceedings                    8th International Symposium on Empirical Software Engineering and Measurement.
+     of the 39th International Conference on Software Engineering. 3ś14.                              29:1ś29:10.
+[18] Anja Guzzi, Alberto Bacchelli, Michele Lanza, Martin Pinzger, and Arie van                  [40] C. Tantithamthavorn, S. McIntosh, A. E. Hassan, and K. Matsumoto. 2018. The
+     Deursen. 2013. Communication in Open Source Software Development Mailing                         Impact of Automated Parameter Optimization on Defect Prediction Models. IEEE
+     Lists. In Proceedings of the 10th International Conference on Mining Software                    Transactions on Software Engineering, 1ś1.
+     Repositories. 277ś286.                                                                      [41] Yida Tao, Donggyun Han, and Sunghun Kim. 2014. Writing Acceptable Patches:
+[19] Kazuki Hamasaki, Raula Gaikovina Kula, Norihiro Yoshida, A. E. Camargo Cruz,                     An Empirical Study of Open Source Project Patches. In Proceedings of the 30th
+     Kenji Fujiwara, and Hajimu Iida. 2013. Who Does What During a Code Review?                       International Conference on Software Maintenance and Evolution. 271ś280.
+     Datasets of OSS Peer Review Repositories. In Proceedings of the 10th International          [42] Patanamon Thongtanunam, Chakkrit Tantithamthavorn, Raula Gaikovina Kula,
+     Conference on Mining Software Repositories. 49ś52.                                               Norihiro Yoshida, Hajimu Iida, and Kenichi Matsumoto. 2015. Who Should Review
+[20] Hideaki Hata, Christoph Treude, Raula G. Kula, and Takashi Ishio. 2019. 9.6                      My Code? A File Location-Based Code-Reviewer Recommendation Approach
+     Million Links in Source Code Comments: Purpose, Evolution, and Decay. In                         for Modern Code Review. In Proceedings of the 22nd International Conference on
+     Proceedings of the 41st International Conference on Software Engineering. 1211ś                  Software Analysis, Evolution, and Reengineering. 141ś150.
+     1221.                                                                                       [43] Peter Weißgerber, Daniel Neu, and Stephan Diehl. 2008. Small patches get in!. In
+[21] Vincent J. Hellendoorn, Premkumar T. Devanbu, and Alberto Bacchelli. 2015.                       Proceedings of the 5th International Conference on Mining Software Repositories.
+     Will They Like This? Evaluating Code Contributions with Language Models. In                      67ś76.
+     Proceedings of the 12th International Conference on Mining Software Repositories.           [44] Xin Xia, David Lo, Xinyu Wang, and Xiaohu Yang. 2015. Who Should Review This
+     157ś167.                                                                                         Change? Putting Text and File Location Analyses Together for More Accurate
+[22] Gaeul Jeong, Sunghun Kim, Thomas Zimmermann, and Kwangkeun Yi. 2009.                             Recommendations.. In Proceedings of the 31st International Conference on Software
+     Improving Code Review by Predicting Reviewers and Acceptance of Patches. Tech-                   Maintenance and Evolution. 261ś270.
+     nical Report. Reserach On Software Analysis for Error-free Computing. 215ś226               [45] Xin Yang, Raula Gaikovina Kula, Norihiro Yoshida, and Hajimu Iida. 2016. Mining
+     pages.                                                                                           the Modern Code Review Repositories: A Dataset of People, Process and Product.
+[23] Yujuan Jiang, Bram Adams, and Daniel M. German. 2013. Will My Patch Make                         In Proceedings of the 13th International Conference on Mining Software Repositories.
+     It? And How Fast?: Case Study on the Linux Kernel. In Proceedings of the 10th                    460ś463.
+
+
+
+
+                                                                                           588
+ESEC/FSE ’19, August 26–30, 2019, Tallinn, Estonia                                                          Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi Matsumoto
+
+
+[46] Fiorella Zampetti, Luca Ponzanelli, Gabriele Bavota, Andrea Mocci, Massimil-                   and Measurement. 11:1ś11:10.
+     iano Di Penta, and Michele Lanza. 2017. How Developers Document Pull Requests             [48] Motahareh Zanjani, Huzefa Kagdi, and Christian Bird. 2015. Automatically
+     with External References. In Proceedings of the 25th International Conference on               Recommending Peer Reviewers in Modern Code Review. IEEE Transactions on
+     Program Comprehension. 23ś33.                                                                  Software Engineering 42, 6, 530ś543.
+[47] Farida El Zanaty, Toshiki Hirao, Shane McIntosh, Akinori Ihara, and Kenichi               [49] Shurui Zhou, Ştefan Stănciulescu, Olaf Leßenich, Yingfei Xiong, Andrzej
+     Matsumoto. 2018. An Empirical Study of Design Discussions in Code Review. In                   Wa̧sowski, and Christian Kästner. 2018. Identifying Features in Forks. In Proceed-
+     Proceedings of the 12th International Symposium on Empirical Software Engineering              ings of the 40th International Conference on Software Engineering. 105ś116.
+
+
+
+
+                                                                                         589
+

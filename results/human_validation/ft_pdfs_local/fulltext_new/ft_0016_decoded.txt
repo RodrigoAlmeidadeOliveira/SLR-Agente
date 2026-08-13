@@ -1,0 +1,256 @@
+   Understanding Knowlegde-Intensive Processes: from 
+               Traces to Instance Graphs 
+                                                                                 
+
+
+                                             Claudia Diamantini, Laura Genga, Domenico Potena 
+                                                       Department of Information Engineering 
+                                                         Universit Politecnica delle Marche 
+                                                                       Ancona, Italy 
+                                                    {c.diamantini, l.genga, d.potena}@univpm.it 
+                                                                              
+                                                                              
+  AbstractßÏ  Enterprise  information  systems,  while  support  daily          causal  relations  between  activities.  Such  a  graph  is  called 
+  activities,  typically  collect  data  on  executed  processes  in  event    Instance Graph  IG ; Figures 2 and 3 show examples of IGs. 
+  logs.  These  data  describe  the  temporal  sequence  in  which 
+  activities were carried out, hiding possible parallelism and other                    The  building  of  IGs  is  driven  by  the  knowledge  of  causal 
+  control  flows.  Representing  the  structure  of  each  process                  relations  among  activities,  which either  is  a-priori  held or  can 
+  execution in the form of an Instance Graph, enables managers to                   be inferred from event logs. Process Discovery is the discipline 
+  discover  valuable  knowledge  on  enterprise  behaviors.  In  this               devoted to infer relations from a log and build models. Process 
+  work,  we  describe  BIG4ProM,  a  tool  which  implements  the                   Discovery  PD   techniques  belong  to  the  broader  Process 
+  Building  Instance  Graph  BIG   algorithm.  BIG4ProM  exploits                   Mining  discipline,  whose  goal  consists  in  discovering, 
+  filtering  Process  Discovery  algorithms  implemented  in  ProM  in              monitoring and improving a given process exploiting event log 
+  order  to  return  the  set  of  instance  graphs  related  to  the  given        generated during process execution [2]. Most of techniques aim 
+  event  log.  The  plug-in  is  conceived  to  support  both  expert  and          to generate a complete process model. However, such a model 
+  standard users.                                                                   is  not  always  required,  and  a  good  representation  of  each 
+                                                                                    individual process instance can provide useful insights as well, 
+      Keywords-process mining; building instance graph; knowledge-                  and can be used in addressing several tasks, e.g., [3, 4, 5, 6, 7]. 
+  intensive process; ProM                                                           In  [3]  instance  models  are  used  in  conformance  checking 
+                                                                                    applications.[4] uses instance models to implement a log delta-
+                            I.      INTRODUCTION                                    analysis  technique,  which  allows  to  identify  relevant 
+      Nowadays  enterprise  information  systems,  like  Enterprise                 differences between the executions recorded in two event logs. 
+  Resource Planning  ERP , Customer Relationship Management                         Another  relevant  application  is described in [5, 6,  7],  where a 
+   CRM , Business Process  Management  Systems  BPMS , and                          methodology is proposed aimed at extracting the most relevant 
+  Workflow  Management  Systems  WMS ,  store  data  on                             common substructures in a set of instance models. 
+  business  processes  that  are  daily  executed.  These  data  are                    In  the  literature,  few  approaches  have  been  proposed  to 
+  typically  recorded  in  an  event  log,  where  each  element  of  the           building IGs from simple event logs, namely logs providing the 
+  log  i.e.,  a  trace   describes  the  temporal  sequence  in  which              minimal set of information  i.e., timestamp, actor and activity , 
+  activities  were  carried  out,  and  usually  the  actors  which                 and without resorting to any domain knowledge. In this setting, 
+  performed  each  activity.  Depending  on  the  system,  other                    to the best of our knowledge, only three approaches have been 
+  information  can  be  found  as  well,  like  the  executor,                      proposed.  [4]  and  [8]  are  based  on  the  causal  relations 
+  input/output  data,  and  the  total  duration  of  the  activity  or,            inference  rules  embedded  in  the  áË-algorithm  PD  technique. 
+  equivalently, its end time . Hence, although a single execution                   This  technique  perform  fairly  well  with  well-structured 
+  of  a  business  process  called  process  instance,  or  case   can              processes,  but  they  show  limitations  when  applied  to 
+  usually include parallel executions and cycles, in the event log                  unstructured,  knowledge-intensive  processes.  This  kind  of 
+  the process is flattened, losing its structure.                                   processes is typical of real-world domains, where human actors 
+      Analyzing  information  stored  in  event  logs  enables                      have high degree of freedom in the execution of activities. This 
+  managers  to  discover  valuable  knowledge  on  enterprise                       is the case, for instance, of health care where, although clinical 
+  behaviors,  in  order  to  monitor  and  improve  operations                      guidelines  are  given,  there  may  be  good  reasons  to  deviate 
+  performance.  Simple  analyses  can  be  performed  directly  on                  from such guidelines [9, 10]. The limits of the application of áË-
+  sequential  traces.  For  instance,  average  instance  lead  time,               algorithm to knowledge-intensive processes are well studied in 
+  resource  usage,  event  interval  analysis  [1]  can  be  obtained.              the  literature.  They  are  related  to  the  inference  of  models 
+  However, more insights can be derived only when the control                       affected  by  overgeneralization.  In  practice,  being  unable  to 
+  flow structure of the instance is known or, in other terms, when                  recognize  existing  causal  relations  among  activities,  the 
+  the  model  from  which  the  instance  is  generated  is  known,                 algorithm generates models involving a high number of parallel 
+  namely  the  instance  model.  An  instance  model  can  be                       activities, thus allowing for more instances than the real ones.  
+  represented as a graph, where nodes are activities and arcs are                        
+
+
+
+
+  VTUJNJRMVMJOMUUJNLNSLAPNKMM ßÆOMNS fbbb                                      ONU
+
+
+^    W m~ r~ `~~  m~~~K a~  ^ NPIOMOS ~ NPWOTWMV rq`  fbbb uK o ~K
+)       
+
+
+
+
+                                                                                                                                         
+                                                                   Figure 1: A Petri net 
+                                                                              
+       
+  Similarly,  the  use  of  the  algorithm  to  build  IG  produce  poor            extraction step and an IG repairing step. In the extraction step, 
+  results, in terms of inaccurate, overgeneralizing IG, accounting                  each trace of the event log is converted in an IG following the 
+  for much more traces than those actually recorded in the event                    definition provided in [4]. More precisely, given a trace  l1, its 
+  log.                                                                              corresponding  IG1  is  IG1 V1,  E1,  ëÃ1   where:  V1  is  the  set  of 
+                                                                                    the nodes, each corresponding to an event in the trace; E1 is the 
+       For  these  reasons,  in  a  previous  work,  we  proposed  the 
+                                                                                    set of the edges, each linking a pair of events  ei ,ej  such that i  
+  Building Instance Graph  BIG  algorithm, which is specifically 
+                                                                                    a  causal  relation  exists  between  the  corresponding  activities, 
+  conceived  for  unstructured  processes  [11].  In  particular,  the 
+                                                                                    and ii  neither causal successors of ei nor causal predecessors of 
+  BIG  algorithm  uses  causal  relation  inference  rules  typical  of 
+                                                                                    ej  exist  in  between  the  two  events  in  the  trace;  and  ëÃ1  is  a 
+  filtering  techniques,  which  model  only  the  most  frequent 
+  process  behaviors,  thus  being  able  to  cut  down                             labelling function, which associates each node with the name of 
+  overgeneralization.  However,  the  application  of  a  filtering                 the  activity  of  the  corresponding  event.  The  problem  with 
+  technique also presents some drawbacks. In particular,  causal                    definition proposed  in  [4]  is  that it does  not take  into  account 
+  relations  of   several  traces  of  the  event  log  are  now  not               the  possible  presence  of  noise  and/or  ßÐirregularßÑ  behaviors, 
+  represented in the model  i.e., they are irregular with respect to                representing  deviations  from  the  expected/desired  process 
+  the  model ,  impacting  negatively  on  the  quality  of  the                    execution.  
+  corresponding  IG.  While  in  loosely  variable  domains  this  can                   When  applied  to  this  kind  of  event  log,  [4]  returns 
+  still be acceptable, since irregular traces can be considered the                 overgeneralizing, highly imprecise IGs, which provide little or 
+  result  of  ßÐwrongßÑ  or  outlier  behaviors,  and  can  then  be                  no  support  to  explore  the  activities  execution  flow.  As  an 
+  discarded,  this  is  not  the  case  with  highly  variable  processes,          example, let us consider the trace ldel Y~I I I I I I[  and let 
+  where  no  execution  can  be  really  targeted  as  wrong  and  then             us build the corresponding IG using the causal relations shown  
+  overlooked,  or  in  the  case  we  like  to  analyze  exactly  those             by  the  Petri  net  in  Figure  1.  Note  that  ldel  does  not  fit  this 
+  outlier behaviors. To address this issue, in BIG the exploitation                 model,  since  the  activity  f  is  missing  i.e.,  there  has  been  a 
+  of  filtering  techniques  is  coupled  with  an  original  technique             deletion . The IG corresponding to ldel  is shown in Figure 2. As 
+  aimed  at  repairing  IG  of  irregular  traces,  thus  providing  the            we  can  see,  we  obtain  a  disconnected  graph,  which  does  not 
+  analyst  with  a  more  complete  and  faithful  knowledge  of  the               allow to understand in which portion of the process the activity 
+  reality registered in the event log.                                              g  is  supposed to  be  executed.  Such  a  representation  is  clearly 
+      In  this  work,  we  describe  BIG4ProM,  a  tool  which                      undesired.  Similar  issues can occur  in case of  inserted  events, 
+  implements  the  BIG  algorithm  and  has  been  developed  as  a                 i.e.  events  occurred  in  positions  not  allowed  by  the  process 
+  plug-in  of  the    Process  Mining  Framework  ProM ,  a  widely                 model. 
+  adopted  open  source  tool,  which  provides  an  extensible 
+  platform  for  the  use  and  the  development  of  process  mining 
+  algorithms  [13].  BIG4ProM  exploits  filtering  PD  algorithms 
+  implemented  in  ProM  in  order  to  return  the  set  of  instance 
+  graphs related to the given event log. The plug-in is conceived 
+  to support both expert and standard users, from the selection of 
+  the PD technique to the visualization of resulting IGs.                                                                                       
+                                                                                                                Figure 2: IGdel 
+                        II.    THE BIG ALGORITHM                                     
+      Given  an  event  log,  the  outcome  of  the  BIG  algorithm                     To  address  these  issues,  the  BIG  algorithm  exploits  a 
+  consists in a set of instance graphs, one for each trace stored in                repairing procedure, aimed at manipulating the IGs to enhance 
+  the  log.  The  algorithm  involves  two  main  steps,  i.e.  an  IG              their  precision.  To  this  end,  first  we  need  to  recognize  which 
+
+
+
+
+                                                                              ONV
+
+
+^    W m~ r~ `~~  m~~~K a~  ^ NPIOMOS ~ NPWOTWMV rq`  fbbb uK o ~K
+)  are the anomalous traces in the event log. This can be done by                        The user has to select if she intends to build repaired or not 
+  means  of  a  conformance  checking  technique,  i.e.  a  technique               repaired  graphs,  by  checking/unchecking  the  ßÐRepair" 
+  devoted to check whether or not an event log fits with a given                    checkbox,  respectively.  Note  without  the  repairing,  the  user 
+  process  model  [12].  These  techniques  allow  us  to  identify  for            obtains  in  outcome  IGs  built  by  applying  the  IG  definition 
+  each irregular IGs the positions and the kinds of the anomalies.                  provided  in  [8].  The  other  parameter  regards  the  technique  to 
+  Then, we apply tailored rules for repairing deleted and inserted                  use  to  derive  the  causal  relation  set.  Currently,  three  Process 
+  events. For deleted events, the repairing consists in identifying                 Discovery techniques can be selected, i.e. the ëÎ-algorithm [14], 
+  events which should have been connected to the deleted event                      the  Heuristic  Miner  [15]  and  the  infrequent  Inductive  Miner 
+  and  properly  connecting  them.  For  the  insertion  repairing,  we             [16].  
+  have  to change the edges connecting  the  nodes corresponding 
+  to the event s  before and the event s  after the inserted event, 
+  to  connect  such  nodes  with  the  node  corresponding  to  the 
+  inserted event in the graph. Figure 3 shows the repaired IG for 
+  ldel.  More  details  on  the  BIG  algorithm  and  examples  are 
+  provided in [11].  
+
+
+
+
+                                                                                                                                                               
+                         Figure 3: repaired IGdel                                    Figure 5: starting windows of BIG4Prom plugin variants 
+                                                                                         
+                                                                                        On  the  basis  of  the  user s  choice,  the  ProM  plug-in 
+                              III.  BIG4PROM                                        implementing  the  selected  technique  is  invoked,  using  its 
+       We have implemented the BIG algorithm above delineated                       default configuration. Note that in order to repair the graph, the 
+  as a plug-in of the Process Mining Framework  ProM . Due to                       BIG  algorithm  also  requires  to  test  the  conformance  of  the 
+  its  plug-in  architecture,  the  implementation  of  new  algorithms             event log with respect to the mined process model. To this end, 
+  and their integration within the framework is quite straight.                     our  plug-in  exploits  the    PNetReplayer  plug-in,  implementing 
+                                                                                    the  conformance  checking  technique  presented  in  [12].  Note 
+      Figure 4 shows the starting window of the plug-in.                            that the call to the PNetReplayer is performed automatically by 
+                                                                                    the plug-in, without requiring any user s action. 
+                                                                                         The  variant  of  the  plug-in  discussed  so  far  makes  most  of 
+                                                                                    the  IGs  building  process  transparent  for  the  user.  Indeed,  the 
+                                                                                    user  has  only  to  load  the  event  log  to  analyze,  without 
+                                                                                    configuring  neither  possible  parameters  of  Process  Discovery 
+                                                                                    techniques,  nor  the  conformance  checking  plug-in.  However, 
+                                                                                    some  users  e.g.,  expert  users   can  require  more  freedom  in 
+                                                                                    selecting  Process  Discovery  or  conformance  checking 
+                                                                                    techniques, as well as in parameters configuration. These users 
+                                                                                    can  exploit  the  other  variant  of  the  BIG4ProM  plugin,  which 
+                                                                                    allows them to use a their own process model and conformance 
+                                                                                    checking results. In this regard, it should be noted that, despite 
+   Figure 4: starting windows of BIG4Prom plugin variants                           our approach is not constrained to a specific Process Discovery 
+                                                                                    technique, the current implementation of our plug-in requires to 
+      As  usual  for  ProM  plug-ins,  in  the  left  side  are  listed  the        use  Petri  nets  as  process  model  formalism.  Furthermore,  our 
+  required  inputs,  while  in  the  right  side  there  are  the  expected         plug-in expects the results of the conformance checking to have 
+  outputs. As we can note, there are two variants of the plug-in;                   the  same  format  of  the  PNetReplayer  outcome.  Therefore,  if 
+  the first one, that is the one highlighted in the figure, requires                the  user  intends  to  use  a  different  conformance  checking 
+  an  event  log,  a  Petri  net  and  the  results  of  a  Conformance             technique, she has to check that the outcome fits the expected 
+  Checking  technique.  The  other  variant,  listed  immediately                   format.  We  would  like  to  point  out  that  using  this  variant  the 
+  below the first one, requires only the event log. In both cases,                  user has only to set if repair or not repair the graphs; hence, the 
+  the output consists in an Instance Graphs set. In the following                   configuration window is simpler than the one shown in Figure 
+  we discuss the second variant, that is intended for the standard                  5, i.e. it shows only the ßÐRepairingßÑ checkbox. 
+  users, while the other is more intended for expert users. As the 
+                                                                                        Figure  6  shows  an  example  of  an  Instance  Graphs  set 
+  user  started  the  plug-in,  a  configuration  window  is  displayed, 
+                                                                                    visualized by  ProM.  User  can  select  the  graph  to  visualize by 
+  as shown in Figure 5. 
+                                                                                    using the left panel, which lists all the IGs ids, corresponding to 
+                                                                                    the order of the corresponding trace in the event log. 
+
+
+
+                                                                              OOM
+
+
+^    W m~ r~ `~~  m~~~K a~  ^ NPIOMOS ~ NPWOTWMV rq`  fbbb uK o ~K
+)       
+
+
+
+
+                                                                                                                                                                                
+                                                                               
+                                                         The Figure 6: Instance Graphs visualization 
+       
+       
+       For example, the IG with id 1 corresponds to the first trace                         [7]  C. Diamantini, D. Potena, and E. Storti. ßÐMining usage patterns from a 
+  in  the  log.  By  selecting  an  IG  id,  in  the  central  panel  it  is                      repository  of  scientific  workflowsßÑ.  In  Proceedings  of  the  27th  Annual 
+                                                                                                  ACM Symposium on Applied Computing, pp. 152-157, ACM, 2012. 
+  displayed  the  corresponding  IG.  For  each  node  the  plugin 
+                                                                                            [8]  B.  van  Dongen,  and  W.  van  der  Aalst,  ßÐMulti-phase  Process  mining: 
+  displays  the  name  of  the  activity  and  its  position  in  the                             Building  Instance  GraphsßÑ,  in  :  Atzeni,  P.,  Chu,  W.,  Lu,  H.,  Zhou,  S., 
+  corresponding  trace.  The  user  can  adjust  the  position  of  the                           Ling,  T.  eds.   Conceptual  Modelling-ER  2004,  LNCS,  vol  3288,  pp. 
+  nodes on the basis of her needs. Besides visualizing the graphs                                 362-376, Springer Berlin Heidelberg, 2004 
+  set, the plugin also exports each graph as a single dot file. This                        [9]  H.  de  Man,  ßÐCase  management:  A  review  of  modeling  approachesßÑ, 
+  is useful in order to visualize and use the generated IGs outside                               BPTrends,  URL:  http://www.ww.bptrends.com/publicationfiles/01-09-
+  ProM.                                                                                           ART--20Case%20Management-1-DeMan.%20doc--final.pdf,  January, 
+                                                                                                  2009.  Last Access: 16/09/2015. 
+                                                                                            [10]  M. Rovani, F. Maggi, M. De Leoni, and W. van der Aalst, ßÐDeclarative 
+                                   REFERENCES                                                     process mining in healthcareßÑ. Expert System with Applications, 42 , pp  
+                                                                                                  9236-9251, 2015.  
+                                             
+  [1]  S.  Suriadi,  C.  Ouyang,  W.  van  der  Aalst,  and  A.ter  Hofstede,  ßÐEvent       [11]  C.  Diamantini,  L.  Genga,  D.  Potena,  and  W.  van  der  Aalst,  ßÐBuilding 
+       interval  analysis:  Why  do  processes  take  time?ßÑ,  Decision  Support                  instance  graphs  for  highly  variable  processesßÑ,  Expert  System  With 
+       Systems, 79 , pp 77-98, 2015.                                                              Applications, vol 59, pp 101-118, 2016. 
+  [2]  W.  van  der  Aalst,  Process  Mining:  Discovery,  Conformance  and                 [12]  A.  Adriansyah,  F.  Boudewijn,  and  W.  van  der  Aalst,  ßÐConformance 
+       Enhancement of Business Processes. Springer, 2011.                                         checking using  cost-based fitness analysis,ßÑ in: 15th IEEE  International 
+                                                                                                  Enterprise Distributed Object Computing Conference, pp. 55-64,  IEEE, 
+  [3]  X. Lu, D. Fahland, and W. van der Aalst, ßÐConformance checking based                       2011. 
+       on  partially  ordered  event  dataßÑ,  in:  F.  Fournier,  J.  Mendling  Eds. , 
+       Business Process Management Workshops, LNBIP, vol 202, pp. 75-88.                    [13]  B.  Van  Dongen,  et  al,  "The  ProM  framework:  A  new  era  in  process 
+       Springer International Publishing, 2015.                                                   mining tool support.", in: Applications and Theory of Petri Nets, pp 444-
+                                                                                                  454, Springer Berlin Heidelberg, 2005. 
+  [4]  N.  van  Beest,  M.  Dumas,  L.  Garcia-Banuelos,  and  M.  La  Rosa,    ßÐLog 
+       delta analysis: Interpretable differencing of business process event logsßÑ,          [14]  W.  van  der  Aalst,  T.  Weijters,  and  L.  Maruster.  "Workflow  mining: 
+       in:  H.  R.  Motahari-Nezhad,  J.  Recker,  M.  Weidlich  Eds. ,  Business                 Discovering  process  models  from  event  logs.",  Knowledge  and  Data 
+       Process  Management,  LNCS,  vol  9253,  pp.  386-405,  Springer                           Engineering, IEEE Transactions on, vol 16, pp 1128-1142, 2004. 
+       International Publishing, 2015.                                                      [15]  S.  Leemans,  D.  Fahland,  and  W.  van  der  Aalst,  ßÐDiscovering  process 
+  [5]  C. Diamantini, L. Genga, and D. Potena, ßÐBehavioral process mining for                     models  from  event  logs  containing  infrequent  behaviourßÑ,  in:  N. 
+       unstructured processesßÑ, Journal of  Intellingent Information System, pp                   Lohmann,  M.  Song,  P.  Wohed  Eds. ,  Business  Process  Management 
+       1-28, 2016.                                                                                Workshops,  LNBIP,  vol  171,  pp.  66-78,  2014,  Springer  International 
+                                                                                                  Publishing. 
+  [6]  C.  Diamantini,  L.  Genga,  D.  Potena,  and  E.  Storti,  ßÐPattern  discovery 
+       from innovation processesßÑ, in: Collaboration Technologies and Systems               [16]  A.  Weijters,  W.  van  der  Aalst  and  A.  De  Medeiros,  ßÐProcess  mining 
+        CTS , 2013 International Conference on, pp. 457-464, 2013, IEEE.                          with  the  heuristics  miner-algorithm,ßÑ  Technische  Universiteit 
+                                                                                                  Eindhoven, Tech. Rep. WP 166, pp 1-34, 2006. 
+                                                                                             
+
+   
+
+
+
+
+                                                                                      OON
+
+
+^    W m~ r~ `~~  m~~~K a~  ^ NPIOMOS ~ NPWOTWMV rq`  fbbb uK o ~K
+)
