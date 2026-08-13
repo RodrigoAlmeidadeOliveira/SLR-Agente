@@ -1,0 +1,2 @@
+detected_at,review_id,issue_type,details,action_taken,local_pdf_path_before,local_pdf_path_after
+2026-08-13T12:40:48Z,ft_0136,duplicate_pdf_wrong_match,"ft_0136 shared MD5 66ef2b9369ec2422b778d044ad74ebe9 with ft_0095 (Jiang et al. ICSESS 2015). Expected Nigro et al. 2019 (DOI 10.1007/978-981-15-0637-6_5), not OA.",moved duplicate to bad_match/; cleared local_pdf_path for ft_0136,results/human_validation/ft_pdfs_local/ok/ft_0136_formal_modeling_and_analysis_of_probabilistic_real_t.pdf,

@@ -1,0 +1,77 @@
+Third-rater QA/extraction — sanity report (2026-08-13)
+======================================================
+
+Deliverable
+-----------
+results/human_validation/third_rater_qa_extraction.csv
+  108 rows (all LLM-included papers with local PDF in ft_pdfs_local/ok/)
+  19 columns: review_id, QA1–QA8, qa_total, qa_notes, + 8 extraction fields
+
+Source batches (archived)
+-------------------------
+results/human_validation/third_rater_batches/
+  batch_00.json + batch_01.csv … batch_08.csv (12 papers each)
+
+Merge command
+-------------
+python -m pipeline.merge_third_rater
+
+Validation (all passed)
+-----------------------
+- 108 unique review_id values
+- All rows have exactly 19 expected columns
+- qa_total = sum(QA1..QA8) for every row
+- QA1..QA8 ∈ {0,1} for every row
+
+qa_total distribution (third rater)
+-----------------------------------
+  1:   2 papers
+  2:   8 papers
+  3:  14 papers
+  4:   9 papers
+  5:  31 papers
+  6:  26 papers
+  7:  15 papers
+  8:   3 papers
+
+Papers with qa_total ≤ 2 (likely position/tutorial/incomplete extractions)
+--------------------------------------------------------------------------
+ft_0002, ft_0169, ft_0094, ft_0050, ft_0103, ft_0068, ft_0134, ft_0112,
+ft_0009, ft_0138
+
+Data integrity flags (manual follow-up recommended)
+---------------------------------------------------
+1. DUPLICATE PDF (same MD5, different catalog titles):
+   - ft_0095  "Model-driven safety modeling and analysis of embedded parallel software"
+   - ft_0136  "Formal modeling and analysis of probabilistic real-time systems"
+   Both point to the same file (MD5 66ef2b93…). The extracted text is the
+   AADL/FMEA/Markov-chain safety paper (Jiang et al.), not a probabilistic
+   real-time systems paper. ft_0136 rating in batch_07 reflects the actual PDF
+   content and flags the title mismatch in qa_notes.
+
+2. GARBLED TEXT EXTRACTION (decoded/heuristic read):
+   - ft_0069: font-encoding cipher (+29 ASCII shift decode applied)
+   - ft_0044: severe font-encoding corruption; rating based on abstract/tables
+   - ft_0135: scanned technical report, OCR noise in equations
+
+3. BORDERLINE SLR INCLUSIONS (flagged in qa_notes by third rater):
+   - ft_0059: ARCH-COMP25 cyber-physical verification benchmark (not SE)
+   - ft_0069: CEP+ML for financial trading (not PM/stochastic SE)
+   - ft_0092, ft_0082: MSR/fault-injection studies without PM/stochastic technique
+
+4. NOT IN FT SAMPLE ANSWER KEY (expected — different sampling frame):
+   - ft_0177, ft_0178 are in the 108-PDF corpus but outside the 177-row
+     ft_sample_20pct.csv used for human double-screening.
+
+5. PDF CATALOG FIX (2026-08-13):
+   - ft_0095/ft_0136 duplicate resolved: wrong copy moved to
+     ft_pdfs_local/bad_match/ft_0136_WRONG_DUPLICATE_OF_ft_0095.pdf
+   - ft_0136 local_pdf_path cleared (correct Nigro et al. chapter not OA)
+   - See ft_pdf_catalog_issues.csv and scripts/fix_ft_0095_0136_pdf_catalog.py
+
+Overlap with primary LLM answer key (informational only)
+--------------------------------------------------------
+106/108 third-rater papers appear in ft_qa_extraction_answer_key.csv.
+25 have LLM QA scores (LLM-included ∩ local-PDF corpus).
+Full comparison: python -m pipeline.third_rater_kappa
+  → third_rater_vs_llm_report.txt

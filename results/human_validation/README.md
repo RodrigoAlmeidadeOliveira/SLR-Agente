@@ -85,7 +85,37 @@ Extração de dados:
   `results/auxiliary/extraction_combined_381.csv` para exemplos de granularidade
   esperada, SEM abrir a linha correspondente a este paper).
 
-## 3. Depois de preencher tudo
+## 3. Third-rater QA/extraction (108 papers com PDF local, 2026-08-13)
+
+Avaliação independente adicional (QA1–QA8 + extração) sobre os **108 papers
+LLM-included com PDF em `ft_pdfs_local/ok/`**, lida em texto completo
+(`pdftotext -layout`, com fallback OCR quando necessário).
+
+| Artefato | Descrição |
+|----------|-----------|
+| `third_rater_qa_extraction.csv` | CSV consolidado (108 linhas) |
+| `third_rater_batches/` | Lotes individuais (`batch_00.json` … `batch_08.csv`) |
+| `third_rater_sanity_report.txt` | Validação, distribuição qa_total, flags de qualidade |
+
+Regenerar o CSV consolidado:
+
+```
+python -m pipeline.merge_third_rater
+```
+
+Comparar third-rater vs LLM primário (106 papers com answer key):
+
+```
+python -m pipeline.third_rater_kappa
+```
+
+Saída: `third_rater_vs_llm_report.txt` / `.tex`
+
+Ver `third_rater_sanity_report.txt` para flags conhecidos (PDF duplicado
+ft_0095/ft_0136 — corrigido em `ft_pdf_catalog_issues.csv`, extrações corrompidas,
+possíveis falsos positivos de inclusão).
+
+## 4. Depois de preencher tudo (double-screening humano)
 
 ```
 python -m pipeline.human_kappa --compute
