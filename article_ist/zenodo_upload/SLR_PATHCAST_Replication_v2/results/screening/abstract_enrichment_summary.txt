@@ -1,0 +1,12 @@
+SLR PATHCAST — Abstract Enrichment Summary
+==================================================
+Queue total: 886
+With abstract: 648
+Without abstract: 238
+
+By source:
+  preexisting_or_unknown: 642 (99.07%)
+  core: 5 (0.77%)
+  manual_scopus: 1 (0.15%)
+
+CSV detail: results/screening/abstract_enrichment_summary.csv

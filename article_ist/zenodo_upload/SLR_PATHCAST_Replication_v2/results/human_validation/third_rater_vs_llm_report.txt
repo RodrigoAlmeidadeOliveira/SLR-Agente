@@ -1,0 +1,61 @@
+SLR PATHCAST — Third-rater vs Primary LLM Agreement Report
+==============================================================
+Primary rater (rater 1): claude-haiku-4-5-20251001 (answer key)
+Third rater:             independent QA/extraction pass (108-PDF corpus)
+
+Overlap with answer key: 106 papers
+  LLM ft_decision=include: 25
+  LLM ft_decision=exclude: 81
+
+[QA/extraction comparison base] n=26 papers with LLM QA scores
+(LLM-included papers in the 20% FT sample that also have local PDFs)
+
+Per-criterion agreement (third vs LLM, binary 0/1):
+  QA1: Po=100.0%  kappa=nan (almost perfect)  n=26
+  QA2: Po=96.2%  kappa=0.000 (slight)  n=26
+  QA3: Po=73.1%  kappa=0.295 (fair)  n=26
+  QA4: Po=73.1%  kappa=0.235 (fair)  n=26
+  QA5: Po=84.6%  kappa=-0.061 (poor (worse than chance))  n=26
+  QA6: Po=65.4%  kappa=0.225 (fair)  n=26
+  QA7: Po=92.3%  kappa=-0.040 (poor (worse than chance))  n=26
+  QA8: Po=76.9%  kappa=0.418 (moderate)  n=26
+
+qa_total: exact match 34.6%, MAE=1.15 (n=26)
+qa_include (third: qa_total>=4 vs LLM qa_include): Po=80.8%, kappa=-0.102 (poor (worse than chance)) n=26
+
+[Extraction] normalized exact-match agreement:
+  research_question: 0.0% (n=26)
+  study_type: 53.8% (n=26)
+  pm_technique: 26.9% (n=26)
+  stochastic_technique: 80.8% (n=26)
+  software_process: 7.7% (n=26)
+  dataset_source: 61.5% (n=26)
+  main_finding: 0.0% (n=26)
+  limitations: 0.0% (n=26)
+
+[Largest qa_total disagreements] (third - LLM):
+  ft_0169: third=2 LLM=7 diff=-5 | An integrated infrastructure using process mining techniques for softw
+  ft_0176: third=6 LLM=3 diff=+3 | An exploratory study of process enactment as input to software process
+  ft_0168: third=6 LLM=3 diff=+3 | Process mining framework for software processes
+  ft_0150: third=6 LLM=4 diff=+2 | Nirikshan: Process Mining Software Repositories to Identify Inefficien
+  ft_0155: third=6 LLM=4 diff=+2 | Kanban and Process Mining in the Task Management
+  ft_0172: third=4 LLM=2 diff=+2 | Mining Software Process Lines
+  ft_0148: third=3 LLM=5 diff=-2 | An Intelligent Methodology to Enhance Requirements Engineering in Mult
+  ft_0171: third=6 LLM=4 diff=+2 | The economic impact of software process variations
+  ft_0156: third=5 LLM=4 diff=+1 | Supporting software evolution actions with process mining
+  ft_0170: third=5 LLM=4 diff=+1 | Monte Carlo simulation based estimations: Case from a global outsourci
+  ft_0164: third=5 LLM=4 diff=+1 | Intervention of knowledge flows in software process mining projects
+  ft_0149: third=7 LLM=6 diff=+1 | Automatic Real-Time Mining Software Process Activities From SVN Logs U
+
+[All 106 papers] third-rater qa_total distribution:
+  qa_total=1: 2
+  qa_total=2: 8
+  qa_total=3: 14
+  qa_total=4: 8
+  qa_total=5: 30
+  qa_total=6: 26
+  qa_total=7: 15
+  qa_total=8: 3
+
+Interpretation thresholds (Landis & Koch 1977):
+  <0.00 poor | 0-0.20 slight | 0.21-0.40 fair | 0.41-0.60 moderate | 0.61-0.80 substantial | >0.80 almost perfect

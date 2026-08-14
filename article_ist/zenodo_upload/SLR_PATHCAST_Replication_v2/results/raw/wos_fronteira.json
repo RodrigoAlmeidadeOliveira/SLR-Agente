@@ -1,0 +1,29 @@
+[
+  {
+    "internal_id": "77d1f815",
+    "source_db": "wos",
+    "source_query_id": "wos_fronteira",
+    "source_query_label": "WoS Fronteira",
+    "doi": "",
+    "title": "The economic impact of software process variations",
+    "authors": [
+      "Deissenboeck, Florian",
+      "Pizka, Markus"
+    ],
+    "year": 2007,
+    "abstract": "The economic benefit of a certain development process or particular\nactivity is usually unknown and indeed hard to predict. However, the\ncost-effectiveness of process improvements is of paramount importance\nand the question how profitable certain activities are needs to be\nanswered. Within a large-scale commercial organization, we were\nchallanged with the task to quantify the economic benefit of isolated\ntest and development environments. To answer this question we defined a\ngeneric process model based on absorbing Markov chains that allows to\nanalyze the economic benefit of software process variations. This model\nexposes conflicts between process steps and reiterations of development\nactivities and thereby provides a highly flexible tool for the\ninvestigation of the effects of changes to a development process on its\noverall performance. This model was used to predict the impact of\nisolated testing on the overall effort and duration of projects at BMW.\nThe results obtained correspond well with the perception of experienced\ndevelopers and gives a detailed explanation for the effects. Besides\nthis, it can be used to analyze various other economic aspects of\nsoftware development processes and yields an interesting alternative for\ncost estimation.",
+    "venue": "SOFTWARE PROCESS DYNAMICS AND AGILITY, PROCEEDINGS",
+    "doc_type": "conference paper",
+    "language": "English",
+    "keywords": [],
+    "url": "",
+    "volume": "4470",
+    "issue": "",
+    "pages": "259+",
+    "publisher": "",
+    "is_duplicate": false,
+    "duplicate_of": "",
+    "qа_score": null,
+    "selected": null
+  }
+]

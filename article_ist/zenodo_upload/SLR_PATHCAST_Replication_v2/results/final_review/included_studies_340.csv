@@ -1,0 +1,397 @@
+seq,internal_id,year,authors,title,doi,origin,source_db,ic,qa_total,qa_include
+1,dd71433d,1991,,VALIDATION AND VERIFICATION OF SOFTWARE PROCESS MODELS,,Aux1,wos,IC2,5.0,True
+2,37385fbd,1992,,SOFTWARE PROCESS VALIDATION BASED ON FUNSOFT NETS,,Aux1,wos,IC2,3.0,False
+3,87bce30b,1995,"Cook, Jonathan E.; Wolf, Alexander L.",Automating Process Discovery through Event-Data Analysis,10.1145/225014.225021,WS,ieee,IC1|IC2,2.0,False
+4,6d68591e,1996,,Process discovery and validation through event-data analysis,,Aux1,snowball,IC1,3.0,False
+5,50144afd,1997,,Software-Engineering Process Simulation model (SEPS),10.1016/S0164-1212(96)00156-2,Aux1,wos,IC2|IC3,3.0,False
+6,07e55287,1998,"Cook, Jonathan E.; Wolf, Alexander L.",Discovering Models of Software Processes from Event-Based Data,10.1145/287000.287001,WS,acm,IC1|IC2,4.0,True
+7,3f8fd941,1998,,"Using software process simulation to assist software development
+organizations in making good enough quality decisions",,Aux1,wos,IC2|IC3,4.0,True
+8,f453a92f,1999,,A net practice for software project management,10.1109/52.805479,Aux2,,IC2,2.0,False
+9,d044ef55,1999,,Experience with software process simulation and modeling,10.1016/S0164-1212(99)00011-4,Aux1,wos,IC2,3.0,False
+10,afd1b7aa,1999,,Software process simulation for reliability management,10.1016/S0164-1212(99)00010-2,Aux1,wos,IC2|IC3,5.0,True
+11,66d00b19,1999,,Software process simulation modeling: Why? What? How?,10.1016/S0164-1212(99)00003-5,Aux1,wos,IC2|IC3,3.0,False
+12,eb05417e,1999,,Software process simulation to achieve higher CMM levels,10.1016/S0164-1212(99)00009-6,Aux1,wos,IC2,5.0,True
+13,eb526806,1999,,Software process validation,10.1145/304399.304401,Aux1,snowball,IC1,4.0,True
+14,f06ebc31,2000,,A model of the software development process using both continuous and discrete models,10.1002/1099-1670(200006/09)5:2/3<147::aid-spip122>3.0.co;2-t,Aux1,snowball,IC2,5.0,True
+15,9c255853,2000,Raffo D.M.,Empirical analysis in software process simulation modeling,10.1016/S0164-1212(00)00006-6,WS,scopus,IC2,6.0,True
+16,ab16b112,2000,Walton G.H.,"Generating transition probabilities to support model-based software
+testing",10.1002/1097-024X(200008)30:10<1095::AID-SPE328>3.0.CO;2-H,Aux1,wos,IC2,3.0,False
+17,46287754,2000,,Using Simulation to Visualise and Analyse Product-Process Dependencies in Software Development Projects,10.1007/978-3-540-45051-1_11,Aux2,,IC2|IC3,7.0,True
+18,a4f13cb1,2000,,"Using simulation to analyse the impact of software requirement
+volatility on project performance",10.1016/S0950-5849(00)00152-X,Aux1,wos,IC2|IC3,4.0,True
+19,da2f44fa,2001,,A simplified model of software project dynamics,10.1016/S0164-1212(01)00070-X,Aux1,wos,IC2|IC3,4.0,True
+20,8ae72547,2001,Stutzke M.A.,"A stochastic model of fault introduction & removal during software
+development",10.1109/24.963126,Aux1,wos,IC2|IC3,6.0,True
+21,50dda3a0,2001,,"Application of a hybrid process simulation model to a software
+development project",10.1016/S0164-1212(01)00065-6,Aux1,wos,IC2|IC3,4.0,True
+22,b48dde83,2001,,"Behavioral characterization: finding and using the influential factors
+in software process simulation models",10.1016/S0164-1212(01)00067-X,Aux1,wos,IC2,6.0,True
+23,39e47477,2001,,"Exploring bottlenecks in market-driven requirements management processes
+with discrete event simulation",10.1016/S0164-1212(01)00072-3,Aux1,wos,IC2|IC3,7.0,True
+24,4155a4da,2001,,Hybrid simulation modelling of the software process,10.1016/S0164-1212(01)00064-4,Aux1,wos,IC2,5.0,True
+25,f33d3c89,2001,,Software maintenance process analysis using discrete-event simulation,10.1109/CSMR.2001.914986,Aux1,ieee,IC2,5.0,True
+26,839d520d,2001,,"Stochastic simulation of risk factor potential effects for software
+development risk management",10.1016/S0164-1212(01)00066-8,Aux1,wos,IC2|IC3,3.0,False
+27,883e1702,2002,,A discrete simulation model for assessing software project scheduling policies,10.1002/spip.160,Aux1,snowball,IC2|IC3,4.0,True
+28,b75d202e,2002,,A dynamic integrated framework for software process improvement,10.1023/A:1020580008694,Aux1,wos,IC2|IC3,4.0,True
+29,0b759736,2002,,"A method for modeling and evaluating software maintenance process
+performances",10.1109/CSMR.2002.995786,Aux1,wos,IC2,4.0,True
+30,ad4f84a7,2002,,Simulation-based risk reduction for planning inspections,,Aux1,wos,IC2|IC4,4.0,True
+31,b1aabe94,2002,,"Using process simulation to compare scheduling strategies for software
+projects",10.1109/APSEC.2002.1183094,Aux1,wos,IC2|IC3,6.0,True
+32,78969f65,2003,,Decision support for using software inspections,10.1109/SEW.2003.1270720,Aux1,ieee,IC2,3.0,False
+33,39157e2c,2003,,Simulating human resources in software development processes,,Aux1,wos,IC2,3.0,False
+34,6e4114dc,2003,,"Using empirical knowledge from, replicated experiments for software
+process simulation:: A practical example",10.1109/ISESE.2003.1237961,Aux1,wos,IC2|IC3,7.0,True
+35,58996946,2004,,A comprehensive simulation study on optimal scheduling for software projects,10.1049/ic:20040457,Aux1,snowball,IC2,6.0,True
+36,96767878,2004,Gokhale S.S.,Analysis of software fault removal policies using a non-homogeneous continuous time Markov chain,10.1023/B:SQJO.0000034709.63615.8b,WS,scopus,IC2,1.0,False
+37,64c03c8d,2004,,Assessing staffing needs for a software maintenance project through queuing simulation,10.1109/tse.2004.1265735,Aux1,snowball,IC2|IC3,7.0,True
+38,ab99a53e,2004,,Data mining for software process discovery in open source software development communities,10.1049/ic:20040484,Aux1,snowball,IC1|IC4,3.0,False
+39,3c810db6,2004,Padberg F.,Linking software process modeling with Markov decision theory,,WS,scopus,IC2,4.0,True
+40,c9512bbb,2004,,"Using simulation to facilitate the study of software product line
+evolution",10.1109/IWPSE.2004.1334774,Aux2,,IC2|IC3,5.0,True
+41,b37c10c1,2004,,Using software process simulation to assess the impact of IV&amp;V activities,10.1049/ic:20040459,Aux1,snowball,IC2|IC3,6.0,True
+42,2fbf6d36,2005,,Computing Optimal Scheduling Policies for Software Projects,10.1109/apsec.2004.39,Aux1,snowball,IC2|IC3,5.0,True
+43,3cc5a1cb,2005,,Coordinate metrics and process model to manage software project risk,10.1109/iemc.2004.1407505,Aux1,snowball,IC2,3.0,False
+44,a20e7c58,2005,Tian L.,Modeling distributed software defect removal effectiveness in the presence of code churn,10.1016/j.mcm.2004.10.021,WS,scopus,IC2|IC3,5.0,True
+45,5b51a065,2005,,SIMULATION-BASED SOFTWARE PROCESS MODELING AND EVALUATION,10.1142/9789812775245_0012,Aux1,snowball,IC2,4.0,True
+46,557b4102,2005,,Scheduling software projects to minimize the development time and cost with a given staff,10.1109/apsec.2001.991476,Aux1,snowball,IC2,3.0,False
+47,c94fc209,2005,,"Software project management using PROMPT: A hybrid metrics, modeling and
+utility framework",10.1016/j.infsof.2005.09.004,Aux1,wos,IC2|IC3,5.0,True
+48,df3ad75a,2006,"Huo, Ming; Zhang, He; Jeffery, Ross",A Systematic Approach to Process Enactment Analysis as Input to Software Process Improvement or Tailoring,10.1109/APSEC.2006.14,WS,ieee,IC1|IC4,3.0,False
+49,8888cfdc,2006,,A study on optimal scheduling for software projects,10.1002/spip.254,Aux1,snowball,IC2,6.0,True
+50,48e69187,2006,,Activity mining for discovering software process models,,Aux1,snowball,IC1|IC4,3.0,False
+51,cdf1f104,2006,Huo M.,An exploratory study of process enactment as input to software process improvement,10.1145/1137702.1137711,WS,scopus,IC1|IC4,3.0,False
+52,9f8b9dba,2006,,"Analysis of software-intensive system acquisition using hybrid software
+process simulation",,Aux1,wos,IC2|IC4,3.0,False
+53,be942093,2006,Jensen C.,"Discovering, modeling, and re-enacting open source software development processes: A case study",10.1142/9789812774460_0001,WS,scopus,IC1,4.0,True
+54,8e0eec4d,2006,,Evaluating the impact of test-first programming and pair programming through software process simulation,10.1002/spip.286,Aux1,snowball,IC2|IC3,4.0,True
+55,2c280053,2006,Jensen C.,"Experiences in discovering, modeling, and reenacting open source software development processes",10.1007/11608035_36,WS,scopus,IC1|IC4,5.0,True
+56,7766e7b4,2006,,"Exploring the impact of task allocation strategies for global software
+development using simulation",,Aux1,wos,IC2,5.0,True
+57,53434e77,2006,,"Modeling and simulation of open source development using an agile
+practice",10.1016/j.sysarc.2006.06.005,Aux1,wos,IC2|IC4,6.0,True
+58,ae4f4926,2006,Li X.M.,Modeling uncertainties involved with software development with a stochastic Petri net,10.1111/j.1468-0394.2006.00411.x,WS,scopus,IC2,4.0,True
+59,dbcd2435,2006,,On the Potential of Process Simulation in Software Project Schedule Optimization,10.1109/compsac.2005.115,Aux1,snowball,IC2|IC3,3.0,False
+60,b5b1402b,2006,Siri-on Setamanit; Wayne Wakeland; David Raffo,Planning and improving global software development process using simulation,10.1145/1138506.1138510,Aux1,snowball,IC2|IC3,3.0,False
+61,c3683c28,2006,,"Project replayer - An investigation tool to revisit processes of past
+projects",,Aux1,wos,IC1|IC4,4.0,True
+62,d50fcf26,2006,,SIMKIT – a software process simulation model construction kit in support of empirical research,,Aux2,,IC2,4.0,True
+63,416c979c,2006,,Semi-quantitative simulation modeling of software engineering process,,Aux1,wos,IC2|IC3,6.0,True
+64,836b5ef0,2006,,Simulation-based stability analysis for software release plans,,Aux1,wos,IC2|IC3,5.0,True
+65,ec94ba4d,2006,,Spiral lifecycle increment modeling for new hybrid processes,,Aux1,wos,IC2|IC3,4.0,True
+66,747fc068,2007,,"A project management approach to using simulation for cost estimation on
+large, complex software development projects",10.1080/10429247.2007.11431746,Aux1,wos,IC2|IC3,6.0,True
+67,3ddbfd94,2007,Rubin V.,Process mining framework for software processes,10.1007/978-3-540-72426-1_15,WS,scopus,IC1,3.0,False
+68,d7b22f54,2007,Yin R.,Quantitative analysis of value-based software processes using decision-based stochastic object petri-nets,10.1109/APSEC.2007.78,WS,scopus,IC2,3.0,False
+69,ac05d867,2007,,Software Process Dynamics,10.1002/9780470192719,Aux1,snowball,IC2,3.0,False
+70,e9a40e7a,2007,Deissenboeck F.,The economic impact of software process variations,10.1007/978-3-540-72426-1_22,WS,scopus,IC2,4.0,True
+71,9870248b,2007,,Using Simulation to Evaluate the Impact of New Requirements Analysis Tools,10.1109/PICMET.2007.4349581,Aux1,ieee,IC2,4.0,True
+72,0fcd5ece,2008,Ferreira F.M.L.,A method for stochastic modeling the software development process in constrained resource environments,10.1109/SIEDS.2008.4559698,WS,scopus,IC2,3.0,False
+73,1637d1d9,2008,,ANOMALY DETECTION ALGORITHMS IN BUSINESS PROCESS LOGS,,Aux1,wos,IC1,5.0,True
+74,e080b18d,2008,,"DEFINING THE IMPLEMENTATION ORDER OF SOFTWARE PROJECTS IN UNCERTAIN
+ENVIRONMENTS",,Aux1,wos,IC2|IC3,5.0,True
+75,deae809b,2008,David P.A.,"Dynamics of innovation in an ``open source″ collaboration
+environment: lurking, laboring, and launching FLOSS projects on
+SourceForge",10.1093/icc/dtn026,Aux1,wos,IC2|IC4,7.0,True
+76,863bae01,2008,,"GENSIM 2.0: A customizable process simulation model for software process
+evaluation",,Aux1,wos,IC2|IC3,6.0,True
+77,b8b834e2,2008,,Hybrid modeling of test-and-fix processes in incremental development,,Aux1,wos,IC2,5.0,True
+78,5c43edc7,2008,,"Identifying key success factors for Globally Distributed Software
+Development project using simulation: A case study",,Aux1,wos,IC2|IC3,7.0,True
+79,2fb4f513,2008,Ravishanker N.,NHPP models with Markov switching for software reliability,10.1016/j.csda.2008.01.010,Aux1,wos,IC2,5.0,True
+80,40bc718e,2008,Deissenboeck F.,Probabilistic analysis of process economics,10.1002/spip.362,WS,scopus,IC2,6.0,True
+81,3c0dd1ad,2008,,"RVSim: A simulation approach to predict the impact of requirements
+volatility on software project plans",,Aux1,wos,IC2|IC3,4.0,True
+82,7e6b3f9f,2008,"Cruz, John Igor B. da; Ruiz, Duncan",Uma Experiência em Mineração de Processos de Manutenção de Software,10.1145/1809980.1810047,WS,acm,IC1,3.0,False
+83,70af8211,2009,,A Process Optimization Method Based on Process Performance Models,10.1109/ICMSS.2009.5303022,Aux1,ieee,IC2|IC3,3.0,False
+84,917f238d,2009,"Akman, Burcu; Demirörs, Onur",Applicability of Process Discovery Algorithms for Software Organizations,10.1109/SEAA.2009.87,WS,ieee,IC1,5.0,True
+85,ee5ccaa2,2009,Šamalíková J.,Discovering changes of the change control board process during a software development project using process mining,10.1007/978-3-642-04133-4_11,WS,scopus,IC1,4.0,True
+86,fc8f325d,2009,,"Dynamic project performance estimation by combining static estimation
+models with system dynamics",10.1016/j.infsof.2008.03.001,Aux1,wos,IC2|IC3,7.0,True
+87,e856dbe4,2009,VanHilst M.,Mining objective process metrics from repository data,,WS,scopus,IC1|IC4,5.0,True
+88,b2c57fd3,2009,,Modeling Software Testing Process Using HTCPN,10.1109/FCST.2009.53,Aux1,ieee,IC2|IC3,5.0,True
+89,beb83053,2009,Grottke M.,Modeling and Predicting Software Failure Costs,10.1109/COMPSAC.2009.195,Aux2,,IC2|IC3,6.0,True
+90,008caf63,2009,,Simulation of the defect removal process with queuing theory,10.1109/ESEM.2009.5316005,Aux1,ieee,IC2|IC3,5.0,True
+91,fcc830f6,2009,Ghosh J.,Software development of a globally distributed multicomponent project: A theoretical model and simulations,10.1080/1097198X.2009.10856496,WS,scopus,IC2,7.0,True
+92,3b4591cd,2009,,"Understanding the effects of requirements volatility in software
+engineering by using analytical modeling and software process simulation",10.1016/j.jss.2009.03.014,Aux1,wos,IC2|IC3,5.0,True
+93,ddeca0e6,2009,Thomson C.,Using process mining metrics to measure noisy process fidelity,10.14236/ewic/ease2009.16,WS,scopus,IC1,7.0,True
+94,ba2ff831,2010,Wang Y.,A stochastic model for optimizing the patching time of software bugs,,WS,scopus,IC2,5.0,True
+95,d96a3161,2010,,Are developers complying with the process,10.1145/1852786.1852805,Aux1,snowball,IC1|IC4,5.0,True
+96,0ef6a5b4,2010,,Bayesian Network Based XP Process Modelling,10.5121/ijsea.2010.1301,Aux1,snowball,IC2|IC3,5.0,True
+97,a222ef2c,2010,"Sunindyo, Wikan Danar; Moser, Thomas; Winkler, Dietmar; Biffl, Stefan",Foundations for Event-Based Process Analysis in Heterogeneous Software Engineering Environments,10.1109/SEAA.2010.52,WS,ieee,IC1|IC4,6.0,True
+98,6354fc81,2010,,"Modeling a Resource-Constrained Test-and-Fix Cycle and Test Phase
+Duration",,Aux1,wos,IC2|IC3,5.0,True
+99,bafb58a0,2010,,Process Mining Opportunities for CMMI Assessments,,Aux2,,IC1|IC4,2.0,False
+100,c72f823c,2010,,"Software Development Process Simulation: Multi Agent-Based Simulation
+versus System Dynamics",,Aux1,wos,IC2,4.0,True
+101,c113bf1b,2010,"Hindle, Abram",Software Process Recovery: Recovering Process from Artifacts,10.1109/WCRE.2010.46,WS,ieee,IC1|IC4,4.0,True
+102,7f497573,2010,,Software Process Simulation Modeling: An Extended Systematic Review,10.1007/978-3-642-14347-2_27,Aux2,,IC2|IC3,8.0,True
+103,62936834,2010,,Software process deviation threshold analysis by system dynamics,10.1109/ICIME.2010.5477522,Aux1,ieee,IC2|IC3,4.0,True
+104,26582491,2010,Okamura H.,Software safety assessment based on a subordinated Markov chain,10.1007/s13198-011-0034-0,Aux1,wos,IC2,6.0,True
+105,3476b5db,2010,Al-Emran A.,"Studying the impact of uncertainty in operational release planning - An
+integrated method and its initial evaluation",10.1016/j.infsof.2009.11.003,Aux1,wos,IC2|IC3,6.0,True
+106,57d2445c,2011,,"A Discrete Event Simulation Model to Evaluate Changes to a Software
+Project Delivery Process",10.1109/CEC.2011.19,Aux1,wos,IC2|IC3,7.0,True
+107,266210a7,2011,Dertzbacher J.,A simulation model for process-centered software engineering environments using sensitivity analysis,10.1109/WEIT.2011.21,WS,scopus,IC2,4.0,True
+108,b61ea92e,2011,,Assessing Software Quality Using the Markov Decision Processes,10.1002/hfm.20355,Aux1,snowball,IC2|IC3,4.0,True
+109,4316248d,2011,Da Cruz J.I.B.,Conformance analysis on software development: An experience with process mining,10.1504/IJBPIM.2011.040203,WS,scopus,IC1,6.0,True
+110,f449ac41,2011,Lemos A.,Conformance checking of software development processes through process mining,,WS,scopus,IC1,3.0,False
+111,917d9592,2011,Czekster R.,Follow-the-sun methodology in a stochastic modeling perspective,10.1109/ICGSE-W.2011.26,WS,scopus,IC2,3.0,False
+112,47ed5bf0,2011,Wong S.,Generalizing evolutionary coupling with stochastic dependencies,10.1109/ASE.2011.6100065,Aux1,ieee,IC2|IC4,8.0,True
+113,0de90ff4,2011,,Handling Concept Drift in Process Mining,10.1007/978-3-642-21640-4_30,Aux2,,IC1,6.0,True
+114,2de8a9af,2011,,Handling Estimation Uncertainty with Bootstrapping: Empirical Evaluation in the Context of Hybrid Prediction Methods,10.1109/ESEM.2011.33,Aux1,ieee,IC3,7.0,True
+115,84315802,2011,Dasgupta J.,Monte Carlo simulation based estimations: Case from a global outsourcing company,10.1109/ITMC.2011.5996034,WS,scopus,IC2,4.0,True
+116,51b4ae2b,2011,Fernandes P.,Performance Evaluation of Software Development Teams: A Practical Case Study,10.1016/j.entcs.2011.09.006,WS,scopus,IC2|IC3,4.0,True
+117,7eaf7eb3,2011,,Petri Net Based Simulation for SPI,,Aux1,wos,IC2,4.0,True
+118,c517c93f,2011,"Poncin, Wouter; Serebrenik, Alexander; Brand, Mark van den",Process Mining Software Repositories,10.1109/CSMR.2011.5,WS,ieee,IC1|IC4,5.0,True
+119,c7682ec2,2011,"Duan, Beichen; Shen, Beijun",Software process discovery using link analysis,10.1109/ICCSN.2011.6014218,WS,ieee,IC1|IC4,4.0,True
+120,c24db118,2011,Samalikova J.,Toward objective software process information: Experiences from a case study,10.1007/s11219-010-9105-8,WS,scopus,IC1,5.0,True
+121,d098c91d,2011,"Lemos, Artini M.; Sabino, Caio C.; Lima, Ricardo M. F.; Oliveira, Cesar A. L.",Using process mining in software development process management: A case study,10.1109/ICSMC.2011.6083858,WS,ieee,IC1,5.0,True
+122,9249c6bb,2012,Roy S.,A CSP-Theoretic framework of checking conformance of business processes,10.1109/APSEC.2012.110,WS,scopus,IC1,3.0,False
+123,ca00050f,2012,,"A Comparative Study of Scrum and Kanban Approaches on a Real Case Study
+Using Simulation",,Aux1,wos,IC2|IC4,6.0,True
+124,326da20f,2012,Zhou P.,A stochastic simulation model for risk management process,10.1109/APSEC.2012.12,WS,scopus,IC2,3.0,False
+125,f5151d89,2012,,Agent-based simulation of the software development process: A case study at AVL,10.1109/wsc.2012.6465117,Aux1,snowball,IC2|IC3,7.0,True
+126,ae20e68e,2012,Astromskis S.,Egidio: A non-invasive approach for synthesizing organizational models,10.1109/ICSE.2012.6227062,WS,scopus,IC1,3.0,False
+127,9a84a55d,2012,Pérez-Castillo R.,Improving event correlation for non-process aware information systems,,WS,scopus,IC1,3.0,False
+128,d4601a2f,2012,,Issue handling performance in proprietary software projects,10.1109/MSR.2012.6224282,Aux1,ieee,IC4,5.0,True
+129,66a32124,2012,,Predicting defect numbers based on defect state transition models,10.1145/2372251.2372287,Aux1,ieee,IC2|IC3,6.0,True
+130,ceec0a17,2012,Bihary S.,Process conformance using CSP,10.1145/2134254.2134278,WS,scopus,IC1,3.0,False
+131,bbc13de4,2012,,Process mining application in software process assessment,10.6100/ir739990,Aux1,snowball,IC1|IC4,2.0,False
+132,0c10d633,2012,,Risk-Based Intelligent Software Release Planning,10.1109/UIC-ATC.2012.109,Aux1,ieee,IC2|IC3,3.0,False
+133,23ec55bd,2012,,SHARING LIMITED RESOURCES IN SOFTWARE PROCESS SIMULATIONS,,Aux1,wos,IC2,4.0,True
+134,a3c061ae,2012,,Simulation-Based Management for Software Dynamic Testing Processes,,Aux1,snowball,IC2|IC3,5.0,True
+135,3b614f91,2013,,"Simulation of software maintenance process, with and without a
+work-in-process limit",10.1002/smr.1599,Aux1,wos,IC2|IC3,7.0,True
+136,2a7de581,2014,,"A Model and System for Applying Lean Six Sigma to Agile Software
+Development Using Hybrid Simulation",,Aux1,wos,IC2|IC3,3.0,False
+137,542728fe,2014,,"A Risk Emergency Management Model for Software Project Based on
+Stochastic Petri Nets",,Aux1,wos,IC2,3.0,False
+138,c9cdb64d,2014,Sayiam R.,A process mining approach in Software Development and Testing Process: A case study,,WS,scopus,IC1,5.0,True
+139,e58074e0,2014,"Sebu, Maria Laura; Ciocârlie, Horia",Applied process mining in software development,10.1109/SACI.2014.6840098,WS,ieee,IC1,5.0,True
+140,c8ea828e,2014,,Applied process mining in software development Case Study,,Aux1,wos,IC1,5.0,True
+141,4cff6b4d,2014,,Kashvi: a framework for software process intelligence,,Aux1,snowball,IC1|IC4,2.0,False
+142,829f8c13,2014,"Gupta, Monika; Sureka, Ashish","Nirikshan: Mining Bug Report History for Discovering Process Maps, Inefficiencies and Inconsistencies",10.1145/2590748.2590749,WS,acm,IC1|IC4,7.0,True
+143,d1ed6154,2014,"Gupta, Monika","Nirikshan: Process Mining Software Repositories to Identify Inefficiencies, Imperfections, and Enhance Existing Process Capabilities",10.1145/2591062.2591080,WS,acm,IC1|IC4,4.0,True
+144,1363926c,2014,Honda K.,Predicting release time based on Generalized Software Reliability Model (GSRM),10.1109/COMPSAC.2014.86,WS,scopus,IC2|IC3,3.0,False
+145,1de657c1,2014,"Gupta, Monika; Sureka, Ashish",Process Cube for Software Defect Resolution,10.1109/APSEC.2014.45,WS,ieee,IC1|IC4,6.0,True
+146,3231578f,2014,"Gupta, Monika; Sureka, Ashish; Padmanabhuni, Srinivas",Process Mining Multiple Repositories for Software Defect Resolution from Control and Organizational Perspective,10.1145/2597073.2597081,WS,acm,IC1,6.0,True
+147,6fd30d7e,2014,"Mittal, Megha; Sureka, Ashish",Process Mining Software Repositories from Student Projects in an Undergraduate Software Engineering Course,10.1145/2591062.2591152,WS,acm,IC1|IC4,6.0,True
+148,932f2a18,2014,Samalikova J.,"Process mining support for Capability Maturity Model Integration-based software process assessment, in principle and in practice",10.1002/smr.1645,WS,scopus,IC1,6.0,True
+149,f6edde4a,2014,Lin C.T.,Rate-based queueing simulation model of open source software debugging activities,10.1109/TSE.2014.2354032,WS,scopus,IC2,7.0,True
+150,e722b1cf,2014,,Software Process Simulation based on Mining Software Repositories,10.1109/ICDMW.2014.35,Aux1,wos,IC1|IC2|IC4,6.0,True
+151,ad250ae5,2014,Khodabandelou G.,Unsupervised discovery of intentional process models from event logs,10.1145/2597073.2597101,WS,scopus,IC1,6.0,True
+152,c7ed395a,2015,,"A procedure to detect problems of processes in software development
+projects using Bayesian networks",10.1016/j.eswa.2014.08.015,Aux1,wos,IC2,4.0,True
+153,2ee3dc10,2015,"Sureka, Ashish; Kumar, Atul; Gupta, Shrinath",Ahaan: Software Process Intelligence: Mining Software Process Data for Extracting Actionable Information,10.1145/2723742.2723763,WS,acm,IC1|IC4,3.0,False
+154,d2e1b306,2015,Folino F.,"An Approach to the Discovery of Accurate and Expressive Fix-Time
+Prediction Models",10.1007/978-3-319-22348-3_7,Aux1,wos,IC1|IC3|IC4,7.0,True
+155,2647ea07,2015,Gürgen T.,An integrated infrastructure using process mining techniques for software process verification,10.4018/978-1-4666-7456-1.ch036,WS,scopus,IC1,7.0,True
+156,aa3ce899,2015,,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models generated by Mining Event-Log Data in Issue Tracking System,10.48550/arxiv.1511.07023,Aux1,snowball,IC1|IC4,7.0,True
+157,508f3b5b,2015,Sebu M.,Business activity monitoring solution to detect deviations in business process execution,10.1109/SACI.2015.7208243,WS,scopus,IC1,5.0,True
+158,3d379233,2015,,Comparison of software repositories for their usability in software process reconstruction,10.1109/rcis.2015.7128890,Aux1,snowball,IC1|IC4,4.0,True
+159,53d897a8,2015,Van Der Werf J.M.E.M.,Discovery of functional architectures from event logs,,WS,scopus,IC1,5.0,True
+160,927817d5,2015,,"Evaluation of simulation-assisted value stream mapping for software
+product development: Two industrial cases",10.1016/j.infsof.2015.08.005,Aux1,wos,IC2|IC3,7.0,True
+161,3ad9cd69,2015,,Increase Return on Investment of Software Development Life Cycle by Managing the Risk - A Case Study,,Aux1,snowball,IC2|IC3,4.0,True
+162,e23bbc10,2015,"Santos, Renata M. S.; Oliveira, Toacy C.; Abreu, Fernando Brito e",Mining Software Development Process Variations,10.1145/2695664.2696046,WS,acm,IC1,5.0,True
+163,ee562777,2015,Bala S.,Mining project-oriented business processes,10.1007/978-3-319-23063-4_28,WS,scopus,IC1|IC4,5.0,True
+164,f356af5c,2015,Washizaki H.,Predicting Release Time for Open Source Software Based on the Generalized Software Reliability Model,10.1109/Agile.2015.19,WS,scopus,IC2|IC3,6.0,True
+165,b8b5b64e,2015,Jeon C.,Probabilistic Approach to Predicting Risk in Software Projects Using Software Repository Data,10.1142/S0218194015500151,WS,scopus,IC2|IC3|IC4,5.0,True
+166,82b3401d,2015,Mukala P.,Process mining event logs from FLOSS data: State of the art and perspectives,10.1007/978-3-319-15201-1_12,WS,scopus,IC1,4.0,True
+167,fa561e12,2015,Blum F.,Software process line discovery,10.1145/2785592.2785605,WS,scopus,IC1|IC4,5.0,True
+168,efbaa4df,2015,,"Statistical Learning and Software Mining for Agent Based Simulation of
+Software Evolution",10.1109/ICSE.2015.279,Aux1,wos,IC3|IC4,4.0,True
+169,eea29299,2015,,"Supporting Rule-Based Process Mining by User-Guided Discovery of
+Resource-Aware Frequent Patterns",10.1007/978-3-319-22885-3_10,Aux1,wos,IC1,3.0,False
+170,261f6383,2015,Magennis T.,The economic impact of software development process choice - Cycle-time analysis and Monte Carlo simulation results,10.1109/HICSS.2015.599,WS,scopus,IC2|IC3,5.0,True
+171,3ac74336,2015,,The research on software project schedule prediction and controlling,,Aux1,wos,IC2|IC3,3.0,False
+172,c149b689,2015,Trinkenreich B.,Toward using business process intelligence to support incident management metrics selection and service improvement,10.18293/SEKE2015-110,WS,scopus,IC1|IC4,4.0,True
+173,4541f643,2016,Neulinger K.,"A Longitudinal Study of Community-Oriented Open Source Software
+Development",10.1007/978-3-319-39696-5_31,Aux2,,IC1,7.0,True
+174,c42be0aa,2016,Thamizharasan R.,A review on software process mining using petri nets,10.3923/ajaps.2016.131.142,WS,scopus,IC1|IC2,3.0,False
+175,00ce8cfe,2016,Juneja P.,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models Generated by Mining Event-Log Data in Issue Tracking Systems,10.1109/COMPSAC.2016.64,WS,scopus,IC1,7.0,True
+176,b0f56a95,2016,,"Comparing Pre Commit Reviews and Post Commit Reviews Using Process
+Simulation",10.1145/2904354.2904362,Aux1,wos,IC2|IC3,6.0,True
+177,b7fd840a,2016,Kamma D.,High productivity programmers use effective task processes in unit-testing,10.1109/APSEC.2015.31,WS,scopus,IC2,6.0,True
+178,eefc7305,2016,,Interactive Exploration of Developer Interaction Traces using a Hidden Markov Model,,Aux1,ieee,IC1|IC2,5.0,True
+179,37b22a16,2016,"Rojas Blum, Fabian",Mining Software Process Lines,10.1145/2889160.2889267,WS,acm,IC1,2.0,False
+180,2b343650,2016,"Joe, Jeni; Emmatty, Tanya; Ballal, Yasha; Kulkarni, Snehal",Process mining for project management,10.1109/SAPIENCE.2016.7684142,WS,ieee,IC1|IC4,3.0,False
+181,4f816525,2016,"Caldeira, João; Abreu, Fernando Brito e","Software Development Process Mining: Discovery, Conformance Checking and Enhancement",10.1109/QUATIC.2016.061,WS,ieee,IC1,3.0,False
+182,4dc479a6,2016,,The Discovery of the Implemented Software Engineering Process Using Process Mining Techniques,10.14569/ijacsa.2016.070239,Aux1,snowball,IC1,4.0,True
+183,7ab40121,2016,Ernst M.,The Potential of Key Process/Performance Indicators (KPIs) in Automotive Software Quality Management,10.4271/2016-01-0046,WS,scopus,IC2|IC3,4.0,True
+184,16e31373,2016,Rojas Blum F.,The v-algorithm for discovering software process lines,10.1002/smr.1778,WS,scopus,IC1,7.0,True
+185,632737fb,2016,Zhang L.,Verification of lean-kanban processes with probabilistic model checking,10.1504/IJCAT.2016.076799,WS,scopus,IC2,5.0,True
+186,3d967450,2017,Jeon C.K.,A probabilistic approach to building defect prediction model for platform-based product lines,,WS,scopus,IC2|IC3,6.0,True
+187,ef76ffc3,2017,,An Experience Report on Applying Passive Learning in a Large-Scale Payment Company,10.1109/ICSME.2017.71,Aux1,ieee,IC1|IC4,6.0,True
+188,2e76e921,2017,Erdem S.,An exploratory study on usage of process mining in agile software development,10.1007/978-3-319-67383-7_14,WS,scopus,IC1,3.0,False
+189,0d31db29,2017,M. Valle A.,Applying process mining techniques in software process appraisals,10.1016/j.infsof.2017.01.004,WS,scopus,IC1,5.0,True
+190,fbc469cf,2017,Hassan F.,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,10.1109/ESEM.2017.23,Aux1,ieee,IC3|IC4,5.0,True
+191,4fd2327e,2017,,"Comparing pre-commit reviews and post-commit reviews using process
+simulation",10.1002/smr.1865,Aux1,wos,IC2,7.0,True
+192,1145c10d,2017,Ni A.,Cost-Effective Build Outcome Prediction Using Cascaded Classifiers,10.1109/MSR.2017.26,Aux1,ieee,IC3,5.0,True
+193,20c17d18,2017,,"Evaluation of Project Architecture in Software Development Mixing
+Waterfall and Agile by Using Process Simulation",10.1142/S2424862217500075,Aux1,wos,IC2|IC3,7.0,True
+194,ec38f0ba,2017,Lübke D.,Extracting and Conserving Production Data as Test Cases in Executable Business Process Architectures,10.1016/j.procs.2017.11.130,WS,scopus,IC1|IC4,4.0,True
+195,dcbf27d8,2017,"Gupta, Monika; Serebrenik, Alexander; Jalote, Pankaj",Improving Software Maintenance Using Process Mining and Predictive Analytics,10.1109/ICSME.2017.39,WS,ieee,IC1|IC3|IC4,5.0,True
+196,bc54c3b6,2017,,Information Systems Security Risk,10.4018/978-1-5225-2703-9.ch005,Aux1,snowball,IC2|IC3,5.0,True
+197,08d64489,2017,"Yu, Dongjin; Wang, Jiaojiao",Mining Collaboration Patterns of Software Development Processes Based on Trace Alignment,10.1145/3084100.3084103,WS,acm,IC1,4.0,True
+198,d0e040e1,2017,,Mining Handover Process in Open Source Development: An Exploratory Study,10.1109/APSEC.2017.44,Aux1,ieee,IC1|IC4,6.0,True
+199,0222b592,2017,Gadler D.,Mining Logs to Model the Use of a System,10.1109/ESEM.2017.47,Aux1,ieee,IC1|IC2,6.0,True
+200,63e1f0bf,2017,Tillem G.,Mining encrypted software logs using alpha algorithm,10.5220/0006408602670274,WS,scopus,IC1,5.0,True
+201,d4a1d75c,2017,Bala S.,Mining projects from structured and unstructured data,,WS,scopus,IC4,3.0,False
+202,b5ea4fdd,2017,Savchuk T.,Modeling of software development process with the Markov processes,10.15587/1729-4061.2017.103340,WS,scopus,IC2,3.0,False
+203,160fface,2017,,On the Differences between Unit and Integration Testing in the TravisTorrent Dataset,10.1109/MSR.2017.25,Aux1,ieee,IC1|IC4,6.0,True
+204,4c73b15f,2017,Colucci L.,Predicting the unpredictable: Using monte carlo simulation to predict project completion date,10.1007/978-3-319-55907-0_11,WS,scopus,IC3,5.0,True
+205,3ef399e6,2017,Keith B.,Process mining applications in software engineering,10.1007/978-3-319-48523-2_5,WS,scopus,IC1,4.0,True
+206,ca6989c0,2017,"Janes, Andrea",Test Case Generation and Prioritization: A Process-Mining Approach,10.1109/ICSTW.2017.11,WS,ieee,IC1,3.0,False
+207,14ff01e5,2017,,Transition Systems Reduction: Balancing Between Precision and Simplicity,10.1007/978-3-662-55862-1_6,Aux2,,IC1,6.0,True
+208,b940a63a,2017,,"Understanding Student Interactions in Capstone Courses to Improve
+Learning Experiences",10.1145/3017680.3017716,Aux1,wos,IC1,6.0,True
+209,5f84fdc9,2018,,A model for estimating change propagation in software,10.1007/s11219-017-9358-6,Aux1,wos,IC2|IC3,7.0,True
+210,9e341b7f,2018,Massitela I.,A structured stochastic model for software project estimation in Waterfall models,10.18293/SEKE2018-033,WS,scopus,IC2|IC3,3.0,False
+211,223a62e3,2018,Arora R.,Analysis of software repositories using process mining,10.1007/978-981-10-5547-8_65,WS,scopus,IC1|IC4,4.0,True
+212,4082a5b1,2018,Archanjo M.A.,Application of process mining in project management context: An exploratory case study in software development projects,,WS,scopus,IC1,5.0,True
+213,04ab260e,2018,"Marques, Rita; Mira da Silva, Miguel; R. Ferreira, Diogo",Assessing Agile Software Development Processes with Process Mining: A Case Study,10.1109/CBI.2018.00021,WS,ieee,IC1,6.0,True
+214,d0c47271,2018,Liu C.,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,WS,scopus,IC1,8.0,True
+215,43977ab5,2018,,Execution-Based Model Profiling,10.1007/978-3-319-74161-1_3,Aux2,,IC1|IC4,7.0,True
+216,0a07a816,2018,Leemans M.,Hierarchical performance analysis for process mining,10.1145/3202710.3203151,WS,scopus,IC1,5.0,True
+217,4cb686b6,2018,,Investigating the Significance of the Bellwether Effect to Improve Software Effort Prediction: Further Empirical Study,10.1109/TR.2018.2839718,Aux1,ieee,IC2|IC3,6.0,True
+218,50d875ff,2018,"Mendes, Vitor; Faria Junior, Elio Ribeiro; Garcia, Cleiton; Malucelli, Andreia",Kanban and Process Mining in the Task Management,10.1145/3275245.3275286,WS,acm,IC1|IC3,4.0,True
+219,7ecd535e,2018,Oberhauser R.,"Microflows: Leveraging Process Mining and an Automated Constraint
+Recommender for Microflow Modeling",10.1007/978-3-319-78428-1_2,Aux1,wos,IC1|IC4,4.0,True
+220,6f9a5a08,2018,Bala S.,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,WS,scopus,IC1,3.0,False
+221,4409efef,2018,Akbarinasaji S.,Predicting bug-fixing time: A replication study using an open source software project,10.1016/j.jss.2017.02.021,WS,scopus,IC3,7.0,True
+222,e12fff7c,2018,,"Process Mining for Process Conformance Checking in an OSS Project: An
+Empirical Research",10.1007/978-3-319-92375-8_7,Aux1,wos,IC1|IC4,5.0,True
+223,4e01ae35,2018,Leemans M.,Software process analysis methodology-a methodology based on lessons learned in embracing legacy software,10.1109/ICSME.2018.00076,WS,scopus,IC1,4.0,True
+224,5c4c0e7f,2018,,Studying Developer Build Issues and Debugger Usage via Timeline Analysis in Visual Studio IDE,,Aux1,ieee,IC1|IC4|IC3,6.0,True
+225,608b005d,2018,,"Using simulation for understanding and reproducing distributed software
+development processes in the cloud",10.1016/j.infsof.2018.07.004,Aux1,wos,IC2|IC3,6.0,True
+226,94e88f90,2019,,A Point Process Approach of Bug Fixing Analysis in Open Source Software Projects,10.1109/qrs.2019.00024,Aux1,snowball,IC2|IC3,6.0,True
+227,6cb59310,2019,"Agostinelli, Simone; Maggi, Fabrizio Maria; Marrella, Andrea; Milani, Fredrik",A User Evaluation of Process Discovery Algorithms in a Software Engineering Company,10.1109/EDOC.2019.00026,WS,ieee,IC1,6.0,True
+228,588a19f5,2019,"Caldeira, João; Brito e Abreu, Fernando; Reis, José; Cardoso, Jorge",Assessing Software Development Teams' Efficiency using Process Mining,10.1109/ICPM.2019.00020,WS,ieee,IC1,7.0,True
+229,f16294f2,2019,"Zhu, Rui; Dai, Yichao; Li, Tong; Ma, Zifei; Zheng, Ming; Tang, Yahui; Yuan, Jiayi; Huang, Yue",Automatic Real-Time Mining Software Process Activities From SVN Logs Using a Naive Bayes Classifier,10.1109/ACCESS.2019.2945608,WS,ieee,IC1|IC4,6.0,True
+230,2d369fe9,2019,"Razi, Muhammad Ar; Sungkono, Kelly Rossa; Sarno, Riyanarto; Wahyuni, Cahyaningtyas Sekar",Detecting Bottleneck and Fraud in Agile Development by using Petri net Performance and Trace Clustering,10.1109/ISEMANTIC.2019.8884226,WS,ieee,IC1|IC2,5.0,True
+231,c0352476,2019,Raitubu N.,Detection of Bottleneck and Social Network in Business Process of Agile Development,10.1109/ISEMANTIC.2019.8884341,WS,scopus,IC1,3.0,False
+232,d5aff523,2019,,"Do as I Do, Not as I Say: Do Contribution Guidelines Match the GitHub Contribution Process?",10.1109/icsme.2019.00043,Aux1,snowball,IC1|IC4,6.0,True
+233,e6f42f43,2019,"Ardimento, Pasquale; Bernardi, Mario Luca; Cimitile, Marta; Maggi, Fabrizio Maria",Evaluating Coding Behavior in Software Development Processes: A Process Mining Approach,10.1109/ICSSP.2019.00020,WS,ieee,IC1,6.0,True
+234,5cfcbc53,2019,,Exploiting Event Log Event Attributes in RNN Based Prediction,10.1007/978-3-030-30278-8_40,Aux2,,IC1|IC3,6.0,True
+235,be899615,2019,Jooken L.,Extracting a Collaboration Model from VCS Logs Based on Process Mining Techniques,10.1007/978-3-030-37453-2_18,WS,scopus,IC1,5.0,True
+236,542c0019,2019,"Ardimento, Pasquale; Bernardi, Mario Luca; Cimitile, Marta; Ruvo, Giuseppe De",Learning analytics to improve coding abilities: a fuzzy-based process mining approach,10.1109/FUZZ-IEEE.2019.8859009,WS,ieee,IC1,6.0,True
+237,6464a4f1,2019,,Method for Building UML Activity Diagrams from Event Logs,10.15514/ispras-2019-31(4)-9,Aux1,snowball,IC1|IC4,4.0,True
+238,9662854d,2019,,Mining Software Repositories for Predictive Modelling of Defects in SDN Controller,,Aux1,ieee,IC2|IC4,7.0,True
+239,8ea46c1d,2019,,Monitoring the Software Bug-Fixing Process Through the Process Mining Approach,10.1002/smr.2162,Aux2,,IC1,6.0,True
+240,e627756c,2019,"Baskoro, Sangaji; Sunindyo, Wikan Danar",Predicting Issue Handling Process using Case Attributes and Categorical Variable Encoding Techniques,10.1109/ICoDSE48700.2019.9092617,WS,ieee,IC3|IC4,5.0,True
+241,537bbfd0,2019,,Process-Driven Incremental Effort Estimation,10.1109/ICSSP.2019.00030,Aux1,ieee,IC2|IC3,7.0,True
+242,fbd20bfb,2019,Pourmasoumi A.,The evolutionary composition of desirable execution traces from event logs,10.1016/j.future.2019.03.037,WS,scopus,IC1,6.0,True
+243,c0a779ae,2019,"Shani, Asadul Haq Muhammad; Sarno, Riyanarto; Sungkono, Kelly Rossa; Wahyuni, Cahyaningtyas Sekar",Time Performance Evaluation of Agile Software Development,10.1109/ISEMANTIC.2019.8884304,WS,ieee,IC1|IC4,6.0,True
+244,73df5473,2019,,"Using a Systematic Literature Review to Strengthen the Evidence
+Supporting a Simulation Model of Distributed Software Projects",10.1109/SEAA.2019.00063,Aux1,wos,IC2,5.0,True
+245,b788b176,2019,Krismayer T.,Using constraint mining to analyze software development processes,10.1109/ICSSP.2019.00021,WS,scopus,IC1|IC4,6.0,True
+246,c077d9a4,2020,Chambers A.J.,"Automated Business Process Discovery from Unstructured Natural-Language
+Documents",10.1007/978-3-030-66498-5_18,Aux1,wos,IC1|IC4,5.0,True
+247,8de6dcfa,2020,Nafreen M.,Connecting software reliability growth models to software defect tracking,10.1109/ISSRE5003.2020.00022,WS,scopus,IC2|IC3,7.0,True
+248,8a97d0cf,2020,Yue Li; He Zhang; Liming Dong; Bohan Liu; Jinyu Ma,Constructing a Hybrid Software Process Simulation Model in Practice: An Exemplar from Industry,10.1145/3379177.3388906,WS,acm,IC2|IC3,5.0,True
+249,99736057,2020,,Control-Flow based Anomaly Detection in the Bug-Fixing Process of Open-Source Projects,10.1145/3385032.3385038,Aux1,snowball,IC1|IC4,7.0,True
+250,15c9808b,2020,Shynkarenko V.,DEVELOPMENT OF A TOOLKIT FOR ANALYZING SOFTWARE DEBUGGING PROCESSES USING THE CONSTRUCTIVE APPROACH,10.15587/1729-4061.2020.215090,WS,scopus,IC1,6.0,True
+251,5029f905,2020,"Yuan, Jiayi; Li, Tong; Zhu, Rui; Ma, Zifei; Peng, Jiayuan; Huang, Yue",Detecting Sudden Drift for Single-Instance Log in Software Development Process,10.1109/PHM-Besancon49106.2020.00069,WS,ieee,IC1|IC4,4.0,True
+252,6e572cbb,2020,Dumbach P.,Exploration of Process Mining Opportunities In Educational Software Engineering - The GitLab Analyser,,WS,scopus,IC1|IC4,5.0,True
+253,7cf00385,2020,Destro G.A.,Mining Software Repositories for the Characterization of Continuous Integration and Delivery,10.1145/3422392.3422503,WS,scopus,IC1|IC4,4.0,True
+254,340c0c24,2020,,"Research on Software Project Schedule Management Method based on Monte
+Carlo Simulation",,Aux1,wos,IC2|IC3,4.0,True
+255,5d10f784,2020,,Truncated Trace Classifier. Removal of Incomplete Traces from Event Logs,10.1007/978-3-030-49418-6_10,Aux2,,IC1,6.0,True
+256,b7022ac2,2020,"Lämmel, Ralf; Kerber, Alvin; Praza, Liane",Understanding What Software Engineers Are Working on: The Work-Item Prediction Challenge,10.1145/3387904.3389294,WS,acm,IC1|IC4,4.0,True
+257,77fa80cd,2021,Tang M.,A cluster analysis method of software development activities based on event log,10.2174/2666255813666191204144931,WS,scopus,IC1,5.0,True
+258,e89188a6,2021,Tyagi M.K.,Agile Planning and Tracking of Software Projects Using the State-Space Approach,10.1007/978-981-16-0404-1_26,WS,scopus,IC2|IC3,5.0,True
+259,b123faf2,2021,Miranda P.,An analysis of Monte Carlo simulations for forecasting software projects,10.1145/3412841.3442030,WS,scopus,IC3,7.0,True
+260,9e450f55,2021,Shynkarenko V.,Application of Constructive Modeling and Process Mining Approaches to the Study of Source Code Development in Software Engineering Courses,10.24138/JCOMSS-2021-0046,WS,scopus,IC1|IC2,3.0,False
+261,f36a08fe,2021,Lunesu M.I.,Assessing the risk of software development in agile methodologies using simulation,10.1109/ACCESS.2021.3115941,WS,scopus,IC2|IC3,7.0,True
+262,abfd6b2e,2021,Fauzi R.,Business process analysis of programmer job role in software development using process mining,10.1016/j.procs.2021.12.191,WS,scopus,IC1,7.0,True
+263,38694b4e,2021,Ufuktepe E.,Code Change Sniffer: Predicting Future Code Changes with Markov Chain,10.1109/COMPSAC51774.2021.00137,Aux1,wos,IC2|IC3,6.0,True
+264,f59b10d5,2021,Kawalerowicz M.,Continuous Build Outcome Prediction: A Small-N Experiment in Settings of a Real Software Project,10.1007/978-3-030-79463-7_35,WS,scopus,IC3,5.0,True
+265,483d7725,2021,Ben Mesmia W.,DevOps workflow verification and duration prediction using non-Markovian stochastic Petri nets,10.1002/smr.2329,WS,scopus,IC2|IC3,5.0,True
+266,db43c22c,2021,Nasyrov R.,Evaluating the Effectiveness of Software Development Processes Based on Probabilistic Causal Models,10.1109/SUMMA53307.2021.9632118,WS,scopus,IC2,4.0,True
+267,9c4cc898,2021,Pourbafrani M.,Extracting Process Features from Event Logs to Learn Coarse-Grained Simulation Models,10.1007/978-3-030-79382-1_8,WS,scopus,IC1|IC2,4.0,True
+268,2d2d29ea,2021,,Investigation and prediction of open source software evolution using automated parameter mining for agent-based simulation,10.1007/s10515-021-00280-3,Aux2,,IC3|IC4,7.0,True
+269,16644fb0,2021,Nayebi M.,"Mining Treatment-Outcome Constructs from Sequential Software Engineering
+Data",10.1109/TSE.2019.2892956,Aux1,wos,IC1|IC4,6.0,True
+270,c894f613,2021,Nogueira A.F.,Monitoring a CI/CD Workflow Using Process Mining,10.1007/s42979-021-00830-2,WS,scopus,IC1,5.0,True
+271,2f713568,2021,,Partially observable Markov Decision Process to prioritize software defects,10.32920/ryerson.14638470.v1,Aux1,snowball,IC2|IC4,6.0,True
+272,61e62f9d,2021,,Process Mining bei hybriden Vorgehensmodellen zur Umsetzung von Unternehmenssoftware,10.1007/s00287-021-01359-7,Aux1,snowball,IC1,3.0,False
+273,a86b1042,2021,,Profiling Software Developers with Process Mining and N-Gram Language Models,10.48550/arxiv.2101.06733,Aux1,snowball,IC1,7.0,True
+274,f64a5949,2021,Liu C.,Quantitative evaluation of software component behavior discovery approach,10.1587/transinf.2020MPL0001,WS,scopus,IC1,6.0,True
+275,e3d29a38,2021,Pourbafrani M.,SIMPT: Process Improvement Using Interactive Simulation of Time-Aware Process Trees,10.1007/978-3-030-75018-3_40,WS,scopus,IC1|IC3,3.0,False
+276,7b0b22ea,2021,Jalote P.,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,WS,scopus,IC1|IC2,7.0,True
+277,6f295ec6,2021,Macak M.,Using process mining for Git log analysis of projects in a software development course,10.1007/s10639-021-10564-6,WS,scopus,IC1|IC4,5.0,True
+278,ffa8885e,2021,,Експериментальні дослідження процесів налагодження комп'ютерних програм студентами з використанням Process Mining,10.35546/kntu2078-4481.2021.3.9,Aux1,snowball,IC1|IC4,7.0,True
+279,0587b264,2022,"Salmani, Ali; Imani, Alireza; Bahrehvar, Majid; Duffett-Leger, Linda; Moshirpour, Mohammad",A Data-Centric Approach to Evaluate Requirements Engineering in Multidisciplinary Projects,10.1109/SMC53654.2022.9945270,WS,ieee,IC1|IC4,6.0,True
+280,ae9983fa,2022,Bhadra S.,A Stochastic Petri net Model of Continuous Integration and Continuous Delivery,10.1109/ISSREW55968.2022.00050,WS,scopus,IC2|IC3,4.0,True
+281,e4f9257c,2022,"Salmani, Ali; Imani, Alireza; Bahrehvar, Majid; Duffett-Leger, Linda; Moshirpour, Mohammad",An Intelligent Methodology to Enhance Requirements Engineering in Multidisciplinary Projects,10.1109/CCECE49351.2022.9918286,WS,ieee,IC1|IC3,5.0,True
+282,eeee1fa8,2022,Taskesenlioglu S.,Identifying Possible Improvements of Software Development Life Cycle (SDLC) Process of a Bank by Using Process Mining,10.1142/S0218194022400010,WS,scopus,IC1,5.0,True
+283,f52cb3e1,2022,"Urrea-Contreras, Silvia Jaqueline; Astorga-Vargas, María Angélica; Flores-Rios, Brenda L.; Ibarra-Esquer, Jorge E.; González-Navarro, Félix Fernando",Intervention of knowledge flows in software process mining projects,10.1109/ENC56672.2022.9882931,WS,ieee,IC1|IC4,4.0,True
+284,b5ffb64d,2022,Reinhartz-Berger I.,Mining Fork-Including Software Development Traces,10.1007/978-3-031-07481-3_12,WS,scopus,IC1,6.0,True
+285,68dbd881,2022,,Moscow Rules: A Quantitative Expose,10.1007/978-3-031-08169-9_2,Aux1,wos,IC2|IC3,5.0,True
+286,7eebcd00,2022,"Urrea-Contreras, Silvia Jaqueline; Flores-Rios, Brenda L.; González-Navarro, Félix Fernando; Astorga-Vargas, María Angélica; Ibarra-Esquer, Jorge Eduardo; Pacheco, Iván A. García; Agüero, Carla L. Pacheco","Process Mining Model Integrated with Control Flow, Case, Organizational and Time Perspectives in a Software Development Project",10.1109/CONISOFT55708.2022.00022,WS,ieee,IC1,5.0,True
+287,fde0a3b4,2022,,Process Mining Model Quality in Software Development Case Studies,10.30844/akwi_2022_9,Aux1,snowball,IC1,4.0,True
+288,e941deda,2022,,Process Mining Model Quality in Software Development Case Studies: An Analysis,10.30844/akwi_2022_09,Aux1,snowball,IC1|IC4,4.0,True
+289,fbe93e3d,2022,Vavpotič D.,Software Process Evaluation from User Perceptions and Log Data,10.1002/smr.2438,WS,scopus,IC1,6.0,True
+290,ff916fb9,2022,De Almeida C.D.A.,"Studying the Impact of Continuous Delivery Adoption on Bug-Fixing Time
+in Apache's Open-Source Projects",10.1145/3524842.3528049,Aux1,wos,IC3|IC4,4.0,True
+291,88087b27,2022,Ardimento P.,Understanding Coding Behavior: An Incremental Process Mining Approach,10.3390/electronics11030389,WS,scopus,IC1,5.0,True
+292,b8fc130d,2022,Nand Sharma P.,Unearthing open source decision-making processes: A case study of python enhancement proposals,10.1002/spe.3128,WS,scopus,IC1|IC4,6.0,True
+293,4b34f7a5,2022,Caldeira J.,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,WS,scopus,IC1|IC3,7.0,True
+294,548627c6,2023,,A Novel Technique to Assess Agile Systems for Stability,10.1007/978-3-031-33976-9_2,Aux2,,IC2|IC4,8.0,True
+295,d65695c6,2023,Bhadra S.,A stochastic petri net model of continuous integration and continuous delivery,10.1109/RAMS51473.2023.10088212,WS,scopus,IC2|IC3,5.0,True
+296,667f1705,2023,,ADPTriage: Approximate Dynamic Programming for Bug Triage,10.1109/tse.2023.3307243,Aux1,snowball,IC2|IC4,6.0,True
+297,82ce5370,2023,"Nguyen, Minh Khoi; Tran, Hanh Nhi; Abualsaud, Razan; Ober, Ileana",An AI-Enhanced Process Mining Framework for Software Process Insights,10.1109/KSE59128.2023.10299475,WS,ieee,IC1|IC4,4.0,True
+298,b68e0602,2023,,An Exploration of Learning Processes as Process Maps in FLOSS Repositories,10.48550/arxiv.2307.07841,Aux1,snowball,IC1|IC4,5.0,True
+299,60f3005f,2023,Lopez-Pintado O.,Discovery and Simulation of Business Processes with Probabilistic Resource Availability Calendars,10.1109/ICPM60904.2023.10271965,WS,scopus,IC1|IC2,7.0,True
+300,472e7acc,2023,,Enterprise Information Management Systems Development: Two Cases of Mining for Process Conformance,10.1016/j.jjimei.2022.100141,Aux2,,IC1,5.0,True
+301,e45c53bb,2023,,Evaluating Learning-to-Rank Models for Prioritizing Code Review Requests using Process Simulation,10.1109/SANER56733.2023.00050,Aux1,ieee,IC2|IC3,8.0,True
+302,21851bba,2023,Jo S.,Exploring Collaboration Patterns in GitHub Using Discrete Time Markov Chain,10.1109/APSEC60848.2023.00090,WS,scopus,IC2|IC4,5.0,True
+303,56342950,2023,Ortu M.,Fault-insertion and fault-fixing behavioural patterns in Apache Software Foundation Projects,10.1016/j.infsof.2023.107187,WS,scopus,IC2|IC4,7.0,True
+304,140e67e6,2023,,Macrosimulation Model of Software Development Process,10.1016/j.procs.2023.10.061,Aux1,snowball,IC2|IC3,6.0,True
+305,5b7858a6,2023,Feres C.,Mapping Process Mining Techniques to Agile Software Development Perspectives,10.5220/0011850500003464,WS,scopus,IC1,3.0,False
+306,bbfaa5a6,2023,Hlushko S.,Mathematical model of the software development process according to the 'outsource' scheme,10.1109/DESSERT61349.2023.10416494,WS,scopus,IC2,3.0,False
+307,f512f749,2023,,"On Preparing and Assessing Data for Process Simulation Modeling: An
+Industrial Report",10.1109/ICSSP59042.2023.00016,Aux1,wos,IC2|IC4,7.0,True
+308,a88acaff,2023,,Process Mining Applied in a Software Project Development with SCRUM and ProM,10.24018/ejeng.2023.8.5.3089,Aux1,snowball,IC1|IC4,4.0,True
+309,1b7688b7,2023,Coremans B.,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,WS,scopus,IC1,5.0,True
+310,fda7184e,2023,Calegari D.,Supporting software evolution actions with process mining,,WS,scopus,IC1,4.0,True
+311,df1bee14,2023,,"The Why, When, What, and How About Predictive Continuous Integration: A Simulation-Based Investigation",10.1109/TSE.2023.3330510,Aux1,ieee,IC2|IC3,6.0,True
+312,61cb2257,2023,Kolesnikova K.,Transforming Cognitive Maps into Markov Process Models for Software Development Projects,10.1109/SIST58284.2023.10223535,WS,scopus,IC2,3.0,False
+313,12484962,2023,,Using Process Mining to Leverage the Development of a Family of Mobile Applications,10.15514/ispras-2023-35(3)-13,Aux2,,IC1,7.0,True
+314,3430f3d0,2024,Salin H.,A Stochastic Approach Based on Rational Decision-Making for Analyzing Software Engineering Project Status,10.1007/978-3-031-49266-2_12,WS,scopus,IC2,4.0,True
+315,373ad20e,2024,Urrea-Contreras S.J.,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,WS,scopus,IC1,7.0,True
+316,9ffa3123,2024,Joshi R.,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,WS,scopus,IC2|IC3|IC4,7.0,True
+317,7f6a881a,2024,Alman A.,Declarative Process Mining for Software Processes: The RuM Toolkit and the Declare4Py Python Library,10.1007/978-3-031-49269-3_2,WS,scopus,IC1,6.0,True
+318,c7d555aa,2024,"Liu, Bohan; Zhang, He; Ma, Weigang; Kuang, Hongyu; Yang, Yi; Xu, Jinwei; Gao, Shan; Gao, Jian",Mining Pull Requests to Detect Process Anomalies in Open Source Software Development,10.1145/3597503.3639196,WS,ieee,IC1,7.0,True
+319,63bfddbd,2024,Nguyen T.,Multi-Dimensional Process Analysis of Software Development Projects,10.5220/0012372100003645,WS,scopus,IC1|IC4,4.0,True
+320,98edc5c2,2024,,"Prioritizing code review requests to improve review efficiency: a
+simulation study",10.1007/s10664-024-10575-0,Aux1,wos,IC2|IC4,8.0,True
+321,6ff2b7f2,2024,Jo S.,Probabilistic Model Checking GitHub Repositories for Software Project Analysis,10.3390/app14031260,WS,scopus,IC2|IC4,5.0,True
+322,2349bd7b,2024,,"Process mining software engineering practices: A case study for
+deployment pipelines",10.1016/j.infsof.2023.107392,Aux1,wos,IC1|IC4,8.0,True
+323,20e0d51e,2025,,A benchmarking study on process model forecasting: univariate vs. multivariate approaches,10.1007/s44311-025-00031-7,Aux1,snowball,IC1|IC3,7.0,True
+324,563af713,2025,,Analyzing the&#xa0;Evolution of&#xa0;Boards in&#xa0;Collaborative Work Management Tools,10.1007/978-3-031-82225-4_24,Aux2,,IC1|IC4,7.0,True
+325,7434525f,2025,"Tasci, Oguzhan; Erdogan, Tugba Gurgen",Comparative Analysis of AI Software and Traditional Software GitHub Repositories Using Process Mining,10.15439/2025F3421,WS,ieee,IC1|IC4,4.0,True
+326,d57e0f87,2025,,Comparative evaluation of encoding techniques for workflow process remaining time prediction for cloud applications,10.1186/s13677-025-00763-8,Aux2,,IC1|IC3,7.0,True
+327,fa2cb37b,2025,Buliga A.,Enhanced What-If Scenarios Generation by Bridging Generative Models and Process Simulation,10.1109/ICPM66919.2025.11220730,WS,scopus,IC1|IC3,5.0,True
+328,f2c6bd74,2025,,GHALogs: Large-Scale Dataset of GitHub Actions Runs,10.1109/MSR66628.2025.00104,Aux1,ieee,IC1|IC4,5.0,True
+329,43e84ac4,2025,"Ait Mansour, Nassima; Sbai, Hanae; Baïna, Karim",MINDS: An NLP-Driven Process Mining Framework for Superior Microservices Decomposition,10.1109/ACCESS.2025.3639460,WS,ieee,IC1|IC4,7.0,True
+330,bf72ff27,2025,Sang B.,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,WS,scopus,IC1|IC4,7.0,True
+331,f4cf22c5,2025,,Multivariate Approaches for&#xa0;Process Model Forecasting,10.1007/978-3-031-82225-4_21,Aux2,,IC3,6.0,True
+332,ed0ab009,2025,"Guinea-Cabrera, Miguel Ángel; Holgado-Terriza, Juan Antonio; Pico-Valencia, Pablo A.",PRIMAD: Building Digital Twins for Software Development Lifecycle within an Evolutionary Architecture,10.1109/SWC65939.2025.00261,WS,ieee,IC1|IC2|IC3,6.0,True
+333,69029db6,2025,da Silva K.O.A.,Process mining for agile software process assessment and improvement,10.1016/j.infsof.2025.107680,WS,scopus,IC1,5.0,True
+334,03b0c494,2025,Incerto E.,Stochastic conformance checking based on variable-length Markov chains,10.1016/j.is.2025.102561,WS,scopus,IC1|IC2,7.0,True
+335,e3d6d00e,2025,"Paradis, Carlos; Perez, Ivan; Davies, Misty",Towards Streamlining Auditing for Compliance with Requirements in Open-Source Software at NASA,10.1109/DASC66011.2025.11257352,WS,ieee,IC1|IC4,8.0,True
+336,03fb6812,2026,Bala S.,"Analyzing Side-Tracking of Developers Using Object-Centric Process
+Mining",10.1007/978-3-031-96841-9_2,Aux1,wos,IC1|IC4,7.0,True
+337,f7a54d4c,2026,Vitale F.,Architecting software monitors for control-flow anomaly detection through large language models and conformance checking,10.1016/j.infsof.2026.108133,WS,scopus,IC1,7.0,True
+338,2c1f1193,2026,Stepanov E.,Continuous software monitoring backed by process mining: a systematic literature review,10.1007/s41060-025-01000-w,WS,scopus,IC1|IC4,4.0,True
+339,e5c400af,2026,,Leveraging Data Augmentation and&#xa0;Siamese Learning for&#xa0;Predictive Process Monitoring,10.1007/978-3-032-15538-2_5,Aux2,,IC3|IC4,8.0,True
+340,9ea592cd,2026,de Oliveira R.A.,“Bottleneck Analysis in Software Development: A Case Study Using Process Mining”,10.1007/978-3-032-03708-4_22,WS,scopus,IC1,4.0,True

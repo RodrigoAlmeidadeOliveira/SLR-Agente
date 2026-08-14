@@ -1,0 +1,205 @@
+% ============================================================
+% DRAFT — Synthesis paragraphs for cap3_SLR.tex
+% Generated 2026-04-19 from extraction_template + top30 ranking
+% Insert into \subsection{RQ2.2} and \subsection{RQ3.1/RQ3.2}
+% ============================================================
+
+% -----------------------------------------------------------
+% ANCHOR PARAGRAPH — seminal arc (insert at start of RQ2.1 or
+% as opening of Results/Synthesis section)
+% -----------------------------------------------------------
+
+The study of software processes through computational methods dates to the
+mid-1990s. Cook and Wolf~\cite{cook1995,cook1998} were the first to
+demonstrate that process models could be \emph{discovered automatically} from
+event traces---using finite-state automata, Markov models, and neural
+networks---establishing the theoretical vocabulary that later became process
+mining. Rubin et al.~\cite{rubin2007} generalised this foundation into the
+first explicitly named \emph{process mining framework for software processes},
+applying the ProM toolkit to software configuration management logs and
+showing that alpha-algorithm-based discovery, heuristic mining, and social
+network analysis could all be adapted to SDLC event logs.
+These three works collectively define the starting point of the literature
+and are treated here as the canonical origin of the field.
+
+
+% -----------------------------------------------------------
+% RQ2.2 — Stochastic techniques (IC2+IC3 cluster, 14 papers)
+% INSERT into \subsubsection{RQ2.2: Predictive and Stochastic Techniques}
+% replaces / expands the current paragraph that starts
+% "The PDF analysis sharpens the stochastic-method picture."
+% -----------------------------------------------------------
+
+The stochastic-technique picture that emerges from the top-ranked literature
+divides naturally into three sub-families. The largest is
+\textbf{Markov-chain-based prediction}, which spans from defect-removal
+modelling~\cite{tian2005,jeon2015} through agile risk
+assessment~\cite{lunesu2021} and CI/CD reliability
+analysis~\cite{bhadra2022,bhadra2023} to reinforcement-learning formulations
+of pull-request outcome prediction~\cite{joshi2024}. Common to all of these
+is the use of discrete-state transition matrices estimated from repository or
+defect-tracking data; the prediction target varies from remaining defect count
+and release date to the probability of PR acceptance within a sprint
+boundary. The second sub-family uses \textbf{stochastic Petri
+nets}~\cite{benmesmia2021,bhadra2022,bhadra2023}: these models capture
+parallelism and resource contention in CI/CD and DevOps workflows more
+faithfully than plain Markov chains, but at the cost of additional
+specification effort and sensitivity to parametric assumptions. The third
+sub-family employs \textbf{Monte Carlo simulation} directly on project
+data~\cite{magennis2015,lunesu2021,li2020}, typically feeding historical cycle
+times into throughput forecasts. Ghosh~\cite{ghosh2009} and Santos et
+al.~\cite{santos2018} extend this line to globally distributed projects and
+Waterfall-style estimation, respectively, while Li et al.~\cite{li2020}
+demonstrate the construction of a \emph{hybrid} simulation combining
+System Dynamics and Discrete Event Simulation for industrial project
+forecasting---the closest prior work to PATHCAST's Stages 3--4 in terms of
+modelling ambition.
+
+A consistent limitation across all three sub-families is their
+\emph{disconnection from process mining}: the stochastic models are
+parametrised from aggregate statistics (average cycle times, historical
+defect counts) rather than from mined transition structures. The consequence
+is that model states correspond to coarse lifecycle phases rather than to
+discovered process states with empirical fitness guarantees. This disconnect
+is the operational definition of Finding~F3 and justifies the absorbing-chain
+construction in Stage~2 of PATHCAST, where state-transition probabilities are
+derived directly from the mined process model rather than estimated
+independently.
+
+
+% -----------------------------------------------------------
+% RQ2.2 continued — PM+stochastic integration (IC1+IC2 cluster, 4+1 papers)
+% -----------------------------------------------------------
+
+A smaller but highly relevant cluster combines process mining and stochastic
+analysis within the same study. Incerto et al.~\cite{incerto2025} propose
+stochastic conformance checking based on variable-length Markov chains
+(VLMCs), outperforming 18 state-of-the-art techniques on 10 of 11 benchmark
+datasets---arguably the most technically advanced integration of PM and
+Markov modelling in the current literature, though it targets conformance
+assessment rather than operational forecasting. L\'opez-Pintado and
+Dumas~\cite{lopezpintado2023} bridge PM and simulation by discovering
+probabilistic resource-availability calendars from event logs, showing
+that simulation models with stochastic calendars replicate temporal
+distributions of activity instances more faithfully than crisp-calendar
+alternatives. Jalote and Kamma~\cite{jalote2021} apply Markov chains to
+model task processes extracted from IDE interaction logs, providing empirical
+evidence that process similarity within productivity groups is quantifiable
+via chain distance metrics.
+
+The single paper that approaches L3 integration is PRIMAD~\cite{guinea2025},
+which proposes a Digital Twin for the SDLC by composing pm4py-based process
+mining, Akka actor simulation, and LightGBM prediction. PRIMAD is the closest
+prior work to PATHCAST in architectural scope; however, it remains at the
+component-validation stage (each layer is evaluated independently) and does
+not establish formal inter-stage data contracts or a Monte Carlo forecasting
+layer. This positions PRIMAD at L2 in the SPMF taxonomy and leaves the L3
+slot---formally specified, end-to-end, multi-layer pipeline with empirical
+validation---unoccupied in the literature.
+
+
+% -----------------------------------------------------------
+% RQ2.2 continued — PM+forecasting (IC1+IC3 cluster, 5 papers)
+% -----------------------------------------------------------
+
+Studies that combine process mining with forecasting objectives (IC1 $\cap$
+IC3) tend to approach prediction through \emph{process enhancement} rather
+than through explicit stochastic modelling. Gupta~\cite{gupta2017} applies
+inductive miner discovery with conformance checking on multi-repository data
+from VCS and issue trackers, then feeds process metrics into a predictive
+analytics layer for software maintenance---one of the few studies to chain
+discovery and prediction in the SE domain, though without a probabilistic
+forecasting component. Pourbafrani et al.~\cite{pourbafrani2021} present
+SIMPT, a tool that extracts process trees with time parameters from event
+logs and enables interactive what-if simulation; its successor
+work~\cite{buliga2025} further integrates generative AI with business process
+simulation to produce conformance-preserving what-if scenarios. Caldeira et
+al.~\cite{caldeira2022} mine IDE interaction logs and show that process
+complexity metrics derived from ProM correlate moderately ($r \approx 0.43$)
+with software cyclomatic complexity, demonstrating the feasibility of
+process-derived features for product-quality prediction.
+
+Taken together, this cluster confirms that PM and prediction are being
+connected in the SE literature, but always at the level of sequential
+application (PM output feeds a downstream model) rather than through a
+unified pipeline with formal contracts. The absence of an absorbing-state
+formulation means that none of these studies can express ``probability of
+completion within $k$ cycles'' as a first-class model output.
+
+
+% -----------------------------------------------------------
+% RQ1.2 — Event log sources (IC2+IC4 cluster, 3 papers)
+% INSERT into \subsubsection{RQ1.2: Event Log Sources and Construction}
+% -----------------------------------------------------------
+
+Three high-ranked studies use GitHub repository data to construct Markov
+models directly from commit and collaboration traces, without an explicit
+process mining step. Jo et al.~\cite{jo2023,jo2024} model GitHub activity
+sequences as discrete-time Markov chains and apply probabilistic Computation
+Tree Logic for model checking, producing insights about long-run activity
+probabilities and project-level transition dynamics across five repositories.
+Ortu et al.~\cite{ortu2023} analyse fault-insertion and fault-fixing patterns
+in Apache Software Foundation projects through Markov chains and social
+network analysis, finding that fault-inserting developers are less likely to
+also fix their faults as repository size grows. These studies demonstrate that
+SDLC event logs extracted from public repositories are rich enough to sustain
+state-transition modelling---a prerequisite for Stage~1 of PATHCAST---while
+also revealing that the construction step (deciding which GitHub events
+constitute process states) is itself a methodological contribution that the
+literature has not yet standardised.
+
+
+% -----------------------------------------------------------
+% RQ3.1 — Integration level table note (for \subsection{RQ3.1})
+% Replaces / extends current paragraph on integration levels
+% -----------------------------------------------------------
+
+Mapping the top-ranked papers onto the L0--L3 scale confirms and sharpens
+the picture drawn from the broader 73-paper PDF subset.
+The IC2+IC3 cluster (14 papers) concentrates almost exclusively at L1: each
+study applies one stochastic method to software data but does not compose it
+with a process mining layer. The IC1+IC2 cluster (4 papers) contains the
+two highest-integration examples in the full set---Incerto et
+al.~\cite{incerto2025} and L\'opez-Pintado and Dumas~\cite{lopezpintado2023}---both
+reaching L2 but stopping short of a complete SDLC forecasting pipeline.
+The IC1+IC3 cluster illustrates the complementary limitation: process mining
+is used to describe and assess software processes, but the stochastic layer
+required to convert discovered models into distributional forecasts is absent.
+PRIMAD~\cite{guinea2025} is the single study that assembles elements from
+all three ICs, yet its evaluation is component-wise rather than end-to-end.
+The practical consequence is unambiguous: the space of L3 systems---unified
+PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML architectures
+validated on SDLC data---is empty in the current literature, and PATHCAST
+is proposed as its first inhabitant.
+
+
+% -----------------------------------------------------------
+% RQ3.2 — Gap table (structured summary, for gap discussion)
+% Can be turned into a \begin{table}...\end{table} in LaTeX
+% -----------------------------------------------------------
+
+% Gap | Evidence from top-30 | PATHCAST response
+% ----+----------------------+------------------
+% G1  | 14 IC2+IC3 papers use stochastic models parametrised from
+%     | aggregate statistics, not from mined transitions. No paper
+%     | derives Markov matrices from a discovered process model.
+%     | → PATHCAST Stage 2: absorbing chain from mined net.
+%
+% G2  | IC1+IC2 papers (Incerto, López-Pintado) achieve stochastic
+%     | PM integration but target conformance/simulation, not
+%     | multi-step distributional forecasting.
+%     | → PATHCAST Stage 3: Monte Carlo over absorbing chain.
+%
+% G3  | IC1+IC3 papers (Gupta, Caldeira, Pourbafrani) chain PM
+%     | and prediction sequentially but without a stochastic layer.
+%     | → PATHCAST Stage 4: ML residual correction on MC output.
+%
+% G4  | No paper uses process-derived features (conformance score,
+%     | rework count, Markov expected remaining time, path entropy)
+%     | as ML inputs. Caldeira (2022) is closest (process complexity
+%     | metrics), but stops at correlation analysis.
+%     | → PATHCAST Feature Engineering component.
+%
+% G5  | Event-log construction from heterogeneous SDLC sources is
+%     | treated ad hoc in all reviewed papers; no reusable framework.
+%     | → PATHCAST Stage 1: explicit transformation pipeline.

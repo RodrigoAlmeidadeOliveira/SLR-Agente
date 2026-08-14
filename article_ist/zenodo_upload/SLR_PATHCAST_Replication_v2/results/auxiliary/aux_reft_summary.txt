@@ -1,0 +1,9 @@
+SLR PATHCAST — Aux Re-FT after Enrichment
+============================================================
+Re-FT papers: 285 (those that gained an abstract via enrichment)
+  include: 23 (8.1%)
+  exclude: 246 (86.3%)
+  pending: 16 (5.6%)
+  errors:  0
+
+NEW includes from re-FT: 23

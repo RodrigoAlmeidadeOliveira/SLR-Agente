@@ -1,0 +1,21 @@
+SLR PATHCAST — Deduplication Summary (post Reviewer-1 W1 tooling discovery)
+======================================================================
+381-tier (working_set + auxiliary): 381 -> 318 distinct studies (63 duplicates removed)
+404-tier (381 + second auxiliary pass): 404 -> 340 distinct studies (64 duplicates removed)
+
+QA-passed (>=4/8) before dedup, 381-tier: 315/381 (82.7%)
+QA-passed (>=4/8) after dedup, 381-tier:  259/318 (81.4%)
+QA-passed (>=4/8) after dedup, 404-tier:  279/340 (82.1%)
+
+Editorial adjudications:
+  G045 (Petri net CI/CD, ISSREW'22 vs RAMS'23): kept as 2 distinct studies (author decision)
+  G060 (IGI Global chapter reprinted 3x): kept as 1 study, canonical copy internal_id=2647ea07 (author decision)
+  Remaining 62 groups: auto-resolved as unambiguous cross/within-tier duplicates (working_set copy kept)
+
+Files written:
+  results/auxiliary/qa_combined_381_dedup.csv
+  results/auxiliary/extraction_combined_381_dedup.csv
+  results/auxiliary/qa_combined_404_dedup.csv
+  results/auxiliary/extraction_combined_404_dedup.csv
+
+ACTION REQUIRED: update cap3_article_body.tex — every occurrence of '381' and '404' (text, tables, figures, RQ1-RQ3/F1-F5 percentages, SPMF taxonomy counts) must be reviewed against the corrected counts above before resubmission.

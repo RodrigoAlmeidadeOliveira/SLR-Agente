@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite it as below."
+title: >-
+  Replication Package for "Process Mining and Stochastic Modeling for
+  Software Process Forecasting: A Systematic Mapping Study with an
+  LLM-Assisted Protocol"
+authors:
+  - family-names: Almeida de Oliveira
+    given-names: Rodrigo
+    orcid: "https://orcid.org/0009-0009-6310-4126"
+    affiliation: "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+    email: rodrigo1.almeida@pucpr.edu.br
+  - family-names: Ribeiro
+    given-names: Juliano de Paulo
+    orcid: "https://orcid.org/0009-0004-3605-485X"
+    affiliation: "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+  - family-names: Scalabrin
+    given-names: Edson Emilio
+    orcid: "https://orcid.org/0000-0002-3918-1799"
+    affiliation: "Pontifícia Universidade Católica do Paraná (PUC-PR), PPGIa, Curitiba, Brazil"
+type: dataset
+license: MIT
+keywords:
+  - Systematic Mapping Study
+  - Process Mining
+  - Stochastic Modeling
+  - Software Process Forecasting
+  - LLM-Assisted Screening
+  - Cohen's kappa
+  - PRISMA
+  - SEGRESS
+repository-code: "https://doi.org/10.5281/zenodo.20130276"
+url: "https://doi.org/10.5281/zenodo.20130276"
+version: "2.0.0"
+date-released: "2026-08-13"
+preferred-citation:
+  type: article
+  title: >-
+    Process Mining and Stochastic Modeling for Software Process
+    Forecasting: A Systematic Mapping Study with an LLM-Assisted
+    Protocol
+  authors:
+    - family-names: Almeida de Oliveira
+      given-names: Rodrigo
+    - family-names: Ribeiro
+      given-names: Juliano de Paulo
+    - family-names: Scalabrin
+      given-names: Edson Emilio
+  journal: "Information and Software Technology"
+  year: 2026
+  notes: "Submitted; round-1 revision."

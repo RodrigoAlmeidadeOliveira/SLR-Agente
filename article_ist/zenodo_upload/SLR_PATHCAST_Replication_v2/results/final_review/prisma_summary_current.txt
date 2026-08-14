@@ -1,0 +1,52 @@
+SLR PATHCAST — Current Full-Text / PRISMA Snapshot
+============================================================
+Full-text queue total: 886
+T/A include in queue: 111
+T/A maybe in queue: 775
+
+Current FT decisions:
+  include: 169
+  exclude: 717
+  pending: 0
+  blank / unresolved: 0
+
+Priority bands among queue:
+  A: 95
+  B: 16
+  C: 533
+  D: 54
+  E: 188
+
+PDF availability among pending items already attempted for download:
+  downloaded: 0
+  oa_found: 0
+  manual: 0
+  not_found: 0
+
+Operational priority groups among unresolved items:
+  1_com_pdf_ou_oa: 0
+  2_com_doi_sem_pdf: 0
+  3_banda_d_sem_doi: 0
+  4_banda_e_sem_doi: 0
+  5_outros_sem_doi: 0
+
+Dominant exclusion criterion among current FT excludes:
+  EC1: 204
+  EC3: 197
+  EC5: 148
+  EC2: 92
+  EC4: 59
+  <missing>: 15
+  EC1 - O domínio é avaliação de confiabilidade de software como produto, não processos de desenvolvimento de software: 1
+  EC1 - domínio desviado: confiabilidade de software é processamento/qualidade de produto, não processo de desenvolvimento: 1
+
+To finalize the SLR, the 739 unresolved items should be turned into:
+  include
+  exclude
+  pending only when full text remains inaccessible
+
+Artifacts generated alongside this snapshot:
+  Pending review sheet: results/final_review/fulltext_pending_review.csv
+  Pending prioritized: results/final_review/fulltext_pending_review_prioritized.csv
+  Pending DOI no PDF: results/final_review/fulltext_pending_doi_no_pdf.csv
+  Current included studies: results/final_review/included_studies_current.csv

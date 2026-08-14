@@ -1,0 +1,160 @@
+dup_group_id,match_signal,internal_id,origin,title,doi,year,qa_total,qa_include,decision,decision_notes
+G001,exact_doi,03654165,auxiliary,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,2021.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G001,exact_doi,7b0b22ea,working_set,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,2021.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G002,exact_doi,062516d6,auxiliary,Mining Fork-Including Software Development Traces,10.1007/978-3-031-07481-3_12,2022.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G002,exact_doi,b5ffb64d,working_set,Mining Fork-Including Software Development Traces,10.1007/978-3-031-07481-3_12,2022.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G003,exact_doi,0ffa4684,auxiliary,Egidio: A non-invasive approach for synthesizing organizational models,10.1109/ICSE.2012.6227062,2012.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G003,exact_doi,ae20e68e,working_set,Egidio: A non-invasive approach for synthesizing organizational models,10.1109/ICSE.2012.6227062,2012.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G004,exact_title_only,14ee5dda,auxiliary,Supporting software evolution actions with process mining,10.5753/cibse.2023.24692,2023.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G004,exact_title_only,fda7184e,working_set,Supporting software evolution actions with process mining,,2023.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G005,exact_doi,1852bb61,auxiliary,"Exploring Collaboration Patterns in GitHub using Discrete Time Markov
+Chain",10.1109/APSEC60848.2023.00090,2023.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G005,exact_doi,21851bba,working_set,Exploring Collaboration Patterns in GitHub Using Discrete Time Markov Chain,10.1109/APSEC60848.2023.00090,2023.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G006,exact_doi,1941da25,auxiliary,The Economic Impact of Software Development Process Choice -- Cycle-Time Analysis and Monte Carlo Simulation Results,10.1109/HICSS.2015.599,2015.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G006,exact_doi,261f6383,working_set,The economic impact of software development process choice - Cycle-time analysis and Monte Carlo simulation results,10.1109/HICSS.2015.599,2015.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G007,exact_title_only,1c2611b3,auxiliary,Linking software process modeling with Markov decision theory,10.1109/cmpsac.2004.1342699,2004.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G007,exact_title_only,3c810db6,working_set,Linking software process modeling with Markov decision theory,,2004.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G008,exact_doi,1e2799d8,auxiliary,"An Exploratory Study on Usage of Process Mining in Agile Software
+Development",10.1007/978-3-319-67383-7_14,2017.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G008,exact_doi,2e76e921,working_set,An exploratory study on usage of process mining in agile software development,10.1007/978-3-319-67383-7_14,2017.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G009,exact_doi,1f427503,auxiliary,"Nirikshan: Mining Bug Report History for Discovering Process Maps,
+Inefficiencies and Inconsistencies",10.1145/2590748.2590749,2014.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G009,exact_doi,829f8c13,working_set,"Nirikshan: Mining Bug Report History for Discovering Process Maps, Inefficiencies and Inconsistencies",10.1145/2590748.2590749,2014.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G010,exact_doi,24624e32,auxiliary,"Architecting software monitors for control-flow anomaly detection
+through large language models and conformance checking",10.1016/j.infsof.2026.108133,2026.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G010,exact_doi,f7a54d4c,working_set,Architecting software monitors for control-flow anomaly detection through large language models and conformance checking,10.1016/j.infsof.2026.108133,2026.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G011,exact_doi,24e9c63d,auxiliary,Monte carlo simulation based estimations: Case from a global outsourcing company,10.1109/ITMC.2011.5996034,2011.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G011,exact_doi,84315802,working_set,Monte Carlo simulation based estimations: Case from a global outsourcing company,10.1109/ITMC.2011.5996034,2011.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G012,exact_doi,264a3d07,auxiliary,Applying process mining techniques in software process appraisals,10.1016/j.infsof.2017.01.004,2017.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G012,exact_doi,0d31db29,working_set,Applying process mining techniques in software process appraisals,10.1016/j.infsof.2017.01.004,2017.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G013,exact_doi,2b246ed2,auxiliary,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,2022.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G013,exact_doi,4b34f7a5,working_set,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,2022.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G014,exact_doi,2b556768,auxiliary,"Unearthing open source decision-making processes: A case study of python
+enhancement proposals",10.1002/spe.3128,2022.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G014,exact_doi,b8fc130d,working_set,Unearthing open source decision-making processes: A case study of python enhancement proposals,10.1002/spe.3128,2022.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G015,exact_doi,35e35d46,auxiliary,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,2024.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G015,exact_doi,9ffa3123,working_set,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,2024.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G016,exact_doi,3665efbb,auxiliary,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,2024.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G016,exact_doi,373ad20e,working_set,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,2024.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G017,exact_doi,3c32e186,auxiliary,"Probabilistic Model Checking GitHub Repositories for Software Project
+Analysis",10.3390/app14031260,2024.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G017,exact_doi,6ff2b7f2,working_set,Probabilistic Model Checking GitHub Repositories for Software Project Analysis,10.3390/app14031260,2024.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G018,exact_doi,3cc91643,auxiliary,"Probabilistic Approach to Predicting Risk in Software Projects Using
+Software Repository Data",10.1142/S0218194015500151,2015.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G018,exact_doi,b8b5b64e,working_set,Probabilistic Approach to Predicting Risk in Software Projects Using Software Repository Data,10.1142/S0218194015500151,2015.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G019,exact_doi,3fa28ae5,auxiliary,"Quantitative Evaluation of Software Component Behavior Discovery
+Approach",10.1587/transinf.2020MPL0001,2021.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G019,exact_doi,f64a5949,working_set,Quantitative evaluation of software component behavior discovery approach,10.1587/transinf.2020MPL0001,2021.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G020,exact_doi,4e79ecd7,auxiliary,"Application of Constructive Modeling and Process Mining Approaches to
+the Study of Source Code Development in Software Engineering Courses",10.24138/jcomss-2021-0046,2021.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G020,exact_doi,9e450f55,working_set,Application of Constructive Modeling and Process Mining Approaches to the Study of Source Code Development in Software Engineering Courses,10.24138/JCOMSS-2021-0046,2021.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G021,exact_doi,4f61e947,auxiliary,An Analysis of Monte Carlo Simulations for Forecasting Software Projects,10.1145/3412841.3442030,2021.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G021,exact_doi,b123faf2,working_set,An analysis of Monte Carlo simulations for forecasting software projects,10.1145/3412841.3442030,2021.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G022,exact_doi,6394fe12,auxiliary,"Predicting the Unpredictable: Using Monte Carlo Simulation to Predict
+Project Completion Date",10.1007/978-3-319-55907-0_11,2017.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G022,exact_doi,4c73b15f,working_set,Predicting the unpredictable: Using monte carlo simulation to predict project completion date,10.1007/978-3-319-55907-0_11,2017.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G023,exact_doi,63eacbed,auxiliary,"Toward objective software process information: experiences from a case
+study",10.1007/s11219-010-9105-8,2011.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G023,exact_doi,c24db118,working_set,Toward objective software process information: Experiences from a case study,10.1007/s11219-010-9105-8,2011.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G024,exact_doi,650ccfb8,auxiliary,"Assessing the Risk of Software Development in Agile Methodologies Using
+Simulation",10.1109/ACCESS.2021.3115941,2021.0,8.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G024,exact_doi,f36a08fe,working_set,Assessing the risk of software development in agile methodologies using simulation,10.1109/ACCESS.2021.3115941,2021.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G025,exact_doi,65ef350b,auxiliary,"Nirikshan: Process Mining Software Repositories to Identify
+Inefficiencies, Imperfections, and Enhance Existing Process Capabilities",10.1145/2591062.2591080,2014.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G025,exact_doi,d1ed6154,working_set,"Nirikshan: Process Mining Software Repositories to Identify Inefficiencies, Imperfections, and Enhance Existing Process Capabilities",10.1145/2591062.2591080,2014.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G026,exact_doi,697eb5d3,auxiliary,"Mapping Process Mining Techniques to Agile Software Development
+Perspectives",10.5220/0011850500003464,2023.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G026,exact_doi,5b7858a6,working_set,Mapping Process Mining Techniques to Agile Software Development Perspectives,10.5220/0011850500003464,2023.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G027,exact_doi,6a2c2e16,aux_reft,Conformance Analysis on Software Development: An Experience with Process Mining,10.1504/ijbpim.2011.040203,2011.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G027,exact_doi,4316248d,working_set,Conformance analysis on software development: An experience with process mining,10.1504/IJBPIM.2011.040203,2011.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G028,exact_doi,741b52c5,auxiliary,Software Process Evaluation from User Perceptions and Log Data,10.1002/smr.2438,2022.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G028,exact_doi,fbe93e3d,working_set,Software Process Evaluation from User Perceptions and Log Data,10.1002/smr.2438,2022.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G029,exact_doi,76276f2e,auxiliary,"Modeling distributed software defect removal effectiveness in the
+presence of code churn",10.1016/j.mcm.2004.10.021,2005.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G029,exact_doi,a20e7c58,working_set,Modeling distributed software defect removal effectiveness in the presence of code churn,10.1016/j.mcm.2004.10.021,2005.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G030,exact_doi,7898ddcb,auxiliary,"Process mining support for Capability Maturity Model Integration-based
+software process assessment, in principle and in practice",10.1002/smr.1645,2014.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G030,exact_doi,932f2a18,working_set,"Process mining support for Capability Maturity Model Integration-based software process assessment, in principle and in practice",10.1002/smr.1645,2014.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G031,exact_title_only,dbcd2435,auxiliary,On the Potential of Process Simulation in Software Project Schedule Optimization,10.1109/compsac.2005.115,2006.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G031,exact_title_only,8188ab12,auxiliary,"On the potential of process simulation in software project schedule
+optimization",,2005.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G032,exact_doi,82fd1b28,auxiliary,"Identifying Possible Improvements of Software Development Life Cycle
+(SDLC) Process of a Bank by Using Process Mining",10.1142/S0218194022400010,2022.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G032,exact_doi,eeee1fa8,working_set,Identifying Possible Improvements of Software Development Life Cycle (SDLC) Process of a Bank by Using Process Mining,10.1142/S0218194022400010,2022.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G033,exact_doi,835c31bf,auxiliary,Rate-Based Queueing Simulation Model of Open Source Software Debugging Activities,10.1109/TSE.2014.2354032,2014.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G033,exact_doi,f6edde4a,working_set,Rate-based queueing simulation model of open source software debugging activities,10.1109/TSE.2014.2354032,2014.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G034,exact_title_only,839b7aab,auxiliary,"Experiences in discovering, modeling, and reenacting open source
+software development processes",,2005.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G034,exact_title_only,2c280053,working_set,"Experiences in discovering, modeling, and reenacting open source software development processes",10.1007/11608035_36,2006.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G035,exact_doi,852d4b6a,auxiliary,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models Generated by Mining Event-Log Data in Issue Tracking Systems,10.1109/COMPSAC.2016.64,2016.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G035,exact_doi,00ce8cfe,working_set,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models Generated by Mining Event-Log Data in Issue Tracking Systems,10.1109/COMPSAC.2016.64,2016.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G036,exact_doi,89ad8e3a,auxiliary,Mining Software Process Lines,10.1145/2889160.2889267,2016.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G036,exact_doi,37b22a16,working_set,Mining Software Process Lines,10.1145/2889160.2889267,2016.0,2.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G037,exact_doi,8a7996cf,auxiliary,"Predicting bug-fixing time: A replication study using an open source
+software project",10.1016/j.jss.2017.02.021,2018.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G037,exact_doi,4409efef,working_set,Predicting bug-fixing time: A replication study using an open source software project,10.1016/j.jss.2017.02.021,2018.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G038,exact_doi,98786988,auxiliary,High Productivity Programmers Use Effective Task Processes in Unit-Testing,10.1109/APSEC.2015.31,2015.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G038,exact_doi,b7fd840a,working_set,High productivity programmers use effective task processes in unit-testing,10.1109/APSEC.2015.31,2016.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G039,exact_doi,9a4decc9,auxiliary,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,2025.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G039,exact_doi,bf72ff27,working_set,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,2025.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G040,exact_doi,a076177d,auxiliary,Understanding What Software Engineers Are Working on The Work-Item Prediction Challenge,10.1145/3387904.3389294,2020.0,2.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G040,exact_doi,b7022ac2,working_set,Understanding What Software Engineers Are Working on: The Work-Item Prediction Challenge,10.1145/3387904.3389294,2020.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G041,exact_doi,a0b87a64,auxiliary,"Constructing a Hybrid Software Process Simulation Model in Practice: An
+Exemplar from Industry",10.1145/3379177.3388906,2020.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G041,exact_doi,8a97d0cf,working_set,Constructing a Hybrid Software Process Simulation Model in Practice: An Exemplar from Industry,10.1145/3379177.3388906,2020.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G042,exact_doi,a756ae65,auxiliary,"Continuous software monitoring backed by process mining: a systematic
+literature review",10.1007/s41060-025-01000-w,2026.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G042,exact_doi,2c1f1193,working_set,Continuous software monitoring backed by process mining: a systematic literature review,10.1007/s41060-025-01000-w,2026.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G043,exact_doi,aa97e968,auxiliary,A method for stochastic modeling the software development process in constrained resource environments,10.1109/SIEDS.2008.4559698,2008.0,3.0,False,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G043,exact_doi,0fcd5ece,working_set,A method for stochastic modeling the software development process in constrained resource environments,10.1109/SIEDS.2008.4559698,2008.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G044,exact_doi,ab39dd98,auxiliary,Kanban and process mining in the task management,10.1145/3275245.3275286,2015.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G044,exact_doi,50d875ff,working_set,Kanban and Process Mining in the Task Management,10.1145/3275245.3275286,2018.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G045,exact_title_only,d65695c6,working_set,A stochastic petri net model of continuous integration and continuous delivery,10.1109/RAMS51473.2023.10088212,2023.0,5.0,True,keep,author: distinct contributions (workshop vs extended conference version)
+G045,exact_title_only,ae9983fa,working_set,A Stochastic Petri net Model of Continuous Integration and Continuous Delivery,10.1109/ISSREW55968.2022.00050,2022.0,4.0,True,keep,author: distinct contributions (workshop vs extended conference version)
+G046,exact_doi,b5b3cb90,auxiliary,Software Process Analysis Methodology – A Methodology Based on Lessons Learned in Embracing Legacy Software,10.1109/ICSME.2018.00076,2018.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G046,exact_doi,4e01ae35,working_set,Software process analysis methodology-a methodology based on lessons learned in embracing legacy software,10.1109/ICSME.2018.00076,2018.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G047,exact_doi,b5eb7e3b,auxiliary,Empirical analysis in software process simulation modeling,10.1016/S0164-1212(00)00006-6,2000.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G047,exact_doi,9c255853,working_set,Empirical analysis in software process simulation modeling,10.1016/S0164-1212(00)00006-6,2000.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G048,exact_doi,ce1c9294,auxiliary,"``Bottleneck Analysis in Software Development: A Case Study Using
+Process Mining″",10.1007/978-3-032-03708-4_22,2026.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G048,exact_doi,9ea592cd,working_set,“Bottleneck Analysis in Software Development: A Case Study Using Process Mining”,10.1007/978-3-032-03708-4_22,2026.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G049,exact_title_only,cfe3c926,auxiliary,"A Probabilistic Approach to Building Defect Prediction Model for
+Platform-based Product Lines",,2017.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G049,exact_title_only,3d967450,working_set,A probabilistic approach to building defect prediction model for platform-based product lines,,2017.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G050,exact_doi,d266ec18,auxiliary,"Extracting and Conserving Production Data as Test Cases in Executable
+Business Process Architectures",10.1016/j.procs.2017.11.130,2017.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G050,exact_doi,ec38f0ba,working_set,Extracting and Conserving Production Data as Test Cases in Executable Business Process Architectures,10.1016/j.procs.2017.11.130,2017.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G051,exact_doi,d32effe8,auxiliary,Mining Software Development Process Variations,10.1145/2695664.2696046,2015.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G051,exact_doi,e23bbc10,working_set,Mining Software Development Process Variations,10.1145/2695664.2696046,2015.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G052,exact_doi,d49eb731,auxiliary,Process mining for agile software process assessment and improvement,10.1016/j.infsof.2025.107680,2025.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G052,exact_doi,69029db6,working_set,Process mining for agile software process assessment and improvement,10.1016/j.infsof.2025.107680,2025.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G053,exact_doi,d5718074,auxiliary,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,2023.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G053,exact_doi,1b7688b7,working_set,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,2023.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G054,exact_doi,d5b81753,auxiliary,"Mining Collaboration Patterns of Software Development Processes Based on
+Trace Alignment",10.1145/3084100.3084103,2017.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G054,exact_doi,08d64489,working_set,Mining Collaboration Patterns of Software Development Processes Based on Trace Alignment,10.1145/3084100.3084103,2017.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G055,exact_doi,db573f61,auxiliary,"Modeling uncertainties involved with software development with a
+stochastic Petri net",10.1111/j.1468-0394.2006.00411.x,2006.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G055,exact_doi,ae4f4926,working_set,Modeling uncertainties involved with software development with a stochastic Petri net,10.1111/j.1468-0394.2006.00411.x,2006.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G056,exact_doi,dca49e04,auxiliary,Business activity monitoring solution to detect deviations in business process execution,10.1109/SACI.2015.7208243,2015.0,5.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G056,exact_doi,508f3b5b,working_set,Business activity monitoring solution to detect deviations in business process execution,10.1109/SACI.2015.7208243,2015.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G057,exact_doi,dd998c10,auxiliary,Evaluating the Effectiveness of Software Development Processes Based on Probabilistic Causal Models,10.1109/SUMMA53307.2021.9632118,2021.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G057,exact_doi,db43c22c,working_set,Evaluating the Effectiveness of Software Development Processes Based on Probabilistic Causal Models,10.1109/SUMMA53307.2021.9632118,2021.0,4.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G058,exact_doi,dde62dae,auxiliary,"Using process mining for Git log analysis of projects in a software
+development course",10.1007/s10639-021-10564-6,2021.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G058,exact_doi,6f295ec6,working_set,Using process mining for Git log analysis of projects in a software development course,10.1007/s10639-021-10564-6,2021.0,5.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G059,exact_doi,e1f3598f,auxiliary,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,2018.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G059,exact_doi,d0c47271,working_set,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,2018.0,8.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G060,exact_title_only,07ddd290,working_set,An integrated infrastructure using process mining techniques for software process verification,10.4018/978-1-5225-3923-0.ch061,2017.0,6.0,True,drop,"author: same study, editorial reprint — duplicate of G060 keeper"
+G060,exact_title_only,2647ea07,working_set,An integrated infrastructure using process mining techniques for software process verification,10.4018/978-1-4666-7456-1.ch036,2015.0,7.0,True,keep,"author: same study, editorial reprint — canonical (highest QA) copy"
+G060,exact_title_only,e454d548,working_set,An integrated infrastructure using process mining techniques for software process verification,10.4018/978-1-4666-4667-4.ch014,2013.0,6.0,True,drop,"author: same study, editorial reprint — duplicate of G060 keeper"
+G061,exact_doi,e54a7dad,auxiliary,"Process Mining Software Repositories from Student Projects in an
+Undergraduate Software Engineering Course",10.1145/2591062.2591152,2014.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G061,exact_doi,6fd30d7e,working_set,Process Mining Software Repositories from Student Projects in an Undergraduate Software Engineering Course,10.1145/2591062.2591152,2014.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G062,exact_doi,e6ba845c,auxiliary,"Fault-insertion and fault-fixing behavioural patterns in Apache Software
+Foundation Projects",10.1016/j.infsof.2023.107187,2023.0,7.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G062,exact_doi,56342950,working_set,Fault-insertion and fault-fixing behavioural patterns in Apache Software Foundation Projects,10.1016/j.infsof.2023.107187,2023.0,7.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G063,exact_doi,fab243cc,auxiliary,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,2018.0,4.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G063,exact_doi,6f9a5a08,working_set,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,2018.0,3.0,False,keep,auto: unambiguous cross/within-tier duplicate — canonical copy
+G064,exact_doi,ffef36df,auxiliary,Using Constraint Mining to Analyze Software Development Processes,10.1109/ICSSP.2019.00021,2019.0,6.0,True,drop,auto: unambiguous cross/within-tier duplicate — same study as keeper
+G064,exact_doi,b788b176,working_set,Using constraint mining to analyze software development processes,10.1109/ICSSP.2019.00021,2019.0,6.0,True,keep,auto: unambiguous cross/within-tier duplicate — canonical copy

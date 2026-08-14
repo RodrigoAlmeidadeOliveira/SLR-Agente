@@ -1,0 +1,21 @@
+internal_id,title,doi,year
+e3d6d00e,Towards Streamlining Auditing for Compliance with Requirements in Open-Source Software at NASA,10.1109/DASC66011.2025.11257352,2025
+d0c47271,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,2018
+f7a54d4c,Architecting software monitors for control-flow anomaly detection through large language models and conformance checking,10.1016/j.infsof.2026.108133,2026
+03b0c494,Stochastic conformance checking based on variable-length Markov chains,10.1016/j.is.2025.102561,2025
+bf72ff27,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,2025
+43e84ac4,MINDS: An NLP-Driven Process Mining Framework for Superior Microservices Decomposition,10.1109/ACCESS.2025.3639460,2025
+c7d555aa,Mining Pull Requests to Detect Process Anomalies in Open Source Software Development,10.1145/3597503.3639196,2024
+9ffa3123,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,2024
+373ad20e,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,2024
+56342950,Fault-insertion and fault-fixing behavioural patterns in Apache Software Foundation Projects,10.1016/j.infsof.2023.107187,2023
+60f3005f,Discovery and Simulation of Business Processes with Probabilistic Resource Availability Calendars,10.1109/ICPM60904.2023.10271965,2023
+4b34f7a5,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,2022
+7b0b22ea,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,2021
+abfd6b2e,Business process analysis of programmer job role in software development using process mining,10.1016/j.procs.2021.12.191,2021
+f36a08fe,Assessing the risk of software development in agile methodologies using simulation,10.1109/ACCESS.2021.3115941,2021
+b123faf2,An analysis of Monte Carlo simulations for forecasting software projects,10.1145/3412841.3442030,2021
+8de6dcfa,Connecting software reliability growth models to software defect tracking,10.1109/ISSRE5003.2020.00022,2020
+588a19f5,Assessing Software Development Teams' Efficiency using Process Mining,10.1109/ICPM.2019.00020,2019
+4409efef,Predicting bug-fixing time: A replication study using an open source software project,10.1016/j.jss.2017.02.021,2018
+16e31373,The v-algorithm for discovering software process lines,10.1002/smr.1778,2016
