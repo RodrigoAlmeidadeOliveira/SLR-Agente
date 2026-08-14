@@ -71,7 +71,7 @@ QA/extração (n=31, ambos include): categóricos ok-a-fracos; texto livre 0% ex
 | m4 | Datas de busca por base; “December 2026” | crítica | **NOT-DONE** | = R1 W3; l.153 ainda “to December 2026” |
 | m5 | Snowball: included set vs control set | baixa | **NOT-DONE** | §2.2.3 vs §3.1 |
 | m6 | Control set de 10 papers não calibra recall | baixa | **NOT-DONE** | Temperar ou expandir |
-| M14 | Zenodo público (R7 / SEGRESS 27) | **bloqueador** | **DONE** | v2 Open: concept `20130275`, v1 `20130276`, v2 `21939471` |
+| M14 | Zenodo público (R7 / SEGRESS 27) | **bloqueador** | **DONE** | depósito novo Open: `10.5281/zenodo.21939600` |
 | m7 | IC em κ e em F1–F5 | média | **NOT-DONE** | Wilson do Recall já calculável (acima) |
 | M10 | Po=97,4% + κ=0 é paradoxo de prevalência, não desacordo | média | **NOT-DONE** | Texto ainda não interpreta a célula T/A auxiliar |
 | m8 | Dois LLMs da mesma provedora não são independentes | média | **NOT-DONE** | Agora há humano; declarar o limite LLM–LLM |
@@ -81,7 +81,7 @@ QA/extração (n=31, ambos include): categóricos ok-a-fracos; texto livre 0% ex
 | M12 | Tabela 13 L2=4 vs “1 paper triplo-IC” | **bloqueador** | **NOT-DONE** | l.1420 ainda “Three ICs matched” count 4 |
 | M13 | Denominador F1–F5 vs filtro QA | crítica | **NOT-DONE** | = R1 W5; base correta pós-dedup: declarar 259/318 ou 169 |
 | m11 | Tabela 9 vs 10; 6147 vs 5783; PRISMA 238 vs 243; rótulos IC | média | **NOT-DONE** | Funil ainda não unificado |
-| m16 | Um único DOI Zenodo; alinhar 6.5 vs Data availability | média | **DONE** | Concept `20130275`; v2 = `21939471` |
+| m16 | Um único DOI Zenodo; alinhar 6.5 vs Data availability | média | **DONE** | único DOI `21939600` |
 | Título | Mapping study vs SLR (SEGRESS item 1) | estrutural | **NOT-DONE** | **Decisão sua** |
 | Abstract | Limitações + validação; não afirmar “1 of 404” sem suporte | alta | **NOT-DONE** | `main.tex:121,143` ainda “only 1 of 404” |
 | lang | “four-direZction” | trivial | **DONE no source** | `main.tex` já lê “four-direction”; provavelmente PDF antigo |

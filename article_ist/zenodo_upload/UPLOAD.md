@@ -1,13 +1,8 @@
-# Zenodo — DOIs corretos
+# Zenodo — depósito atual
 
-Zenodo emite **três** identificadores nesta família:
+**DOI (usar no artigo):** `10.5281/zenodo.21939600`  
+https://doi.org/10.5281/zenodo.21939600
 
-| Papel | DOI |
-|--------|-----|
-| **Cite all versions** (concept) | `10.5281/zenodo.20130275` |
-| Version 1 | `10.5281/zenodo.20130276` |
-| **Version 2** (esta revisão) | `10.5281/zenodo.21939471` |
+Se a página mostrar um segundo número em “Cite all versions?”, mande esse também. O LaTeX agora cita só `21939600`.
 
-No artigo, `\zenododoi` = **20130275**. Data Availability e carta também declaram a v2 (`21939471`).
-
-Não cite `20130276` como concept DOI — isso era a v1.
+Access deve ser **Open**. Teste o download deslogado.
