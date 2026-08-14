@@ -17,8 +17,11 @@ Curitiba, Brazil.
 
 **Manuscript target.** Information and Software Technology (Elsevier).
 
-**Concept DOI.** [10.5281/zenodo.20130276](https://doi.org/10.5281/zenodo.20130276)
-(always resolves to the latest version).
+**Concept DOI** (“cite all versions”). [10.5281/zenodo.20130275](https://doi.org/10.5281/zenodo.20130275)
+
+**This version (v2).** [10.5281/zenodo.21939471](https://doi.org/10.5281/zenodo.21939471)
+
+Version 1 of the same record was `10.5281/zenodo.20130276`.
 
 **License.** MIT (see `LICENSE`).
 
@@ -162,7 +165,8 @@ Oliveira, R. A., Ribeiro, J. P., Scalabrin, E. E. (2026).
 Replication Package for "Process Mining and Stochastic Modeling
 for Software Process Forecasting: A Systematic Mapping Study
 with an LLM-Assisted Protocol" (v2.0.0).
-Zenodo. https://doi.org/10.5281/zenodo.20130276
+Zenodo. https://doi.org/10.5281/zenodo.21939471
+(concept DOI: https://doi.org/10.5281/zenodo.20130275)
 ```
 
 ---
