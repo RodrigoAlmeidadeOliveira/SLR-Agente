@@ -96,9 +96,8 @@
 %% --- Abstract (150–300 words, structured) ---
 \begin{abstract}
 \textbf{Context.}
-Software development processes generate rich event data --- commits, issues,
-pull requests, CI/CD logs --- that process mining (PM) and stochastic models
-can analyze to support forecasting. Yet integration of these techniques for
+Software processes generate event data that process mining (PM) and
+stochastic models can use for forecasting, yet their integration for
 software development lifecycle (SDLC) prediction is reported only
 anecdotally.
 \textbf{Objective.}
@@ -106,39 +105,33 @@ To map the state of the art at the intersection of process mining,
 stochastic modeling, and machine-learning forecasting applied to software
 processes; to identify research gaps; and to propose a research agenda.
 \textbf{Method.}
-We executed a systematic mapping study reported against SEGRESS
-\cite{kitchenham2023segress}, following Kitchenham and Charters
-(2007), Petersen et~al. (2015), and Wohlin (2014) for search and
-snowballing, augmented with an LLM-assisted screening protocol
-(\textit{claude-haiku-4-5} as primary screener, \textit{claude-sonnet-4-6}
-as cross-model verifier). Searches were executed on 12~April~2026 over
-January~1994--December~2025 (full calendar years). From 5{,}783 deduplicated
-records plus 364 control and manually imported items, the protocol screened
-two corpus tiers: a 2{,}340-paper working-set tier and a 3{,}807-paper
-auxiliary tier (6{,}147 papers screened in total). Cohen's $\kappa$ was
-computed on stratified 20\% LLM--LLM samples and on an independent blind
-human double-screening sample ($n=468$ T/A, $n=177$ FT). An 8-criterion
-reporting-quality checklist (Dyba and Dingsoyr, 2008) was applied to all
-confirmed includes.
+We executed a systematic mapping study reported against
+SEGRESS~\cite{kitchenham2023segress}, with LLM-assisted screening
+(\textit{claude-haiku-4-5} as primary screener;
+\textit{claude-sonnet-4-6} as verifier). Searches were executed on
+12~April~2026 over January~1994--December~2025. From 5{,}783 deduplicated
+records plus 364 control items, two corpus tiers were screened: 2{,}340
+working-set and 3{,}807 auxiliary papers (6{,}147 in total). Cohen's
+$\kappa$ was computed on stratified 20\% LLM--LLM samples and on an
+independent blind human sample ($n=468$ T/A, $n=177$ FT). An 8-criterion
+reporting-quality checklist was applied to all confirmed includes.
 \textbf{Results.}
 340 distinct primary studies were confirmed after cross-tier deduplication
 (404 raw confirmations: 169 working-set + 212 + 23 auxiliary). LLM--LLM
-agreement was substantial in the working-set tier
-($\kappa_{\text{binary}} = 0.695$ T/A, $0.694$ FT); human--LLM agreement
-was fair at T/A ($\kappa_{\text{binary}} = 0.335$) and slight at FT
-($\kappa_{\text{binary}} = 0.122$), with measured Lost Evidence of 75\%
-under strict binary include matching (95\% Wilson CI: 0.18--0.33 recall at
-FT). Five findings emerge: F1 a descriptive ceiling; F2 ad-hoc event-log
-construction; F3 weak stochastic--PM integration; F4 pipeline fragmentation
-(only 1 of 340 papers jointly satisfies PM + stochastic + forecasting in the
-LLM-confirmed corpus); F5 process-derived ML features unexplored.
+agreement was substantial ($\kappa_{\text{binary}} = 0.695$ T/A,
+$0.694$ FT); human--LLM agreement was fair at T/A ($0.335$) and slight at
+FT ($0.122$), with 75\% Lost Evidence at full-text screening. Findings:
+F1 descriptive ceiling; F2 ad-hoc event-log construction; F3 weak
+stochastic--PM integration; F4 pipeline fragmentation (only 1 of 340
+papers jointly satisfies PM, stochastic modeling, and forecasting);
+F5 process-derived ML features unexplored.
 \textbf{Conclusion.}
 The literature is descriptively rich but predictively fragmented. We propose
 the SPMF taxonomy and a four-direction research agenda. PATHCAST is sketched
 as a future-work hypothesis, not as an empirically validated pipeline.
 \textbf{Limitations.}
 Structural scarcity claims depend on an LLM selection protocol whose recall
-against a human gold standard remains limited at full-text screening; cross-tier
+against a human gold standard remains limited at full-text screening;
 deduplication reduced the combined corpus from 404 to 340 studies.
 \end{abstract}
 

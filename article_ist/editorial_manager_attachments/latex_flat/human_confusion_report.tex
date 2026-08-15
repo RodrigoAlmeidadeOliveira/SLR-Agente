@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\caption{Human-vs-LLM confusion matrices on a stratified random 20\% sample (human rater as gold standard; counts, not percentages). Recall and Lost Evidence (1$-$Recall) use Wilson 95\% confidence intervals. The T/A row labelled ``maybe$\rightarrow$positive'' treats LLM \texttt{maybe} decisions as positive referrals, matching LLM4SCREENLIT~R6.}
+\label{tab:human-confusion}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l rrrr c c c}
+\toprule
+Stage & TP & FP & FN & TN & Recall & 95\% CI & Lost Ev. \\
+\midrule
+T/A (strict) & 18 & 4 & 54 & 392 & 0.250 & (0.164, 0.361) & 0.750 \\
+T/A (maybe$\rightarrow$pos.) & 72 & 105 & 0 & 291 & 1.000 & (0.949, 1.000) & 0.000 \\
+FT & 31 & 3 & 95 & 48 & 0.246 & (0.179, 0.328) & 0.754 \\
+\bottomrule
+\end{tabular}
+\end{table}

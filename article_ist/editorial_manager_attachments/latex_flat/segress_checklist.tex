@@ -1,0 +1,69 @@
+% SEGRESS (Kitchenham, Madeyski \& Budgen, TSE 2023) reporting checklist
+% for this systematic mapping study. Item numbering follows SEGRESS Table~9
+% (PRISMA 2020-inspired). ``N/A (mapping)'' marks items SEGRESS declares
+% optional or not required for mapping studies.
+
+\begin{longtable}{c p{4.4cm} p{6.6cm} l}
+\caption{SEGRESS reporting checklist for this systematic mapping study.
+Locations refer to the revised manuscript. Status: R~=~reported;
+P~=~partial; N/A~=~not required for mapping studies under SEGRESS.}
+\label{tab:segress-checklist}\\
+\toprule
+\textbf{Item} & \textbf{Requirement (mapping)} & \textbf{Where addressed} & \textbf{St.} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable{} --- continued from previous page}\\
+\toprule
+\textbf{Item} & \textbf{Requirement (mapping)} & \textbf{Where addressed} & \textbf{St.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\emph{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+1 & Title identifies the report as a systematic mapping study and states the topic. & Title page: ``A Systematic Mapping Study with an LLM-Assisted Protocol''. & R \\
+2 & Structured abstract: background, objective, methods, results, limitations, conclusion. & Abstract (incl.\ a Limitations clause and human-validation statement). & R \\
+3 & Rationale: why the review is needed; gap vs prior secondary studies. & Introduction: states that no prior mapping covers the joint PM~$\times$~stochastic~$\times$~forecasting intersection. & R \\
+4 & Objectives / research questions. & Table~\ref{tab:slr-rqs}; Section~\ref{sec:slr-rqs}. & R \\
+5 & Eligibility criteria, date/language restrictions, handling of on-topic prior reviews. & Table~\ref{tab:criteria} (IC1--IC3 publication filters; IC4a--IC4d content; EC1--EC5). Window Jan~1994--Dec~2025. On-topic secondary studies would be used to motivate the work (EC4 excludes off-topic reviews). & R \\
+6 & Information sources with search execution dates. & Table~\ref{tab:db-adaptations}; all databases searched on 12~April~2026. & R \\
+7 & Full search strategy (strings, snowballing, completeness checks). & Section~\ref{sec:slr-protocol}; per-database strings in the replication package; snowballing from the control set (Table~\ref{tab:validation-set}). Control-set recovery $10/10$ is a weak recall bound, not a completeness guarantee. & R \\
+8 & Selection process: phases, number of assessors, disagreement handling, automation, agreement. & Sections~\ref{sec:slr-llm}, \ref{sec:slr-threats}: one LLM screener; one human rater on a 20\% blind sample; original EC5-extended closure of uncertainty (revised protocol treats \texttt{maybe}/\texttt{pending} as human referrals). $\kappa$, Recall, Lost Evidence in Tables~\ref{tab:human-kappa-results}--\ref{tab:human-confusion}. & R \\
+9 & Data-collection process: reviewers, independence, automation. & LLM extraction (Haiku) on abstracts/PDFs; human re-extraction on $n=31$ dual-includes; no independent second human extractor on the full set (SEGRESS~23c limitation). & R \\
+10a & Outcomes for which data were sought. & N/A: mapping study does not synthesise primary-study outcomes. & N/A \\
+10b & Non-outcome variables and classification schemes. & Extraction schema: PM technique, stochastic technique, SDLC phase, dataset source, IC combination, reporting-quality scores (QA1--QA8). & R \\
+11 & Risk-of-bias methods (optional for mapping studies). & Reporting-quality checklist (Dyb{\aa} \& Dings{\o}yr), not RoB; purpose stated as a sensitivity filter on F1--F5, not a validity judgement. Scored by LLM; human check on $n=31$. Threshold $\geq 4/8$. & R \\
+12 & Effect measures. & N/A (no outcome synthesis). & N/A \\
+13 / 13a & Methods to analyse study characteristics; which studies enter each analysis. & Section~\ref{sec:slr-gaps}: working-set $N=169$; combined analytical $N=318$ (deduplicated); QA-passed $259/318$. & R \\
+13b & Data preparation for outcome synthesis. & N/A (mapping). & N/A \\
+13c & Methods for tables, graphs, maps of study characteristics. & Frequency tables, year plot, IC-combination counts, SPMF taxonomy, integration-level Table~\ref{tab:positioning}. & R \\
+13d & Methods used to synthesise primary-study outcomes. & N/A (mapping). & N/A \\
+13e & Sensitivity of the auxiliary corpus (not outcome synthesis). & Section~\ref{sec:slr-threats}, Table~\ref{tab:sensitivity}. & P \\
+13f & Heterogeneity of primary-study outcomes. & N/A (mapping). & N/A \\
+14 & Reporting-bias / publication-bias methods. & N/A for mapping studies under SEGRESS. & N/A \\
+15 & Certainty (GRADE) methods. & N/A for mapping studies. & N/A \\
+16a & Selection results, ideally a PRISMA flow; agreement statistics. & Section~\ref{sec:slr-synthesis} funnel narrative; PRISMA figure; LLM--LLM and human--LLM $\kappa$; Recall / Lost Evidence. Raw 404 $\rightarrow$ 340 after deduplication. & R \\
+16b & Near-misses (optional for mapping). & EC3 is the modal FT exclusion; a full near-miss citation list is not included (optional). & P \\
+17 & Cite each included study and present characteristics. & Full list and per-study characteristics: replication package \texttt{included\_studies\_340.csv} (\href{\zenododoiurl}{DOI~\zenododoi}); manuscript pointer in \ref{app:included}. & R \\
+18 & Risk-of-bias results per study (optional for mapping). & QA totals in \texttt{included\_studies\_340.csv}; per-criterion scores in the replication package; working-set summary in Section~\ref{sec:slr-qa}. & R \\
+19 & Results of individual studies (outcomes). & N/A (mapping). & N/A \\
+20a & Analyses of study characteristics addressing each RQ. & Sections~\ref{sec:slr-synthesis}--\ref{sec:slr-gaps} (RQ1--RQ3, F1--F5). & R \\
+20b--20d & Statistical outcome syntheses, sensitivity, heterogeneity. & N/A (mapping). & N/A \\
+21 & Reporting-bias results. & N/A (mapping). & N/A \\
+22 & Certainty of evidence. & N/A (mapping). & N/A \\
+23a & Interpretation in the context of other evidence. & Discussion / research agenda (Section~\ref{sec:slr-agenda}). & R \\
+23b & Limitations of the included evidence. & Optional for mapping; extraction-basis and Lost Evidence discussed in Section~\ref{sec:slr-threats}. & R \\
+23c & Limitations of the review process. & Section~\ref{sec:slr-threats}: single human rater outside the blind sample; LLM--LLM non-independence; FT Recall $0.246$; no pre-registration. & R \\
+23d & Implications for practice, policy, future research. & Sections~\ref{sec:slr-practitioners}, \ref{sec:slr-agenda} (RA1--RA4). Mapping studies: future research is the required emphasis. & R \\
+24a & Registration (or statement that the review was not registered). & Conclusion: no protocol was pre-registered (disclosed limitation). & R \\
+24b & Protocol availability (optional for mapping). & No standalone protocol deposit; methods are specified in Section~\ref{sec:slr-protocol} and the replication package. & P \\
+24c & Protocol amendments (optional for mapping). & Revised \texttt{maybe}/\texttt{pending} handling documented as a post-submission protocol change (Section~\ref{sec:slr-llm}). & R \\
+25 & Sources of financial / non-financial support. & Funding statement (CAPES Finance Code 001). & R \\
+26 & Competing interests. & Declaration of competing interest. & R \\
+27 & Public availability of data, code, and other materials. & Zenodo DOI~\zenododoi; 340-study list \texttt{included\_studies\_340.csv} (pointer in \ref{app:included}). Record is open access (LLM4SCREENLIT R7). & P \\
+\end{longtable}
+
+\noindent\textit{Source.} Item definitions follow Kitchenham, Madeyski and Budgen,
+SEGRESS, \textit{IEEE Trans.\ Softw.\ Eng.}, 49(3):1273--1298, 2023,
+doi:\texttt{10.1109/TSE.2022.3174092}.
