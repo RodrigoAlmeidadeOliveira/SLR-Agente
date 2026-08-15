@@ -9,7 +9,7 @@
 \newcommand{\zenododoiurl}{https://doi.org/\zenododoi}
 
 \signature{Rodrigo Almeida de Oliveira, M.Sc. \\ PhD candidate, PPGIa \\ Pontif\'icia Universidade Cat\'olica do Paran\'a (PUCPR)}
-\address{Rodrigo Almeida de Oliveira, M.Sc. \\ Pontif\'icia Universidade Cat\'olica do Paran\'a \\ Programa de P\'os-Gradua\c c\~ao em Inform\'atica (PPGIa) \\ Curitiba, PR, Brazil \\ rodrigo1.almeida@pucpr.edu.br}
+\address{Rodrigo Almeida de Oliveira, M.Sc. \\ Pontif\'icia Universidade Cat\'olica do Paran\'a \\ Programa de P\'os-Gradua\c c\~ao em Inform\'atica (PPGIa) \\ Curitiba, PR, Brazil \\ rodrigo.almeida1@pucpr.edu.br}
 
 \begin{document}
 
@@ -21,11 +21,11 @@ On behalf of all co-authors (Rodrigo Almeida de Oliveira, Juliano de Paulo
 Ribeiro, and Prof.\ Edson Emilio Scalabrin), I am pleased to submit our
 manuscript titled
 \textbf{``Process Mining and Stochastic Modeling for Software Process
-Forecasting: A Systematic Literature Review with an LLM-Assisted Protocol''}
+Forecasting: A Systematic Mapping Study with an LLM-Assisted Protocol''}
 for consideration in \emph{Information and Software Technology}.
 
 \medskip\noindent\textbf{Novelty and contribution.}
-This manuscript reports a systematic literature review (SLR) at the
+This manuscript reports a systematic mapping study at the
 intersection of process mining (PM), stochastic modeling, and machine
 learning applied to software process forecasting. The contribution is
 threefold:
@@ -34,39 +34,43 @@ threefold:
       protocol with cross-model verification (Claude Haiku 4.5 as primary
       screener, Claude Sonnet 4.6 as verifier), achieving substantial
       Cohen's $\kappa$ (binary $\kappa = 0.695$ for title/abstract,
-      $0.694$ for full-text) on a stratified random 20\% sample. The
-      protocol extends the recent work of Khraisha et~al.~(2024) and
+      $0.694$ for full-text) on a stratified random 20\% LLM--LLM sample.
+      Independent human double-screening ($n=468$ T/A, $n=177$ FT) showed
+      fair/slight agreement and is reported as a limitation. The protocol
+      extends the recent work of Khraisha et~al.~(2024) and
       Syriani et~al.~(2023) to the software-process-mining domain at a
       scale of 6{,}147 papers screened across two corpus tiers (5{,}783
       after cross-source deduplication plus 364 control and manually
       imported items).
-\item \textbf{Empirical:} we confirm 404 primary studies (169 working-set
-      + 212 + 23 auxiliary) covering 1995--2026, scored against an
-      8-criterion quality rubric (Dyba and Dingsoyr, 2008). The combined
-      mean QA score is $5.00 \pm 1.42$ (315 papers, 82.7\%, retained for
-      synthesis).
+\item \textbf{Empirical:} we confirm 340 distinct primary studies after
+      cross-tier deduplication (404 raw confirmations: 169 working-set
+      + 212 + 23 auxiliary) covering 1995--2026. All 169 working-set
+      studies were scored against an 8-criterion reporting-quality rubric
+      (Dyb{\aa} and Dings{\o}yr, 2008; 136 with QA $\geq 4/8$). Combined-tier
+      findings use the 318-study analytical subset (259 with QA $\geq 4/8$).
 \item \textbf{Synthetic:} we report five empirically grounded findings
       (F1--F5), propose the SPMF taxonomy (Software Process Mining and
       Forecasting) along three orthogonal dimensions, and articulate a
-      four-direction research agenda (RA1--RA4). The IC-combination
-      analysis shows that only 1 of 404 papers (0.3\%) jointly satisfies
-      process mining, stochastic modeling, and forecasting --- evidence
-      that the gap addressed by our PATHCAST proposal is structural
-      rather than an artefact of the search queries.
+      four-direction research agenda (RA1--RA4). Only 1 of 340 papers
+      jointly satisfies TF-PM $\cap$ TF-ST $\cap$ TF-FC --- evidence that
+      the mapped gap is structural rather than an artefact of the search
+      queries. PATHCAST is sketched as a future-work hypothesis, not as an
+      empirically validated pipeline of this mapping study.
 \end{enumerate}
 
 \medskip\noindent\textbf{Fit with IST scope.}
 The manuscript squarely fits IST's scope on empirical software engineering
 methods, mining software repositories, and process modeling. It complements
-the journal's growing body of evidence-based SLRs while contributing to
-the methodological literature on LLM-assisted reviews.
+the journal's growing body of evidence-based secondary studies while
+contributing to the methodological literature on LLM-assisted reviews.
 
 \medskip\noindent\textbf{Reproducibility.}
 A complete replication package is openly available at Zenodo
 (\href{\zenododoiurl}{DOI~\zenododoi}),
 including all search strings, screening prompts, JSON schemas, decision
-CSVs at every pipeline stage, the cross-model $\kappa$ scripts, and the
-structured extraction tables.
+CSVs at every pipeline stage, the 340-study included list
+(\texttt{included\_studies\_340.csv}), the cross-model $\kappa$ scripts,
+and the structured extraction tables.
 
 \medskip\noindent\textbf{Funding.}
 This study was financed in part by CAPES (Finance Code 001) through a
@@ -83,12 +87,10 @@ judgements.
 
 \medskip\noindent\textbf{Suggested reviewers.}
 \begin{itemize}
-\item \textbf{Wil M.\ P.\ van der Aalst} --- TU Eindhoven, foundational PM
-      researcher (\texttt{w.m.p.v.d.aalst@tue.nl})
-\item \textbf{Marcelo Sergio Pavlovic} --- LASIGE, FCUL, PM in software
-      engineering
+\item \textbf{Wil M.\ P.\ van der Aalst} --- RWTH Aachen University,
+      foundational PM researcher (\texttt{wvdaalst@pads.rwth-aachen.de})
 \item \textbf{Maria Teresa Baldassarre} --- University of Bari, empirical
-      SE and SLRs
+      SE and secondary studies
 \item \textbf{Eugene Syriani} --- University of Montreal, LLM-assisted SLR
       methodology
 \item \textbf{Tore Dyb{\aa}} --- SINTEF / University of Oslo, evidence-based
