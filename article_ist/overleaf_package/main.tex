@@ -49,6 +49,8 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+%% Allow DOI/URL strings to wrap inside table cells (pdflatex).
+\usepackage{xurl}
 
 %% --- Bibliography style: Elsevier numeric + sorted ---
 \bibliographystyle{elsarticle-num}
@@ -152,11 +154,11 @@ Mining Software Repositories
 
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
-\item LLM-assisted mapping protocol screens 6{,}147 software-process papers across two corpus tiers.
-\item Independent human double-screening ($n=468$ T/A, $n=177$ FT) reports measured Lost Evidence.
-\item 340 distinct primary studies confirmed after deduplication; 1 jointly satisfies PM, stochastic, and forecasting.
-\item Five findings (F1--F5) and SPMF taxonomy proposed; four-direction research agenda.
-\item Full replication package (prompts, scripts, decisions) deposited at Zenodo.
+\item LLM-assisted mapping screens 6{,}147 papers across two corpus tiers.
+\item Human double-screening ($n=468$ T/A, $n=177$ FT) reports Lost Evidence.
+\item 340 studies after dedup; 1 jointly covers PM, stochastic, and forecasting.
+\item Five findings (F1--F5), SPMF taxonomy, and a four-direction agenda.
+\item Replication package on Zenodo (DOI 10.5281/zenodo.21939600).
 \end{highlights}
 
 \end{frontmatter}
@@ -217,6 +219,6 @@ agreement reports (LLM--LLM and human--LLM), the 340-study included list
 PRISMA flow snapshot.
 
 %% --- Bibliography ---
-\bibliography{results/final_review/missing_references}
+\bibliography{protocol_refs,results/final_review/missing_references}
 
 \end{document}

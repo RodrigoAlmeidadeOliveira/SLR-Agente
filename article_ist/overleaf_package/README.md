@@ -1,50 +1,49 @@
 # IST Submission — Overleaf Package
 
-Standalone Elsevier (`elsarticle`) package, ready to import in Overleaf.
+Standalone Elsevier (`elsarticle`) package. Round-1 revision: mapping study,
+human validation, Zenodo `10.5281/zenodo.21939600`.
 
-## Import in Overleaf
+## Import / update in Overleaf
 
-1. Overleaf → **New Project** → **Upload Project** → select the zip.
-2. Set compiler: **pdfLaTeX** (Menu → Compiler).
-3. Set main document: `main.tex` (Menu → Main document).
-4. Click **Recompile**. Overleaf runs `pdflatex` + `bibtex` + `pdflatex` × 2 automatically.
+**New project:** Overleaf → **New Project** → **Upload Project** → this zip.
 
-Verified locally: `main.pdf` 38 pages, `cover_letter.pdf` 2 pages, no undefined references.
+**Existing project:** do not re-import the May 2026 zip. Upload/overwrite:
+
+- `main.tex`, `cap3_article_body.tex`, `cover_letter.tex`
+- `results/included_studies_appendix.tex` (new)
+- `results/segress_checklist.tex` (new)
+- `results/human_validation/human_kappa_report.tex` (new)
+- `results/human_validation/human_confusion_report.tex` (new)
+- remaining `results/**` reports and `results/final_review/missing_references.bib`
+
+Compiler: **pdfLaTeX**. Main document: `main.tex`. Then **Recompile**.
 
 ## Files
 
 | Path | Purpose |
 |------|---------|
-| `main.tex` | Entry point — front matter + `\input` body + back matter |
-| `cap3_article_body.tex` | Article body (sections 1–8) |
-| `cover_letter.tex` | Submission cover letter (separate document) |
-| `results/qa_assessment_summary.tex` | QA scores — working-set tier |
-| `results/kappa/kappa_report.tex` | κ inter-rater agreement — working set |
-| `results/auxiliary/aux_qa_summary.tex` | QA scores — auxiliary tier |
-| `results/auxiliary/aux_ft_summary.tex` | Full-text screening — auxiliary tier |
-| `results/auxiliary/aux_reft_summary.tex` | Re-screening pass — auxiliary tier |
-| `results/auxiliary/kappa/aux_kappa_report.tex` | κ inter-rater agreement — auxiliary |
-| `results/ec5_recovery/ec5_recovery_report.tex` | EC5 PDF re-check report |
-| `results/sensitivity/sensitivity_report.tex` | Sensitivity analysis report |
-| `results/final_review/missing_references.bib` | BibTeX bibliography |
+| `main.tex` | Entry point — `\zenododoi` = `10.5281/zenodo.21939600` |
+| `protocol_refs.bib` | SEGRESS + LLM4SCREENLIT (`kitchenham2023segress`, `llm4screenlit2025`) |
+| `cap3_article_body.tex` | Article body |
+| `cover_letter.tex` | Cover letter (compile as a separate Overleaf job) |
+| `results/qa_assessment_summary.tex` | QA — working-set |
+| `results/kappa/kappa_report.tex` | LLM–LLM κ |
+| `results/human_validation/` | Human–LLM κ and confusion |
+| `results/auxiliary/` | Auxiliary-tier summaries |
+| `results/ec5_recovery/ec5_recovery_report.tex` | EC5 audit |
+| `results/sensitivity/sensitivity_report.tex` | Sensitivity |
+| `results/included_studies_appendix.tex` | Appendix A (340 studies) |
+| `results/segress_checklist.tex` | Appendix B SEGRESS |
+| `results/final_review/missing_references.bib` | Bibliography |
 
-## Local build (alternative to Overleaf)
+## Local build
 
 ```bash
-pdflatex main
-bibtex main
-pdflatex main && pdflatex main
+pdflatex main && bibtex main && pdflatex main && pdflatex main
 pdflatex cover_letter
 ```
 
-## Pre-submission checklist
-
-- [ ] Native English proofread (Editage / Elsevier Author Services)
-- [ ] iThenticate plagiarism check (PUC-PR)
-- [ ] Confirm 5 suggested reviewers in `cover_letter.tex`
-- [ ] **Reserve DOI on Zenodo** before submission, then update `\zenododoi` macro in `main.tex` and `cover_letter.tex` (currently set to `10.5281/zenodo.21939600`)
-- [ ] Submit at https://www.editorialmanager.com/infsof/
-
-## Journal target
+## Journal
 
 Information and Software Technology (Elsevier).
+Replication: https://doi.org/10.5281/zenodo.21939600

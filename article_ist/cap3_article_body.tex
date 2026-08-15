@@ -295,6 +295,9 @@ At least one of IC4a--IC4d must be satisfied for inclusion. Criterion IC4b
 ensures that seminal works applying Markov chains to software processes---such
 as Whittaker and Thomason~\cite{whittaker1994}---are captured despite
 predating the term ``process mining.''
+To avoid colliding with the publication filters IC1--IC3, Results and
+Appendix~A report the four content families as \textbf{TF-PM}, \textbf{TF-ST},
+\textbf{TF-FC}, and \textbf{TF-MSR} (IC4a--IC4d, respectively).
 
 
 \subsection{LLM-Assisted Screening Methodology}
@@ -754,21 +757,17 @@ a combined total of \textbf{404 raw confirmed primary studies}
 ($169_{\text{ws}} + 212_{\text{aux1}} + 23_{\text{aux2}}$), reduced to
 \textbf{340 distinct studies} after cross-tier deduplication (63 duplicate
 records removed from the 381-study analytical freeze; 64 from the 404-tier
-freeze; see \texttt{results/auxiliary/dedup\_summary.txt} in the replication
-package). The working-set tier is the narrative spine of this article; the
+freeze). The working-set tier is the narrative spine of this article; the
 combined-tier numbers are reported in parallel for findings F1--F5. Unless
 stated otherwise, combined-tier distributions refer to the
 \textbf{318-study deduplicated analytical subset} (259 pass reporting-quality
-$\geq 4/8$). The 169-study working-set tier spans three decades
-(1995--2025), with a clear acceleration from 2014 onward
-(Figure~\ref{fig:year-dist}). The complete list of the 340 distinct confirmed
-studies, keyed by \texttt{internal\_id} to the extraction sheet, is given in
-Appendix~\ref{app:included}. A completed SEGRESS~\cite{kitchenham2023segress}
-reporting checklist is in Appendix~\ref{app:segress}. Seventy-one
-percent of confirmed papers (working-set tier) were published between 2015
-and 2026, reflecting the maturation of open-source process mining toolkits
-(PM4Py, ProM) and the broader adoption of deep learning frameworks in
-software engineering research.
+$\geq 4/8$). The 169-study working-set tier spans 1995--2026 (publications dated 2026
+that were already indexed on 12~April~2026 are retained), with a clear
+acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Sixty-nine
+percent of working-set papers (117/169) appeared in 2015--2026. The complete
+list of the 340 distinct confirmed studies is given in \ref{app:included}.
+A completed SEGRESS~\cite{kitchenham2023segress} reporting checklist is in
+\ref{app:segress}.
 
 \begin{figure}[htbp]
 \centering
@@ -820,7 +819,7 @@ multiple).
   bar width=0.55cm,
   width=10cm, height=4.5cm,
   xlabel={Papers matching criterion},
-  symbolic y coords={IC4 (MSR for process), IC3 (Forecasting), IC2 (Stochastic), IC1 (PM in SE)},
+  symbolic y coords={TF-MSR (IC4d), TF-FC (IC4c), TF-ST (IC4b), TF-PM (IC4a)},
   ytick=data,
   y tick label style={font=\small},
   xmin=0, xmax=140,
@@ -831,24 +830,24 @@ multiple).
   enlarge y limits=0.25,
 ]
 \addplot coordinates {
-  (121,{IC1 (PM in SE)})
-  (52,{IC2 (Stochastic)})
-  (29,{IC3 (Forecasting)})
-  (45,{IC4 (MSR for process)})
+  (121,{TF-PM (IC4a)})
+  (52,{TF-ST (IC4b)})
+  (29,{TF-FC (IC4c)})
+  (45,{TF-MSR (IC4d)})
 };
 \end{axis}
 \end{tikzpicture}
 \caption{Inclusion criteria matched by the confirmed set ($n = 169$;
-  non-exclusive; IC labels map to IC4a--IC4d in the protocol).}
+  non-exclusive; TF-PM/ST/FC/MSR = content criteria IC4a--IC4d).}
 \label{fig:ic-dist}
 \end{figure}
 
-IC1/IC4a (process mining applied to SE artifacts) is the dominant criterion,
-matched by 121 papers (71.6\%). IC4/IC4d (repository mining for process modeling)
+TF-PM (process mining applied to SE artifacts) is the dominant criterion,
+matched by 121 papers (71.6\%). TF-MSR (repository mining for process modeling)
 is second at 45 papers (26.6\%), reflecting the MSR community's overlapping
-contributions. IC2/IC4b (stochastic modeling) appears in 52 papers (30.8\%) and
-IC3/IC4c (forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
-papers (40.2\%) match IC1 only, without stochastic or forecasting components,
+contributions. TF-ST (stochastic modeling) appears in 52 papers (30.8\%) and
+TF-FC (forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
+papers (40.2\%) match TF-PM only, without stochastic or forecasting components,
 providing direct empirical evidence for the ``Descriptive Ceiling'' identified
 in Finding~F1 below.
 
@@ -1020,12 +1019,12 @@ explicit, named framework for software engineering contexts was accomplished by
 \cite{rubin2007}, who applied the ProM toolkit to source code management logs
 and demonstrated multi-perspective analysis spanning control-flow, informational,
 and organisational dimensions. Together, these three works constitute the seminal
-arc of IC1, establishing automated discovery from SDLC event logs as both
+arc of TF-PM, establishing automated discovery from SDLC event logs as both
 technically feasible and analytically productive, and providing PATHCAST with
 its foundational methodological lineage.
 
 The complete extracted set confirms that \textbf{process mining remains the
-dominant analytical family}: 121 of 169 studies (71.6\%) match IC1 in the
+dominant analytical family}: 121 of 169 studies (71.6\%) match TF-PM in the
 form of discovery, conformance checking, or process-oriented repository
 analysis. At the technique level, the most frequently named PM algorithms
 across the 169 studies are the \textbf{inductive miner} (51 papers),
@@ -1033,7 +1032,7 @@ across the 169 studies are the \textbf{inductive miner} (51 papers),
 and \textbf{heuristic miner} (22 papers); 11 papers use social network
 analysis on developer interactions. The literature is markedly richer in
 \emph{process representation} than in probabilistic forecasting: only 29
-papers (17.2\%) match IC3 (forecasting of process metrics), and the dominant
+papers (17.2\%) match TF-FC (forecasting of process metrics), and the dominant
 contribution type is discovery or conformance checking rather than predictive
 analytics. This is the transition that PATHCAST targets: moving from
 discovered process structures to state-based probabilistic forecasting.
@@ -1148,7 +1147,7 @@ niche---a formally contracted, end-to-end pipeline combining process discovery,
 absorbing Markov chain construction, Monte Carlo simulation, and residual
 correction---remains unoccupied in the extant literature.
 
-Studies that combine process mining with forecasting objectives (IC1~$\cap$~IC3)
+Studies that combine process mining with forecasting objectives (TF-PM~$\cap$~TF-FC)
 tend to approach prediction through \emph{process enhancement} rather than
 through explicit stochastic modelling. Gupta~\cite{gupta2017} demonstrated that
 combining inductive miner discovery with Markov chain-based predictive analytics
@@ -1181,36 +1180,36 @@ constitute a formally defined, queryable forecasting interface.
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
 Mapping the confirmed papers onto the L0--L3 integration scale reveals a clear
-stratification. The largest cluster, comprising papers that touch IC2 and IC3
-without IC1---including stochastic Petri net models of CI/CD pipelines
+stratification. The largest cluster, comprising papers that touch TF-ST and TF-FC
+without TF-PM---including stochastic Petri net models of CI/CD pipelines
 \cite{bhadra2022,bhadra2023}, Markov-based project estimation
 \cite{massitela2018,tyagi2021}, and Monte Carlo risk simulation
 \cite{lunesu2021,magennis2015}---operates almost entirely at \textbf{L1},
 applying stochastic modelling to software processes without any process
-discovery layer. Papers spanning IC1 and IC2, such as the VLMC conformance
+discovery layer. Papers spanning TF-PM and TF-ST, such as the VLMC conformance
 checker of \cite{incerto2025} and the probabilistic resource-calendar discoverer
 of \cite{lopezpintado2023}, reach \textbf{L2} by coupling discovered process
 structure with stochastic reasoning, yet neither closes the loop toward
-distributional schedule forecasting. Papers combining IC1 with IC3, such as
+distributional schedule forecasting. Papers combining TF-PM with TF-FC, such as
 \cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively to
 assess workflows but lack the stochastic machinery required for Monte Carlo
 distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
-antecedent, assembling elements from all three ICs---event-log discovery,
+antecedent, assembling elements from all three technique families---event-log discovery,
 simulation, and ML prediction---but its evaluation remains component-wise,
 placing it at L2 rather than a fully validated end-to-end pipeline. Notably,
 no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
 which process mining discovery feeds an absorbing Markov chain, whose transient
 distributions drive Monte Carlo forecasting, with residuals corrected by a
-learned model, all validated on SDLC event logs. PATHCAST is proposed as the
-first such L3 system.
+learned model, all validated on SDLC event logs. PATHCAST is sketched as a
+candidate L3 architecture, not as a claim of priority.
 
 Quantitative evidence over the full 169-study set confirms the pattern. Only
-1 of 169 papers (0.6\%) jointly satisfies IC1, IC2, and IC3---that is,
+1 of 169 papers (0.6\%) jointly satisfies TF-PM, TF-ST, and TF-FC---that is,
 combines process mining, stochastic modeling, and forecasting in the same
 study---and even that single paper does not specify a formal end-to-end
-pipeline contract. Pairwise convergence is also low: IC1$\cap$IC2 (PM and
-stochastic) appears in 10 papers (5.9\%), IC1$\cap$IC3 (PM and forecasting)
-in 7 papers (4.1\%), and IC2$\cap$IC3 (stochastic and forecasting) in 18
+pipeline contract. Pairwise convergence is also low: TF-PM$\cap$TF-ST (PM and
+stochastic) appears in 10 papers (5.9\%), TF-PM$\cap$TF-FC (PM and forecasting)
+in 7 papers (4.1\%), and TF-ST$\cap$TF-FC (stochastic and forecasting) in 18
 papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
 \textbf{L3} architecture. The literature has many partial bridges but no
 end-to-end process-aware forecasting architecture for SDLC data. The
@@ -1320,13 +1319,13 @@ Section~\ref{sec:slr-threats}.
 \begin{description}
 
 \item[F1: Descriptive Ceiling.]
-In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match IC1/IC4a
-(process mining in SE) but only 29 (17.2\%) advance to IC3/IC4c (forecasting
+In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match TF-PM
+(process mining in SE) but only 29 (17.2\%) advance to TF-FC (forecasting
 of process metrics). In the \textbf{combined analytical subset} (318 papers,
 deduplicated), the proportion shifts because the auxiliary corpus pulled in
 more stochastic-only and forecasting-only studies that did not employ
-explicit process mining: 160 (50.3\%) match IC1, 100 (31.4\%) match IC3,
-and 78 (24.5\%) match IC1 alone. In both tiers the dominant contribution
+explicit process mining: 160 (50.3\%) match TF-PM, 100 (31.4\%) match TF-FC,
+and 78 (24.5\%) match TF-PM alone. In both tiers the dominant contribution
 type is discovery or conformance checking, not predictive analytics or
 distributional forecasting; the descriptive ceiling identified in the
 working-set tier persists in the combined tier.
@@ -1347,20 +1346,20 @@ observed in the QA scoring of the working-set tier.
 
 \item[F3: Stochastic Integration Gap.]
 Working-set tier: 52 of 169 papers (30.8\%) apply stochastic models
-(IC2/IC4b); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
-stochastic Petri nets, 8 (4.7\%) system dynamics; IC2$\cap$IC3 covers 18
-papers (10.7\%); IC1$\cap$IC2 covers 10 (5.9\%). Combined analytical
+(TF-ST); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
+stochastic Petri nets, 8 (4.7\%) system dynamics; TF-ST$\cap$TF-FC covers 18
+papers (10.7\%); TF-PM$\cap$TF-ST covers 10 (5.9\%). Combined analytical
 subset: the
 auxiliary corpus contributes a substantial number of stochastic-only papers
 not previously surfaced by the working-set queries; 152 of 318 (47.8\%)
-match IC2 (with 86 Monte Carlo, 67 Markov, 54 system dynamics, 15 SPN), 81
-(25.5\%) combine IC2 with IC3 (forecasting), and 13 (4.1\%) combine IC2
-with IC1 (process mining). Markov chains and Monte Carlo simulation are
+match TF-ST (with 86 Monte Carlo, 67 Markov, 54 system dynamics, 15 SPN), 81
+(25.5\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
+with TF-PM (process mining). Markov chains and Monte Carlo simulation are
 therefore used extensively in BPM and software reliability engineering, and
 the auxiliary expansion confirms a broader stochastic literature than the
 working-set tier alone suggested; nevertheless, the integration with process
 mining for SDLC forecasting remains minimal in both tiers (5.9\% and 4.1\%
-respectively for IC1$\cap$IC2). EC3 being the largest exclusion reason at
+respectively for TF-PM$\cap$TF-ST). EC3 being the largest exclusion reason at
 FT in the working-set tier ($n=232$, 26.2\% of the 886-paper FT queue)
 reinforces the point: the stochastic modeling community has not converged
 on applying its techniques to software development process data.
@@ -1371,13 +1370,13 @@ PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline with
 inter-stage data contracts has not been proposed in the literature for SDLC
 contexts. The IC-combination analysis is robust across both tiers.
 Working-set tier (169 papers): the joint convergence
-IC1$\cap$IC2$\cap$IC3 appears in only 1 paper (0.6\%), and that single
+TF-PM$\cap$TF-ST$\cap$TF-FC appears in only 1 paper (0.6\%), and that single
 paper does not specify a formal end-to-end pipeline contract; pairwise
-convergences are IC1$\cap$IC2: 10 (5.9\%), IC1$\cap$IC3: 7 (4.1\%),
-IC2$\cap$IC3: 18 (10.7\%). Combined analytical subset (318 papers,
-deduplicated): IC1$\cap$IC2$\cap$IC3 remains 1 paper (0.31\%), with pairwise
-convergences IC1$\cap$IC2: 13 (4.1\%), IC1$\cap$IC3: 10 (3.1\%),
-IC2$\cap$IC3: 81 (25.5\%). These counts describe the LLM-confirmed,
+convergences are TF-PM$\cap$TF-ST: 10 (5.9\%), TF-PM$\cap$TF-FC: 7 (4.1\%),
+TF-ST$\cap$TF-FC: 18 (10.7\%). Combined analytical subset (318 papers,
+deduplicated): TF-PM$\cap$TF-ST$\cap$TF-FC remains 1 paper (0.31\%), with pairwise
+convergences TF-PM$\cap$TF-ST: 13 (4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%),
+TF-ST$\cap$TF-FC: 81 (25.5\%). These counts describe the LLM-confirmed,
 deduplicated corpus; given measured Lost Evidence at full-text screening
 (Recall $= 0.246$, 95\% CI $[0.179, 0.328]$, on the human validation
 sample, Section~\ref{sec:slr-threats}), scarcity findings should be read as
@@ -1390,7 +1389,7 @@ present, validation usually stops at process analysis or simulation without
 a downstream learning component.
 
 PRIMAD is the only paper in the corpus that simultaneously satisfies
-IC1$\cap$IC2$\cap$IC3. Its scope is explicitly SDLC-oriented: it builds a
+TF-PM$\cap$TF-ST$\cap$TF-FC. Its scope is explicitly SDLC-oriented: it builds a
 digital twin from issue-tracking flows in JIRA to analyze and improve value
 streams in software organizations. Methodologically, it combines empirical
 process discovery (\texttt{pm4py}), a Python-based simulation core, an Akka
@@ -1400,7 +1399,7 @@ component-wise rather than end-to-end: the paper shows promising independent
 results for the process-mining, simulation, and prediction components, but it
 does not yet validate a formally coupled PM $\rightarrow$ stochastic
 simulation $\rightarrow$ ML pipeline as a unified operational architecture,
-and remains the sole triple-IC match in the deduplicated 318-study corpus
+and remains the sole triple-family match among the 340 distinct studies
 reported here.
 
 \item[F5: Process-Derived Features Unexplored.]
@@ -1437,21 +1436,21 @@ it is introduced below as a future-work hypothesis motivated by F1--F5.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels in the 169-study working-set tier (IC-based counts
+\caption{Integration levels in the 169-study working-set tier (family-based counts
 and 73-PDF operational subset).}
 \label{tab:positioning}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{c p{4.8cm} c c p{3.4cm}}
 \toprule
-\textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, IC-based)}
+\textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, family-based)}
   & \textbf{Papers (73-PDF subset, operational)} & \textbf{Representative example} \\
 \midrule
-L0 & Single analytical family ($\leq$1 IC matched); no cross-technique chaining
+L0 & Single analytical family ($\leq$1 TF matched); no cross-technique chaining
   & 95 & 13 & Contextual or single-technique studies \\
-L1 & Two ICs matched; two families present, but no explicit reproducible pipeline contract
+L1 & Two technique families matched; two families present, but no explicit reproducible pipeline contract
   & 73 & 54 & Stochastic models or PM without formal coupling \\
-L2 & Three ICs matched (IC1$\cap$IC2$\cap$IC3); partial bridge, incomplete pipeline
+L2 & Three technique families matched (TF-PM$\cap$TF-ST$\cap$TF-FC); partial bridge, incomplete pipeline
   & 1 & 1 & PRIMAD \cite{guinea2025} \\
 L3 & Unified PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline (proposed, not observed)
   & 0 & 0 & --- (future-work hypothesis; Section~\ref{sec:slr-agenda}) \\
@@ -1502,8 +1501,8 @@ The gaps identified motivate four research directions:
   case correlation.
 
 \item[RA2: Process-Aware Stochastic Forecasting.]
-  Motivated by F3: IC2$\cap$IC3 reaches 18/169 (10.7\%) in the working set
-  but IC1$\cap$IC2 remains 10/169 (5.9\%). Target: formal integration of
+  Motivated by F3: TF-ST$\cap$TF-FC reaches 18/169 (10.7\%) in the working set
+  but TF-PM$\cap$TF-ST remains 10/169 (5.9\%). Target: formal integration of
   mined transition structure with Markov/Monte Carlo forecasting.
 
 \item[RA3: Process-Derived Features for ML.]
@@ -1512,8 +1511,8 @@ The gaps identified motivate four research directions:
   and path-entropy features in SE predictors.
 
 \item[RA4: Empirical Benchmarking of Integrated Pipelines.]
-  Motivated by F4: a single deduplicated study (PRIMAD) satisfies
-  IC1$\cap$IC2$\cap$IC3 in the 318-study corpus. Target: comparable OSS
+  Motivated by F4: a single distinct study (PRIMAD) satisfies
+  TF-PM$\cap$TF-ST$\cap$TF-FC among the 340 studies. Target: comparable OSS
   benchmarks with temporal hold-out for end-to-end PM--stochastic--ML
   pipelines; formal specification and evaluation of candidates such as
   PATHCAST remain future work by the authors.
@@ -1560,14 +1559,14 @@ schema, enabling post-hoc analysis of decision patterns and rationale
 distributions.
 
 (ii)~\textbf{Author inspection of LLM \texttt{include} decisions}.
-Every paper retained at the FT stage was inspected by the author against the
+Every paper retained at the FT stage was inspected by the first author against the
 PRISMA flow before being added to the 169-study confirmed set. This is a
 single-reviewer check without independent second-human reliability outside
 the blind sample below (SEGRESS item~23c).
 
 (iii)~\textbf{Independent human double-screening (gold standard)}.
 A stratified random 20\% sample of T/A ($n=468$) and FT ($n=177$) decisions
-was re-rated by the author blind to the LLM's decisions. Against the human
+was re-rated by the first author blind to the LLM's decisions. Against the human
 rater as gold standard, strict binary Recall was 0.250 at T/A and 0.246 at
 FT (Lost Evidence 75\% and 75\%, respectively; Wilson 95\% CIs in
 Table~\ref{tab:human-confusion}). All 54 T/A false negatives were LLM
@@ -1613,7 +1612,7 @@ the primary screener committed to a binary decision.
 \input{results/kappa/kappa_report}
 
 The cross-model verification protocol was also extended to the auxiliary
-tier (\texttt{pipeline/aux\_kappa.py}, FT stage, $n = 276$ stratified
+tier (FT stage, $n = 276$ stratified
 random 20\% sample). On the auxiliary tier the verifier (Sonnet 4.6)
 returned \texttt{pending} on every paper that the primary screener
 (Haiku 4.5) had rated as \texttt{include}, yielding a multi-class
@@ -1659,15 +1658,14 @@ for expansion if gaps in the confirmed 169-study set are identified.
 
 A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM
-protocol used for the working set
-(\texttt{pipeline/sensitivity.py}); 12 of 200 (6.0\%) returned a T/A
+protocol used for the working set;
+12 of 200 (6.0\%) returned a T/A
 \texttt{include} decision and 59 (29.5\%) returned \texttt{maybe}, yielding
 a point-estimated 228 additional candidate includes if the auxiliary corpus
 were screened in full. Given that this estimate exceeded the working-set
 include count, the second stage was triggered: a \textbf{full-corpus
-T/A and FT screening pass} over all 3{,}807 auxiliary papers, executed via
-\texttt{pipeline/auxiliary\_screening.py} and
-\texttt{pipeline/auxiliary\_ft.py}. The result is reported in
+T/A and FT screening pass} over all 3{,}807 auxiliary papers.
+The result is reported in
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
 screening as \texttt{include}. Combined with the 169 working-set
@@ -1677,10 +1675,10 @@ analytical subset is used for combined-tier F1--F5 tables.
 
 The protocol then proceeded to a third stage: a multi-source abstract
 enrichment cascade (Semantic Scholar, OpenAlex, CORE, Crossref) was applied
-to the 880 auxiliary FT-\texttt{pending} papers
-(\texttt{pipeline/aux\_enrich.py}), recovering an abstract for 285 papers
+to the 880 auxiliary FT-\texttt{pending} papers,
+recovering an abstract for 285 papers
 (32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
-papers (\texttt{pipeline/aux\_reft.py}), confirming 23 additional includes,
+papers, confirming 23 additional includes,
 246 excludes, and 16 still-pending. Under the conservative closure rule,
 those 16 residual abstract-insufficient papers are closed under EC5-extended
 rather than carried forward as a manual-validation queue. The combined
@@ -1704,19 +1702,15 @@ automated open-access (OA) recovery pass was executed against four public
 discovery services (Unpaywall, Semantic Scholar Graph API, OpenAlex, CORE).
 The result is summarised in Table~\ref{tab:ec5-recovery}: 27 of the 148 EC5
 papers (18.2\%) returned at least one OA URL during the recovery pass; of
-those, 17 PDFs were successfully downloaded (\texttt{pipeline/aux\_pdf\_\allowbreak download.py}, scope \texttt{ec5}), corresponding to 11.5\% of the
-148-paper EC5 stratum recovered into the read-set. A targeted PDF audit was
-then executed on those 17 downloads
-(\texttt{results/ec5\_recovery/ec5\_pdf\_rescreen\_results.csv}): 14 OA
-links resolved to unrelated papers or generic proceedings and therefore
-remained under EC5, while 3 papers were substantively re-screened and
-reclassified to EC3. The active PRISMA EC5 count after this audit is thus
-145 rather than 148. The remaining 121
-papers (81.8\%) remain inaccessible and continue to be reported under EC5
-in the PRISMA flow. A parallel OA-download pass over the 212 auxiliary
-includes recovered 49 PDFs (20.5\% of 212; the lower yield reflects the
-publisher-paywall mix of the auxiliary corpus and is documented in
-\texttt{results/auxiliary/aux\_pdf\_summary.txt}).
+those, 17 PDFs were successfully downloaded (11.5\% of the stratum).
+A targeted audit of those 17 files found that 14 OA links resolved to
+unrelated papers or generic proceedings and therefore remained under EC5,
+while 3 papers were substantively re-screened and reclassified to EC3.
+The active PRISMA EC5 count after this audit is thus 145 rather than 148.
+The remaining 121 papers (81.8\%) remain inaccessible and continue to be
+reported under EC5 in the PRISMA flow. A parallel OA-download pass over the
+212 auxiliary includes recovered 49 PDFs (20.5\% of 212; the lower yield
+reflects the publisher-paywall mix of the auxiliary corpus).
 
 \input{results/ec5_recovery/ec5_recovery_report}
 
@@ -1727,12 +1721,12 @@ applied to two extraction layers: (i)~the full 169-study working-set
 extraction (Section~\ref{sec:slr-extraction};
 Table~\ref{tab:extraction}), partly triangulated against the 73-PDF subset;
 and (ii)~the 212-study auxiliary-tier extraction performed via abstract
-only (\texttt{pipeline/auxiliary\_extraction.py}). Both extractions feed
+only. Both extractions feed
 the IC-combination counts and the technique distributions reported under
 F1--F5. The QA-based filtering reported in Table~\ref{tab:qa-results}
 retains 136 of the 169 working-set studies (80.5\%); QA scoring was
-subsequently extended to the auxiliary tier
-(\texttt{pipeline/aux\_qa.py}), retaining 179 of 212 (84.4\%, mean
+subsequently extended to the auxiliary tier,
+retaining 179 of 212 (84.4\%, mean
 $5.09 \pm 1.43$). The combined 318-study deduplicated subset retains 259 papers
 ($81.4\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold; full
 combined-QA results are reported in Table~\ref{tab:qa-combined}.
@@ -1762,22 +1756,18 @@ inter-rater verification described above uses
 \textit{claude-sonnet-4-6} (Anthropic) as the second rater. AI tools are
 \textbf{not} listed as authors of this work and are responsible for none of
 the editorial judgements; final selection, QA threshold, taxonomy design,
-and synthesis claims are the responsibility of the author.
+and synthesis claims are the responsibility of the authors.
 
-A complete replication package is deposited at Zenodo (DOI~\zenododoi)
-and includes: the search strings for all five databases, the deduplication and
-enrichment scripts (\texttt{pipeline/dedup.py}, \texttt{pipeline/enrich.py}),
-the screening prompts and JSON schema (\texttt{config/screening\_criteria.py}),
-the QA prompt (\texttt{pipeline/qa\_llm.py}), the cross-model verification
-prompts and computation (\texttt{pipeline/kappa.py}), the decision CSVs at
-each stage (\texttt{results/screening/ta\_screening\_results.csv},
-\texttt{results/screening/ft\_screening\_results.csv}), the QA-scored 169-study
-table (\texttt{results/qa\_assessment.csv}), the structured extraction
-table (\texttt{results/extraction/extraction\_template.csv}), the
-inter-rater agreement reports (\texttt{results/kappa/}), and a PRISMA flow
-snapshot. The package is intended to be self-contained: any reviewer can
-re-run the LLM-assisted protocol on the same working set and reproduce the
-169-study confirmed selection within the stated $\kappa$ confidence band.
+A complete replication package is deposited at Zenodo
+(\href{\zenododoiurl}{DOI~\zenododoi}).
+It contains the search strings for all five databases; deduplication and
+enrichment scripts; screening and QA prompts with JSON schemas; per-stage
+decision tables; reporting-quality and extraction tables for both corpus
+tiers; LLM--LLM and human--LLM agreement reports; the 340-study included
+list; a completed SEGRESS checklist; and a PRISMA flow snapshot.
+File-level layout is documented in the package README. The deposit is
+intended to be self-contained: a reviewer can re-run the LLM-assisted
+protocol on the deposited working set under the same model identifiers.
 
 
 \section{Conclusion}
@@ -1826,14 +1816,12 @@ interpreted conditional on human-validation Recall bounds
 Analysis of the working-set tier (169 studies) and the 318-study deduplicated
 combined subset supports five key findings. First, the field exhibits a
 descriptive ceiling: 71.6\% of confirmed working-set papers (50.3\% combined)
-apply process mining to software artifacts (IC1), but only 17.2\% advance
+apply process mining to software artifacts (TF-PM), but only 17.2\% advance
 (working-set; 31.4\% combined) to forecasting of process metrics
-(IC3)~(F1). Second, event log construction from heterogeneous repository
+(TF-FC)~(F1). Second, event log construction from heterogeneous repository
 sources is a pervasive challenge~(F2). Third, the integration of stochastic
 models with process mining for SDLC forecasting remains limited: 10.7\%
-working-set / 25.5\% combined for IC2$\cap$IC3~(F3). Fourth, only one
-deduplicated study (PRIMAD) satisfies IC1$\cap$IC2$\cap$IC3 in the
-318-study corpus~(F4). Fifth, ML studies in SE rarely incorporate
+working-set / 25.5\% combined for TF-ST$\cap$TF-FC~(F3). Fourth, only one distinct study (PRIMAD) satisfies TF-PM$\cap$TF-ST$\cap$TF-FC among the 340 studies~(F4). Fifth, ML studies in SE rarely incorporate
 process-derived features~(F5).
 
 These gaps motivate the SPMF taxonomy and research agenda RA1--RA4
@@ -1853,11 +1841,19 @@ package is openly available at Zenodo (DOI~\zenododoi).
 \label{app:included}
 
 This appendix lists the 340 distinct primary studies confirmed after
-cross-tier deduplication. Each row is keyed by \texttt{internal\_id} to
-\texttt{results/auxiliary/extraction\_combined\_404\_dedup.csv} and
-\texttt{qa\_combined\_404\_dedup.csv} in the replication package, so that
-claims such as ``121 of 169'' can be traced to named studies
-(SEGRESS item~17).
+cross-tier deduplication (Table~\ref{tab:included-studies}).
+When a DOI was recovered it is shown in the table; otherwise the short
+internal identifier from the replication package is used.
+Origin WS has 167 rows because two of the 169 working-set confirmations
+were duplicates of auxiliary records and were removed in cross-tier
+deduplication. Two auxiliary records (1991 and 1992) predate the IC1
+publication window (1994--2025); they are retained as historical software
+process-modelling studies and appear as the first two rows.
+Publications dated 2026 that were already indexed on 12~April~2026 are
+retained, as declared in the search protocol.
+The same records, with extraction and reporting-quality fields, are in
+the replication package (DOI~\zenododoi), so frequency claims in the main
+text can be traced to named studies (SEGRESS item~17).
 
 \input{results/included_studies_appendix}
 
