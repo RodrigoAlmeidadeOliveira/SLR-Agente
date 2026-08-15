@@ -25,7 +25,6 @@ EXT = Path("results/auxiliary/extraction_combined_404_dedup.csv")
 FT = Path("results/screening/ft_screening_results.csv")
 CSV_OUT = Path("results/final_review/included_studies_340.csv")
 TEX_OUTS = [
-    Path("article_ist/overleaf_package/results/included_studies_appendix.tex"),
     Path("results/final_review/included_studies_appendix.tex"),
 ]
 

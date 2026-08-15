@@ -10,7 +10,7 @@ human validation, Zenodo `10.5281/zenodo.21939600`.
 **Existing project:** do not re-import the May 2026 zip. Upload/overwrite:
 
 - `main.tex`, `cap3_article_body.tex`, `cover_letter.tex`
-- `results/included_studies_appendix.tex` (new)
+- `protocol_refs.bib`
 - `results/segress_checklist.tex` (new)
 - `results/human_validation/human_kappa_report.tex` (new)
 - `results/human_validation/human_confusion_report.tex` (new)
@@ -32,7 +32,6 @@ Compiler: **pdfLaTeX**. Main document: `main.tex`. Then **Recompile**.
 | `results/auxiliary/` | Auxiliary-tier summaries |
 | `results/ec5_recovery/ec5_recovery_report.tex` | EC5 audit |
 | `results/sensitivity/sensitivity_report.tex` | Sensitivity |
-| `results/included_studies_appendix.tex` | Appendix A (340 studies) |
 | `results/segress_checklist.tex` | Appendix B SEGRESS |
 | `results/final_review/missing_references.bib` | Bibliography |
 
