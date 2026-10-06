@@ -98,4 +98,8 @@ Search strings, databases, search date (12 April 2026), eligibility criteria
 
 ## 6. Deviations
 
-(none yet — append dated entries here)
+* 2026-10-06, before any data collection: a decoy stratum S0 (20 random
+  auxiliary LLM includes, seed 20261006) is mixed into the auxiliary sheets so
+  that raters cannot infer that every sampled record is an LLM non-include.
+  S0 does not enter the §3 Recall estimate; its consensus labels are reported
+  as a descriptive precision check of auxiliary includes.

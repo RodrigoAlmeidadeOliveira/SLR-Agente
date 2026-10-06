@@ -35,3 +35,6 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 .ipynb_checkpoints
+
+# round-2 rater package (copyrighted PDFs, shared privately)
+results/human_validation_round2/*.zip
