@@ -1,29 +1,87 @@
 \section{Introduction}
 \label{sec:slr-intro}
 
-This article reports a systematic mapping study conducted to map
-the state of the art at the intersection of process mining, stochastic
-modeling, and machine learning applied to software process forecasting. The
-review is reported against SEGRESS~\cite{kitchenham2023segress} and follows
-the guidelines established by Kitchenham and
-Charters~\cite{kitchenham2007} for evidence-based software engineering,
-complemented by the snowballing procedures described by
-Wohlin~\cite{Wohlin2024} and the mapping study guidelines of Petersen et
-al.~\cite{petersen2015}. To our knowledge, no prior systematic mapping or
-literature review has targeted the joint intersection of process mining,
-stochastic SDLC modeling, and ML-based process forecasting; the closest
-secondary studies address subsets of this space (process mining in agile
-development, software reliability modeling, or repository mining for
-prediction) without integrating all three technique families. The primary
-objective is to identify, classify, and count existing approaches that
-combine process-aware techniques with predictive modeling for software
-development outcomes, and to articulate the evidence gaps that motivate
-future integrated pipelines such as PATHCAST (Section~\ref{sec:slr-agenda}).
+Software organisations routinely need to answer forecasting questions about
+their own development process: when a feature will be delivered, how long an
+issue will remain open, or whether a release will slip. The data needed to
+answer them already exists as a by-product of everyday work---commits, issue
+transitions, pull requests, code reviews, and CI/CD executions are all
+time-stamped events. Three research communities have developed techniques
+that can exploit these traces, largely independently of one another.
+\emph{Process mining} (PM) discovers, checks, and enhances process models
+from event logs, and has been applied to software repositories since the
+work of Cook and Wolf~\cite{cook1995,cook1998} and Rubin et
+al.~\cite{rubin2007}. \emph{Stochastic modelling}---Markov chains,
+stochastic Petri nets, Monte Carlo simulation---has a long tradition in
+software reliability and process simulation~\cite{whittaker1994,ali2014simulation}.
+\emph{Machine-learning-based prediction} dominates mining-software-repositories
+research on defects, effort, and outcomes~\cite{kagdi2007msr,hall2012fault},
+and, in the business-process domain, predictive process
+monitoring~\cite{marquezchamorro2018predictive}. Combining them is attractive
+because each covers a weakness of the others: PM provides an empirically
+grounded process structure, stochastic models turn that structure into
+probability distributions over future paths and durations, and ML can
+correct systematic errors using context features. Whether, and how far, the
+literature has actually combined them for software processes is not known.
 
-The review addresses three overarching research questions, each decomposed
-into two sub-questions covering the application landscape of process mining in
-SDLC contexts, the techniques and prediction methods employed, and the degree
-of integration between process mining and stochastic forecasting methods.
+\paragraph{Related secondary studies.} Existing secondary studies each cover
+one side of this space. In business process management, predictive process
+monitoring has been surveyed and benchmarked for outcome
+prediction~\cite{teinemaa2019outcome}, remaining-time
+prediction~\cite{verenich2019remaining}, and in
+general~\cite{marquezchamorro2018predictive}, but on business event logs
+rather than software development processes. General mappings of process
+mining applications~\cite{garcia2019pmmapping,thiede2018pmorg} treat software
+engineering as one domain among many and do not address forecasting. Within
+software engineering, secondary studies have covered process simulation
+modelling~\cite{zhang2010simulation,ali2014simulation}, process mining of
+FLOSS event logs~\cite{mukala2015floss}, software process mining with Petri
+nets~\cite{thamizharasan2016petri}, continuous software monitoring backed by
+process mining~\cite{stepanov2026continuous}, repository
+mining~\cite{kagdi2007msr}, and defect prediction~\cite{hall2012fault}. Four
+of these (\cite{zhang2010simulation,mukala2015floss,thamizharasan2016petri,stepanov2026continuous})
+fall within our scope and were retained as included studies under EC4
+(Table~\ref{tab:criteria}), which excludes only secondary studies that do
+\emph{not} address PM or stochastic methods in software engineering. None of
+them maps the joint use of process mining, stochastic modelling, and
+forecasting on software development data, and none reports how often the
+three are combined. Establishing that baseline is the gap this mapping study
+addresses.
+
+\paragraph{Why the mapping matters.} For researchers, a structured map shows
+which combinations have been tried, on which SDLC phases and data sources,
+and with what evidence, so that integration work can build on what exists
+instead of re-deriving it. For practitioners, it indicates which parts of a
+process-aware forecasting toolchain are mature (discovery and conformance
+checking on repository data) and which remain research problems. For the
+methodology of secondary studies, the review is also a deployment of
+LLM-assisted screening whose selection error we measure against a
+pre-registered human reference standard, following
+LLM4SCREENLIT~\cite{llm4screenlit2025}.
+
+\paragraph{Study design and contributions.} We report a systematic mapping
+study against SEGRESS~\cite{kitchenham2023segress}, following the mapping
+guidelines of Petersen et al.~\cite{petersen2015}, the evidence-based software
+engineering guidelines of Kitchenham and Charters~\cite{kitchenham2007}, and
+the snowballing procedure of Wohlin~\cite{Wohlin2024}. The review addresses
+three research questions, each decomposed into two sub-questions, covering
+the application landscape of process mining in SDLC contexts, the techniques
+and prediction methods employed, and the degree of integration between
+process mining and stochastic forecasting. Its contributions are (i)~a
+classification of the confirmed studies by SDLC phase, data source, and
+technique family; (ii)~five findings (F1--F5) on where integration stops;
+(iii)~the SPMF taxonomy and a four-direction research agenda; and (iv)~a
+measured account of the LLM-assisted selection, including where it failed.
+The authors' own integrated-pipeline proposal (PATHCAST) is mentioned only as
+one research-agenda hypothesis (Section~\ref{sec:slr-positioning}) and is not
+evaluated here.
+
+Section~\ref{sec:slr-protocol} describes the protocol;
+Section~\ref{sec:slr-results-selection} the search and selection;
+Section~\ref{sec:slr-synthesis} the results per research question;
+Section~\ref{sec:slr-discussion} the findings, taxonomy, and agenda;
+Section~\ref{sec:slr-threats} threats to validity, including the human
+validation of the selection; and Section~\ref{sec:slr-summary} concludes.
 
 
 \section{Review Protocol}
@@ -32,7 +90,7 @@ of integration between process mining and stochastic forecasting methods.
 \subsection{Research Questions}
 \label{sec:slr-rqs}
 
-The SLR is guided by the following research questions, structured to
+The mapping study is guided by the following research questions, structured to
 progressively map the landscape from application scope to technique
 integration (mapping-study outputs: classification, frequencies, taxonomy):
 
@@ -152,10 +210,14 @@ contexts:
 \end{quote}
 
 The strings are adapted to each database's syntax and field conventions as
-summarized in Table~\ref{tab:db-adaptations}. The eligibility window covers
-publications from January 1994 to December 2025 (full calendar years).
-All database searches were executed on 12~April~2026; publications dated
-2026 that were already indexed at execution time were retained.
+summarized in Table~\ref{tab:db-adaptations}. All database searches were
+executed on 12~April~2026. The eligibility window (IC1) runs from
+1~January~1994 to the search execution date; publications dated 2026 are
+therefore partial-year coverage (indexed by 12~April~2026) and are reported
+as such. Where a database supported a date restriction, the query used
+publication years 1994--2026; the Web of Science export was not
+date-restricted at query time, and IC1 is enforced at screening for every
+source (Table~\ref{tab:db-adaptations}, note).
 
 \begin{table}[htbp]
 \centering
@@ -165,19 +227,26 @@ All database searches were executed on 12~April~2026; publications dated
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{p{2.6cm} p{2.6cm} c p{5.0cm} r}
 \toprule
-\textbf{Database} & \textbf{Search Field} & \textbf{Strings} & \textbf{Filters} & \textbf{Records} \\
+\textbf{Database} & \textbf{Search Field} & \textbf{Strings} & \textbf{Filters at query time} & \textbf{Records} \\
 \midrule
-Scopus         & TITLE-ABS-KEY & 3         & ar, cp; EN; 1994--2025; exec.\ 2026-04-12 & 2{,}377 \\
-IEEE Xplore    & All Metadata  & 4 (split) & Conf.\ + Journals; 1994--2025          & 1{,}386 \\
-Web of Science & TS (Topic)    & 3         & Article, Proc.; EN; 1994--2025         & 997 \\
-SpringerLink   & Simplified    & 8 queries & Chapter, Article; EN; 1994--2025       & 2{,}884 \\
-ACM DL         & Abstract      & 2         & Date: 1994--2025                       & 96 \\
+Scopus         & TITLE-ABS-KEY & 3         & ar, cp; EN; PUBYEAR 1994--2026          & 2{,}377 \\
+IEEE Xplore    & All Metadata  & 4 (split) & Conf.\ + Journals; 1994--2026          & 1{,}386 \\
+Web of Science & TS (Topic)    & 3         & Article, Proc.; EN; no date filter     & 997 \\
+SpringerLink   & Simplified    & 8 queries & Chapter, Article; EN                   & 2{,}884 \\
+ACM DL         & Abstract      & 2         & Date: 1994--2026                       & 96 \\
 Snowballing    & --            & --        & Backward + forward                     & 595 \\
 Control set    & --            & --        & Manual                                 & 12 \\
 \midrule
 \textbf{Total} &  &  &  & \textbf{8{,}347} \\
 \bottomrule
 \end{tabular}
+
+\smallskip
+\footnotesize\textit{Note:} all searches executed on 12~April~2026. After
+deduplication, 7 records dated before 1994 remained in the pool (6 from Web of
+Science, 1 from ACM DL). IC1 (1~January~1994 to the execution date) is
+enforced at screening; two pre-1994 auxiliary-tier records that had been
+confirmed in R1 were removed in this revision (\ref{app:included}).
 \end{table}
 
 \subsubsection{Snowballing Procedure}
@@ -255,7 +324,8 @@ R6).
 \textbf{Type} & \textbf{ID} & \textbf{Criterion} \\
 \midrule
 \multirow{7}{*}{Inclusion}
-& IC1  & Publication period: 1994--2025 (from Whittaker \& Thomason onward). \\
+& IC1  & Published between 1~January~1994 (from Whittaker \& Thomason
+          onward) and the search execution date (12~April~2026). \\
 & IC2  & Language: English. \\
 & IC3  & Peer-reviewed journal article, conference paper, or workshop paper
           ($\geq$4 pages). \\
@@ -308,8 +378,15 @@ systematic, reproducible screening decisions with traceable rationale, the
 title/abstract screening phase employs a language model as the primary
 screener. Specifically, \textit{claude-haiku-4-5-20251001} is used via the
 Anthropic Message Batches API, with a structured prompt encoding the IC4a--IC4d
-and EC1--EC4 criteria (EC5 is applied programmatically post-screening), the PATHCAST scope description, and decision rules for
+and EC1--EC4 criteria (EC5 is applied programmatically post-screening), a
+short scope statement of the target intersection, and decision rules for
 the three-class output: \texttt{include}, \texttt{exclude}, or \texttt{maybe}.
+The scope statement was labelled with the name of the authors' research
+programme (PATHCAST); its content restates the four content families
+IC4a--IC4d and adds no further criterion, but we report it because a
+framework label in the prompt is a potential source of selection bias
+(Section~\ref{sec:slr-threats}). The exact prompts are in the replication
+package.
 
 The screening prompt instructs the model to (i)~identify which ICs are
 satisfied, (ii)~identify which ECs apply, (iii)~assign a decision with a
@@ -321,7 +398,11 @@ forcing a binary decision.
 At the full-text screening phase, the same model is applied with a stricter
 prompt that enforces a binary outcome (\texttt{include} or \texttt{exclude})
 with \texttt{pending} reserved only when the abstract is genuinely
-insufficient for a decision.\footnote{The two protocols use different
+insufficient for a decision. The FT prompt also instructed the model to
+prefer \texttt{exclude} when undecided between \texttt{include} and
+\texttt{exclude}; this rule biases the FT stage toward false negatives, which
+is the error the human validation in Section~\ref{sec:slr-threats} is
+designed to measure.\footnote{The two protocols use different
 nomenclature for the uncertainty class: T/A uses \texttt{maybe}
 (epistemically broad: criterion ambiguity \emph{or} abstract
 insufficiency), whereas FT uses \texttt{pending} (narrowly: abstract
@@ -352,11 +433,9 @@ primary validity evidence for selection outcomes.
 Operationally, the \textbf{original execution run} did not preserve an
 open-ended manual-arbitration queue: unresolved \texttt{maybe}/\texttt{pending}
 cases were closed under EC5-extended. The \textbf{revised protocol} routes
-such cases to human review instead. Human validation
-(Section~\ref{sec:slr-threats}) shows that, under the original closure rule,
-all 54 T/A false negatives in the human sample were \texttt{maybe} rather than
-\texttt{exclude} decisions---a protocol artefact with measured Lost Evidence
-rather than hard LLM exclusions at T/A.
+such cases to human review instead. In the working set, T/A \texttt{maybe}
+decisions were forwarded to FT screening, so no human-relevant record in the
+T/A validation sample was lost at T/A (Section~\ref{sec:slr-threats}).
 
 
 \subsection{Reporting-Quality Assessment}
@@ -365,10 +444,12 @@ rather than hard LLM exclusions at T/A.
 Under SEGRESS~\cite{kitchenham2023segress} \S4.3.2, risk-of-bias assessment
 is optional for mapping studies; we retained a \textbf{reporting-quality}
 checklist (not a risk-of-bias instrument) adapted from
-Dyb{\aa} and Dings{\o}yr~\cite{dyba2008}, with eight binary criteria. Its
-purpose is a sensitivity filter on synthesis tables (studies below the cut are
-excluded from the F1--F5 evidence base but remain in the confirmed set for
-context), not a validity judgement on primary-study outcomes:
+Dyb{\aa} and Dings{\o}yr~\cite{dyba2008}, with eight binary criteria. It is
+\emph{not} a selection filter: every confirmed study enters the F1--F5
+evidence base. The checklist is reported descriptively and used in one
+sensitivity analysis that repeats F1--F5 on the studies scoring $\geq 4/8$
+(Section~\ref{sec:slr-gaps}). It is not a validity judgement on primary-study
+outcomes:
 
 \begin{table}[htbp]
 \centering
@@ -390,9 +471,10 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 \end{tabular}
 \end{table}
 
-Studies scoring below 4.0/8 (50\%) are excluded from the F1--F5 synthesis
-base. QA8 reflects whether studies report standard process-model quality
-metrics, not a framework-specific requirement.
+The $4/8$ (50\%) cut-off defines the sensitivity subset only; it is a
+conventional midpoint, not an empirically derived threshold. QA8 reflects
+whether studies report standard process-model quality metrics, not a
+framework-specific requirement.
 
 QA scoring is performed by the same LLM-assisted protocol used for screening
 (Section~\ref{sec:slr-llm}): \textit{claude-haiku-4-5-20251001} receives a
@@ -406,10 +488,9 @@ complete confirmed set ($n = 169$). All 169 studies were scored.
 
 The 33 studies below the QA threshold are predominantly short workshop papers,
 position papers, or extended abstracts that fail QA3 (reproducible data
-source) and QA4 (formally defined technique) simultaneously. They are not
-removed from the PRISMA flow; they are retained in the included set as
-context but are not used in the F1--F5 evidence base reported in
-Section~\ref{sec:slr-gaps}.
+source) and QA4 (formally defined technique) simultaneously. Like all
+confirmed studies, they are part of the F1--F5 evidence base; they are
+omitted only in the sensitivity analysis of Section~\ref{sec:slr-gaps}.
 
 
 \subsection{Data Extraction}
@@ -438,7 +519,7 @@ Specific Algorithm(s)        & Alpha, Heuristics, Inductive Miner, etc. \\
 Stochastic Method            & Markov / Monte Carlo / Stochastic Petri Net / None \\
 ML Technique                 & RF, XGBoost, LSTM, etc. / None \\
 Prediction Target            & Remaining time, outcome, lead time, delay, etc. \\
-Integration Level            & L0 None / L1 Sequential / L2 Pipeline / L3 Unified \\
+Integration Level            & L0--L3 (derived from technique families; Table~\ref{tab:positioning}) \\
 Validation Type              & Case study / Experiment / Industrial / Simulation \\
 Tool/Platform                & PM4Py, ProM, Disco, custom, etc. \\
 Dataset Size                 & Number of events and cases analyzed \\
@@ -490,7 +571,7 @@ Deduplication used normalized DOI matching, followed by fuzzy title matching
 Screening 5{,}783 records in a single pass would require substantial
 resources. A working set of 2{,}340 papers was therefore constructed from
 the highest-signal primary queries---those whose query design directly
-targets the PATHCAST intersection (process mining, stochastic modeling,
+targets the review intersection (process mining, stochastic modeling,
 and software development)---as shown in Table~\ref{tab:working-set}. The
 working-set construction also incorporates 364 additional records from the
 manually imported control set and supplementary IEEE/ACM batches that were
@@ -560,7 +641,20 @@ together form the full-text review queue of 886 papers. The
 software development, principally generic business process management) and EC3
 (theoretical algorithm proposals without SE evaluation).
 
-\subsection{Full-Text Screening}
+\paragraph{Information basis at T/A.} For 1{,}695 of the 2{,}340 working-set
+records (72.4\%; mostly Scopus and ACM) the T/A decision was made on the
+title alone: the Scopus Search API leaves the abstract field empty for most
+records, and the separate Abstract Retrieval call was not part of the
+original extractor. This is one reason for the large \texttt{maybe} class.
+After the R1 review we recovered abstracts for 1{,}131 of these records
+(working-set abstract coverage 27.6\%~$\rightarrow$~74.0\%) and re-screened
+them with the same model, prompt, and decision rule; after discarding 44
+recoveries that had attached the wrong abstract, 1{,}087 re-screenings
+remain, of which 372 (34.2\%) changed decision and 4 moved from
+\texttt{exclude} to \texttt{include}/\texttt{maybe}. \tbd{Disposition of the
+4 recovered records in the corpus.}
+
+\subsection{Second-Pass Eligibility Screening (``FT'')}
 
 The 886 papers forwarded from the T/A phase were subjected to LLM-assisted
 full-text screening using the strict prompt described in
@@ -577,6 +671,17 @@ coverage from 16.6\% to 72.6\% (643 of 886 papers).\footnote{Papers were
   + IC signal, no abstract), Band~E (584, T/A \texttt{maybe}, no IC signal, no
   abstract). Abstract enrichment and LLM re-screening were applied to Bands~A,
   B, C, and the subset of D/E that gained an abstract after enrichment.}
+
+\paragraph{Information basis at the second pass.} Despite its label, this
+stage was not a full-text reading for almost all records: the screening
+prompt received the same (enriched) title and abstract as T/A, under the
+stricter decision rule described in Section~\ref{sec:slr-llm}, and a PDF was
+read for only 0.5\% of the 886 records. We keep the label ``FT'' for
+traceability with the replication package, but its decisions are
+abstract-based eligibility decisions. Full texts were read by humans only in
+the validation samples (Section~\ref{sec:slr-threats}) and, after R1, for 8
+records with conflicting abstract-based decisions, 3 of which were found
+eligible on full text (\tbd{disposition of ba2ff831, ee562777, 9188583f}).
 
 Table~\ref{tab:ft-screening} summarises the outcome.
 
@@ -706,8 +811,8 @@ diagram~\cite{page2021} of the selection process.
 \draw[arr] (ta) -- (ftq);
 
 \node[stg=7cm, minimum height=1.4cm] (ft) at (-0.5,-12.2)
-  {\textbf{Full-text screened} ($n = 886$)\\[3pt]
-   LLM + manual \textbullet{} abstract coverage 72.6\% after enrichment\\
+  {\textbf{Second-pass eligibility (``FT'')} ($n = 886$)\\[3pt]
+   LLM on title/abstract \textbullet{} abstract coverage 72.6\%\\
    Screen-blanks pass (186 FT-undecided papers)};
 
 \node[exc] (ftexc) at (6.0,-11.6)
@@ -744,7 +849,7 @@ diagram~\cite{page2021} of the selection process.
 
 \subsection{Overview of Included Studies}
 
-The SLR is reported in two complementary tiers: (i)~the
+The mapping study is reported in two complementary tiers: (i)~the
 \textbf{working-set tier}, comprising the 2{,}340-paper operational corpus
 that was deduplicated and processed through the LLM-assisted T/A and FT
 screening, yielding \textbf{169 confirmed primary studies}; and (ii)~the
@@ -945,9 +1050,6 @@ digital traces are abundant and already timestamped, such as commits, issues,
 test events, and pipeline executions. Second, the early SDLC phases remain
 structurally underrepresented, which weakens the ability of current
 approaches to support end-to-end forecasting from requirements to delivery.
-For PATHCAST, this supports a pragmatic focus on operational phases with
-reliable event data while leaving room for future extensions toward
-requirements and design logs.
 
 \subsubsection{RQ1.2: Event Log Sources and Construction}
 
@@ -964,8 +1066,8 @@ The dominant construction problem is case correlation across tools. Studies
 frequently analyze one source in isolation or perform ad hoc joins between
 issues and commits, which limits reproducibility. This confirms that event-log
 construction is not a preparatory detail but a central methodological layer in
-software process mining. The finding directly justifies Stage~1 of PATHCAST as
-an explicit transformation pipeline rather than an implicit data-cleaning step.
+software process mining, which the reviewed studies rarely make explicit or
+reusable.
 
 A non-trivial fraction of studies report data sources only in coarse terms
 (\textit{repository data}, \textit{VCS history}, \textit{open-source
@@ -990,10 +1092,9 @@ network analysis to identify fault-insertion and fault-fixing behavioural patter
 across Apache Software Foundation projects, demonstrating that developer expertise
 significantly moderates defect introduction likelihood. Collectively, these studies
 confirm that SDLC event logs extracted from public repositories are sufficiently
-rich to support state-transition modelling, satisfying a foundational prerequisite
-for PATHCAST Stage~1. However, the event-to-state mapping adopted across these
-works remains unstandardised and ad hoc, representing a methodological gap that
-PATHCAST's process mining discovery stage aims to address systematically.
+rich to support state-transition modelling. However, the event-to-state mapping
+adopted across these works is defined manually and differs from study to study;
+none derives the state space from a discovered process model.
 
 
 \subsection{RQ2: Techniques and Prediction}
@@ -1020,8 +1121,7 @@ explicit, named framework for software engineering contexts was accomplished by
 and demonstrated multi-perspective analysis spanning control-flow, informational,
 and organisational dimensions. Together, these three works constitute the seminal
 arc of TF-PM, establishing automated discovery from SDLC event logs as both
-technically feasible and analytically productive, and providing PATHCAST with
-its foundational methodological lineage.
+technically feasible and analytically productive.
 
 The complete extracted set confirms that \textbf{process mining remains the
 dominant analytical family}: 121 of 169 studies (71.6\%) match TF-PM in the
@@ -1034,8 +1134,7 @@ analysis on developer interactions. The literature is markedly richer in
 \emph{process representation} than in probabilistic forecasting: only 29
 papers (17.2\%) match TF-FC (forecasting of process metrics), and the dominant
 contribution type is discovery or conformance checking rather than predictive
-analytics. This is the transition that PATHCAST targets: moving from
-discovered process structures to state-based probabilistic forecasting.
+analytics.
 
 The stochastic-technique distribution at the same 169-study level shows the
 same fragmentation. Only 52 of 169 studies (30.8\%) name an explicit
@@ -1142,10 +1241,9 @@ validation is reported per component rather than across the assembled pipeline,
 no formal inter-stage contracts govern the handoffs between discovery,
 simulation, and learning modules, and the architecture incorporates no dedicated
 Monte Carlo forecasting layer capable of propagating uncertainty estimates
-end-to-end. The present review therefore concludes that the Level~3 integration
-niche---a formally contracted, end-to-end pipeline combining process discovery,
-absorbing Markov chain construction, Monte Carlo simulation, and residual
-correction---remains unoccupied in the extant literature.
+end-to-end. No study in the mapped corpus validates an end-to-end pipeline in
+which process discovery, stochastic modelling, and forecasting are coupled and
+evaluated as a whole.
 
 Studies that combine process mining with forecasting objectives (TF-PM~$\cap$~TF-FC)
 tend to approach prediction through \emph{process enhancement} rather than
@@ -1165,13 +1263,9 @@ feasibility of process-derived features for product-quality prediction.
 Taken together, this cluster confirms that PM and prediction are being connected
 in the SE literature, but always at the level of sequential application---PM
 output feeds a downstream model---rather than through a unified pipeline with
-formal contracts. Notably, none of these systems can express, as a first-class
-output, the probability that a given process instance will reach completion
-within $k$ activity cycles---the precise forecasting primitive that distinguishes
-absorbing Markov chain formulations from ad hoc simulation runs. This gap
-motivates PATHCAST's design, wherein the mined process structure feeds directly
-into an absorbing Markov chain whose transient-state absorption probabilities
-constitute a formally defined, queryable forecasting interface.
+formal contracts. None of these systems reports a probability distribution
+over completion time or remaining steps for an individual process instance;
+forecasts are point estimates or scenario runs.
 
 
 \subsection{RQ3: Integration and Gaps}
@@ -1179,8 +1273,10 @@ constitute a formally defined, queryable forecasting interface.
 
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
-Mapping the confirmed papers onto the L0--L3 integration scale reveals a clear
-stratification. The largest cluster, comprising papers that touch TF-ST and TF-FC
+Mapping the confirmed papers onto the L0--L3 integration scale (defined
+operationally in Table~\ref{tab:positioning}: the number of technique families
+TF-PM, TF-ST, TF-FC a study matches) reveals a clear stratification. The
+largest two-family cluster, comprising papers that touch TF-ST and TF-FC
 without TF-PM---including stochastic Petri net models of CI/CD pipelines
 \cite{bhadra2022,bhadra2023}, Markov-based project estimation
 \cite{massitela2018,tyagi2021}, and Monte Carlo risk simulation
@@ -1188,20 +1284,18 @@ without TF-PM---including stochastic Petri net models of CI/CD pipelines
 applying stochastic modelling to software processes without any process
 discovery layer. Papers spanning TF-PM and TF-ST, such as the VLMC conformance
 checker of \cite{incerto2025} and the probabilistic resource-calendar discoverer
-of \cite{lopezpintado2023}, reach \textbf{L2} by coupling discovered process
-structure with stochastic reasoning, yet neither closes the loop toward
-distributional schedule forecasting. Papers combining TF-PM with TF-FC, such as
+of \cite{lopezpintado2023}, are also \textbf{L1}: they couple discovered
+process structure with stochastic reasoning, but neither closes the loop
+toward distributional schedule forecasting. Papers combining TF-PM with TF-FC, such as
 \cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively to
 assess workflows but lack the stochastic machinery required for Monte Carlo
 distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
 antecedent, assembling elements from all three technique families---event-log discovery,
 simulation, and ML prediction---but its evaluation remains component-wise,
-placing it at L2 rather than a fully validated end-to-end pipeline. Notably,
-no paper in the reviewed corpus instantiates an \textbf{L3} architecture in
-which process mining discovery feeds an absorbing Markov chain, whose transient
-distributions drive Monte Carlo forecasting, with residuals corrected by a
-learned model, all validated on SDLC event logs. PATHCAST is sketched as a
-candidate L3 architecture, not as a claim of priority.
+placing it at L2 rather than a fully validated end-to-end pipeline. No paper
+in the reviewed corpus reaches \textbf{L3}, i.e., an architecture in which
+process discovery, stochastic modelling, and forecasting are coupled through
+explicit interfaces and validated end-to-end on SDLC event logs.
 
 Quantitative evidence over the full 169-study set confirms the pattern. Only
 1 of 169 papers (0.6\%) jointly satisfies TF-PM, TF-ST, and TF-FC---that is,
@@ -1260,9 +1354,8 @@ replication package. The QA scoring in Table~\ref{tab:qa-results} confirms
 this pattern: only 33\% of studies score 1 on QA7 (data/code availability),
 which is the single weakest QA criterion across the included set.
 
-Taken together, these patterns explain why PATHCAST requires both a formal
-pipeline and an evaluation strategy grounded in real SDLC traces. The gap is
-not the absence of isolated techniques, but the absence of robust,
+Taken together, these patterns indicate that the gap is not the absence of
+isolated techniques, but the absence of robust,
 end-to-end, process-aware forecasting workflows validated on heterogeneous
 software engineering data. The evidence-type distribution observed in the
 73-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
@@ -1308,13 +1401,14 @@ an analytical view, not as a separate selection layer.
 
 The analysis of 2{,}340 screened records and 169 confirmed primary studies,
 together with the deduplicated 318-study combined analytical subset, supports
-five key findings. \textbf{Evidence bases:} F1--F5 counts for the
-working-set tier use all 169 confirmed studies; combined-tier percentages
-use the 318 deduplicated studies unless noted; synthesis percentages that
-exclude sub-threshold reporting-quality scores use 136/169 (working set) or
-259/318 (combined). Structural scarcity claims (F3, F4) are interpreted
-conditionally on the human-validation Recall bounds reported in
-Section~\ref{sec:slr-threats}.
+five key findings. \textbf{Evidence base:} every count and percentage in
+F1--F5 uses the same base, the \tbd{N} distinct confirmed studies.
+Working-set-tier figures are given only as a labelled sensitivity view. A
+second sensitivity analysis repeats F1--F5 on the \tbd{p} studies scoring
+$\geq 4/8$ on the reporting-quality checklist (Table~\tbd{QA sensitivity
+table}); \tbd{whether any finding changes}. Structural scarcity claims (F3,
+F4) are bounded by the measured selection Recall
+(Section~\ref{sec:slr-threats}).
 
 \begin{description}
 
@@ -1376,11 +1470,11 @@ convergences are TF-PM$\cap$TF-ST: 10 (5.9\%), TF-PM$\cap$TF-FC: 7 (4.1\%),
 TF-ST$\cap$TF-FC: 18 (10.7\%). Combined analytical subset (318 papers,
 deduplicated): TF-PM$\cap$TF-ST$\cap$TF-FC remains 1 paper (0.31\%), with pairwise
 convergences TF-PM$\cap$TF-ST: 13 (4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%),
-TF-ST$\cap$TF-FC: 81 (25.5\%). These counts describe the LLM-confirmed,
-deduplicated corpus; given measured Lost Evidence at full-text screening
-(Recall $= 0.246$, 95\% CI $[0.179, 0.328]$, on the human validation
-sample, Section~\ref{sec:slr-threats}), scarcity findings should be read as
-conditional on the selection protocol rather than as a complete census.
+TF-ST$\cap$TF-FC: 81 (25.5\%). These counts describe the selected,
+deduplicated corpus; with FT Recall of \tbd{Recall} (95\% CI \tbd{CI})
+against the two-rater reference (Section~\ref{sec:slr-threats}), scarcity
+findings are bounded by the selection protocol and are not a complete
+census.
 The closest antecedent
 in the corpus is PRIMAD \cite{guinea2025}, which assembles discovery,
 simulation, and learning components but validates each independently and
@@ -1427,43 +1521,50 @@ event-log construction as a cross-cutting community need (RA1,
 Section~\ref{sec:slr-agenda}).
 
 
-\subsection{PATHCAST as an Emerging Research Agenda}
+\subsection{Integration Levels}
 \label{sec:slr-positioning}
 
-Table~\ref{tab:positioning} summarizes integration levels in the 169-study
-working-set tier. PATHCAST is \textbf{not} evaluated in this mapping study;
-it is introduced below as a future-work hypothesis motivated by F1--F5.
+Table~\ref{tab:positioning} defines the integration levels used throughout
+the article and reports their counts. A level is determined only by how many
+of the three \emph{technique} families a study matches (TF-PM, TF-ST,
+TF-FC); TF-MSR describes the data source and is not counted. With this
+single definition, the L1 and L2 rows coincide with the pairwise and triple
+intersections reported under F3 and F4.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels in the 169-study working-set tier (family-based counts
-and 73-PDF operational subset).}
+\caption{Integration levels (working-set tier, $n=169$). Levels count the
+technique families TF-PM, TF-ST, and TF-FC matched by each study.}
 \label{tab:positioning}
 \small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{c p{4.8cm} c c p{3.4cm}}
+\begin{tabularx}{\linewidth}{@{}c X r X@{}}
 \toprule
-\textbf{Level} & \textbf{Description} & \textbf{Papers (169-set, family-based)}
-  & \textbf{Papers (73-PDF subset, operational)} & \textbf{Representative example} \\
+\textbf{Level} & \textbf{Operational definition} & \textbf{Papers} & \textbf{Example} \\
 \midrule
-L0 & Single analytical family ($\leq$1 TF matched); no cross-technique chaining
-  & 95 & 13 & Contextual or single-technique studies \\
-L1 & Two technique families matched; two families present, but no explicit reproducible pipeline contract
-  & 73 & 54 & Stochastic models or PM without formal coupling \\
-L2 & Three technique families matched (TF-PM$\cap$TF-ST$\cap$TF-FC); partial bridge, incomplete pipeline
-  & 1 & 1 & PRIMAD \cite{guinea2025} \\
-L3 & Unified PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML pipeline (proposed, not observed)
-  & 0 & 0 & --- (future-work hypothesis; Section~\ref{sec:slr-agenda}) \\
+L0 & At most one technique family & 136 & Single-technique studies \\
+L1 & Exactly two technique families (TF-PM$\cap$TF-ST: 9;
+     TF-PM$\cap$TF-FC: 6; TF-ST$\cap$TF-FC: 17) & 32
+   & Incerto~\cite{incerto2025}; L\'opez-Pintado~\cite{lopezpintado2023} \\
+L2 & All three technique families (TF-PM$\cap$TF-ST$\cap$TF-FC) & 1
+   & PRIMAD~\cite{guinea2025} \\
+L3 & All three families coupled through explicit interfaces and validated
+     end-to-end & 0 & --- \\
 \midrule
-\textbf{Total} & --- & \textbf{169} & \textbf{73} & --- \\
+\textbf{Total} & & \textbf{169} & \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
+
+\smallskip
+\footnotesize\textit{Note:} L1 counts exclude the single L2 study, so they are
+one lower than the inclusive pairwise intersections in F3/F4 (10, 7, 18).
+The 73-PDF operational coding (Figure~\ref{fig:pdf-integration-priority}) uses
+a reading-based classification and is reported separately.
 \end{table}
 
-PATHCAST names a candidate L3 architecture---process mining, absorbing
-Markov analysis, Monte Carlo forecasting, and ML enhancement composed for
-SDLC event data---as a \textbf{research agenda item} (RA2--RA4) rather than
-as an empirically validated contribution of this paper.
+The authors' PATHCAST proposal is one candidate design for L3. It is
+\textbf{not} evaluated in this mapping study and is listed only as a
+research-agenda hypothesis motivated by F1--F5 (RA2--RA4,
+Section~\ref{sec:slr-agenda}).
 
 
 \subsection{Proposed Taxonomy: SPMF}
@@ -1473,9 +1574,10 @@ Based on the systematic analysis, this review proposes the Software Process
 Mining and Forecasting (SPMF) taxonomy with three dimensions:
 
 \begin{description}
-\item[Analytical Depth] classifies studies along four levels: L1
-  (Descriptive: discovery, conformance), L2 (Diagnostic: bottleneck, rework),
-  L3 (Predictive: outcome, remaining time), and L4 (Forecasting:
+\item[Analytical Depth] classifies studies along four levels (labelled AD
+  to avoid confusion with the integration levels L0--L3): AD1
+  (Descriptive: discovery, conformance), AD2 (Diagnostic: bottleneck, rework),
+  AD3 (Predictive: outcome, remaining time), and AD4 (Forecasting:
   distributional, probabilistic).
 
 \item[SDLC Coverage] maps which lifecycle phases are addressed: Requirements
@@ -1537,22 +1639,29 @@ the data already exists in the event logs; the challenge is methodological
 composition, not data collection.
 
 
-\section{Threats to Validity of the SLR}
+\section{Threats to Validity}
 \label{sec:slr-threats}
 
 \subsection{Construct Validity}
 
 The search strings may exclude studies that use non-canonical terminology.
 This threat is mitigated through three mechanisms: the complementary MSR
-string, the frontier stochastic-PM string, and snowballing. The 10/10 control
-paper recovery provides empirical evidence of high recall.
+string, the frontier stochastic-PM string, and snowballing. The control set
+was recovered in full (10/10), but this is a weak check of search recall: the
+ten papers were known to the authors when the strings were designed, so their
+recovery cannot bound the proportion of relevant studies the strings miss.
+Snowballing was seeded from the control set rather than from the included
+studies (Section~\ref{sec:slr-search}), which further limits its contribution
+to recall.
 
 \subsection{Internal Validity}
 
-LLM-based screening introduces the risk of systematic decision bias. This
-threat is addressed by five mechanisms, of which the first four were
-executed directly in the protocol and the fifth is encoded as a conservative
-closure rule rather than a mandatory human-arbitration step.
+LLM-based screening introduces the risk of systematic decision bias. We
+report six aspects of how this risk was handled: (i)~structured outputs;
+(ii)~author inspection of \texttt{include} decisions; (iii)~human
+validation of the selection against a two-rater reference standard;
+(iv)~LLM--LLM cross-model agreement; (v)~the T/A false-positive rate; and
+(vi)~the closure rule for unresolved cases used in the original run.
 
 (i)~\textbf{Structured outputs}. All screening responses use a strict JSON
 schema, enabling post-hoc analysis of decision patterns and rationale
@@ -1564,23 +1673,52 @@ PRISMA flow before being added to the 169-study confirmed set. This is a
 single-reviewer check without independent second-human reliability outside
 the blind sample below (SEGRESS item~23c).
 
-(iii)~\textbf{Independent human double-screening (gold standard)}.
-A stratified random 20\% sample of T/A ($n=468$) and FT ($n=177$) decisions
-was re-rated by the first author blind to the LLM's decisions. Against the human
-rater as gold standard, strict binary Recall was 0.250 at T/A and 0.246 at
-FT (Lost Evidence 75\% and 75\%, respectively; Wilson 95\% CIs in
-Table~\ref{tab:human-confusion}). All 54 T/A false negatives were LLM
-\texttt{maybe} rather than \texttt{exclude} decisions; treating
-\texttt{maybe} as a positive referral (LLM4SCREENLIT~\cite{llm4screenlit2025}
-R6) raises T/A Recall to 1.000 in this sample. Human--LLM $\kappa$ was fair
-at T/A ($\kappa_{\text{binary}}=0.335$) and slight at FT
-($\kappa_{\text{binary}}=0.122$); the low FT $\kappa$ reflects a real
-criteria disagreement (the human rater included substantially more papers
-than the LLM), not merely prevalence effects
-(Table~\ref{tab:human-kappa-results}). On the 31 papers included by both
-raters, LLM QA matched the human rater on 68--100\% per criterion; free-text
-extraction fields showed 0\% exact-match agreement, so F1--F5 fields drawn
-from abstract-only auxiliary extraction are interpreted cautiously.
+(iii)~\textbf{Human validation of the selection}.
+\emph{T/A stage.} A stratified random 20\% sample of working-set T/A
+decisions ($n=468$) was screened by a human rater blind to the LLM. In the
+working set, LLM \texttt{maybe} decisions were forwarded to FT screening
+(Section~\ref{sec:slr-results-selection}); against the human labels, the
+operational T/A Recall is therefore 72/72 $=1.000$ (Wilson 95\% CI
+$0.949$--$1.000$). Counting \texttt{maybe} as a negative, as the R1
+manuscript did, gives 18/72 $=0.250$, but that figure describes a decision
+rule the working set never applied.
+
+\emph{FT stage --- R1 reference standard withdrawn.} The FT reference
+standard reported in R1 ($n=177$) did not record eligibility: all 126 human
+\texttt{include} labels coincided with papers for which a PDF had been
+obtained, and 50 of the 51 human \texttt{exclude} labels were annotated
+``PDF not accessible''. The resulting Recall (0.246) measured PDF
+availability, not screening error, and is withdrawn.
+
+\emph{FT stage --- round-2 validation.} Following a protocol pre-registered
+before data collection (replication package,
+\texttt{PREREGISTRATION\_round2\_validation.md}; success criterion
+Recall~$\geq 0.90$), the same 177 records were judged on full text against
+Table~\ref{tab:criteria} by two raters independently (first and second
+authors), blind to the LLM and to each other, with disagreements resolved by
+consensus. Records whose full text could not be obtained are
+\texttt{not\_assessable} and excluded from the denominator (\tbd{n NA}).
+Inter-rater $\kappa$ was \tbd{kappa A-B}. Against the consensus reference,
+FT Recall was \tbd{Recall} (95\% CI \tbd{CI}; Lost Evidence \tbd{LE};
+MCC \tbd{MCC}; WMCC$_{10:1}$ \tbd{WMCC}; Table~\ref{tab:human-confusion}).
+With the second rater's labels alone, Recall was \tbd{Recall B}. The first
+author had computed the R1 agreement report on this sample and may retain
+partial memory of LLM decisions; the second rater had no such exposure.
+\tbd{Escalation outcome E1 and records added to the corpus.}
+
+\emph{Auxiliary tier.} Stratified samples of auxiliary non-includes ---
+S1 T/A excludes ($N=2{,}423$; $n=40$), S2 FT and re-FT excludes ($N=537$;
+$n=40$), S3 records closed under EC5-extended ($N=611$; $n=60$) --- were
+judged by the first author, with the second author on a 30\% subset
+($\kappa$ \tbd{kappa aux}); 20 auxiliary includes were mixed in as decoys to
+preserve blinding. Estimated missed relevant records: \tbd{M per stratum};
+estimated auxiliary Recall \tbd{aux Recall}. \tbd{Escalation outcome E2.}
+
+\emph{QA and extraction.} On the 31 papers included by both the R1 human
+rater and the LLM, LLM QA matched the human rater on 68--100\% per
+criterion; free-text extraction fields showed 0\% exact-match agreement, so
+F1--F5 fields drawn from abstract-only extraction are interpreted
+cautiously.
 
 \input{results/human_validation/human_kappa_report.tex}
 \input{results/human_validation/human_confusion_report.tex}
@@ -1625,7 +1763,7 @@ validation is completed.
 
 \input{results/auxiliary/kappa/aux_kappa_report}
 
-(iv)~\textbf{T/A false-positive rate}.
+(v)~\textbf{T/A false-positive rate}.
 The LLM confirmatory pass at FT level (Round~1) rejected 33 of 108 T/A
 \texttt{include} papers (30.6\%), primarily for EC3 (algorithm without SE
 evaluation). This false-positive rate is consistent with the
@@ -1637,19 +1775,21 @@ is made and therefore do not affect the F1--F5 evidence base. The Round~2
 screening reprocessed 495 \texttt{maybe} papers with enriched abstracts and
 brought the confirmed set to its final value of 169.
 
-(v)~\textbf{Original closure of unresolved uncertainty (revised in resubmission)}.
+(vi)~\textbf{Original closure of unresolved uncertainty (revised in resubmission)}.
 In the original execution run, papers where metadata remained insufficient or
 verifier disagreement could not be resolved were closed under EC5-extended,
-biasing toward false negatives. Human validation (item~iii) quantifies the
-cost: 75\% Lost Evidence at FT under strict matching. The revised protocol
-routes \texttt{maybe}/\texttt{pending} to human review instead
+biasing toward false negatives. In the working set this rule affected only
+records that remained abstract-insufficient at FT; in the auxiliary tier it
+closed 611 records (stratum S3), whose share of relevant studies is
+estimated in item~(iii). The revised protocol routes
+\texttt{maybe}/\texttt{pending} to human review instead
 (Section~\ref{sec:slr-llm}).
 
 \subsection{External Validity}
 
 The review is limited to English-language peer-reviewed publications,
 potentially excluding relevant work in other languages or grey literature.
-The broad time span (1994--2025) and five-database coverage mitigate
+The broad time span (January 1994 to 12~April~2026) and five-database coverage mitigate
 geographic and temporal bias. The deferred high-recall auxiliary corpus
 (3{,}807 records from SpringerLink, WoS, Snowball, and other low-precision
 queries; corresponds to the difference between the 5{,}783 unique deduplicated
@@ -1776,9 +1916,12 @@ protocol on the deposited working set under the same model identifiers.
 This article presented a systematic mapping study of the intersection of
 process mining, stochastic modeling, and machine learning applied to software
 process forecasting, reported against SEGRESS~\cite{kitchenham2023segress}.
-No review protocol was pre-registered; this is disclosed as a limitation.
+The review protocol was not pre-registered, which we disclose as a
+limitation; the round-2 human validation of the selection was pre-registered
+before data collection.
 The review executed three complementary search strings across five databases
-(executed 12~April~2026; eligibility window 1994--2025), yielding 8{,}347
+(executed 12~April~2026; eligibility window January 1994 to the execution
+date), yielding 8{,}347
 records, 5{,}783 after deduplication, and a 2{,}340-paper operational working
 set for systematic screening. Title
 and abstract screening on the working set using a LLM-assisted protocol
@@ -1830,9 +1973,10 @@ pipeline as future work by the authors, not as an empirically validated
 contribution of this mapping study.
 
 Methodologically, cross-model verification achieved substantial LLM--LLM
-$\kappa$ (0.695 T/A; 0.694 FT), but independent human double-screening
-showed fair/slight human--LLM $\kappa$ and 75\% measured Lost Evidence at
-FT---the primary validity evidence for selection. Reporting-quality scoring
+$\kappa$ (0.695 T/A; 0.694 FT), a secondary signal. The primary validity
+evidence is the pre-registered two-rater human validation: operational T/A
+Recall 1.000 and FT Recall \tbd{Recall} (95\% CI \tbd{CI}); estimated
+auxiliary-tier Recall \tbd{aux Recall}. Reporting-quality scoring
 covers all 169 working-set studies (136/169 above $\geq 4/8$). The replication
 package is openly available at Zenodo (DOI~\zenododoi).
 
@@ -1848,10 +1992,11 @@ score, is file \texttt{included\_studies\_340.csv} in the replication package
 (\href{\zenododoiurl}{DOI~\zenododoi}).
 Origin WS has 167 rows because two of the 169 working-set confirmations
 were duplicates of auxiliary records and were removed in cross-tier
-deduplication. Two auxiliary records (1991 and 1992) predate the IC1
-publication window (1994--2025); they are retained as historical software
-process-modelling studies. Publications dated 2026 that were already
-indexed on 12~April~2026 are retained, as declared in the search protocol.
+deduplication. Two auxiliary-tier records confirmed in R1 predate IC1
+(\texttt{dd71433d}, 1991; \texttt{37385fbd}, 1992; both from the
+non-date-restricted Web of Science export) and were removed from the corpus
+in this revision. Publications dated 2026 are within IC1 (indexed by the
+12~April~2026 execution date) and are retained as partial-year coverage.
 Frequency claims in the main text can be traced to named studies via that
 file (SEGRESS item~17).
 

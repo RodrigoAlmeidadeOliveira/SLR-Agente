@@ -58,6 +58,10 @@
 \newcommand{\zenododoi}{10.5281/zenodo.21939600}
 \newcommand{\zenododoiurl}{https://doi.org/\zenododoi}
 
+%% --- Round-2 placeholders: filled after `python -m pipeline.round2_validation --compute`.
+%% Must not remain in the submitted PDF: `grep -n "\tbd" *.tex` must return nothing.
+\newcommand{\tbd}[1]{\textcolor{red}{\textbf{[#1]}}}
+
 \journal{Information and Software Technology}
 
 \begin{document}
@@ -109,30 +113,30 @@ We executed a systematic mapping study reported against
 SEGRESS~\cite{kitchenham2023segress}, with LLM-assisted screening
 (\textit{claude-haiku-4-5} as primary screener;
 \textit{claude-sonnet-4-6} as verifier). Searches were executed on
-12~April~2026 over January~1994--December~2025. From 5{,}783 deduplicated
+12~April~2026, covering January~1994 to the search date. From 5{,}783 deduplicated
 records plus 364 control items, two corpus tiers were screened: 2{,}340
 working-set and 3{,}807 auxiliary papers (6{,}147 in total). Cohen's
-$\kappa$ was computed on stratified 20\% LLM--LLM samples and on an
-independent blind human sample ($n=468$ T/A, $n=177$ FT). An 8-criterion
-reporting-quality checklist was applied to all confirmed includes.
+$\kappa$ was computed on stratified 20\% LLM--LLM samples. Selection was
+validated against a pre-registered two-rater human reference standard
+(full-text sample $n=177$; stratified auxiliary-tier samples $n=140$;
+success criterion Recall $\geq 0.90$).
 \textbf{Results.}
-340 distinct primary studies were confirmed after cross-tier deduplication
-(404 raw confirmations: 169 working-set + 212 + 23 auxiliary). LLM--LLM
-agreement was substantial ($\kappa_{\text{binary}} = 0.695$ T/A,
-$0.694$ FT); human--LLM agreement was fair at T/A ($0.335$) and slight at
-FT ($0.122$), with 75\% Lost Evidence at full-text screening. Findings:
+\tbd{N} distinct primary studies were confirmed. Operational T/A Recall was
+1.000; FT Recall was \tbd{Recall} (95\% CI \tbd{CI}); estimated
+auxiliary-tier Recall was \tbd{aux Recall}. Findings:
 F1 descriptive ceiling; F2 ad-hoc event-log construction; F3 weak
-stochastic--PM integration; F4 pipeline fragmentation (only 1 of 340
-papers jointly satisfies PM, stochastic modeling, and forecasting);
+stochastic--PM integration; F4 pipeline fragmentation (\tbd{k} of \tbd{N}
+studies jointly cover PM, stochastic modeling, and forecasting);
 F5 process-derived ML features unexplored.
 \textbf{Conclusion.}
 The literature is descriptively rich but predictively fragmented. We propose
 the SPMF taxonomy and a four-direction research agenda. PATHCAST is sketched
 as a future-work hypothesis, not as an empirically validated pipeline.
 \textbf{Limitations.}
-Structural scarcity claims depend on an LLM selection protocol whose recall
-against a human gold standard remains limited at full-text screening;
-deduplication reduced the combined corpus from 404 to 340 studies.
+Scarcity claims are bounded by the measured recall of the LLM-assisted
+selection; full-text screening relied on abstracts for most records
+(Section~\ref{sec:slr-results-selection}); the review protocol was not
+pre-registered.
 \end{abstract}
 
 \begin{keyword}
@@ -147,8 +151,8 @@ Mining Software Repositories
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
 \item LLM-assisted mapping screens 6{,}147 papers across two corpus tiers.
-\item Human double-screening ($n=468$ T/A, $n=177$ FT) reports Lost Evidence.
-\item 340 studies after dedup; 1 jointly covers PM, stochastic, and forecasting.
+\item Pre-registered two-rater human check: FT Recall \tbd{Recall}.
+\item \tbd{N} studies; \tbd{k} jointly cover PM, stochastic, and forecasting.
 \item Five findings (F1--F5), SPMF taxonomy, and a four-direction agenda.
 \item Replication package on Zenodo (DOI 10.5281/zenodo.21939600).
 \end{highlights}
@@ -185,7 +189,7 @@ author within the Graduate Program in Informatics at the Pontif\'icia
 Universidade Cat\'olica do Paran\'a (PPGIa/PUC-PR).
 
 \section*{Declaration of generative AI in the writing process}
-During the conduct of this systematic literature review, the authors used
+During the conduct of this systematic mapping study, the authors used
 \textit{claude-haiku-4-5-20251001} (Anthropic) as the primary LLM screener
 at the title/abstract and full-text stages and as the LLM scorer for the
 quality-assessment rubric, and \textit{claude-sonnet-4-6} (Anthropic) as

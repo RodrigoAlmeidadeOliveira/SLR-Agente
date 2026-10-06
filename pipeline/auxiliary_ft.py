@@ -223,7 +223,7 @@ def report() -> None:
         f"Excluded            & {exc} & {exc/n*100:.1f} \\\\",
         f"Pending / unparsed  & {pend + err} & {(pend+err)/n*100:.1f} \\\\",
         "\\midrule",
-        f"\\textbf{{Combined SLR set (working-set + auxiliary)}} & \\textbf{{{169 + inc}}} & --- \\\\",
+        f"\\textbf{{Combined set, first auxiliary pass (raw, pre-deduplication)}} & \\textbf{{{169 + inc}}} & --- \\\\",
         "\\bottomrule",
         "\\end{tabular}",
         "\\end{table}",
