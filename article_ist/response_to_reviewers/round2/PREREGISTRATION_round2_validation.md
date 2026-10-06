@@ -103,3 +103,11 @@ Search strings, databases, search date (12 April 2026), eligibility criteria
   that raters cannot infer that every sampled record is an LLM non-include.
   S0 does not enter the §3 Recall estimate; its consensus labels are reported
   as a descriptive precision check of auxiliary includes.
+* 2026-10-06, before any data collection: Rater A's FT sheet is prefilled
+  (`python -m pipeline.round2_validation --prefill-rater-a`) with the reading
+  notes Rater A himself recorded in round 1 (study type, techniques, software
+  process, data source, findings, limitations, access notes) for the 126
+  records he read in full text then. No LLM output and not the round-1 label
+  are copied. Rater A still records a fresh eligibility decision for every
+  record. Rater B's sheet is unchanged, so Rater B remains the fully
+  independent reference for the sensitivity analysis in §2.

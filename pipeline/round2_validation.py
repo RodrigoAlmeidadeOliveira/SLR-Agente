@@ -153,6 +153,33 @@ def build_sheets() -> None:
     logger.info(f"stratum sizes: {stratum_sizes()}")
 
 
+R1_OWN_FIELDS = ["human_ft_notes", "human_study_type", "human_pm_technique", "human_stochastic_technique",
+                 "human_software_process", "human_dataset_source", "human_research_question",
+                 "human_main_finding", "human_limitations", "human_qa_notes"]
+
+
+def prefill_rater_a() -> None:
+    """Append Rater A's own round-1 reading notes to his FT sheet (pre-registration deviation, 2026-10-06).
+
+    Only fields Rater A wrote himself in round 1 are copied. The round-1 decision label
+    (which encoded PDF availability) and anything produced by the LLM are not copied.
+    Rater B's sheet is left untouched.
+    """
+    path = _sheet_path("ft", "A")
+    sheet = pd.read_excel(path, dtype=str)
+    if any(c.startswith("r1_") for c in sheet.columns):
+        raise SystemExit(f"{path} already prefilled")
+    if sheet[RATER_FIELDS].notna().any().any():
+        raise SystemExit(f"{path} already has rater input — refusing to modify")
+    r1 = pd.read_csv(R1_FT_SHEET, dtype=str)[["review_id"] + R1_OWN_FIELDS]
+    r1 = r1.rename(columns={c: "r1_" + c.removeprefix("human_") for c in R1_OWN_FIELDS})
+    out = sheet.merge(r1, on="review_id", how="left")  # left merge keeps the shuffled row order
+    assert list(out["review_id"]) == list(sheet["review_id"])
+    out.to_excel(path, index=False)
+    filled = out["r1_study_type"].notna().sum()
+    logger.info(f"prefilled {path}: R1 own notes on {filled}/{len(out)} rows")
+
+
 # --------------------------------------------------------------------------- validate / consensus
 
 def _read_rater(sample: str, rater: str) -> pd.DataFrame:
@@ -328,11 +355,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--build-sheets", action="store_true")
+    g.add_argument("--prefill-rater-a", action="store_true")
     g.add_argument("--build-consensus", action="store_true")
     g.add_argument("--compute", action="store_true")
     args = ap.parse_args()
     if args.build_sheets:
         build_sheets()
+    elif args.prefill_rater_a:
+        prefill_rater_a()
     elif args.build_consensus:
         build_consensus()
     else:

@@ -19,7 +19,14 @@ Protocolo pré-registrado em
 | A (Rodrigo) | `ft_eligibility_raterA.xlsx` (177) | `aux_eligibility_raterA.xlsx` (160) |
 | B (Juliano) | `ft_eligibility_raterB.xlsx` (177) | `aux_eligibility_raterB.xlsx` (48) |
 
-Preencha só as seis colunas da direita. Não altere, apague nem reordene linhas.
+Preencha só as seis colunas de decisão (`access_basis` … `evidence_location`).
+Não altere, apague nem reordene linhas.
+
+**Só para o avaliador A:** a planilha FT traz, à direita, colunas `r1_*` com as
+suas próprias notas de leitura da rodada 1 (extração dos 126 artigos lidos e a
+nota de acesso dos 51 restantes). Use-as para decidir sem reler o PDF inteiro;
+abra o PDF só quando as notas não bastarem. Elas não contêm nada do LLM nem a
+antiga decisão da rodada 1. A planilha do avaliador B não tem essas colunas.
 
 ## O que preencher
 
