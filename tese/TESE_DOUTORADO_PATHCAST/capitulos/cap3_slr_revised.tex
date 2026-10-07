@@ -9,9 +9,14 @@ the state of the art at the intersection of process mining, stochastic
 modeling, and machine learning applied to software process forecasting. The
 review follows the guidelines established by Kitchenham and
 Charters~\cite{kitchenham2007} for evidence-based software engineering,
-complemented by the snowballing procedures described by
+is reported against SEGRESS~\cite{kitchenham2023segress}, and is complemented
+by the snowballing procedures described by
 Wohlin~\cite{wohlin2014guidelines} (EASE 2014) and the mapping study guidelines of Petersen et
-al.~\cite{petersen2015}. The primary objective is to identify, classify, and
+al.~\cite{petersen2015}. Headline combined-tier counts follow the
+cross-tier de-duplication frozen for the IST resubmission package
+($318$ analytical / $340$ final; Section~\ref{sec:slr-synthesis}): the
+replication file \texttt{included\_studies\_340.csv} is the machine-readable
+authority. The primary objective is to identify, classify, and
 synthesize existing approaches that combine process-aware techniques with
 predictive modeling for software development outcomes, establishing the
 research gap that motivates PATHCAST proposed in
@@ -681,9 +686,9 @@ screening---combining DOI-based lookups via Semantic Scholar, OpenAlex, CORE,
 and Crossref, followed by title-based fallback lookups---raising abstract
 coverage from 16.6\% to 72.6\% (643 of 886 papers).\footnote{Papers were
   processed in order of a five-band priority scheme: Band~A (91 papers,
-  T/A \texttt{include} $\geq$2 ICs), Band~B (20, T/A \texttt{include} 1~IC),
+  T/A \texttt{include} $\geq$2 content criteria IC4a--IC4d), Band~B (20, T/A \texttt{include} 1~content IC),
   Band~C (39, T/A \texttt{maybe} + abstract), Band~D (152, T/A \texttt{maybe}
-  + IC signal, no abstract), Band~E (584, T/A \texttt{maybe}, no IC signal, no
+  + IC4 signal, no abstract), Band~E (584, T/A \texttt{maybe}, no IC4 signal, no
   abstract). Abstract enrichment and LLM re-screening were applied to Bands~A,
   B, C, and the subset of D/E that gained an abstract after enrichment.}
 
@@ -872,25 +877,25 @@ percentages quoted below can be traced to a single, explicit evidence base.
   Narrative spine: year and document-type distributions, inclusion-criterion coverage, structured extraction, technique families, evidence-type breakdown, and the working-set branch of Findings~F1--F5 &
   Highest-signal query tier; full structured extraction (PDF or abstract/metadata); unaffected by cross-tier overlap with the auxiliary corpus \\
 \addlinespace
-319 &
+318 &
   De-duplicated combined analytical subset &
-  $169_{\text{ws}} + 150_{\text{aux1}}^{\text{unique}}$: working set plus first-pass auxiliary inclusions after removing 60 cross-tier near-duplicates and 2 internal duplicates; frozen before the second auxiliary re-FT pass &
-  Combined-tier F1--F5 distributions, IC-combination counts, event-log source and technique tables, and QA-filtered combined synthesis ($260/319$ above the $\geq 4/8$ threshold) &
+  $169_{\text{ws}} + 149_{\text{aux1}}^{\text{unique}}$: working set plus first-pass auxiliary inclusions after removing 63 cross-tier and within-tier duplicate records; frozen before the second auxiliary re-FT pass &
+  Combined-tier F1--F5 distributions, IC-combination counts, event-log source and technique tables, and QA-filtered combined synthesis ($259/318$ above the $\geq 4/8$ threshold) &
   Recall-bounded expansion of the same protocol over the 3{,}807-paper auxiliary corpus; cross-tier duplicates reconciled so combined percentages are not inflated by papers counted twice \\
 \addlinespace
 381 &
   Raw combined tier (pre de-duplication) &
   $169_{\text{ws}} + 212_{\text{aux1}}$: working set plus all first-pass auxiliary FT-includes, before cross-tier reconciliation &
-  Not used as a synthesis denominator; cited in Section~\ref{sec:slr-extval} and the conclusion-validity discussion to contrast the auxiliary screening yield ($315/381$ would pass QA) with the de-duplicated analytical subset reported in Table~\ref{tab:qa-combined} ($260/319$) &
-  Arithmetic sum before cross-tier reconciliation; the $62$ papers removed to obtain~319 ($60$ cross-tier $+$ $2$ internal duplicates) are named explicitly so that combined-tier percentages are not silently inflated \\
+  Not used as a synthesis denominator; cited in Section~\ref{sec:slr-extval} and the conclusion-validity discussion to contrast the auxiliary screening yield ($315/381$ would pass QA) with the de-duplicated analytical subset reported in Table~\ref{tab:qa-combined} ($259/318$) &
+  Arithmetic sum before cross-tier reconciliation; the $63$ papers removed to obtain~318 (cross-tier and within-tier duplicates; see \texttt{results/auxiliary/dedup\_summary.txt}) are named explicitly so that combined-tier percentages are not silently inflated \\
 \bottomrule
 \end{tabular}
 
 \smallskip
-\footnotesize\textit{Note:} A fourth headline count, \textbf{341} ($169 + 150 + 22$), denotes the
+\footnotesize\textit{Note:} A fourth headline count, \textbf{340} ($169 + 149 + 22$), denotes the
 final de-duplicated combined evidence base after a second auxiliary re-FT pass
 over enriched abstracts; it extends the recall bound but is not the basis of the
-detailed combined-tier tables below, which refer to the 319-study first-pass
+detailed combined-tier tables below, which refer to the 318-study first-pass
 subset unless stated otherwise.
 \end{table}
 
@@ -902,19 +907,21 @@ that was deduplicated and processed through the LLM-assisted T/A and FT
 screening, yielding \textbf{169 confirmed primary studies}; and (ii)~the
 \textbf{combined tier}, which adds the 3{,}807-paper deferred auxiliary
 corpus after a full T/A and FT pass on the same protocol, yielding
-212 first-pass auxiliary inclusions---of which \textbf{150 are unique
-studies} not already present in the working set, after removing 60
-cross-tier near-duplicates and 2 internal duplicates---plus 22 further
+212 first-pass auxiliary inclusions---of which \textbf{149 are unique
+studies} not already present in the working set, after removing 63
+cross-tier and within-tier duplicate records---plus 22 further
 unique confirmations from a second auxiliary pass over enriched abstracts,
-for a de-duplicated combined total of \textbf{341 confirmed primary
+for a de-duplicated combined total of \textbf{340 confirmed primary
 studies}. The working-set tier is the narrative spine of this chapter; the
 combined-tier numbers are reported in parallel for the findings F1--F5 and
-provide the recall-bounded view of the SLR. Unless stated otherwise,
-detailed combined-tier distributions refer to the \textbf{319-study
-de-duplicated analytical subset} (working set plus 150 unique first-pass
+provide the recall-bounded view of the SLR. The 340-study list appears in
+Appendix~\ref{app:included}; a completed SEGRESS reporting checklist is in
+Appendix~\ref{app:segress}. Unless stated otherwise,
+detailed combined-tier distributions refer to the \textbf{318-study
+de-duplicated analytical subset} (working set plus 149 unique first-pass
 auxiliary studies), frozen before the second auxiliary re-FT pass. The 169-study set spans three decades (1995--2026), with a clear
-acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Seventy-one
-percent of confirmed papers (working-set tier) were published between 2015
+acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Sixty-nine
+percent of confirmed papers (working-set tier; $117/169$) were published between 2015
 and 2026, reflecting the maturation of open-source process mining toolkits
 (PM4Py, ProM) and the broader adoption of deep learning frameworks in
 software engineering research.
@@ -1560,18 +1567,25 @@ features. In short, the gap is composition, not invention of yet another
 standalone miner, Markov model, or regressor.
 
 The analysis of 2{,}340 screened records and 169 confirmed primary studies,
-together with the criterion coverage patterns, supports five key findings:
+together with the de-duplicated 318-study combined analytical subset, supports
+five key findings.
+\textbf{Evidence bases:} F1--F5 counts for the working-set tier use all 169
+confirmed studies; combined-tier percentages use the 318 de-duplicated studies
+unless noted; synthesis percentages that exclude sub-threshold reporting-quality
+scores use 136/169 (working set) or 259/318 (combined). Structural scarcity
+claims (F3, F4) are interpreted conditionally on the human-validation Recall
+bounds in Section~\ref{sec:slr-threats}.
 
 \begin{description}
 
 \item[F1: Descriptive Ceiling.]
 In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match TF-PM
 (IC4a) but only 29 (17.2\%) advance to TF-FC (IC4c; forecasting
-of process metrics). In the \textbf{de-duplicated combined analytical subset} (319 papers,
-working-set + 150 unique auxiliary studies), the proportion shifts because
+of process metrics). In the \textbf{de-duplicated combined analytical subset} (318 papers,
+working-set + 149 unique auxiliary studies), the proportion shifts because
 the auxiliary corpus pulled in more stochastic-only and forecasting-only
-studies that did not employ explicit process mining: 162 (50.8\%) match TF-PM,
-100 (31.3\%) match TF-FC, and 78 (24.5\%) match TF-PM alone. In both tiers the dominant contribution
+studies that did not employ explicit process mining: 160 (50.3\%) match TF-PM,
+100 (31.4\%) match TF-FC, and 78 (24.5\%) match TF-PM alone. In both tiers the dominant contribution
 type is discovery or conformance checking, not predictive analytics or
 distributional forecasting; the descriptive ceiling identified in the
 working-set tier persists in the combined tier.
@@ -1581,12 +1595,12 @@ The reproducibility deficit is uniform across both tiers. Working-set tier:
 only 25 of 169 papers (14.8\%) declare the dataset as publicly available
 and only 4 (2.4\%) declare any replication package. De-duplicated combined
 analytical subset: 44 of
-319 papers (13.8\%) declare a public dataset and 9 (2.8\%) declare a
+318 papers (13.8\%) declare a public dataset and 9 (2.8\%) declare a
 replication package (3 ``yes''~+~6 ``partial''). The majority of studies
 that mention data collection procedures rely on ad hoc joins between
-version-control commits (115 of 319 papers, 36.1\%), issue trackers (39,
-12.2\%), Jira (41, 12.9\%), GitHub (42, 13.2\%), and IDE interaction logs
-(32, 10.0\%) rather than on a reusable construction protocol with explicit
+version-control commits (112 of 318 papers, 35.2\%), issue trackers (44,
+13.8\%), Jira (46, 14.5\%), GitHub (43, 13.5\%), and IDE interaction logs
+(37, 11.6\%) rather than on a reusable construction protocol with explicit
 case-correlation semantics. The absence of standardized construction
 frameworks limits reproducibility and cross-study comparability and is the
 most common cause of QA3 (data source described reproducibly) failures
@@ -1599,9 +1613,9 @@ stochastic Petri nets, 8 (4.7\%) system dynamics; TF-ST$\cap$TF-FC covers 18
 papers (10.7\%); TF-PM$\cap$TF-ST covers 10 (5.9\%). De-duplicated combined
 analytical subset: the
 auxiliary corpus contributes a substantial number of stochastic-only papers
-not previously surfaced by the working-set queries; 158 of 319 (49.5\%)
-match TF-ST (with 85 Monte Carlo, 58 Markov, 62 system dynamics, 15 SPN), 81
-(25.4\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
+not previously surfaced by the working-set queries; 152 of 318 (47.8\%)
+match TF-ST (with 86 Monte Carlo, 67 Markov, 54 system dynamics, 15 SPN), 81
+(25.5\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
 with TF-PM (process mining). Markov chains and Monte Carlo simulation are
 therefore used extensively in BPM and software reliability engineering, and
 the auxiliary expansion confirms a broader stochastic literature than the
@@ -1622,10 +1636,13 @@ Working-set tier (169 papers): the joint convergence
 TF-PM$\cap$TF-ST$\cap$TF-FC appears in only 1 paper (0.6\%), and that single
 paper does not specify a formal end-to-end pipeline contract; pairwise
 convergences are TF-PM$\cap$TF-ST: 10 (5.9\%), TF-PM$\cap$TF-FC: 7 (4.1\%),
-TF-ST$\cap$TF-FC: 18 (10.7\%). De-duplicated combined analytical subset (319 papers): TF-PM$\cap$TF-ST$\cap$TF-FC
-remains 1 paper (0.3\%), with pairwise convergences TF-PM$\cap$TF-ST: 13
-(4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%), TF-ST$\cap$TF-FC: 81 (25.4\%). The
-auxiliary expansion increased the TF-ST$\cap$TF-FC cluster substantially without
+TF-ST$\cap$TF-FC: 18 (10.7\%). De-duplicated combined analytical subset (318 papers): TF-PM$\cap$TF-ST$\cap$TF-FC
+remains 1 paper (0.31\%), with pairwise convergences TF-PM$\cap$TF-ST: 13
+(4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%), TF-ST$\cap$TF-FC: 81 (25.5\%). These
+counts describe the LLM-confirmed, de-duplicated corpus; given measured Lost
+Evidence at full-text screening (Recall~$= 0.246$, Section~\ref{sec:slr-threats}),
+scarcity findings should be read as conditional on the selection protocol.
+The auxiliary expansion increased the TF-ST$\cap$TF-FC cluster substantially without
 producing any new TF-PM$\cap$TF-ST$\cap$TF-FC paper, which is independent
 empirical confirmation that the gap is not an artefact of the working-set
 queries but a structural property of the literature. The closest antecedent
@@ -1658,8 +1675,8 @@ papers whose research contribution centers on ML/prediction; only 1
 explicitly couples ML with a named process-mining algorithm (alpha,
 inductive, heuristic, conformance, fuzzy, or Petri-net-based discovery).
 De-duplicated combined analytical subset: the auxiliary corpus added a large number of ML/prediction
-papers (111 in the combined 319 set), but the rate of process-mining
-coupling remains low: only 2 of 111 (1.8\%) jointly use a named PM
+papers (110 in the combined 318 set), but the rate of process-mining
+coupling remains low: only 4 of 110 (3.6\%) jointly use a named PM
 algorithm. Conformance scores, rework counts, Markov-expected remaining
 time, and path entropy---features that are naturally produced by a
 process-mining stage---remain essentially absent from the SE prediction
@@ -1827,11 +1844,36 @@ closure rule rather than a mandatory human-arbitration step.
 schema, enabling post-hoc analysis of decision patterns and rationale
 distributions.
 
-(ii)~\textbf{Manual verification of all \texttt{include} decisions}.
+(ii)~\textbf{Author inspection of LLM \texttt{include} decisions}.
 Every paper retained at the FT stage was inspected by the author against the
-PRISMA flow before being added to the 169-study confirmed set.
+PRISMA flow before being added to the 169-study confirmed set. This is a
+single-reviewer check without independent second-human reliability outside
+the blind sample below (SEGRESS item~23c~\cite{kitchenham2023segress}).
 
-(iii)~\textbf{Cross-model inter-rater agreement (Cohen's $\kappa$)}.
+(iii)~\textbf{Independent human double-screening (gold standard)}.
+A stratified random 20\% sample of T/A ($n=468$) and FT ($n=177$) decisions
+was re-rated by the author blind to the LLM's decisions. Against the human
+rater as gold standard, strict binary Recall was 0.250 at T/A and 0.246 at
+FT (Lost Evidence 75\% and $\approx$75\%, respectively; Wilson 95\% CIs in
+Table~\ref{tab:human-confusion}). All 54 T/A false negatives were LLM
+\texttt{maybe} rather than \texttt{exclude} decisions; treating
+\texttt{maybe} as a positive referral (LLM4SCREENLIT~\cite{llm4screenlit2025}
+R6) raises T/A Recall to 1.000 in this sample. Human--LLM $\kappa$ was fair
+at T/A ($\kappa_{\text{binary}}=0.335$) and slight at FT
+($\kappa_{\text{binary}}=0.122$); the low FT $\kappa$ reflects a real
+criteria disagreement (the human rater included substantially more papers
+than the LLM), not merely prevalence effects
+(Table~\ref{tab:human-kappa-results}). On the 31 papers included by both
+raters, LLM QA matched the human rater on 68--100\% per criterion; free-text
+extraction fields showed 0\% exact-match agreement, so F1--F5 fields drawn
+from abstract-only auxiliary extraction are interpreted cautiously.
+Structural scarcity claims (F3, F4) are therefore conditional on these Recall
+bounds, not a complete census of the literature.
+
+\input{results/human_validation/human_kappa_report.tex}
+\input{results/human_validation/human_confusion_report.tex}
+
+(iv)~\textbf{Cross-model inter-rater agreement (Cohen's $\kappa$)}.
 A stratified random 20\% sample of T/A ($n_{\text{theoretical}} = 468$ from
 the 2{,}340-paper working set) and FT ($n_{\text{theoretical}} = 177$ from
 the 886-paper FT queue) decisions was independently re-rated by a different
@@ -1854,10 +1896,10 @@ threshold $\kappa \geq 0.61$ \cite{landiskoch1977}. The multi-class FT
 $\kappa$ is lower ($0.479$, moderate) because the verifier returned
 \texttt{pending} on $25/177$ FT papers where the primary screener committed
 to a binary decision; this represents a difference in conservativeness, not
-a difference in the final selection outcome. The cross-model verification
-design follows the guidance of Khraisha~et~al.~\cite{khraisha2024} and
-Syriani~et~al.~\cite{syriani2023} for LLM-assisted SLRs and is intended as a
-tractable proxy for a fully independent human second-rater protocol.
+a difference in the final selection outcome. Cross-model $\kappa$ is a
+tractable proxy for a fully independent human second-rater protocol, but two
+LLMs from the same provider may share systematic biases that inflate
+LLM--LLM agreement relative to the human check in~(iii).
 
 \input{results/kappa/kappa_report}
 
@@ -1894,7 +1936,7 @@ unresolved arbitration queue.
 
 \input{results/auxiliary/kappa/aux_kappa_report}
 
-(iv)~\textbf{T/A false-positive rate}.
+(v)~\textbf{T/A false-positive rate}.
 The LLM confirmatory pass at FT level (Round~1) rejected 33 of 108 T/A
 \texttt{include} papers (30.6\%), primarily for EC3 (algorithm without SE
 evaluation). This false-positive rate is consistent with the
@@ -1940,12 +1982,12 @@ divergent or missing identifiers and are matched only by normalized title.
 This cross-tier overlap arises because the working-set and auxiliary tiers
 were screened as separate pipelines, so duplicates were resolved within each
 tier but only reconciled across tiers by this post-hoc check. After removing
-these 60 cross-tier duplicates and 2 internal
+these 63 cross-tier and within-tier
 duplicates, the auxiliary tier contributes 150 genuinely new first-pass
 studies (and 22 from the second pass) rather than 212 and 23; accordingly,
 the combined-tier distributions reported in this chapter use the
-de-duplicated counts---319 studies in the first-pass analytical subset
-($169 + 150$) and 341 in the final combined set ($169 + 150 + 22$)---rather
+de-duplicated counts---318 studies in the first-pass analytical subset
+($169 + 149$) and 340 in the final combined set ($169 + 149 + 22$)---rather
 than the raw sums of 381 and 404. The auxiliary corpus provides a
 mechanism for robustness testing and for expansion if gaps in the confirmed
 169-study set are identified, and is not treated as a primary evidence
@@ -1964,10 +2006,10 @@ is reported in
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
 screening as \texttt{include}. Of these 212 first-pass inclusions, 150 are
-unique studies after removing 60 cross-tier near-duplicates of working-set
+unique studies after removing 63 cross-tier and within-tier duplicates of working-set
 papers and 2 internal duplicates (Section~\ref{sec:slr-extval}). Combined
 with the 169 working-set confirmations, the SLR therefore covers a
-de-duplicated set of 319 primary studies after the first auxiliary FT pass
+de-duplicated set of 318 primary studies after the first auxiliary FT pass
 ($169 + 150$); this first-pass de-duplicated subset is the analytical basis
 used by the detailed auxiliary extraction, QA, and IC-combination tables.
 
@@ -1982,8 +2024,8 @@ those 16 residual abstract-insufficient papers are closed under EC6
 (insufficient metadata) rather than carried forward as a manual-validation
 queue. The 23 second-pass
 inclusions reduce to 22 unique studies after cross-tier de-duplication, so
-the de-duplicated final combined set is \textbf{341 primary studies}
-($169_{\text{ws}} + 150_{\text{aux1}}^{\text{unique}} +
+the de-duplicated final combined set is \textbf{340 primary studies}
+($169_{\text{ws}} + 149_{\text{aux1}}^{\text{unique}} +
 22_{\text{aux2}}^{\text{unique}}$; the raw sum before de-duplication was
 404). The remaining
 595 papers without abstract after enrichment are likewise closed under EC6,
@@ -2037,14 +2079,14 @@ reported under F1--F5. The QA-based filtering reported in
 Table~\ref{tab:qa-results} retains 136 of the 169 working-set studies
 (80.5\%); QA scoring was subsequently extended to the auxiliary tier with
 the same eight-criterion rubric (Section~\ref{sec:slr-qa}), retaining 124
-of the 150 unique auxiliary
+of the 149 unique auxiliary
 studies (82.7\%, mean $5.09 \pm 1.43$). The de-duplicated combined
-319-study analytical subset therefore retains 260 papers
+318-study analytical subset therefore retains 259 papers
 ($81.5\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold.
 Table~\ref{tab:qa-combined} reports the QA breakdown over the
 \emph{raw} combined tiers (working set $169$ plus the $212$ first-pass
 auxiliary inclusions $= 381$, of which $315$ pass), \emph{before} cross-tier
-de-duplication; the $260/319$ figure quoted here is the corresponding count
+de-duplication; the $259/318$ figure quoted here is the corresponding count
 after removing the $60$ cross-tier and $2$ internal duplicates, and is the
 value used in all combined-tier analyses.
 
@@ -2244,20 +2286,20 @@ inclusions (second auxiliary pass). After cross-tier de-duplication---which
 removes 60 first-pass and 1 second-pass near-duplicates of working-set
 studies, plus 2 internal duplicates---these contribute 150 and 22 unique
 new studies, giving a de-duplicated combined total of
-\textbf{341 primary studies} ($169_{\text{ws}} +
-150_{\text{aux1}}^{\text{unique}} + 22_{\text{aux2}}^{\text{unique}}$; the
+\textbf{340 primary studies} ($169_{\text{ws}} +
+149_{\text{aux1}}^{\text{unique}} + 22_{\text{aux2}}^{\text{unique}}$; the
 raw sum was 404). Under the conservative closure policy, the residual
 auxiliary cases without usable abstract are treated as EC6 (insufficient
 metadata) exclusions and the unresolved disagreement cases as EC7, rather
 than as an open manual-validation backlog. The original EC5 recovery pass was also closed:
 its 17 downloaded PDFs were audited, yielding 3 substantive EC3 exclusions
 and 14 residual EC5 mismatches. The de-duplicated final total is therefore
-341, and the combined-tier analytical tables below refer to the
-de-duplicated 319-study first-pass subset
+340, and the combined-tier analytical tables below refer to the
+de-duplicated 318-study first-pass subset
 ($169 + 150$).
 
-Analysis of the working-set tier (169 studies), together with the 341-study
-de-duplicated combined evidence base and the 319-study combined analytical
+Analysis of the working-set tier (169 studies), together with the 340-study
+de-duplicated combined evidence base and the 318-study combined analytical
 subset, supports
 five key findings. First, the field exhibits a descriptive
 ceiling: 71.6\% of confirmed working-set papers (50.8\% combined) apply

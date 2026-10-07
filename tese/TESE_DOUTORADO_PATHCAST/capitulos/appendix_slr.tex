@@ -949,7 +949,13 @@ with their role, location, and current status.
 \texttt{results/extraction/extraction\_template.csv}
   & Extraction data (169 papers) & 169/169 main\_finding \\
 \texttt{results/final\_review/included\_studies\_current.csv}
-  & Included set & 169 rows \\
+  & Included set (working-set tier) & 169 rows \\
+\texttt{results/final\_review/included\_studies\_340.csv}
+  & De-duplicated combined included set & 340 rows \\
+\texttt{results/final\_review/included\_studies\_appendix.tex}
+  & Appendix~\ref{app:included} longtable & Synced from IST package \\
+\texttt{results/final\_review/segress\_checklist.tex}
+  & Appendix~\ref{app:segress} checklist & Synced from IST package \\
 \texttt{results/final\_review/top30\_reading\_list.csv}
   & Ranked reading list & 32 rows \\
 \texttt{results/final\_review/cap3\_synthesis\_v2.tex}
@@ -965,3 +971,37 @@ with their role, location, and current status.
 \bottomrule
 \end{tabular}
 \end{table}
+
+
+% =============================================================================
+% APPENDIX — Included primary studies (N=340) + SEGRESS checklist
+% Synced from IST resubmission package (2026-09-05)
+% =============================================================================
+
+\chapter{Included Primary Studies (De-duplicated Combined Set)}
+\label{app:included}
+
+The 340 distinct primary studies confirmed after cross-tier de-duplication
+are listed below. The machine-readable companion is
+\texttt{results/final\_review/included\_studies\_340.csv} in the replication
+package (\href{\zenododoiurl}{DOI~\zenododoi}). Origin WS has 167 rows because
+two of the 169 working-set confirmations were duplicates of auxiliary records
+and were removed in cross-tier de-duplication. Two auxiliary records (1991 and
+1992) predate the IC1 publication window (1994--2025); they are retained as
+historical software process-modelling studies. Publications dated 2026 that
+were already indexed on 12~April~2026 are retained, as declared in the search
+protocol. Frequency claims in Chapter~\ref{ch:slr} can be traced to named
+studies via this list (SEGRESS item~17).
+
+\input{results/final_review/included_studies_appendix}
+
+\chapter{SEGRESS Reporting Checklist}
+\label{app:segress}
+
+Table~\ref{tab:segress-checklist} maps each SEGRESS item
+\cite{kitchenham2023segress} to the location in this thesis (primarily
+Chapter~\ref{ch:slr}). Items marked N/A are those SEGRESS declares not required
+for mapping studies (no synthesis of primary-study outcomes).
+
+\input{results/final_review/segress_checklist}
+

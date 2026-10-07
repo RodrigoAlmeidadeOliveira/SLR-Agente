@@ -1,0 +1,62 @@
+% Cap.~1 Fig.~1.3 --- process-aware PATHCAST contrast
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[>=Stealth, x=1cm, y=1cm]
+
+\node[font=\small, text=black!75] at (5.55,2.55)
+  {Open the black box: structure learned from flow data};
+
+\node[draw=teal!70!black, fill=teal!55!black, text=white,
+  font=\bfseries\small, rounded corners=3pt,
+  minimum width=2.4cm, minimum height=0.95cm] (td) at (0.0,1.0) {To Do};
+\node[draw=teal!70!black, fill=teal!55!black, text=white,
+  font=\bfseries\small, rounded corners=3pt,
+  minimum width=2.4cm, minimum height=0.95cm] (ip) at (3.7,1.0) {In Progress};
+\node[draw=teal!70!black, fill=teal!55!black, text=white,
+  font=\bfseries\small, rounded corners=3pt,
+  minimum width=2.4cm, minimum height=0.95cm] (rv) at (7.4,1.0) {Review};
+\node[draw=green!50!black, fill=green!45!black, text=white,
+  font=\bfseries\small, rounded corners=3pt,
+  minimum width=2.4cm, minimum height=0.95cm] (dn) at (11.1,1.0) {Done};
+
+\draw[->, thick, teal!45!black]
+  (td) -- node[above, font=\bfseries\footnotesize] {$0.8$} (ip);
+\draw[->, thick, teal!45!black]
+  (ip) -- node[above, font=\bfseries\footnotesize] {$0.7$} (rv);
+\draw[->, thick, teal!45!black]
+  (rv) -- node[above, font=\bfseries\footnotesize] {$0.9$} (dn);
+\draw[->, very thick, red!65!black]
+  (rv.south) .. controls +(0,-1.25) and +(0,-1.25) ..
+  node[below, font=\bfseries\footnotesize, text=red!65!black]
+  {rework $0.2$ (measured)} (ip.south);
+
+% Benefit cards --- short titles only; detail in caption
+\node[draw=green!40!black, fill=green!6, rounded corners=3pt,
+  minimum width=3.5cm, minimum height=1.55cm, align=center,
+  font=\small, inner sep=6pt] at (1.4,-2.0)
+  {\textbf{Knows state}\\[2pt]
+   \footnotesize Different remaining-time\\distribution per stage};
+\node[draw=green!40!black, fill=green!6, rounded corners=3pt,
+  minimum width=3.5cm, minimum height=1.55cm, align=center,
+  font=\small, inner sep=6pt] at (5.55,-2.0)
+  {\textbf{Models the path}\\[2pt]
+   \footnotesize Markov transitions +\\measured rework};
+\node[draw=green!40!black, fill=green!6, rounded corners=3pt,
+  minimum width=3.5cm, minimum height=1.55cm, align=center,
+  font=\small, inner sep=6pt] at (9.7,-2.0)
+  {\textbf{Explains why}\\[2pt]
+   \footnotesize Bottlenecks become\\actionable};
+
+\end{tikzpicture}%
+}
+\caption{Process-aware alternative proposed by PATHCAST.
+Each box is a process state; each arc carries a transition probability
+\emph{estimated} from the event log via process mining (illustrative
+values; empirical estimates are obtained per repository in
+Chapter~\ref{ch:method}).
+Rework is measured, not assumed.
+The forecast respects current state, models path-dependent dynamics, and
+supports bottleneck diagnosis.}
+\label{fig:cap1-pathcast-aware}
+\end{figure}

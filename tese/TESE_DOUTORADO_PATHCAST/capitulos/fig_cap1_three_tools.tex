@@ -1,0 +1,106 @@
+% Cap.~1 Fig.~1.4 --- why Markov + Monte Carlo + ML
+% Layout: each column has three fixed vertical bands
+%   header (y\approx2.3) | graphic (y\approx0.9) | text (y\approx-1.3)
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[>=Stealth]
+
+% Column frames (tall enough for three bands)
+\foreach \x in {0, 5.2, 10.4} {
+  \node[draw=black!40, rounded corners=3pt, thick, fill=white,
+    minimum width=4.8cm, minimum height=6.4cm] at (\x,0) {};
+}
+
+% ========== MARKOV ==========
+\node[font=\bfseries\small, text=teal!40!black] at (0,2.7) {Markov chain};
+\node[font=\footnotesize\itshape, text=black!55] at (0,2.25)
+  {What is the structure?};
+
+% graphic band centred at y=0.95
+\begin{scope}[shift={(0,0.95)}]
+  \node[draw=teal!60!black, fill=teal!15, rounded corners=1pt,
+    font=\scriptsize\bfseries, minimum width=0.8cm, minimum height=0.42cm]
+    (m1) at (-1.25,0.25) {S$_1$};
+  \node[draw=teal!60!black, fill=teal!15, rounded corners=1pt,
+    font=\scriptsize\bfseries, minimum width=0.8cm, minimum height=0.42cm]
+    (m2) at (0,0.25) {S$_2$};
+  \node[draw=teal!60!black, fill=teal!15, rounded corners=1pt,
+    font=\scriptsize\bfseries, minimum width=0.8cm, minimum height=0.42cm]
+    (m3) at (1.25,0.25) {S$_3$};
+  \draw[->, thick] (m1) -- (m2);
+  \draw[->, thick] (m2) -- (m3);
+  \draw[->, thick, red!60!black]
+    (m3.south) .. controls +(0,-0.55) and +(0,-0.55) .. (m2.south);
+\end{scope}
+
+\node[font=\footnotesize, text width=4.1cm, align=center, text=black!75]
+  at (0,-1.35)
+  {Interpretable transition matrix.\\[2pt]
+   Process backbone with rework.\\[2pt]
+   Order \emph{tested}, not assumed.};
+
+% ========== MONTE CARLO ==========
+\node[font=\bfseries\small, text=teal!40!black] at (5.2,2.7) {Monte Carlo};
+\node[font=\footnotesize\itshape, text=black!55] at (5.2,2.25)
+  {And the uncertainty?};
+
+\begin{scope}[shift={(5.2,0.70)}]
+  \draw[thick, black!45] (-1.45,0) -- (1.45,0);
+  \foreach \h/\x in {0.28/-1.0, 0.55/-0.5, 0.95/0, 0.70/0.5, 0.32/1.0} {
+    \fill[teal!45!black!70] (\x-0.16,0) rectangle (\x+0.16,\h);
+  }
+  \node[font=\tiny, text=black!60] at (-0.85,-0.28) {P50};
+  \node[font=\tiny, text=black!60] at (0.0,-0.28) {P85};
+  \node[font=\tiny, text=black!60] at (0.85,-0.28) {P95};
+\end{scope}
+
+\node[font=\footnotesize, text width=4.1cm, align=center, text=black!75]
+  at (5.2,-1.35)
+  {Simulated trajectories.\\[2pt]
+   Full distribution of dates.\\[2pt]
+   Risk---not a single point.};
+
+% ========== MACHINE LEARNING ==========
+\node[font=\bfseries\small, text=teal!40!black] at (10.4,2.7) {Machine learning};
+\node[font=\footnotesize\itshape, text=black!55] at (10.4,2.25)
+  {What else predicts?};
+
+\begin{scope}[shift={(10.4,0.95)}]
+  \node[draw=black!40, rounded corners=1pt, fill=orange!12,
+    font=\tiny, minimum width=1.45cm] (f1) at (-1.0,0.55) {churn};
+  \node[draw=black!40, rounded corners=1pt, fill=orange!12,
+    font=\tiny, minimum width=1.45cm] (f2) at (-1.0,0.0) {review lat.};
+  \node[draw=black!40, rounded corners=1pt, fill=orange!12,
+    font=\tiny, minimum width=1.45cm] (f3) at (-1.0,-0.55) {commits};
+  \node[draw=teal!50!black, fill=teal!15, rounded corners=2pt,
+    font=\scriptsize\bfseries, minimum width=1.15cm, minimum height=1.05cm]
+    (mdl) at (1.05,0.0) {ML};
+  \draw[->, thick] (f1) -- (mdl);
+  \draw[->, thick] (f2) -- (mdl);
+  \draw[->, thick] (f3) -- (mdl);
+\end{scope}
+
+\node[font=\footnotesize, text width=4.1cm, align=center, text=black!75]
+  at (10.4,-1.55)
+  {Non-linear residuals.\\[2pt]
+   Tests H1: process features\\vs.\ traditional MSR.};
+
+% ========== H3 ==========
+\node[
+  draw=teal!55!black, fill=teal!8, rounded corners=3pt, thick,
+  text width=14.8cm, align=center, inner sep=8pt, font=\small
+] at (5.2,-3.85)
+  {\textbf{H3:} combination $>$ each technique alone.
+   SDLC integration gap in the SLR
+   (Chapter~\ref{ch:slr}; $L3=0$ / 340 studies)
+   --- niche occupied by this thesis.};
+
+\end{tikzpicture}%
+}
+\caption{Methodological rationale for the PATHCAST toolset.
+Each technique answers a question the others do not; removing any one loses
+a capability---structure (Markov), uncertainty (Monte Carlo), or residual
+predictors (machine learning).}
+\label{fig:cap1-three-tools}
+\end{figure}

@@ -13,14 +13,18 @@
 
 This chapter states the formal vocabulary on which PATHCAST is built. Six
 concepts are introduced in succession: process mining
-(Section~\ref{sec:process-mining}), mining of software repositories
+(Section~\ref{sec:process-mining}), Mining Software Repositories (MSR)
 (Section~\ref{sec:msr}), Markov chains (Section~\ref{sec:markov}), Monte
 Carlo simulation and the probabilistic forecasting metrics it requires
 (Section~\ref{sec:monte-carlo}), machine learning for software engineering
 (Section~\ref{sec:ml-se}), and the entropy of trace variants
 (Section~\ref{sec:variant-entropy-cap2}). Each section is intentionally short:
-its purpose is to fix notation and quote the central property used elsewhere in
-the thesis. Derivations, algorithmic internals and worked examples are
+its purpose is to fix notation, quote the central property used elsewhere in
+the thesis, and---where a technique is selected for PATHCAST---state the
+\emph{methodological potential and limitations} of that choice, so that later
+chapters reuse definitions (for example $\text{conf}(c)$ in
+Chapter~\ref{ch:method}) with an explicit rationale rather than by notational
+convenience alone. Derivations, algorithmic internals and worked examples are
 deferred to Appendices~A--D. The literature gap that motivates the method is
 synthesised in Chapter~\ref{ch:slr}, not here.
 
@@ -74,15 +78,39 @@ feature in Chapter~\ref{ch:method}
 (Eq.~\ref{eq:case-conformance}).
 \end{definition}
 
+\paragraph{Methodological choice: $\text{conf}(c)$ as a PATHCAST feature.}
+\emph{Potential.} Alignment-based fitness is a normalized, comparable score
+in $[0,1]$ that quantifies how well case $c$ follows the discovered backbone
+$M$. Deviations from $M$ (skips, insertions, atypical orders) are expected to
+correlate with atypical remaining time and delay risk; carrying $\text{conf}(c)$
+into Stage~4 therefore links the conformance analysis of Stage~2 to residual
+prediction without inventing a second, ad hoc deviance measure.
+\emph{Limitations.} $\text{conf}(c)$ is defined relative to a specific model
+$M$ and cost function: a change of discovery algorithm, filtering threshold,
+or move costs changes the score. It is not a causal explanation of delay, nor
+a substitute for state position or sojourn information. When $M$ underfits
+(low precision) or overfits (low generalisation), conformance may systematically
+mis-rank cases. PATHCAST therefore treats $\text{conf}(c)$ as one process-derived
+feature among others (rework, expected remaining transitions, path entropy),
+not as a standalone predictor, and reports discovery quality alongside ML
+results so that this dependence on $M$ remains visible.
+
 PATHCAST adopts the Inductive Miner with infrequent-behaviour filtering
 (IMf)~\cite{leemans2013discovering} because it is among the few discovery
 algorithms that guarantee soundness by construction, producing a
-block-structured process tree compatible with SDLC workflows. Discovery
-quality is quantified along four dimensions---fitness, precision,
-generalisation and simplicity~\cite{aalst2016process}; precision and
-generalisation are estimated by the ETC metric and state-visit frequency
-analysis, respectively. The internals of IMf, the alignment search and
-the precision/generalisation estimators are presented in Appendix~A.
+block-structured process tree compatible with SDLC workflows.
+\emph{Potential:} soundness avoids deadlocks and improper completion in the
+backbone used by the Markov and Monte Carlo layers; block structure matches
+typical SDLC stages with optional loops (rework).
+\emph{Limitations:} IMf with infrequent filtering may discard minority paths
+that matter for tail risk; alternative miners (e.g., Heuristics Miner,
+split-miner variants) can yield higher fitness or precision on some logs at
+the cost of soundness or readability. Discovery quality is therefore
+quantified along four dimensions---fitness, precision, generalisation and
+simplicity~\cite{aalst2016process}; precision and generalisation are estimated
+by the ETC metric and state-visit frequency analysis, respectively. The
+internals of IMf, the alignment search and the precision/generalisation
+estimators are presented in Appendix~A.
 
 We refer to this sound, block-structured model $M$ discovered by IMf---the
 one that captures the dominant, infrequent-behaviour-filtered control flow
@@ -123,6 +151,16 @@ distortions caused by the incomplete preservation of historical repository
 data) are operationalised by
 PATHCAST Stage~1 (Chapter~\ref{ch:method}). Software-specific construction
 patterns are catalogued in Appendix~C, Section~C.4.
+
+\paragraph{Methodological choice: heterogeneous repository event sources.}
+\emph{Potential.} Multi-tool logs approximate the real SDLC path (issue,
+commit, review, CI) more faithfully than any single stream, which is a
+prerequisite for process-aware forecasting.
+\emph{Limitations.} Case correlation across tools is inherently imperfect;
+missing links, bot noise and open-source selection bias threaten construct
+and external validity. PATHCAST mitigates these threats with explicit
+correlation strategies and quality metrics in Stage~1, but cannot eliminate
+them: forecasts inherit the completeness of the constructed log.
 
 
 % =============================================================================
@@ -202,10 +240,22 @@ the process remains in $X_n$ for a random time drawn from
 $H_{X_n,X_{n+1}}$ before transitioning.
 \end{definition}
 
-The first-order assumption hides history dependence and time-varying
-transitions; PATHCAST partially mitigates both through optional state-space
-expansion and ML-based residual correction (Section~\ref{sec:ml-se}),
-neither of which fully removes violations of the Markov property.
+\paragraph{Methodological choice: first-order DTMC / semi-Markov layer.}
+\emph{Potential.} A finite-state DTMC is the natural mathematical form of a
+staged flow with rework: the transition matrix is interpretable, the
+fundamental matrix yields closed-form expected visits and absorption
+times, and the same $P$ parameterises Monte Carlo trajectories. Semi-Markov
+sojourns separate \emph{where} the case goes from \emph{how long} it stays,
+which throughput sampling cannot do.
+\emph{Limitations.} The first-order Markov property hides longer history
+dependence and non-stationary transition regimes (team changes, policy
+shifts). Estimated $\hat{p}_{ij}$ are sensitive to state granularity and to
+sparse transitions. PATHCAST partially mitigates these issues through
+optional state-space expansion and ML-based residual correction
+(Section~\ref{sec:ml-se}), neither of which fully removes violations of the
+Markov property; empirical evaluation must therefore compare against
+baselines that do not assume this structure
+(Chapter~\ref{ch:methodology}).
 
 
 % =============================================================================
@@ -280,6 +330,21 @@ PATHCAST. Worked CRPS-versus-MAE derivations
 and numerical examples are in Appendix~B.
 \end{definition}
 
+\paragraph{Methodological choice: Monte Carlo with CRPS and ACE.}
+\emph{Potential.} MC turns the Markov/semi-Markov model into a full
+predictive distribution (P50/P85/P95 and tail risk), which matches the
+operational need for honest uncertainty statements. CRPS is a strictly
+proper scoring rule that rewards both sharpness and calibration; ACE
+emphasises quantile coverage, including tails that managers use for
+commitments.
+\emph{Limitations.} MC quality is bounded by the fidelity of $P$ and
+$\{\hat{F}_s\}$: bias in the generative model is not cured by larger $M$.
+The $O(1/\sqrt{M})$ rate implies diminishing returns; CI coverage assumes
+approximate normality of $\hat{\mu}_g$. ACE depends on the checkpoint set
+$\mathcal{A}$ and does not replace a full reliability diagram. PATHCAST
+therefore reports CRPS together with ACE and baseline comparisons, and
+fixes seeds so that simulation error can be separated from model error.
+
 
 % =============================================================================
 % 2.5 MACHINE LEARNING FOR SOFTWARE ENGINEERING
@@ -313,6 +378,19 @@ beyond traditional MSR features; the feature catalogue and the
 PM-only/MSR-only/Combined comparison protocol are in Chapter~\ref{ch:method},
 Table~\ref{tab:features}.
 
+\paragraph{Methodological choice: supervised ML on process-derived features.}
+\emph{Potential.} Tree ensembles capture non-linear interactions that a
+linear Markov mean cannot express (for example joint effects of rework and
+review latency). Including $\text{conf}(c)$ and related process features
+tests whether structural information improves on MSR-only predictors
+(hypothesis~H1, Chapter~\ref{ch:introduction}).
+\emph{Limitations.} Labels (on-time/delayed; lead time) depend on reference
+targets that are often missing or noisy in OSS data; leakage across time
+must be prevented by temporal hold-out. Feature importance is associative,
+not causal. Model choice (RF/XGBoost vs.\ sequence baselines) trades
+interpretability for capacity; PATHCAST therefore retains simpler baselines
+and reports SHAP summaries without claiming causal attribution.
+
 
 % =============================================================================
 % 2.6 VARIANT ENTROPY
@@ -335,6 +413,17 @@ forecast confidence; PATHCAST uses it as both a diagnostic indicator at
 Stage~2 (Section~\ref{sec:variant-entropy}) and a feature of the ML
 component.
 
+\paragraph{Methodological choice: variant entropy as complexity proxy.}
+\emph{Potential.} $H_{\text{norm}}(V)$ summarises path diversity in a single
+scale-free indicator, useful for comparing repositories and for flagging
+logs where a single backbone may be a weak summary of behaviour.
+\emph{Limitations.} Entropy is a property of the empirical variant
+distribution, not of individual cases; rare but critical paths contribute
+little mass yet may dominate risk. High entropy does not identify
+\emph{which} variants drive delay. PATHCAST therefore uses entropy as a
+repository-level diagnostic and as one ML feature, not as a substitute for
+case-level state and conformance information.
+
 
 % =============================================================================
 % 2.7 CHAPTER SYNTHESIS  (one paragraph)
@@ -342,11 +431,12 @@ component.
 \section{Chapter Synthesis}
 \label{sec:ch2-synthesis}
 
-The six concepts compose the PATHCAST pipeline as follows: process mining
-yields the discovered \emph{process backbone}---the sound, block-structured
-process model (Section~\ref{sec:process-mining}) that captures the dominant control-flow
-of the SDLC---and the per-case conformance feature;
-mining of software repositories provides the heterogeneous event sources
+The six concepts compose the PATHCAST pipeline as follows: process
+mining yields the discovered \emph{process backbone}---the sound,
+block-structured process model (Section~\ref{sec:process-mining}) that
+captures the dominant control-flow of the SDLC---and the per-case
+conformance feature $\text{conf}(c)$;
+Mining Software Repositories (MSR) provides the heterogeneous event sources
 from which that log is built; the Markov chain layer turns the backbone
 into a probabilistic state-transition model with closed-form expressions
 for expected completion time and absorption probabilities; Monte Carlo
@@ -354,6 +444,13 @@ simulation, paired with CRPS and ACE, produces and evaluates the
 distributional forecasts; machine learning consumes process-derived
 features alongside MSR features to refine case-level outcome predictions;
 and the entropy of variants provides a proxy for process complexity and
-expected forecasting difficulty. The empirical evidence that this
-integration has not, to the best of our knowledge, been previously proposed
-for software development is the subject of Chapter~\ref{ch:slr}.
+expected forecasting difficulty.
+Each link above is a methodological commitment with stated potential and
+limitations in the corresponding section: definitions reused in
+Chapter~\ref{ch:method} (notably $\text{conf}(c)$, the IMf backbone, the
+DTMC/semi-Markov layer, and the CRPS/ACE metrics) are therefore not
+notational accidents but justified building blocks whose residual risks are
+carried into the empirical design.
+The empirical evidence that this integration has not, to the best of our
+knowledge, been previously established as a validated L3 composition for
+software development is the subject of Chapter~\ref{ch:slr}.

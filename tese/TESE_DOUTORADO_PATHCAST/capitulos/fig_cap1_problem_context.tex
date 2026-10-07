@@ -1,0 +1,82 @@
+% Cap.~1 Fig.~1.1 --- problem context (environment vs.\ data)
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[>=Stealth, x=1cm, y=1cm]
+
+% ========== (a) Environment ==========
+\node[draw=black!40, rounded corners=4pt, fill=gray!3,
+  minimum width=7.2cm, minimum height=5.0cm] (La) at (0,0) {};
+
+\node[font=\bfseries\small, anchor=north] at ([yshift=-0.25cm]La.north)
+  {(a)~~Environment: work that flows};
+
+\node[draw=black!55, thick, rounded corners=2pt, fill=white,
+  font=\footnotesize\bfseries, minimum width=1.25cm, minimum height=0.65cm]
+  (td) at (-2.55,0.55) {To Do};
+\node[draw=black!55, thick, rounded corners=2pt, fill=white,
+  font=\footnotesize\bfseries, minimum width=1.7cm, minimum height=0.65cm]
+  (ip) at (-0.7,0.55) {In Progress};
+\node[draw=black!55, thick, rounded corners=2pt, fill=white,
+  font=\footnotesize\bfseries, minimum width=1.25cm, minimum height=0.65cm]
+  (rv) at (1.25,0.55) {Review};
+\node[draw=green!50!black, thick, rounded corners=2pt, fill=green!15,
+  font=\footnotesize\bfseries, minimum width=1.15cm, minimum height=0.65cm]
+  (dn) at (3.05,0.55) {Done};
+
+\draw[->, thick] (td) -- (ip);
+\draw[->, thick] (ip) -- (rv);
+\draw[->, thick] (rv) -- (dn);
+\draw[->, thick, red!65!black]
+  (rv.south) .. controls +(0,-1.0) and +(0,-1.0) ..
+  node[midway, below, font=\scriptsize, text=red!65!black] {rework}
+  (ip.south);
+
+\node[font=\footnotesize, text=black!65, text width=6.4cm, align=center]
+  at (0,-1.85)
+  {Queues, loops and stalls.\\The \emph{path} carries information.};
+
+% ========== (b) Data ==========
+\node[draw=black!40, rounded corners=4pt, fill=gray!3,
+  minimum width=7.2cm, minimum height=5.0cm] (Ra) at (7.8,0) {};
+
+\node[font=\bfseries\small, anchor=north] at ([yshift=-0.25cm]Ra.north)
+  {(b)~~Data: event logs};
+
+\node[draw=teal!55!black, rounded corners=2pt, fill=teal!10,
+  font=\footnotesize\bfseries, minimum width=1.6cm, minimum height=0.55cm]
+  (git) at (6.0,1.15) {Git};
+\node[draw=teal!55!black, rounded corners=2pt, fill=teal!10,
+  font=\footnotesize\bfseries, minimum width=1.6cm, minimum height=0.55cm]
+  (jira) at (7.8,1.15) {Jira};
+\node[draw=teal!55!black, rounded corners=2pt, fill=teal!10,
+  font=\footnotesize\bfseries, minimum width=1.6cm, minimum height=0.55cm]
+  (cicd) at (9.6,1.15) {CI/CD};
+
+\node[draw=black!55, thick, rounded corners=3pt, fill=white,
+  align=left, inner sep=5pt, font=\ttfamily\scriptsize]
+  (elog) at (7.8,-0.35)
+  {\textbf{\rmfamily\scriptsize Event log}\\[2pt]
+   case~~activity~~~~~~~~~~~~~~time\\
+   T-42~ToDo$\to$InProg~~~~~~10:01\\
+   T-42~InProg$\to$Review~~~~~14:22\\
+   T-42~Review$\to$InProg~~~~~15:05};
+
+\draw[->, thick] (git.south) -- ++(0,-0.15) -| (elog.north west);
+\draw[->, thick] (jira.south) -- (elog.north);
+\draw[->, thick] (cicd.south) -- ++(0,-0.15) -| (elog.north east);
+
+\node[font=\footnotesize, text=black!65, text width=6.4cm, align=center]
+  at (7.8,-1.85)
+  {Digital trace of the \emph{real} process,\\not a subjective estimate.};
+
+\end{tikzpicture}%
+}
+\caption{Delivery forecasting in plain terms.
+\textbf{(a)}~Each work item traverses stages of the SDLC; queues, rework and
+stalls make the \emph{path} informative.
+\textbf{(b)}~Tools already emit time-stamped movements that form an event log.
+The forecasting problem is uncertainty under a dynamic process, not the
+computation of a single average.}
+\label{fig:cap1-problem-context}
+\end{figure}

@@ -1,0 +1,73 @@
+% Cap.~1 Fig.~1.2 --- throughput Monte Carlo as a black box
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[>=Stealth]
+
+% ===== Left: black box =====
+\node[
+  draw=red!35, rounded corners=4pt, fill=red!4,
+  minimum width=6.8cm, minimum height=5.6cm
+] (LP) at (0,0) {};
+
+\node[font=\bfseries\small, text=red!65!black]
+  at (0,2.3) {Black-box approach};
+
+\node[font=\small] (cnt) at (-2.35,0.6) {count};
+\node[
+  fill=black, text=white, font=\bfseries\small, align=center,
+  minimum width=3.0cm, minimum height=1.3cm, rounded corners=1pt
+] (bb) at (0,0.6) {Mean of\\completions};
+\node[font=\small] (fc) at (2.4,0.6) {forecast};
+\draw[->, ultra thick, red!60!black] (cnt) -- (bb);
+\draw[->, ultra thick, red!60!black] (bb) -- (fc);
+
+\node[font=\footnotesize, align=center, text=black!70]
+  at (0,-1.4)
+  {Sees only the \textbf{how many}.\\[3pt]Ignores the \textbf{how}.};
+
+% ===== Right: three separated cards =====
+% Card 1
+\node[circle, fill=red!70!black, text=white, font=\bfseries\scriptsize,
+  minimum size=0.45cm, inner sep=0pt] (n1) at (4.15,2.05) {1};
+\node[
+  draw=black!25, rounded corners=3pt, fill=white, anchor=west,
+  text width=7.0cm, align=left, inner sep=6pt
+] at (4.55,2.05)
+  {\textbf{Assumes stability}\\[2pt]
+   \footnotesize Treats every week as exchangeable. Real processes change:
+   rework, bottlenecks, seasonality.};
+
+% Card 2
+\node[circle, fill=red!70!black, text=white, font=\bfseries\scriptsize,
+  minimum size=0.45cm, inner sep=0pt] (n2) at (4.15,0.15) {2};
+\node[
+  draw=black!25, rounded corners=3pt, fill=white, anchor=west,
+  text width=7.0cm, align=left, inner sep=6pt
+] at (4.55,0.15)
+  {\textbf{Loses structure}\\[2pt]
+   \footnotesize A case in Review is treated like one in To Do; state
+   position is discarded.};
+
+% Card 3
+\node[circle, fill=red!70!black, text=white, font=\bfseries\scriptsize,
+  minimum size=0.45cm, inner sep=0pt] (n3) at (4.15,-1.75) {3};
+\node[
+  draw=black!25, rounded corners=3pt, fill=white, anchor=west,
+  text width=7.0cm, align=left, inner sep=6pt
+] at (4.55,-1.75)
+  {\textbf{Does not explain}\\[2pt]
+   \footnotesize Yields a number, not a cause---no actionable bottleneck
+   diagnosis.};
+
+\end{tikzpicture}%
+}
+\caption{Structural limits of throughput-based Monte Carlo (market practice):
+weekly completion counts are sampled to project backlog burn-down, but the
+method never opens the process.
+Throughput is how many tasks finish per week; the black box sees the
+\emph{count}, not the \emph{path}.
+At root it is a sophisticated average that assumes a generative process
+rarely present in practice.}
+\label{fig:cap1-throughput-blackbox}
+\end{figure}
