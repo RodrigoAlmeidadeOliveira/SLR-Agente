@@ -44,16 +44,15 @@ fall within our scope and were retained as included studies under EC4
 (Table~\ref{tab:criteria}), which excludes only secondary studies that do
 \emph{not} address PM or stochastic methods in software engineering. None of
 them maps the joint use of process mining, stochastic modelling, and
-forecasting on software development data, and none reports how often the
-three are combined. Establishing that baseline is the gap this mapping study
-addresses.
+forecasting on software development data. This study records the family
+codes stored on the cuts it names. It does not establish how often the
+literature combines the three.
 
-\paragraph{Why the mapping matters.} For researchers, a structured map shows
-which combinations have been tried, on which SDLC phases and data sources,
-and with what evidence, so that integration work can build on what exists
-instead of re-deriving it. For practitioners, it indicates which parts of a
-process-aware forecasting toolchain are mature (discovery and conformance
-checking on repository data) and which remain research problems. For the
+\paragraph{Why the mapping matters.} On the cuts of 150 and of 292, the
+model stored the family codes reported below, and those codes were not
+re-marked. The screen missed eligible studies, so the codes are not a rate
+for the literature. The SPMF taxonomy and the four agenda directions are
+proposals by the authors. For the
 methodology of secondary studies, the review is also a deployment of
 LLM-assisted screening whose selection error we measure against a
 pre-registered human reference standard, following
@@ -71,9 +70,10 @@ the application landscape of process mining in SDLC contexts, the techniques
 and prediction methods employed, and the degree of integration between
 process mining and stochastic forecasting. Its contributions are (i)~a
 classification of the coded rows, on the cuts named in each sentence, by
-SDLC phase, data source, and technique family; (ii)~family-code counts (F1, F3, F4) on the cuts
-named in each sentence, which this revision did not re-mark, plus two
-model counts (F2, F5) that a human re-read did not confirm; (iii)~the SPMF taxonomy and a four-direction research agenda; and (iv)~a
+SDLC phase, data source, and technique family; (ii)~stored family-code
+counts (F1, F3, F4), which this revision does not use as findings, and two
+withdrawn model counts (F2, F5); (iii)~the SPMF taxonomy and a
+four-direction research agenda that is not inferred from F1--F5; and (iv)~a
 measured account of the LLM-assisted selection, including where it failed.
 The authors' own integrated-pipeline proposal (PATHCAST) is mentioned only as
 one research-agenda hypothesis (Section~\ref{sec:slr-positioning}) and is not
@@ -82,7 +82,7 @@ evaluated here.
 Section~\ref{sec:slr-protocol} describes the protocol;
 Section~\ref{sec:slr-results-selection} the search and selection;
 Section~\ref{sec:slr-synthesis} the results per research question;
-Section~\ref{sec:slr-discussion} the findings, taxonomy, and agenda;
+Section~\ref{sec:slr-discussion} the coded counts, taxonomy, and agenda;
 Section~\ref{sec:slr-threats} threats to validity, including the human
 validation of the selection; and Section~\ref{sec:slr-summary} concludes.
 
@@ -93,9 +93,10 @@ validation of the selection; and Section~\ref{sec:slr-summary} concludes.
 \subsection{Research Questions}
 \label{sec:slr-rqs}
 
-The mapping study is guided by the following research questions, structured to
-progressively map the landscape from application scope to technique
-integration (mapping-study outputs: classification, frequencies, taxonomy):
+The questions below name the cuts on which stored family codes are
+reported. Section~\ref{sec:slr-gaps} states once that F1, F3, and F4 are
+stored codes and do not motivate RA1--RA4. Later sections report the
+counts and do not repeat that status.
 
 \begin{table}[htbp]
 \centering
@@ -212,23 +213,151 @@ contexts:
 "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline")}
 \end{quote}
 
-The strings are adapted to each database's syntax and field conventions as
-summarized in Table~\ref{tab:db-adaptations}. All database searches were
-executed on 12~April~2026. The eligibility window (IC1) runs from
+The blocks above are the shared term lists. They are not the Scopus syntax
+that was run. Table~\ref{tab:query-ledger} is the ledger of every export in
+the corpus of 8{,}347 records: database, query name, and raw count. Every
+row was retrieved on 12~April~2026. The six Scopus rows sum to 2{,}377. All six Scopus strings, the four
+Web of Science strings, the two ACM query strings, and the four IEEE
+protocol strings are printed below. \texttt{scopus\_principal} returned
+1{,}595 records. None of the strings in the ledger contains a
+machine-learning block.
+
+\paragraph{\texttt{scopus\_principal} (1{,}595 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("software engineering" OR "software development" OR "software process" OR "software lifecycle" OR "SDLC" OR "DevOps" OR "CI/CD" OR "continuous integration" OR "agile development" OR "issue tracking" OR "version control" OR "code review" OR "pull request" OR "software repository" OR "software evolution") AND ("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "predictive process monitoring" OR "event log analysis" OR "process intelligence" OR ("Monte Carlo simulation" AND ("software" OR "process mining" OR "throughput" OR "lead time")) OR ("Markov chain" AND ("software" OR "process mining" OR "workflow" OR "development process")) OR (("stochastic model" OR "transition probability" OR "absorbing chain") AND ("software" OR "process mining")) OR (("remaining time prediction" OR "outcome prediction" OR "cycle time prediction" OR "lead time prediction") AND "software") OR ("event log" AND ("software" OR "repository" OR "JIRA" OR "GitHub"))) ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{scopus\_markov\_testing} (498 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("Markov chain" OR "Markov model") AND ("statistical software testing" OR "software testing" OR "software reliability")) OR ("A Markov chain model for statistical software testing") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{scopus\_stochastic\_petri} (6 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("stochastic Petri net" OR "stochastic workflow net" OR "GSPN") AND ("remaining service time" OR "service execution time" OR "remaining time")) OR ("Prediction of Remaining Service Execution Time Using Stochastic Petri Nets with Arbitrary Firing Delays") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{scopus\_simulation\_bridge} (200 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("process mining" OR "process discovery" OR "workflow mining") AND ("simulation model" OR "simulation models" OR "process simulation" OR "discovering simulation models" OR "colored Petri") AND ("event log" OR "process model" OR "business process")) OR ("Discovering Simulation Models") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{scopus\_complementar} (48 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{scopus\_fronteira} (30 records).}
+{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND ("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND ("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\paragraph{\texttt{wos\_principal} (632 records).}
+{\footnotesize\ttfamily\raggedright
+TS=("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "event log analysis" OR "process intelligence" OR "predictive process monitoring") AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development" OR "issue tracking" OR "code review" OR "software project" OR "software repository" OR "software maintenance" OR "software evolution")\par}
+
+\paragraph{\texttt{wos\_complementar} (338 records).}
+{\footnotesize\ttfamily\raggedright
+TS=(("Monte Carlo simulation" OR "Markov chain" OR "stochastic model" OR "transition probability" OR "absorbing chain" OR "process simulation") AND ("software" OR "process mining" OR "workflow" OR "throughput")) AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps")\par}
+
+\paragraph{\texttt{wos\_msr} (26 records).}
+{\footnotesize\ttfamily\raggedright
+TS=("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND TS=("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time")\par}
+
+\paragraph{\texttt{wos\_fronteira} (1 record).}
+{\footnotesize\ttfamily\raggedright
+TS=("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND TS=("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND TS=("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline")\par}
+
+\paragraph{\texttt{acm\_principal} (24 records).}
+{\footnotesize\ttfamily\raggedright
+(Abstract:"process mining" OR Abstract:"conformance checking" OR Abstract:"process discovery" OR Abstract:"workflow mining" OR Abstract:"event log analysis" OR Abstract:"process intelligence" OR Abstract:"predictive process monitoring") AND (Abstract:"software engineering" OR Abstract:"software development" OR Abstract:"software process" OR Abstract:"SDLC" OR Abstract:"DevOps" OR Abstract:"continuous integration" OR Abstract:"agile development" OR Abstract:"issue tracking" OR Abstract:"software repository" OR Abstract:"software project")\par}
+
+\paragraph{\texttt{acm\_msr} (32 records).}
+{\footnotesize\ttfamily\raggedright
+(Abstract:"mining software repositories" OR Abstract:"software repository mining" OR Abstract:"software archaeology" OR Abstract:"GitHub mining" OR Abstract:"Jira mining") AND (Abstract:"process model" OR Abstract:"workflow" OR Abstract:"state transition" OR Abstract:"Markov" OR Abstract:"Monte Carlo" OR Abstract:"lead time" OR Abstract:"cycle time" OR Abstract:"throughput" OR Abstract:"process mining" OR Abstract:"process analysis")\par}
+
+The third ACM export, \texttt{acm\_extra\_refs} (40 records), is a
+supplementary Bib\TeX{} file and has no query string.
+The four IEEE protocol strings are printed next. The raw file records
+17 manual batches and 1{,}386 records. It does not record which of these
+four strings produced each batch. \texttt{acm\_complementar} and
+\texttt{springer\_11}--\texttt{springer\_13} are in
+\texttt{config/queries.py} and were not executed.
+
+\paragraph{\texttt{ieee\_exec1}.}
+{\footnotesize\ttfamily\raggedright
+("process mining" OR "conformance checking" OR "process discovery" OR "workflow mining" OR "event log analysis" OR "predictive process monitoring") AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development")\par}
+
+\paragraph{\texttt{ieee\_exec2}.}
+{\footnotesize\ttfamily\raggedright
+(("Monte Carlo simulation" OR "Markov chain" OR "stochastic process model" OR "process simulation") AND ("software" OR "process mining" OR "throughput" OR "lead time")) AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "software testing")\par}
+
+\paragraph{\texttt{ieee\_exec3}.}
+{\footnotesize\ttfamily\raggedright
+(("remaining time prediction" OR "lead time prediction" OR "cycle time prediction" OR "process forecasting" OR "outcome prediction" OR "event log construction") AND "software") AND ("software engineering" OR "software development" OR "software process")\par}
+
+\paragraph{\texttt{ieee\_exec4}.}
+{\footnotesize\ttfamily\raggedright
+("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "process mining" OR "process analysis")\par}
+
+The SpringerLink cell in the ledger is the string that was run.
+
+\begin{table}[htbp]
+\centering
+\caption{Search ledger. Each row is one export retrieved on 12~April~2026.
+The rows sum to 8{,}347.}
+\label{tab:query-ledger}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llp{6.6cm}r}
+\toprule
+\textbf{Database} & \textbf{Query} & \textbf{String} & \textbf{Raw} \\
+\midrule
+Scopus & scopus\_principal & printed above & 1{,}595 \\
+Scopus & scopus\_complementar & printed above & 48 \\
+Scopus & scopus\_markov\_testing & printed above & 498 \\
+Scopus & scopus\_stochastic\_petri & printed above & 6 \\
+Scopus & scopus\_simulation\_bridge & printed above & 200 \\
+Scopus & scopus\_fronteira & printed above & 30 \\
+\midrule
+Web of Science & wos\_principal & printed above & 632 \\
+Web of Science & wos\_complementar & printed above & 338 \\
+Web of Science & wos\_msr & printed above & 26 \\
+Web of Science & wos\_fronteira & printed above & 1 \\
+\midrule
+ACM DL & acm\_principal & printed above & 24 \\
+ACM DL & acm\_msr & printed above & 32 \\
+ACM DL & acm\_extra\_refs & supplementary Bib\TeX{} export & 40 \\
+\midrule
+IEEE Xplore & ieee\_manual\_01--17 & 17 batches; strings printed above & 1{,}386 \\
+\midrule
+SpringerLink & springer\_1 & \texttt{"process mining" "software development"} & 527 \\
+SpringerLink & springer\_2 & \texttt{"process mining" "software process"} & 167 \\
+SpringerLink & springer\_3 & \texttt{"process mining" "software engineering"} & 743 \\
+SpringerLink & springer\_4 & \texttt{"Markov chain" "software process"} & 743 \\
+SpringerLink & springer\_5 & \texttt{"Monte Carlo" "software process"} & 70 \\
+SpringerLink & springer\_6 & \texttt{"mining software repositories" "process model"} & 140 \\
+SpringerLink & springer\_7 & \texttt{"stochastic" "software process" "event log"} & 46 \\
+SpringerLink & springer\_8 & \texttt{"predictive process monitoring" "software"} & 16 \\
+SpringerLink & springer\_9 & \texttt{"conformance checking" "software development"} & 132 \\
+SpringerLink & springer\_10 & \texttt{"workflow mining" "software"} & 300 \\
+\midrule
+Snowballing & snowball\_both & one iteration; labels do not split direction & 595 \\
+Control set & control\_papers\_bib & validation only & 12 \\
+\midrule
+\textbf{Total} & & & \textbf{8{,}347} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The eligibility window (IC1) runs from
 1~January~1994 to the search execution date; publications dated 2026 are
 therefore partial-year coverage (indexed by 12~April~2026) and are reported
-as such. The three strings executed on 12~April~2026 contain no
-machine-learning block. On 31~October~2026 a fourth string, with
+as such. On 31~October~2026 a fourth string, with
 \texttt{machine learning}, \texttt{deep learning}, \texttt{neural network},
 \texttt{random forest}, \texttt{gradient boosting}, \texttt{xgboost}, or
 \texttt{lstm}, and with lead time, cycle time, remaining time, throughput,
 or just-in-time defect as the target, was run on Scopus. It returned 165
 records. Title screening against the criteria in
 Table~\ref{tab:criteria} left 19 includes, all under IC4c, and 2 records
-already in the 506. None of the 19 joins process mining, a stochastic
-model, and forecasting. They are not added to the 506: the screen used the
-title only, and the other four databases were not re-run. Finding F5 in
-the body is still the count from the three original strings. Where a database supported a date restriction, the query used
+already in the 455. None of the 19 joins process mining, a stochastic
+model, and forecasting. They are not added to the 455: the screen used the
+title only, and the other four databases were not re-run. F5 is
+withdrawn, so those 19 are not used as a finding. Where a database supported a date restriction, the query used
 publication years 1994--2026; the Web of Science export was not
 date-restricted at query time, and IC1 is enforced at screening for every
 source (Table~\ref{tab:db-adaptations}, note).
@@ -243,11 +372,11 @@ source (Table~\ref{tab:db-adaptations}, note).
 \toprule
 \textbf{Database} & \textbf{Search Field} & \textbf{Strings} & \textbf{Filters at query time} & \textbf{Records} \\
 \midrule
-Scopus         & TITLE-ABS-KEY & 3         & ar, cp; EN; PUBYEAR 1994--2026          & 2{,}377 \\
-IEEE Xplore    & All Metadata  & 4 (split) & Conf.\ + Journals; 1994--2026          & 1{,}386 \\
-Web of Science & TS (Topic)    & 3         & Article, Proc.; EN; no date filter     & 997 \\
-SpringerLink   & Simplified    & 8 queries & Chapter, Article; EN                   & 2{,}884 \\
-ACM DL         & Abstract      & 2         & Date: 1994--2026                       & 96 \\
+Scopus         & TITLE-ABS-KEY & 6         & ar, cp; EN; PUBYEAR 1994--2026          & 2{,}377 \\
+IEEE Xplore    & All Metadata  & 17 batches & Conf.\ + Journals; 1994--2026         & 1{,}386 \\
+Web of Science & TS (Topic)    & 4         & Article, Proc.; EN; no date filter     & 997 \\
+SpringerLink   & Simplified    & 10 queries & Chapter, Article; EN                  & 2{,}884 \\
+ACM DL         & Abstract      & 3         & Date: 1994--2026                       & 96 \\
 Snowballing    & --            & --        & Backward + forward                     & 595 \\
 Control set    & --            & --        & Manual                                 & 12 \\
 \midrule
@@ -406,7 +535,10 @@ Given the scale of the working set (2{,}340 papers) and the requirement for
 systematic, reproducible screening decisions with traceable rationale, the
 title/abstract screening phase employs a language model as the primary
 screener. Specifically, \textit{claude-haiku-4-5-20251001} is used via the
-Anthropic Message Batches API, with a structured prompt encoding the IC4a--IC4d
+Anthropic Message Batches API. The screening, QA, extraction, and
+verifier calls pass the model identifier and \texttt{max\_tokens} and do
+not pass a temperature. The Messages API then uses its default
+temperature of 1. The prompt encodes the IC4a--IC4d
 and EC1--EC4 criteria (EC5 is applied programmatically post-screening), a
 short scope statement of the target intersection, and decision rules for
 the three-class output: \texttt{include}, \texttt{exclude}, or \texttt{maybe}.
@@ -457,9 +589,13 @@ following Landis and Koch (1977)~\cite{landiskoch1977}; and
 excluded and of the auxiliary records that were pending or otherwise
 unclassified. On that re-screen the two reviewers agreed with 92\% of the
 suggested labels, including the labels that a heuristic pass had proposed
-for the later S1 batches and for all of S3. The 8\% they did not accept is
-not identified record by record, so the study list in
-Section~\ref{sec:slr-synthesis} still contains every suggested include.
+for the later S1 batches and for all of S3. The sheets for that re-screen
+(4{,}005 rows) store a decision equal to the suggestion on every row, so
+the labels they did not accept are not marked there. Rebuilt from the
+title or abstract the LLM treated as sufficient, that share of the coded
+includes is 33 of 338 (9.8\%), listed in
+\texttt{labels\_ta\_insufficient\_for\_include.csv} and removed in
+Section~\ref{sec:slr-synthesis}.
 Cross-model verification is a secondary signal. The Recall figures come
 from the sample, not from the 92\% agreement.
 
@@ -513,14 +649,11 @@ QA scoring is performed by the same LLM-assisted protocol used for screening
 strict rubric for each criterion and returns a binary score with a brief
 justification. The full prompt and the per-study scores are part of the
 replication package (Section~\ref{sec:slr-replication}).
-Table~\ref{tab:qa-results} reports the scores for the 169 working-set studies.
+Table~\ref{tab:qa-results} reports the scores for the 150 working-set studies that remain.
 
 \input{results/qa_assessment_summary}
 
-The model scored 33 of the 169 working-set studies below 4/8. They are
-predominantly short workshop papers, position papers, or extended abstracts,
-and the model marked both QA3 (reproducible data source) and QA4 (formally
-defined technique) as failed. Those 33 rows stay in the descriptive counts.
+The model scored 27 of the 150 working-set studies that remain below 4/8.
 The score is not a filter. Section~\ref{sec:slr-gaps} does not apply a cut
 on $4/8$.
 
@@ -566,7 +699,8 @@ Process Model Quality        & Fitness, precision, generalization (if reported) 
 
 \subsection{Database Retrieval and Deduplication}
 
-The three search strings executed across five databases returned 7{,}740
+The database rows in Table~\ref{tab:query-ledger}, apart from snowballing
+and the control set, returned 7{,}740
 records. One snowballing iteration, stored as 595 records attributed to
 400 source DOIs, yielded the additional records
 (Section~\ref{sec:slr-search}). Together with 12 control papers maintained as a
@@ -582,7 +716,7 @@ Table~\ref{tab:retrieval} summarizes the retrieval by source.
 \textbf{Source} & \textbf{Raw Records} & \textbf{After Internal Dedup} \\
 \midrule
 Scopus (6 queries)      & 2{,}377 & 1{,}852 \\
-SpringerLink (8 queries, 10 export batches) & 2{,}884 & 1{,}543 \\
+SpringerLink (10 queries) & 2{,}884 & 1{,}543 \\
 IEEE Xplore (manual)    & 1{,}386 & 1{,}263 \\
 Snowballing             &   595   &   575   \\
 Web of Science (4 queries) & 997  &   514   \\
@@ -605,18 +739,16 @@ Screening 5{,}783 records in a single pass would require substantial
 resources. A working set of 2{,}340 papers was therefore constructed from
 the highest-signal primary queries---those whose query design directly
 targets the review intersection (process mining, stochastic modeling,
-and software development)---as shown in Table~\ref{tab:working-set}. The
-working-set construction also incorporates 364 additional records from the
-manually imported control set and supplementary IEEE/ACM batches that were
-not part of the primary deduplication pool. The 3{,}807 unique records not
-selected for the working set therefore constitute the \textit{high-recall
-auxiliary corpus}, retained as a frozen baseline and available for
-supplementary analysis if gaps in the primary results warrant
-expansion.\footnote{Composition: $5{,}783$ unique deduplicated records,
-of which $1{,}976$ were selected into the working set, plus $364$ control
-and manually imported records added directly to the working set, totalling
-$2{,}340$ working-set papers; the remaining $3{,}807$ unique records
-constitute the auxiliary corpus.}
+and software development)---as shown in Table~\ref{tab:working-set}.
+Of the 2{,}340 working-set identifiers, 1{,}976 are among the 5{,}783
+deduplicated records, the other 364 rows are the same papers under a
+different identifier inside the 3{,}807 ($5{,}783 - 1{,}976$), the union
+of the two identifier lists is the 5{,}783, and 345 of those 364 are
+Scopus rows in the working-set file, so $2{,}197 - 345 = 1{,}852$, the
+Scopus count in the deduplicated file.
+Of the 364 pairs, 69 appear in the corpus of 455 under the working-set
+identifier and 30 under the canonical identifier. No pair appears under
+both identifiers. The 3{,}807 is the auxiliary identifier list that was screened.
 
 \begin{table}[htbp]
 \centering
@@ -626,7 +758,7 @@ constitute the auxiliary corpus.}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{p{2.2cm} p{8.3cm} r}
 \toprule
-\textbf{Database} & \textbf{Queries included} & \textbf{Unique papers} \\
+\textbf{Database} & \textbf{Queries included} & \textbf{Rows} \\
 \midrule
 Scopus & scopus\_principal, scopus\_complementar, scopus\_fronteira,
          scopus\_markov\_testing, scopus\_stochastic\_petri,
@@ -687,7 +819,8 @@ remain, of which 372 (34.2\%) changed decision and 4 moved from
 \texttt{exclude} to \texttt{include}/\texttt{maybe}. Those four records were
 not added as a separate batch. Studies that entered the corpus because a
 human later judged them eligible are the 168 described in
-Section~\ref{sec:slr-synthesis}.
+Section~\ref{sec:slr-synthesis}, of which 18 are removed in the eligibility
+pass. The 150 that remain are the corpus added in this revision.
 
 \subsection{Second-Pass Eligibility Screening (``FT'')}
 
@@ -718,7 +851,7 @@ the validation samples (Section~\ref{sec:slr-threats}) and, after R1, for 8
 records with conflicting abstract-based decisions. Three of those eight were
 eligible on the PDF: \texttt{ba2ff831}, \texttt{ee562777}, and
 \texttt{9188583f}. The first two are already in the original confirmed list.
-The third is not in the 506-study corpus of this revision.
+The third is not in the 455-study corpus of this revision.
 
 Table~\ref{tab:ft-screening} summarises the outcome.
 
@@ -893,17 +1026,19 @@ diagram~\cite{page2021} of the selection process.
 \draw[arr] (raw) -- (coded);
 
 \node[stg=8.4cm, minimum height=1.25cm] (inc) at (-0.5,-19.8)
-  {\textbf{Corpus of this revision} ($n = 506$)\\[2pt]
-   $338 + 168$ added after the human check\\
-   188 listed, 20 duplicate identifiers removed};
+  {\textbf{Corpus of this revision} ($n = 455$)\\[2pt]
+   $305 + 150$\\
+   33 coded rows removed; 18 added rows removed};
 
 \draw[arr] (coded) -- (inc);
 
 \end{tikzpicture}
-\caption{PRISMA 2020 flow of the study selection. The included phase
+\caption{PRISMA 2020 flow of the study selection. The 2{,}340 and the
+  3{,}807 are identifier lists. They share 364 papers, and their union is
+  the 5{,}783. The included phase
   continues through the auxiliary screen, the removal of overlapping
   identifiers, the removal of two pre-1994 studies, and the human re-screen.
-  The mapped set is 506 studies (Table~\ref{tab:ledger}). The 318-study
+  The mapped set is 455 studies (Table~\ref{tab:ledger}). The 318-study
 joint tables are an older cut (381 records minus 63 duplicates) and are
 not a node of this flow. In the original run, 595 records with no abstract
 and 16 records that stayed pending were closed under EC5; this revision
@@ -917,38 +1052,68 @@ re-screened those records.}
 
 \subsection{Overview of Included Studies}
 
-This revision includes \textbf{506 studies}: 338 already coded, plus 168
-added after the human check.
+This revision includes \textbf{455 studies}: 305 that remain from the
+coded list of 338, plus 150 that remain after the eligibility pass.
 
 The 338 are the LLM list of 340 studies, minus two papers from 1991 and
-1992. The 168 are what remains of 188 records the re-screen marked as
-eligible, after 20 records that repeated a study already in the list were
-removed. Eleven of the 168 were read as a PDF, 80 from the abstract, and
-77 from the title only.
+1992. The human re-screen marked 188 records as eligible. Twenty of them
+repeated a study already in the list, leaving 168. Eighteen of those 168
+fail an inclusion or exclusion rule and are removed. Seventeen had been
+read from an abstract or a PDF: the extraction either names no technique
+in IC4a--IC4d, or the text is outside software development (EC1 or EC2).
+One, identifier \texttt{46815264}, is dated 1992 and fails IC1. Forty-six
+others had been labelled ``none of the four'' even though the extraction
+names a technique; they stay, with that family. The 18 removals and the
+46 assignments are listed in \texttt{corpus\_eligibility\_pass.csv}. Of the
+150 that remain, 11 were read as a PDF, 63 from the abstract, and 76 from
+the title only.
 
-The three technique families were marked on \textbf{429} of the 506: the
-338, plus the 91 added studies that had an abstract or a PDF. One of those
-429, PRIMAD, has all three families. The 77 studies known only by the title
-were left blank.
+Thirty-three studies, 33 of the 338 coded includes (9.8\%), are then
+removed. The re-screen sheets do not mark them: on all 4{,}005 rows the
+decision equals the suggestion. The list was rebuilt from the title or
+abstract the LLM treated as sufficient. Each was an include for which
+that text does not support inclusion. The object is generic
+process mining or forecasting, a business process, product execution, or
+system architecture. Two of them, \texttt{96767878} and \texttt{f449ac41},
+have no abstract, and the inclusion note itself asks for the full text.
+Seventeen come from the working set, seven from the first auxiliary tier,
+and nine from the second. The list is
+\texttt{labels\_ta\_insufficient\_for\_include.csv}. The coded studies that
+remain are 305, and the corpus is $305 + 150 = 455$.
+
+The three technique families were marked on \textbf{379} of the 455: the
+305, plus the 74 added studies that had an abstract or a PDF and meet at
+least one content criterion. One of those 379, PRIMAD, has all three
+families. The 76 studies known only by the title were left blank. A blank
+is not counted as a no.
 
 Table~\ref{tab:ledger} is the single count of every cut used in the
 paper. Four of those rows answer different questions, and they are not
-interchangeable. The context set is the 506: a study entered when it met
-one of IC4a--IC4d. The rows with technique-family codes filled before this
-round are the 338. The rows whose three family marks were filled, including
-the 91 added studies read from an abstract or a PDF, are the 429. The
-intersection of process mining, a stochastic model, and forecasting is one
-study inside that 429. Each research question is answered on the cut named
-in its sentence. The working-set tables, including the integration levels,
-use 169 of the 338. The joint tables use 318. That 318 is what remained
-after 63 duplicate records were removed from an earlier combined list of
-381. The 340 is what remained after 64 duplicate records were removed from
-404 raw confirmations. The two cuts were built by different removals.
-Adding the 23 studies of the second auxiliary pass to 318 does not produce
-340. The 8\% of suggested labels that the two reviewers did not accept is
-not listed record by record, so the 506 still contains every suggested
-include. Appendix~\ref{app:included} lists the 506 studies and groups them
-by family.
+interchangeable. The context set is the 455. The 33 removed from the
+coded list are the LLM includes whose title or abstract does not support
+inclusion. The 74 added studies stay because the extraction names a
+technique in IC4a--IC4d. The 76 title-only studies were not marked, and a
+blank is not treated as satisfying a content criterion. The rows with
+technique-family codes filled before this round were the 338; 305 remain
+after the removal of 33. The rows with at least one family mark, including
+the 74 added studies, are the 379. The intersection of process mining, a
+stochastic model, and forecasting is one study inside that 379.
+Each research question is answered on the cut named in its sentence. The
+working-set family codes use 150 studies. That is the 169 extraction minus
+17 studies whose title or abstract does not support inclusion, and minus
+two extra identifiers of one paper the corpus keeps once
+(\texttt{2647ea07}). The joint family codes use 292 studies. That is the
+318 minus those 17, minus seven studies from the first auxiliary tier
+removed for the same reason, and minus the two pre-1994 papers. Nine of
+the 33 removed studies are not in the 318.
+The joint tables use 318. That 318 is what remained after 63 duplicate
+records were removed from an earlier combined list of 381. The 340 is what
+remained after 64 duplicate records were removed from 404 raw
+confirmations. The two cuts were built by different removals. Adding the
+23 studies of the second auxiliary pass to 318 does not produce 340. The
+33 removed above are the coded includes whose title or abstract does not
+support inclusion. The appendix lists the 455 studies and groups them by
+family.
 
 \begin{table}[htbp]
 \centering
@@ -961,33 +1126,42 @@ by family.
 \midrule
 8{,}347 & Records retrieved, before deduplication. \\
 5{,}783 & Records after deduplication. \\
-2{,}340 & Working set screened (Scopus, IEEE, ACM). \\
-3{,}807 & Auxiliary set screened. \\
+2{,}340 & Working-set identifier list. 1{,}976 of these identifiers are in the 5{,}783. \\
+3{,}807 & The other identifiers in the 5{,}783 ($5{,}783-1{,}976$). This list holds the second identifier of 364 papers that are also in the working set. The union is 5{,}783. \\
 404 & Raw LLM confirmations (169 + 212 + 23). \\
 340 & Distinct LLM list (404 minus 64 duplicate records). \\
 338 & The 340 minus two papers from 1991 and 1992. \\
 381 & Earlier combined list, before the 318 cut. \\
 318 & Joint tables (381 minus 63 duplicate records). Not 340 minus 23. \\
-506 & This revision (338 + 168). \\
-429 & Three family marks filled (338 + 91). \\
-77 & Added studies known only by the title. Marks left blank. \\
+150 & Working-set family codes. The 169 minus 17 removed studies and minus 2 extra identifiers of one paper. \\
+292 & Joint family codes. The 318 minus 24 removed studies and minus 2 pre-1994 papers. \\
+33 & Coded includes removed (33 of 338, 9.8\%). The title or abstract does not support inclusion. Not marked on the 4{,}005-row sheets. \\
+305 & Coded studies that remain (338 minus 33). \\
+455 & This revision (305 + 150). Of 168 after de-duplication, 18 were also removed. \\
+379 & At least one family mark (305 + 74). Not a rate over the 455. \\
+76 & Added studies known only by the title. Marks left blank. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The list is \texttt{included\_studies\_506.csv}. The file of 340 rows is
-kept so the removal of the two pre-1994 papers can be checked. Forty-three
-of the 168 added studies were assigned a model score of at least 4/8. A
-score taken from an abstract is not a quality assessment of the study, and
-no score is used to keep or drop a study. The percentages in F1--F5, apart
-from the count of one study in 429, use the 338 and the smaller cuts of
-169 and 318. Those percentages were not re-marked by a human in this
-revision.
+The list is \texttt{included\_studies\_506.csv} (455 rows; the filename
+keeps an earlier count). The file of 340 rows is kept so the removal of
+the two pre-1994 papers can be checked. Thirty-five of the 150 added
+studies were assigned a model score of at least 4/8. A score taken from an
+abstract is not a quality assessment of the study, and no score is used to
+keep or drop a study. F2 and F5 are withdrawn, and their percentages are
+not reported. The percentages under F1, F3, and F4, apart from the count
+of one study in 379, are the family codes on the 150 and the 292. On the
+original 169, TF-PM with neither TF-ST nor TF-FC is 105, not 68: the 68
+are the code that is exactly TF-PM, and 37 more are TF-PM with TF-MSR
+only. On the original 318 the same definition is 138, not 78: the 78 are
+TF-ST together with TF-FC and no TF-PM. The figures below use the 150 and
+the 292. Their status is stated once in Section~\ref{sec:slr-gaps}.
 
-The 169-study working-set tier spans 1995--2026 (publications dated 2026
+The 150 working-set studies that remain span 1995--2026 (publications dated 2026
 that were already indexed on 12~April~2026 are retained), with a clear
-acceleration from 2014 onward (Figure~\ref{fig:year-dist}). Sixty-nine
-percent of working-set papers (117/169) appeared in 2015--2026.
+acceleration from 2014 onward (Figure~\ref{fig:year-dist}). One hundred
+and four of them (69.3\%) appeared in 2015--2026.
 A completed SEGRESS~\cite{kitchenham2023segress} reporting checklist is in
 Appendix~\ref{app:segress}.
 
@@ -1012,11 +1186,11 @@ Appendix~\ref{app:segress}.
   nodes near coords style={font=\tiny, above},
 ]
 \addplot coordinates {
-  (1,1)(2,1)(3,1)(4,2)(5,1)(6,5)(7,3)(8,3)(9,5)(10,3)(11,10)(12,5)(13,1)(14,11)(15,12)(16,9)(17,13)(18,10)(19,12)(20,7)(21,15)(22,11)(23,10)(24,7)(25,8)(26,3)
+  (1,1)(2,1)(3,1)(4,1)(5,1)(6,5)(7,3)(8,3)(9,5)(10,3)(11,9)(12,2)(13,0)(14,11)(15,9)(16,9)(17,11)(18,10)(19,11)(20,7)(21,13)(22,11)(23,8)(24,7)(25,5)(26,3)
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Publication year of the 169 working-set studies.}
+\caption{Publication year of the 150 working-set studies that remain.}
 \label{fig:year-dist}
 \end{figure}
 
@@ -1030,7 +1204,7 @@ coded in the triangulation subset) or abstract/title metadata (94/169).
 \subsection{Inclusion Criterion Coverage}
 
 Figure~\ref{fig:ic-dist} shows the distribution of inclusion criteria among
-the 169 working-set studies (criteria are non-exclusive; a paper may satisfy
+the 150 working-set studies that remain (criteria are non-exclusive; a paper may satisfy
 multiple).
 
 \begin{figure}[htbp]
@@ -1052,27 +1226,26 @@ multiple).
   enlarge y limits=0.25,
 ]
 \addplot coordinates {
-  (121,{TF-PM (IC4a)})
-  (52,{TF-ST (IC4b)})
-  (29,{TF-FC (IC4c)})
-  (45,{TF-MSR (IC4d)})
+  (103,{TF-PM (IC4a)})
+  (49,{TF-ST (IC4b)})
+  (27,{TF-FC (IC4c)})
+  (42,{TF-MSR (IC4d)})
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Inclusion criteria matched by the 169 working-set studies. Counts
+\caption{Inclusion criteria matched by the 150 working-set studies that remain. Counts
 are non-exclusive. TF-PM, TF-ST, TF-FC, and TF-MSR are the content criteria
-IC4a--IC4d.}
+IC4a--IC4d. TF-PM with neither TF-ST nor TF-FC is 91 of these 150.}
 \label{fig:ic-dist}
 \end{figure}
 
 TF-PM (process mining applied to SE artifacts) is the dominant criterion,
-matched by 121 papers (71.6\%). TF-MSR (repository mining for process modeling)
-is second at 45 papers (26.6\%), reflecting the MSR community's overlapping
-contributions. TF-ST (stochastic modeling) appears in 52 papers (30.8\%) and
-TF-FC (forecasting of process metrics) in 29 papers (17.2\%). Notably, 68
-papers (40.2\%) match TF-PM only, without stochastic or forecasting components.
-That split is the family-code count labeled F1 below. It was not re-marked
-in this revision, and it is a count on these 169 studies.
+matched by 103 papers (68.7\%). TF-MSR (repository mining for process modeling)
+is second at 42 papers (28.0\%). TF-ST (stochastic modeling) appears in 49
+papers (32.7\%) and TF-FC (forecasting of process metrics) in 27 papers
+(18.0\%). TF-PM with neither TF-ST nor TF-FC is 91 papers (60.7\%). The
+other 101 of the 150 do not carry TF-ST, and $49+101=150$. That split is
+the stored family-code count labeled F1 in Section~\ref{sec:slr-gaps}.
 
 \subsection{Prevalent Exclusion Patterns}
 
@@ -1092,9 +1265,8 @@ $n=60$). EC counts are non-exclusive: the sum of per-EC counts
 ($232+205+145+110+60 = 752$) exceeds the 717 excluded papers by 35,
 corresponding to papers that triggered more than one EC simultaneously. EC3
 and EC1 are the two largest reasons in this exclusion list. That is a
-property of the list. It does not confirm F3 or F4. Those labels, below,
-are family-code counts on the 169 and the 318, and they were not re-marked
-in this revision.
+property of the list. It does not confirm the family codes in
+Section~\ref{sec:slr-gaps}.
 
 \subsection{Full-Text Extraction and PDF-Based Triangulation}
 \label{sec:slr-pdf-enrichment}
@@ -1131,20 +1303,23 @@ unchanged.
   bar width=0.7cm,
   width=9cm, height=5cm,
   ylabel={Papers},
-  symbolic x coords={Include,Maybe,Exclude},
+  symbolic x coords={Confirm include,With caveats,Confirm exclude},
   xtick=data,
+  x tick label style={font=\small, rotate=20, anchor=east},
   ymin=0, ymax=60,
   ytick={0,10,20,30,40,50,60},
   nodes near coords,
   nodes near coords style={font=\small, above},
   fill=gray!45,
   draw=black,
-  enlarge x limits=0.25,
+  enlarge x limits=0.35,
 ]
-\addplot coordinates {(Include,54) (Maybe,13) (Exclude,6)};
+\addplot coordinates {(Confirm include,54) (With caveats,13) (Confirm exclude,6)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational decision distribution in the 73-paper PDF triangulation subset.}
+\caption{Reading of the 73 PDFs: 54 confirm-include, 13 confirm-include with
+caveats, and 6 confirm-exclude. These labels are not the screen decisions
+Include, Maybe, and Exclude. The PRISMA flow is unchanged.}
 \label{fig:pdf-decision-dist}
 \end{figure}
 
@@ -1153,49 +1328,20 @@ unchanged.
 
 \subsubsection{RQ1.1: SDLC Phases Covered}
 
-The model extraction of the 169 working-set studies, which this revision
-did not re-mark, assigns SDLC phases as follows. It is not a description
-of the 506. \textbf{Development activities} (coding,
-commits, pull requests, repository evolution) dominate at 133 papers
-(78.7\%); \textbf{quality-related activities} (testing, defect handling, code
-review, process evaluation) appear in 74 papers (43.8\%);
-\textbf{maintenance} appears in 38 papers (22.5\%);
-\textbf{requirements engineering} in only 22 papers (13.0\%); and
-\textbf{delivery/DevOps contexts} (CI/CD, build and release pipelines) in
-just 18 papers (10.7\%). \textbf{Design and architecture} are not the primary
-focus of any extracted study, and only 3 papers (1.8\%) center the analysis
-on project management.
+The phase field on the 169 extraction was not recomputed after 17 studies
+and two extra identifiers left that cut. Those phase percentages are not
+reported. The family codes that are reported use the 150 studies that
+remain. They are not a description of the 455.
 
-These 169 codes were not re-marked in this revision. They concentrate on
-phases where digital traces are abundant and already timestamped, such as
-commits, issues, test events, and pipeline executions. The early SDLC phases
-are uncommon in these codes.
+The phase field was not re-marked.
 
 \subsubsection{RQ1.2: Event Log Sources and Construction}
 
-Across the 169-study set, event logs are constructed primarily from four
-source families: \textbf{version-control repositories} (Git/GitHub/SVN
-commits) appear in 84 papers (49.7\%); \textbf{issue tracking systems}
-(especially Jira and GitHub Issues) in 37 papers (21.9\%); \textbf{IDE
-interaction logs} in 22 papers (13.0\%); and \textbf{CI/CD or build
-pipelines} in 15 papers (8.9\%). The common pattern is not a native event
-log but rather a \emph{derived} event log assembled from repository metadata,
-commit histories, issue transitions, and (where available) pipeline records.
-
-The dominant construction problem is case correlation across tools. Studies
-frequently analyze one source in isolation or perform ad hoc joins between
-issues and commits. In these 169 codes, that construction is rarely
-explicit. The count is the model extraction labeled F2 below. A human
-re-read did not confirm it: exact agreement on the free-text fields is
-0\% on 31 studies.
-
-A non-trivial fraction of studies report data sources only in coarse terms
-(\textit{repository data}, \textit{VCS history}, \textit{open-source
-projects}) without naming specific projects, time windows, or extraction
-queries. Across the 169-study set, only 25 papers (14.8\%) explicitly state
-that their dataset is publicly available and only 4 papers (2.4\%) declare a
-replication package. These 25 and 4 are the same model count. They are
-not a measure of incomplete reporting in the literature.
+The source families, the public-dataset count, and the replication-package
+count are free-text fields. On 31 studies the exact match between a human
+rater and the model on those fields is 0\%, and the fields were not
+re-extracted. F2 is withdrawn. Those percentages are not reported, and
+they do not motivate RA1.
 
 A complementary body of work constructs Markov models directly from GitHub
 repository traces, bypassing explicit process discovery in favour of manual
@@ -1243,25 +1389,23 @@ and organisational dimensions. Together, these three works constitute the semina
 arc of TF-PM, establishing automated discovery from SDLC event logs as both
 technically feasible and analytically productive.
 
-The family-code count on the 169 working-set studies, which this revision
-did not re-mark, has 121 studies (71.6\%) matching TF-PM in the form of
-discovery, conformance checking, or process-oriented repository analysis.
-The same count has 29 papers (17.2\%) matching TF-FC. It is not a
-description of the literature. At the technique level, the model names the
-\textbf{inductive miner} in 51 papers, the \textbf{alpha miner} in 45, \textbf{conformance checking} in 30,
-and the \textbf{heuristic miner} in 22; 11 papers are coded as social
-network analysis on developer interactions. Those names were not
-re-extracted in this revision.
+The family-code count on the 150 working-set studies that remain, which
+this revision did not re-mark, has 103 studies (68.7\%) matching TF-PM.
+The same count has 27 papers (18.0\%) matching TF-FC.
+The names of individual algorithms are free-text
+fields. They were not re-extracted. Those names are not reported.
 
-The same family-code count names an explicit stochastic technique in 52 of
-169 studies (30.8\%): 38 papers (22.5\%) use Markov chains, 15 (8.9\%) use
-Monte Carlo simulation, 9 (5.3\%) use stochastic Petri nets, and 8 (4.7\%)
-use system dynamics. Those technique counts are non-exclusive. The
-extraction also records 110 rows without a stochastic component and 29 rows
-with stochastic methods in an auxiliary role. These are the original codes
-on this cut. They were not re-marked in this revision, and they are not a
-description of the forecasting literature, as shown in
-Figure~\ref{fig:pdf-technique-dist}.
+TF-ST is 49 of these 150 (32.7\%). The other 101 do not carry that code,
+and $49+101=150$. The column \texttt{stochastic\_technique} is not that
+code. On these 150 rows it is \texttt{none} for 96 and a named technique
+for 54, and $96+54=150$. Twenty-six of the 54 also contain the token
+\texttt{other}. Six rows coded TF-ST have \texttt{none} in the column, and
+11 rows with a named technique are not coded TF-ST. On the original 169
+the same column was \texttt{none} for 110 rows, and 29 rows also contained
+\texttt{other}. Set beside TF-ST $=52$, those two figures do not partition
+169: $52+110=162$ and $110+29+52=191$. The four technique bars in
+Figure~\ref{fig:pdf-technique-dist} are tokens in that column. They are
+not a partition of the 49.
 
 \begin{figure}[tbp]
 \centering
@@ -1281,17 +1425,18 @@ Figure~\ref{fig:pdf-technique-dist}.
   enlarge y limits=0.18,
 ]
 \addplot coordinates {
-  (121,{Process Mining})
-  (38,{Markov Chain})
-  (15,{Simulation})
+  (103,{Process Mining})
+  (36,{Markov Chain})
+  (12,{Simulation})
   (9,{Stochastic Petri Net})
   (8,{System Dynamics})
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Main technique families in the 169 working-set studies.
-Counts are non-exclusive: a paper may use multiple technique families.
-These counts were not re-marked in this revision.}
+\caption{Process mining is the TF-PM family code on the 150 working-set
+studies that remain. The other four bars are tokens in
+\texttt{stochastic\_technique}. They are not a partition of TF-ST, and a
+paper may carry more than one token. These counts were not re-marked.}
 \label{fig:pdf-technique-dist}
 \end{figure}
 
@@ -1325,7 +1470,7 @@ than from transition frequencies extracted through process mining of
 fine-grained event logs \cite{nafreen2020,bhadra2022,li2020}. In the same
 descriptions, model states stay anchored to coarse lifecycle phases. This
 is a reading of those descriptions. It is not a re-mark of the family codes
-labeled F3, which remain the original counts on the 169 and the 318.
+labeled F3, which are the counts on the 150 and the 292.
 
 Three studies exemplify the productive convergence of process mining and
 stochastic modelling at the component level. Incerto~\cite{incerto2025}
@@ -1354,10 +1499,10 @@ validation is reported per component rather than across the assembled pipeline,
 no formal inter-stage contracts govern the handoffs between discovery,
 simulation, and learning modules, and the architecture incorporates no dedicated
 Monte Carlo forecasting layer capable of propagating uncertainty estimates
-end-to-end. On the family codes filled for the 429 studies, PRIMAD is the
+end-to-end. On the family codes filled for the 379 studies, PRIMAD is the
 one row that matches the three families. The 338 were not re-marked in this
-revision. None of the 91 added studies read from an abstract or a PDF adds
-a second triple. The 77 title-only studies are outside that count. A single
+revision. None of the 74 added studies read from an abstract or a PDF adds
+a second triple. The 76 title-only studies are outside that count. A single
 code on that cut is not a statement that the literature contains no
 end-to-end pipeline.
 
@@ -1387,7 +1532,7 @@ over completion time or remaining steps for an individual process instance.
 
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
-The original family codes on the 169 working-set studies, which this
+The family codes on the 150 working-set studies that remain, which this
 revision did not re-mark, place rows on the L0--L3 scale defined in
 Table~\ref{tab:positioning}: the number of technique families TF-PM, TF-ST,
 and TF-FC a study matches. The
@@ -1408,30 +1553,29 @@ distributional forecasts. The PRIMAD framework \cite{guinea2025} is the one
 triple match in these codes. It assembles event-log discovery,
 simulation, and ML prediction, and its evaluation is described as component-wise,
 so the code is L2 rather than a validated end-to-end contract. No row
-in these 169 codes is \textbf{L3}. L3 would be a row that matches the three
+in these 150 codes is \textbf{L3}. L3 would be a row that matches the three
 families and states formal interfaces validated end-to-end on SDLC event logs.
 These codes do not establish that no such architecture exists in the literature.
 
-The same 169 codes, not a confirmation of a literature pattern, are as follows. 
-1 of 169 papers (0.6\%) jointly satisfies TF-PM, TF-ST, and TF-FC,
-and that paper's extraction does not record a formal end-to-end
-pipeline contract. Pairwise codes are TF-PM$\cap$TF-ST in 10 papers (5.9\%), TF-PM$\cap$TF-FC
-in 7 papers (4.1\%), and TF-ST$\cap$TF-FC in 18
-papers (10.7\%). No row in these 169 codes is an
-\textbf{L3} architecture. The same triple on the 318 joint tables is also one
-paper. A rare code on these cuts is not a rare pattern in the literature. The
-operational coding of the 73-PDF triangulation subset is a view of that subset and is summarized in
-Figure~\ref{fig:pdf-integration-priority}.
+The same 150 codes, not a confirmation of a literature pattern, are as follows.
+1 of 150 papers (0.7\%) jointly satisfies TF-PM, TF-ST, and TF-FC.
+Pairwise codes are TF-PM$\cap$TF-ST in 8 papers (5.3\%), TF-PM$\cap$TF-FC
+in 5 papers (3.3\%), and TF-ST$\cap$TF-FC in 18
+papers (12.0\%). No row in these 150 codes is an
+\textbf{L3} architecture. The same triple on the 292 joint-table studies is also one
+paper. A rare code on these cuts is not a rare pattern in the literature.
+Figure~\ref{fig:pdf-integration-priority} is the reading priority of the 73
+PDFs. It is not the L0--L3 scale of Table~\ref{tab:positioning}.
 
 \begin{figure}[p]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
   ybar,
-  bar width=0.55cm,
-  width=12cm, height=5.2cm,
+  bar width=0.7cm,
+  width=9cm, height=5.2cm,
   ylabel={Papers},
-  symbolic x coords={L0,L1,L2,L3,High,Medium,Low},
+  symbolic x coords={High,Medium,Low},
   xtick=data,
   x tick label style={font=\small},
   ymin=0, ymax=60,
@@ -1440,31 +1584,33 @@ Figure~\ref{fig:pdf-integration-priority}.
   nodes near coords style={font=\small, above},
   fill=gray!45,
   draw=black,
-  enlarge x limits=0.08,
+  enlarge x limits=0.35,
 ]
-\addplot coordinates {(L0,13) (L1,54) (L2,6) (L3,0) (High,54) (Medium,14) (Low,5)};
+\addplot coordinates {(High,54) (Medium,14) (Low,5)};
 \end{axis}
 \end{tikzpicture}
-\caption{Operational integration levels and reading-priority distribution in the 73-paper PDF triangulation subset.}
+\caption{Reading priority of the 73 PDFs. High, Medium, and Low order those
+PDFs for reading. They are not the integration levels L0--L3 in
+Table~\ref{tab:positioning} (121, 28, 1, and 0 on the 150 studies).}
 \label{fig:pdf-integration-priority}
 \end{figure}
 
-\subsubsection{RQ3.2: Gap Analysis}
+\subsubsection{RQ3.2: What the codes do not establish}
 
-Three readings of the 169-study extraction follow. They were not re-marked
-in this revision, and they are not a description of the literature.
-First, the family-code count labeled F1: 121 papers (71.6\%) match process
-mining and 29 (17.2\%) match forecasting of a process metric.
-Second, the model assigned study types on these 169 rows: 69
-(40.8\%) case studies, 34 (20.1\%) tool papers, 33 (19.5\%) theoretical,
-13 (7.7\%) simulation-only, 10 (5.9\%) controlled experiments, 5 (3.0\%)
-surveys, and 5 (3.0\%) residual categories (mixed, framework, exploratory;
-sum: $69+34+33+13+10+5+5 = 169$). That assignment was not re-marked.
-Third, the model count labeled F2: 25 of 169 papers (14.8\%) declare a
-public dataset and 4 (2.4\%) declare a replication package. On 31 studies
-the exact match between a human rater and the model on those free-text
-fields is 0\%. The scores in Table~\ref{tab:qa-results} are what the same
-model assigned. They do not confirm the count.
+Two stored readings of the 150 working-set studies that remain follow.
+First, the family-code count labeled F1: 103 papers (68.7\%) match process
+mining and 27 (18.0\%) match forecasting of a process metric. TF-PM with
+neither TF-ST nor TF-FC is 91 (60.7\%).
+Second, the model assigned study types on these 150 rows: 66
+(44.0\%) case studies, 29 (19.3\%) tool papers, 26 (17.3\%) theoretical,
+12 (8.0\%) simulation-only, 8 (5.3\%) controlled experiments, 5 (3.3\%)
+surveys, and 4 (2.7\%) residual categories (mixed, framework, exploratory;
+sum: $66+29+26+12+8+5+4 = 150$). That assignment was not re-marked.
+F2 is withdrawn: on 31 studies the exact match between a human rater and
+the model on the free-text fields is 0\%, so the public-dataset and
+replication-package percentages are not reported. The scores in
+Table~\ref{tab:qa-results} are what the same model assigned. They do not
+stand in for that count.
 
 These readings do not establish that an end-to-end workflow is absent from
 the literature. The evidence-type distribution in the 73-PDF subset
@@ -1505,85 +1651,67 @@ separate selection layer, and it does not confirm the fields.
 \section{Discussion}
 \label{sec:slr-discussion}
 
-\subsection{Research Gap Identification}
+\subsection{Coded counts that are not findings}
 \label{sec:slr-gaps}
 
-F1, F3, and F4 are family-code counts. Each sentence names its cut: 169,
-318, or the 429 for the triple. None of those percentages is a rate over
-the 506. F2 and F5 are counts extracted by the same model that screened
-the papers. On 31 studies a human rater and the model had 0\% exact
-agreement on those fields, so F2 and F5 are not confirmed findings.
+F2 and F5 are withdrawn. On 31 studies a human rater and the model had
+0\% exact agreement on the free-text fields, and those fields were not
+re-extracted, so no percentage from them is reported. F1, F3, and F4 are
+stored family-code counts. Each sentence names its cut: 150, 292, or the
+379 for the triple. None of those percentages is a rate over the 455, none
+was re-marked, and none is a finding. None of the five motivates
+RA1--RA4.
 
 \begin{description}
 
-\item[F1: Descriptive ceiling (family codes on 169 and on 318).]
-These percentages are the original family codes. They were not re-marked
-by a human in this revision, and they are not a rate over the 506.
-In the \textbf{working-set tier} (169 papers), 121 (71.6\%) match TF-PM
-(process mining in SE) but only 29 (17.2\%) advance to TF-FC (forecasting
-of process metrics). In the \textbf{combined analytical subset} (318 papers,
-deduplicated), the proportion shifts because the auxiliary corpus pulled in
-more stochastic-only and forecasting-only studies that did not employ
-explicit process mining: 160 (50.3\%) match TF-PM, 100 (31.4\%) match TF-FC,
-and 78 (24.5\%) match TF-PM alone. In both tiers the dominant contribution
-type is discovery or conformance checking, not predictive analytics or
-distributional forecasting; the descriptive ceiling identified in the
-working-set tier persists in the combined tier.
+\item[F1: Stored family codes on 150 and on 292.]
+In the \textbf{working-set cut} (150 papers), 103 (68.7\%) match TF-PM
+and 27 (18.0\%) match TF-FC. TF-PM with neither TF-ST nor TF-FC is 91
+(60.7\%). In the \textbf{joint cut} (292 papers), 138 (47.3\%) match
+TF-PM, 96 (32.9\%) match TF-FC, and 122 (41.8\%) match TF-PM with neither
+TF-ST nor TF-FC. The shift between the two cuts is a difference in which
+rows the auxiliary corpus added. It is not a claim about the literature.
 
-\item[F2: Event-log construction (model count, not confirmed).]
-These counts are model extractions. Exact agreement with a human rater on
-the free-text fields is 0\% on the 31-study sample, and the fields were not
-re-extracted by a human.
-The same model count, on both cuts, is as follows. Working-set tier:
-only 25 of 169 papers (14.8\%) declare the dataset as publicly available
-and only 4 (2.4\%) declare any replication package. Combined analytical
-subset: 44 of 318 papers (13.8\%) declare a public dataset and 9 (2.8\%)
-declare a replication package. The model also records ad hoc joins between
-version-control commits
-(112 of 318 papers, 35.2\%), issue trackers (44, 13.8\%), Jira (46, 14.5\%),
-GitHub (43, 13.5\%), and IDE interaction logs (37, 11.6\%). The quality
-scores are assigned by the same model. They do not confirm this count.
+\item[F2: Withdrawn.]
+Event-log construction, dataset availability, and replication-package
+status are free-text fields. Exact agreement with a human rater is 0\% on
+the 31-study sample, and the fields were not re-extracted. No percentage
+is reported. F2 does not motivate RA1. The quality scores are assigned by
+the same model. They do not replace this item.
 
-\item[F3: Stochastic integration (family codes on 169 and on 318).]
-These percentages are the original family codes. They were not re-marked
-by a human in this revision.
-Working-set tier: 52 of 169 papers (30.8\%) apply stochastic models
-(TF-ST); 38 (22.5\%) Markov chains, 15 (8.9\%) Monte Carlo, 9 (5.3\%)
-stochastic Petri nets, 8 (4.7\%) system dynamics; TF-ST$\cap$TF-FC covers 18
-papers (10.7\%); TF-PM$\cap$TF-ST covers 10 (5.9\%). Combined analytical
-subset: the
-auxiliary corpus contributes a substantial number of stochastic-only papers
-not previously surfaced by the working-set queries; 152 of 318 (47.8\%)
-match TF-ST (with 86 Monte Carlo, 67 Markov, 54 system dynamics, 15 SPN), 81
-(25.5\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
-with TF-PM (process mining). On these codes, TF-PM$\cap$TF-ST is 10 of 169
-(5.9\%) and 13 of 318 (4.1\%). The 318 codes contain more stochastic-only
-rows than the 169 codes. That is a difference between the two cuts. It is
-not a description of the stochastic literature, and it was not re-marked
-in this revision. The largest second-pass exclusion in
-the working-set queue is EC3 (232 of 886). That is a property of this
-screen.
+\item[F3: Stored stochastic family codes on 150 and on 292.]
+Working-set cut: 49 of 150 papers (32.7\%) match TF-ST, and the other 101
+do not ($49+101=150$). TF-ST$\cap$TF-FC covers 18 papers (12.0\%).
+TF-PM$\cap$TF-ST covers 8 (5.3\%). Joint cut: 152 of 292 (52.1\%) match
+TF-ST, and the other 140 do not ($152+140=292$). TF-ST$\cap$TF-FC covers
+80 (27.4\%). TF-PM$\cap$TF-ST covers 10 (3.4\%). The joint cut contains
+more rows with TF-ST and without TF-PM than the working-set cut. That is a
+difference between the two cuts. It is not a description of the stochastic
+literature. The largest second-pass exclusion in the working-set queue is
+EC3 (232 of 886). That is a property of this screen. The technique-name
+column is not added to these family codes. On the original 169 it does not
+partition the rows together with TF-ST, as stated above.
 
-\item[F4: Pipeline fragmentation (family codes on 169, 318, and 429).]
-These percentages are the original family codes on the 169 and the 318.
-They were not re-marked by a human in this revision. The family marks
-added in this revision are the 91 studies read from an abstract or a PDF.
-None of those 91 has all three families.
-No coded row in the 429 states a formal
-PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML contract with
-inter-stage data contracts. That statement is about those rows.
-Working-set tier (169 papers): the joint convergence
-TF-PM$\cap$TF-ST$\cap$TF-FC appears in 1 paper (0.6\%), and that paper
-does not specify a formal end-to-end pipeline contract; pairwise
-convergences are TF-PM$\cap$TF-ST: 10 (5.9\%), TF-PM$\cap$TF-FC: 7 (4.1\%),
-TF-ST$\cap$TF-FC: 18 (10.7\%). Combined analytical subset (318 papers,
-deduplicated): TF-PM$\cap$TF-ST$\cap$TF-FC remains 1 paper (0.31\%), with pairwise
-convergences TF-PM$\cap$TF-ST: 13 (4.1\%), TF-PM$\cap$TF-FC: 10 (3.1\%),
-TF-ST$\cap$TF-FC: 81 (25.5\%). These counts describe the coded studies, not the 506-study corpus. Full-text
-Recall on the working-set sample is 0.630 (29 of 46; Wilson 95\% CI
-0.486--0.755). The screen missed eligible studies, so a rare pattern in the
+\item[F4: Stored pairwise and triple codes on 150, 292, and 379.]
+The family marks
+added in this revision are the 74 studies read from an abstract or a PDF
+that meet a content criterion, inside the 379. None of those 74 has all
+three families. The code file does not record a formal
+PM $\rightarrow$ Markov $\rightarrow$ MC $\rightarrow$ ML contract. That
+is a property of the file. It is not a finding that no such contract
+exists.
+Working-set cut (150 papers): the joint convergence
+TF-PM$\cap$TF-ST$\cap$TF-FC appears in 1 paper (0.7\%). Pairwise
+convergences are TF-PM$\cap$TF-ST: 8 (5.3\%), TF-PM$\cap$TF-FC: 5 (3.3\%),
+TF-ST$\cap$TF-FC: 18 (12.0\%). Joint cut (292 papers):
+TF-PM$\cap$TF-ST$\cap$TF-FC remains 1 paper (0.3\%), with pairwise
+convergences TF-PM$\cap$TF-ST: 10 (3.4\%), TF-PM$\cap$TF-FC: 7 (2.4\%),
+TF-ST$\cap$TF-FC: 80 (27.4\%). These counts describe these cuts, not the 455-study corpus. Recall
+on the working-set sample is 0.630 (29 of 46; Wilson 95\% CI
+0.486--0.755). That figure is not a full-text Recall: a PDF was read
+for 0.5\% of the 886 records. The screen missed eligible studies, so a rare pattern in the
 338 is not a rare pattern in the literature.
-PRIMAD \cite{guinea2025} is that one study inside the 429. It assembles discovery,
+PRIMAD \cite{guinea2025} is that one study inside the 379. It assembles discovery,
 simulation, and learning components but validates each independently and
 leaves the unified pipeline unevaluated. Its scope is SDLC-oriented: it builds a
 digital twin from issue-tracking flows in JIRA. It combines empirical
@@ -1592,39 +1720,18 @@ actor system, and supervised machine learning
 for context-aware prediction. The reported results are component-wise:
 the paper does not validate a coupled PM $\rightarrow$ stochastic
 simulation $\rightarrow$ ML pipeline as one architecture.
-The 77 added studies read from the title alone are outside this count.
+The 76 added studies read from the title alone are outside this count.
 
-\item[F5: Process-derived features (model count, not confirmed).]
-These counts are model extractions of the research-contribution and
-algorithm fields. They were not re-extracted by a human. On 31 studies the
-exact match with a human rater on those fields is 0\%. A Scopus search on
-31~October~2026 with machine-learning terms returned 165 records; title
-screening left 19 IC4c includes, and none joins the three families
-(Section~\ref{sec:slr-search}). Those 19 are not in the counts below.
-The counts below are the studies the three original strings retrieved.
-In those model counts, the coded ML/prediction rows rarely name a feature
-taken from a process model. Working-set tier: 32
-papers whose research contribution centers on ML/prediction; only 1
-explicitly couples ML with a named process-mining algorithm (alpha,
-inductive, heuristic, conformance, fuzzy, or Petri-net-based discovery).
-Combined analytical subset: the auxiliary corpus added a large number of ML/prediction
-papers (110 in the combined 318 set), but the rate of process-mining
-coupling remains low: only 4 of 110 (3.6\%) jointly use a named PM
-algorithm. Conformance scores, rework counts, Markov-expected remaining
-time, and path entropy are absent from these model counts. They were not
-re-extracted by a human, so their absence here is not an absence in the
-literature.
+\item[F5: Withdrawn.]
+Process-derived features and the coupling of a named mining algorithm with
+prediction are free-text fields. On 31 studies the exact match with a
+human rater is 0\%, and the fields were not re-extracted. No percentage is
+reported, including the share of ML rows that name a process-model
+feature. F5 does not motivate RA3. The 19 IC4c title hits from the Scopus
+search of 31~October~2026 are reported in Section~\ref{sec:slr-search}.
+They are not a substitute for this item.
 
 \end{description}
-
-These five statements are not a census of a confirmed corpus. F1, F3, and
-F4 are the original family codes on the cut named in each sentence. They
-were not re-marked in this revision. F2 and F5 are model extractions. On
-31 studies the exact match with a human rater on those fields is 0\%, so
-they are not confirmed. D1, D3, D5, and D4 name the same cuts. The agenda
-in Section~\ref{sec:slr-agenda} uses those cuts as motivation. It does not
-turn them into confirmed findings.
-
 
 \subsection{Integration Levels}
 \label{sec:slr-positioning}
@@ -1638,7 +1745,7 @@ intersections reported under F3 and F4.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels of the 169 working-set studies. A level counts
+\caption{Integration levels of the 150 working-set studies that remain. A level counts
 how many of TF-PM, TF-ST, and TF-FC the study matches.}
 \label{tab:positioning}
 \small
@@ -1646,37 +1753,39 @@ how many of TF-PM, TF-ST, and TF-FC the study matches.}
 \toprule
 \textbf{Level} & \textbf{Operational definition} & \textbf{Papers} & \textbf{Example} \\
 \midrule
-L0 & At most one technique family & 136 & Single-technique studies \\
-L1 & Exactly two technique families (TF-PM$\cap$TF-ST: 9;
-     TF-PM$\cap$TF-FC: 6; TF-ST$\cap$TF-FC: 17) & 32
+L0 & At most one technique family & 121 & Single-technique studies \\
+L1 & Exactly two technique families (TF-PM$\cap$TF-ST: 7;
+     TF-PM$\cap$TF-FC: 4; TF-ST$\cap$TF-FC: 17) & 28
    & Incerto~\cite{incerto2025}; L\'opez-Pintado~\cite{lopezpintado2023} \\
 L2 & All three technique families (TF-PM$\cap$TF-ST$\cap$TF-FC) & 1
    & PRIMAD~\cite{guinea2025} \\
 L3 & All three families coupled through explicit interfaces and validated
      end-to-end & 0 & --- \\
 \midrule
-\textbf{Total} & & \textbf{169} & \\
+\textbf{Total} & & \textbf{150} & \\
 \bottomrule
 \end{tabularx}
 
 \smallskip
 \footnotesize\textit{Note:} L1 counts exclude the single L2 study, so they are
-one lower than the inclusive pairwise intersections in F3/F4 (10, 7, 18).
-The 73-PDF operational coding (Figure~\ref{fig:pdf-integration-priority}) uses
-a reading-based classification and is reported separately.
+one lower than the inclusive pairwise intersections in F3/F4 (8, 5, 18).
+The three exclusive pairs sum to 28 ($7+4+17$).
+Figure~\ref{fig:pdf-integration-priority} reports reading priority for 73
+PDFs. It is not this L0--L3 scale.
 \end{table}
 
 The authors' PATHCAST proposal is one candidate design for L3. It is
 \textbf{not} evaluated in this mapping study and is listed only as a
-research-agenda hypothesis motivated by F1--F5 (RA2--RA4,
-Section~\ref{sec:slr-agenda}).
+research-agenda hypothesis (RA2--RA4, Section~\ref{sec:slr-agenda}). It
+is not inferred from F1--F5.
 
 
 \subsection{Proposed Taxonomy: SPMF}
 \label{sec:slr-taxonomy}
 
-Based on the systematic analysis, this review proposes the Software Process
-Mining and Forecasting (SPMF) taxonomy with three dimensions:
+The authors propose the Software Process
+Mining and Forecasting (SPMF) taxonomy. It is not inferred from F1--F5.
+The three dimensions below are a proposal by the authors:
 
 \begin{description}
 \item[Analytical Depth] classifies studies along four levels (labelled AD
@@ -1698,46 +1807,38 @@ Mining and Forecasting (SPMF) taxonomy with three dimensions:
 \subsection{Research Agenda}
 \label{sec:slr-agenda}
 
-The gaps identified motivate four research directions:
+The four directions below are proposals by the authors.
 
 \begin{description}
 \item[RA1: Standardized Event Log Construction for SDLC.]
-  The model count, which a human re-read did not confirm, is 25 of 169
-  working-set papers declaring a public dataset. Target: frameworks for transforming
+  Not inferred from F2. Target: frameworks for transforming
   heterogeneous repository data into comparable event logs with cross-tool
   case correlation.
 
 \item[RA2: Process-Aware Stochastic Forecasting.]
-  Motivated by F3: TF-ST$\cap$TF-FC reaches 18/169 (10.7\%) in the working set
-  but TF-PM$\cap$TF-ST remains 10/169 (5.9\%). Target: formal integration of
+  Not inferred from F3. Target: formal integration of
   mined transition structure with Markov/Monte Carlo forecasting.
 
 \item[RA3: Process-Derived Features for ML.]
-  Motivated by F5: only 1/32 ML-centric working-set papers couples a named PM
-  algorithm with prediction. Target: systematic use of conformance, rework,
+  Not inferred from F5. Target: systematic use of conformance, rework,
   and path-entropy features in SE predictors.
 
 \item[RA4: Empirical Benchmarking of Integrated Pipelines.]
-  Motivated by F4: one study (PRIMAD) satisfies
-  TF-PM$\cap$TF-ST$\cap$TF-FC among the 429 studies with family marks filled.
-  The 77 title-only additions are not in that count. Target: comparable OSS
-  benchmarks with temporal hold-out for end-to-end PM--stochastic--ML
-  pipelines; formal specification and evaluation of candidates such as
-  PATHCAST remain future work by the authors.
+  Not inferred from F4. The authors' reading of PRIMAD is reported under
+  F4 as a reading of that paper, not as a count of the literature. Target:
+  comparable OSS benchmarks with temporal hold-out for end-to-end
+  PM--stochastic--ML pipelines. Formal specification and evaluation of
+  candidates such as PATHCAST remain future work by the authors.
 \end{description}
 
 
 \subsection{Implications for Practitioners}
 \label{sec:slr-practitioners}
 
-These three points are readings of the 169 working-set codes. They were
-not re-extracted by a human, and they are not a description of the 506.
-First, in those codes, structured event logs in issue trackers are the
-usual input to process mining. Second, the same codes name the inductive
-miner in 51 papers and the alpha miner in 45 papers. Third, the stochastic
-extension in those codes uses Markov chains and Monte Carlo on data the
-studies already describe as present in the logs. The challenge those codes
-describe is methodological composition.
+No practitioner recommendation is drawn from these counts. The
+readings of individual cited papers in Section~\ref{sec:slr-rq2} are
+readings of those papers. They are not a recommendation derived from the
+169 codes.
 
 
 \section{Threats to Validity}
@@ -1790,7 +1891,8 @@ obtained, and 50 of the 51 human \texttt{exclude} labels were annotated
 ``PDF not accessible''. The resulting Recall (0.246) measured PDF
 availability, not screening error, and is withdrawn.
 
-\emph{FT stage --- round-2 validation.} Before any new judgement we
+\emph{Second pass --- round-2 validation.} The replication files
+label this pass FT. Before any new judgement we
 pre-registered the check
 (\texttt{PREREGISTRATION\_round2\_validation.md}; success if the point
 estimate of Recall is at least 0.90). The same 177 records were judged
@@ -1804,8 +1906,10 @@ The reference standard is the consensus after a full-text re-reading of the
 23 records the first consensus had included and the LLM had excluded. Five of
 those 23 are ineligible. One is not assessable, because the file on disk is
 a conference programme. Seventeen remain eligible. Against that reference the
-LLM's full-text Recall is 0.630 (29 true positives out of 46 eligible
-studies; Wilson 95\% CI 0.486--0.755). Lost evidence is 0.370. MCC is 0.656
+LLM's Recall on the working-set sample is 0.630 (29 true positives out of 46 eligible
+studies; Wilson 95\% CI 0.486--0.755). This is not a full-text Recall.
+A PDF was read for 0.5\% of the 886 records, and the second-pass prompt
+received the title and the abstract. Lost evidence is 0.370. MCC is 0.656
 and WMCC with false negatives weighted ten to one is 0.168
 (Table~\ref{tab:r2-confusion}). The same Recall, 0.630, is obtained if the
 second rater's labels are used alone. The first author had computed the
@@ -1828,44 +1932,53 @@ that rounding they are 182.7. That sample estimator of auxiliary Recall is
 
 Both reviewers then screened the working-set exclusions and the rest of
 S1, S2, and S3, including the records whose first label was heuristic.
-They agreed with 92\% of those suggested labels. The 8\% they did not
-accept is not listed record by record, so the counts below still follow
-the suggested labels in full. Those labels contain 89 includes the LLM
+They agreed with 92\% of those suggested labels. The sheets (4{,}005 rows)
+store a decision equal to the suggestion on every row, so the labels they
+did not accept are not marked there. Rebuilt from the title or abstract
+the LLM treated as sufficient, that share of the coded includes is the 33
+studies in \texttt{labels\_ta\_insufficient\_for\_include.csv} (33 of 338,
+9.8\%), and those 33 are removed from the corpus. The counts of missed
+studies below follow the suggested includes. The suggested includes
+contain 89 studies the LLM
 had missed (10 in the sample, 33 in the rest of S1, 32 in the rest of S2,
 14 in the rest of S3). Auxiliary Recall on that count is 0.725 (235 of
 324). It is still below 0.90. Seventeen of the 33 S1 includes, and all 14
 S3 includes, began as heuristic suggestions. The reviewers' 92\% agreement
 covers those suggestions. It does not replace them with a second written
-code on each row. After de-duplication, the studies new to the corpus are
-the 168 in Section~\ref{sec:slr-synthesis}. The 89 is the auxiliary slice
-of the screen. The 168 also includes working-set records the LLM had
-excluded.
+code on each row. After de-duplication, 168 records were new to the list. The eligibility
+pass removes 18 of them, so the studies new to the corpus are the 150 in
+Section~\ref{sec:slr-synthesis}. The 89 is the auxiliary slice of the
+screen. The 150 also includes working-set records the LLM had excluded.
 
 \begin{table}[htbp]
 \centering
-\caption{Round-2 full-text check of the working-set sample. The human label
+\caption{Round-2 check of the working-set sample. The human label
 is the consensus reference. Lost evidence is $1-\mathrm{Recall}$. The
 interval is a Wilson 95\% confidence interval. Six records judged
-\texttt{not\_assessable} are outside this table.}
+\texttt{not\_assessable} are outside this table. The Recall in this
+table is not a full-text Recall: a PDF was read for 0.5\% of the 886
+records, and the prompt received the title and the abstract.}
 \label{tab:r2-confusion}
 \small
 \begin{tabular}{lrrrrccc}
 \toprule
  & TP & FP & FN & TN & Recall & 95\% CI & Lost ev. \\
 \midrule
-Working-set FT & 29 & 5 & 17 & 120 & 0.630 & (0.486, 0.755) & 0.370 \\
+Working-set sample & 29 & 5 & 17 & 120 & 0.630 & (0.486, 0.755) & 0.370 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The two tables that follow are the round-1 matrices. Their full-text row
-measured whether a PDF was on disk. That row is withdrawn.
+The two tables that follow are the round-1 matrices. The row labelled
+FT (withdrawn) measured whether a PDF was on disk (Recall 0.246;
+$\kappa = 0.122$). That row is withdrawn. The 0.630 above is the Recall
+of the working-set sample. It is not a full-text Recall.
 
 \emph{QA and extraction.} On the 31 papers included by both the R1 human
 rater and the LLM, LLM QA matched the human rater on 68--100\% per
 criterion; free-text extraction fields showed 0\% exact-match agreement.
 Those fields were not re-extracted by a human. F2 and F5, which use them,
-are model extractions. F1, F3, and F4 use the technique-family codes.
+are withdrawn.
 
 \input{results/human_validation/human_kappa_report.tex}
 \input{results/human_validation/human_confusion_report.tex}
@@ -1916,7 +2029,7 @@ when one class dominates. The auxiliary records were afterwards screened by
 both reviewers, who agreed with 92\% of the suggested labels
 (Section~\ref{sec:slr-threats}). The combined-tier counts still rest on the
 family codes of the original coded set, plus the triple-intersection count
-on the 429. They were not re-marked in this revision.
+on the 379. They were not re-marked in this revision.
 
 \input{results/auxiliary/kappa/aux_kappa_report}
 
@@ -1928,12 +2041,13 @@ T/A-screening false-positive rates reported by Khraisha~et~al.\
 \cite{khraisha2024} for medical SLRs (in the 25--35\% range, depending on
 domain specificity) and by Syriani~et~al.~\cite{syriani2023} for SE
 SLRs. A false positive at title/abstract can be removed at the second
-pass. A false negative is not removed by that pass. Full-text Recall on
-the working-set sample is 0.630, so missed studies do affect what F1--F5
-can claim. The Round~2
+pass. A false negative is not removed by that pass. Recall on
+the working-set sample is 0.630. That figure is not a full-text Recall:
+a PDF was read for 0.5\% of the 886 records. Missed studies would affect any claim
+drawn from the coded rows. This revision draws none from F1--F5. The Round~2
 screening reprocessed 495 \texttt{maybe} papers with enriched abstracts and
 brought the working-set tier to 169. The corpus of this revision is the
-506 in Table~\ref{tab:ledger}.
+455 in Table~\ref{tab:ledger}.
 
 (vi)~\textbf{Original closure of unresolved uncertainty (revised in resubmission)}.
 In the original execution run, papers where metadata remained insufficient or
@@ -1954,8 +2068,9 @@ coverage mitigate geographic and temporal bias. Grey literature is
 excluded. The stop rule is the document type at search time: journal
 articles, conference papers, and workshop papers. Theses, preprints, and
 technical reports were not searched in a separate round. The auxiliary
-corpus (3{,}807 records from SpringerLink, WoS, Snowball, and other
-low-precision queries) was screened in full. The mapped set is the 506 in
+identifier list (3{,}807 rows; Section~\ref{sec:slr-results-selection})
+was screened in full. It shares 364 papers with the working set.
+The mapped set is the 455 in
 Table~\ref{tab:ledger}. The working set was built from Scopus, IEEE, and
 ACM. SpringerLink, Web of Science, and most of the snowballing records
 were screened in the auxiliary tier, with greater use of abstracts. A
@@ -1974,7 +2089,7 @@ auxiliary papers at title/abstract and at the second pass.
 The result is reported in
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
 were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived the
-second pass as \texttt{include}. The arithmetic from there to the 506 is
+second pass as \texttt{include}. The arithmetic from there to the 455 is
 the one in Table~\ref{tab:ledger}.
 
 In the original run, 16 auxiliary records stayed pending after abstract
@@ -2009,25 +2124,26 @@ reflects the publisher-paywall mix of the auxiliary corpus).
 
 \subsection{Conclusion Validity}
 
-Synthesis statements that use technique-family codes (F1, F3, F4) are the
-original codes on the cut named in the sentence. This revision did not
-re-mark those codes. The human re-mark in this revision is the triple
-intersection on the 91 added studies with an abstract or a PDF: none of
-them joins the three families. Statements that use free-text extraction
-fields (F2, F5) were not re-extracted by a human. On 31 studies the exact
-agreement between the model and a human rater on those free-text fields is
-0\%, and agreement on the categorical fields is 29--81\%. Those categorical
-fields were not adjudicated. The two
+F1, F3, and F4 are the original family codes on the cut named in the
+sentence. This revision did not re-mark those codes and does not use them
+as findings. The human re-mark in this revision is the triple
+intersection on the 74 added studies with an abstract or a PDF: none of
+them joins the three families. F2 and F5 are withdrawn. On 31 studies the
+exact agreement between the model and a human rater on those free-text
+fields is 0\%, and agreement on the categorical fields is 29--81\%. Those
+categorical fields were not adjudicated. The agenda is not inferred from
+F1--F5. The two
 extraction layers are (i)~the 169-study working-set extraction
 (Section~\ref{sec:slr-extraction}; Table~\ref{tab:extraction}), partly
 checked against the 73-PDF subset, and (ii)~the 212-study auxiliary
 extraction from abstracts. The quality scores are what the same model
 assigned. A score taken from an abstract is not a quality assessment of
 the study. The $4/8$
-line is not a filter on any statement. Of the 169 working-set studies, 136
-were assigned at least 4/8. Of the 212 auxiliary studies, 179 were
-(mean $5.09 \pm 1.43$). Of the 318-study joint subset, 259 were
-($81.4\%$, mean $5.00 \pm 1.42$). Abstract-only scores stay labeled as
+line is not a filter on any statement. Of the 150 working-set studies that
+remain, 123 were assigned at least 4/8 (mean $4.90 \pm 1.36$). Of the 212
+auxiliary studies, 179 were (mean $5.09 \pm 1.43$). Of the 292 joint-table
+studies that remain, 240 were ($82.2\%$, mean $4.96 \pm 1.40$).
+Abstract-only scores stay labeled as
 abstract-only scores.
 
 \input{results/auxiliary/aux_qa_summary}
@@ -2047,10 +2163,11 @@ agreement on free-text fields and 29--81\% on categorical fields
 
 In line with current Elsevier and Springer-Nature editorial policy, this
 review explicitly declares the use of AI tools in its conduct. The primary
-screener at the title/abstract and full-text stages is
+screener at title and abstract, including the second pass, is
 \textit{claude-haiku-4-5-20251001} (Anthropic), invoked through the
 Anthropic Message Batches API for screening and through the
-synchronous Messages API for QA scoring. The cross-model
+synchronous Messages API for QA scoring. Those calls omit
+\texttt{temperature}; the API default is 1. The cross-model
 inter-rater verification described above uses
 \textit{claude-sonnet-4-6} (Anthropic) as the second rater. AI tools are
 \textbf{not} listed as authors of this work and are responsible for none of
@@ -2063,8 +2180,8 @@ A complete replication package is deposited at Zenodo
 It contains the search strings for all five databases; deduplication and
 enrichment scripts; screening and QA prompts with JSON schemas; per-stage
 decision tables; reporting-quality and extraction tables for both corpus
-tiers; LLM--LLM and human--LLM agreement reports; the 340-study included
-list; a completed SEGRESS checklist; and a PRISMA flow snapshot.
+tiers; LLM--LLM and human--LLM agreement reports; the 455-study list of
+this revision (\texttt{included\_studies\_506.csv}, 455 rows); a completed SEGRESS checklist; and a PRISMA flow snapshot.
 File-level layout is documented in the package README. The deposit is
 intended to be self-contained: a reviewer can re-run the LLM-assisted
 protocol on the deposited working set under the same model identifiers.
@@ -2073,33 +2190,31 @@ protocol on the deposited working set under the same model identifiers.
 \section{Conclusion}
 \label{sec:slr-summary}
 
-The corpus of this revision is 506 distinct studies
-(Table~\ref{tab:ledger}): 338 from the LLM list after two pre-1994 records
-were removed, plus 168 added by the human re-screen after duplicate
-identifiers were removed. On the 429 studies whose three family marks were
-filled, one study, PRIMAD, matches process mining, a stochastic model, and
-forecasting together. Seventy-seven added studies, read from the title
+The corpus of this revision is 455 distinct studies
+(Table~\ref{tab:ledger}): 305 that remain after 33 coded studies are
+removed from the list of 338, plus 150 that remain after the eligibility
+pass removed 18 of the 168. On the 379 studies with at least one family
+mark, one study,
+PRIMAD, matches process mining, a stochastic model, and forecasting
+together. Seventy-six added studies, read from the title
 alone, are outside that count.
 
-Five statements describe the coded rows, on the cut each sentence names.
-The 169 working-set codes and the 318 joint-table codes show process mining
-without a matching rate of process-metric forecasting (F1). Those codes
-were not re-marked in this revision. Event-log construction is a model
-extraction (F2). Stochastic models and process mining are rarely combined
-in those codes (F3). PRIMAD is the one triple match in the 429 (F4).
-Machine-learning rows in the model extraction rarely use a feature taken
-from a process model (F5). A Scopus search on 31~October~2026 added
-machine-learning terms and, on titles alone, found 19 further IC4c studies.
-They are not in the 506, and none joins the three families.
+F2 and F5 are withdrawn: on 31 studies the exact match on the free-text
+fields is 0\%, so those percentages are not reported. The status of F1,
+F3, and F4 is in Section~\ref{sec:slr-gaps}. PRIMAD is the one stored
+triple in the 379. A Scopus search on 31~October~2026 added
+machine-learning terms and, on titles alone, found 19 further IC4c
+studies. They are not in the 455, and none joins the three families.
 
-These gaps motivate the SPMF taxonomy and research agenda RA1--RA4
-(Section~\ref{sec:slr-agenda}). PATHCAST is future work by the authors.
-It is not a finding of the mapping.
+The SPMF taxonomy and the agenda RA1--RA4
+(Section~\ref{sec:slr-agenda}) are proposals by the authors.
+PATHCAST is future work by the authors.
 
 The primary validity evidence is the pre-registered two-rater check.
 Operational title/abstract Recall is 1.000 (72 of 72). Recall on the
-working-set sample, against full texts, is 0.630 (29 of 46; Wilson 95\% CI
-0.486--0.755). Auxiliary Recall after the stratum re-screen is 0.725
+working-set sample is 0.630 (29 of 46; Wilson 95\% CI
+0.486--0.755). It is not a full-text Recall: a PDF was read for 0.5\%
+of the 886 records. Auxiliary Recall after the stratum re-screen is 0.725
 (235 of 324). Both are below 0.90. The replication package is openly
 available at Zenodo (DOI~\zenododoi).
 
@@ -2107,7 +2222,7 @@ available at Zenodo (DOI~\zenododoi).
 \section{Included primary studies}
 \label{app:included}
 
-Appendix~\ref{app:included} lists the 506 studies. Table~\ref{tab:class-matrix}
+This appendix lists the 455 studies. Table~\ref{tab:class-matrix}
 groups them by family. Table~\ref{tab:included-506} gives the identifier of
 each study. The file \texttt{included\_studies\_340.csv} still contains the
 two papers from 1991 and 1992 (\texttt{dd71433d}, \texttt{37385fbd}) so that

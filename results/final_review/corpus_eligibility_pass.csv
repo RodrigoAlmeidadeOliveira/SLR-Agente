@@ -1,0 +1,65 @@
+internal_id,decision,tf_pattern,reason,year,title,evidence_basis
+6d83b874,keep,TF-ST|TF-FC,pm=none; st=markov_chain; contrib=prediction; art=other,2005,Software reliability modelling and prediction with hidden Markov chains,abstract_only
+2f1e25da,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2014,A business process simulation method supporting resource evolution,full_text
+a6c6358f,exclude,,no IC4 technique applied: practitioner survey of challenge categories,2015,Identifying Software Process Management Challenges: Survey of Practitioners in a Large Global IT Company,abstract_only
+1fd95ebc,keep,TF-PM,pm=other; st=none; contrib=framework | discovery; art=other,2022,Process Mining in Project Management for Smart Cities,abstract_only
+063986d6,keep,TF-PM,pm=other; st=none; contrib=discovery | framework; art=other,2024,Using Logs to Reduce the Impact of Process Variability and Dependence on Practitioners in Requirements Engineering for Traditional Business Process Automation Software,abstract_only
+04657923,keep,TF-PM,pm=other; st=none; contrib=framework; art=other,2022,Monitoring of Microservices Architecture based Applications using Process Mining,abstract_only
+85002ffb,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,1998,Using simulation to build inspection efficiency benchmarks for development projects,abstract_only
+fbf7e330,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2008,A Framework for Simulation of Requirements Engineering Processes,abstract_only
+0999fe57,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2021,On CMMN Model for Software System Project Simulation,abstract_only
+f27117e2,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2012,Estimate of the Appropriate Iteration Length in Agile Development by Conducting Simulation,abstract_only
+1c928aae,keep,TF-PM,pm=other; st=none; contrib=discovery; art=other,2003,Simulating an Automated Approach to Discovery and Modeling of Open Source Software Development Processes,abstract_only
+0232276d,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2005,Software Process Modeling Support for Management Planning and Control,abstract_only
+a401497c,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2007,Deriving Software Process Simulation Model from SPEM-based Software Process Model,abstract_only
+24059629,keep,TF-ST,pm=none; st=system_dynamics | other; contrib=simulation; art=none,2006,An approach to a hybrid software process simulation using the DEVS formalism,abstract_only
+368dc22f,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2003,Creating an Advanced Software Engineering Laboratory by Combining Empirical Studies with Process Simulation,abstract_only
+3487bbf5,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2003,SUPPORTING DECISION-MAKING IN SOFTWARE ENGINEERING WITH PROCESS SIMULATION AND EMPIRICAL STUDIES,abstract_only
+66c95d97,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2006,Qualitative simulation model for software engineering process,abstract_only
+dcf53abb,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2002,Systematically combining process simulation and empirical data in support of decision analysis in software development,abstract_only
+31405de3,exclude,,no IC4a–d signal in the extraction,2019,A dataset to facilitate automated workflow analysis,abstract_only
+7b61ad5a,exclude,,no IC4a–d signal in the extraction,2002,RESEARCH ON AGILE SOFTWARE PROCESS,abstract_only
+190c11c4,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2005,The Allocation of Software Development Resources in Open Source Production Mode,abstract_only
+3486571a,exclude,,no IC4a–d signal in the extraction,2005,Process modeling across the web information infrastructure,abstract_only
+e620e55e,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2002,Model-based tests of truisms,abstract_only
+d8591f96,keep,TF-PM,pm=other; st=none; contrib=discovery; art=other,2020,Mining Decision-Making Processes in Open Source Software Development - A Study of Python Enhancement Proposals (PEPs) using Email Repositories,abstract_only
+ec09271c,exclude,,no IC4a–d signal in the extraction,2014,Software process evaluation: a machine learning framework with application to defect management process,abstract_only
+b78523e4,keep,TF-PM,conformance of a development practice (TDD); pm cell had been left empty,2006,Automated recognition of low-level process: A pilot validation study of Zorro for test-driven development,abstract_only
+12f7f992,keep,TF-ST|TF-FC,pm=none; st=other; contrib=prediction; art=none,1998,A stochastic model of human error during software development,abstract_only
+e6075fca,keep,TF-ST,pm=none; st=system_dynamics | other; contrib=simulation; art=none,2008,Software Process Simulation over the Past Decade: Trends Discovery from A Systematic Review,abstract_only
+5c3f99ea,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2011,SOFTWARE DEVELOPMENT PROCESS SIMULATION FOR TEACHER EDUCATION REPOSITORY SYSTEM,abstract_only
+e3a9143c,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2002,Learning and understanding a software process through simulation of its underlying model,abstract_only
+cc618a37,keep,TF-PM|TF-MSR,pm=conformance_checking; st=none; contrib=conformance; art=issues | jira | other,2021,Towards a Taxonomy of Bug Tracking Process Smells: A Quantitative Analysis,abstract_only
+b618e568,exclude,,"out of scope: learner behaviour in a design tutor, not an SDLC process",2021,Learning about learners: Understanding learner behaviours in software conceptual design TELE,abstract_only
+b9ea47c3,exclude,,"EC1: abstract is a biochemical master equation, not a software process",2012,Process simulation will soon come of age: Where's the party?,abstract_only
+704a0d34,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2011,Intelligent Behavior Simulation Module for Software Process Elements,abstract_only
+e24af4e7,keep,TF-ST,pm=none; st=system_dynamics; contrib=simulation; art=none,2001,An experiment for evaluating the effectiveness of using a system dynamics simulation model in software project management education,abstract_only
+aa0da064,keep,TF-ST|TF-FC,pm=none; st=system_dynamics; contrib=framework | simulation | prediction; art=none,2007,Adjustable Cost Estimation Model for COTS-Based Development,abstract_only
+22412f71,keep,TF-PM|TF-MSR,pm=other; st=none; contrib=discovery | enhancement; art=commits | other,2022,Code Smell Prioritization with Business Process Mining and Static Code Analysis: A Case Study,abstract_only
+ca22bfe7,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2010,A Software Process Simulator Machine for Software Engineering Simulation Games,abstract_only
+e82e259b,keep,TF-ST,pm=none; st=system_dynamics; contrib=simulation; art=none,2000,Case studies in software process modeling with system dynamics,abstract_only
+9801135d,keep,TF-ST|TF-FC,pm=none; st=other; contrib=prediction; art=other,2007,Quantifying Software Maintainability Based on a Fault-Detection/Correction Model,abstract_only
+be4c9529,exclude,,"EC2: time Petri nets for a robot controller, not an SDLC process",2009,Computation of Performance Bounds for Real-Time Systems Using Time Petri Nets,abstract_only
+70af59ef,exclude,,"EC2: UML model performance, not a software-development process",2006,Software Performance Analysis in UML Models,abstract_only
+780b3d58,exclude,,"EC1: hospital and store workflow logs, not a software-development process",2020,QCPW: a quality centric process workflow improvement approach for a legacy healthcare information system,abstract_only
+33361b00,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2005,Design and evaluation of an educational software process simulation environment and associated model,abstract_only
+bc9498ef,exclude,,"EC1: basin stability of dynamical systems, not a software process",2022,bSTAB: an open-source software for computing the basin stability of multi-stable dynamical systems,abstract_only
+72329237,keep,TF-ST,pm=none; st=system_dynamics; contrib=simulation; art=none,2001,A CBT module with integrated simulation component for software project management education and training,abstract_only
+c73bda19,exclude,,no IC4a–d signal in the extraction,2016,An Agile Software Engineering Process Improvement Game,abstract_only
+5ee71dfd,exclude,,"EC2: response-time module for the PIPE tool, no software-development process",2007,Cluster grid based response-time analysis module for the PIPE tool,abstract_only
+6b16f9de,keep,TF-ST,pm=none; st=system_dynamics; contrib=simulation; art=none,2003,An externally replicated experiment for evaluating the learning effectiveness of using simulations in software project management education,abstract_only
+58c1d91f,exclude,,EC2: Monte Carlo for quantum lattice models; software is the platform,2005,The ALPS Project: Open Source Software for Strongly Correlated Systems,abstract_only
+d327f361,exclude,,EC1: chemical separation; the software is the simulator,2001,New process for separating propylene and propane by extractive distillation with aqueous acetonitrile,abstract_only
+dd3b63a3,keep,TF-MSR,pm=none; st=none; contrib=framework; art=github | ci_cd | commits,2024,gawd: A Differencing Tool for GitHub Actions Workflows,abstract_only
+4ba3e996,keep,TF-MSR,pm=none; st=none; contrib=discovery; art=ci_cd | github,2026,An empirical study of the evolution of GitHub actions workflows,abstract_only
+227a76af,exclude,,"EC1: clones of business-process models on GitHub, not an SDLC process",2024,An empirical study of business process models and model clones on GitHub,abstract_only
+8923f975,exclude,,no IC4a–d signal in the extraction,2004,A Flexible Software Process Model,abstract_only
+3f09473c,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2012,Simulation modeling of evolving software processes,abstract_only
+cd860b9f,keep,TF-ST,pm=none; st=other; contrib=simulation | framework; art=none,2010,Towards an Approach to Support Software Process Simulation in Small and Medium Enterprises,abstract_only
+780addad,keep,TF-MSR,pm=none; st=none; contrib=conformance; art=issues | jira | github | other,2022,Taxonomy of bug tracking process smells: Perceptions of practitioners and an empirical analysis,abstract_only
+7f8d2b91,keep,TF-PM,pm=conformance_checking; st=none; contrib=conformance; art=none,2002,Toward metrics for process validation,abstract_only
+a98f6c54,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2009,How to avoid drastic software process change (using stochastic stability),abstract_only
+65e5d58c,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2018,Modeling and Performance Analysis of Scrumban with Test-Driven Development using Discrete Event and Fuzzy Logic,abstract_only
+dfb2398b,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2008,Using process simulation to assess the test design effort reduction of a model-based testing approach,abstract_only
+117db759,keep,TF-ST,pm=none; st=other; contrib=simulation; art=none,2006,Users and developers: An agent-based simulation of open source software evolution,abstract_only
+46815264,exclude,,"IC1: year 1992, before 1 January 1994",1992,SOFTWARE PROCESS SIMULATION ON ARBITRARY LEVELS OF ABSTRACTION,title_only

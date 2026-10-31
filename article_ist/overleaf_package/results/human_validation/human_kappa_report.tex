@@ -1,13 +1,13 @@
 \begin{table}[htbp]
 \centering
-\caption{Inter-rater agreement (Cohen's $\kappa$) between the primary LLM screener (claude-haiku-4-5) and an independent human rater on a stratified random 20\% sample. Interpretation thresholds follow Landis and Koch (1977)~\cite{landiskoch1977}.}
+\caption{Round-1 agreement (Cohen's $\kappa$) between the primary LLM screener (claude-haiku-4-5) and an independent human rater on a stratified random 20\% sample. Interpretation thresholds follow Landis and Koch (1977)~\cite{landiskoch1977}. The T/A row is the title/abstract check. The row ``FT (withdrawn)'' ($\kappa = 0.122$, $n=177$) uses the same PDF-on-disk labels as the withdrawn Recall 0.246. It is not agreement on the criteria, and it is not the $\kappa$ of this revision.}
 \label{tab:human-kappa-results}
 \begin{tabular}{lccc}
 \toprule
 Stage & $N$ & $\kappa_{\text{multi}}$ (interpretation) & $\kappa_{\text{binary}}$ (interpretation) \\
 \midrule
 T/A & 468 & 0.250 (fair) & 0.335 (fair) \\
-FT & 177 & 0.122 (slight) & 0.122 (slight) \\
+FT (withdrawn) & 177 & 0.122 (slight) & 0.122 (slight) \\
 \bottomrule
 \end{tabular}
 \end{table}

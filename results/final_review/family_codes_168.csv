@@ -6,8 +6,8 @@ e969d9bd,title_only,,,,,,só título; marcas em branco
 063967eb,full_text,não,sim,sim,não,IC2|IC3,TF-ST: o processo de detecção de falhas é um NHPP/SRGM e a comparação entre máxima verossimilhança e mínimos quadrados usa simulação de Monte Carlo. TF-FC: com as falhas das 12 primeiras semanas o modelo prediz as cinco semanas seguintes e o erro relativo é calculado contra o número observado de falhas.
 ed81f924,full_text,não,sim,sim,não,IC2|IC3,"TF-ST: o framework de detecção e correção de falhas é formulado como modelo de Markov. TF-FC: os modelos ajustados nas 12 primeiras semanas predizem as cinco semanas restantes, e o erro relativo médio compara a contagem prevista de falhas à contagem observada."
 cd2ca776,title_only,,,,,,só título; marcas em branco
-6d83b874,abstract_only,não,não,não,não,,nenhuma família no texto
-2f1e25da,full_text,não,não,não,não,,nenhuma família no texto
+6d83b874,abstract_only,não,sim,sim,não,IC2|IC3,TF-ST|TF-FC. pm=none; st=markov_chain; contrib=prediction; art=other
+2f1e25da,full_text,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
 e4c752f3,title_only,,,,,,só título; marcas em branco
 140c9afd,full_text,não,não,sim,não,IC3,"O texto define a previsão contínua do resultado de build como tratar o build que falha como defeito, combina o histórico de integração contínua com métricas mineradas do controle de versão e avalia, num projeto real, se a prática reduz a razão de builds falhos."
 bce026ce,full_text,sim,não,não,sim,IC1|IC4,"TF-PM: sobre 203 issues fechadas do Mantis, a mineração de processo produz o modelo de fluxo, aponta gargalos e verifica se a comunicação entre serviços está conforme o esquema predefinido. TF-MSR: o mesmo bug tracker da empresa de suporte de software é a fonte desses modelos de processo."
@@ -45,7 +45,6 @@ e8daaada,title_only,,,,,,só título; marcas em branco
 e69d723f,title_only,,,,,,só título; marcas em branco
 88ee1d90,title_only,,,,,,só título; marcas em branco
 ed17c20e,title_only,,,,,,só título; marcas em branco
-a6c6358f,abstract_only,não,não,não,não,,nenhuma família no texto
 3691dee1,title_only,,,,,,só título; marcas em branco
 f2c78b19,title_only,,,,,,só título; marcas em branco
 4eeb076b,title_only,,,,,,só título; marcas em branco
@@ -61,7 +60,7 @@ a21c9dff,title_only,,,,,,só título; marcas em branco
 4b58cb90,title_only,,,,,,só título; marcas em branco
 12343eec,title_only,,,,,,só título; marcas em branco
 61048559,title_only,,,,,,só título; marcas em branco
-1fd95ebc,abstract_only,não,não,não,não,,nenhuma família no texto
+1fd95ebc,abstract_only,sim,não,não,não,IC1,TF-PM. pm=other; st=none; contrib=framework | discovery; art=other
 83421d8c,title_only,,,,,,só título; marcas em branco
 92fa0290,title_only,,,,,,só título; marcas em branco
 aaef3235,title_only,,,,,,só título; marcas em branco
@@ -71,7 +70,7 @@ dea836a1,title_only,,,,,,só título; marcas em branco
 e3f89404,title_only,,,,,,só título; marcas em branco
 44d6a32e,title_only,,,,,,só título; marcas em branco
 2c9ac8c4,title_only,,,,,,só título; marcas em branco
-063986d6,abstract_only,não,não,não,não,,nenhuma família no texto
+063986d6,abstract_only,sim,não,não,não,IC1,TF-PM. pm=other; st=none; contrib=discovery | framework; art=other
 d36b0adf,abstract_only,sim,não,não,não,IC1,"O Layered Mixed Miner é apresentado como algoritmo de mineração de processo que parte de uma árvore de processo e produz modelos interpretáveis a partir de dados não estruturados de programação e depuração de estudantes, com testes de consistência de acurácia e precisão frente a algoritmos de referência."
 08a023e2,title_only,,,,,,só título; marcas em branco
 6ffcab24,title_only,,,,,,só título; marcas em branco
@@ -80,70 +79,55 @@ d36b0adf,abstract_only,sim,não,não,não,IC1,"O Layered Mixed Miner é apresent
 ecc17ad4,title_only,,,,,,só título; marcas em branco
 8851bb5e,title_only,,,,,,só título; marcas em branco
 1a59bb38,title_only,,,,,,só título; marcas em branco
-04657923,abstract_only,não,não,não,não,,nenhuma família no texto
-85002ffb,abstract_only,não,não,não,não,,nenhuma família no texto
-fbf7e330,abstract_only,não,não,não,não,,nenhuma família no texto
-0999fe57,abstract_only,não,não,não,não,,nenhuma família no texto
-f27117e2,abstract_only,não,não,não,não,,nenhuma família no texto
+04657923,abstract_only,sim,não,não,não,IC1,TF-PM. pm=other; st=none; contrib=framework; art=other
+85002ffb,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+fbf7e330,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+0999fe57,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+f27117e2,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
 0e15e613,abstract_only,não,não,não,sim,IC4,"O modelo de simulação do processo de verificação formal do seL4 é apoiado num modelo descritivo do processo e em informação retirada dos logs do projeto, das atas e dos dados de controle de versão ao longo da história do projeto."
 8dea6481,abstract_only,não,sim,não,não,IC2,"O resumo estende a rede de crença do PERT com variáveis de decisão e resolve o diagrama por programação dinâmica estocástica e amostragem de Gibbs, descrita como método iterativo de Monte Carlo, num exemplo de projeto de desenvolvimento de software, calculando o tempo médio de conclusão e a probabilidade de terminar dentro de um prazo."
 6115d05e,abstract_only,não,sim,não,não,IC2,"O resumo modela a dependência entre durações de atividades com redes de crença e estima a densidade do tempo de conclusão por Monte Carlo, incluindo amostragem de Gibbs, ilustrando o cálculo com um projeto de desenvolvimento de software."
-1c928aae,abstract_only,não,não,não,não,,nenhuma família no texto
-0232276d,abstract_only,não,não,não,não,,nenhuma família no texto
-a401497c,abstract_only,não,não,não,não,,nenhuma família no texto
-24059629,abstract_only,não,não,não,não,,nenhuma família no texto
-368dc22f,abstract_only,não,não,não,não,,nenhuma família no texto
-3487bbf5,abstract_only,não,não,não,não,,nenhuma família no texto
-66c95d97,abstract_only,não,não,não,não,,nenhuma família no texto
-dcf53abb,abstract_only,não,não,não,não,,nenhuma família no texto
-31405de3,abstract_only,não,não,não,não,,nenhuma família no texto
-7b61ad5a,abstract_only,não,não,não,não,,nenhuma família no texto
-190c11c4,abstract_only,não,não,não,não,,nenhuma família no texto
-3486571a,abstract_only,não,não,não,não,,nenhuma família no texto
-e620e55e,abstract_only,não,não,não,não,,nenhuma família no texto
+1c928aae,abstract_only,sim,não,não,não,IC1,TF-PM. pm=other; st=none; contrib=discovery; art=other
+0232276d,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+a401497c,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+24059629,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics | other; contrib=simulation; art=none
+368dc22f,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+3487bbf5,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+66c95d97,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+dcf53abb,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+190c11c4,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+e620e55e,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
 050fa5cf,abstract_only,não,sim,não,não,IC2,O resumo define data farming como amostragem de Monte Carlo do espaço de desfechos e aplica o SEESAW a dados de projetos de software para recomendar o menor conjunto de mudanças de projeto.
-d8591f96,abstract_only,não,não,não,não,,nenhuma família no texto
-ec09271c,abstract_only,não,não,não,não,,nenhuma família no texto
-b78523e4,abstract_only,não,não,não,não,,nenhuma família no texto
-12f7f992,abstract_only,não,não,não,não,,nenhuma família no texto
+d8591f96,abstract_only,sim,não,não,não,IC1,TF-PM. pm=other; st=none; contrib=discovery; art=other
+b78523e4,abstract_only,sim,não,não,não,IC1,TF-PM. conformance of a development practice (TDD); pm cell had been left empty
+12f7f992,abstract_only,não,sim,sim,não,IC2|IC3,TF-ST|TF-FC. pm=none; st=other; contrib=prediction; art=none
 f822c54d,abstract_only,não,sim,não,não,IC2,O resumo define um modelo estocástico no formalismo de redes de atividades estocásticas para avaliar cenários de projetos Follow-the-Sun e compara instâncias quanto ao tempo de execução e à composição de custos.
 8f1fb42b,title_only,,,,,,só título; marcas em branco
-e6075fca,abstract_only,não,não,não,não,,nenhuma família no texto
-5c3f99ea,abstract_only,não,não,não,não,,nenhuma família no texto
-e3a9143c,abstract_only,não,não,não,não,,nenhuma família no texto
-cc618a37,abstract_only,não,não,não,não,,nenhuma família no texto
-b618e568,abstract_only,não,não,não,não,,nenhuma família no texto
+e6075fca,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics | other; contrib=simulation; art=none
+5c3f99ea,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+e3a9143c,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+cc618a37,abstract_only,sim,não,não,sim,IC1|IC4,TF-PM|TF-MSR. pm=conformance_checking; st=none; contrib=conformance; art=issues | jira | other
 fd7ca261,abstract_only,não,sim,não,não,IC2,"O resumo substitui a taxa constante de reparo de falhas por um modelo de configuração de recursos de engenharia que é uma rede de Jackson com configuração em cadeia de Markov, para medir a produtividade de quem repara falhas e o desempenho de quem testa durante o desenvolvimento."
-b9ea47c3,abstract_only,não,não,não,não,,nenhuma família no texto
-704a0d34,abstract_only,não,não,não,não,,nenhuma família no texto
-e24af4e7,abstract_only,não,não,não,não,,nenhuma família no texto
-aa0da064,abstract_only,não,não,não,não,,nenhuma família no texto
+704a0d34,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+e24af4e7,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics; contrib=simulation; art=none
+aa0da064,abstract_only,não,sim,sim,não,IC2|IC3,TF-ST|TF-FC. pm=none; st=system_dynamics; contrib=framework | simulation | prediction; art=none
 f48e9319,abstract_only,não,sim,não,não,IC2,"O resumo adota uma visão markoviana do processo de teste de unidade, em que a qualidade da unidade e a qualidade do teste se ligam à qualidade esperada do sistema e ao número esperado de testes, e ilustra o compromisso com simulação de arquiteturas de teste."
 6e178383,abstract_only,não,não,sim,não,IC3,"O DeepJIT extrai features de mensagens de commit e de mudanças de código para identificar defeitos em QT e OpenStack, e a avaliação inclui, além da validação cruzada, janelas de curto prazo e de longo prazo, isto é, comparação com um período futuro."
-22412f71,abstract_only,não,não,não,não,,nenhuma família no texto
+22412f71,abstract_only,sim,não,não,sim,IC1|IC4,TF-PM|TF-MSR. pm=other; st=none; contrib=discovery | enhancement; art=commits | other
 a31e0556,abstract_only,não,sim,não,não,IC2,"O resumo formula a alocação de esforço de teste entre módulos com um processo de Poisson não homogêneo, para minimizar as falhas remanescentes dado um esforço fixo, ou o esforço dado um objetivo de falhas e de confiabilidade, e mostra exemplos numéricos e análise de sensibilidade."
-ca22bfe7,abstract_only,não,não,não,não,,nenhuma família no texto
-e82e259b,abstract_only,não,não,não,não,,nenhuma família no texto
+ca22bfe7,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
+e82e259b,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics; contrib=simulation; art=none
 165593a8,abstract_only,não,sim,não,não,IC2,"O resumo propõe um modelo de crescimento de confiabilidade de software livre com dados mascarados, cobrindo ao mesmo tempo a detecção e a correção de falhas, e estima os parâmetros pelo método ELS em três conjuntos de dados de projetos reais de código aberto."
-9801135d,abstract_only,não,não,não,não,,nenhuma família no texto
+9801135d,abstract_only,não,sim,sim,não,IC2|IC3,TF-ST|TF-FC. pm=none; st=other; contrib=prediction; art=other
 921e8fc3,abstract_only,não,sim,não,não,IC2,"O resumo trata a modelagem de crescimento de confiabilidade com o atraso estocástico entre detecção e correção de falhas, estende o quadro a software de várias releases e estima os parâmetros por máxima verossimilhança num conjunto de teste com três releases de um projeto real."
-be4c9529,abstract_only,não,não,não,não,,nenhuma família no texto
 86f0c466,abstract_only,não,sim,não,não,IC2,"O resumo incorpora simulação de Monte Carlo, junto com imputação por k vizinhos mais próximos, suavização por kernel e regressão passo a passo, para simplificar modelos que preveem métricas de projetos de software a partir de amostras incompletas."
-70af59ef,abstract_only,não,não,não,não,,nenhuma família no texto
 76a1870d,abstract_only,não,sim,não,não,IC2,"O resumo combina modelos candidatos de confiabilidade de software por média bayesiana de modelos e calcula a probabilidade a posteriori de cada candidato com o algoritmo de Monte Carlo via cadeias de Markov, comparando-o ao algoritmo EM."
-780b3d58,abstract_only,não,não,não,não,,nenhuma família no texto
-33361b00,abstract_only,não,não,não,não,,nenhuma família no texto
+33361b00,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
 1d754c2e,abstract_only,não,sim,não,não,IC2,"O resumo monta um portfólio de projetos de software com a teoria moderna de portfólio e simulação de Monte Carlo, usando a correlação dinâmica entre os projetos candidatos para estudar a influência de cada um sobre o portfólio."
-bc9498ef,abstract_only,não,não,não,não,,nenhuma família no texto
-72329237,abstract_only,não,não,não,não,,nenhuma família no texto
-c73bda19,abstract_only,não,não,não,não,,nenhuma família no texto
-5ee71dfd,abstract_only,não,não,não,não,,nenhuma família no texto
-6b16f9de,abstract_only,não,não,não,não,,nenhuma família no texto
-58c1d91f,abstract_only,não,não,não,não,,nenhuma família no texto
-d327f361,abstract_only,não,não,não,não,,nenhuma família no texto
-dd3b63a3,abstract_only,não,não,não,não,,nenhuma família no texto
-4ba3e996,abstract_only,não,não,não,não,,nenhuma família no texto
-227a76af,abstract_only,não,não,não,não,,nenhuma família no texto
+72329237,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics; contrib=simulation; art=none
+6b16f9de,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=system_dynamics; contrib=simulation; art=none
+dd3b63a3,abstract_only,não,não,não,sim,IC4,TF-MSR. pm=none; st=none; contrib=framework; art=github | ci_cd | commits
+4ba3e996,abstract_only,não,não,não,sim,IC4,TF-MSR. pm=none; st=none; contrib=discovery; art=ci_cd | github
 13983127,title_only,,,,,,só título; marcas em branco
 4d088b6b,title_only,,,,,,só título; marcas em branco
 fe75ced8,title_only,,,,,,só título; marcas em branco
@@ -152,18 +136,16 @@ c7a601d8,title_only,,,,,,só título; marcas em branco
 7607982d,title_only,,,,,,só título; marcas em branco
 eeed2f5d,title_only,,,,,,só título; marcas em branco
 171085b9,title_only,,,,,,só título; marcas em branco
-46815264,title_only,,,,,,só título; marcas em branco
 16a201ed,title_only,,,,,,só título; marcas em branco
-8923f975,abstract_only,não,não,não,não,,nenhuma família no texto
-3f09473c,abstract_only,não,não,não,não,,nenhuma família no texto
-cd860b9f,abstract_only,não,não,não,não,,nenhuma família no texto
+3f09473c,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+cd860b9f,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation | framework; art=none
 1d19dd67,title_only,,,,,,só título; marcas em branco
-780addad,abstract_only,não,não,não,não,,nenhuma família no texto
+780addad,abstract_only,não,não,não,sim,IC4,TF-MSR. pm=none; st=none; contrib=conformance; art=issues | jira | github | other
 7a92806a,abstract_only,não,sim,não,sim,IC2|IC4,"TF-ST: o resumo ajusta uma cadeia de Markov de primeira ordem às transições entre passos de código (pré-processamento, modelagem e demais etapas) anotados em 470 notebooks. TF-MSR: esses notebooks foram obtidos de repositórios públicos no GitHub, e as probabilidades de transição são o modelo do fluxo de trabalho extraído dessa mineração."
-7f8d2b91,abstract_only,não,não,não,não,,nenhuma família no texto
-a98f6c54,abstract_only,não,não,não,não,,nenhuma família no texto
+7f8d2b91,abstract_only,sim,não,não,não,IC1,TF-PM. pm=conformance_checking; st=none; contrib=conformance; art=none
+a98f6c54,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
 a210fdd3,abstract_only,não,sim,não,não,IC2,"O resumo propõe um modelo oculto de Markov com três estados latentes de aprendizagem e o calibra em seis anos de dados de 251 desenvolvedores em 25 projetos de código aberto hospedados no SourceForge, estimando o efeito das atividades de aprendizagem sobre a transição entre estados."
-65e5d58c,abstract_only,não,não,não,não,,nenhuma família no texto
+65e5d58c,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
 10bdcff6,abstract_only,não,não,sim,não,IC3,"O TraceJIT calcula sete features dinâmicas a partir dos rastros coletados na execução das suítes de teste, para caracterizar a mudança de comportamento do produto, e avalia a previsão just-in-time de defeito em dois projetos de código aberto pela variação de ROC-AUC, precisão e PR-AUC frente aos modelos que usam só as features tradicionais."
-dfb2398b,abstract_only,não,não,não,não,,nenhuma família no texto
-117db759,abstract_only,não,não,não,não,,nenhuma família no texto
+dfb2398b,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none
+117db759,abstract_only,não,sim,não,não,IC2,TF-ST. pm=none; st=other; contrib=simulation; art=none

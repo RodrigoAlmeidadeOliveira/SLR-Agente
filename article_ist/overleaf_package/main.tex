@@ -72,7 +72,7 @@
 \begin{frontmatter}
 
 \title{Process Mining and Stochastic Modeling for Software Process
-       Forecasting: A Systematic Mapping Study with an LLM-Assisted Protocol}
+       Forecasting: Stored Family Codes from an LLM-Assisted Screen}
 
 %% Authors
 \author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}\fnref{orcid1}}
@@ -105,30 +105,31 @@ stochastic models can use for forecasting, yet their integration for
 software development lifecycle (SDLC) prediction is reported only
 anecdotally.
 \textbf{Objective.}
-To map the state of the art at the intersection of process mining,
-stochastic modeling, and machine-learning forecasting applied to software
-processes; to identify research gaps; and to propose a research agenda.
+To record the family codes a model stored on two cuts of this corpus,
+150 and 292 studies, which were not re-marked, and to propose a research
+agenda. Those codes are not a census of the literature, because the screen
+missed eligible studies.
 \textbf{Method.}
 We report a systematic mapping study against
 SEGRESS~\cite{kitchenham2023segress}. The mapping protocol was not
 pre-registered. The human check of the screen was. Searches ran on
-12~April~2026. An LLM screened 2{,}340 working-set and 3{,}807 auxiliary
-records. The success bar, set before the judgements, was Recall $\geq 0.90$.
+12~April~2026. An LLM screened 2{,}340 working-set rows and 3{,}807
+auxiliary rows. Those lists share 364 papers under different identifiers.
+Their union is the 5{,}783 deduplicated records. The success bar, set before the judgements, was Recall $\geq 0.90$.
 \textbf{Results.}
-The LLM list has 340 studies. Two predate 1994 and are removed, leaving
-338. Human Recall on the working-set sample is 0.630 (29 of 46; Wilson
-95\% CI 0.486--0.755). Auxiliary Recall is 0.725 (235 of 324). After
-de-duplication the corpus is 506 studies. F1, F3, and F4 are
-family-code counts on the cuts named in each sentence. They were not
-re-marked, and they are not rates over the 506. One study in 429 matches
-process mining, a stochastic model, and forecasting. F2 and F5 are
-unconfirmed model counts.
+The LLM list has 340 studies. Two predate 1994, leaving 338. Human
+Recall on the working-set sample is 0.630 (29 of 46; Wilson 95\% CI
+0.486--0.755). Auxiliary Recall is 0.725 (235 of 324). Removing 33
+coded studies and keeping 150 added studies leaves a corpus of 455. F2 and
+F5 are withdrawn. F1, F3, and F4 were not re-marked and are not findings.
+One stored code in 379 matches process mining, a stochastic model, and
+forecasting.
 \textbf{Conclusion.}
-The family-code picture is descriptive and predictively thin. It is not a
-census of the 506, because the screen missed eligible studies. PATHCAST is
+The agenda is not inferred from those codes. The mapping is not a
+census of the 455, because the screen missed eligible studies. PATHCAST is
 future work, not a result of this mapping.
 \textbf{Limitations.}
-The second pass used the abstract for almost every record. Seventy-seven
+The second pass used the abstract for almost every record. Seventy-six
 added studies were read from the title alone.
 \end{abstract}
 
@@ -144,9 +145,9 @@ Mining Software Repositories
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
 \item Human check of the LLM screen: Recall 0.630 and 0.725.
-\item This revision maps 506 distinct studies after de-duplication.
-\item Percentages in F1--F5 are the 169 and 318 cuts.
-\item One of 429 coded studies joins mining, stochastic models, and forecasting.
+\item This revision retains 455 studies after two removal passes.
+\item F2 and F5 are withdrawn. F1, F3, and F4 are not findings.
+\item One stored code joins mining, stochastic models, and forecasting.
 \item Replication package: Zenodo DOI 10.5281/zenodo.21939600.
 \end{highlights}
 
@@ -184,7 +185,7 @@ Universidade Cat\'olica do Paran\'a (PPGIa/PUC-PR).
 \section*{Declaration of generative AI in the writing process}
 During the conduct of this systematic mapping study, the authors used
 \textit{claude-haiku-4-5-20251001} (Anthropic) as the primary LLM screener
-at the title/abstract and full-text stages and as the LLM scorer for the
+at the title/abstract stage and at the second pass, which used the title and the abstract, and as the LLM scorer for the
 quality-assessment rubric, and \textit{claude-sonnet-4-6} (Anthropic) as
 the cross-model verifier for inter-rater agreement. All decisions were
 inspected by the authors; the LLM tools are not listed as authors and
@@ -203,7 +204,7 @@ and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
 the cross-model $\kappa$ verification scripts, all decision CSVs at every
 pipeline stage, the QA-scored 169-study and 212-study tables, the
 structured extraction tables (working-set and auxiliary), the inter-rater
-agreement reports (LLM--LLM and human--LLM), the 506-study list of this
+agreement reports (LLM--LLM and human--LLM), the 455-study list of this
 revision (\texttt{included\_studies\_506.csv}), the earlier 340-study file
 kept for traceability, a completed SEGRESS checklist, and a
 PRISMA flow snapshot.
