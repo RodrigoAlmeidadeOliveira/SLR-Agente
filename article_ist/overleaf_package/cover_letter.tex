@@ -30,32 +30,29 @@ intersection of process mining (PM), stochastic modeling, and machine
 learning applied to software process forecasting. The contribution is
 threefold:
 \begin{enumerate}
-\item \textbf{Methodological:} we operationalise an LLM-assisted screening
-      protocol with cross-model verification (Claude Haiku 4.5 as primary
-      screener, Claude Sonnet 4.6 as verifier), achieving substantial
-      Cohen's $\kappa$ (binary $\kappa = 0.695$ for title/abstract,
-      $0.694$ for full-text) on a stratified random 20\% LLM--LLM sample.
-      Independent human double-screening ($n=468$ T/A, $n=177$ FT) showed
-      fair/slight agreement and is reported as a limitation. The protocol
-      extends the recent work of Khraisha et~al.~(2024) and
-      Syriani et~al.~(2023) to the software-process-mining domain at a
-      scale of 6{,}147 papers screened across two corpus tiers (5{,}783
-      after cross-source deduplication plus 364 control and manually
-      imported items).
-\item \textbf{Empirical:} we confirm 340 distinct primary studies after
-      cross-tier deduplication (404 raw confirmations: 169 working-set
-      + 212 + 23 auxiliary) covering 1995--2026. All 169 working-set
-      studies were scored against an 8-criterion reporting-quality rubric
-      (Dyb{\aa} and Dings{\o}yr, 2008; 136 with QA $\geq 4/8$). Combined-tier
-      findings use the 318-study analytical subset (259 with QA $\geq 4/8$).
-\item \textbf{Synthetic:} we report five empirically grounded findings
-      (F1--F5), propose the SPMF taxonomy (Software Process Mining and
-      Forecasting) along three orthogonal dimensions, and articulate a
-      four-direction research agenda (RA1--RA4). Only 1 of 340 papers
-      jointly satisfies TF-PM $\cap$ TF-ST $\cap$ TF-FC --- evidence that
-      the mapped gap is structural rather than an artefact of the search
-      queries. PATHCAST is sketched as a future-work hypothesis, not as an
-      empirically validated pipeline of this mapping study.
+\item \textbf{Methodological:} an LLM screened the records (Claude Haiku 4.5
+      as primary screener, Claude Sonnet 4.6 as verifier). On the parseable
+      cross-model sample, binary Cohen's $\kappa$ is 0.695 at
+      title/abstract (420 of 468 papers; 48 verifier responses had no
+      category because the abstract was absent) and 0.694 at the second
+      pass ($n=177$). That agreement is not a human validation. The
+      pre-registered check is a two-rater sample. Full-text Recall on the
+      working-set sample is 0.630 (29 of 46). Auxiliary Recall after the
+      stratum re-screen is 0.725 (235 of 324). Both are below the
+      pre-registered bar of 0.90. The two reviewers agreed with 92\% of
+      the suggested labels on the remaining records. The 8\% they did not
+      accept is not identified record by record.
+\item \textbf{Empirical:} the corpus of this revision is 506 studies: the
+      LLM list of 340, minus two papers from 1991 and 1992, plus 168
+      studies added after the human check. One study in the 429 whose
+      family marks were filled (PRIMAD) matches process mining, a
+      stochastic model, and forecasting. Seventy-seven added studies, read
+      from the title alone, are outside that fraction. Family-code
+      percentages use the cuts of 169 and 318. They were not re-marked in
+      this revision.
+\item \textbf{Synthetic:} the SPMF taxonomy and a four-direction research
+      agenda (RA1--RA4). PATHCAST is future work. It is not a result of
+      this mapping.
 \end{enumerate}
 
 \medskip\noindent\textbf{Fit with IST scope.}
@@ -68,8 +65,8 @@ contributing to the methodological literature on LLM-assisted reviews.
 A complete replication package is openly available at Zenodo
 (\href{\zenododoiurl}{DOI~\zenododoi}),
 including all search strings, screening prompts, JSON schemas, decision
-CSVs at every pipeline stage, the 340-study included list
-(\texttt{included\_studies\_340.csv}), the cross-model $\kappa$ scripts,
+CSVs at every pipeline stage, the 506-study included list
+(\texttt{included\_studies\_506.csv}), the cross-model $\kappa$ scripts,
 and the structured extraction tables.
 
 \medskip\noindent\textbf{Funding.}
