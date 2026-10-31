@@ -52,6 +52,8 @@ AUX_KEY = KEY_DIR / "aux_key.csv"
 CONSENSUS = OUT_DIR / "consensus_sheet.xlsx"
 REPORT_TXT = OUT_DIR / "round2_report.txt"
 REPORT_TEX = OUT_DIR / "round2_confusion.tex"
+CENSUS = OUT_DIR / "escalation" / "accepted_includes_census.csv"
+CORPUS_340 = Path("results/final_review/included_studies_340.csv")
 
 RATER_FIELDS = ["access_basis", "decision", "ic_matched", "ec_applied", "justification", "evidence_location"]
 ACCESS_VALUES = {"full_text", "abstract_only", "title_only", "not_accessible"}
@@ -275,6 +277,55 @@ def _kappa_line(name: str, y1, y2) -> str:
     return f"  kappa {name}: {k:.3f} ({_interpret(k)}), Po={info['po']*100:.1f}%, n={info['n']}"
 
 
+def _census_block(ft_recall: float | None) -> list[str]:
+    """Post-escalation census. Absent until the accepted-includes file is written."""
+    if not CENSUS.exists():
+        return []
+    cen = pd.read_csv(CENSUS, dtype=str).fillna("")
+    aux_tiers = ("aux_sample", "s1", "s2", "s3")
+    lines = [
+        "[Operative results after the 2026-10-31 consensus update]",
+        f"  FT Recall (consensus sheet, full-text re-read of the 23 FNs) = {_fmt(ft_recall)}  "
+        f"threshold {RECALL_THRESHOLD:.2f}: "
+        f"{'PASS' if (ft_recall or 0) >= RECALL_THRESHOLD else 'FAIL'}",
+        "  The auxiliary sample estimator printed above is the pre-escalation figure (N·p̂).",
+        "  Once S1–S3 were screened, the operative auxiliary Recall is the census.",
+        "",
+        "[Escalation census — accepted 2026-10-31]",
+        "  Decisions in 01b/02b/03b/04b are accepted, including heuristic rows.",
+        "  S3 has no preclass_source column; its includes are marked heuristic.",
+    ]
+    missed = 0
+    for tier in aux_tiers:
+        d = cen[cen["tier"] == tier]
+        n = int(d["internal_id"].replace("", pd.NA).nunique())
+        missed += n
+        heur = int(d["preclass_source"].str.contains("heuristic", case=False, na=False).sum())
+        extra = f"  (heuristic rows: {heur})" if heur else ""
+        lines.append(f"  {tier}: {n} includes{extra}")
+    i_aux = stratum_sizes()["S0"]
+    aux_recall = i_aux / (i_aux + missed) if (i_aux + missed) else None
+    lines.append(
+        f"  Auxiliary Recall (census) = {i_aux}/({i_aux}+{missed}) = {_fmt(aux_recall)}  "
+        f"threshold {RECALL_THRESHOLD:.2f}: "
+        f"{'PASS' if (aux_recall or 0) >= RECALL_THRESHOLD else 'FAIL'}"
+    )
+    already = set(pd.read_csv(CORPUS_340, dtype=str)["internal_id"])
+    new_ids = [i for i in cen["internal_id"].unique() if i and i not in already]
+    lines.append(f"  Corpus: 340 + {len(new_ids)} distinct new includes = {340 + len(new_ids)}")
+    lines.append(
+        "  F1–F5 are not recomputed: the added studies have no QA/extraction row "
+        "in extraction_combined_404_dedup.csv."
+    )
+    lines.append(
+        "  E1 executed on the working-set FT LLM excludes. "
+        "E2 executed on S1, S2 and S3. The census stays below 0.90 and "
+        "no registered stratum remains unscreened."
+    )
+    lines.append("")
+    return lines
+
+
 def compute() -> None:
     cons = pd.read_excel(CONSENSUS, dtype=str).fillna("")
     cons["consensus_decision"] = cons["consensus_decision"].str.strip().str.lower()
@@ -336,9 +387,11 @@ def compute() -> None:
     lines.append(f"  Records to ADD to the corpus (consensus include among LLM non-includes): "
                  f"{', '.join(new_inc['internal_id']) or 'none'}")
     lines.append("")
-    lines.append("Escalation (pre-registered §4): "
+    lines.append("Escalation (pre-registered §4, sample estimator): "
                  f"E1 {'NOT triggered' if (cm_ft['recall'] or 0) >= RECALL_THRESHOLD else 'TRIGGERED'}; "
                  f"E2 {'NOT triggered' if aux_recall >= RECALL_THRESHOLD else 'TRIGGERED'}")
+    lines.append("")
+    lines.extend(_census_block(cm_ft["recall"]))
 
     REPORT_TXT.write_text("\n".join(lines), encoding="utf-8")
     lo, hi = cm_ft["ci"]

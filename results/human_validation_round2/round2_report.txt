@@ -1,0 +1,46 @@
+Round-2 human validation report (pre-registered, see PREREGISTRATION_round2_validation.md)
+================================================================================
+
+[FT working-set sample] n=177
+  kappa Rater A vs Rater B (pre-consensus): 0.654 (substantial), Po=83.6%, n=177
+  kappa LLM vs Rater A: 0.461 (moderate), Po=76.8%, n=177
+  kappa LLM vs Rater B: 0.583 (moderate), Po=84.2%, n=177
+  not_assessable (excluded from Recall): 6
+
+[FT — consensus reference (PRIMARY)] TP=29 FP=5 FN=17 TN=120
+  Recall=0.630  95% Wilson CI=(0.486, 0.755)  threshold 0.90: FAIL
+  MCC=0.656  WMCC(FN:FP=10:1)=0.168
+
+[FT — Rater B only (sensitivity)] TP=29 FP=5 FN=17 TN=120
+  Recall=0.630  95% Wilson CI=(0.486, 0.755)  threshold 0.90: FAIL
+  MCC=0.656  WMCC(FN:FP=10:1)=0.168
+
+  FN records (consensus include, LLM non-include): ft_0012, ft_0013, ft_0014, ft_0038, ft_0040, ft_0044, ft_0066, ft_0083, ft_0096, ft_0003, ft_0010, ft_0024, ft_0048, ft_0056, ft_0084, ft_0101, ft_0102
+
+[Auxiliary tier] stratum sizes: {'S1': 2423, 'S2': 537, 'S3': 611, 'S0': 235}
+  S1: 1/40 assessable judged include  p=0.025 CI=(0.004, 0.129)  est. missed=60.6  (not_assessable=0)
+  S2: 8/39 assessable judged include  p=0.205 CI=(0.108, 0.355)  est. missed=110.2  (not_assessable=1)
+  S3: 1/51 assessable judged include  p=0.020 CI=(0.003, 0.103)  est. missed=12.0  (not_assessable=9)
+  Auxiliary Recall = 235/(235+182.7) = 0.563  threshold 0.90: FAIL
+  S0 decoys (LLM includes) judged include: 13/20 (descriptive precision)
+  kappa aux Rater A vs Rater B: 0.494 (moderate), Po=85.4%, n=48
+  Records to ADD to the corpus (consensus include among LLM non-includes): 1d19dd67, 780addad, 7a92806a, 7f8d2b91, a98f6c54, a210fdd3, 65e5d58c, 10bdcff6, dfb2398b, 117db759
+
+Escalation (pre-registered §4, sample estimator): E1 TRIGGERED; E2 TRIGGERED
+
+[Operative results after the 2026-10-31 consensus update]
+  FT Recall (consensus sheet, full-text re-read of the 23 FNs) = 0.630  threshold 0.90: FAIL
+  The auxiliary sample estimator printed above is the pre-escalation figure (N·p̂).
+  Once S1–S3 were screened, the operative auxiliary Recall is the census.
+
+[Escalation census — accepted 2026-10-31]
+  Decisions in 01b/02b/03b/04b are accepted, including heuristic rows.
+  S3 has no preclass_source column; its includes are marked heuristic.
+  aux_sample: 10 includes
+  s1: 33 includes  (heuristic rows: 17)
+  s2: 32 includes
+  s3: 14 includes  (heuristic rows: 14)
+  Auxiliary Recall (census) = 235/(235+89) = 0.725  threshold 0.90: FAIL
+  Corpus: 340 + 188 distinct new includes = 528
+  F1–F5 are not recomputed: the added studies have no QA/extraction row in extraction_combined_404_dedup.csv.
+  E1 executed on the working-set FT LLM excludes. E2 executed on S1, S2 and S3. The census stays below 0.90 and no registered stratum remains unscreened.

@@ -1,0 +1,210 @@
+internal_id,review_id,tier,decision,title,authors,year,doi,preclass_source,ic_matched,source_file,already_in_340
+c815bcc6,ft_0038,ft_fn,include,Software reliability,,2011,10.1002/wics.159,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+e969d9bd,ft_0003,ft_fn,include,A note on two-stage software testing by two teams,,2011,10.1007/978-3-642-27207-3_35,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+0d4ebe86,ft_0010,ft_fn,include,Systematic mapping study on process mining in agile software development,,2018,10.1007/978-3-030-00623-5_20,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+17602c88,ft_0012,ft_fn,include,Modeling and predicting software failure costs,,2009,10.1109/COMPSAC.2009.195,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+6217173e,ft_0013,ft_fn,include,An Empirical Analysis of Build Failures in the Continuous Integration Workflows of Java-Based Open-Source Software,,2017,10.1109/MSR.2017.54,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+063967eb,ft_0014,ft_fn,include,Detection and correction process modeling considering the time dependency,,2006,10.1109/PRDC.2006.27,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+ed81f924,ft_0024,ft_fn,include,A general modeling and analysis framework for software fault detection and correction process,,2016,10.1002/stvr.1600,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+cd2ca776,ft_0040,ft_fn,include,Optimal version-upgrade problem based on stochastic differential equations for Open Source Software,,2008,,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+6d83b874,ft_0044,ft_fn,include,Software reliability modelling and prediction with hidden Markov chains,,2005,10.1191/1471082X05st087oa,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+340129d0,ft_0048,ft_fn,include,An approach to the discovery of accurate and expressive fix-time prediction models,,2015,10.1007/978-3-319-22348-3_7,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+2f1e25da,ft_0056,ft_fn,include,A business process simulation method supporting resource evolution,,2014,10.1145/2600821.2600827,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+e4c752f3,ft_0066,ft_fn,include,Mining reuse processes,,2014,,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+140c9afd,ft_0083,ft_fn,include,Continuous build outcome prediction: an experimental evaluation and acceptance modelling,,2023,10.1007/s10489-023-04523-6,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+bce026ce,ft_0084,ft_fn,include,Cross-company collaboration analyzed through process mining: A method for analyzing the working environment and measuring impacts of change,,2016,,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+9a40c123,ft_0096,ft_fn,include,Cutting the software building efforts in continuous integration by semi-supervised online AUC optimization,,2018,10.24963/ijcai.2018/399,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+8e41b716,ft_0101,ft_fn,include,Effects of architecture and technical development process on micro-process,,2007,10.1007/978-3-540-72426-1_5,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+e07c6819,ft_0102,ft_fn,include,Guiding the discovery of open source software processes with a reference model,,2007,10.1007/978-0-387-72486-7_26,fulltext_reread_2026-10-31,,01c_E1_FN23_fulltext_review.xlsx,no
+20a00ebf,,e1,include,Stochastic model of human errors in software development: Impact of repair times,Smidts C.,1999,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+fbd2b2ff,,e1,include,A stochastic model of fault introduction & removal during software development,Stutzke M.A.,2001,10.1109/24.963126,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+4c4a7770,,e1,include,A ontology-based process modelling for XP,Ceravolo P.,2003,10.1109/APSEC.2003.1254376,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+2cdd723f,,e1,include,Jackson networks and Markov processes for resource allocation modeling,Luong B.,2004,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+6795e33c,,e1,include,Discovering the software process by means of stochastic workflow analysis,Colombo A.,2006,10.1016/j.sysarc.2006.06.012,e1_screen,IC4b; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+2709c552,,e1,include,"Dynamics of innovation in an ""open source"" collaboration environment: Lurking, laboring, and launching FLOSS projects on SourceForge",David P.A.,2008,10.1093/icc/dtn026,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+3ae2f9fd,,e1,include,On the online parameter estimation problem in adaptive software testing,Cai K.Y.,2008,10.1142/S0218194008003696,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+fb4a2cb3,,e1,include,Complementing approaches in ERP effort estimation practice: An industrial study,Daneva M.,2008,10.1145/1370788.1370808,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+e5fa7505,,e1,include,Adaptive software testing in the context of an improved controlled Markov chain model,Hu H.,2008,10.1109/COMPSAC.2008.186,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+6f5e6f89,,e1,include,Agile estimation with monte carlo simulation,Zang J.,2008,10.1007/978-3-540-68255-4_17,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+ba328b1c,,e1,include,Chapter 4 The Use of Simulation Techniques for Hybrid Software Cost Estimation and Risk Analysis,Kläs M.,2008,10.1016/S0065-2458(08)00604-9,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+5b65e0eb,,e1,include,Defining the implementation order of software projects in uncertain environments,Schmitz E.A.,2008,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+989891c5,,e1,include,An improved approach to adaptive testing,Hu H.,2009,10.1142/S0218194009004349,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+67b85117,,e1,include,Schedule risk management for business M-applications development projects,Pocatilu P.,2009,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+ecd93074,,e1,include,Improving effectiveness of Agile development,Menachem S.,2009,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+0906c3aa,,e1,include,Project scheduling problem for software development with random fuzzy activity duration times,Huang W.,2009,10.1007/978-3-642-01510-6_8,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+5f66b602,,e1,include,Reliability estimation and prediction of SA producing process based on Markov chain,He X.,2010,10.1109/ICCASM.2010.5620017,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+a9bafd0d,,e1,include,Risk assessment on distributed software projects,Lima A.,2010,10.1145/1810295.1810387,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+a9220982,,e1,include,Studying the impact of uncertainty in operational release planning - An integrated method and its initial evaluation,Al-Emran A.,2010,10.1016/j.infsof.2009.11.003,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+c4269b60,,e1,include,Empirical validation of human factors in predicting issue lead time in open source projects,Anh N.D.,2011,10.1145/2020390.2020403,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+04e0e983,,e1,include,Optimal scheduling of software projects using reinforcement learning,Padberg F.,2011,10.1109/APSEC.2011.39,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+7a18f4ee,,e1,include,Software development process animation,Ravikant Agarwal,2011,10.1145/2016039.2016098,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+9ae84d72,,e1,include,Analyzing the effect of imperfect debugging on software fault detection and correction processes via a simulation framework,Lin C.T.,2011,10.1016/j.mcm.2011.07.033,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+0e708ae8,,e1,include,How Distributed Version Control Systems impact open source software projects,Rodriguez-Bustos C.,2012,10.1109/MSR.2012.6224297,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+1303e41e,,e1,include,Scheduling quality related activities in incremental software development projects based on Monte Carlo simulation,Xu B.,2012,10.3923/itj.2012.751.759,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+da28afcb,,e1,include,Setting up a stochastic model for teams working in a follow-the-sun environment,Santos A.,2012,10.1109/ICGSE.2012.21,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+f8532d2c,,e1,include,Agent-based simulation of the software development process: a case study at AVL,Bojan Spasic; Bhakti S. S. Onggo,2012,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+0b62bf5c,,e1,include,Research and practice reciprocity in software process simulation,Dan Houston,2012,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+8e68ae72,,e1,include,Software process simulation is simulation too: what can be learned from other domains of simulation?,Thomas Birkhölzer,2012,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+60e4fba6,,e1,include,Exploring collaboration networks in open-source projects,Jermakovics A.,2013,10.1007/978-3-642-38928-3_7,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+02cc4c2d,,e1,include,Understanding the dynamics of software projects: an introduction to software process simulation (Abstract Only),Dan X. Houston; Raymond Madachy,2014,10.1145/2600821.2600855,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+8c42d0fe,,e1,include,Agile Development with Software Process Mining,"Rubin, Vladimir; Lomazova, Irina; van der Aalst, Wil M. P.",2014,10.1145/2600821.2600842,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+e8daaada,,e1,include,A framework for applying process mining techniques in software process assessments,Valle A.,2014,,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+5fe2fe46,,e1,include,A novel approach to software quality risk management,Bubevski V.,2014,10.1002/stvr.1488,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+e69d723f,,e1,include,Process mining can be applied to software too!,Rubin V.A.,2014,10.1145/2652524.2652583,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+88ee1d90,,e1,include,Predicting time range of development based on generalized software reliability model,Honda K.,2014,10.1109/APSEC.2014.59,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+ed17c20e,,e1,include,Structure and content of a framework to apply process mining techniques in scampi assessments,Valle A.,2014,,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+a6c6358f,,e1,include,Identifying Software Process Management Challenges: Survey of Practitioners in a Large Global IT Company,"Gupta, Monika; Sureka, Ashish; Padmanabhuni, Srinivas; Asadullah, Allahbaksh Mohammedali",2015,10.1109/MSR.2015.39,e1_screen,"IC4a,IC4d",01b_E1_TO_SCREEN_only.xlsx,no
+3691dee1,,e1,include,Constructing hybrid software process simulation models,Chao Gao; He Zhang; Shu Jiang,2015,10.1145/2785592.2785610,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+f2c78b19,,e1,include,Dependability approach for evaluating software development risks,Melo A.,2015,10.1049/iet-sen.2013.0196,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+4eeb076b,,e1,include,Big software on the run: In vivo software analytics based on process mining (Keynote),Van Der Aalst W.,2015,10.1145/2785592.2785593,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+b269731f,,e1,include,Stochastic performance analysis of global software development teams,Czekster R.M.,2016,10.1145/2955093,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+8060c92d,,e1,include,A longitudinal study of community-oriented open source software development,Neulinger K.,2016,10.1007/978-3-319-39696-5_31,e1_screen,IC4a; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+d85e3fdf,,e1,include,Introduction to integration of the process mining to the knowledge framework for software processes,Stolfa J.,2016,10.1007/978-3-319-29504-6_4,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+6f007eeb,,e1,include,Investigating the significance of bellwether effect to improve software effort estimation,Mensah S.,2017,10.1109/QRS.2017.44,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+bc39e52a,,e1,include,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,Hassan F.,2017,10.1109/ESEM.2017.23,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+01f8cab1,,e1,include,Examining the attributes of transitions between team roles in the software development projects,Liubchenko V.,2017,10.15587/1729-4061.2017.91597,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+e3f1f421,,e1,include,Towards a Bayesian Decision Model for Release Planning in Incremental Development,Oni O.,2017,10.1109/RE.2017.32,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+c6bb741f,,e1,include,Cost-Effective Build Outcome Prediction Using Cascaded Classifiers,Ni A.,2017,10.1109/MSR.2017.26,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+a21c9dff,,e1,include,Simkan: Training kanban practices through stochastic simulation,Lopes F.,2017,10.1007/978-3-319-55907-0_10,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+56fcb7c7,,e1,include,Enterprise Level Integration of Ontology Engineering and Process Mining for Management of Complex Data and Processes to improve Decision System,Thakar T.,2018,10.1016/j.ifacol.2018.11.200,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+56d5020d,,e1,include,Mining software repositories for predictive modelling of defects in SDN controller,Vizarreta P.,2019,,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+9d84f54e,,e1,include,Mining Decision-Making Processes in Open Source Software Development: A Study of Python Enhancement Proposals (PEPs) using Email Repositories,Sharma P.,2020,10.1145/3383219.3383240,e1_screen,IC4a; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+0bb6f873,,e1,include,Extending the Space of Software Test Monitoring: Practical Experience,Lasynskyi M.,2021,10.1109/ACCESS.2021.3136138,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+b1fa96d6,,e1,include,Mining Treatment-Outcome Constructs from Sequential Software Engineering Data,Nayebi M.,2021,10.1109/TSE.2019.2892956,e1_screen,IC4c; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+91c9dfa1,,e1,include,Towards a Taxonomy of Bug Tracking Process Smells: A Quantitative Analysis,Qamar K.A.,2021,10.1109/SEAA53835.2021.00026,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+8d2c0b03,,e1,include,Modeling and analysis of a software development project with design structure matrix and simulation approach in an Indonesian startup,Tifany E.,2021,,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+4b58cb90,,e1,include,Jaskier: A Supporting Software Tool for Continuous Build Outcome Prediction Practice,Kawalerowicz M.,2021,10.1007/978-3-030-79463-7_36,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+40ece10d,,e1,include,Studying the Impact of Continuous Delivery Adoption on Bug-Fixing Time in Apache's Open-Source Projects,De Almeida C.D.A.,2022,10.1145/3524842.3528049,e1_screen,IC4c; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+12343eec,,e1,include,Efficient secure DevOps using process mining and Attack Defense Trees,Okubo T.,2022,10.1016/j.procs.2022.09.079,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+61048559,,e1,include,Predicting build outcomes in continuous integration using textual analysis of source code commits,Al-Sabbagh K.,2022,10.1145/3558489.3559070,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+1fd95ebc,,e1,include,Process Mining in Project Management for Smart Cities,"Zebro, Kevin; Timinger, Holger",2022,10.1109/E-TEMS53558.2022.9944415,e1_screen,IC4a; IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+6556e00e,,e1,include,Taxonomy of bug tracking process smells: Perceptions of practitioners and an empirical analysis,Qamar K.A.,2022,10.1016/j.infsof.2022.106972,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+83421d8c,,e1,include,Improving the prediction of continuous integration build failures using deep learning,Saidani I.,2022,10.1007/s10515-021-00319-5,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+92fa0290,,e1,include,Development of a Tool for Extracting and Analyzing Software Development Process Models,Kushchenko A.,2022,10.1007/978-3-030-95120-7_23,e1_screen,IC4d,01b_E1_TO_SCREEN_only.xlsx,no
+aaef3235,,e1,include,Reviewing and Proposing Approaches for Self-adaptive Testing in the Field,Silva S.,2023,10.1109/ISSREW60843.2023.00035,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+1efe6b8c,,e1,include,Finding Behavioral Indicators from Contextualized Commits in Software Engineering Courses with Process Mining,Pons M.,2023,10.1007/978-3-031-48639-5_5,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+dea836a1,,e1,include,Study of Effort Calculation and Estimation in Open Source Projects,Sone H.,2023,10.1142/S0218539323500110,e1_screen,IC4c,01b_E1_TO_SCREEN_only.xlsx,no
+8e09bd55,,e1,include,Prioritizing Test Cases with Markov Chains: A Preliminary Investigation,Rebelo L.,2023,10.1007/978-3-031-43240-8_14,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+e3f89404,,e1,include,A Preliminary Study of GitHub Actions Workflow Changes,Mazrae P.R.,2023,,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+44d6a32e,,e1,include,An Approach Based on Process Mining Techniques to Support Software Development,Hernandez-Resendiz J.D.,2023,10.1007/978-3-031-08246-7_2,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+2c9ac8c4,,e1,include,LPMSAEF: Lightweight process mining-based software architecture evaluation framework for security and performance analysis,Sahlabadi M.,2024,10.1016/j.heliyon.2024.e26969,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+063986d6,,e1,include,Using Logs to Reduce the Impact of Process Variability and Dependence on Practitioners in Requirements Engineering for Traditional Business Process Automation Software,"Menezes, Thiago Medeiros de; Salgado, Ana Carolina",2024,10.1109/ACCESS.2024.3514801,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+d36b0adf,,e1,include,Layered Mixing Miner: A Process Mining Algorithm for Complex Programming Debugging Data,"Chen, Ruiqi; Kong, Jiangli",2024,10.1109/ACAI63924.2024.10899496,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+08a023e2,,e1,include,Towards Automating Model-Based Systems Engineering in Industry - An Experience Report,Cederbladh J.,2024,10.1109/SysCon61195.2024.10553610,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+6ffcab24,,e1,include,A dataset of GitHub Actions workflow histories,Cardoen G.,2024,10.1145/3643991.3644867,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+7221e872,,e1,include,A Case Study: To Discuss the Construction of the Finite State Machine and Markov-Chain OP Models for Test Case Generation,Shaheen S.,2024,10.1109/ICACS60934.2024.10473284,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+6ef49a7b,,e1,include,Extracting high-level activities from low-level program execution logs,Stepanov E.V.,2024,10.1007/s10515-024-00441-0,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+ecc17ad4,,e1,include,Markov model based coverage testing of deep learning software systems,Shi Y.,2025,10.1016/j.infsof.2024.107628,e1_screen,IC4b,01b_E1_TO_SCREEN_only.xlsx,no
+8851bb5e,,e1,include,Improving Learning Analytics from Open-Source Software Data Logs Using Machine Learning and Process Mining Techniques,Mukala P.,2026,10.1007/978-981-96-9248-4_5,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+6778e0d5,,e1,include,Analyzing Side-Tracking of Developers Using Object-Centric Process Mining,Bala S.,2026,10.1007/978-3-031-96841-9_2,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+1a59bb38,,e1,include,bXES: A Binary Format for Storing and Transferring Software Event Logs,Stepanov E.V.,2026,10.1007/978-3-032-03997-2_20,e1_screen,IC4a,01b_E1_TO_SCREEN_only.xlsx,no
+04657923,,s2,include,Monitoring of Microservices Architecture based Applications using Process Mining,"Raj, Vinay; Chander, G Punnam",2022,10.23919/INDIACom54597.2022.9763155,revisit_includes_v2,IC4a,02b_E2_S2_TO_SCREEN_only.xlsx,no
+85002ffb,,s2,include,Using simulation to build inspection efficiency benchmarks for development projects,"Briand, L.; El Emam, K.; Laitenberger, O.; Fussbroich, T.",1998,10.1109/ICSE.1998.671387,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+fbf7e330,,s2,include,A Framework for Simulation of Requirements Engineering Processes,"Höst, Martin; Regnell, Björn; Tingström, Christofer",2008,10.1109/SEAA.2008.26,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+0999fe57,,s2,include,On CMMN Model for Software System Project Simulation,"Sielskaitė, Šarūnė; Kalibatienė, Diana",2021,10.1109/eStream53087.2021.9431516,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+f27117e2,,s2,include,Estimate of the Appropriate Iteration Length in Agile Development by Conducting Simulation,"Shiohama, Ryushi; Washizaki, Hironori; Kuboaki, Shin; Sakamoto, Kazunori; Fukazawa, Yoshiaki",2012,10.1109/Agile.2012.16,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+0e15e613,,s2,include,Simulation modeling of a large-scale formal verification process,"Zhang, He; Klein, Gerwin; Staples, Mark; Andronick, June; Zhu, Liming; Kolanski, Rafal",2012,10.1109/ICSSP.2012.6225979,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+8dea6481,,s2,include,Using influence diagrams for PERT,"Jenzarli, A.",1997,10.1109/PICMET.1997.653430,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+6115d05e,,s2,include,Using belief networks for PERT,"Jenzarli, A.",1997,10.1109/PICMET.1997.653431,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+1c928aae,,s2,include,Simulating an Automated Approach to Discovery and Modeling of Open Source Software Development Processes,Chris Jensen; Walt Scacchi,2003,,revisit_includes_v2,IC4d,02b_E2_S2_TO_SCREEN_only.xlsx,no
+0232276d,,s2,include,Software Process Modeling Support for Management Planning and Control,Marc Kellner,2005,10.1109/icsp.1991.664337,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+a401497c,,s2,include,Deriving Software Process Simulation Model from SPEM-based Software Process Model,Seung-Hun Park; KeungSik Choi; Kyung-A Yoon; Doo‐Hwan Bae,2007,10.1109/apsec.2007.40,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+24059629,,s2,include,An approach to a hybrid software process simulation using the DEVS formalism,KeungSik Choi; Doo‐Hwan Bae; Tag-Gon Kim,2006,10.1002/spip.284,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+368dc22f,,s2,include,Creating an Advanced Software Engineering Laboratory by Combining Empirical Studies with Process Simulation,Jürgen Münch; Dieter Rombach; Ioana Rus,2003,,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+3487bbf5,,s2,include,SUPPORTING DECISION-MAKING IN SOFTWARE ENGINEERING WITH PROCESS SIMULATION AND EMPIRICAL STUDIES,Ioana Rus; Michael Halling; Stefan Biffl,2003,10.1142/s0218194003001391,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+66c95d97,,s2,include,Qualitative simulation model for software engineering process,H. Zhang; Ming Huo; Barbara Kitchenham; R. Jeffery,2006,10.1109/aswec.2006.42,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+dcf53abb,,s2,include,Systematically combining process simulation and empirical data in support of decision analysis in software development,Ioana Rus; Stefan Biffl; Michael Halling,2002,10.1145/568760.568901,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+31405de3,,s2,include,A dataset to facilitate automated workflow analysis,Tony Allard; Paul Alvino; Leslie Shing; Allan Wollaber; Joseph S. M. Yuen,2019,10.1371/journal.pone.0211486,revisit_includes_v2,IC4a;IC4d,02b_E2_S2_TO_SCREEN_only.xlsx,no
+7b61ad5a,,s2,include,RESEARCH ON AGILE SOFTWARE PROCESS,Shen Bei,2002,,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+190c11c4,,s2,include,The Allocation of Software Development Resources in Open Source Production Mode,Jean‐Michel Dalle; Paul A. David,2005,10.7551/mitpress/5326.003.0023,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+3486571a,,s2,include,Process modeling across the web information infrastructure,Chris Jensen; Walt Scacchi,2005,10.1002/spip.228,revisit_includes_v2,IC4d,02b_E2_S2_TO_SCREEN_only.xlsx,no
+e620e55e,,s2,include,Model-based tests of truisms,Tim Menzies; David Raffo; Siri‐on Setamanit; Ying Hu; S. Tootoonian,2002,10.1109/ase.2002.1115012,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+050fa5cf,,s2,include,Learning Project Management Decisions: A Case Study with Case-Based Reasoning versus Data Farming,Tim Menzies; Adam Brady; Jacky Keung; Jairus Hihn; Steven Williams; Oussama El-Rawas; Phillip Green; Barry Boehm,2013,10.1109/tse.2013.43,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+d8591f96,,s2,include,"Mining Decision-Making Processes in Open Source Software Development - A
+Study of Python Enhancement Proposals (PEPs) using Email Repositories","Sharma, Pankajeshwara; Savarimuthu, Bastin Tony Roy; Stanger,
+Nigel",2020,10.1145/3383219.3383240,revisit_includes_v2,IC4a;IC4d,02b_E2_S2_TO_SCREEN_only.xlsx,no
+ec09271c,,s2,include,"Software process evaluation: a machine learning framework with
+application to defect management process","Chen, Ning; Hoi, Steven C. H.; Xiao, Xiaokui",2014,10.1007/s10664-013-9254-z,revisit_includes_v2,IC4a,02b_E2_S2_TO_SCREEN_only.xlsx,no
+b78523e4,,s2,include,"Automated recognition of low-level process: A pilot validation study of
+Zorro for test-driven development","Kou, Hongbing; Johnson, Philip M.",2006,,revisit_includes_v2,IC4a,02b_E2_S2_TO_SCREEN_only.xlsx,no
+12f7f992,,s2,include,A stochastic model of human error during software development,"Stutzke, M; Agarwal, M; Smidts, C",1998,,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+f822c54d,,s2,include,Using SAN formalism to evaluate Follow-The-Sun project scenarios,"Santos, Alan R.; Sales, Afonso; Fernandes, Paulo",2015,10.1016/j.jss.2014.10.046,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+0090447a,,s2,include,"Mining Software Repositories for the Characterization of Continuous
+Integration and Delivery","Destro, Gabriel Augusto; Nicolau de Franca, Breno Bernard",2020,10.1145/3422392.3422503,revisit_includes_v2,IC4d,02b_E2_S2_TO_SCREEN_only.xlsx,no
+8f1fb42b,,s2,include,A Hybrid Model for Dynamic Simulation of Custom Software Projects in a Multiproject Environment,Javier NavascuésIsabel RamosMiguel Toro,2009,10.1007/978-3-642-01680-6_17,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+e6075fca,,s2,include,"Software Process Simulation over the Past Decade: Trends Discovery from
+A Systematic Review","Zhang, He; Kitchenham, Barbara; Pfahl, Dietmar",2008,10.1007/978-3-540-85156-1_173,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+5c3f99ea,,s2,include,"SOFTWARE DEVELOPMENT PROCESS SIMULATION FOR TEACHER EDUCATION REPOSITORY
+SYSTEM","Boyadzhiev, Dimo",2011,,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+e3a9143c,,s2,include,"Learning and understanding a software process through simulation of its
+underlying model","Neu, H; Becker-Kornstaedt, U",2002,,revisit_includes_v2,IC4b,02b_E2_S2_TO_SCREEN_only.xlsx,no
+cc618a37,,s1,include,Towards a Taxonomy of Bug Tracking Process Smells: A Quantitative Analysis,"Qamar, Khushbakht Ali; Sülün, Emre; Tüzün, Eray",2021,10.1109/SEAA53835.2021.00026,agent_batches_01_02,IC4d,03b_E2_S1_TO_SCREEN_only.xlsx,no
+b618e568,,s1,include,Learning about learners: Understanding learner behaviours in software conceptual design TELE,"Nishane, Indrayani; Sabanwar, Vivek; Lakshmi, T. G.; Singh, Daevesh; Rajendran, Ramkumar",2021,10.1109/ICALT52272.2021.00096,agent_batches_01_02,IC4a,03b_E2_S1_TO_SCREEN_only.xlsx,no
+fd7ca261,,s1,include,Jackson networks and Markov processes for resource allocation modeling,"Luong, B.; Dar-Biau Liu",2004,10.1109/RAMS.2004.1285458,agent_batches_01_02,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+b9ea47c3,,s1,include,Process simulation will soon come of age: Where's the party?,"Raffo, David",2012,10.1109/ICSSP.2012.6225975,agent_batches_01_02,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+704a0d34,,s1,include,Intelligent Behavior Simulation Module for Software Process Elements,"Chaves, Rafael O.; Lobato, Walter A. Da L.; Tavares, Emanuel M. Da C.; Oliveira, Sandro R. B.; Miranda, Tales C.; Favero, Eloi L.",2011,10.1109/SBGAMES.2011.29,agent_batches_01_02,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+e24af4e7,,s1,include,An experiment for evaluating the effectiveness of using a system dynamics simulation model in software project management education,"Pfahl, D.; Koval, N.; Ruhe, G.",2001,10.1109/METRIC.2001.915519,agent_batches_01_02,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+aa0da064,,s1,include,Adjustable Cost Estimation Model for COTS-Based Development,"Naunchan, Poom; Sutivong, Daricha",2007,10.1109/ASWEC.2007.10,agent_batches_03_04,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+f48e9319,,s1,include,System Test Architecture Evaluation: A Probabilistic Modeling Approach,"Efatmaneshnik, Mahmoud; Shoval, Shraga; Joiner, Keith",2019,10.1109/JSYST.2019.2899697,agent_batches_05_06,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+6e178383,,s1,include,DeepJIT: An End-to-End Deep Learning Framework for Just-in-Time Defect Prediction,"Hoang, Thong; Khanh Dam, Hoa; Kamei, Yasutaka; Lo, David; Ubayashi, Naoyasu",2019,10.1109/MSR.2019.00016,agent_batches_07_08,IC4c,03b_E2_S1_TO_SCREEN_only.xlsx,no
+22412f71,,s1,include,Code Smell Prioritization with Business Process Mining and Static Code Analysis: A Case Study,Md Rofiqul Islam; Abdullah Al Maruf; Tomas Cerny,2022,10.3390/electronics11121880,agent_batches_07_08,IC4a,03b_E2_S1_TO_SCREEN_only.xlsx,no
+a31e0556,,s1,include,"Optimal Testing Resource Allocation, and Sensitivity Analysis in Software Development",Ching-Hung Huang; Michael R. Lyu,2005,10.1109/tr.2005.858099,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+ca22bfe7,,s1,include,A Software Process Simulator Machine for Software Engineering Simulation Games,Rafael Oliveira Chaves; Elói Luiz Favero; Emanuel M. da C. Tavares; Sandro Ronaldo Bezerra Oliveira,2010,10.1109/sbgames.2010.35,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+e82e259b,,s1,include,Case studies in software process modeling with system dynamics,Raymond Madachy; Denton Tarbet,2000,10.1002/1099-1670(200006/09)5:2/3<133::aid-spip117>3.0.co;2-m,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+165593a8,,s1,include,ELS algorithm for estimating open source software reliability with masked data considering both fault detection and correction processes,Jianfeng Yang; Ming Zhao; Jing Chen,2021,10.1080/03610926.2020.1866610,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+9801135d,,s1,include,Quantifying Software Maintainability Based on a Fault-Detection/Correction Model,Kazuya Shibata; Koichiro Rinsaka; Tadashi Dohi; Hiroyuki Okamura,2007,10.1109/prdc.2007.46,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+921e8fc3,,s1,include,A New Framework and Application of Software Reliability Estimation Based on Fault Detection and Correction Processes,Yu Liu; Min Xie; Jianfeng Yang; Ming Zhao,2015,10.1109/qrs.2015.20,agent_batches_07_08,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+be4c9529,,s1,include,Computation of Performance Bounds for Real-Time Systems Using Time Petri Nets,Simona Bernardi; J. Campos,2009,10.1109/tii.2009.2017201,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+86f0c466,,s1,include,An improved method to simplify software metric models constructed with incomplete data samples,Tianfa Xie; W. Eric Wong,2010,10.1109/fskd.2010.5569384,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+70af59ef,,s1,include,Software Performance Analysis in UML Models,Salvatore Distefano; Marco Scarpa; Antonio Puliafito,2006,10.1109/firb-perf.2005.19,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+76a1870d,,s1,include,"A Bayesian model averaging method for software reliability modeling and
+assessment","Li, Zhaojun Steven; Jia, Shun; Yu, Qiumin",2023,10.1002/qre.3273,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+780b3d58,,s1,include,"QCPW: a quality centric process workflow improvement approach for a
+legacy healthcare information system","Sharma, Shashank; Srivastava, Sumit",2020,10.1049/iet-sen.2019.0064,heuristic,IC4a,03b_E2_S1_TO_SCREEN_only.xlsx,no
+33361b00,,s1,include,"Design and evaluation of an educational software process simulation
+environment and associated model","Navarro, EO; van der Hoek, A",2005,10.1109/CSEET.2005.16,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+1d754c2e,,s1,include,"Software Project Portfolio Selection A Modern Portfolio Theory Based
+Technique","Costa, Helio R.; Barros, Marcio O.; Rocha, Ana Regina",2010,,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+bc9498ef,,s1,include,"bSTAB: an open-source software for computing the basin stability of
+multi-stable dynamical systems","Stender, Merten; Hoffmann, Norbert",2022,10.1007/s11071-021-06786-5,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+72329237,,s1,include,"A CBT module with integrated simulation component for software project
+management education and training","Pfahl, D; Klemm, M; Ruhe, G",2001,10.1016/S0164-1212(01)00069-3,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+c73bda19,,s1,include,An Agile Software Engineering Process Improvement Game,"Maxim, Bruce R.; Kaur, Raspinder; Apzynski, Christopher; Edwards, David; Evans, Ethan",2016,,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+5ee71dfd,,s1,include,Cluster grid based response-time analysis module for the PIPE tool,"Kulatunga, Harini; Argent-Katwala, Ashok; Knottenbelt, William",2007,10.1109/QEST.2007.42,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+6b16f9de,,s1,include,"An externally replicated experiment for evaluating the learning
+effectiveness of using simulations in software project management
+education","Pfahl, D; Laitenberger, O; Dorsch, J; Ruhe, G",2003,10.1023/A:1025320418915,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+58c1d91f,,s1,include,The ALPS Project: Open Source Software for Strongly Correlated Systems,"Alet, F.; Dayal, P.; Grzesik, A.; Honecker, A.; Koerner, M.; Laeuchli, A.; Manmana, S. R.; McCulloch, I. P.; Michel, F.; Noack, R. M.; Schmid, G.; Schollwoeck, U.; Stoeckli, F.; Todo, S.; Trebst, S.; Troyer, M.; Werner, P.; Wessel, S.; ALPS Collaboration",2005,10.1143/JPSJS.74S.30,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+d327f361,,s1,include,"New process for separating propylene and propane by extractive
+distillation with aqueous acetonitrile","Liao, B; Lei, ZG; Xu, Z; Zhou, RQ; Duan, ZT",2001,10.1016/S1385-8947(01)00175-9,heuristic,IC4b,03b_E2_S1_TO_SCREEN_only.xlsx,no
+dd3b63a3,,s1,include,gawd: A Differencing Tool for GitHub Actions Workflows,"Mazrae, Pooya Rostami; Decan, Alexandre; Mens, Tom",2024,10.1145/3643991.3644873,heuristic,IC4d,03b_E2_S1_TO_SCREEN_only.xlsx,no
+4ba3e996,,s1,include,An empirical study of the evolution of GitHub actions workflows,"Mazrae, Pooya Rostami; Decan, Alexandre; Mens, Tom; Wessel,
+Mairieli",2026,10.1016/j.jss.2026.112824,heuristic,IC4d,03b_E2_S1_TO_SCREEN_only.xlsx,no
+227a76af,,s1,include,An empirical study of business process models and model clones on GitHub,"Nikoo, Mahdi Saeedi; Kochanthara, Sangeeth; Babur, Onder; van
+den Brand, Mark",2024,10.1007/s10664-024-10584-z,heuristic,IC4d,03b_E2_S1_TO_SCREEN_only.xlsx,no
+13983127,,s3,include,Software Process Simulation Modelling,David Raffo; Paul Wernick,2001,10.1016/s0164-1212(01)00063-2,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+4d088b6b,,s3,include,Studying Lean-Kanban Approach Using Software Process Simulation,David Anderson; Giulio Concas; Maria Ilaria Lunesu; Michele Marchesi,2011,10.1007/978-3-642-20677-1_2,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+fe75ced8,,s3,include,ProSim/RA — Software Process Simulation in Support of Risk Assessment,Dietmar Pfahl,2006,10.1007/3-540-29263-2_13,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+fe1cd2ea,,s3,include,"Special issue on ProSim 2004, The 5th International Workshop on Software Process Simulation and Modeling, Edinburgh, Scotland, May 2004",Dietmar Pfahl; Ioana Rus,2005,10.1002/spip.227,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+c7a601d8,,s3,include,A β-distributed stochastic petri net model for software project time/cost management,Gang-soo Lee; T. Murata,1994,10.1016/0164-1212(94)90085-x,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+06bd16ff,,s3,include,Process Mining for Agile Software Process Assessment and Improvement,KATIANE Oliveira Alpes da Silva; Ricardo Lima; Vanderson Botelho da Silva,2024,10.2139/ssrn.4798299,heuristic,IC4a,04b_E2_S3_TO_SCREEN_only.xlsx,no
+7607982d,,s3,include,Software Process Simulation Modelling for Agile Cloud Software Development Projects: Techniques and Applications,Olumide Akerele,2017,10.1007/978-3-319-52491-7_7,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+eeed2f5d,,s3,include,Investigating the Gap between Quantitative and Qualitative/Semi-quantitative Software Process Simulation Models: An Explorative Study,He Zhang,2009,10.1007/978-3-642-01680-6_19,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+171085b9,,s3,include,A Framework for Adopting Software Process Simulation in CMMI Organizations,He ZhangBarbara KitchenhamRoss Jeffery,2007,10.1007/978-3-540-72426-1_27,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+46815264,,s3,include,SOFTWARE PROCESS SIMULATION ON ARBITRARY LEVELS OF ABSTRACTION,"GRUHN, V",1992,,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+16a201ed,,s3,include,"Software process simulation frameworks in support of packaging and
+transferring empirical evidence","Pfahl, Dietmar",2007,,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+8923f975,,s3,include,A Flexible Software Process Model,"Kirk, Dianna",2004,,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+3f09473c,,s3,include,Simulation modeling of evolving software processes,He Zhang,2012,10.5555/2664360.2664396,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+cd860b9f,,s3,include,"Towards an Approach to Support Software Process Simulation in Small and
+Medium Enterprises","Silva Filho, Reinaldo Cabral; Cavalcanti da Rocha, Ana Regina",2010,10.1109/SEAA.2010.67,heuristic,IC4b,04b_E2_S3_TO_SCREEN_only.xlsx,no
+1d19dd67,aux_0105,aux_sample,include,,Hongbing KouPhilip M. JohnsonHakan Erdogmus,2009,10.1007/s10515-009-0058-8,consensus_sample,,00_ADD_NOW_corpus.csv,no
+780addad,aux_0002,aux_sample,include,,"Qamar, Khushbakht Ali; Sulun, Emre; Tuzun, Eray",2022,10.1016/j.infsof.2022.106972,consensus_sample,,00_ADD_NOW_corpus.csv,no
+7a92806a,aux_0048,aux_sample,include,,Dhivyabharathi Ramasamy; Cristina Sarasua; Alberto Bacchelli; Abraham Bernstein,2022,10.1007/s10664-022-10229-z,consensus_sample,,00_ADD_NOW_corpus.csv,no
+7f8d2b91,aux_0049,aux_sample,include,,Jonathan Cook; Alexander L. Wolf,2002,10.1109/spcon.1994.344426,consensus_sample,,00_ADD_NOW_corpus.csv,no
+a98f6c54,aux_0051,aux_sample,include,,"Menzies, T.; Williams, S.; El-Rawas, O.; Boehm, B.; Hihn, J.",2009,10.1109/ICSE.2009.5070552,consensus_sample,,00_ADD_NOW_corpus.csv,no
+a210fdd3,aux_0064,aux_sample,include,,Param Vir Singh; Yong Tan; Nara Youn,2010,10.1287/isre.1100.0308,consensus_sample,,00_ADD_NOW_corpus.csv,no
+65e5d58c,aux_0065,aux_sample,include,,"Sambinelli, Fernando; Ursini, Edson L.; Borges, Marcos A. F.; Martins, Paulo S.",2018,10.1109/CONISOFT.2018.00029,consensus_sample,,00_ADD_NOW_corpus.csv,no
+10bdcff6,aux_0066,aux_sample,include,,"Morita, Issei; Kashiwa, Yutaro; Kondo, Masanari; Sohn, Jeongju; McIntosh, Shane; Kamei, Yasutaka; Ubayashi, Naoyasu",2024,10.1109/SANER60148.2024.00065,consensus_sample,,00_ADD_NOW_corpus.csv,no
+dfb2398b,aux_0073,aux_sample,include,,"Aranha, Eduardo; Borba, Paulo",2008,,consensus_sample,,00_ADD_NOW_corpus.csv,no
+117db759,aux_0078,aux_sample,include,,"Smith, Neil; Capiluppi, Andrea; Fernandez-Ramil, Juan",2006,,consensus_sample,,00_ADD_NOW_corpus.csv,no

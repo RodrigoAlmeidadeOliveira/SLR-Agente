@@ -111,3 +111,16 @@ Search strings, databases, search date (12 April 2026), eligibility criteria
   are copied. Rater A still records a fresh eligibility decision for every
   record. Rater B's sheet is unchanged, so Rater B remains the fully
   independent reference for the sensitivity analysis in §2.
+* 2026-10-31, after the first consensus: the 23 working-set records that were
+  consensus `include` and LLM non-include were re-read on the full text
+  (`escalation/01c_E1_FN23_fulltext_review.xlsx`). The consensus sheet was
+  updated from that reading: 17 remain `include`, 5 become `exclude`
+  (ft_0025 and ft_0099 for not meeting IC4; ft_0052, ft_0085 and ft_0100
+  under EC3) and ft_0077 becomes `not_assessable` (the file is the EURO 2015
+  programme). Rater A/B pre-consensus labels were not overwritten.
+* 2026-10-31: the escalation sheets 01b, 02b, 03b and 04b are accepted as the
+  screen, including heuristic rows (S1 batches 09–16; all of S3). Auxiliary
+  Recall is re-estimated by census of accepted includes among LLM
+  non-includes (M = 10 sample + 33 S1 + 32 S2 + 14 S3 = 89), which replaces
+  Σ N·p̂ once those strata have been listed in full. F1–F5 are not recomputed
+  in this step: the added studies have no QA/extraction row.

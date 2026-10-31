@@ -121,22 +121,26 @@ validated against a pre-registered two-rater human reference standard
 (full-text sample $n=177$; stratified auxiliary-tier samples $n=140$;
 success criterion Recall $\geq 0.90$).
 \textbf{Results.}
-\tbd{N} distinct primary studies were confirmed. Operational T/A Recall was
-1.000; FT Recall was \tbd{Recall} (95\% CI \tbd{CI}); estimated
-auxiliary-tier Recall was \tbd{aux Recall}. Findings:
-F1 descriptive ceiling; F2 ad-hoc event-log construction; F3 weak
-stochastic--PM integration; F4 pipeline fragmentation (\tbd{k} of \tbd{N}
-studies jointly cover PM, stochastic modeling, and forecasting);
-F5 process-derived ML features unexplored.
+The LLM screen confirmed 340 distinct studies. Two were published before 1994
+and are removed, leaving 338. A pre-registered human check then failed its own
+bar of Recall 0.90. Full-text Recall on the working-set sample is 0.630
+(29 of 46; Wilson 95\% CI 0.486--0.755). Auxiliary-tier Recall, after
+re-screening the strata the sample had flagged, is 0.725 (235 of 324).
+That re-screen found 188 further includes. Sixteen are the same study as one
+of the 338, under another identifier, and four more are duplicate pairs
+inside the 188, so 168 distinct studies are added. The corpus of this
+revision is 506 studies. Findings F1--F5 describe the 338 studies that have
+technique-family codes. They are not percentages of the 506. In those 338,
+one study covers process mining, stochastic modeling, and forecasting together.
 \textbf{Conclusion.}
-The literature is descriptively rich but predictively fragmented. We propose
-the SPMF taxonomy and a four-direction research agenda. PATHCAST is sketched
-as a future-work hypothesis, not as an empirically validated pipeline.
+The coded literature is descriptively rich and predictively fragmented.
+Because the screen missed eligible studies, that description is not a census
+of the 506. We propose the SPMF taxonomy and a four-direction research agenda.
+PATHCAST is future work, not a result of this mapping.
 \textbf{Limitations.}
-Scarcity claims are bounded by the measured recall of the LLM-assisted
-selection; full-text screening relied on abstracts for most records
-(Section~\ref{sec:slr-results-selection}); the review protocol was not
-pre-registered.
+The second screening pass used the abstract, not the PDF, for almost every
+record. Of the 168 added studies, 77 were coded from the title alone.
+The mapping protocol was not pre-registered. The human check of the screen was.
 \end{abstract}
 
 \begin{keyword}
@@ -150,11 +154,11 @@ Mining Software Repositories
 
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
-\item LLM-assisted mapping screens 6{,}147 papers across two corpus tiers.
-\item Pre-registered two-rater human check: FT Recall \tbd{Recall}.
-\item \tbd{N} studies; \tbd{k} jointly cover PM, stochastic, and forecasting.
-\item Five findings (F1--F5), SPMF taxonomy, and a four-direction agenda.
-\item Replication package on Zenodo (DOI 10.5281/zenodo.21939600).
+\item Human check of the LLM screen: Recall 0.630 and 0.725.
+\item This revision maps 506 distinct studies after de-duplication.
+\item Findings F1--F5 describe 338 coded studies, not all 506.
+\item One coded study joins mining, stochastic models, and forecasting.
+\item Replication package: Zenodo DOI 10.5281/zenodo.21939600.
 \end{highlights}
 
 \end{frontmatter}
@@ -210,8 +214,9 @@ and enrichment scripts, screening prompts and JSON schemas, the QA prompt,
 the cross-model $\kappa$ verification scripts, all decision CSVs at every
 pipeline stage, the QA-scored 169-study and 212-study tables, the
 structured extraction tables (working-set and auxiliary), the inter-rater
-agreement reports (LLM--LLM and human--LLM), the 340-study included list
-(\texttt{included\_studies\_340.csv}), a completed SEGRESS checklist, and a
+agreement reports (LLM--LLM and human--LLM), the 506-study list of this
+revision (\texttt{included\_studies\_506.csv}), the earlier 340-study file
+kept for traceability, a completed SEGRESS checklist, and a
 PRISMA flow snapshot.
 
 %% --- Bibliography ---

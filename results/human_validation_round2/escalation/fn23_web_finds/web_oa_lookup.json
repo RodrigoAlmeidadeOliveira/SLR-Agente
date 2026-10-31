@@ -1,0 +1,20 @@
+{
+  "ft_0083": {
+    "doi": "10.1007/s10489-023-04523-6",
+    "title": "Continuous build outcome prediction: an experimental evaluation and acceptance modelling",
+    "openalex_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>",
+    "ss_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>"
+  },
+  "ft_0024": {
+    "doi": "10.1002/stvr.1600",
+    "title": "A general modeling and analysis framework for software fault detection and correction process",
+    "openalex_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>",
+    "ss_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>"
+  },
+  "ft_0048": {
+    "doi": "10.1007/978-3-319-22348-3_7",
+    "title": "An approach to the discovery of accurate and expressive fix-time prediction models",
+    "openalex_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>",
+    "ss_err": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>"
+  }
+}
