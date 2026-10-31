@@ -70,8 +70,8 @@ three research questions, each decomposed into two sub-questions, covering
 the application landscape of process mining in SDLC contexts, the techniques
 and prediction methods employed, and the degree of integration between
 process mining and stochastic forecasting. Its contributions are (i)~a
-classification of the confirmed studies by SDLC phase, data source, and
-technique family; (ii)~family-code counts (F1, F3, F4) on the cuts
+classification of the coded rows, on the cuts named in each sentence, by
+SDLC phase, data source, and technique family; (ii)~family-code counts (F1, F3, F4) on the cuts
 named in each sentence, which this revision did not re-mark, plus two
 model counts (F2, F5) that a human re-read did not confirm; (iii)~the SPMF taxonomy and a four-direction research agenda; and (iv)~a
 measured account of the LLM-assisted selection, including where it failed.
@@ -517,11 +517,12 @@ Table~\ref{tab:qa-results} reports the scores for the 169 working-set studies.
 
 \input{results/qa_assessment_summary}
 
-The 33 studies below the QA threshold are predominantly short workshop papers,
-position papers, or extended abstracts that fail QA3 (reproducible data
-source) and QA4 (formally defined technique) simultaneously. Like all
-confirmed studies, they remain in the descriptive counts. No sensitivity
-cut on $4/8$ is reported in Section~\ref{sec:slr-gaps}.
+The model scored 33 of the 169 working-set studies below 4/8. They are
+predominantly short workshop papers, position papers, or extended abstracts,
+and the model marked both QA3 (reproducible data source) and QA4 (formally
+defined technique) as failed. Those 33 rows stay in the descriptive counts.
+The score is not a filter. Section~\ref{sec:slr-gaps} does not apply a cut
+on $4/8$.
 
 
 \subsection{Data Extraction}
@@ -1029,7 +1030,7 @@ coded in the triangulation subset) or abstract/title metadata (94/169).
 \subsection{Inclusion Criterion Coverage}
 
 Figure~\ref{fig:ic-dist} shows the distribution of inclusion criteria among
-the 169 confirmed papers (criteria are non-exclusive; a paper may satisfy
+the 169 working-set studies (criteria are non-exclusive; a paper may satisfy
 multiple).
 
 \begin{figure}[htbp]
@@ -1152,8 +1153,9 @@ unchanged.
 
 \subsubsection{RQ1.1: SDLC Phases Covered}
 
-The structured extraction over the full 169-study set confirms a strongly
-uneven coverage of the SDLC. \textbf{Development activities} (coding,
+The model extraction of the 169 working-set studies, which this revision
+did not re-mark, assigns SDLC phases as follows. It is not a description
+of the 506. \textbf{Development activities} (coding,
 commits, pull requests, repository evolution) dominate at 133 papers
 (78.7\%); \textbf{quality-related activities} (testing, defect handling, code
 review, process evaluation) appear in 74 papers (43.8\%);
@@ -1164,12 +1166,10 @@ just 18 papers (10.7\%). \textbf{Design and architecture} are not the primary
 focus of any extracted study, and only 3 papers (1.8\%) center the analysis
 on project management.
 
-Two readings of these 169 working-set codes follow. They were not
-re-marked in this revision, and they are not a description of the 506.
-First, the codes concentrate on phases where
-digital traces are abundant and already timestamped, such as commits, issues,
-test events, and pipeline executions. Second, the early SDLC phases are
-uncommon in these codes.
+These 169 codes were not re-marked in this revision. They concentrate on
+phases where digital traces are abundant and already timestamped, such as
+commits, issues, test events, and pipeline executions. The early SDLC phases
+are uncommon in these codes.
 
 \subsubsection{RQ1.2: Event Log Sources and Construction}
 
@@ -1243,28 +1243,24 @@ and organisational dimensions. Together, these three works constitute the semina
 arc of TF-PM, establishing automated discovery from SDLC event logs as both
 technically feasible and analytically productive.
 
-The complete extracted set confirms that \textbf{process mining remains the
-dominant analytical family}: 121 of 169 studies (71.6\%) match TF-PM in the
-form of discovery, conformance checking, or process-oriented repository
-analysis. At the technique level, the most frequently named PM algorithms
-across the 169 studies are the \textbf{inductive miner} (51 papers),
-\textbf{alpha miner} (45 papers), \textbf{conformance checking} (30 papers),
-and \textbf{heuristic miner} (22 papers); 11 papers use social network
-analysis on developer interactions. The literature is markedly richer in
-\emph{process representation} than in probabilistic forecasting: only 29
-papers (17.2\%) match TF-FC (forecasting of process metrics), and the dominant
-contribution type is discovery or conformance checking rather than predictive
-analytics.
+The family-code count on the 169 working-set studies, which this revision
+did not re-mark, has 121 studies (71.6\%) matching TF-PM in the form of
+discovery, conformance checking, or process-oriented repository analysis.
+The same count has 29 papers (17.2\%) matching TF-FC. It is not a
+description of the literature. At the technique level, the model names the
+\textbf{inductive miner} in 51 papers, the \textbf{alpha miner} in 45, \textbf{conformance checking} in 30,
+and the \textbf{heuristic miner} in 22; 11 papers are coded as social
+network analysis on developer interactions. Those names were not
+re-extracted in this revision.
 
-The stochastic-technique distribution at the same 169-study level shows the
-same fragmentation. Only 52 of 169 studies (30.8\%) name an explicit
-stochastic technique: 38 papers (22.5\%) use Markov chains, 15 (8.9\%) use
+The same family-code count names an explicit stochastic technique in 52 of
+169 studies (30.8\%): 38 papers (22.5\%) use Markov chains, 15 (8.9\%) use
 Monte Carlo simulation, 9 (5.3\%) use stochastic Petri nets, and 8 (4.7\%)
-use system dynamics. The remaining studies either do not adopt a stochastic
-component (110 papers) or place stochastic methods in an auxiliary role
-(\textit{other}, 29 papers). The forecasting literature thus remains
-fragmented across adjacent technique families rather than consolidated around
-a single process-aware predictive paradigm, as shown in
+use system dynamics. Those technique counts are non-exclusive. The
+extraction also records 110 rows without a stochastic component and 29 rows
+with stochastic methods in an auxiliary role. These are the original codes
+on this cut. They were not re-marked in this revision, and they are not a
+description of the forecasting literature, as shown in
 Figure~\ref{fig:pdf-technique-dist}.
 
 \begin{figure}[tbp]
@@ -1345,10 +1341,9 @@ distributions. Jalote~\cite{jalote2021} took a complementary perspective,
 modelling programmer task sequences as first-order Markov chains derived from
 IDE interaction logs and demonstrating that transferring the process patterns of
 high-productivity developers to average-productivity peers yields measurable
-productivity gains. Together, these contributions confirm that stochastic
-extensions of process models improve both explanatory and predictive validity;
-however, each study confines its stochastic layer to a single analytical
-concern without integrating multiple stages into a unified forecasting pipeline.
+productivity gains. In the studies cited in this paragraph, the stochastic
+layer stays on one analytical concern. That reading does not establish a
+unified forecasting pipeline in the literature.
 
 The closest published work to a fully integrated multi-stage architecture is
 PRIMAD, proposed by Guinea-Cabrera~\cite{guinea2025}, which orchestrates
@@ -1359,9 +1354,12 @@ validation is reported per component rather than across the assembled pipeline,
 no formal inter-stage contracts govern the handoffs between discovery,
 simulation, and learning modules, and the architecture incorporates no dedicated
 Monte Carlo forecasting layer capable of propagating uncertainty estimates
-end-to-end. No study in the mapped corpus validates an end-to-end pipeline in
-which process discovery, stochastic modelling, and forecasting are coupled and
-evaluated as a whole.
+end-to-end. On the family codes filled for the 429 studies, PRIMAD is the
+one row that matches the three families. The 338 were not re-marked in this
+revision. None of the 91 added studies read from an abstract or a PDF adds
+a second triple. The 77 title-only studies are outside that count. A single
+code on that cut is not a statement that the literature contains no
+end-to-end pipeline.
 
 Studies that combine process mining with forecasting objectives (TF-PM~$\cap$~TF-FC)
 tend to approach prediction through \emph{process enhancement} rather than
@@ -1378,12 +1376,10 @@ ProM correlate moderately ($r \approx 0.43$) with software cyclomatic
 complexity, achieving predictive accuracies exceeding 92\%, demonstrating the
 feasibility of process-derived features for product-quality prediction.
 
-Taken together, this cluster confirms that PM and prediction are being connected
-in the SE literature, but always at the level of sequential application---PM
-output feeds a downstream model---rather than through a unified pipeline with
-formal contracts. None of these systems reports a probability distribution
-over completion time or remaining steps for an individual process instance;
-forecasts are point estimates or scenario runs.
+Taken together, the papers cited in this paragraph describe PM output feeding
+a downstream model. That reading is not a census of the SE literature. None of
+these cited systems is described as reporting a probability distribution
+over completion time or remaining steps for an individual process instance.
 
 
 \subsection{RQ3: Integration and Gaps}
@@ -1391,42 +1387,40 @@ forecasts are point estimates or scenario runs.
 
 \subsubsection{RQ3.1: PM and Stochastic Integration Level}
 
-Mapping the confirmed papers onto the L0--L3 integration scale (defined
-operationally in Table~\ref{tab:positioning}: the number of technique families
-TF-PM, TF-ST, TF-FC a study matches) reveals a clear stratification. The
+The original family codes on the 169 working-set studies, which this
+revision did not re-mark, place rows on the L0--L3 scale defined in
+Table~\ref{tab:positioning}: the number of technique families TF-PM, TF-ST,
+and TF-FC a study matches. The
 largest two-family cluster, comprising papers that touch TF-ST and TF-FC
 without TF-PM---including stochastic Petri net models of CI/CD pipelines
 \cite{bhadra2022,bhadra2023}, Markov-based project estimation
 \cite{massitela2018,tyagi2021}, and Monte Carlo risk simulation
-\cite{lunesu2021,magennis2015}---operates almost entirely at \textbf{L1},
+\cite{lunesu2021,magennis2015}---is coded \textbf{L1},
 applying stochastic modelling to software processes without any process
 discovery layer. Papers spanning TF-PM and TF-ST, such as the VLMC conformance
 checker of \cite{incerto2025} and the probabilistic resource-calendar discoverer
-of \cite{lopezpintado2023}, are also \textbf{L1}: they couple discovered
+of \cite{lopezpintado2023}, are also coded \textbf{L1}: they couple discovered
 process structure with stochastic reasoning, but neither closes the loop
 toward distributional schedule forecasting. Papers combining TF-PM with TF-FC, such as
 \cite{gupta2017} and \cite{caldeira2022}, use process mining descriptively to
 assess workflows but lack the stochastic machinery required for Monte Carlo
-distributional forecasts. The PRIMAD framework \cite{guinea2025} is the closest
-antecedent, assembling elements from all three technique families---event-log discovery,
-simulation, and ML prediction---but its evaluation remains component-wise,
-placing it at L2 rather than a fully validated end-to-end pipeline. No paper
-in the reviewed corpus reaches \textbf{L3}, i.e., an architecture in which
-process discovery, stochastic modelling, and forecasting are coupled through
-explicit interfaces and validated end-to-end on SDLC event logs.
+distributional forecasts. The PRIMAD framework \cite{guinea2025} is the one
+triple match in these codes. It assembles event-log discovery,
+simulation, and ML prediction, and its evaluation is described as component-wise,
+so the code is L2 rather than a validated end-to-end contract. No row
+in these 169 codes is \textbf{L3}. L3 would be a row that matches the three
+families and states formal interfaces validated end-to-end on SDLC event logs.
+These codes do not establish that no such architecture exists in the literature.
 
-Quantitative evidence over the full 169-study set confirms the pattern. Only
-1 of 169 papers (0.6\%) jointly satisfies TF-PM, TF-ST, and TF-FC---that is,
-combines process mining, stochastic modeling, and forecasting in the same
-study---and even that single paper does not specify a formal end-to-end
-pipeline contract. Pairwise convergence is also low: TF-PM$\cap$TF-ST (PM and
-stochastic) appears in 10 papers (5.9\%), TF-PM$\cap$TF-FC (PM and forecasting)
-in 7 papers (4.1\%), and TF-ST$\cap$TF-FC (stochastic and forecasting) in 18
-papers (10.7\%). \textbf{No paper} in the reviewed corpus implements an
-\textbf{L3} architecture. The literature has many partial bridges but no
-end-to-end process-aware forecasting architecture for SDLC data. The
-operational coding of the 73-PDF triangulation subset is consistent with the
-full-set numbers and is summarized in
+The same 169 codes, not a confirmation of a literature pattern, are as follows. 
+1 of 169 papers (0.6\%) jointly satisfies TF-PM, TF-ST, and TF-FC,
+and that paper's extraction does not record a formal end-to-end
+pipeline contract. Pairwise codes are TF-PM$\cap$TF-ST in 10 papers (5.9\%), TF-PM$\cap$TF-FC
+in 7 papers (4.1\%), and TF-ST$\cap$TF-FC in 18
+papers (10.7\%). No row in these 169 codes is an
+\textbf{L3} architecture. The same triple on the 318 joint tables is also one
+paper. A rare code on these cuts is not a rare pattern in the literature. The
+operational coding of the 73-PDF triangulation subset is a view of that subset and is summarized in
 Figure~\ref{fig:pdf-integration-priority}.
 
 \begin{figure}[p]
@@ -1457,28 +1451,25 @@ Figure~\ref{fig:pdf-integration-priority}.
 
 \subsubsection{RQ3.2: Gap Analysis}
 
-Three structural observations emerge from the 169-study extraction. First,
-the field is \textbf{descriptively strong but forecastively weak}: 121
-papers (71.6\%) discover or assess process behavior, but only 29 (17.2\%)
-estimate future paths or probabilistic completion distributions. Second,
-\textbf{evidence quality is uneven}: of the 169 confirmed studies, 69
-(40.8\%) are case studies, 34 (20.1\%) are tool papers, 33 (19.5\%) are
-theoretical, 13 (7.7\%) are simulation-only, 10 (5.9\%) are controlled
-experiments, 5 (3.0\%) are surveys, and 5 (3.0\%) fall in residual
-categories (mixed, framework, exploratory; sum: $69+34+33+13+10+5+5 = 169$).
-The literature is therefore method-heavy and applied-evidence light. Third, \textbf{reproducibility is poor}: only 25 of 169 papers
-(14.8\%) declare their dataset publicly, and only 4 (2.4\%) declare a
-replication package. The QA scoring in Table~\ref{tab:qa-results} confirms
-this pattern: only 33\% of studies score 1 on QA7 (data/code availability),
-which is the single weakest QA criterion across the included set.
+Three readings of the 169-study extraction follow. They were not re-marked
+in this revision, and they are not a description of the literature.
+First, the family-code count labeled F1: 121 papers (71.6\%) match process
+mining and 29 (17.2\%) match forecasting of a process metric.
+Second, the model assigned study types on these 169 rows: 69
+(40.8\%) case studies, 34 (20.1\%) tool papers, 33 (19.5\%) theoretical,
+13 (7.7\%) simulation-only, 10 (5.9\%) controlled experiments, 5 (3.0\%)
+surveys, and 5 (3.0\%) residual categories (mixed, framework, exploratory;
+sum: $69+34+33+13+10+5+5 = 169$). That assignment was not re-marked.
+Third, the model count labeled F2: 25 of 169 papers (14.8\%) declare a
+public dataset and 4 (2.4\%) declare a replication package. On 31 studies
+the exact match between a human rater and the model on those free-text
+fields is 0\%. The scores in Table~\ref{tab:qa-results} are what the same
+model assigned. They do not confirm the count.
 
-Taken together, these patterns indicate that the gap is not the absence of
-isolated techniques, but the absence of robust,
-end-to-end, process-aware forecasting workflows validated on heterogeneous
-software engineering data. The evidence-type distribution observed in the
-73-PDF triangulation subset (Figure~\ref{fig:pdf-evidence-dist}) is
-consistent with the full-set characterization above and is reported here as
-an analytical view, not as a separate selection layer.
+These readings do not establish that an end-to-end workflow is absent from
+the literature. The evidence-type distribution in the 73-PDF subset
+(Figure~\ref{fig:pdf-evidence-dist}) is a view of that subset. It is not a
+separate selection layer, and it does not confirm the fields.
 
 \begin{figure}[tbp]
 \centering
@@ -1543,18 +1534,15 @@ working-set tier persists in the combined tier.
 These counts are model extractions. Exact agreement with a human rater on
 the free-text fields is 0\% on the 31-study sample, and the fields were not
 re-extracted by a human.
-The reproducibility deficit is uniform across both tiers. Working-set tier:
+The same model count, on both cuts, is as follows. Working-set tier:
 only 25 of 169 papers (14.8\%) declare the dataset as publicly available
 and only 4 (2.4\%) declare any replication package. Combined analytical
 subset: 44 of 318 papers (13.8\%) declare a public dataset and 9 (2.8\%)
-declare a replication package. The majority of studies that mention data
-collection procedures rely on ad hoc joins between version-control commits
+declare a replication package. The model also records ad hoc joins between
+version-control commits
 (112 of 318 papers, 35.2\%), issue trackers (44, 13.8\%), Jira (46, 14.5\%),
-GitHub (43, 13.5\%), and IDE interaction logs (37, 11.6\%) rather than on a
-reusable construction protocol with explicit case-correlation semantics. The absence of standardized construction
-frameworks limits reproducibility and cross-study comparability and is the
-most common cause of QA3 (data source described reproducibly) failures
-observed in the QA scoring of the working-set tier.
+GitHub (43, 13.5\%), and IDE interaction logs (37, 11.6\%). The quality
+scores are assigned by the same model. They do not confirm this count.
 
 \item[F3: Stochastic integration (family codes on 169 and on 318).]
 These percentages are the original family codes. They were not re-marked
@@ -1568,12 +1556,11 @@ auxiliary corpus contributes a substantial number of stochastic-only papers
 not previously surfaced by the working-set queries; 152 of 318 (47.8\%)
 match TF-ST (with 86 Monte Carlo, 67 Markov, 54 system dynamics, 15 SPN), 81
 (25.5\%) combine TF-ST with TF-FC (forecasting), and 13 (4.1\%) combine TF-ST
-with TF-PM (process mining). Markov chains and Monte Carlo simulation are
-therefore used extensively in BPM and software reliability engineering, and
-the auxiliary expansion confirms a broader stochastic literature than the
-working-set tier alone suggested; nevertheless, the integration with process
-mining for SDLC forecasting remains minimal in both tiers (5.9\% and 4.1\%
-respectively for TF-PM$\cap$TF-ST). The largest second-pass exclusion in
+with TF-PM (process mining). On these codes, TF-PM$\cap$TF-ST is 10 of 169
+(5.9\%) and 13 of 318 (4.1\%). The 318 codes contain more stochastic-only
+rows than the 169 codes. That is a difference between the two cuts. It is
+not a description of the stochastic literature, and it was not re-marked
+in this revision. The largest second-pass exclusion in
 the working-set queue is EC3 (232 of 886). That is a property of this
 screen.
 
@@ -2067,8 +2054,9 @@ synchronous Messages API for QA scoring. The cross-model
 inter-rater verification described above uses
 \textit{claude-sonnet-4-6} (Anthropic) as the second rater. AI tools are
 \textbf{not} listed as authors of this work and are responsible for none of
-the editorial judgements; final selection, QA threshold, taxonomy design,
-and synthesis claims are the responsibility of the authors.
+the editorial judgements; final selection, the decision not to filter on a
+quality score, taxonomy design, and the wording of the synthesis are the
+responsibility of the authors.
 
 A complete replication package is deposited at Zenodo
 (\href{\zenododoiurl}{DOI~\zenododoi}).
