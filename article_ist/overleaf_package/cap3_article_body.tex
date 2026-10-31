@@ -57,20 +57,23 @@ checking on repository data) and which remain research problems. For the
 methodology of secondary studies, the review is also a deployment of
 LLM-assisted screening whose selection error we measure against a
 pre-registered human reference standard, following
-LLM4SCREENLIT~\cite{llm4screenlit2025}.
+LLM4SCREENLIT~\cite{llm4screenlit2025}. The mapping protocol itself was
+not pre-registered. The human check of the screen was pre-registered before
+the round-2 judgements.
 
 \paragraph{Study design and contributions.} We report a systematic mapping
 study against SEGRESS~\cite{kitchenham2023segress}, following the mapping
 guidelines of Petersen et al.~\cite{petersen2015}, the evidence-based software
 engineering guidelines of Kitchenham and Charters~\cite{kitchenham2007}, and
-the snowballing procedure of Wohlin~\cite{Wohlin2024}. The review addresses
+the snowballing procedure of Wohlin~\cite{Wohlin2014}. The review addresses
 three research questions, each decomposed into two sub-questions, covering
 the application landscape of process mining in SDLC contexts, the techniques
 and prediction methods employed, and the degree of integration between
 process mining and stochastic forecasting. Its contributions are (i)~a
 classification of the confirmed studies by SDLC phase, data source, and
-technique family; (ii)~five findings (F1--F5) on where integration stops;
-(iii)~the SPMF taxonomy and a four-direction research agenda; and (iv)~a
+technique family; (ii)~three family-code findings (F1, F3, F4) on the cuts
+named in each sentence, plus two model counts (F2, F5) that a human re-read
+did not confirm; (iii)~the SPMF taxonomy and a four-direction research agenda; and (iv)~a
 measured account of the LLM-assisted selection, including where it failed.
 The authors' own integrated-pipeline proposal (PATHCAST) is mentioned only as
 one research-agenda hypothesis (Section~\ref{sec:slr-positioning}) and is not
@@ -214,7 +217,18 @@ summarized in Table~\ref{tab:db-adaptations}. All database searches were
 executed on 12~April~2026. The eligibility window (IC1) runs from
 1~January~1994 to the search execution date; publications dated 2026 are
 therefore partial-year coverage (indexed by 12~April~2026) and are reported
-as such. Where a database supported a date restriction, the query used
+as such. The three strings executed on 12~April~2026 contain no
+machine-learning block. On 31~October~2026 a fourth string, with
+\texttt{machine learning}, \texttt{deep learning}, \texttt{neural network},
+\texttt{random forest}, \texttt{gradient boosting}, \texttt{xgboost}, or
+\texttt{lstm}, and with lead time, cycle time, remaining time, throughput,
+or just-in-time defect as the target, was run on Scopus. It returned 165
+records. Title screening against the criteria in
+Table~\ref{tab:criteria} left 19 includes, all under IC4c, and 2 records
+already in the 506. None of the 19 joins process mining, a stochastic
+model, and forecasting. They are not added to the 506: the screen used the
+title only, and the other four databases were not re-run. Finding F5 in
+the body is still the count from the three original strings. Where a database supported a date restriction, the query used
 publication years 1994--2026; the Web of Science export was not
 date-restricted at query time, and IC1 is enforced at screening for every
 source (Table~\ref{tab:db-adaptations}, note).
@@ -251,18 +265,26 @@ confirmed in R1 were removed in this revision (\ref{app:included}).
 
 \subsubsection{Snowballing Procedure}
 
-Backward snowballing examines the reference lists of the control-set seed
-papers (Section~\ref{sec:slr-search}, Table~\ref{tab:validation-set}).
-Forward snowballing uses Google Scholar citation tracking to identify
-subsequent works that cite those seed papers. Both rounds apply the same
-inclusion and exclusion criteria defined in Section~\ref{sec:slr-criteria}.
+Snowballing follows Wohlin~\cite{Wohlin2014} for one iteration. The
+identification file stores 595 records, each labeled as coming from both
+the reference list and the citation list of one source DOI. Those labels
+name 400 distinct source DOIs. The file does not split the 595 into a
+backward count and a forward count, and it does not record a second
+iteration. The stop rule is that single pass: a candidate is kept when the
+title or the abstract contains one process-mining or stochastic term and
+one software-engineering term. The ten papers in
+Table~\ref{tab:validation-set} check whether the database strings retrieve
+known studies. They are not the 400 source DOIs. The database searches are
+dated 12~April~2026. The snowball file does not carry a separate date.
 
 \subsubsection{Search String Validation}
 
 The search strings are validated against a control set of 10 papers that are
 known to be relevant to the review scope
-(Table~\ref{tab:validation-set}). The acceptance threshold is $\geq 8/10$
-papers found; the validation returned $10/10$ ($100\%$, PASS).
+(Table~\ref{tab:validation-set}). The ten papers were known when the
+strings were written. Retrieving all ten shows that the strings can
+return these known papers. It does not measure how many relevant studies
+the strings miss, and it is not recorded as a pass.
 
 \begin{table}[htbp]
 \centering
@@ -296,8 +318,11 @@ The inclusion criteria are organized in two tiers. Formal criteria
 (IC1--IC3) filter on publication attributes and are applied during the
 database search configuration. Content criteria (IC4a--IC4d) require that the
 study's research contribution addresses at least one of four specific
-technique-domain intersections; they are applied during title/abstract and
-full-text screening. Exclusion criteria (EC1--EC5) are applied cumulatively
+technique-domain intersections; they are applied during title/abstract
+screening and during the second-pass eligibility screen. The replication
+files label that second pass ``FT''. For almost every record the second
+pass read the title and the abstract. ``Full text'' in this article means
+a PDF was read. Exclusion criteria (EC1--EC5) are applied cumulatively
 across both screening phases. Criteria EC1--EC4 are evaluated by the
 LLM-assisted screener; EC5 (full text inaccessible) is applied
 programmatically after the inter-library-loan recovery pass for Band~D/E
@@ -395,7 +420,7 @@ JSON. The \texttt{maybe} class captures genuine uncertainty---typically
 arising from missing abstracts or ambiguous domain terminology---without
 forcing a binary decision.
 
-At the full-text screening phase, the same model is applied with a stricter
+At the second-pass eligibility screen, the same model is applied with a stricter
 prompt that enforces a binary outcome (\texttt{include} or \texttt{exclude})
 with \texttt{pending} reserved only when the abstract is genuinely
 insufficient for a decision. The FT prompt also instructed the model to
@@ -449,11 +474,12 @@ Under SEGRESS~\cite{kitchenham2023segress} \S4.3.2, risk-of-bias assessment
 is optional for mapping studies; we retained a \textbf{reporting-quality}
 checklist (not a risk-of-bias instrument) adapted from
 Dyb{\aa} and Dings{\o}yr~\cite{dyba2008}, with eight binary criteria. It is
-\emph{not} a selection filter: every confirmed study enters the F1--F5
-evidence base. The checklist is reported descriptively and used in one
-sensitivity analysis that repeats F1--F5 on the studies scoring $\geq 4/8$
-(Section~\ref{sec:slr-gaps}). It is not a validity judgement on primary-study
-outcomes:
+\emph{not} a selection filter, and the $4/8$ line is not applied to any
+finding. The same model that screens and extracts
+(\textit{claude-haiku-4-5-20251001}) also assigns the eight scores. A score
+produced from an abstract is an abstract-only score. It is reported as such
+and is not pooled with a score produced from a PDF. The checklist is
+descriptive. It is not a validity judgement on primary-study outcomes:
 
 \begin{table}[htbp]
 \centering
@@ -475,26 +501,23 @@ QA8 & Are process model quality metrics reported (fitness, precision)?& 0/1 \\
 \end{tabular}
 \end{table}
 
-The $4/8$ (50\%) cut-off defines the sensitivity subset only; it is a
-conventional midpoint, not an empirically derived threshold. QA8 reflects
-whether studies report standard process-model quality metrics, not a
-framework-specific requirement.
+The eight scores are descriptive. The same model that screens and extracts
+assigns them. No finding uses a cutoff on the sum.
 
 QA scoring is performed by the same LLM-assisted protocol used for screening
 (Section~\ref{sec:slr-llm}): \textit{claude-haiku-4-5-20251001} receives a
 strict rubric for each criterion and returns a binary score with a brief
 justification. The full prompt and the per-study scores are part of the
 replication package (Section~\ref{sec:slr-replication}).
-Table~\ref{tab:qa-results} reports the quality-assessment outcome for the
-complete confirmed set ($n = 169$). All 169 studies were scored.
+Table~\ref{tab:qa-results} reports the scores for the 169 working-set studies.
 
 \input{results/qa_assessment_summary}
 
 The 33 studies below the QA threshold are predominantly short workshop papers,
 position papers, or extended abstracts that fail QA3 (reproducible data
 source) and QA4 (formally defined technique) simultaneously. Like all
-confirmed studies, they are part of the F1--F5 evidence base; they are
-omitted only in the sensitivity analysis of Section~\ref{sec:slr-gaps}.
+confirmed studies, they remain in the descriptive counts. No sensitivity
+cut on $4/8$ is reported in Section~\ref{sec:slr-gaps}.
 
 
 \subsection{Data Extraction}
@@ -539,8 +562,9 @@ Process Model Quality        & Fitness, precision, generalization (if reported) 
 \subsection{Database Retrieval and Deduplication}
 
 The three search strings executed across five databases returned 7{,}740
-records. Backward and forward snowballing from the control set yielded an
-additional 595 records. Together with 12 control papers maintained as a
+records. One snowballing iteration, stored as 595 records attributed to
+400 source DOIs, yielded the additional records
+(Section~\ref{sec:slr-search}). Together with 12 control papers maintained as a
 validation-only set, the initial corpus totaled 8{,}347 records.
 Table~\ref{tab:retrieval} summarizes the retrieval by source.
 
@@ -610,9 +634,9 @@ ACM DL & acm\_principal, acm\_msr & 46 \\
 \end{tabular}
 \end{table}
 
-The working set preserves $10/10$ control papers when the validation-only
-control set is included, and $8/10$ from primary queries alone---both above
-the 80\% threshold.
+Of the ten known control papers, eight are retrieved by the primary
+queries and all ten appear once a validation-only set is counted. That
+count does not measure search recall.
 
 \subsection{Title/Abstract Screening}
 
@@ -640,7 +664,7 @@ Exclude & 1{,}454 & 62.2 \\
 \end{table}
 
 The \texttt{include} set (111 papers) and the \texttt{maybe} set (775 papers)
-together form the full-text review queue of 886 papers. The
+together form the second-pass queue of 886 papers. The
 \texttt{exclude} decisions were driven primarily by EC1 (domain outside
 software development, principally generic business process management) and EC3
 (theoretical algorithm proposals without SE evaluation).
@@ -662,8 +686,8 @@ Section~\ref{sec:slr-synthesis}.
 
 \subsection{Second-Pass Eligibility Screening (``FT'')}
 
-The 886 papers forwarded from the T/A phase were subjected to LLM-assisted
-full-text screening using the strict prompt described in
+The 886 papers forwarded from the T/A phase entered the second-pass
+eligibility screen, using the strict prompt described in
 Section~\ref{sec:slr-llm} (decisions limited to \texttt{include},
 \texttt{exclude}, or \texttt{pending}; \texttt{maybe} is not permitted at this
 stage). To maximise the number of papers assessable by the LLM, a
@@ -695,7 +719,7 @@ Table~\ref{tab:ft-screening} summarises the outcome.
 
 \begin{table}[htbp]
 \centering
-\caption{Full-text screening outcomes (886 papers forwarded from T/A phase).}
+\caption{Second-pass eligibility outcomes (886 papers forwarded from the T/A phase). The replication files label this stage FT. The prompt received the title and the abstract.}
 \label{tab:ft-screening}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -812,7 +836,7 @@ diagram~\cite{page2021} of the selection process.
 \draw[gray!40, dashed] (-6.0,-8.0) -- (-6.0,-13.6);
 
 \node[stg=7cm, minimum height=1.3cm] (ftq) at (-0.5,-9.4)
-  {\textbf{Full-text review queue} ($n = 886$)\\[3pt]
+  {\textbf{Second-pass queue} ($n = 886$)\\[3pt]
    T/A include~111 \textbullet{} T/A maybe~775\\
    Bands~A--E by priority};
 
@@ -824,10 +848,10 @@ diagram~\cite{page2021} of the selection process.
    Screen-blanks pass (186 FT-undecided papers)};
 
 \node[exc] (ftexc) at (6.0,-11.6)
-  {Excluded at FT ($n = 717$)\\
+  {Excluded at the second pass ($n = 717$)\\
    EC3: 232 theoretical, no SE\\
    EC1: 205 non-SE domain\\
-   EC5: 145 FT inaccessible\\
+   EC5: 145 text inaccessible\\
    EC2: 110 \textbullet{} EC4: 60};
 
 \draw[arr] (ftq) -- (ft);
@@ -835,19 +859,46 @@ diagram~\cite{page2021} of the selection process.
 
 %% -- PHASE: INCLUDED ----------------------------------------------------
 
-\node[lbl] at (-6.8,-14.6) {INCLUDED};
-\draw[gray!40, dashed] (-6.0,-13.6) -- (-6.0,-15.6);
+\node[lbl] at (-6.8,-17.2) {INCLUDED};
+\draw[gray!40, dashed] (-6.0,-13.6) -- (-6.0,-20.4);
 
-\node[stg=8cm, minimum height=1.3cm] (inc) at (-0.5,-14.8)
-  {\textbf{Studies included} ($n = 169$)\\[3pt]
-   75 with PDF \textbullet{} LLM extraction complete (169/169)};
+\node[stg=8cm, minimum height=1.15cm] (wsinc) at (-0.5,-14.6)
+  {\textbf{Working-set tier} (169 studies)\\[2pt]
+   Second-pass includes from the 886};
 
-\draw[arr] (ft) -- (inc);
+\node[exc] (auxinc) at (6.0,-14.6)
+  {Auxiliary second-pass includes\\
+   212 + 23 = 235 raw\\
+   Pending and unclassifiable\\
+   records were re-screened};
+
+\draw[arr] (ft) -- (wsinc);
+\draw[sidearr] (wsinc.east) -- (auxinc.west);
+
+\node[stg=8cm, minimum height=1.15cm] (raw) at (-0.5,-16.3)
+  {\textbf{LLM confirmations} ($n = 404$ raw)\\[2pt]
+   $169 + 212 + 23$; 64 overlapping identifiers removed $\rightarrow$ 340 distinct};
+
+\draw[arr] (wsinc) -- (raw);
+
+\node[stg=8cm, minimum height=1.15cm] (coded) at (-0.5,-18.0)
+  {\textbf{Coded set} ($n = 338$)\\[2pt]
+   340 distinct, minus 2 studies published before 1994};
+
+\draw[arr] (raw) -- (coded);
+
+\node[stg=8.4cm, minimum height=1.25cm] (inc) at (-0.5,-19.8)
+  {\textbf{Corpus of this revision} ($n = 506$)\\[2pt]
+   $338 + 168$ added after the human check\\
+   188 listed, 20 duplicate identifiers removed};
+
+\draw[arr] (coded) -- (inc);
 
 \end{tikzpicture}
-\caption{PRISMA 2020 flow diagram of the study selection process.
-  Phase labels follow the four-stage structure: Identification, Screening,
-  Eligibility, and Included.}
+\caption{PRISMA 2020 flow of the study selection. The included phase
+  continues through the auxiliary screen, the removal of overlapping
+  identifiers, the removal of two pre-1994 studies, and the human re-screen.
+  The mapped set is 506 studies (Table~\ref{tab:ledger}).}
 \label{fig:prisma}
 \end{figure}
 
@@ -857,39 +908,52 @@ diagram~\cite{page2021} of the selection process.
 
 \subsection{Overview of Included Studies}
 
-Three numbers are easy to mix up. They are different things.
+This revision includes \textbf{506 studies}: 338 already coded, plus 168
+added after the human check.
 
-The LLM screen, after cross-tier de-duplication, confirmed 340 distinct
-studies. Two of them were published in 1991 and 1992, outside the eligibility
-window, and are removed. That leaves \textbf{338 studies with technique-family
-codes}. Findings F1--F5, and every percentage that still says 169 or 318,
-describe this coded set or a tier inside it. The 169 is the working-set tier.
-The 318 is the de-duplicated subset used for the joint tables. Neither number
-is the corpus of this revision.
+The 338 are the LLM list of 340 studies, minus two papers from 1991 and
+1992. The 168 are what remains of 188 records the re-screen marked as
+eligible, after 20 records that repeated a study already in the list were
+removed. Eleven of the 168 were read as a PDF, 80 from the abstract, and
+77 from the title only.
 
-The human check in Section~\ref{sec:slr-threats} found eligible studies the
-LLM had excluded. The re-screen listed 188 includes. Sixteen of those 188 are
-the same study as one of the 338, stored under another identifier. Four
-further pairs inside the 188 are the same article twice, once from the
-abstract and once from the title. Removing those 20 identifiers leaves
-\textbf{168 distinct studies added} by the check. Eleven were read in full
-text, 80 from the abstract, and 77 from the title only.
+The three technique families were marked on \textbf{429} of the 506: the
+338, plus the 91 added studies that had an abstract or a PDF. One of those
+429, PRIMAD, has all three families. The 77 studies known only by the title
+were left blank.
 
-The corpus of this revision is therefore $338 + 168 = \textbf{506}$ distinct
-studies. The list is \texttt{included\_studies\_506.csv}
-(Appendix~\ref{app:included}). The earlier file of 340 rows is kept so the
-removal of the two pre-1994 records can be checked. Summing 340 and 188
-counts identifiers, not studies, and is not the corpus size.
+Table~\ref{tab:ledger} is the whole set. The working-set tables, including
+the integration levels, use 169 of those studies. The joint tables use 318
+studies. That 318 is what remained after 63 duplicate records were removed
+from an earlier combined list of 381. The 340 is what remained after 64
+duplicate records were removed from 404 raw confirmations. The two cuts
+were built by different removals. Adding the 23 studies of the second
+auxiliary pass to 318 does not produce 340. Appendix~\ref{app:included}
+lists the 506 studies and groups them by family.
 
-The 168 added studies have an extraction form and a quality score (43 of 168
-score at least 4/8). The three technique families were then marked again on
-the 91 of them that have an abstract or a PDF
-(\texttt{family\_codes\_168.csv}). None of those 91 has process mining,
-a stochastic model, and forecasting together. Added to the one such study
-already in the 338 (PRIMAD, \texttt{ed0ab009}), the intersection is 1 of 429.
-The other 77 added studies were read from the title alone. Their family marks
-are blank, and they are not in the 429. The remaining F1--F5 percentages
-were not recomputed on this set.
+\begin{table}[htbp]
+\centering
+\caption{Studies in this revision.}
+\label{tab:ledger}
+\small
+\begin{tabular}{lp{9.2cm}}
+\toprule
+\textbf{Studies} & \textbf{Meaning} \\
+\midrule
+506 & All studies in this revision (338 + 168). \\
+338 & Coded before this round. \\
+168 & Added after the human check. \\
+429 & Studies with the three family marks filled (338 + 91). \\
+77  & Added studies known only by the title. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The list is \texttt{included\_studies\_506.csv}. The file of 340 rows is
+kept so the removal of the two pre-1994 papers can be checked. Forty-three
+of the 168 added studies score at least 4/8 on the quality checklist. The
+percentages in F1--F5, apart from the count of one study in 429, use the
+338 and the smaller cuts of 169 and 318.
 
 The 169-study working-set tier spans 1995--2026 (publications dated 2026
 that were already indexed on 12~April~2026 are retained), with a clear
@@ -923,7 +987,7 @@ Appendix~\ref{app:segress}.
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Distribution of confirmed studies by publication year ($n = 169$).}
+\caption{Publication year of the 169 working-set studies.}
 \label{fig:year-dist}
 \end{figure}
 
@@ -966,8 +1030,9 @@ multiple).
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Inclusion criteria matched by the confirmed set ($n = 169$;
-  non-exclusive; TF-PM/ST/FC/MSR = content criteria IC4a--IC4d).}
+\caption{Inclusion criteria matched by the 169 working-set studies. Counts
+are non-exclusive. TF-PM, TF-ST, TF-FC, and TF-MSR are the content criteria
+IC4a--IC4d.}
 \label{fig:ic-dist}
 \end{figure}
 
@@ -1423,16 +1488,11 @@ an analytical view, not as a separate selection layer.
 \subsection{Research Gap Identification}
 \label{sec:slr-gaps}
 
-The paragraphs below describe the 338 studies that have technique-family
-codes. Where a sentence says 169, it is the working-set tier. Where it says
-318, it is the de-duplicated subset used for the joint tables. Neither
-figure is a percentage of the 506-study corpus. The 168 studies added by the
-human check are not in these percentages. A reporting-quality score of at
-least 4/8 is met by 278 of the 338. We do not repeat F1--F5 on that slice
-in this revision, so we do not claim the slice changes or preserves any
-finding. What the human check does change is the scope of the scarcity
-statements: they describe the coded 338, not the 506
-(Section~\ref{sec:slr-threats}).
+F1, F3, and F4 are family-code counts. Each sentence names its cut: 169,
+318, or the 429 for the triple. None of those percentages is a rate over
+the 506. F2 and F5 are counts extracted by the same model that screened
+the papers. On 31 studies a human rater and the model had 0\% exact
+agreement on those fields, so F2 and F5 are not confirmed findings.
 
 \begin{description}
 
@@ -1448,7 +1508,10 @@ type is discovery or conformance checking, not predictive analytics or
 distributional forecasting; the descriptive ceiling identified in the
 working-set tier persists in the combined tier.
 
-\item[F2: Event Log Construction Challenge.]
+\item[F2: Event-log construction (model count, not confirmed).]
+These counts are model extractions. Exact agreement with a human rater on
+the free-text fields is 0\% on the 31-study sample, and the fields were not
+re-extracted by a human.
 The reproducibility deficit is uniform across both tiers. Working-set tier:
 only 25 of 169 papers (14.8\%) declare the dataset as publicly available
 and only 4 (2.4\%) declare any replication package. Combined analytical
@@ -1521,7 +1584,14 @@ family marks were filled: the 338, plus the 91 added studies read from an
 abstract or a PDF. None of those 91 joins the three families. The 77 added
 studies read from the title alone are outside this count.
 
-\item[F5: Process-Derived Features Unexplored.]
+\item[F5: Process-derived features (model count, not confirmed).]
+These counts are model extractions of the research-contribution and
+algorithm fields. They were not re-extracted by a human. On 31 studies the
+exact match with a human rater on those fields is 0\%. A Scopus search on
+31~October~2026 with machine-learning terms returned 165 records; title
+screening left 19 IC4c includes, and none joins the three families
+(Section~\ref{sec:slr-search}). Those 19 are not in the counts below.
+The counts below are the studies the three original strings retrieved.
 ML-based prediction studies in the confirmed set rely overwhelmingly on
 traditional features (code metrics, commit characteristics, defect counts)
 rather than on features derived from process mining. Working-set tier: 32
@@ -1558,8 +1628,8 @@ intersections reported under F3 and F4.
 
 \begin{table}[htbp]
 \centering
-\caption{Integration levels (working-set tier, $n=169$). Levels count the
-technique families TF-PM, TF-ST, and TF-FC matched by each study.}
+\caption{Integration levels of the 169 working-set studies. A level counts
+how many of TF-PM, TF-ST, and TF-FC the study matches.}
 \label{tab:positioning}
 \small
 \begin{tabularx}{\linewidth}{@{}c X r X@{}}
@@ -1672,13 +1742,12 @@ composition, not data collection.
 
 The search strings may exclude studies that use non-canonical terminology.
 This threat is mitigated through three mechanisms: the complementary MSR
-string, the frontier stochastic-PM string, and snowballing. The control set
-was recovered in full (10/10), but this is a weak check of search recall: the
-ten papers were known to the authors when the strings were designed, so their
-recovery cannot bound the proportion of relevant studies the strings miss.
-Snowballing was seeded from the control set rather than from the included
-studies (Section~\ref{sec:slr-search}), which further limits its contribution
-to recall.
+string, the frontier stochastic-PM string, and one snowballing iteration
+over 595 records attributed to 400 source DOIs
+(Section~\ref{sec:slr-search}). The ten control papers were recovered, but
+this is a weak check: they were known when the strings were written, so
+their recovery does not bound the proportion of relevant studies the
+strings miss. Those ten papers are not the snowballing seed list.
 
 \subsection{Internal Validity}
 
@@ -1788,9 +1857,9 @@ measured whether a PDF was on disk. That row is withdrawn.
 
 \emph{QA and extraction.} On the 31 papers included by both the R1 human
 rater and the LLM, LLM QA matched the human rater on 68--100\% per
-criterion; free-text extraction fields showed 0\% exact-match agreement, so
-F1--F5 fields drawn from abstract-only extraction are interpreted
-cautiously.
+criterion; free-text extraction fields showed 0\% exact-match agreement.
+Those fields were not re-extracted by a human. F2 and F5, which use them,
+are model extractions. F1, F3, and F4 use the technique-family codes.
 
 \input{results/human_validation/human_kappa_report.tex}
 \input{results/human_validation/human_confusion_report.tex}
@@ -1802,9 +1871,11 @@ the 886-paper FT queue) decisions was independently re-rated by a different
 model family (\textit{claude-sonnet-4-6}) acting as a second rater. Of the
 468 T/A papers in the sample, 420 produced a parseable decision from the
 verifier and entered the agreement computation; the remaining 48 papers
-returned a non-parseable response (typically because the abstract was
-absent, leading the verifier to refuse a categorical answer) and were
-excluded from the $\kappa$ calculation as missing-at-random. All 177 FT
+returned a non-parseable response because the abstract was absent, and the
+verifier then refused a categorical answer. Those 48 stay out of
+$\kappa$ because the abstract was absent. The reported $\kappa$ is the
+agreement on the 420 papers that produced a parseable decision, out of 468
+sampled. All 177 FT
 sample papers produced a parseable decision. Both the multi-class
 $\kappa$ (over the original \texttt{include}/\texttt{exclude}/\texttt{maybe}
 or \texttt{include}/\texttt{exclude}/\texttt{pending} categories) and the
@@ -1862,13 +1933,15 @@ estimated in item~(iii). The revised protocol routes
 \subsection{External Validity}
 
 The review is limited to English-language peer-reviewed publications,
-potentially excluding relevant work in other languages or grey literature.
-The broad time span (January 1994 to 12~April~2026) and five-database coverage mitigate
-geographic and temporal bias. The deferred high-recall auxiliary corpus
-(3{,}807 records from SpringerLink, WoS, Snowball, and other low-precision
-queries; corresponds to the difference between the 5{,}783 unique deduplicated
-records and the 2{,}340-paper operational working set) provides a mechanism
-for expansion if gaps in the confirmed 169-study set are identified.
+which leaves out work in other languages.
+The broad time span (January 1994 to 12~April~2026) and five-database
+coverage mitigate geographic and temporal bias. Grey literature is
+excluded. The stop rule is the document type at search time: journal
+articles, conference papers, and workshop papers. Theses, preprints, and
+technical reports were not searched in a separate round. The auxiliary
+corpus (3{,}807 records from SpringerLink, WoS, Snowball, and other
+low-precision queries) was screened in full. The mapped set is the 506 in
+Table~\ref{tab:ledger}.
 
 A four-stage sensitivity check was executed against the auxiliary corpus.
 First, a random 200-paper subsample was re-screened with the same T/A LLM
@@ -1877,34 +1950,18 @@ protocol used for the working set;
 \texttt{include} decision and 59 (29.5\%) returned \texttt{maybe}, yielding
 a point-estimated 228 additional candidate includes if the auxiliary corpus
 were screened in full. Given that this estimate exceeded the working-set
-include count, the second stage was triggered: a \textbf{full-corpus
-T/A and FT screening pass} over all 3{,}807 auxiliary papers.
+include count, the second stage was triggered: a screen of all 3{,}807
+auxiliary papers at title/abstract and at the second pass.
 The result is reported in
 Table~\ref{tab:aux-ft-screening}: of the 3{,}807 auxiliary papers, 232
-were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived FT
-screening as \texttt{include}. Combined with the 169 working-set
-confirmations, the LLM screen covers 404 raw confirmations (340 distinct
-after de-duplication). Two of the 340 predate 1994 and are removed. The
-human re-screen then adds 168 distinct studies. The corpus of this revision
-is 506 (Section~\ref{sec:slr-synthesis}). The 318-study subset remains the
-base of the joint F1--F5 tables, which do not include those 168.
+were T/A-included and 1{,}151 T/A-marked-maybe, of which 212 survived the
+second pass as \texttt{include}. The arithmetic from there to the 506 is
+the one in Table~\ref{tab:ledger}.
 
-The protocol then proceeded to a third stage: a multi-source abstract
-enrichment cascade (Semantic Scholar, OpenAlex, CORE, Crossref) was applied
-to the 880 auxiliary FT-\texttt{pending} papers,
-recovering an abstract for 285 papers
-(32.4\%). The fourth stage re-ran the FT screening on these 285 enriched
-papers, confirming 23 additional includes,
-246 excludes, and 16 still-pending. Under the conservative closure rule,
-those 16 residual abstract-insufficient papers are closed under EC5-extended
-rather than carried forward as a manual-validation queue. The combined
-confirmed set from the LLM screen is \textbf{404 raw primary studies}
-($169_{\text{ws}} + 212_{\text{aux1}} + 23_{\text{aux2}}$), or
-\textbf{340 distinct studies} after cross-tier de-duplication. That list is
-the input to the human check, not the corpus reported here.
-The remaining 595 papers without abstract after enrichment are likewise closed under
-EC5-extended, rather than queued for manual retrieval, because they remain
-unclassifiable after the full multi-source enrichment cascade.
+In the original run, 16 auxiliary records stayed pending after abstract
+enrichment, and 595 records still had no abstract. Those records were
+closed under EC5. In this revision the two reviewers screened the pending
+and the unclassifiable records (Section~\ref{sec:slr-threats}).
 
 \input{results/sensitivity/sensitivity_report}
 
@@ -1933,20 +1990,19 @@ reflects the publisher-paywall mix of the auxiliary corpus).
 
 \subsection{Conclusion Validity}
 
-Synthesis findings F1--F5 are derived from the structured data extraction
-applied to two extraction layers: (i)~the full 169-study working-set
-extraction (Section~\ref{sec:slr-extraction};
-Table~\ref{tab:extraction}), partly triangulated against the 73-PDF subset;
-and (ii)~the 212-study auxiliary-tier extraction performed via abstract
-only. Both extractions feed
-the IC-combination counts and the technique distributions reported under
-F1--F5. The QA-based filtering reported in Table~\ref{tab:qa-results}
-retains 136 of the 169 working-set studies (80.5\%); QA scoring was
-subsequently extended to the auxiliary tier,
-retaining 179 of 212 (84.4\%, mean
-$5.09 \pm 1.43$). The combined 318-study deduplicated subset retains 259 papers
-($81.4\%$, mean $5.00 \pm 1.42$) above the $\geq 4/8$ threshold; full
-combined-QA results are reported in Table~\ref{tab:qa-combined}.
+Synthesis findings that use technique-family codes (F1, F3, F4) are taken
+from those codes. Findings that use free-text extraction fields (F2, F5)
+were not re-extracted by a human. On 31 studies the exact agreement between
+the model and a human rater on those free-text fields is 0\%. The two
+extraction layers are (i)~the 169-study working-set extraction
+(Section~\ref{sec:slr-extraction}; Table~\ref{tab:extraction}), partly
+checked against the 73-PDF subset, and (ii)~the 212-study auxiliary
+extraction from abstracts. The quality scores are descriptive. The $4/8$
+line is not a filter on any finding. Of the 169 working-set studies, 136
+score at least 4/8. Of the 212 auxiliary studies, 179 do (mean
+$5.09 \pm 1.43$). Of the 318-study joint subset, 259 do
+($81.4\%$, mean $5.00 \pm 1.42$). Abstract-only scores stay labeled as
+abstract-only scores.
 
 \input{results/auxiliary/aux_qa_summary}
 
@@ -1990,104 +2046,48 @@ protocol on the deposited working set under the same model identifiers.
 \section{Conclusion}
 \label{sec:slr-summary}
 
-This article presented a systematic mapping study of the intersection of
-process mining, stochastic modeling, and machine learning applied to software
-process forecasting, reported against SEGRESS~\cite{kitchenham2023segress}.
-The review protocol was not pre-registered, which we disclose as a
-limitation; the round-2 human validation of the selection was pre-registered
-before data collection.
-The review executed three complementary search strings across five databases
-(executed 12~April~2026; eligibility window January 1994 to the execution
-date), yielding 8{,}347
-records, 5{,}783 after deduplication, and a 2{,}340-paper operational working
-set for systematic screening. Title
-and abstract screening on the working set using a LLM-assisted protocol
-produced 111 candidate \texttt{include} decisions and 775 \texttt{maybe}
-decisions (886 papers for full-text review).
+The corpus of this revision is 506 distinct studies
+(Table~\ref{tab:ledger}): 338 from the LLM list after two pre-1994 records
+were removed, plus 168 added by the human re-screen after duplicate
+identifiers were removed. On the 429 studies whose three family marks were
+filled, one study, PRIMAD, matches process mining, a stochastic model, and
+forecasting together. Seventy-seven added studies, read from the title
+alone, are outside that count.
 
-Full-text screening combined LLM-assisted passes (Rounds~1 and~2, with cascade
-abstract enrichment raising coverage from 16.6\% to 72.6\%, i.e., 643/886
-papers) with a final \emph{screen-blanks} pass that processed the 186 papers
-that still lacked an FT decision after the earlier rounds. In the final
-screening artifact, 238/886 papers still lack an abstract field, but all have
-a recorded FT decision. Papers whose full text remained inaccessible despite
-all retrieval attempts were closed under EC5; after the OA recovery audit,
-145 papers remain in that stratum. The working-set
-result is \textbf{169 confirmed primary studies} and 717 FT excluded (EC3:
-232, EC1: 205, EC5: 145, EC2: 110, EC4: 60), with zero pending decisions.
-Data extraction for all 169 studies was completed using a structured
-LLM-assisted pipeline operating on locally available PDFs (75/169, with 73
-operationally coded in the triangulation subset) or abstract/title metadata
-(94/169).
-
-A second tier of the protocol then applied the same T/A and FT screening
-to the previously deferred 3{,}807-paper auxiliary corpus, yielding 232
-T/A includes and 1{,}151 T/A maybes; FT screening of the 1{,}383 forwarded
-papers produced 212 additional confirmed primary studies (first auxiliary
-pass), 291 excludes, and 880 \texttt{pending}. A subsequent re-screening
-pass over 285 abstract-enriched auxiliary papers confirmed 23 further
-studies (second auxiliary pass), bringing the raw combined total to
-404 primary studies, or 340 distinct studies after cross-tier
-de-duplication. Two of those 340 are removed because they predate 1994.
-The human re-screen adds 168 distinct studies. The corpus of this revision
-is 506. The 318-study subset is the base of the joint F1--F5 tables. Those
-tables do not include the 168
-(Section~\ref{sec:slr-synthesis}).
-
-Analysis of the working-set tier (169 studies) and the 318-study subset
-supports five findings about the coded studies, not about all 506. First,
-the coded set shows a descriptive ceiling: 71.6\% of working-set papers
-(50.3\% in the 318) apply process mining to software artifacts, but only
-17.2\% of the working-set tier (31.4\% in the 318) forecast a process metric
-(F1). Second, event-log construction from heterogeneous repositories is a
-standing difficulty (F2). Third, stochastic models and process mining are
-rarely combined for forecasting: 10.7\% of the working-set tier and 25.5\%
-of the 318 match both families (F3). Fourth, one coded study, PRIMAD, matches
-process mining, stochastic modeling, and forecasting together. On the 429
-studies with those three marks filled, that study is still the only one.
-Seventy-seven added studies, read from the title alone, are outside the
-count (F4). Fifth,
-machine-learning studies in the coded set rarely use features taken from a
-process model (F5).
+Five findings describe the coded rows. The 169 working-set studies and the
+318 joint-table studies show a descriptive ceiling: process mining is
+common and forecasting of a process metric is not (F1). Event-log
+construction is a model extraction (F2). Stochastic models and process
+mining are rarely combined (F3). PRIMAD is the only triple match in the
+429 (F4). Machine-learning studies in that coded set rarely use a feature
+taken from a process model (F5). A Scopus search on 31~October~2026 added
+machine-learning terms and, on titles alone, found 19 further IC4c studies.
+They are not in the 506, and none joins the three families.
 
 These gaps motivate the SPMF taxonomy and research agenda RA1--RA4
-(Section~\ref{sec:slr-agenda}). PATHCAST names a candidate integrated
-pipeline as future work by the authors, not as an empirically validated
-contribution of this mapping study.
+(Section~\ref{sec:slr-agenda}). PATHCAST is future work by the authors.
+It is not a finding of the mapping.
 
-Methodologically, cross-model verification achieved substantial LLM--LLM
-$\kappa$ (0.695 T/A; 0.694 FT), a secondary signal. The primary validity
-evidence is the pre-registered two-rater human validation. Operational
-title/abstract Recall is 1.000 (72 of 72). Full-text Recall on the
-working-set sample is 0.630 (29 of 46; Wilson 95\% CI 0.486--0.755).
-Auxiliary Recall after the stratum re-screen is 0.725 (235 of 324). Both
-are below the pre-registered bar of 0.90. The corpus of this revision is
-506 distinct studies: 338 from the LLM list after removing two pre-1994
-records, plus 168 distinct studies the re-screen added. The percentages in
-F1--F5, other than the triple intersection, still describe the 338. The
-triple intersection, process mining with a stochastic model and with
-forecasting, is 1 of 429: the 338 plus the 91 added studies read from an
-abstract or a PDF. None of those 91 joins the three families. The 77 added
-studies read from the title alone are outside that fraction. Reporting-quality scoring
-covers the 338 coded studies (278 of them at or above 4/8) and the 168
-added studies (43 of them at or above 4/8). The replication
-package is openly available at Zenodo (DOI~\zenododoi).
+The primary validity evidence is the pre-registered two-rater check.
+Operational title/abstract Recall is 1.000 (72 of 72). Recall on the
+working-set sample, against full texts, is 0.630 (29 of 46; Wilson 95\% CI
+0.486--0.755). Auxiliary Recall after the stratum re-screen is 0.725
+(235 of 324). Both are below 0.90. The replication package is openly
+available at Zenodo (DOI~\zenododoi).
 
 \appendix
 \section{Included primary studies}
 \label{app:included}
 
-The corpus of this revision contains 506 distinct studies: 338 from the
-LLM-confirmed list after removal of two pre-1994 records, and 168 added by
-the human re-screen after de-duplication. The machine-readable list is
-\texttt{included\_studies\_506.csv}. The earlier
-\texttt{included\_studies\_340.csv} keeps the two removed records
-(\texttt{dd71433d}, 1991; \texttt{37385fbd}, 1992) so the removal can be
-checked. The triple intersection is 1 of 429 studies with family marks
-filled (\texttt{family\_codes\_168.csv}). The other F1--F5 percentages stay
-on the coded 338 and on the tier subsets named in those paragraphs (169 and
-318). Of the 168 added studies, 11 were read in full text, 80 from the
-abstract, and 77 from the title only. Publications dated 2026 that were
+Appendix~\ref{app:included} lists the 506 studies. Table~\ref{tab:class-matrix}
+groups them by family. Table~\ref{tab:included-506} gives the identifier of
+each study. The file \texttt{included\_studies\_340.csv} still contains the
+two papers from 1991 and 1992 (\texttt{dd71433d}, \texttt{37385fbd}) so that
+removal can be checked.
+
+\input{results/included_506_matrix}
+
+Publications dated 2026 that were
 indexed by 12~April~2026 remain inside the eligibility window.
 
 \section{SEGRESS reporting checklist}
