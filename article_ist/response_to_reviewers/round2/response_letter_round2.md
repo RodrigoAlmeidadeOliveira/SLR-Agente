@@ -27,7 +27,7 @@ The new check was pre-registered on 6 October 2026, before any new judgement (`P
 
 The 506 is 338 + 168. The LLM list had 340 distinct studies. Two were published in 1991 and 1992 and are removed, which leaves 338. The re-screen listed 188 further includes. Sixteen are the same study as one of the 338, under another identifier. Four more are the same article twice inside the 188. That leaves 168 studies actually added. Adding 340 and 188 counts identifiers and is not the corpus size.
 
-Findings F1 to F5 still describe the coded studies (the working-set tier of 169, and the joint tables on 318). They are not percentages of the 506. The 168 added studies have an extraction form, but 77 of them were coded from the title alone, and their screen label is not the technique-family code used in those findings. We do not treat a missing code as evidence of absence, and we do not claim that the scarcity results were recomputed on the 506. In the coded set, one study (PRIMAD) matches process mining, stochastic modeling, and forecasting together. That sentence is about the coded set only.
+Findings F1 to F5, other than the triple intersection, still describe the coded studies (the working-set tier of 169, and the joint tables on 318). They were not recomputed on the 506. The triple intersection was. Every added study that had an abstract or a PDF received the same three family marks as the 338 (`family_codes_168.csv`: 91 studies). None of the 91 has process mining, a stochastic model, and forecasting together. Added to PRIMAD (`ed0ab009`), the count is 1 of 429. The other 77 added studies were read from the title alone. Their marks are blank, and they are outside that fraction. We do not treat a blank as a no.
 
 Section names below are those of the revised manuscript. Page numbers are not cited: the PDF has not been recompiled in this step.
 
@@ -37,11 +37,11 @@ Section names below are those of the revised manuscript. Page numbers are not ci
 
 **Human validation, and whether it corrected the corpus.**
 
-In round 1 it did not. That was a real gap. In this revision the full-text sample was judged again. Recall is 0.630 (29 of 46). Six further records are not assessable and are outside that fraction. Lost evidence is 0.370. MCC is 0.656. The weighted MCC, with a false negative counted ten times a false positive, is 0.168. The same Recall is obtained from the second rater's labels alone. Because 0.630 is below 0.90, the accessible working-set records the LLM had excluded were re-screened, and so were the three auxiliary strata. The studies that survive de-duplication are the 168 named above. They are in `included_studies_506.csv`. They are not inside the F1–F5 percentages. The account is in Internal Validity (Threats to Validity) and in the opening of Results and Synthesis.
+In round 1 it did not. That was a real gap. In this revision the full-text sample was judged again. Recall is 0.630 (29 of 46). Six further records are not assessable and are outside that fraction. Lost evidence is 0.370. MCC is 0.656. The weighted MCC, with a false negative counted ten times a false positive, is 0.168. The same Recall is obtained from the second rater's labels alone. Because 0.630 is below 0.90, the accessible working-set records the LLM had excluded were re-screened, and so were the three auxiliary strata. The studies that survive de-duplication are the 168 named above. They are in `included_studies_506.csv`. The triple intersection was marked on the 91 of them that have an abstract or a PDF and is 1 of 429, including PRIMAD. The other F1–F5 percentages were not recomputed on the 506. The account is in Internal Validity (Threats to Validity) and in the opening of Results and Synthesis.
 
 **Corpus sizes that did not match.**
 
-The manuscript had been using 169, 318, 340, and 404 for different cuts of the same list. The revised Results section says what each number is. The corpus of this revision is 506. Findings F1–F5 stay on the coded tiers. We did not regenerate every table onto 506, because the 168 do not carry the family codes those tables use.
+The manuscript had been using 169, 318, 340, and 404 for different cuts of the same list. The revised Results section says what each number is. The corpus of this revision is 506. Findings F1–F5 other than the triple intersection stay on the coded tiers. The triple intersection is 1 of 429. We did not regenerate every table onto 506.
 
 **Studies from 1991 and 1992.**
 
@@ -61,7 +61,7 @@ The second pass used the enriched title and abstract for almost every record. A 
 
 **Which protocol produced the corpus.**
 
-The 340-identifier list was produced by the original protocol, including the closure of unresolved auxiliary records. The 506 is that list, minus the two pre-1994 records, plus the 168 studies added by the human re-screen. The stratum of records closed without a decision was part of the auxiliary check (1 include in a sample of 51 assessable records; 14 includes in the rest of the stratum, all from a heuristic pass).
+The 340-identifier list was produced by the original protocol, including the closure of unresolved auxiliary records. The 506 is that list, minus the two pre-1994 records, plus the 168 studies added by the human re-screen. The records closed without a decision, the other working-set full-text exclusions, and the pending records were screened by both reviewers. They agreed with 92% of the suggested labels, including the heuristic labels on the later S1 batches and on all of S3. The 8% they did not accept is not identified record by record, so the 506 list still contains every suggested include. The stratum closed without a decision contributed 1 include in a sample of 51 assessable records and 14 includes in the rest of the stratum.
 
 **The letter and the manuscript.**
 
@@ -83,7 +83,7 @@ We confirm your reading of the round-1 package, and we withdraw that full-text R
 
 The threshold and the escalation rules were registered before the new judgements. Inaccessible records are not assessable. They are not exclusions. Six working-set records are in that class.
 
-The working-set full-text Recall is 0.630. The auxiliary Recall after re-screening the three strata is 0.725. Both miss 0.90. The re-screen is what added the 168 studies. The findings were not rewritten as properties of the 506. The conclusion says this in one place: the coded literature is descriptively rich and predictively fragmented, and that description is not a census of the 506.
+The working-set full-text Recall is 0.630. The auxiliary Recall after re-screening the three strata is 0.725. Both miss 0.90. The re-screen is what added the 168 studies. The triple intersection, after coding the 91 added studies that have an abstract or a PDF, is 1 of 429. The other findings were not rewritten as percentages of the 506. Seventy-seven added studies, read from the title alone, remain outside the triple count.
 
 The records that round 1 had closed for lack of an abstract are stratum S3 of the auxiliary check. They were not left as a silent exclusion.
 
@@ -97,7 +97,7 @@ Two raters, a written justification, a consensus, and a separate label when the 
 
 ---
 
-We are grateful to both reviewers. The revision reports a screen that missed eligible studies, a corpus of 506 after the duplicates were removed, and findings that still belong to the studies that were coded. It does not report a Recall of 0.90, and it does not report those findings as if they had been counted again on the 506.
+We are grateful to both reviewers. The revision reports a screen that missed eligible studies, a corpus of 506 after the duplicates were removed, and a triple intersection of 1 of 429 studies whose family marks were filled. It does not report a Recall of 0.90, and it does not report the other F1–F5 percentages as if they had been counted again on the 506.
 
 Sincerely,
 

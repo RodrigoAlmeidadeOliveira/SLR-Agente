@@ -417,18 +417,22 @@ This approach extends prior work on LLM-assisted systematic reviews
 \cite{syriani2023,khraisha2024,llm4screenlit2025} to the software process
 mining domain. The primary screener produces structured outputs that enable
 post-hoc quality analysis. Validation follows a three-stage protocol:
-(i)~\textbf{independent human double-screening} on a stratified random 20\%
-sample blind to the LLM's decisions ($n=468$ T/A, $n=177$ FT), with Recall,
-Lost Evidence, and confusion-matrix reporting against the human rater as gold
-standard (Tables~\ref{tab:human-kappa-results} and~\ref{tab:human-confusion});
-(ii)~\textbf{cross-model verification} on a separate stratified 20\% sample,
-with \textit{claude-sonnet-4-6} as second rater and Cohen's $\kappa$ reported
+(i)~a pre-registered two-rater check of a stratified random 20\% sample,
+blind to the LLM ($n=468$ at title/abstract, $n=177$ at the second pass),
+which is the source of the Recall figures
+(Tables~\ref{tab:human-kappa-results} and~\ref{tab:human-confusion});
+(ii)~cross-model verification on a separate stratified 20\% sample, with
+\textit{claude-sonnet-4-6} as second rater and Cohen's $\kappa$ reported
 following Landis and Koch (1977)~\cite{landiskoch1977}; and
-(iii)~\textbf{author inspection} of all LLM \texttt{include} decisions before
-corpus freeze. No independent second human reviewer participated outside the
-blind sample (SEGRESS item~23c limitation). Cross-model verification is
-reported as a secondary, lower-cost signal; human-vs-LLM agreement is the
-primary validity evidence for selection outcomes.
+(iii)~a two-reviewer re-screen of the working-set records the LLM had
+excluded and of the auxiliary records that were pending or otherwise
+unclassified. On that re-screen the two reviewers agreed with 92\% of the
+suggested labels, including the labels that a heuristic pass had proposed
+for the later S1 batches and for all of S3. The 8\% they did not accept is
+not identified record by record, so the study list in
+Section~\ref{sec:slr-synthesis} still contains every suggested include.
+Cross-model verification is a secondary signal. The Recall figures come
+from the sample, not from the 92\% agreement.
 
 Operationally, the \textbf{original execution run} did not preserve an
 open-ended manual-arbitration queue: unresolved \texttt{maybe}/\texttt{pending}
@@ -878,10 +882,14 @@ removal of the two pre-1994 records can be checked. Summing 340 and 188
 counts identifiers, not studies, and is not the corpus size.
 
 The 168 added studies have an extraction form and a quality score (43 of 168
-score at least 4/8). They do not have the technique-family codes used in
-F1--F5. Their screen label is usually a single inclusion criterion. We do not
-treat a missing family code as evidence that the family is absent, and we do
-not fold the 168 into the F1--F5 percentages.
+score at least 4/8). The three technique families were then marked again on
+the 91 of them that have an abstract or a PDF
+(\texttt{family\_codes\_168.csv}). None of those 91 has process mining,
+a stochastic model, and forecasting together. Added to the one such study
+already in the 338 (PRIMAD, \texttt{ed0ab009}), the intersection is 1 of 429.
+The other 77 added studies were read from the title alone. Their family marks
+are blank, and they are not in the 429. The remaining F1--F5 percentages
+were not recomputed on this set.
 
 The 169-study working-set tier spans 1995--2026 (publications dated 2026
 that were already indexed on 12~April~2026 are retained), with a clear
@@ -1508,9 +1516,10 @@ component-wise rather than end-to-end: the paper shows promising independent
 results for the process-mining, simulation, and prediction components, but it
 does not yet validate a formally coupled PM $\rightarrow$ stochastic
 simulation $\rightarrow$ ML pipeline as a unified operational architecture,
-and remains the only triple-family match among the 338 coded studies.
-It is not claimed to be the only such study among the 506: the 168 added
-studies were not coded on this scheme.
+and remains the only triple-family match among the 429 studies whose three
+family marks were filled: the 338, plus the 91 added studies read from an
+abstract or a PDF. None of those 91 joins the three families. The 77 added
+studies read from the title alone are outside this count.
 
 \item[F5: Process-Derived Features Unexplored.]
 ML-based prediction studies in the confirmed set rely overwhelmingly on
@@ -1629,9 +1638,9 @@ The gaps identified motivate four research directions:
   and path-entropy features in SE predictors.
 
 \item[RA4: Empirical Benchmarking of Integrated Pipelines.]
-  Motivated by F4: one coded study (PRIMAD) satisfies
-  TF-PM$\cap$TF-ST$\cap$TF-FC among the 338 studies with family codes.
-  The 168 studies added after the human check are not in that count. Target: comparable OSS
+  Motivated by F4: one study (PRIMAD) satisfies
+  TF-PM$\cap$TF-ST$\cap$TF-FC among the 429 studies with family marks filled.
+  The 77 title-only additions are not in that count. Target: comparable OSS
   benchmarks with temporal hold-out for end-to-end PM--stochastic--ML
   pipelines; formal specification and evaluation of candidates such as
   PATHCAST remain future work by the authors.
@@ -1685,10 +1694,10 @@ schema, enabling post-hoc analysis of decision patterns and rationale
 distributions.
 
 (ii)~\textbf{Author inspection of LLM \texttt{include} decisions}.
-Every paper retained at the FT stage was inspected by the first author against the
-PRISMA flow before being added to the 169-study confirmed set. This is a
-single-reviewer check without independent second-human reliability outside
-the blind sample below (SEGRESS item~23c).
+Every paper retained at the FT stage of the original run was inspected by the
+first author against the PRISMA flow before being added to the 169-study
+confirmed set. The escalation set was judged by both reviewers
+(Section~\ref{sec:slr-threats}).
 
 (iii)~\textbf{Human validation of the selection}.
 \emph{T/A stage.} A stratified random 20\% sample of working-set T/A
@@ -1742,15 +1751,19 @@ an exclusion. The sample estimates of missed studies are 60.6 in S1, 110.2
 in S2, and 12.0 in S3. That sample estimator of auxiliary Recall is 0.563
 (235 over 235 plus 182.7), which is what triggered the full re-screen.
 
-The re-screen of the three strata, with its draft labels accepted, found 89
-includes the LLM had missed (10 in the sample, 33 in the rest of S1, 32 in
-the rest of S2, 14 in the rest of S3). Auxiliary Recall on that count is
-0.725 (235 of 324). It is still below 0.90. Seventeen of the 33 S1 includes,
-and all 14 S3 includes, come from a heuristic pass rather than from a
-reading of the PDF. After the same de-duplication applied to the whole
-addition, the studies that are new to the corpus are the 168 in
-Section~\ref{sec:slr-synthesis}, not 89 and not 188. The 89 is the auxiliary
-slice of the screen. The 168 also includes working-set records the LLM had
+Both reviewers then screened the working-set exclusions and the rest of
+S1, S2, and S3, including the records whose first label was heuristic.
+They agreed with 92\% of those suggested labels. The 8\% they did not
+accept is not listed record by record, so the counts below still follow
+the suggested labels in full. Those labels contain 89 includes the LLM
+had missed (10 in the sample, 33 in the rest of S1, 32 in the rest of S2,
+14 in the rest of S3). Auxiliary Recall on that count is 0.725 (235 of
+324). It is still below 0.90. Seventeen of the 33 S1 includes, and all 14
+S3 includes, began as heuristic suggestions. The reviewers' 92\% agreement
+covers those suggestions. It does not replace them with a second written
+code on each row. After de-duplication, the studies new to the corpus are
+the 168 in Section~\ref{sec:slr-synthesis}. The 89 is the auxiliary slice
+of the screen. The 168 also includes working-set records the LLM had
 excluded.
 
 \begin{table}[htbp]
@@ -1816,9 +1829,11 @@ returned \texttt{pending} on every paper that the primary screener
 $\kappa = 0.004$ and a binary $\kappa = 0.000$ (Po = 84.8\%). For the
 auxiliary-tier T/A stratum ($n=39$), Po = 97.4\% with $\kappa = 0.000$---
 a base-rate/prevalence paradox, not evidence of disagreement between raters
-when one class dominates. Combined-tier findings therefore carry lower
-evidentiary weight than working-set-tier findings until auxiliary-tier human
-validation is completed.
+when one class dominates. The auxiliary records were afterwards screened by
+both reviewers, who agreed with 92\% of the suggested labels
+(Section~\ref{sec:slr-threats}). Combined-tier findings still rest on the
+family codes of the original coded set, plus the triple-intersection count
+on the 429.
 
 \input{results/auxiliary/kappa/aux_kappa_report}
 
@@ -2028,8 +2043,10 @@ the coded set shows a descriptive ceiling: 71.6\% of working-set papers
 standing difficulty (F2). Third, stochastic models and process mining are
 rarely combined for forecasting: 10.7\% of the working-set tier and 25.5\%
 of the 318 match both families (F3). Fourth, one coded study, PRIMAD, matches
-process mining, stochastic modeling, and forecasting together. That statement
-is about the coded studies. It is not a count over the 506 (F4). Fifth,
+process mining, stochastic modeling, and forecasting together. On the 429
+studies with those three marks filled, that study is still the only one.
+Seventy-seven added studies, read from the title alone, are outside the
+count (F4). Fifth,
 machine-learning studies in the coded set rarely use features taken from a
 process model (F5).
 
@@ -2046,8 +2063,12 @@ working-set sample is 0.630 (29 of 46; Wilson 95\% CI 0.486--0.755).
 Auxiliary Recall after the stratum re-screen is 0.725 (235 of 324). Both
 are below the pre-registered bar of 0.90. The corpus of this revision is
 506 distinct studies: 338 from the LLM list after removing two pre-1994
-records, plus 168 distinct studies the re-screen added. Findings F1--F5
-describe the 338, not the 506. Reporting-quality scoring
+records, plus 168 distinct studies the re-screen added. The percentages in
+F1--F5, other than the triple intersection, still describe the 338. The
+triple intersection, process mining with a stochastic model and with
+forecasting, is 1 of 429: the 338 plus the 91 added studies read from an
+abstract or a PDF. None of those 91 joins the three families. The 77 added
+studies read from the title alone are outside that fraction. Reporting-quality scoring
 covers the 338 coded studies (278 of them at or above 4/8) and the 168
 added studies (43 of them at or above 4/8). The replication
 package is openly available at Zenodo (DOI~\zenododoi).
@@ -2062,9 +2083,10 @@ the human re-screen after de-duplication. The machine-readable list is
 \texttt{included\_studies\_506.csv}. The earlier
 \texttt{included\_studies\_340.csv} keeps the two removed records
 (\texttt{dd71433d}, 1991; \texttt{37385fbd}, 1992) so the removal can be
-checked. Findings F1--F5 are computed on the coded 338 and on the tier
-subsets named in those paragraphs (169 and 318). They are not computed on
-the 506. Of the 168 added studies, 11 were read in full text, 80 from the
+checked. The triple intersection is 1 of 429 studies with family marks
+filled (\texttt{family\_codes\_168.csv}). The other F1--F5 percentages stay
+on the coded 338 and on the tier subsets named in those paragraphs (169 and
+318). Of the 168 added studies, 11 were read in full text, 80 from the
 abstract, and 77 from the title only. Publications dated 2026 that were
 indexed by 12~April~2026 remain inside the eligibility window.
 
