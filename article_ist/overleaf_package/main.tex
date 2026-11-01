@@ -47,7 +47,16 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black,
+  pdftitle={Process Mining and Stochastic Modeling for Software Process Forecasting: A Systematic Mapping Study with a Human-Checked LLM-Assisted Screen},
+  pdfauthor={Rodrigo Almeida de Oliveira, Juliano de Paulo Ribeiro, Edson Emilio Scalabrin}}
+%% Suppress the author-markup tokens elsarticle feeds to the PDF author string.
+\makeatletter
+\pdfstringdefDisableCommands{\let\corref\@gobble \let\fnref\@gobble \let\comma\@empty \let\@fnmark\@empty \let\@corref\@empty \let\cnotenum\@empty}
+\makeatother
+%% IST asks for line numbers in the review version.
+\usepackage{lineno}
+\modulolinenumbers[5]
 %% Allow DOI/URL strings to wrap inside table cells (pdflatex).
 \usepackage{xurl}
 
@@ -65,6 +74,7 @@
 \journal{Information and Software Technology}
 
 \begin{document}
+\linenumbers
 
 %% =========================
 %% Front matter
@@ -72,7 +82,8 @@
 \begin{frontmatter}
 
 \title{Process Mining and Stochastic Modeling for Software Process
-       Forecasting: A Systematic Mapping of Stored Family Codes}
+       Forecasting: A Systematic Mapping Study with a Human-Checked
+       LLM-Assisted Screen}
 
 %% Authors
 \author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}\fnref{orcid1}}
@@ -100,39 +111,42 @@
 %% --- Abstract (150–300 words, structured) ---
 \begin{abstract}
 \textbf{Context.}
-Software processes generate event data that process mining (PM) and
-stochastic models can use for forecasting. This mapping records family
-codes for that intersection on named cuts of one corpus. It does not
-establish how often the literature combines them for software
-development lifecycle (SDLC) prediction.
+Process mining (PM) and stochastic models can turn software process
+event data into forecasts of software development lifecycle (SDLC)
+metrics. No secondary study maps their joint use on software development
+data.
 \textbf{Objective.}
-To record the family codes a model stored on two cuts of this corpus,
-WS-151 (151 working-set studies) and 293 joint-table studies, which were
-not re-marked, and to propose a research agenda. Those codes are not a census of the literature, because the screen
-missed eligible studies.
+To assemble and classify a corpus at that intersection, to measure the
+selection error of an LLM-assisted screen against a pre-registered human
+reference, and to propose a research agenda.
 \textbf{Method.}
-We report a systematic mapping study against
-SEGRESS~\cite{kitchenham2023segress}. The mapping protocol was not
-pre-registered. The human check of the screen was. Searches ran on
-12~April~2026. An LLM screened 2{,}340 working-set rows and 3{,}807
-auxiliary rows. Those lists share 364 papers under different identifiers.
-Their union is the 5{,}783 deduplicated records. The success bar, set before the judgements, was Recall $\geq 0.90$.
+A systematic mapping study reported against
+SEGRESS~\cite{kitchenham2023segress}. Searches of five databases on
+12~April~2026 yielded 5{,}783 deduplicated records. An LLM screened
+them in two tiers; two human raters checked the screen on pre-registered
+samples against a bar of Recall $\geq 0.90$ and re-screened the records
+the LLM had excluded. Studies
+read from an abstract or a PDF were classified into four technique and
+data families.
 \textbf{Results.}
-The LLM list has 340 studies. Two predate 1994, leaving 338. Human
-Recall on the working-set sample is 0.630 (29 of 46; Wilson 95\% CI
-0.486--0.755). Auxiliary Recall is 0.725 (235 of 324). Removing 32
-coded studies and keeping the 150 added studies (ADD-150, a cut disjoint
-from WS-151) leaves a corpus of 456. F2 and
-F5 are withdrawn. F1, F3, and F4 were not re-marked and are not findings.
-One stored code in 380 matches process mining, a stochastic model, and
-forecasting.
+Recall is 0.630 on the working-set sample (29 of 46; Wilson 95\% CI
+0.486--0.755) and 0.725 (235 of 324) on the auxiliary tier, both below
+the bar. Three failure mechanisms are named: a second pass that read the
+abstract rather than the PDF, records without an abstract closed by rule,
+and 32 includes (9.5\% of 338) whose title or abstract does not support
+inclusion. The human re-screen added 150 studies; the corpus is 456. On
+the 151 working-set studies with full family codes, 104 match process
+mining, 49 a stochastic model, and 27 forecasting; one study in the 380
+with family marks matches all three.
 \textbf{Conclusion.}
-The agenda is not inferred from those codes. The mapping is not a
-census of the 456, because the screen missed eligible studies. PATHCAST is
-future work, not a result of this mapping.
+The family codes describe named cuts of this corpus, not the rate at
+which the literature combines the three techniques. The SPMF taxonomy and
+the agenda are proposals by the authors; the PATHCAST pipeline is future
+work.
 \textbf{Limitations.}
-The second pass used the abstract for almost every record. Seventy-six
-added studies were read from the title alone.
+The second pass used the abstract for almost every record; 76 added
+studies were read from the title alone; free-text extraction fields are
+withdrawn (0\% exact match with a human rater on 31 studies).
 \end{abstract}
 
 \begin{keyword}
@@ -146,10 +160,10 @@ Mining Software Repositories
 
 %% --- Highlights (3–5 bullets, ≤85 chars each) ---
 \begin{highlights}
-\item Human check of the LLM screen: Recall 0.630 and 0.725.
-\item This revision retains 456 studies after two removal passes.
-\item F2 and F5 are withdrawn. F1, F3, and F4 are not findings.
-\item One stored code joins mining, stochastic models, and forecasting.
+\item Pre-registered human check of an LLM screen: Recall 0.630 and 0.725 vs a 0.90 bar.
+\item Three failure mechanisms of the screen are named and quantified.
+\item Corpus of 456 studies at the PM, stochastic, and forecasting intersection.
+\item One study (PRIMAD) joins process mining, stochastic modelling, and forecasting.
 \item Replication package: Zenodo DOI 10.5281/zenodo.21939600.
 \end{highlights}
 
@@ -185,18 +199,15 @@ author within the Graduate Program in Informatics at the Pontif\'icia
 Universidade Cat\'olica do Paran\'a (PPGIa/PUC-PR).
 
 \section*{Declaration of generative AI in the writing process}
-During the conduct of this systematic mapping study, the authors used
-\textit{claude-haiku-4-5-20251001} (Anthropic) as the primary LLM screener
-at the title/abstract stage and at the second pass, which used the title and the abstract, and as the LLM scorer for the
-quality-assessment rubric, and \textit{claude-sonnet-4-6} (Anthropic) as
-the cross-model verifier for inter-rater agreement. All decisions were
-inspected by the authors; the LLM tools are not listed as authors and
-bear no responsibility for editorial judgements. Full prompts, JSON
-schemas, and per-paper decisions are deposited in the replication package
-(\href{\zenododoiurl}{Zenodo
-DOI~\zenododoi}). The authors reviewed and edited the content
-as needed and take full responsibility for the content of the
-publication.
+No generative AI tool was used to write, draft, translate, or edit the
+text of this manuscript. Large language models were used in the
+\emph{conduct} of the study, as a screening and scoring instrument whose
+selection error the study measures; that use (models, prompts, stages,
+and the human check) is described in Section~\ref{sec:slr-llm} and
+Section~\ref{sec:slr-replication}, and the prompts, JSON schemas, and
+per-record decisions are deposited in the replication package
+(\href{\zenododoiurl}{Zenodo DOI~\zenododoi}). The authors take full
+responsibility for the content of the publication.
 
 \section*{Data availability}
 A full replication package is openly available at Zenodo

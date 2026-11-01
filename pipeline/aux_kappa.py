@@ -287,7 +287,7 @@ def compute():
     REPORT_TXT.write_text("\n".join(lines), encoding="utf-8")
     tex = [
         "\\begin{table}[htbp]", "\\centering",
-        "\\caption{Auxiliary-tier inter-rater agreement (cross-model verification: Haiku 4.5 primary vs.\\ Sonnet 4.6 verifier on a stratified 20\\% sample).}",
+        "\\caption{Auxiliary-tier cross-model agreement (Haiku 4.5 primary vs.\\ Sonnet 4.6 verifier). FT: stratified 20\\% sample of the 1{,}383 forwarded records. TA: only 39 of the 761 records drawn (20\\% of 3{,}806) received a verifier decision, all primary \\texttt{exclude}s; that row is not a 20\\% sample.}",
         "\\label{tab:aux-kappa-results}",
         "\\begin{tabular}{lcccccc}", "\\toprule",
         "Stage & $N$ & $P_o^{\\text{multi}}$ & $P_o^{\\text{binary}}$ & $\\kappa_{\\text{multi}}$ & $\\kappa_{\\text{binary}}$ \\\\",

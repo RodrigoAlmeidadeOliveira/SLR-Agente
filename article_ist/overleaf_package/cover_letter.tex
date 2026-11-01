@@ -21,7 +21,8 @@ On behalf of all co-authors (Rodrigo Almeida de Oliveira, Juliano de Paulo
 Ribeiro, and Prof.\ Edson Emilio Scalabrin), I am pleased to submit our
 manuscript titled
 \textbf{``Process Mining and Stochastic Modeling for Software Process
-Forecasting: A Systematic Mapping of Stored Family Codes''}
+Forecasting: A Systematic Mapping Study with a Human-Checked LLM-Assisted
+Screen''}
 for consideration in \emph{Information and Software Technology}.
 
 \medskip\noindent\textbf{Novelty and contribution.}
@@ -30,38 +31,36 @@ intersection of process mining (PM), stochastic modeling, and machine
 learning applied to software process forecasting. The contribution is
 threefold:
 \begin{enumerate}
-\item \textbf{Methodological:} an LLM screened the records (Claude Haiku 4.5
-      as primary screener, Claude Sonnet 4.6 as verifier). On the parseable
-      cross-model sample, binary Cohen's $\kappa$ is 0.695 at
-      title/abstract (420 of 468 papers; 48 verifier responses had no
-      category because the abstract was absent) and 0.694 at the second
-      pass ($n=177$). That agreement is not a human validation. The
-      pre-registered check is a two-rater sample. Recall on the
-      working-set sample is 0.630 (29 of 46). It is not a full-text
-      Recall: a PDF was read for 0.5\% of the 886 records. The round-1
-      FT row (Recall 0.246; $\kappa = 0.122$) is withdrawn. Auxiliary Recall after the
-      stratum re-screen is 0.725 (235 of 324). Both are below the
-      pre-registered bar of 0.90. The two reviewers agreed with 92\% of
-      the suggested labels on the remaining records. The re-screen sheets
-      (4{,}005 rows) match the suggestion on every row, so that share is
-      not marked there. Rebuilt from the title or abstract, it is 32 of
-      the 338 coded includes (9.5\%), and those 32 are removed.
-\item \textbf{Empirical:} the corpus of this revision is 456 studies: 306
-      that remain after 32 coded studies are removed from the list of 338,
-      plus the 150 added studies (ADD-150) that remain after an
-      eligibility pass removed 18 of 168. The family codes are reported
-      on WS-151, the 151 working-set studies inside the 306, a cut
-      disjoint from ADD-150.
-      One study
-      in the 380 with at least one family mark (PRIMAD) matches process
-      mining, a stochastic model, and forecasting. Seventy-six added
-      studies, read from the title alone, are outside that fraction.
-      F2 and F5 are withdrawn. F1, F3, and F4 are stored codes and are not
-      findings. The agenda is not inferred from them.
+\item \textbf{Methodological:} a pre-registered, two-rater measurement
+      of the selection error of an LLM-assisted screen (Claude Haiku 4.5
+      as primary screener, Claude Sonnet 4.6 as cross-model verifier).
+      Against a pre-registered bar of Recall $\geq 0.90$, Recall is 0.630
+      on the working-set sample (29 of 46) and 0.725 on the auxiliary
+      tier after the stratum re-screen (235 of 324). The paper names the
+      three mechanisms behind the shortfall (an abstract-based second
+      pass, with a PDF read for 0.5\% of the 886 records; records without
+      an abstract closed by rule; and 32 of 338 coded includes, 9.5\%,
+      whose title or abstract does not support inclusion, which are
+      removed) and reports the human re-screen the rule triggered. The
+      cross-model $\kappa$ (0.695 at title/abstract, 0.694 at the second
+      pass) is reported as a secondary signal, and the round-1 FT row
+      (Recall 0.246; $\kappa = 0.122$) is withdrawn.
+\item \textbf{Empirical:} a corpus of 456 studies at the intersection of
+      process mining, stochastic modelling, and software process
+      forecasting: 306 that remain after the 32 removals from the list of
+      338, plus the 150 added studies (ADD-150) that remain after an
+      eligibility pass removed 18 of 168. The studies are classified into
+      four technique and data families and into integration levels
+      L0--L3, with counts reported on named cuts (WS-151, the 151
+      working-set studies inside the 306, and the 293-study joint cut).
+      One study in the 380 with at least one family mark (PRIMAD) matches
+      process mining, a stochastic model, and forecasting. Two free-text
+      fields (F2, F5) are withdrawn after a 0\% exact match with a human
+      rater on 31 studies; a single scope paragraph states what the
+      counts describe.
 \item \textbf{Synthetic:} the SPMF taxonomy and a four-direction research
-      agenda (RA1--RA4), proposed by the authors and not inferred from
-      F1--F5. PATHCAST is future work. It is not a result of
-      this mapping.
+      agenda (RA1--RA4), proposed by the authors. PATHCAST, the authors'
+      own pipeline, is named as future work and is not evaluated.
 \end{enumerate}
 
 \medskip\noindent\textbf{Fit with IST scope.}

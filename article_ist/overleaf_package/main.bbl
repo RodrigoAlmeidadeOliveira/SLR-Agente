@@ -154,14 +154,14 @@ B.~A. Kitchenham, S.~Charters, Guidelines for performing systematic literature
 C.~Wohlin, Guidelines for snowballing in systematic literature studies and a
   replication in software engineering, in: Proceedings of the 18th
   International Conference on Evaluation and Assessment in Software Engineering
-  (EASE 2014), ACM, 2014.
+  (EASE 2014), ACM, 2014, pp. 38:1--38:10.
 \newblock \href {https://doi.org/10.1145/2601248.2601268}
   {\path{doi:10.1145/2601248.2601268}}.
 
 \bibitem{syriani2023}
 E.~Syriani, I.~D{\'a}vid, G.~Kumar, Assessing the ability of {ChatGPT} to
-  screen articles for systematic reviews, in: arXiv preprint, 2023,
-  arXiv:2307.06464.
+  screen articles for systematic reviews, arXiv preprint arXiv:2307.06464
+  (2023).
 \newblock \href {https://doi.org/10.48550/arXiv.2307.06464}
   {\path{doi:10.48550/arXiv.2307.06464}}.
 
@@ -217,8 +217,10 @@ M.~Ortu, G.~Destefanis, T.~Hall, D.~Bowes, Fault-insertion and fault-fixing
 
 \bibitem{joshi2024}
 R.~Joshi, N.~Kahani, Comparative study of reinforcement learning in {GitHub}
-  pull request outcome predictions (2024) 489--500\href
-  {https://doi.org/10.1109/SANER60148.2024.00057}
+  pull request outcome predictions, in: 2024 IEEE International Conference on
+  Software Analysis, Evolution and Reengineering (SANER), IEEE, 2024, pp.
+  489--500.
+\newblock \href {https://doi.org/10.1109/SANER60148.2024.00057}
   {\path{doi:10.1109/SANER60148.2024.00057}}.
 
 \bibitem{jeon2015}
@@ -237,20 +239,25 @@ L.~Tian, A.~Noore, Modeling distributed software defect removal effectiveness
 
 \bibitem{tyagi2021}
 M.~Tyagi, D.~K. Tyagi, L.~K. Tyagi, N.~Tyagi, D.~Kumar, A.~Sikandar, Agile
-  planning and tracking of software projects using the state-space approach
-  (2021) 355--371\href {https://doi.org/10.1007/978-981-16-0404-1_26}
+  planning and tracking of software projects using the state-space approach,
+  in: Proceedings of International Conference on Communication and
+  Computational Technologies, Communications in Computer and Information
+  Science, Springer, 2021, pp. 355--371.
+\newblock \href {https://doi.org/10.1007/978-981-16-0404-1_26}
   {\path{doi:10.1007/978-981-16-0404-1_26}}.
 
 \bibitem{washizaki2015}
 H.~Washizaki, K.~Honda, Y.~Fukazawa, Predicting release time for open source
-  software based on the generalized software reliability model (2015)
-  76--81\href {https://doi.org/10.1109/Agile.2015.19}
+  software based on the generalized software reliability model, in: 2015 Agile
+  Conference, IEEE, 2015, pp. 76--81.
+\newblock \href {https://doi.org/10.1109/Agile.2015.19}
   {\path{doi:10.1109/Agile.2015.19}}.
 
 \bibitem{massitela2018}
 I.~Massitela, J.~Assun{\c{c}}{\~a}o, A.~R. Santos, P.~Fernandes, A structured
-  stochastic model for software project estimation in {Waterfall} models
-  (2018).
+  stochastic model for software project estimation in {Waterfall} models, in:
+  Proceedings of the 30th International Conference on Software Engineering and
+  Knowledge Engineering (SEKE 2018), 2018.
 \newblock \href {https://doi.org/10.18293/SEKE2018-033}
   {\path{doi:10.18293/SEKE2018-033}}.
 
@@ -362,5 +369,19 @@ J.~Caldeira, F.~B. e~Abreu, J.~Cardoso, J.~Reis, Unveiling process insights
   103587.
 \newblock \href {https://doi.org/10.1016/j.csi.2021.103587}
   {\path{doi:10.1016/j.csi.2021.103587}}.
+
+\bibitem{matthews1975}
+B.~W. Matthews, Comparison of the predicted and observed secondary structure of
+  {T4} phage lysozyme, Biochimica et Biophysica Acta (BBA) - Protein Structure
+  405~(2) (1975) 442--451.
+\newblock \href {https://doi.org/10.1016/0005-2795(75)90109-9}
+  {\path{doi:10.1016/0005-2795(75)90109-9}}.
+
+\bibitem{chicco2020}
+D.~Chicco, G.~Jurman, The advantages of the {Matthews} correlation coefficient
+  ({MCC}) over {F1} score and accuracy in binary classification evaluation, BMC
+  Genomics 21 (2020) 6.
+\newblock \href {https://doi.org/10.1186/s12864-019-6413-7}
+  {\path{doi:10.1186/s12864-019-6413-7}}.
 
 \end{thebibliography}
