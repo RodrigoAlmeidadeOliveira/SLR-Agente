@@ -1,7 +1,8 @@
 """Remove LLM includes whose title or abstract does not support inclusion.
 
 Source list: results/final_review/labels_ta_insufficient_for_include.csv.
-These 33 rows sit in the coded set (the 338). They are not part of the
+These 32 rows sit in the coded set (the 338); ee562777 was reinstated
+because its include decision was PDF-based (see article §3.5). They are not part of the
 168 studies added after the human re-screen.
 """
 from __future__ import annotations
@@ -67,7 +68,7 @@ def main() -> None:
 
     old = "The %d use the codes already stored for that set." % coded
     new = (
-        "The %d remain from the coded list of 338 after 33 studies were removed "
+        "The %d remain from the coded list of 338 after 32 studies were removed "
         "because the title or abstract does not support inclusion."
     ) % coded
     for path in MATRIX_PATHS:

@@ -23,7 +23,6 @@ f449ac41,2011,WS,Conformance checking of software development processes through 
 9a84a55d,2012,WS,Improving event correlation for non-process aware information systems,,Correlação de eventos para minerar processos de negócio em sistemas não conscientes de processo.
 ceec0a17,2012,WS,Process conformance using CSP,10.1145/2134254.2134278,Conformance de processo de negócio via CSP; o resumo não trata processo de software.
 53d897a8,2015,WS,Discovery of functional architectures from event logs,,"Arquitetura funcional descoberta de event logs do sistema; comportamento do produto, não do processo de desenvolvimento."
-ee562777,2015,WS,Mining project-oriented business processes,10.1007/978-3-319-23063-4_28,"Processos de negócio orientados a projeto e conformidade; VCS é fonte de dados, e o resumo não fixa processo de desenvolvimento de software."
 c149b689,2015,WS,Toward using business process intelligence to support incident management metrics selection and service improvement,10.18293/SEKE2015-110,"Métricas de gestão de incidentes de serviço de TI; processo de negócio/serviço, não de desenvolvimento."
 63e1f0bf,2017,WS,Mining encrypted software logs using alpha algorithm,10.5220/0006408602670274,Mineração de logs cifrados da execução do software; objeto é a execução do produto.
 fbd20bfb,2019,WS,The evolutionary composition of desirable execution traces from event logs,10.1016/j.future.2019.03.037,Composição de traços a partir de event logs de organizações pares; process mining genérico (tipo BPIC).
