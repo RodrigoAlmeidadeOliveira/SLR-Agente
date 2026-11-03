@@ -1,0 +1,12 @@
+Family-code audit (Option B) — recompute
+============================================================
+sheet rows: 99 | Rater B pairs: 30 | kappa A vs B: undef (Po=1.000)
+conflicts awaiting consensus: 0 []
+problems: 0
+
+changes applied:
+  none
+
+[WS-151] n=151 PM=104 ST=49 FC=27 | PM&ST=8 PM&FC=5 ST&FC=18 triple=1 | L0/L1/L2/L3=122/28/1/0
+[joint-293] n=293 PM=139 ST=152 FC=96 | PM&ST=10 PM&FC=7 ST&FC=80 triple=1 | L0/L1/L2/L3=198/94/1/0
+[marked-380] n=380 PM=157 ST=210 FC=111 | PM&ST=10 PM&FC=7 ST&FC=90 triple=1 | L0/L1/L2/L3=275/104/1/0

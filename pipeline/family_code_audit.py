@@ -279,13 +279,17 @@ def recompute() -> None:
 
     kappa = None
     if kappa_pairs:
+        po = sum(1 for a, b in kappa_pairs if a == b) / len(kappa_pairs)
         try:
             from pipeline.kappa import _kappa  # type: ignore
             kappa = _kappa([a for a, _ in kappa_pairs], [b for _, b in kappa_pairs])
             if isinstance(kappa, tuple):
                 kappa = kappa[0]
+            import math
+            if isinstance(kappa, float) and (math.isnan(kappa) or math.isinf(kappa)):
+                # Pe=1 when both raters use a single category → κ undefined
+                kappa = f"undef (Po={po:.3f})"
         except Exception:
-            po = sum(1 for a, b in kappa_pairs if a == b) / len(kappa_pairs)
             kappa = f"Po={po:.3f} (kappa helper unavailable)"
 
     # --- apply verdicts --------------------------------------------------
