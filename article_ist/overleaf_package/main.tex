@@ -111,42 +111,42 @@
 %% --- Abstract (150–300 words, structured) ---
 \begin{abstract}
 \textbf{Context.}
-Process mining (PM) and stochastic models can turn software process
-event data into forecasts of software development lifecycle (SDLC)
-metrics. No secondary study maps their joint use on software development
-data.
+The authors' PATHCAST programme proposes a forecasting pipeline for
+software development processes that couples process mining (PM) of
+repository event logs, a stochastic model of the mined process, Monte
+Carlo forecasting of lifecycle metrics, and machine-learning correction,
+through explicit interfaces validated end-to-end. Before building it, we
+needed to know whether such a pipeline, or its parts in combination, had
+already been published.
 \textbf{Objective.}
-To assemble and classify a corpus at that intersection, to measure the
-selection error of an LLM-assisted screen against a pre-registered human
-reference, and to propose a research agenda.
+To map the primary studies that combine process mining, stochastic
+modelling, and forecasting on software development data; to position
+PATHCAST against them; and to measure the selection error of the
+LLM-assisted screen used to build the corpus.
 \textbf{Method.}
 A systematic mapping study reported against
 SEGRESS~\cite{kitchenham2023segress}. Searches of five databases on
-12~April~2026 yielded 5{,}783 deduplicated records. An LLM screened
-them in two tiers; two human raters checked the screen on pre-registered
-samples against a bar of Recall $\geq 0.90$ and re-screened the records
-the LLM had excluded. Studies
-read from an abstract or a PDF were classified into four technique and
-data families.
+12~April~2026 yielded 5{,}783 deduplicated records. An LLM screened them;
+two human raters checked the screen on pre-registered samples against a
+Recall bar of 0.90 and re-screened the records it had excluded. Studies
+were classified into four technique and data families and into
+integration levels L0--L3, where L3 is the coupled, end-to-end-validated
+pipeline PATHCAST proposes.
 \textbf{Results.}
-Recall is 0.630 on the working-set sample (29 of 46; Wilson 95\% CI
-0.486--0.755) and 0.725 (235 of 324) on the auxiliary tier, both below
-the bar. Three failure mechanisms are named: a second pass that read the
-abstract rather than the PDF, records without an abstract closed by rule,
-and 32 includes (9.5\% of 338) whose title or abstract does not support
-inclusion. The human re-screen added 150 studies; the corpus is 456. On
-the 151 working-set studies with full family codes, 104 match process
-mining, 49 a stochastic model, and 27 forecasting; one study in the 380
-with family marks matches all three.
+The corpus has 456 studies. On the 151 fully coded working-set studies,
+104 use process mining, 49 a stochastic model, and 27 forecasting; eight
+combine process mining with a stochastic model. On the 380 studies with
+family marks, one (PRIMAD) combines all three, with its components
+validated separately (L2). No study identified in this review reaches
+L3. The LLM screen reached Recall 0.630 (29 of 46) and 0.725 (235 of
+324), below the bar; the human re-screen added 150 studies.
 \textbf{Conclusion.}
-The family codes describe named cuts of this corpus, not the rate at
-which the literature combines the three techniques. The SPMF taxonomy and
-the agenda are proposals by the authors; the PATHCAST pipeline is future
-work.
-\textbf{Limitations.}
-The second pass used the abstract for almost every record; 76 added
-studies were read from the title alone; free-text extraction fields are
-withdrawn (0\% exact match with a human rater on 31 studies).
+Within the reviewed corpus, no published work reports the architecture
+PATHCAST proposes; the closest, PRIMAD, stops at component-wise
+validation. Because the screen missed eligible studies, this is a
+statement about the corpus, not a proof of absence in the literature. The
+SPMF taxonomy and a four-direction research agenda frame the work that
+remains.
 \end{abstract}
 
 \begin{keyword}
@@ -163,7 +163,7 @@ Mining Software Repositories
 \item Pre-registered human check of an LLM screen: Recall 0.630 and 0.725 vs a 0.90 bar.
 \item Three failure mechanisms of the screen are named and quantified.
 \item Corpus of 456 studies at the PM, stochastic, and forecasting intersection.
-\item One study (PRIMAD) joins process mining, stochastic modelling, and forecasting.
+\item No study in the corpus reaches L3; the closest (PRIMAD) validates per component.
 \item Replication package: Zenodo DOI 10.5281/zenodo.21939600.
 \end{highlights}
 
@@ -199,15 +199,17 @@ author within the Graduate Program in Informatics at the Pontif\'icia
 Universidade Cat\'olica do Paran\'a (PPGIa/PUC-PR).
 
 \section*{Declaration of generative AI in the writing process}
-No generative AI tool was used to write, draft, translate, or edit the
-text of this manuscript. Large language models were used in the
-\emph{conduct} of the study, as a screening and scoring instrument whose
-selection error the study measures; that use (models, prompts, stages,
-and the human check) is described in Section~\ref{sec:slr-llm} and
-Section~\ref{sec:slr-replication}, and the prompts, JSON schemas, and
-per-record decisions are deposited in the replication package
-(\href{\zenododoiurl}{Zenodo DOI~\zenododoi}). The authors take full
-responsibility for the content of the publication.
+During the preparation of this work the authors used Claude (Anthropic)
+to review the manuscript text for language, internal consistency, and
+arithmetic. After using this tool, the authors (first author, advisor,
+and co-advisor) reviewed and edited the content as needed and take full
+responsibility for the content of the publication. Separately from the
+writing, large language models were used in the \emph{conduct} of the
+study, as a screening and scoring instrument whose selection error the
+study measures; that use (models, prompts, stages, and the human check) is
+described in Sections~\ref{sec:slr-llm} and~\ref{sec:slr-replication},
+and the prompts, JSON schemas, and per-record decisions are deposited in
+the replication package (\href{\zenododoiurl}{Zenodo DOI~\zenododoi}).
 
 \section*{Data availability}
 A full replication package is openly available at Zenodo

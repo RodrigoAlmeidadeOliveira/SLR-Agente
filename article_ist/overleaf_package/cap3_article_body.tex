@@ -461,6 +461,22 @@ V10 & Gupta \& Sureka (2017)         & PM multi-repository in SE          & ACM 
 \subsection{Inclusion and Exclusion Criteria}
 \label{sec:slr-criteria}
 
+\paragraph{Unit of counting} The unit of this mapping is the publication,
+as in Petersen et al.~\cite{petersen2015}; ``study'' in this article means
+one published report. Duplicate records of the same publication (same
+DOI, or same title under a different identifier) are merged during
+de-duplication. A conference paper and its later journal or conference
+extension are different publications and are both retained when each
+satisfies the criteria independently, because the extension may add
+evaluation the earlier report lacks and the mapping records what each
+report contains. Two such pairs exist in the corpus of 456:
+\texttt{b0f56a95} (ICSSP 2016) with \texttt{4fd2327e} (JSEP 2017), and
+\texttt{ae9983fa} (ISSREW 2022) with \texttt{d65695c6} (RAMS 2023).
+Counting studies rather than publications would give 454; both pairs
+carry the same family codes, so no proportion reported below moves by
+more than one percentage point (on WS-151, TF-ST would be 48 of 150 and
+TF-ST$\cap$TF-FC 17 of 150; the 293-study joint cut would be 291).
+
 The inclusion criteria are organized in two tiers. Formal criteria
 (IC1--IC3) filter on publication attributes and are applied during the
 database search configuration. Content criteria (IC4a--IC4d) require that the
@@ -743,7 +759,7 @@ SpringerLink (10 queries) & 2{,}884 & 1{,}543 \\
 IEEE Xplore (manual)    & 1{,}386 & 1{,}263 \\
 Snowballing             &   595   &   575   \\
 Web of Science (4 queries) & 997  &   514   \\
-ACM Digital Library (3 queries) & 96 &  34  \\
+ACM Digital Library (2 queries + 1 export) & 96 &  34  \\
 Control set (validation only) & 12 &    2   \\
 \midrule
 \textbf{Total} & \textbf{8{,}347} & \textbf{5{,}783} \\
@@ -1122,7 +1138,8 @@ the title alone carry no family mark and are outside every count below.
 
 \subsection{Overview of Included Studies}
 
-This revision includes \textbf{456 studies}: 306 that remain from the
+This revision includes \textbf{456 studies} (publications;
+Section~\ref{sec:slr-criteria}): 306 that remain from the
 coded list of 338, plus the 150 added studies that remain after the
 eligibility pass (ADD-150). ADD-150 is not the WS-151 cut: WS-151 is the
 151 working-set studies inside the 306 on which the family codes below
@@ -2245,7 +2262,12 @@ F1, F3, and F4 are the original family codes on the cut named in the
 sentence, not re-assigned in this revision (Section~\ref{sec:slr-scope});
 the human re-mark in this revision is the triple intersection on the 74
 added studies with an abstract or a PDF, none of which joins the three
-families. F2 and F5 are withdrawn: on 31 studies the exact agreement
+families. The set on which a single coding error would change the
+conclusion is identifiable: the 99 coded studies that carry two technique
+families (98 L1 studies and PRIMAD), 29 of them in WS-151, since one
+under-coded family would move such a study to L2 or L3. Those 99 were not
+re-read for this revision; the audit sheet and protocol for doing so are in
+the replication package (\texttt{results/family\_code\_audit/}). F2 and F5 are withdrawn: on 31 studies the exact agreement
 between the model and a human rater on those free-text fields is 0\%, and
 agreement on the categorical fields is 29--81\%, without adjudication.
 The two extraction layers are (i)~the 169-study working-set extraction
@@ -2323,7 +2345,7 @@ as a referral is 1.000 (72 of 72), which locates the working-set loss at
 the abstract-based second pass rather than at triage. The human re-screen
 that the pre-registered rule triggered recovered 150 studies.
 
-The second contribution is the corpus itself: 456 distinct studies at the
+The second contribution is the corpus itself: 456 publications at the
 intersection of process mining, stochastic modelling, and forecasting of
 software processes (Table~\ref{tab:ledger}), 306 that remain from the
 coded list of 338 plus the 150 added studies (ADD-150), classified into
@@ -2332,7 +2354,10 @@ a PDF was available (380 of the 456) and listed in \ref{app:included}. On WS-151
 codes, 104 carry process mining, 49 a stochastic model, and 27
 forecasting; the two technique families meet in 8 studies; and on the
 380 studies with at least one family mark, one study, PRIMAD, joins all
-three, with its components validated separately. Those counts describe
+three, with its components validated separately; no study reaches L3, the
+coupled and end-to-end-validated pipeline that PATHCAST proposes, so
+within the reviewed corpus the architecture has no published equivalent.
+Those counts describe
 the named cuts of this corpus (Section~\ref{sec:slr-scope}); the F2 and
 F5 fields are withdrawn after the extraction check. A supplementary Scopus
 search on 31~October~2026 with machine-learning terms found 19 further
@@ -2348,7 +2373,9 @@ openly available at Zenodo (DOI~\zenododoi).
 \section{Included primary studies}
 \label{app:included}
 
-This appendix lists the 456 studies. Table~\ref{tab:class-matrix}
+This appendix lists the 456 studies (publications; two
+conference--extension pairs are identified in
+Section~\ref{sec:slr-criteria}). Table~\ref{tab:class-matrix}
 groups them by family. Table~\ref{tab:included-506} gives the identifier of
 each study. The file \texttt{included\_studies\_340.csv} still contains the
 two papers from 1991 and 1992 (\texttt{dd71433d}, \texttt{37385fbd}) so that

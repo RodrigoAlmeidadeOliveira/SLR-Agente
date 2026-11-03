@@ -1,0 +1,52 @@
+Family-code audit (Option B) — recompute
+============================================================
+sheet rows: 99 | Rater B pairs: 0 | kappa A vs B: None
+conflicts awaiting consensus: 0 []
+problems: 129
+  - 87bce30b: Rater A verdict missing (third_family_present)
+  - 87bce30b: Rater B verdict missing (third_family_present)
+  - 07e55287: Rater A verdict missing (third_family_present)
+  - a20e7c58: Rater A verdict missing (third_family_present)
+  - 51b4ae2b: Rater A verdict missing (third_family_present)
+  - 51b4ae2b: Rater B verdict missing (third_family_present)
+  - 1363926c: Rater A verdict missing (third_family_present)
+  - f356af5c: Rater A verdict missing (third_family_present)
+  - f356af5c: Rater B verdict missing (third_family_present)
+  - b8b5b64e: Rater A verdict missing (third_family_present)
+  - b8b5b64e: Rater B verdict missing (third_family_present)
+  - 261f6383: Rater A verdict missing (third_family_present)
+  - 261f6383: Rater B verdict missing (third_family_present)
+  - c42be0aa: Rater A verdict missing (third_family_present)
+  - 7ab40121: Rater A verdict missing (third_family_present)
+  - 3d967450: Rater A verdict missing (third_family_present)
+  - dcbf27d8: Rater A verdict missing (third_family_present)
+  - dcbf27d8: Rater B verdict missing (third_family_present)
+  - 9e341b7f: Rater A verdict missing (third_family_present)
+  - 50d875ff: Rater A verdict missing (third_family_present)
+  - 50d875ff: Rater B verdict missing (third_family_present)
+  - 2d369fe9: Rater A verdict missing (third_family_present)
+  - 2d369fe9: Rater B verdict missing (third_family_present)
+  - 8de6dcfa: Rater A verdict missing (third_family_present)
+  - 8a97d0cf: Rater A verdict missing (third_family_present)
+  - 8a97d0cf: Rater B verdict missing (third_family_present)
+  - e89188a6: Rater A verdict missing (third_family_present)
+  - e89188a6: Rater B verdict missing (third_family_present)
+  - 9e450f55: Rater A verdict missing (third_family_present)
+  - 9e450f55: Rater B verdict missing (third_family_present)
+  - f36a08fe: Rater A verdict missing (third_family_present)
+  - 483d7725: Rater A verdict missing (third_family_present)
+  - 9c4cc898: Rater A verdict missing (third_family_present)
+  - 7b0b22ea: Rater A verdict missing (third_family_present)
+  - ae9983fa: Rater A verdict missing (third_family_present)
+  - ae9983fa: Rater B verdict missing (third_family_present)
+  - e4f9257c: Rater A verdict missing (third_family_present)
+  - 4b34f7a5: Rater A verdict missing (third_family_present)
+  - d65695c6: Rater A verdict missing (third_family_present)
+  - 9ffa3123: Rater A verdict missing (third_family_present)
+
+changes applied:
+  none
+
+[WS-151] n=151 PM=104 ST=49 FC=27 | PM&ST=8 PM&FC=5 ST&FC=18 triple=1 | L0/L1/L2/L3=122/28/1/0
+[joint-293] n=293 PM=139 ST=152 FC=96 | PM&ST=10 PM&FC=7 ST&FC=80 triple=1 | L0/L1/L2/L3=198/94/1/0
+[marked-380] n=380 PM=157 ST=210 FC=111 | PM&ST=10 PM&FC=7 ST&FC=90 triple=1 | L0/L1/L2/L3=275/104/1/0

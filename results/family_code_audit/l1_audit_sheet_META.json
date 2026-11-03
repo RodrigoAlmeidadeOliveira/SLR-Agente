@@ -1,0 +1,27 @@
+{
+  "built_from": {
+    "corpus": "results/final_review/included_studies_506.csv",
+    "extraction": "results/auxiliary/extraction_combined_381_dedup.csv"
+  },
+  "coded_set_n": 306,
+  "candidates_n": 99,
+  "by_tier": {
+    "WS-151": 29,
+    "Aux (293)": 70
+  },
+  "by_current_level": {
+    "L1": 98,
+    "L2": 1
+  },
+  "by_family_to_check": {
+    "TF-FC": 9,
+    "TF-PM": 83,
+    "TF-ST": 6,
+    "L3 (end-to-end coupling)": 1
+  },
+  "with_pdf": 22,
+  "with_abstract": 94,
+  "rater_B_seed": 20261101,
+  "rater_B_share": 0.3,
+  "rater_B_n": 30
+}
