@@ -60,7 +60,7 @@ of the software development process.
 Our model incorporates the cost and effectiveness of defect prevention
 techniques (such as software inspections), defect detection techniques
 (such as software testing) and the cost of failing to detect defects.
-Several simulation runs are presented to illustrate the model's usage.",none,system_dynamics | monte_carlo,simulation | framework,no,pdf,no,,,avaliador confirma PDF do mestrado,,,,,,no,,A only; consensus = A
+Several simulation runs are presented to illustrate the model's usage.",none,system_dynamics | monte_carlo,simulation | framework,no,abstract,no,,,"No PDF of the SCSC98 paper (Collofello et al. 1998, pp. 63-68) is available; verdict based on the WoS abstract. Original note (""avaliador confirma PDF do mestrado"") referred to a related master thesis, not to this paper; corrected 2026-11-03 by the first author.",,,,,,no,,A only; consensus = A
 32,afd1b7aa,Aux (293),yes,1999,,Software process simulation for reliability management,10.1016/S0164-1212(99)00010-2,wos,IC2|IC3,TF-ST|TF-FC,L1,TF-PM,Does the study ALSO apply TF-PM? (process discovery / conformance / enhancement from event logs),yes,results/pdfs/afd1b7aa_software_process_simulation_reliability_management.pdf,"This paper describes the use of a process simulator to support software
 project planning and management. The modeling approach here focuses on
 software reliability, but is just as applicable to other software
