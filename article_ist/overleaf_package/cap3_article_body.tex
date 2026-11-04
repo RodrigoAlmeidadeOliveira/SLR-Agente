@@ -46,8 +46,9 @@ them maps the joint use of process mining, stochastic modelling, and
 forecasting on software development data. This study does.
 
 \paragraph{Why the mapping matters} For the three communities named
-above, the mapping delivers a corpus of 456 primary studies at their
-intersection, classified into four technique and data families on named
+above, the mapping delivers a corpus of 456 records at their
+intersection, 380 of them with at least one family mark and 76 known only
+by their title, classified into four technique and data families on named
 cuts, with the one study that joins all three families identified. For
 the methodology of secondary studies, the review is also a deployment of
 LLM-assisted screening whose selection error we measure against a
@@ -69,17 +70,22 @@ count on the cut named in the cell, or a field left unreported.
 Its contributions are (i)~a pre-registered measurement of the selection
 error of an LLM-assisted screen (Recall 0.630 on the working-set sample
 and 0.725 on the auxiliary tier, against a bar of 0.90), with the
-failure mechanisms named and the human re-screen that repaired them;
-(ii)~a corpus of 456 primary studies at the PM, stochastic-modelling,
-and forecasting intersection, classified into four technique and data
+failure mechanisms named and the human re-screen that the
+pre-registered rule triggered, which raised auxiliary Recall from 0.563 to
+0.725 and added 150 studies;
+(ii)~a corpus of 456 records at the PM, stochastic-modelling, and
+forecasting intersection (380 with at least one family mark; 76 known
+only by their title), classified into four technique and data
 families (TF-PM, TF-ST, TF-FC, TF-MSR) and into integration levels
 L0--L3, with the counts reported on named cuts (F1, F3, F4) and two
 free-text fields withdrawn after the extraction check (F2, F5); and
 (iii)~the SPMF taxonomy and a four-direction research agenda proposed by
 the authors. Section~\ref{sec:slr-scope} states once what the family-code
-counts are and are not. The authors' own integrated-pipeline proposal
-(PATHCAST) is mentioned only as one research-agenda hypothesis
-(Section~\ref{sec:slr-positioning}) and is not evaluated here.
+counts are and are not. The mapping was motivated by, and is used to position, the authors'
+own integrated-pipeline proposal (PATHCAST). PATHCAST itself is not
+evaluated here; L3 is defined without reference to its components
+(Section~\ref{sec:slr-positioning}), and PATHCAST appears as one
+research-agenda hypothesis among others.
 
 Section~\ref{sec:slr-protocol} describes the protocol, including the
 eligibility criteria (Section~\ref{sec:slr-criteria});
@@ -233,73 +239,12 @@ contexts:
 The blocks above are the shared term lists. They are not the Scopus syntax
 that was run. Table~\ref{tab:query-ledger} is the ledger of every export in
 the corpus of 8{,}347 records: database, query name, and raw count. Every
-row was retrieved on 12~April~2026. The six Scopus rows sum to 2{,}377. All six Scopus strings, the four
-Web of Science strings, the two ACM query strings, and the four IEEE
-protocol strings are printed below. \texttt{scopus\_principal} returned
+row was retrieved on 12~April~2026. The six Scopus rows sum to 2{,}377.
+All six Scopus strings, the four Web of Science strings, the two ACM
+query strings, and the four IEEE protocol strings, as executed, are
+reproduced in \ref{app:strings}. \texttt{scopus\_principal} returned
 1{,}595 records. None of the strings in the ledger contains a
 machine-learning block.
-
-\begin{description}
-\item[\texttt{scopus\_principal} (1{,}595 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( ("software engineering" OR "software development" OR "software process" OR "software lifecycle" OR "SDLC" OR "DevOps" OR "CI/CD" OR "continuous integration" OR "agile development" OR "issue tracking" OR "version control" OR "code review" OR "pull request" OR "software repository" OR "software evolution") AND ("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "predictive process monitoring" OR "event log analysis" OR "process intelligence" OR ("Monte Carlo simulation" AND ("software" OR "process mining" OR "throughput" OR "lead time")) OR ("Markov chain" AND ("software" OR "process mining" OR "workflow" OR "development process")) OR (("stochastic model" OR "transition probability" OR "absorbing chain") AND ("software" OR "process mining")) OR (("remaining time prediction" OR "outcome prediction" OR "cycle time prediction" OR "lead time prediction") AND "software") OR ("event log" AND ("software" OR "repository" OR "JIRA" OR "GitHub"))) ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{scopus\_markov\_testing} (498 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( (("Markov chain" OR "Markov model") AND ("statistical software testing" OR "software testing" OR "software reliability")) OR ("A Markov chain model for statistical software testing") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{scopus\_stochastic\_petri} (6 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( (("stochastic Petri net" OR "stochastic workflow net" OR "GSPN") AND ("remaining service time" OR "service execution time" OR "remaining time")) OR ("Prediction of Remaining Service Execution Time Using Stochastic Petri Nets with Arbitrary Firing Delays") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{scopus\_simulation\_bridge} (200 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( (("process mining" OR "process discovery" OR "workflow mining") AND ("simulation model" OR "simulation models" OR "process simulation" OR "discovering simulation models" OR "colored Petri") AND ("event log" OR "process model" OR "business process")) OR ("Discovering Simulation Models") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{scopus\_complementar} (48 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( ("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{scopus\_fronteira} (30 records)]{\footnotesize\ttfamily\raggedright
-TITLE-ABS-KEY( ("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND ("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND ("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
-
-\item[\texttt{wos\_principal} (632 records)]{\footnotesize\ttfamily\raggedright
-TS=("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "event log analysis" OR "process intelligence" OR "predictive process monitoring") AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development" OR "issue tracking" OR "code review" OR "software project" OR "software repository" OR "software maintenance" OR "software evolution")\par}
-
-\item[\texttt{wos\_complementar} (338 records)]{\footnotesize\ttfamily\raggedright
-TS=(("Monte Carlo simulation" OR "Markov chain" OR "stochastic model" OR "transition probability" OR "absorbing chain" OR "process simulation") AND ("software" OR "process mining" OR "workflow" OR "throughput")) AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps")\par}
-
-\item[\texttt{wos\_msr} (26 records)]{\footnotesize\ttfamily\raggedright
-TS=("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND TS=("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time")\par}
-
-\item[\texttt{wos\_fronteira} (1 record)]{\footnotesize\ttfamily\raggedright
-TS=("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND TS=("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND TS=("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline")\par}
-
-\item[\texttt{acm\_principal} (24 records)]{\footnotesize\ttfamily\raggedright
-(Abstract:"process mining" OR Abstract:"conformance checking" OR Abstract:"process discovery" OR Abstract:"workflow mining" OR Abstract:"event log analysis" OR Abstract:"process intelligence" OR Abstract:"predictive process monitoring") AND (Abstract:"software engineering" OR Abstract:"software development" OR Abstract:"software process" OR Abstract:"SDLC" OR Abstract:"DevOps" OR Abstract:"continuous integration" OR Abstract:"agile development" OR Abstract:"issue tracking" OR Abstract:"software repository" OR Abstract:"software project")\par}
-
-\item[\texttt{acm\_msr} (32 records)]{\footnotesize\ttfamily\raggedright
-(Abstract:"mining software repositories" OR Abstract:"software repository mining" OR Abstract:"software archaeology" OR Abstract:"GitHub mining" OR Abstract:"Jira mining") AND (Abstract:"process model" OR Abstract:"workflow" OR Abstract:"state transition" OR Abstract:"Markov" OR Abstract:"Monte Carlo" OR Abstract:"lead time" OR Abstract:"cycle time" OR Abstract:"throughput" OR Abstract:"process mining" OR Abstract:"process analysis")\par}
-\end{description}
-
-The third ACM export, \texttt{acm\_extra\_refs} (40 records), is a
-supplementary Bib\TeX{} file and has no query string.
-The four IEEE protocol strings are printed next. The raw file records
-17 manual batches and 1{,}386 records. It does not record which of these
-four strings produced each batch. \texttt{acm\_complementar} and
-\texttt{springer\_11}--\texttt{springer\_13} are in
-\texttt{config/queries.py} and were not executed.
-
-\begin{description}
-\item[\texttt{ieee\_exec1}]{\footnotesize\ttfamily\raggedright
-("process mining" OR "conformance checking" OR "process discovery" OR "workflow mining" OR "event log analysis" OR "predictive process monitoring") AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development")\par}
-
-\item[\texttt{ieee\_exec2}]{\footnotesize\ttfamily\raggedright
-(("Monte Carlo simulation" OR "Markov chain" OR "stochastic process model" OR "process simulation") AND ("software" OR "process mining" OR "throughput" OR "lead time")) AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "software testing")\par}
-
-\item[\texttt{ieee\_exec3}]{\footnotesize\ttfamily\raggedright
-(("remaining time prediction" OR "lead time prediction" OR "cycle time prediction" OR "process forecasting" OR "outcome prediction" OR "event log construction") AND "software") AND ("software engineering" OR "software development" OR "software process")\par}
-
-\item[\texttt{ieee\_exec4}]{\footnotesize\ttfamily\raggedright
-("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "process mining" OR "process analysis")\par}
-\end{description}
-
-The SpringerLink cell in the ledger is the string that was run.
 
 \begin{table}[htbp]
 \centering
@@ -312,23 +257,23 @@ The rows sum to 8{,}347.}
 \toprule
 \textbf{Database} & \textbf{Query} & \textbf{String} & \textbf{Raw} \\
 \midrule
-Scopus & scopus\_principal & printed above & 1{,}595 \\
-Scopus & scopus\_complementar & printed above & 48 \\
-Scopus & scopus\_markov\_testing & printed above & 498 \\
-Scopus & scopus\_stochastic\_petri & printed above & 6 \\
-Scopus & scopus\_simulation\_bridge & printed above & 200 \\
-Scopus & scopus\_fronteira & printed above & 30 \\
+Scopus & scopus\_principal & \ref{app:strings} & 1{,}595 \\
+Scopus & scopus\_complementar & \ref{app:strings} & 48 \\
+Scopus & scopus\_markov\_testing & \ref{app:strings} & 498 \\
+Scopus & scopus\_stochastic\_petri & \ref{app:strings} & 6 \\
+Scopus & scopus\_simulation\_bridge & \ref{app:strings} & 200 \\
+Scopus & scopus\_fronteira & \ref{app:strings} & 30 \\
 \midrule
-Web of Science & wos\_principal & printed above & 632 \\
-Web of Science & wos\_complementar & printed above & 338 \\
-Web of Science & wos\_msr & printed above & 26 \\
-Web of Science & wos\_fronteira & printed above & 1 \\
+Web of Science & wos\_principal & \ref{app:strings} & 632 \\
+Web of Science & wos\_complementar & \ref{app:strings} & 338 \\
+Web of Science & wos\_msr & \ref{app:strings} & 26 \\
+Web of Science & wos\_fronteira & \ref{app:strings} & 1 \\
 \midrule
-ACM DL & acm\_principal & printed above & 24 \\
-ACM DL & acm\_msr & printed above & 32 \\
+ACM DL & acm\_principal & \ref{app:strings} & 24 \\
+ACM DL & acm\_msr & \ref{app:strings} & 32 \\
 ACM DL & acm\_extra\_refs & supplementary Bib\TeX{} export & 40 \\
 \midrule
-IEEE Xplore & ieee\_manual\_01--17 & 17 batches; strings printed above & 1{,}386 \\
+IEEE Xplore & ieee\_manual\_01--17 & 17 batches; strings in \ref{app:strings} & 1{,}386 \\
 \midrule
 SpringerLink & springer\_1 & \texttt{"process mining" "software development"} & 527 \\
 SpringerLink & springer\_2 & \texttt{"process mining" "software process"} & 167 \\
@@ -901,7 +846,7 @@ package). Three of those eight were \texttt{include} on the PDF.
 canonical identifier, \texttt{b5b1402b}, the snowballing record with the
 same DOI (10.1145/1138506.1138510); the pair is one of the 364 twin
 identifiers (Section~\ref{sec:slr-results-selection}), and only the
-canonical identifier is listed in \ref{app:included}.
+canonical identifier is listed in Supplementary Material S1.
 \texttt{ee562777} (Bala et al., 2015) is in the 169 and in the 340. A
 first draft of this revision had placed it among the coded includes
 removed on the title and abstract (Section~\ref{sec:slr-synthesis}), with
@@ -1122,12 +1067,16 @@ count of family codes on a named cut of this corpus: WS-151, the 293
 joint-table studies, or the 380 studies with at least one family mark. The
 codes on the 338 are those the model assigned in the original extraction,
 spot-checked on the 73-PDF subset; every coded study carrying two
-technique families ($n = 99$) was re-read by the authors for the third
-family (PDF for 78, abstract for 21; perfect agreement on the 30
+technique families ($n = 99$) was re-examined by the authors for the
+third family (PDF for 78, abstract for 21; perfect agreement on the 30
 double-read rows, $\kappa$ undefined because both raters used a single
 category); none moved from L1 to L2 and none reaches L3; the marks on
 the 74 added studies read from an abstract or a PDF were assigned by the
-authors.
+authors. The family counts are lower bounds: under-marking on the L0
+rows and on the 76 blank rows was not audited, and correcting it would
+raise, not lower, every family count; the 46 added studies first
+labelled ``none of the four'' and then assigned a family show that such
+under-marking occurs.
 Three consequences follow and are stated here once rather than at each
 count. First, the counts describe this corpus, not the literature: the
 screen missed eligible studies (Recall 0.630 and 0.725,
@@ -1211,7 +1160,7 @@ remained after 64 duplicate records were removed from 404 raw
 confirmations. The two cuts were built by different removals. Adding the
 23 studies of the second auxiliary pass to 318 does not produce 340. The
 32 removed above are the coded includes whose title or abstract does not
-support inclusion. The appendix lists the 456 studies and groups them by
+support inclusion. \ref{app:included} groups the 456 studies by
 family.
 
 \begin{table}[htbp]
@@ -1263,7 +1212,7 @@ that were already indexed on 12~April~2026 are retained), with a clear
 acceleration from 2014 onward (Figure~\ref{fig:year-dist}). One hundred
 and five of them (69.5\%) appeared in 2015--2026.
 A completed SEGRESS~\cite{kitchenham2023segress} reporting checklist is in
-Appendix~\ref{app:segress}.
+\ref{app:segress}.
 
 \begin{figure}[htbp]
 \centering
@@ -2056,7 +2005,9 @@ had missed (10 in the sample, 33 in the rest of S1, 32 in the rest of S2,
 324). It is still below 0.90. Seventeen of the 33 S1 includes, and all 14
 S3 includes, began as heuristic suggestions. The reviewers' 92\% agreement
 covers those suggestions. It does not replace them with a second written
-code on each row. After de-duplication, 168 records were new to the list. The eligibility
+code on each row, so the 150 added studies rest on suggested labels
+accepted by two reviewers and none received a second independent
+coding. After de-duplication, 168 records were new to the list. The eligibility
 pass removes 18 of them, so the studies new to the corpus are ADD-150 in
 Section~\ref{sec:slr-synthesis}. The 89 is the auxiliary slice of the
 screen. ADD-150 also includes working-set records the LLM had excluded.
@@ -2349,14 +2300,15 @@ intersection of process mining, stochastic modelling, and forecasting of
 software processes (Table~\ref{tab:ledger}), 306 that remain from the
 coded list of 338 plus the 150 added studies (ADD-150), classified into
 the four families TF-PM, TF-ST, TF-FC, and TF-MSR wherever an abstract or
-a PDF was available (380 of the 456) and listed in \ref{app:included}. On WS-151, the 151 working-set studies with full
+a PDF was available (380 of the 456), summarised in \ref{app:included} and listed in Supplementary Material S1. On WS-151, the 151 working-set studies with full
 codes, 104 carry process mining, 49 a stochastic model, and 27
 forecasting; the two technique families meet in 8 studies; and on the
 380 studies with at least one family mark, one study, PRIMAD, joins all
-three, with its components validated separately; after re-reading every
-two-family study for a missing third family ($n = 99$), none reaches L3,
-the coupled and end-to-end-validated pipeline that PATHCAST proposes, so
-within the reviewed corpus the architecture has no published equivalent.
+three, with its components validated separately; after re-examining
+every two-family study for a missing third family ($n = 99$), none
+reaches L3 as defined in Table~\ref{tab:positioning}, the level PATHCAST
+targets, so within the reviewed corpus that architecture has no published
+equivalent; PATHCAST itself is not evaluated here.
 Those counts describe
 the named cuts of this corpus (Section~\ref{sec:slr-scope}); the F2 and
 F5 fields are withdrawn after the extraction check. A supplementary Scopus
@@ -2370,16 +2322,87 @@ candidate for RA4 and is future work. The replication package, with the
 openly available at Zenodo (DOI~\zenododoi).
 
 \appendix
+\section{Search strings as executed}
+\label{app:strings}
+
+This appendix reproduces, verbatim, the database-specific strings behind
+the rows of Table~\ref{tab:query-ledger}. Section~\ref{sec:slr-search}
+gives the shared term lists from which they were derived.
+
+\begin{description}
+\item[\texttt{scopus\_principal} (1{,}595 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("software engineering" OR "software development" OR "software process" OR "software lifecycle" OR "SDLC" OR "DevOps" OR "CI/CD" OR "continuous integration" OR "agile development" OR "issue tracking" OR "version control" OR "code review" OR "pull request" OR "software repository" OR "software evolution") AND ("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "predictive process monitoring" OR "event log analysis" OR "process intelligence" OR ("Monte Carlo simulation" AND ("software" OR "process mining" OR "throughput" OR "lead time")) OR ("Markov chain" AND ("software" OR "process mining" OR "workflow" OR "development process")) OR (("stochastic model" OR "transition probability" OR "absorbing chain") AND ("software" OR "process mining")) OR (("remaining time prediction" OR "outcome prediction" OR "cycle time prediction" OR "lead time prediction") AND "software") OR ("event log" AND ("software" OR "repository" OR "JIRA" OR "GitHub"))) ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{scopus\_markov\_testing} (498 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("Markov chain" OR "Markov model") AND ("statistical software testing" OR "software testing" OR "software reliability")) OR ("A Markov chain model for statistical software testing") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{scopus\_stochastic\_petri} (6 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("stochastic Petri net" OR "stochastic workflow net" OR "GSPN") AND ("remaining service time" OR "service execution time" OR "remaining time")) OR ("Prediction of Remaining Service Execution Time Using Stochastic Petri Nets with Arbitrary Firing Delays") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{scopus\_simulation\_bridge} (200 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( (("process mining" OR "process discovery" OR "workflow mining") AND ("simulation model" OR "simulation models" OR "process simulation" OR "discovering simulation models" OR "colored Petri") AND ("event log" OR "process model" OR "business process")) OR ("Discovering Simulation Models") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{scopus\_complementar} (48 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{scopus\_fronteira} (30 records)]{\footnotesize\ttfamily\raggedright
+TITLE-ABS-KEY( ("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND ("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND ("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline") ) AND PUBYEAR > 1993 AND PUBYEAR < 2027 AND (LIMIT-TO(DOCTYPE, "ar") OR LIMIT-TO(DOCTYPE, "cp")) AND LIMIT-TO(LANGUAGE, "English")\par}
+
+\item[\texttt{wos\_principal} (632 records)]{\footnotesize\ttfamily\raggedright
+TS=("process mining" OR "process discovery" OR "conformance checking" OR "workflow mining" OR "event log analysis" OR "process intelligence" OR "predictive process monitoring") AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development" OR "issue tracking" OR "code review" OR "software project" OR "software repository" OR "software maintenance" OR "software evolution")\par}
+
+\item[\texttt{wos\_complementar} (338 records)]{\footnotesize\ttfamily\raggedright
+TS=(("Monte Carlo simulation" OR "Markov chain" OR "stochastic model" OR "transition probability" OR "absorbing chain" OR "process simulation") AND ("software" OR "process mining" OR "workflow" OR "throughput")) AND TS=("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps")\par}
+
+\item[\texttt{wos\_msr} (26 records)]{\footnotesize\ttfamily\raggedright
+TS=("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND TS=("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix" OR "sojourn time")\par}
+
+\item[\texttt{wos\_fronteira} (1 record)]{\footnotesize\ttfamily\raggedright
+TS=("Monte Carlo" OR "Markov chain" OR "stochastic simulation" OR "probabilistic forecast" OR "stochastic model" OR "absorbing Markov" OR "transition matrix") AND TS=("process mining" OR "event log" OR "workflow mining" OR "process model" OR "business process") AND TS=("software development" OR "software engineering" OR "software process" OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log" OR "build pipeline")\par}
+
+\item[\texttt{acm\_principal} (24 records)]{\footnotesize\ttfamily\raggedright
+(Abstract:"process mining" OR Abstract:"conformance checking" OR Abstract:"process discovery" OR Abstract:"workflow mining" OR Abstract:"event log analysis" OR Abstract:"process intelligence" OR Abstract:"predictive process monitoring") AND (Abstract:"software engineering" OR Abstract:"software development" OR Abstract:"software process" OR Abstract:"SDLC" OR Abstract:"DevOps" OR Abstract:"continuous integration" OR Abstract:"agile development" OR Abstract:"issue tracking" OR Abstract:"software repository" OR Abstract:"software project")\par}
+
+\item[\texttt{acm\_msr} (32 records)]{\footnotesize\ttfamily\raggedright
+(Abstract:"mining software repositories" OR Abstract:"software repository mining" OR Abstract:"software archaeology" OR Abstract:"GitHub mining" OR Abstract:"Jira mining") AND (Abstract:"process model" OR Abstract:"workflow" OR Abstract:"state transition" OR Abstract:"Markov" OR Abstract:"Monte Carlo" OR Abstract:"lead time" OR Abstract:"cycle time" OR Abstract:"throughput" OR Abstract:"process mining" OR Abstract:"process analysis")\par}
+\end{description}
+
+The third ACM export, \texttt{acm\_extra\_refs} (40 records), is a
+supplementary Bib\TeX{} file and has no query string.
+The four IEEE protocol strings follow. The raw file records
+17 manual batches and 1{,}386 records. It does not record which of these
+four strings produced each batch. \texttt{acm\_complementar} and
+\texttt{springer\_11}--\texttt{springer\_13} are in
+\texttt{config/queries.py} and were not executed.
+
+\begin{description}
+\item[\texttt{ieee\_exec1}]{\footnotesize\ttfamily\raggedright
+("process mining" OR "conformance checking" OR "process discovery" OR "workflow mining" OR "event log analysis" OR "predictive process monitoring") AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "DevOps" OR "continuous integration" OR "agile development")\par}
+
+\item[\texttt{ieee\_exec2}]{\footnotesize\ttfamily\raggedright
+(("Monte Carlo simulation" OR "Markov chain" OR "stochastic process model" OR "process simulation") AND ("software" OR "process mining" OR "throughput" OR "lead time")) AND ("software engineering" OR "software development" OR "software process" OR "SDLC" OR "software testing")\par}
+
+\item[\texttt{ieee\_exec3}]{\footnotesize\ttfamily\raggedright
+(("remaining time prediction" OR "lead time prediction" OR "cycle time prediction" OR "process forecasting" OR "outcome prediction" OR "event log construction") AND "software") AND ("software engineering" OR "software development" OR "software process")\par}
+
+\item[\texttt{ieee\_exec4}]{\footnotesize\ttfamily\raggedright
+("mining software repositories" OR "software repository mining" OR "software archaeology" OR "mining commit logs" OR "GitHub mining" OR "Jira mining") AND ("process model" OR "workflow" OR "state transition" OR "Markov" OR "Monte Carlo" OR "stochastic" OR "process mining" OR "process analysis")\par}
+\end{description}
+
+The SpringerLink cell of Table~\ref{tab:query-ledger} is the string that was run.
+
 \section{Included primary studies}
 \label{app:included}
 
-This appendix lists the 456 studies (publications; two
+This appendix summarises the 456 studies (publications; two
 conference--extension pairs are identified in
 Section~\ref{sec:slr-criteria}). Table~\ref{tab:class-matrix}
-groups them by family. Table~\ref{tab:included-506} gives the identifier of
-each study. The file \texttt{included\_studies\_340.csv} still contains the
-two papers from 1991 and 1992 (\texttt{dd71433d}, \texttt{37385fbd}) so that
-removal can be checked.
+groups them by family. The identifier, year, role, and family pattern of
+each study are given in Supplementary Material S1
+(\texttt{supplement.pdf}) and in \texttt{included\_studies\_506.csv} of
+the replication package. The file \texttt{included\_studies\_340.csv}
+still contains the two papers from 1991 and 1992 (\texttt{dd71433d},
+\texttt{37385fbd}) so that removal can be checked.
 
 \input{results/included_506_matrix}
 

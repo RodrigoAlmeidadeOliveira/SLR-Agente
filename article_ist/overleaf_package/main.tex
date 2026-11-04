@@ -114,35 +114,38 @@
 PATHCAST proposes a forecasting pipeline that couples process mining of
 repository event logs, a stochastic model of the mined process, Monte
 Carlo forecasting of lifecycle metrics, and machine-learning correction,
-with explicit interfaces validated end-to-end. Before building it, we asked
-whether such a pipeline—or its parts in combination—had already been
-published.
+with explicit interfaces validated end-to-end. Before building it, we
+asked whether such a pipeline had already been published.
 \textbf{Objective.}
-To map primary studies that combine process mining, stochastic modelling,
+To map primary studies combining process mining, stochastic modelling,
 and forecasting on software development data; to position PATHCAST
-against them; and to measure selection error of the LLM-assisted screen.
+against them; and to measure the selection error of the LLM-assisted
+screen.
 \textbf{Method.}
 A systematic mapping study reported against
 SEGRESS~\cite{kitchenham2023segress}. Searches of five databases on
 12~April~2026 yielded 5{,}783 deduplicated records. An LLM screened them;
-two human raters checked pre-registered samples against a Recall bar of
-0.90 and re-screened its exclusions. Studies were classified into four
-technique and data families and into integration levels L0--L3, where L3
-is the coupled, end-to-end-validated pipeline PATHCAST proposes.
+two human raters checked pre-registered samples against a 0.90 Recall
+bar; two reviewers then accepted or rejected suggested labels on every
+excluded or unclassified record (92\% acceptance). Studies were
+classified into four technique and data families and into integration
+levels L0--L3, where L3 is any pipeline coupling the three families
+through explicit interfaces validated end-to-end, the level PATHCAST
+targets.
 \textbf{Results.}
-The corpus has 456 studies. On the 151 fully coded working-set studies,
-104 use process mining, 49 a stochastic model, and 27 forecasting; eight
-combine process mining with a stochastic model. On the 380 studies with
-family marks, one (PRIMAD) combines all three at L2. Every study coded
-with two technique families ($n = 99$) was re-read for the third; none
-reaches L3. The LLM screen reached Recall 0.630 (29 of 46) and 0.725
-(235 of 324), below the bar; the human re-screen added 150 studies.
+The corpus has 456 records, 380 with a family mark and 76 known only by
+title. On the 151 fully coded working-set studies, 104 use process
+mining, 49 a stochastic model, and 27 forecasting; eight combine the
+first two. Among the 380, one (PRIMAD) combines all three, at L2. Every
+two-family study ($n = 99$) was re-examined from PDF or abstract for the
+third; none reaches L3. The screen reached Recall 0.630 (29 of 46) and
+0.725 (235 of 324), below the bar; the re-screen added 150 studies.
 \textbf{Conclusion.}
-Within the reviewed corpus, no published work reports the PATHCAST
-architecture; the closest, PRIMAD, stops at component-wise validation.
-Because the screen missed eligible studies, this is a statement about the
-corpus, not a proof of absence in the literature. The SPMF taxonomy and a
-four-direction agenda frame the work that remains.
+Within the reviewed corpus, no published work reports an L3 pipeline,
+the level PATHCAST targets; the closest, PRIMAD, stops at component-wise
+validation. Because the screen missed eligible studies, this is a
+statement about the corpus, not a proof of absence in the literature. The
+SPMF taxonomy and a four-direction agenda frame the remaining work.
 \end{abstract}
 
 \begin{keyword}
@@ -158,8 +161,8 @@ Mining Software Repositories
 \begin{highlights}
 \item Pre-registered human check of an LLM screen: Recall 0.630 and 0.725 vs a 0.90 bar.
 \item Three failure mechanisms of the screen are named and quantified.
-\item Corpus of 456 studies at the PM, stochastic, and forecasting intersection.
-\item 99 two-family studies re-read; none reaches L3 (PRIMAD remains L2).
+\item 456-record corpus (380 family-marked) at the PM--stochastic--forecasting intersection.
+\item 99 two-family studies re-examined; none reaches L3 (PRIMAD remains L2).
 \item Replication package: Zenodo DOI 10.5281/zenodo.21939600.
 \end{highlights}
 
@@ -208,7 +211,9 @@ and the prompts, JSON schemas, and per-record decisions are deposited in
 the replication package (\href{\zenododoiurl}{Zenodo DOI~\zenododoi}).
 
 \section*{Data availability}
-A full replication package is openly available at Zenodo
+Supplementary Material S1 (\texttt{supplement.pdf}) lists the identifier,
+year, role, and family pattern of each of the 456 included studies. A
+full replication package is openly available at Zenodo
 (\href{\zenododoiurl}{DOI~\zenododoi}).
 The package contains: search strings for all five databases, deduplication
 and enrichment scripts, screening prompts and JSON schemas, the QA prompt,

@@ -1,0 +1,48 @@
+%% Supplementary Material S1 — per-study identifier list of the 456 included publications.
+%% Companion to main.tex (same elsarticle class so numbering and fonts match).
+\documentclass[review,3p,times]{elsarticle}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, urlcolor=blue!50!black,
+  pdftitle={Supplementary Material S1: Included primary studies},
+  pdfauthor={Rodrigo Almeida de Oliveira, Juliano de Paulo Ribeiro, Edson Emilio Scalabrin}}
+\makeatletter
+\pdfstringdefDisableCommands{\let\corref\@gobble \let\fnref\@gobble \let\comma\@empty \let\@fnmark\@empty \let\@corref\@empty \let\cnotenum\@empty}
+\makeatother
+
+\newcommand{\zenododoi}{10.5281/zenodo.21939600}
+\newcommand{\zenododoiurl}{https://doi.org/\zenododoi}
+
+%% Tables in the supplement are numbered S1, S2, ...
+\renewcommand{\thetable}{S\arabic{table}}
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Supplementary Material S1: Included primary studies\\
+\large for ``Process Mining and Stochastic Modeling for Software Process
+Forecasting: A Systematic Mapping Study with a Human-Checked LLM-Assisted
+Screen''}
+\author[pucpr]{Rodrigo Almeida de Oliveira}
+\author[pucpr]{Juliano de Paulo Ribeiro}
+\author[pucpr]{Edson Emilio Scalabrin}
+\affiliation[pucpr]{organization={Pontif\'icia Universidade Cat\'olica do Paran\'a (PUCPR), Graduate Program in Informatics (PPGIa)},
+  city={Curitiba}, country={Brazil}}
+\end{frontmatter}
+
+This supplement lists the 456 publications of the corpus: identifier,
+year, role (\emph{coded set} for the 306 that remain from the coded list
+of 338; \emph{added} for the 150 studies added after the human re-screen),
+and the family pattern counted in the classification matrix of the main
+text (Appendix B there). TF-PM is process mining (IC4a), TF-ST a stochastic
+model (IC4b), TF-FC forecasting (IC4c), and TF-MSR repository mining
+(IC4d); the 76 title-only studies carry no family mark. The same list is
+\texttt{included\_studies\_506.csv} in the replication package
+(\href{\zenododoiurl}{Zenodo DOI~\zenododoi}), which also stores, for each
+identifier, the bibliographic record and the screening decisions.
+
+\input{results/included_506_list}
+
+\end{document}
