@@ -4,46 +4,44 @@ The top-level auxiliary file: main.aux
 The style file: elsarticle-num.bst
 Database file #1: protocol_refs.bib
 Database file #2: results/final_review/missing_references.bib
-Warning--empty pages in massitela2018
 You've used 52 entries,
             2952 wiz_defined-function locations,
-            1033 strings with 17910 characters,
-and the built_in function-call counts, 20089 in all, are:
-= -- 2009
+            1034 strings with 17918 characters,
+and the built_in function-call counts, 20272 in all, are:
+= -- 2035
 > -- 610
-< -- 21
+< -- 22
 + -- 238
 - -- 186
-* -- 1567
-:= -- 2552
+* -- 1575
+:= -- 2569
 add.period$ -- 102
 call.type$ -- 52
 change.case$ -- 53
 chr.to.int$ -- 0
-cite$ -- 53
-duplicate$ -- 654
-empty$ -- 2213
+cite$ -- 52
+duplicate$ -- 663
+empty$ -- 2227
 format.name$ -- 233
-if$ -- 5200
+if$ -- 5250
 int.to.chr$ -- 0
 int.to.str$ -- 52
 missing$ -- 50
 newline$ -- 216
 num.names$ -- 52
-pop$ -- 343
+pop$ -- 342
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1340
+skip$ -- 1355
 stack$ -- 0
-substring$ -- 1207
-swap$ -- 299
-text.length$ -- 21
+substring$ -- 1239
+swap$ -- 308
+text.length$ -- 22
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 159
+warning$ -- 0
+while$ -- 162
 width$ -- 54
-write$ -- 551
-(There was 1 warning)
+write$ -- 552

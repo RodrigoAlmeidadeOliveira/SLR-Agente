@@ -1,0 +1,546 @@
+\documentclass[preprint,12pt,authoryear=false]{elsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,top=22mm,bottom=24mm,left=28mm,right=28mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\linenumbers
+
+% ---------------------------------------------------------------
+% Notas dos autores. Cada \pendente{} marca trabalho que ainda
+% depende de dados novos ou de uma decisão dos autores. Remover
+% todos antes da submissão (buscar por "PENDENTE").
+% ---------------------------------------------------------------
+\newcommand{\pendente}[1]{\textcolor{red}{\textbf{[PENDENTE:} #1\textbf{]}}}
+
+\newcommand{\PM}{TF-PM}
+\newcommand{\ST}{TF-ST}
+\newcommand{\FC}{TF-FC}
+\newcommand{\MSR}{TF-MSR}
+
+\abstracttitle{Resumo}
+\keywordtitle{Palavras-chave}
+\makeatletter
+\def\@elsarticlehighlightstitle{Destaques}
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty\def\@oddfoot{\hfill\thepage\hfill}\let\@evenfoot\@oddfoot}
+\makeatother
+\renewcommand{\appendixname}{Apêndice}
+
+\journal{Information and Software Technology}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Mineração de Processos, Modelagem Estocástica e Previsão de Processos de Desenvolvimento de Software: Um Estudo de Mapeamento Sistemático}
+
+\author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}}
+\ead{rodrigo.almeida1@pucpr.edu.br}
+\author[pucpr]{Juliano de Paulo Ribeiro}
+\ead{juliano.ribeiro@pucpr.edu.br}
+\author[pucpr]{Edson Emilio Scalabrin}
+\ead{scalabrin@ppgia.pucpr.br}
+\cortext[cor1]{Autor correspondente.}
+\affiliation[pucpr]{organization={Pontifícia Universidade Católica do Paraná (PUCPR), Programa de Pós-Graduação em Informática (PPGIa)},
+  city={Curitiba}, state={PR}, country={Brasil}}
+
+\begin{abstract}\small
+\textbf{Contexto.} Repositórios de software registram o desenvolvimento como eventos com carimbo de tempo. A mineração de processos (PM), a modelagem estocástica e a previsão de métricas de processo exploram esses rastros, em grande parte de forma independente.
+\textbf{Objetivo.} Mapear os estudos primários que aplicam essas técnicas a dados de desenvolvimento de software, caracterizar como as três linhas evoluíram e medir até que ponto elas foram integradas.
+\textbf{Método.} Um estudo de mapeamento sistemático relatado segundo o SEGRESS. Cinco bibliotecas digitais e uma iteração de busca por citações resultaram em 5.783 registros únicos (12 de abril de 2026). Um modelo de linguagem serviu de apoio a uma primeira triagem; todo registro que ele excluiu ou deixou sem decisão foi triado novamente por dois revisores humanos. Os estudos foram classificados em quatro famílias de técnica e de dados e em quatro níveis de integração (L0--L3).
+\textbf{Resultados.} O corpus contém 456 estudos publicados entre 1994 e 2026, dos quais 380 estão classificados. A modelagem estocástica (55,3\%) predominou até 2013; a mineração de processos (41,3\%) predomina desde 2014. As duas linhas se encontram em 10 estudos. A previsão aparece em 29,2\% dos estudos, quase sempre associada a modelos estocásticos (90 estudos) e raramente à mineração de processos (7). Um estudo combina as três famílias (L2), e nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta (L3).
+\textbf{Conclusão.} A área está fragmentada segundo as comunidades de pesquisa, e não por falta de técnicas. A previsão estocástica orientada a processos, na qual a estrutura de processo minerada parametriza uma previsão estocástica, é a combinação menos explorada. Propõe-se uma agenda com quatro direções.
+\end{abstract}
+
+\begin{highlights}
+\item 456 estudos aplicam PM, modelos estocásticos ou previsão a dados do SDLC.
+\item A modelagem estocástica predominou até 2013; desde então, a mineração de processos.
+\item PM e modelagem estocástica se encontram em 10 dos 380 estudos classificados.
+\item Um estudo combina as três; nenhum as acopla com avaliação de ponta a ponta.
+\item Corpus, classificação e registros de triagem estão disponíveis abertamente.
+\end{highlights}
+
+\begin{keyword}
+Estudo de mapeamento sistemático \sep Mineração de processos \sep Modelagem estocástica \sep Previsão de processos de software \sep Mineração de repositórios de software
+\end{keyword}
+
+\end{frontmatter}
+
+% =================================================================
+\section{Introdução}\label{sec:intro}
+
+Organizações de software precisam responder rotineiramente a perguntas de previsão sobre o próprio processo de desenvolvimento: quando uma funcionalidade será entregue, quanto tempo uma issue permanecerá aberta ou se uma release vai atrasar. Os dados necessários para respondê-las já existem como subproduto do trabalho cotidiano. Commits, transições de issues, pull requests, revisões de código e execuções de CI/CD são todos eventos com carimbo de tempo.
+
+Três comunidades de pesquisa desenvolveram técnicas capazes de explorar esses rastros, em grande parte de forma independente umas das outras. A mineração de processos (PM, do inglês \emph{process mining}) descobre, verifica e aprimora modelos de processo a partir de logs de eventos, e é aplicada a repositórios de software desde os trabalhos de Cook e Wolf~\cite{cook1995,cook1998} e de Rubin et al.~\cite{rubin2007}. A modelagem estocástica, incluindo cadeias de Markov, redes de Petri estocásticas e simulação de Monte Carlo, tem longa tradição em confiabilidade de software e em simulação de processos~\cite{whittaker1994,ali2014}. A predição baseada em aprendizado de máquina domina a pesquisa em mineração de repositórios de software sobre defeitos, esforço e resultados~\cite{kagdi2007,hall2012} e, na gestão de processos de negócio, o monitoramento preditivo de processos~\cite{marquez2018}.
+
+Combinar as três é atraente porque cada uma cobre uma fraqueza das outras. A PM fornece uma estrutura de processo fundamentada empiricamente. Os modelos estocásticos transformam essa estrutura em distribuições de probabilidade sobre caminhos e durações futuros. Os modelos aprendidos podem corrigir erros sistemáticos usando atributos de contexto. Não se sabe se essas combinações já foram construídas, nem sobre quais dados.
+
+\paragraph{Estudos secundários relacionados}
+Os estudos secundários existentes cobrem, cada um, um lado desse espaço. O monitoramento preditivo de processos foi revisado e comparado em \emph{benchmarks} para predição de resultado~\cite{teinemaa2019}, predição de tempo restante~\cite{verenich2019}, métodos de aprendizado profundo~\cite{ramamaneiro2023} e de modo geral~\cite{marquez2018}, mas sobre logs de eventos de negócio, e não sobre processos de desenvolvimento de software. Os mapeamentos gerais de aplicações de mineração de processos~\cite{garcia2019,thiede2018} tratam a engenharia de software como um domínio entre muitos e não abordam previsão. Dentro da engenharia de software, estudos secundários cobriram a modelagem por simulação de processos~\cite{zhang2010,ali2014}, a mineração de processos em logs de eventos de software livre (FLOSS)~\cite{mukala2015}, a mineração de processos de software com redes de Petri~\cite{thamizharasan2016}, o monitoramento contínuo de software apoiado por mineração de processos~\cite{stepanov2026}, a mineração de repositórios~\cite{kagdi2007} e a predição de defeitos~\cite{hall2012}. Nenhum mapeia o uso conjunto de mineração de processos, modelagem estocástica e previsão sobre dados de desenvolvimento de software.
+
+\paragraph{Contribuições}
+Este artigo relata um estudo de mapeamento sistemático dessa interseção. Suas contribuições são:
+\begin{enumerate}
+\item um corpus de 456 estudos primários, disponível abertamente junto com os registros de triagem e de classificação;
+\item uma classificação dos estudos em quatro famílias de técnica e de dados e em quatro níveis de integração, com a evolução de cada família ao longo de três décadas; e
+\item uma análise das lacunas entre as três linhas de pesquisa, da qual derivamos uma agenda de pesquisa com quatro direções.
+\end{enumerate}
+
+A revisão foi motivada pelo trabalho dos próprios autores em um pipeline integrado de previsão. Relatamos isso porque é uma possível fonte de viés na forma como os níveis de integração foram definidos e interpretados; por isso, as definições da Seção~\ref{sec:classification} são enunciadas sem referência a nenhuma arquitetura específica, e a ameaça é discutida na Seção~\ref{sec:threats}.
+
+A Seção~\ref{sec:method} descreve o protocolo da revisão; a Seção~\ref{sec:selection}, os resultados da busca e da seleção; a Seção~\ref{sec:results}, as respostas às questões de pesquisa; a Seção~\ref{sec:discussion}, a discussão e a agenda de pesquisa; a Seção~\ref{sec:threats}, as ameaças à validade; e a Seção~\ref{sec:conclusion} conclui.
+
+% =================================================================
+\section{Protocolo da Revisão}\label{sec:method}
+
+Seguimos as diretrizes de mapeamento de Petersen et al.~\cite{petersen2015}, as diretrizes de Kitchenham e Charters~\cite{kitchenham2007} e o procedimento de \emph{snowballing} de Wohlin~\cite{wohlin2014}, e relatamos segundo o SEGRESS~\cite{segress}. O protocolo do mapeamento não foi registrado previamente. O checklist SEGRESS preenchido está no material suplementar.
+
+\subsection{Questões de pesquisa}\label{sec:rqs}
+
+\begin{description}
+\item[RQ1] Como evoluiu a pesquisa que aplica mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software?
+\item[RQ2] Quais famílias de técnica, e quais combinações entre elas, os estudos utilizam?
+\item[RQ3] Quais fases do SDLC, fontes de logs de eventos e técnicas específicas os estudos abordam?
+\item[RQ4] Em que medida a mineração de processos, a modelagem estocástica e a previsão estão integradas, e quais lacunas permanecem?
+\end{description}
+
+RQ1 e RQ2 caracterizam o corpus. RQ3 descreve o que os estudos analisam e com quais algoritmos. RQ4 trata da questão que motivou esta revisão.
+
+\pendente{RQ3 só pode ser respondida após a extração humana dos campos fase do SDLC, fonte e construção do event log, algoritmo de PM, método estocástico e alvo da previsão (ver Seção~\ref{sec:rq3}). A extração anterior, feita pelo LLM, teve 0\% de concordância exata com o avaliador humano e não pode ser usada. Se a extração não for feita, retirar RQ3 do artigo.}
+
+\subsection{Estratégia de busca}\label{sec:search}
+
+A busca automatizada cobriu cinco bibliotecas digitais: IEEE Xplore, ACM Digital Library, Scopus, Web of Science e SpringerLink. As strings foram construídas a partir de uma decomposição PICO adaptada à engenharia de software. A população é o contexto de engenharia de software (desenvolvimento de software, SDLC, DevOps, CI/CD, rastreamento de issues, controle de versão, revisão de código). A intervenção é a técnica analítica (mineração de processos, descoberta de processos, verificação de conformidade, monitoramento preditivo de processos, cadeia de Markov, Monte Carlo, rede de Petri estocástica). O resultado é uma previsão ou um modelo de processo (\emph{lead time}, tempo de ciclo, tempo restante, vazão). Não há faceta de comparação.
+
+Foram derivadas três listas de termos complementares: uma string principal que une população e intervenção; uma string complementar para estudos que usam a terminologia de MSR sem os termos canônicos de PM; e uma string de fronteira para a interseção entre métodos estocásticos e PM em contextos de software. Elas foram adaptadas a cada biblioteca, resultando em 25 exportações (Tabela~\ref{tab:search}). Todas as buscas foram executadas em 12 de abril de 2026, com janela de publicação de 1º de janeiro de 1994 (Whittaker e Thomason~\cite{whittaker1994}) até essa data. As publicações datadas de 2026 representam, portanto, cobertura parcial do ano. As listas de termos compartilhadas estão no \ref{app:strings}; todas as strings específicas de cada base estão no pacote de replicação.
+
+\pendente{Três strings do Scopus contêm os títulos literais de artigos do conjunto de controle (V6, V8, V9). Opção A: retirar os títulos, rodar as strings de novo e atualizar as Tabelas~\ref{tab:search} e~\ref{tab:selection}. Opção B: manter, deixando a declaração da Seção~\ref{sec:threats-search}, e validar a busca com um conjunto de teste independente.}
+
+\pendente{Nenhuma string principal tem bloco de forecasting/ML em repositórios (por exemplo ``bug fix time'', ``issue resolution time'', ``effort estimation'', ``machine learning'')~\cite{panjer2007,giger2010}. Rodar esse bloco nas cinco bases e incorporar os resultados ao corpus. A busca suplementar no Scopus de 31/10/2026 (165 registros, 19 includes por título) deve ser incorporada ou descartada de vez.}
+
+\begin{table}[t]
+\centering\small
+\caption{Registro das buscas por fonte. Todas as exportações foram obtidas em 12 de abril de 2026. Os registros únicos são contados uma vez, na fonte que forneceu a cópia mantida.}\label{tab:search}
+\footnotesize
+\begin{tabular}{lllrr}
+\toprule
+Fonte & Campo & Exportações & Brutos & Únicos \\
+\midrule
+Scopus & TITLE-ABS-KEY & 6 & 2.377 & 1.852 \\
+SpringerLink & Busca simplificada & 10 & 2.884 & 1.543 \\
+IEEE Xplore & Todos os metadados & 17 lotes & 1.386 & 1.263 \\
+Web of Science & Tópico (TS) & 4 & 997 & 514 \\
+ACM DL & Resumo & 2 + 1 exportação & 96 & 34 \\
+\emph{Snowballing} & -- & 1 iteração & 595 & 575 \\
+Conjunto de controle & -- & -- & 12 & 2 \\
+\midrule
+Total & & & 8.347 & 5.783 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{\emph{Snowballing}}
+Uma iteração de \emph{snowballing} para trás e para a frente foi executada sobre 400 DOIs de origem e recuperou 595 registros. Um candidato era mantido quando seu título ou resumo continha um termo de PM ou estocástico e um termo de engenharia de software.
+
+\pendente{O procedimento acima não segue Wohlin~\cite{wohlin2014}: os 400 DOIs-fonte não são os estudos incluídos, backward e forward não estão separados e não houve critério de saturação. Refazer o snowballing a partir dos 380 estudos classificados, separando backward e forward e iterando até nenhum estudo novo aparecer, e informar as contagens por iteração. Sem isso, descrever o procedimento como ``uma iteração de busca por citações'' e não como snowballing de Wohlin.}
+
+\paragraph{Conjunto de controle}
+Dez estudos conhecidos (Tabela~\ref{tab:control}) foram usados para verificar se as strings recuperam trabalhos relevantes. Todos os dez foram recuperados. Como os dez já eram conhecidos quando as strings foram escritas, essa verificação não estima a sensibilidade da busca.
+
+\begin{table}[t]
+\centering\small
+\caption{Estudos de controle para a verificação das strings de busca.}\label{tab:control}
+\footnotesize
+\begin{tabularx}{\textwidth}{llXl}
+\toprule
+\# & Estudo & Justificativa & Recuperado via \\
+\midrule
+V1 & Cook \& Wolf (1998) & PM seminal em ES & ACM \\
+V2 & Rubin et al. (2007) & Framework de PM para processos de software & Scopus \\
+V3 & Poncin et al. (2011) & PM e MSR & IEEE \\
+V4 & Caldeira \& Cardoso (2019) & PM para avaliação de processos de software & IEEE \\
+V5 & Lemos et al. (2011) & PM para gestão de processos de software & IEEE \\
+V6 & Whittaker \& Thomason (1994) & Modelos de Markov em teste de software & Scopus \\
+V7 & Tax et al. (2017) & Monitoramento preditivo de processos (BPM) & Conjunto de controle \\
+V8 & Rogge-Solti \& Weske (2015) & Previsão com PM estocástica & Scopus \\
+V9 & Rozinat et al. (2009) & Da PM à simulação & Conjunto de controle \\
+V10 & Gupta \& Sureka (2017) & PM em múltiplos repositórios em ES & ACM \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Critérios de elegibilidade}\label{sec:criteria}
+
+A Tabela~\ref{tab:criteria} lista os critérios. A unidade de contagem é a publicação~\cite{petersen2015}. Registros duplicados da mesma publicação são unificados. Um artigo de conferência e sua extensão posterior são ambos mantidos quando cada um satisfaz os critérios de forma independente; há dois desses pares no corpus, e contá-los uma única vez não alteraria nenhum percentual relatado em mais de um ponto.
+
+Um estudo é incluído quando satisfaz IC1--IC3 e ao menos um dos critérios de conteúdo IC4a--IC4d, e nenhum de EC1--EC5. Os quatro critérios de conteúdo definem as quatro famílias usadas ao longo do artigo: \PM{} (IC4a), \ST{} (IC4b), \FC{} (IC4c) e \MSR{} (IC4d). \PM{}, \ST{} e \FC{} são famílias de técnica; \MSR{} descreve a fonte de dados.
+
+\pendente{IC4b e IC4c, como estão, aceitam modelos Markovianos de teste estatístico e modelos de crescimento de confiabilidade (``defect rates''). Esses modelos descrevem o produto, não o processo de desenvolvimento, e provavelmente formam boa parte dos 89 estudos ST+FC de 1997--2013. Decidir: (a) mantê-los, declarando o escopo amplo; ou (b) acrescentar um EC (``model of product reliability, not of the development process'') e reclassificar.}
+
+\begin{table}[t]
+\centering\small
+\caption{Critérios de inclusão e exclusão.}\label{tab:criteria}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+Tipo & ID & Critério \\
+\midrule
+\multirow{7}{*}{Inclusão}
+ & IC1 & Publicado entre 1º de janeiro de 1994 e 12 de abril de 2026. \\
+ & IC2 & Escrito em inglês. \\
+ & IC3 & Artigo de periódico, de conferência ou de workshop revisado por pares, com ao menos quatro páginas. \\
+ & IC4a & Aplica mineração de processos (descoberta, verificação de conformidade, monitoramento preditivo de processos) a artefatos de desenvolvimento de software (commits, issues, pull requests, logs de CI/CD, rastreadores de bugs, controle de versão). \\
+ & IC4b & Usa modelos estocásticos (cadeias de Markov, Monte Carlo, redes de Petri estocásticas, cadeias absorventes) para analisar processos ou fluxos de trabalho de desenvolvimento de software. \\
+ & IC4c & Propõe ou avalia a previsão de métricas de processo de software (\emph{lead time}, tempo de ciclo, tempo restante, vazão, taxas de defeitos) a partir de logs de eventos ou de dados de repositório. \\
+ & IC4d & Minera repositórios de software (GitHub, Jira, controle de versão, plataformas de CI/CD) para descobrir, analisar ou melhorar modelos de processo de software. \\
+\midrule
+\multirow{5}{*}{Exclusão}
+ & EC1 & Domínio de aplicação exclusivamente fora do desenvolvimento de software, sem relevância demonstrada para processos do SDLC. \\
+ & EC2 & O software é apenas a plataforma de implementação; o processo analisado não é um processo de desenvolvimento de software. \\
+ & EC3 & Contribuição puramente algorítmica ou teórica, sem avaliação empírica em contexto de desenvolvimento de software. \\
+ & EC4 & Estudo secundário que não trata especificamente de PM ou de métodos estocásticos em engenharia de software. \\
+ & EC5 & O registro não pode ser julgado com a evidência obtida: texto completo não recuperável (EC5a), sem resumo e sem texto completo (EC5b) ou informação decisiva ausente (EC5c). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Processo de seleção}\label{sec:selection-process}
+
+A seleção teve três etapas.
+
+\paragraph{Etapa 1: primeira triagem apoiada por modelo de linguagem}
+Um modelo de linguagem (claude-haiku-4-5-20251001, Message Batches API da Anthropic) triou todos os registros únicos segundo IC4a--IC4d e EC1--EC4, retornando \emph{incluir}, \emph{excluir} ou \emph{talvez}, com uma justificativa curta. Os registros marcados como incluir ou talvez foram encaminhados a uma segunda passagem, mais estrita, sobre título e resumo (\emph{incluir}, \emph{excluir} ou \emph{pendente}). Antes disso, os resumos ausentes nas exportações foram recuperados no Semantic Scholar, OpenAlex, CORE e Crossref. Os prompts, os esquemas JSON e as decisões por registro estão no pacote de replicação.
+
+\paragraph{Etapa 2: verificação humana da primeira triagem}
+Dois avaliadores, cegos em relação às decisões do modelo e um ao outro, julgaram uma amostra aleatória estratificada de 177 decisões da segunda passagem segundo a Tabela~\ref{tab:criteria}. A concordância entre avaliadores antes do consenso foi $\kappa = 0{,}654$. Em relação ao consenso, a primeira triagem manteve 29 dos 46 estudos elegíveis amostrados (Recall 0,630; IC de Wilson 95\% 0,486--0,755). Para os registros do segundo lote de triagem, amostras estratificadas das não inclusões do modelo indicaram um Recall estimado de 0,563. O critério de sucesso fixado antes dessa verificação era um Recall de no mínimo 0,90. Como ele não foi atingido, a primeira triagem é usada aqui apenas para priorizar registros, e a Etapa~3 triou novamente todos os registros que ela não incluiu.
+
+\pendente{Informar onde o pré-registro da verificação foi depositado, com carimbo de tempo verificável (OSF ou Zenodo, com DOI ou link).}
+
+\paragraph{Etapa 3: re-triagem humana e verificação das inclusões}
+Dois revisores triaram todos os 4.005 registros que a primeira triagem havia excluído ou deixado sem decisão, incluindo 611 registros encerrados sem decisão por falta de resumo. Eles também verificaram cada inclusão da primeira triagem segundo os critérios. A re-triagem identificou 188 registros elegíveis, que, após a remoção de duplicatas e uma verificação final de elegibilidade, acrescentaram 150 estudos. A verificação das inclusões removeu 32 estudos cujo título e resumo não sustentavam a inclusão.
+
+\pendente{Para tornar a Etapa~3 auditável: (a) registrar, por linha, a decisão de cada revisor, separada da sugestão exibida, e identificar quem decidiu; (b) informar o $\kappa$ entre os dois revisores na re-triagem; (c) descrever a heurística que gerou as sugestões nos lotes S1 e S3 (regras, autoria, abrangência); (d) se esses registros não existirem, repetir a triagem numa amostra estratificada sem mostrar a sugestão e informar a concordância. Hoje as planilhas guardam decisão igual à sugestão em todas as linhas.}
+
+\subsection{Extração e classificação dos dados}\label{sec:classification}
+
+Para cada estudo incluído registramos os dados bibliográficos, as famílias que ele satisfaz (\PM{}, \ST{}, \FC{}, \MSR{}) e seu nível de integração. O nível de integração depende apenas das três famílias de técnica:
+
+\begin{description}
+\item[L0] No máximo uma família de técnica.
+\item[L1] Exatamente duas famílias de técnica.
+\item[L2] As três famílias de técnica no mesmo estudo, com as etapas avaliadas separadamente ou conectadas sem interfaces especificadas.
+\item[L3] As três famílias de técnica acopladas por meio de interfaces de dados especificadas, em que a saída de cada etapa é a entrada da seguinte, e avaliadas de ponta a ponta em dados de desenvolvimento de software.
+\end{description}
+
+L0 e L1 decorrem mecanicamente dos códigos de família. Distinguir L2 de L3 exige ler a avaliação do estudo; isso foi necessário para um único estudo (Seção~\ref{sec:rq4}).
+
+As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com duas famílias de técnica ($n = 99$) foi relido em busca de uma terceira família ausente (PDF em 78 casos, resumo em 21); 30 foram lidos por dois autores com concordância total, e nenhum estudo mudou de nível. Os 74 estudos acrescentados pela re-triagem foram classificados pelos autores. Setenta e seis estudos acrescentados pela re-triagem são conhecidos apenas pelo título e ainda não foram classificados.
+
+\pendente{(1) Classificar os 76 estudos lidos só pelo título, a partir do abstract ou do PDF; os que não tiverem nenhum dos dois devem ser excluídos sob EC5b, e o corpus deixa de ser 456. (2) Auditar uma amostra estratificada dos 275 estudos L0, cujas famílias vieram do LLM, e informar a taxa de erro. Depois, atualizar as Tabelas~\ref{tab:combos} e~\ref{tab:levels} e as Figuras~\ref{fig:years} e~\ref{fig:bubble} com \texttt{figs.py}.}
+
+\pendente{Extração para RQ3 e para o mapa de venues: fase do SDLC, fonte do event log, construção do log (manual, semi, automática), algoritmo de PM, método estocástico, técnica de ML, alvo da previsão, tipo de validação, research type (Wieringa et al.~\cite{wieringa2006}) e venue. Dois extratores humanos, ou um extrator e um verificador numa amostra com $\kappa$ reportado.}
+
+% =================================================================
+\section{Resultados da Busca e da Seleção}\label{sec:selection}
+
+A busca retornou 8.347 registros. A remoção de duplicatas entre fontes por DOI, seguida de comparação aproximada de títulos (similaridade de Levenshtein $\geq 0{,}9$) para os registros sem DOI, eliminou 2.564 duplicatas e deixou 5.783 registros únicos. Por razões práticas, a primeira triagem foi executada em dois lotes. O lote principal continha os registros das consultas principais do Scopus, do IEEE Xplore e da ACM; o segundo continha os registros restantes (SpringerLink, Web of Science, \emph{snowballing} e as demais exportações do IEEE e da ACM). A Tabela~\ref{tab:selection} apresenta o resultado de cada etapa, e a Figura~\ref{fig:prisma}, o fluxo geral.
+
+\begin{table}[t]
+\centering\small
+\caption{Resultado das etapas de seleção. As listas de identificadores dos lotes se sobrepõem em 364 artigos registrados com identificadores diferentes; sua união corresponde aos 5.783 registros únicos.}\label{tab:selection}
+\footnotesize
+\begin{tabular}{lrr}
+\toprule
+Etapa & Lote principal & Segundo lote \\
+\midrule
+Triados (Etapa 1, título/resumo) & 2.340 & 3.807 \\
+\quad incluir / talvez & 111 / 775 & 232 / 1.151 \\
+Segunda passagem (Etapa 1) & 886 & 1.383 \\
+\quad incluir & 169 & 212 + 23 \\
+\midrule
+Inclusões da 1ª triagem, distintas & \multicolumn{2}{c}{340} \\
+\quad removidas: publicadas antes de 1994 (IC1) & \multicolumn{2}{c}{2} \\
+\quad removidas na verificação humana (Etapa 3) & \multicolumn{2}{c}{32} \\
+Re-triados por humanos (Etapa 3) & \multicolumn{2}{c}{4.005} \\
+\quad elegíveis e novos & \multicolumn{2}{c}{168} \\
+\quad removidos na verificação final & \multicolumn{2}{c}{18} \\
+\midrule
+Estudos incluídos & \multicolumn{2}{c}{306 + 150 = 456} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\footnotesize, minimum width=4.4cm, inner sep=3pt},
+  side/.style={draw, rounded corners=2pt, align=left, font=\footnotesize, text width=5.4cm, inner sep=3pt, fill=gray!8},
+  arr/.style={-{Stealth[length=2mm]}, thin}, node distance=7mm]
+\node[box] (id) {Registros identificados: 8.347\\ \scriptsize cinco bibliotecas 7.740; \emph{snowballing} 595; controle 12};
+\node[box, below=of id] (dd) {Registros únicos: 5.783};
+\node[box, below=of dd] (s1) {Etapa 1: primeira triagem apoiada por modelo\\ \scriptsize título/resumo, depois segunda passagem};
+\node[box, below=of s1] (inc1) {Inclusões da primeira triagem: 340 distintas};
+\node[box, below=of inc1] (chk) {Após verificação humana das inclusões: 306};
+\node[box, below=10mm of chk] (add) {Acrescentados pela re-triagem humana: 150};
+\node[box, below=of add, fill=gray!15] (fin) {Estudos incluídos: 456\\ \scriptsize classificados 380; apenas título 76};
+\node[side, right=6mm of dd] (dup) {Duplicatas removidas: 2.564};
+\node[side, right=6mm of inc1] (ex1) {Não incluídos pela primeira triagem: 4.005 registros, todos triados novamente por dois humanos (Etapa 3)};
+\node[side, right=6mm of chk] (rm) {Removidos: 2 publicados antes de 1994 (IC1); 32 que não atendem aos critérios};
+\node[side, right=6mm of add] (rm2) {Re-triagem: 188 elegíveis, 168 novos após remoção de duplicatas, 18 removidos na verificação final};
+\draw[arr] (id) -- (dd); \draw[arr] (dd) -- (s1); \draw[arr] (s1) -- (inc1); \draw[arr] (inc1) -- (chk);
+\draw[arr] (chk) -- (add); \draw[arr] (add) -- (fin);
+\draw[arr] (dd) -- (dup); \draw[arr] (inc1) -- (ex1); \draw[arr] (chk) -- (rm);
+\draw[arr] (ex1.east) -- ++(4mm,0) |- (rm2.east); \draw[arr] (rm2) -- (add);
+\end{tikzpicture}
+\caption{Fluxo PRISMA 2020~\cite{page2021} da seleção dos estudos.}\label{fig:prisma}
+\end{figure}
+
+As exclusões da segunda passagem no lote principal ($n = 717$) foram motivadas por EC3 (232; contribuições algorítmicas ou teóricas sem avaliação em engenharia de software), EC1 (205; em sua maioria, gestão genérica de processos de negócio), EC5 (145), EC2 (110) e EC4 (60). Um estudo pode acionar mais de um critério. O tamanho de EC3 indica um volume considerável de pesquisa em PM e em modelagem estocástica ainda não avaliado em dados de desenvolvimento de software.
+
+% =================================================================
+\section{Resultados}\label{sec:results}
+
+O corpus contém 456 estudos. Todos os percentuais a seguir são calculados sobre os 380 estudos classificados, salvo indicação em contrário; os 76 estudos conhecidos apenas pelo título são contados somente na Figura~\ref{fig:years}. A lista completa está no \ref{app:studies}.
+
+\subsection{RQ1: Evolução ao longo do tempo}\label{sec:rq1}
+
+Os 456 estudos abrangem o período de 1994 a 2026 (Figura~\ref{fig:years}). Desde 2006, a maioria dos anos contribui com 13 a 26 estudos, com quedas em 2013 (3), 2020 (10) e 2025 (7); 2026 é um ano parcial. No total, 222 estudos (48,7\%) foram publicados entre 2015 e 2026.
+
+\pendente{A queda para 3 estudos em 2013, entre anos com 18 e 25, é suspeita. Verificar se é efeito da busca ou da indexação (por exemplo, um lote do IEEE ou do SpringerLink faltando) antes de interpretar.}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figs/years_pt.pdf}
+\caption{Estudos incluídos por ano de publicação ($n = 456$).}\label{fig:years}
+\end{figure}
+
+A composição da área mudou bruscamente por volta de 2014 (Figura~\ref{fig:bubble}). Até 2013, o corpus é dominado por modelos estocásticos: 92\% dos estudos classificados de 1994--2005 e 73\% dos de 2006--2013 têm \ST{}. A partir de 2014, a mineração de processos assume a liderança, com \PM{} em 61\% dos estudos de 2014--2019 e em 60\% dos de 2020--2026, enquanto \ST{} cai para cerca de um terço. A mineração de repositórios (\MSR{}) cresce de forma contínua, de 3\% para 41\% dos estudos de cada período. A participação da previsão (\FC{}) permanece aproximadamente estável, entre 24\% e 35\%.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figs/bubble_pt.pdf}
+\caption{Famílias de técnica e de dados por período (estudos classificados, $n = 380$). A área de cada bolha é proporcional ao número de estudos; o percentual é a parcela dos estudos classificados do período que têm a família. As famílias não são mutuamente exclusivas.}\label{fig:bubble}
+\end{figure}
+
+\pendente{Acrescentar a distribuição por tipo de publicação (periódico, conferência, workshop) e os venues mais frequentes, a partir da extração da Seção~\ref{sec:classification}.}
+
+\subsection{RQ2: Famílias de técnica e suas combinações}\label{sec:rq2}
+
+Dos 380 estudos classificados, 210 (55,3\%) têm \ST{}, 157 (41,3\%) \PM{}, 111 (29,2\%) \FC{} e 97 (25,5\%) \MSR{}. A Tabela~\ref{tab:combos} mostra como as três famílias de técnica se combinam.
+
+\begin{table}[t]
+\centering\small
+\caption{Combinações das três famílias de técnica nos 380 estudos classificados. Cada estudo aparece em exatamente uma linha. A coluna \MSR{} conta os estudos da linha que também mineram repositórios.}\label{tab:combos}
+\begin{tabular}{lrrrc}
+\toprule
+Combinação & Estudos & \% & com \MSR{} & Ano mediano \\
+\midrule
+Apenas \PM{} & 141 & 37,1 & 62 & 2018 \\
+Apenas \ST{} & 111 & 29,2 & 16 & 2008 \\
+\ST{} + \FC{} & 89 & 23,4 & 2 & 2010 \\
+Apenas \FC{} & 15 & 3,9 & 5 & 2019 \\
+\PM{} + \ST{} & 9 & 2,4 & 1 & 2016 \\
+Nenhuma (apenas \MSR{}) & 8 & 2,1 & 8 & 2017 \\
+\PM{} + \FC{} & 6 & 1,6 & 3 & 2018 \\
+\PM{} + \ST{} + \FC{} & 1 & 0,3 & 0 & 2025 \\
+\midrule
+Total & 380 & 100,0 & 97 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Dois agrupamentos respondem por 90\% do corpus e quase não se sobrepõem. O primeiro é a mineração de processos, frequentemente sobre dados de repositório: 141 estudos usam PM sem modelagem estocástica nem previsão, e 62 deles mineram repositórios. O segundo é a modelagem estocástica, isolada (111) ou usada para prever (89), quase nunca sobre eventos minerados de repositórios (18 de 200).
+
+\paragraph{Mineração de processos}
+O arco seminal de \PM{} vai da descoberta, por Cook e Wolf, de modelos de processo de estados finitos a partir de rastros de eventos, que já usava modelos de Markov~\cite{cook1995,cook1998}, à aplicação, por Rubin et al., do framework ProM a logs de gerência de código-fonte~\cite{rubin2007}. Trabalhos posteriores estenderam a descoberta a múltiplos repositórios e perspectivas.
+
+\paragraph{Modelagem estocástica}
+Os estudos com cadeias de Markov representam processos de software como transições discretas de estado: a atividade de desenvolvedores em repositórios GitHub como cadeias de Markov de tempo discreto~\cite{jo2023}, com verificação probabilística de modelos para propriedades temporais~\cite{jo2024}; padrões de inserção e de correção de falhas combinados com análise de redes sociais~\cite{ortu2023}; processos de decisão de Markov para predição do resultado de pull requests~\cite{joshi2024}; predição de risco a partir de dados de repositório~\cite{jeon2015}; remoção de defeitos sob \emph{code churn}~\cite{tian2005}; planejamento ágil em espaço de estados~\cite{tyagi2021}; previsão do momento de release~\cite{washizaki2015}; e estimativa de equipes com redes de autômatos estocásticos~\cite{massitela2018}. Redes de Petri estocásticas modelam a concorrência em pipelines de DevOps e de CI/CD~\cite{mesmia2021} e as etapas gargalo que governam a probabilidade de entrega~\cite{bhadra2022,bhadra2023}. A simulação de Monte Carlo apoia a previsão de projetos em modelos híbridos de dinâmica de sistemas~\cite{li2020}, a avaliação de riscos em métodos ágeis~\cite{lunesu2021} e a análise econômica do tempo de ciclo~\cite{magennis2015}.
+
+Nesses estudos, probabilidades de transição, taxas de disparo e parâmetros de distribuições vêm de estatísticas agregadas de projeto, como contagens de defeitos, médias de duração por fase ou métricas de velocidade~\cite{nafreen2020,bhadra2022,li2020}. Os estados ficam ancorados em fases genéricas do ciclo de vida. Nenhum dos estudos citados deriva seu espaço de estados de um modelo de processo descoberto a partir de logs de eventos de granularidade fina.
+
+\subsection{RQ3: Fases do SDLC, fontes de logs de eventos e técnicas}\label{sec:rq3}
+
+\pendente{Esta subseção depende da extração humana (Seção~\ref{sec:classification}). Estrutura sugerida: (a) Tabela de fase do SDLC $\times$ família; (b) Tabela de fontes de event log (Jira, GitHub, GitLab, Jenkins, IDE, outras) e modo de construção; (c) frequência dos algoritmos de PM (Alpha, Heuristics, Inductive Miner, Fuzzy etc.), métodos estocásticos (DTMC, CTMC, SPN, Monte Carlo, System Dynamics) e alvos de previsão (lead time, remaining time, resolução de issue, outcome); (d) mapa de bolhas fase $\times$ família, como na Figura~\ref{fig:bubble}.}
+
+\begin{table}[h]
+\centering\small
+\caption{\textcolor{red}{[PENDENTE]} Fases do SDLC abordadas, por família de técnica (estudos classificados). Um estudo pode abordar várias fases.}\label{tab:phases}
+\begin{tabular}{lcccc}
+\toprule
+Fase do SDLC & \PM{} & \ST{} & \FC{} & \MSR{} \\
+\midrule
+Requisitos e projeto & -- & -- & -- & -- \\
+Desenvolvimento (commits, pull requests) & -- & -- & -- & -- \\
+Qualidade (teste, revisão, defeitos) & -- & -- & -- & -- \\
+Entrega (CI/CD, release) & -- & -- & -- & -- \\
+Operação (incidentes, manutenção) & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{RQ4: Integração e lacunas}\label{sec:rq4}
+
+A Tabela~\ref{tab:levels} apresenta os níveis de integração. A maioria dos estudos (72,4\%) usa uma única família de técnica; 104 combinam duas; um combina três; nenhum atinge L3.
+
+\begin{table}[t]
+\centering\small
+\caption{Níveis de integração dos 380 estudos classificados.}\label{tab:levels}
+\begin{tabularx}{\textwidth}{lXrr}
+\toprule
+Nível & Definição & Estudos & \% \\
+\midrule
+L0 & No máximo uma família de técnica & 275 & 72,4 \\
+L1 & Duas famílias de técnica (\PM{}+\ST{} 9; \PM{}+\FC{} 6; \ST{}+\FC{} 89) & 104 & 27,4 \\
+L2 & Três famílias; etapas avaliadas separadamente & 1 & 0,3 \\
+L3 & Três famílias acopladas por interfaces especificadas, avaliadas de ponta a ponta & 0 & 0,0 \\
+\midrule
+Total & & 380 & 100,0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Mineração de processos com modelagem estocástica}
+Dez estudos combinam \PM{} e \ST{}, oito deles publicados a partir de 2014. Eles acoplam a estrutura de processo descoberta a raciocínio estocástico para uma única questão analítica. Incerto et al.\ mostram que cadeias de Markov de comprimento variável superam dezoito técnicas de verificação de conformidade estocástica em dez de onze logs de \emph{benchmark}~\cite{incerto2025}. López-Pintado e Dumas substituem calendários determinísticos de recursos por calendários probabilísticos descobertos a partir de logs de eventos, reproduzindo com mais fidelidade as distribuições empíricas de tempo de ciclo~\cite{lopezpintado2023}. Jalote e Kamma modelam sequências de tarefas de programadores, extraídas de logs de IDE, como cadeias de Markov de primeira ordem~\cite{jalote2021}. Nenhum desses estudos usa a camada estocástica para prever uma métrica de processo.
+
+\paragraph{Mineração de processos com previsão}
+Sete estudos combinam \PM{} e \FC{}, todos publicados a partir de 2015. Eles abordam a predição por meio do aprimoramento de processos, e não de um modelo estocástico explícito. Gupta combina a descoberta com o \emph{inductive miner} e análise preditiva para identificar padrões recorrentes de falha em fluxos de manutenção~\cite{gupta2017}. O SIMPT extrai árvores de processo anotadas com tempo para simulação interativa do tipo ``e se''~\cite{pourbafrani2021}, linha estendida com modelos generativos~\cite{buliga2025}. Caldeira et al.\ derivam métricas de complexidade de processo a partir de logs de IDE e as usam para prever a qualidade do produto~\cite{caldeira2022}. Nenhum relata uma distribuição de probabilidade sobre o tempo de conclusão ou os passos restantes de uma instância individual de processo.
+
+\paragraph{O único estudo com três famílias}
+O PRIMAD~\cite{guinea2025} constrói um gêmeo digital do SDLC a partir de fluxos de issues do Jira, combinando descoberta baseada no pm4py, um núcleo de simulação baseado em atores e aprendizado supervisionado para predição sensível ao contexto. Sua avaliação é relatada por componente: o pipeline acoplado não é avaliado como um todo, as passagens entre etapas não são especificadas e nenhuma camada de previsão propaga a incerteza de ponta a ponta. Por isso, classificamos o estudo como L2.
+
+\pendente{Registrar quem leu o PDF completo do PRIMAD e citar os trechos (seção/página) que mostram a avaliação por componente. Como a conclusão principal se apoia neste estudo, o revisor vai pedir isso.}
+
+\paragraph{Lacunas}
+Três lacunas decorrem das Tabelas~\ref{tab:combos} e~\ref{tab:levels}. Primeiro, a lacuna é de integração, não de cobertura: cada família está bem representada, mas as linhas de PM e estocástica se encontram em 10 de 380 estudos. Segundo, a previsão é feita sobretudo com modelos estocásticos alimentados por estatísticas agregadas (89 estudos) e raramente com estrutura minerada de logs de eventos (7). Terceiro, nenhum estudo avalia um pipeline de múltiplas etapas de ponta a ponta em dados do SDLC.
+
+% =================================================================
+\section{Discussão}\label{sec:discussion}
+
+\subsection{Duas comunidades, uma fonte de dados}
+
+O padrão mais nítido do corpus é a sucessão de duas comunidades sobre o mesmo tipo de dado. A modelagem estocástica de processos de software, com raízes na engenharia de confiabilidade e na simulação de processos, domina as duas primeiras décadas. A mineração de processos, com raízes na gestão de processos de negócio, domina a última e usa cada vez mais dados de repositório. Seus métodos são complementares: a PM fornece uma estrutura fundamentada empiricamente, e os modelos estocásticos fornecem distribuições sobre caminhos e durações. Ainda assim, o corpus contém poucos estudos que usam uma para alimentar a outra. Os estudos de PM com modelagem estocástica que encontramos vêm sobretudo do lado de processos de negócio e são avaliados em logs genéricos de \emph{benchmark}~\cite{incerto2025,lopezpintado2023}, linha que a literatura de mineração estocástica de processos dá continuidade~\cite{burke2020}.
+
+\subsection{Agenda de pesquisa}\label{sec:agenda}
+
+\begin{description}
+\item[RA1.] \textbf{Construção padronizada de logs de eventos para o SDLC.} \emph{Frameworks} que transformem dados heterogêneos de repositório em logs de eventos comparáveis, com correlação de casos entre ferramentas. No corpus, os modelos de Markov da atividade em repositórios definem seus estados manualmente e de forma diferente a cada estudo~\cite{jo2023,jo2024,ortu2023}. \pendente{fundamentar com a contagem da Tabela de fontes e construção de logs (RQ3).}
+\item[RA2.] \textbf{Previsão estocástica orientada a processos.} Derivar o espaço de estados e as probabilidades de transição de um modelo estocástico de previsão a partir de um modelo de processo descoberto, em vez de estatísticas agregadas. Esta é a combinação menos explorada (\PM{}+\ST{}: 10 estudos, nenhum prevendo uma métrica de processo).
+\item[RA3.] \textbf{Atributos derivados de processos para preditores aprendidos.} Uso sistemático de atributos de conformidade, retrabalho e entropia de caminhos em preditores de engenharia de software, direção sugerida por~\cite{caldeira2022,gupta2017}. \pendente{fundamentar com a extração de RQ3 ou mover para trabalho futuro.}
+\item[RA4.] \textbf{Benchmarks de ponta a ponta.} \emph{Benchmarks} abertos e compartilhados de código aberto, com separação temporal dos dados de teste, para que pipelines de múltiplas etapas possam ser comparados como um todo, e não por componente (L2 $\rightarrow$ L3).
+\end{description}
+
+\pendente{Taxonomia SPMF: aplicá-la aos 380 estudos (Analytical Depth $\times$ SDLC Coverage $\times$ Technique Integration), com mapa de bolhas, e reinserir aqui. Se não for aplicada, deixá-la só como proposta de trabalho futuro em uma frase, ou retirar.}
+
+\subsection{Implicações para profissionais}
+
+As técnicas do corpus operam sobre logs que já existem em rastreadores de issues e em controle de versão; assim, o custo de entrada está na construção dos logs de eventos, e não na coleta de dados. Nenhum estudo relata um pipeline de ponta a ponta avaliado como um único sistema. Um profissional que hoje encadeie PM, um modelo estocástico e um corretor aprendido estará combinando partes testadas individualmente cujo comportamento conjunto é desconhecido.
+
+% =================================================================
+\section{Ameaças à Validade}\label{sec:threats}
+
+\subsection{Busca}\label{sec:threats-search}
+
+As strings podem deixar de recuperar estudos que usam terminologia não canônica. A string complementar de MSR, a string de fronteira e a busca por citações atenuam esse risco. A verificação com o conjunto de controle é uma evidência fraca de completude: os dez estudos de controle já eram conhecidos quando as strings foram escritas, e três strings do Scopus incluem literalmente os títulos de estudos de controle. As strings não contêm bloco para previsão por aprendizado de máquina em dados de repositório; por isso, estudos que preveem métricas de processo com aprendizado de máquina sem termos de PM ou estocásticos estão sub-representados, e a participação de \FC{} provavelmente está subestimada. A revisão se limita a publicações em inglês revisadas por pares; literatura cinzenta, teses e preprints não foram pesquisados. As exportações do IEEE Xplore foram feitas em lotes manuais cuja string de origem não foi registrada.
+
+\subsection{Seleção}
+
+A primeira triagem usou um modelo de linguagem. O Recall do modelo na amostra verificada por humanos (0,630) ficou abaixo do critério predefinido de 0,90. Grande parte desse déficit vem da informação disponível para o modelo, e não do modelo em si: para 72,4\% dos registros do lote principal, a primeira decisão foi tomada apenas com o título, porque a exportação do Scopus não trazia resumos, e a segunda passagem leu o PDF em 0,5\% dos registros. O modelo foi executado com a temperatura padrão da API, de modo que suas decisões não são determinísticas. Por essas razões, a primeira triagem foi usada apenas para ordenar o trabalho, e todo registro que ela não incluiu foi triado novamente por humanos. A ameaça residual está nessa re-triagem humana: a concordância entre os revisores foi moderada na amostra do segundo lote ($\kappa = 0{,}494$), e os revisores viam rótulos sugeridos durante a triagem, o que pode ancorar suas decisões.
+
+\subsection{Classificação}
+
+Os códigos de família das inclusões originais foram propostos pelo modelo de linguagem e revisados pelos autores em todo estudo com duas famílias; os estudos de família única não foram auditados, de modo que um estudo com uma família não detectada pode estar subclassificado. Setenta e seis estudos não estão classificados. Se dois deles combinassem as três famílias, a contagem de L2 mudaria; um estudo L3 entre eles mudaria a conclusão principal. O julgamento entre L2 e L3 depende da leitura de um único estudo.
+
+\subsection{Construto}
+
+IC4b e IC4c admitem modelos de uso Markovianos para teste estatístico e modelos de crescimento de confiabilidade baseados em taxas de defeitos. Esses modelos descrevem o produto, e não o processo de desenvolvimento, e provavelmente respondem por muitos dos 89 estudos \ST{}+\FC{} de 1997--2013. Os autores desenvolvem um pipeline integrado de previsão; para limitar a influência desse interesse, os níveis de integração são definidos por critérios genéricos, e a referência ao nome do projeto dos autores no prompt do modelo de linguagem está declarada no pacote de replicação.
+
+% =================================================================
+\section{Conclusão}\label{sec:conclusion}
+
+Mapeamos 456 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014. Elas se encontram em 10 dos 380 estudos classificados. A previsão é feita sobretudo com modelos estocásticos alimentados por estatísticas agregadas, e raramente com estrutura de processo minerada de logs de eventos. Um estudo combina as três famílias, com cada componente avaliado separadamente; nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. A previsão estocástica orientada a processos e os \emph{benchmarks} de ponta a ponta são as duas direções com apoio mais claro no corpus.
+
+O corpus, a classificação, os prompts e os registros de triagem estão disponíveis no pacote de replicação (Zenodo, DOI 10.5281/zenodo.21939600).
+
+% =================================================================
+\section*{Declaração de contribuição dos autores (CRediT)}
+\textbf{Rodrigo Almeida de Oliveira:} Conceitualização, Metodologia, Software, Investigação, Curadoria de dados, Análise formal, Visualização, Escrita -- rascunho original, Escrita -- revisão e edição.
+\textbf{Juliano de Paulo Ribeiro:} Metodologia, Validação, Investigação, Escrita -- revisão e edição.
+\textbf{Edson Emilio Scalabrin:} Conceitualização, Metodologia, Supervisão, Escrita -- revisão e edição, Recursos, Obtenção de financiamento.
+
+\section*{Declaração de conflito de interesses}
+Os autores declaram não ter interesses financeiros concorrentes ou relações pessoais conhecidas que possam ter influenciado o trabalho relatado neste artigo.
+
+\section*{Financiamento}
+Este estudo foi financiado em parte pela Coordenação de Aperfeiçoamento de Pessoal de Nível Superior -- Brasil (CAPES) -- Código de Financiamento 001, por meio de bolsa de doutorado concedida ao autor correspondente no Programa de Pós-Graduação em Informática da Pontifícia Universidade Católica do Paraná (PPGIa/PUCPR).
+
+\section*{Declaração sobre IA generativa no processo de escrita}
+Durante a preparação deste trabalho, os autores usaram o Claude (Anthropic) para reestruturar e editar o manuscrito e para verificar sua aritmética. Após o uso dessa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo da publicação. Separadamente, um modelo de linguagem foi usado na condução do estudo como apoio à primeira triagem (Seção~\ref{sec:selection-process}).
+
+\section*{Disponibilidade de dados}
+O pacote de replicação (Zenodo, DOI 10.5281/zenodo.21939600) contém as strings de busca, os scripts de remoção de duplicatas e de enriquecimento, os prompts e esquemas de triagem, as decisões por registro em todas as etapas, as planilhas de verificação e de re-triagem humanas, a lista dos estudos incluídos com sua classificação e o checklist SEGRESS preenchido.
+\pendente{Renomear \texttt{included\_studies\_506.csv} para \texttt{included\_studies.csv} e incluir \texttt{figs.py} e \texttt{studies.json} no pacote.}
+
+\appendix
+
+\section{Listas de termos de busca}\label{app:strings}
+
+As strings são reproduzidas no idioma em que foram executadas.
+
+\paragraph{String principal (população $\wedge$ intervenção)}
+\begin{footnotesize}\begin{verbatim}
+("software engineering" OR "software development" OR "software process"
+ OR "software lifecycle" OR "software life cycle" OR "SDLC"
+ OR "development lifecycle" OR "development life cycle" OR "DevOps"
+ OR "CI/CD" OR "continuous integration" OR "continuous delivery"
+ OR "agile development" OR "agile process" OR "issue tracking"
+ OR "bug tracking" OR "version control" OR "code review" OR "pull request"
+ OR "software project" OR "software repository" OR "software maintenance"
+ OR "software evolution")
+AND
+("process mining" OR "process discovery" OR "conformance checking"
+ OR "workflow mining" OR "predictive process monitoring"
+ OR "process prediction" OR "remaining time prediction"
+ OR "process forecasting" OR "event log" OR "process simulation"
+ OR "Monte Carlo simulation" OR "Markov chain" OR "Markov model"
+ OR "stochastic process model" OR "transition probability"
+ OR "absorbing chain" OR "lead time prediction" OR "cycle time prediction")
+\end{verbatim}\end{footnotesize}
+
+\paragraph{String complementar (MSR $\rightarrow$ modelagem de processos)}
+\begin{footnotesize}\begin{verbatim}
+("mining software repositories" OR "software repository mining"
+ OR "GitHub mining" OR "Jira mining")
+AND ("process model" OR "Markov" OR "Monte Carlo" OR "stochastic"
+ OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix")
+\end{verbatim}\end{footnotesize}
+
+\paragraph{String de fronteira (estocástico $\wedge$ PM $\wedge$ ES)}
+\begin{footnotesize}\begin{verbatim}
+("Monte Carlo" OR "Markov chain" OR "stochastic simulation"
+ OR "probabilistic forecast" OR "transition matrix")
+AND ("process mining" OR "event log" OR "workflow mining"
+ OR "process model" OR "business process")
+AND ("software development" OR "software engineering" OR "software process"
+ OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log"
+ OR "build pipeline")
+\end{verbatim}\end{footnotesize}
+
+\section{Estudos incluídos}\label{app:studies}
+\input{appendix_studies_pt.tex}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}

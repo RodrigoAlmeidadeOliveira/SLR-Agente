@@ -1,0 +1,535 @@
+\documentclass[preprint,12pt,authoryear=false]{elsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,top=22mm,bottom=24mm,left=28mm,right=28mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\linenumbers
+
+% ---------------------------------------------------------------
+% Author notes. Every \pendente{} marks work that still needs new
+% data or a decision by the authors. Remove all of them before
+% submission (search for "PENDENTE").
+% ---------------------------------------------------------------
+\newcommand{\pendente}[1]{\textcolor{red}{\textbf{[PENDENTE:} #1\textbf{]}}}
+
+\newcommand{\PM}{TF-PM}
+\newcommand{\ST}{TF-ST}
+\newcommand{\FC}{TF-FC}
+\newcommand{\MSR}{TF-MSR}
+
+\journal{Information and Software Technology}
+\makeatletter\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty\def\@oddfoot{\hfill\thepage\hfill}\let\@evenfoot\@oddfoot}\makeatother
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Process Mining, Stochastic Modelling, and Forecasting of Software Development Processes: A Systematic Mapping Study}
+
+\author[pucpr]{Rodrigo Almeida de Oliveira\corref{cor1}}
+\ead{rodrigo.almeida1@pucpr.edu.br}
+\author[pucpr]{Juliano de Paulo Ribeiro}
+\ead{juliano.ribeiro@pucpr.edu.br}
+\author[pucpr]{Edson Emilio Scalabrin}
+\ead{scalabrin@ppgia.pucpr.br}
+\cortext[cor1]{Corresponding author.}
+\affiliation[pucpr]{organization={Pontifícia Universidade Católica do Paraná (PUCPR), Graduate Program in Informatics (PPGIa)},
+  city={Curitiba}, state={PR}, country={Brazil}}
+
+\begin{abstract}\small
+\textbf{Context.} Software repositories record development as time-stamped events. Process mining (PM), stochastic modelling, and forecasting of process metrics exploit such traces, largely independently.
+\textbf{Objective.} To map the primary studies that apply these techniques to software development data, to characterise how the three lines have evolved, and to measure how far they have been integrated.
+\textbf{Method.} A systematic mapping study reported against SEGRESS. Five libraries and one citation-search iteration gave 5,783 unique records (12 April 2026). A language model served as a first-pass screening aid; every record it excluded or left undecided was re-screened by two human reviewers. Studies were classified into four technique and data families and into four integration levels (L0--L3).
+\textbf{Results.} The corpus contains 456 studies published between 1994 and 2026, of which 380 are classified. Stochastic modelling (55.3\%) dominated until 2013; process mining (41.3\%) has dominated since 2014. The two lines meet in 10 studies. Forecasting appears in 29.2\% of the studies, mostly paired with stochastic models (90 studies) and rarely with process mining (7). One study combines all three families (L2), and none couples them through specified interfaces evaluated end-to-end (L3).
+\textbf{Conclusion.} The field is fragmented along community lines rather than short of techniques. Process-aware stochastic forecasting, in which mined process structure parameterises a stochastic forecast, is the least explored combination. A four-direction agenda is proposed.
+\end{abstract}
+
+\begin{highlights}
+\item 456 studies apply process mining, stochastic models or forecasting to SDLC data.
+\item Stochastic modelling dominated until 2013; process mining has dominated since.
+\item Process mining and stochastic modelling meet in 10 of 380 classified studies.
+\item One study combines all three; none couples them with end-to-end evaluation.
+\item Corpus, classification, and screening records are openly available.
+\end{highlights}
+
+\begin{keyword}
+Systematic mapping study \sep Process mining \sep Stochastic modelling \sep Software process forecasting \sep Mining software repositories
+\end{keyword}
+
+\end{frontmatter}
+
+% =================================================================
+\section{Introduction}\label{sec:intro}
+
+Software organisations routinely need to answer forecasting questions about their own development process: when a feature will be delivered, how long an issue will remain open, or whether a release will slip. The data needed to answer them already exists as a by-product of everyday work. Commits, issue transitions, pull requests, code reviews, and CI/CD executions are all time-stamped events.
+
+Three research communities have developed techniques that can exploit these traces, largely independently of one another. Process mining (PM) discovers, checks, and enhances process models from event logs, and has been applied to software repositories since the work of Cook and Wolf~\cite{cook1995,cook1998} and Rubin et al.~\cite{rubin2007}. Stochastic modelling, including Markov chains, stochastic Petri nets, and Monte Carlo simulation, has a long tradition in software reliability and process simulation~\cite{whittaker1994,ali2014}. Machine-learning-based prediction dominates mining-software-repositories research on defects, effort, and outcomes~\cite{kagdi2007,hall2012} and, in business process management, predictive process monitoring~\cite{marquez2018}.
+
+Combining the three is attractive because each covers a weakness of the others. PM provides an empirically grounded process structure. Stochastic models turn that structure into probability distributions over future paths and durations. Learned models can correct systematic errors using context features. Whether such combinations have been built, and on which data, is not known.
+
+\paragraph{Related secondary studies}
+Existing secondary studies each cover one side of this space. Predictive process monitoring has been surveyed and benchmarked for outcome prediction~\cite{teinemaa2019}, remaining-time prediction~\cite{verenich2019}, deep-learning methods~\cite{ramamaneiro2023}, and in general~\cite{marquez2018}, but on business event logs rather than software development processes. General mappings of process mining applications~\cite{garcia2019,thiede2018} treat software engineering as one domain among many and do not address forecasting. Within software engineering, secondary studies have covered process simulation modelling~\cite{zhang2010,ali2014}, process mining of FLOSS event logs~\cite{mukala2015}, software process mining with Petri nets~\cite{thamizharasan2016}, continuous software monitoring backed by process mining~\cite{stepanov2026}, repository mining~\cite{kagdi2007}, and defect prediction~\cite{hall2012}. None maps the joint use of process mining, stochastic modelling, and forecasting on software development data.
+
+\paragraph{Contributions}
+This article reports a systematic mapping study of that intersection. Its contributions are:
+\begin{enumerate}
+\item a corpus of 456 primary studies, openly available with the screening and classification records;
+\item a classification of the studies into four technique and data families and into four integration levels, with the evolution of each family over three decades; and
+\item an analysis of the gaps between the three research lines, from which we derive a four-direction research agenda.
+\end{enumerate}
+
+The review was motivated by the authors' own work on an integrated forecasting pipeline. We report this because it is a potential source of bias in how the integration levels were defined and read; the definitions in Section~\ref{sec:classification} are therefore stated without reference to any particular architecture, and the threat is discussed in Section~\ref{sec:threats}.
+
+Section~\ref{sec:method} describes the review protocol, Section~\ref{sec:selection} the search and selection results, Section~\ref{sec:results} the answers to the research questions, Section~\ref{sec:discussion} the discussion and research agenda, Section~\ref{sec:threats} the threats to validity, and Section~\ref{sec:conclusion} concludes.
+
+% =================================================================
+\section{Review Protocol}\label{sec:method}
+
+We follow the mapping guidelines of Petersen et al.~\cite{petersen2015}, the guidelines of Kitchenham and Charters~\cite{kitchenham2007}, and the snowballing procedure of Wohlin~\cite{wohlin2014}, and report against SEGRESS~\cite{segress}. The mapping protocol was not registered in advance. The completed SEGRESS checklist is in the supplementary material.
+
+\subsection{Research questions}\label{sec:rqs}
+
+\begin{description}
+\item[RQ1] How has research applying process mining, stochastic modelling, or forecasting to software development data evolved over time?
+\item[RQ2] Which technique families, and which combinations of them, do the studies use?
+\item[RQ3] Which SDLC phases, event-log sources, and specific techniques do the studies address?
+\item[RQ4] To what extent are process mining, stochastic modelling, and forecasting integrated, and which gaps remain?
+\end{description}
+
+RQ1 and RQ2 characterise the corpus. RQ3 describes what the studies analyse and with which algorithms. RQ4 addresses the motivating question of this review.
+
+\pendente{RQ3 só pode ser respondida após a extração humana dos campos fase do SDLC, fonte e construção do event log, algoritmo de PM, método estocástico e alvo da previsão (ver Seção~\ref{sec:rq3}). A extração anterior, feita pelo LLM, teve 0\% de concordância exata com o avaliador humano e não pode ser usada. Se a extração não for feita, retirar RQ3 do artigo.}
+
+\subsection{Search strategy}\label{sec:search}
+
+The automated search covered five digital libraries: IEEE Xplore, ACM Digital Library, Scopus, Web of Science, and SpringerLink. The strings were built from a PICO decomposition adapted to software engineering. The population is the software engineering context (software development, SDLC, DevOps, CI/CD, issue tracking, version control, code review). The intervention is the analytical technique (process mining, process discovery, conformance checking, predictive process monitoring, Markov chain, Monte Carlo, stochastic Petri net). The outcome is a forecast or a process model (lead time, cycle time, remaining time, throughput). There is no comparison facet.
+
+Three complementary term lists were derived: a principal string joining population and intervention; a complementary string for studies that use MSR terminology without canonical PM terms; and a frontier string for the intersection of stochastic methods and PM in software contexts. They were adapted to each library, giving 25 exports (Table~\ref{tab:search}). All searches were run on 12 April 2026, with a publication window from 1 January 1994 (Whittaker and Thomason~\cite{whittaker1994}) to that date. Publications dated 2026 are therefore partial-year coverage. The shared term lists are given in \ref{app:strings}; every database-specific string is in the replication package.
+
+\pendente{Três strings do Scopus contêm os títulos literais de artigos do conjunto de controle (V6, V8, V9). Opção A: retirar os títulos, rodar as strings de novo e atualizar as Tabelas~\ref{tab:search} e~\ref{tab:selection}. Opção B: manter, deixando a declaração da Seção~\ref{sec:threats-search}, e validar a busca com um conjunto de teste independente.}
+
+\pendente{Nenhuma string principal tem bloco de forecasting/ML em repositórios (por exemplo ``bug fix time'', ``issue resolution time'', ``effort estimation'', ``machine learning'')~\cite{panjer2007,giger2010}. Rodar esse bloco nas cinco bases e incorporar os resultados ao corpus. A busca suplementar no Scopus de 31/10/2026 (165 registros, 19 includes por título) deve ser incorporada ou descartada de vez.}
+
+\begin{table}[t]
+\centering\small
+\caption{Search ledger by source. All exports were retrieved on 12 April 2026. Unique records are counted once, under the source that supplied the retained copy.}\label{tab:search}
+\begin{tabular}{lllrr}
+\toprule
+Source & Field searched & Exports & Raw records & Unique \\
+\midrule
+Scopus & TITLE-ABS-KEY & 6 & 2,377 & 1,852 \\
+SpringerLink & Simplified search & 10 & 2,884 & 1,543 \\
+IEEE Xplore & All metadata & 17 batches & 1,386 & 1,263 \\
+Web of Science & Topic (TS) & 4 & 997 & 514 \\
+ACM DL & Abstract & 2 + 1 export & 96 & 34 \\
+Snowballing & -- & 1 iteration & 595 & 575 \\
+Control set & -- & -- & 12 & 2 \\
+\midrule
+Total & & & 8,347 & 5,783 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Snowballing}
+One iteration of backward and forward snowballing was run over 400 source DOIs and retrieved 595 records. A candidate was kept when its title or abstract contained one PM or stochastic term and one software-engineering term.
+
+\pendente{O procedimento acima não segue Wohlin~\cite{wohlin2014}: os 400 DOIs-fonte não são os estudos incluídos, backward e forward não estão separados e não houve critério de saturação. Refazer o snowballing a partir dos 380 estudos classificados, separando backward e forward e iterando até nenhum estudo novo aparecer, e informar as contagens por iteração. Sem isso, descrever o procedimento como ``one iteration of citation search'' e não como snowballing de Wohlin.}
+
+\paragraph{Control set}
+Ten known studies (Table~\ref{tab:control}) were used to check that the strings retrieve relevant work. All ten were retrieved. Because the ten were known when the strings were written, this check does not estimate the sensitivity of the search.
+
+\begin{table}[t]
+\centering\small
+\caption{Control studies for the search-string check.}\label{tab:control}
+\footnotesize
+\begin{tabularx}{\textwidth}{llXl}
+\toprule
+\# & Study & Rationale & Retrieved via \\
+\midrule
+V1 & Cook \& Wolf (1998) & Seminal PM in SE & ACM \\
+V2 & Rubin et al. (2007) & PM framework for software processes & Scopus \\
+V3 & Poncin et al. (2011) & PM and MSR & IEEE \\
+V4 & Caldeira \& Cardoso (2019) & PM for software process assessment & IEEE \\
+V5 & Lemos et al. (2011) & PM for software process management & IEEE \\
+V6 & Whittaker \& Thomason (1994) & Markov models in software testing & Scopus \\
+V7 & Tax et al. (2017) & Predictive process monitoring (BPM) & Control set \\
+V8 & Rogge-Solti \& Weske (2015) & Stochastic PM forecasting & Scopus \\
+V9 & Rozinat et al. (2009) & From PM to simulation & Control set \\
+V10 & Gupta \& Sureka (2017) & Multi-repository PM in SE & ACM \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Eligibility criteria}\label{sec:criteria}
+
+Table~\ref{tab:criteria} lists the criteria. The unit of counting is the publication~\cite{petersen2015}. Duplicate records of the same publication are merged. A conference paper and its later extension are both retained when each satisfies the criteria independently; there are two such pairs in the corpus, and counting them once would change no reported percentage by more than one point.
+
+A study is included when it satisfies IC1--IC3 and at least one of the content criteria IC4a--IC4d, and none of EC1--EC5. The four content criteria define the four families used throughout the article: \PM{} (IC4a), \ST{} (IC4b), \FC{} (IC4c), and \MSR{} (IC4d). \PM{}, \ST{}, and \FC{} are technique families; \MSR{} describes the data source.
+
+\pendente{IC4b e IC4c, como estão, aceitam modelos Markovianos de teste estatístico e modelos de crescimento de confiabilidade (``defect rates''). Esses modelos descrevem o produto, não o processo de desenvolvimento, e provavelmente formam boa parte dos 89 estudos ST+FC de 1997--2013. Decidir: (a) mantê-los, declarando o escopo amplo; ou (b) acrescentar um EC (``model of product reliability, not of the development process'') e reclassificar.}
+
+\begin{table}[t]
+\centering\small
+\caption{Inclusion and exclusion criteria.}\label{tab:criteria}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+Type & ID & Criterion \\
+\midrule
+\multirow{7}{*}{Inclusion}
+ & IC1 & Published between 1 January 1994 and 12 April 2026. \\
+ & IC2 & Written in English. \\
+ & IC3 & Peer-reviewed journal article, conference paper, or workshop paper of at least four pages. \\
+ & IC4a & Applies process mining (discovery, conformance checking, predictive process monitoring) to software development artefacts (commits, issues, pull requests, CI/CD logs, bug trackers, version control). \\
+ & IC4b & Uses stochastic models (Markov chains, Monte Carlo, stochastic Petri nets, absorbing chains) to analyse software development processes or workflows. \\
+ & IC4c & Proposes or evaluates forecasting of software process metrics (lead time, cycle time, remaining time, throughput, defect rates) from event logs or repository data. \\
+ & IC4d & Mines software repositories (GitHub, Jira, version control, CI/CD platforms) to discover, analyse, or improve software process models. \\
+\midrule
+\multirow{5}{*}{Exclusion}
+ & EC1 & Application domain exclusively outside software development, without demonstrated relevance to SDLC processes. \\
+ & EC2 & Software is only the implementation platform; the analysed process is not a software development process. \\
+ & EC3 & Purely algorithmic or theoretical contribution without empirical evaluation in a software development context. \\
+ & EC4 & Secondary study not specifically addressing PM or stochastic methods in software engineering. \\
+ & EC5 & Record cannot be judged on the obtainable evidence: full text not retrievable (EC5a), no abstract and no full text (EC5b), or decision-critical information absent (EC5c). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Selection process}\label{sec:selection-process}
+
+Selection had three steps.
+
+\paragraph{Step 1: language-model-assisted first pass}
+A language model (claude-haiku-4-5-20251001, Anthropic Message Batches API) screened every unique record against IC4a--IC4d and EC1--EC4, returning \emph{include}, \emph{exclude}, or \emph{maybe} with a short rationale. Records marked include or maybe were forwarded to a second, stricter pass on the title and abstract (\emph{include}, \emph{exclude}, or \emph{pending}). Abstracts missing from the exports were recovered beforehand from Semantic Scholar, OpenAlex, CORE, and Crossref. The prompts, JSON schemas, and per-record decisions are in the replication package.
+
+\paragraph{Step 2: human verification of the first pass}
+Two raters, blind to the model's decisions and to each other, judged a stratified random sample of 177 second-pass decisions against Table~\ref{tab:criteria}. Inter-rater agreement before consensus was $\kappa = 0.654$. Against the consensus, the first pass retained 29 of 46 eligible sampled studies (Recall 0.630; Wilson 95\% CI 0.486--0.755). For the records of the second screening batch, stratified samples of the model's non-includes gave an estimated Recall of 0.563. The success criterion fixed before this check was a Recall of at least 0.90. Because it was not met, the first pass is used here only to prioritise records, and Step~3 re-screened every record it had not included.
+
+\pendente{Informar onde o pré-registro da verificação foi depositado, com carimbo de tempo verificável (OSF ou Zenodo, com DOI ou link).}
+
+\paragraph{Step 3: human re-screen and check of the includes}
+Two reviewers screened all 4,005 records the first pass had excluded or left undecided, including 611 records closed without a decision for lack of an abstract. They also checked every first-pass include against the criteria. The re-screen identified 188 eligible records, which after de-duplication and a final eligibility check added 150 studies. The check of the includes removed 32 studies whose title and abstract did not support inclusion.
+
+\pendente{Para tornar a Etapa~3 auditável: (a) registrar, por linha, a decisão de cada revisor, separada da sugestão exibida, e identificar quem decidiu; (b) informar o $\kappa$ entre os dois revisores na re-triagem; (c) descrever a heurística que gerou as sugestões nos lotes S1 e S3 (regras, autoria, abrangência); (d) se esses registros não existirem, repetir a triagem numa amostra estratificada sem mostrar a sugestão e informar a concordância. Hoje as planilhas guardam decisão igual à sugestão em todas as linhas.}
+
+\subsection{Data extraction and classification}\label{sec:classification}
+
+For each included study we recorded the bibliographic data, the families it satisfies (\PM{}, \ST{}, \FC{}, \MSR{}), and its integration level. The integration level depends only on the three technique families:
+
+\begin{description}
+\item[L0] At most one technique family.
+\item[L1] Exactly two technique families.
+\item[L2] All three technique families in the same study, with stages evaluated separately or connected without specified interfaces.
+\item[L3] All three technique families coupled through specified data interfaces, in which the output of each stage is the input of the next, and evaluated end-to-end on software development data.
+\end{description}
+
+L0 and L1 follow mechanically from the family codes. Telling L2 from L3 requires reading the study's evaluation; this was needed for one study only (Section~\ref{sec:rq4}).
+
+Families were first proposed by the language model from the title, abstract, and, where available, the PDF. The authors then reviewed them as follows. Every study with two technique families ($n = 99$) was re-read for a missing third family (PDF for 78, abstract for 21); 30 were read by two authors with full agreement, and no study changed level. The 74 studies added by the re-screen were classified by the authors. Seventy-six studies added by the re-screen are known only by their title and are not yet classified.
+
+\pendente{(1) Classificar os 76 estudos lidos só pelo título, a partir do abstract ou do PDF; os que não tiverem nenhum dos dois devem ser excluídos sob EC5b, e o corpus deixa de ser 456. (2) Auditar uma amostra estratificada dos 275 estudos L0, cujas famílias vieram do LLM, e informar a taxa de erro. Depois, atualizar as Tabelas~\ref{tab:combos} e~\ref{tab:levels} e as Figuras~\ref{fig:years} e~\ref{fig:bubble} com \texttt{figs.py}.}
+
+\pendente{Extração para RQ3 e para o mapa de venues: fase do SDLC, fonte do event log, construção do log (manual, semi, automática), algoritmo de PM, método estocástico, técnica de ML, alvo da previsão, tipo de validação, research type (Wieringa et al.~\cite{wieringa2006}) e venue. Dois extratores humanos, ou um extrator e um verificador numa amostra com $\kappa$ reportado.}
+
+% =================================================================
+\section{Search and Selection Results}\label{sec:selection}
+
+The search returned 8,347 records. Cross-source de-duplication by DOI, followed by fuzzy title matching (Levenshtein similarity $\geq 0.9$) for records without a DOI, removed 2,564 duplicates and left 5,783 unique records. For practical reasons the first pass ran in two batches. The primary batch contained the records from the principal Scopus, IEEE Xplore, and ACM queries; the second contained the remaining records (SpringerLink, Web of Science, snowballing, and the other IEEE and ACM exports). Table~\ref{tab:selection} gives the outcome of each step, and Figure~\ref{fig:prisma} the overall flow.
+
+\begin{table}[t]
+\centering\small
+\caption{Outcome of the selection steps. Batch identifier lists overlap by 364 papers recorded under different identifiers; their union is the 5,783 unique records.}\label{tab:selection}
+\footnotesize
+\begin{tabular}{lrr}
+\toprule
+Step & Primary batch & Second batch \\
+\midrule
+Records screened (Step 1, title/abstract) & 2,340 & 3,807 \\
+\quad include / maybe & 111 / 775 & 232 / 1,151 \\
+Second pass (Step 1) & 886 & 1,383 \\
+\quad include & 169 & 212 + 23 \\
+\midrule
+First-pass includes, distinct after de-duplication & \multicolumn{2}{c}{340} \\
+\quad removed: published before 1994 (IC1) & \multicolumn{2}{c}{2} \\
+\quad removed by the human check of includes (Step 3) & \multicolumn{2}{c}{32} \\
+Records re-screened by humans (Step 3) & \multicolumn{2}{c}{4,005} \\
+\quad eligible, new after de-duplication & \multicolumn{2}{c}{168} \\
+\quad removed in the final eligibility check & \multicolumn{2}{c}{18} \\
+\midrule
+Included studies & \multicolumn{2}{c}{306 + 150 = 456} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\footnotesize, minimum width=4.4cm, inner sep=3pt},
+  side/.style={draw, rounded corners=2pt, align=left, font=\footnotesize, text width=5.4cm, inner sep=3pt, fill=gray!8},
+  arr/.style={-{Stealth[length=2mm]}, thin}, node distance=7mm]
+\node[box] (id) {Records identified: 8,347\\ \scriptsize five libraries 7,740; snowballing 595; control 12};
+\node[box, below=of id] (dd) {Unique records: 5,783};
+\node[box, below=of dd] (s1) {Step 1: model-assisted first pass\\ \scriptsize title/abstract, then second pass};
+\node[box, below=of s1] (inc1) {First-pass includes: 340 distinct};
+\node[box, below=of inc1] (chk) {After human check of includes: 306};
+\node[box, below=10mm of chk] (add) {Added by the human re-screen: 150};
+\node[box, below=of add, fill=gray!15] (fin) {Included studies: 456\\ \scriptsize classified 380; title only 76};
+\node[side, right=6mm of dd] (dup) {Duplicates removed: 2,564};
+\node[side, right=6mm of inc1] (ex1) {Not included by the first pass: 4,005 records, all re-screened by two humans (Step 3)};
+\node[side, right=6mm of chk] (rm) {Removed: 2 published before 1994 (IC1); 32 not meeting the criteria};
+\node[side, right=6mm of add] (rm2) {Re-screen: 188 eligible, 168 new after de-duplication, 18 removed at final check};
+\draw[arr] (id) -- (dd); \draw[arr] (dd) -- (s1); \draw[arr] (s1) -- (inc1); \draw[arr] (inc1) -- (chk);
+\draw[arr] (chk) -- (add); \draw[arr] (add) -- (fin);
+\draw[arr] (dd) -- (dup); \draw[arr] (inc1) -- (ex1); \draw[arr] (chk) -- (rm);
+\draw[arr] (ex1.east) -- ++(4mm,0) |- (rm2.east); \draw[arr] (rm2) -- (add);
+\end{tikzpicture}
+\caption{PRISMA 2020 flow~\cite{page2021} of the study selection.}\label{fig:prisma}
+\end{figure}
+
+The second-pass exclusions in the primary batch ($n = 717$) were driven by EC3 (232; algorithmic or theoretical contributions without software engineering evaluation), EC1 (205; mostly generic business process management), EC5 (145), EC2 (110), and EC4 (60). A study may trigger more than one criterion. The size of EC3 indicates a sizeable body of PM and stochastic research not yet evaluated on software development data.
+
+% =================================================================
+\section{Results}\label{sec:results}
+
+The corpus contains 456 studies. All percentages below are computed on the 380 classified studies unless stated otherwise; the 76 title-only studies are counted only in Figure~\ref{fig:years}. The full list is in \ref{app:studies}.
+
+\subsection{RQ1: Evolution over time}\label{sec:rq1}
+
+The 456 studies span 1994--2026 (Figure~\ref{fig:years}). Since 2006 most years contribute 13 to 26 studies, with dips in 2013 (3), 2020 (10), and 2025 (7); 2026 is a partial year. In total, 222 studies (48.7\%) appeared in 2015--2026.
+
+\pendente{A queda para 3 estudos em 2013, entre anos com 18 e 25, é suspeita. Verificar se é efeito da busca ou da indexação (por exemplo, um lote do IEEE ou do SpringerLink faltando) antes de interpretar.}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figs/years.pdf}
+\caption{Included studies per publication year ($n = 456$).}\label{fig:years}
+\end{figure}
+
+The composition of the field changed sharply around 2014 (Figure~\ref{fig:bubble}). Until 2013 the corpus is dominated by stochastic models: 92\% of the classified studies of 1994--2005 and 73\% of 2006--2013 carry \ST{}. From 2014 process mining takes over, with \PM{} in 61\% of the studies of 2014--2019 and 60\% of 2020--2026, while \ST{} falls to about a third. Repository mining (\MSR{}) grows steadily, from 3\% to 41\% of the studies of each period. The share of forecasting (\FC{}) is roughly stable, between 24\% and 35\%.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figs/bubble.pdf}
+\caption{Technique and data families by period (classified studies, $n = 380$). Bubble area is proportional to the number of studies; the percentage is the share of the period's classified studies that carry the family. Families are not exclusive.}\label{fig:bubble}
+\end{figure}
+
+\pendente{Acrescentar a distribuição por tipo de publicação (periódico, conferência, workshop) e os venues mais frequentes, a partir da extração da Seção~\ref{sec:classification}.}
+
+\subsection{RQ2: Technique families and their combinations}\label{sec:rq2}
+
+Of the 380 classified studies, 210 (55.3\%) carry \ST{}, 157 (41.3\%) \PM{}, 111 (29.2\%) \FC{}, and 97 (25.5\%) \MSR{}. Table~\ref{tab:combos} shows how the three technique families combine.
+
+\begin{table}[t]
+\centering\small
+\caption{Combinations of the three technique families in the 380 classified studies. Each study appears in exactly one row. The \MSR{} column counts studies of that row that also mine repositories.}\label{tab:combos}
+\begin{tabular}{lrrrc}
+\toprule
+Combination & Studies & \% & with \MSR{} & Median year \\
+\midrule
+\PM{} only & 141 & 37.1 & 62 & 2018 \\
+\ST{} only & 111 & 29.2 & 16 & 2008 \\
+\ST{} + \FC{} & 89 & 23.4 & 2 & 2010 \\
+\FC{} only & 15 & 3.9 & 5 & 2019 \\
+\PM{} + \ST{} & 9 & 2.4 & 1 & 2016 \\
+None (\MSR{} only) & 8 & 2.1 & 8 & 2017 \\
+\PM{} + \FC{} & 6 & 1.6 & 3 & 2018 \\
+\PM{} + \ST{} + \FC{} & 1 & 0.3 & 0 & 2025 \\
+\midrule
+Total & 380 & 100.0 & 97 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two clusters account for 90\% of the corpus and barely overlap. The first is process mining, often on repository data: 141 studies use PM without stochastic modelling or forecasting, and 62 of them mine repositories. The second is stochastic modelling, alone (111) or used to forecast (89), almost never on mined repository events (18 of 200).
+
+\paragraph{Process mining}
+The seminal arc of \PM{} runs from Cook and Wolf's discovery of finite-state process models from event traces, which already used Markov models~\cite{cook1995,cook1998}, to Rubin et al.'s application of the ProM framework to source code management logs~\cite{rubin2007}. Later work extended discovery to multiple repositories and perspectives.
+
+\paragraph{Stochastic modelling}
+Markov-chain studies represent software processes as discrete state transitions: developer activity in GitHub repositories as discrete-time Markov chains~\cite{jo2023}, with probabilistic model checking of temporal properties~\cite{jo2024}; fault-insertion and fault-fixing patterns combined with social network analysis~\cite{ortu2023}; Markov decision processes for pull-request outcome prediction~\cite{joshi2024}; risk prediction from repository data~\cite{jeon2015}; defect removal under code churn~\cite{tian2005}; agile state-space planning~\cite{tyagi2021}; release-time forecasting~\cite{washizaki2015}; and team estimation with stochastic automata networks~\cite{massitela2018}. Stochastic Petri nets model concurrency in DevOps and CI/CD pipelines~\cite{mesmia2021} and the bottleneck stages that govern delivery probability~\cite{bhadra2022,bhadra2023}. Monte Carlo simulation supports project forecasting in hybrid system-dynamics models~\cite{li2020}, agile risk assessment~\cite{lunesu2021}, and cycle-time economics~\cite{magennis2015}.
+
+In these studies, transition probabilities, firing rates, and distribution parameters come from aggregate project statistics such as defect counts, phase-level duration averages, or velocity metrics~\cite{nafreen2020,bhadra2022,li2020}. States are anchored to coarse lifecycle phases. None of the cited studies derives its state space from a process model discovered from fine-grained event logs.
+
+\subsection{RQ3: SDLC phases, event-log sources, and techniques}\label{sec:rq3}
+
+\pendente{Esta subseção depende da extração humana (Seção~\ref{sec:classification}). Estrutura sugerida: (a) Tabela de fase do SDLC $\times$ família; (b) Tabela de fontes de event log (Jira, GitHub, GitLab, Jenkins, IDE, outras) e modo de construção; (c) frequência dos algoritmos de PM (Alpha, Heuristics, Inductive Miner, Fuzzy etc.), métodos estocásticos (DTMC, CTMC, SPN, Monte Carlo, System Dynamics) e alvos de previsão (lead time, remaining time, resolução de issue, outcome); (d) mapa de bolhas fase $\times$ família, como na Figura~\ref{fig:bubble}.}
+
+\begin{table}[h]
+\centering\small
+\caption{\textcolor{red}{[PENDENTE]} SDLC phases addressed, by technique family (classified studies). A study may address several phases.}\label{tab:phases}
+\begin{tabular}{lcccc}
+\toprule
+SDLC phase & \PM{} & \ST{} & \FC{} & \MSR{} \\
+\midrule
+Requirements and design & -- & -- & -- & -- \\
+Development (commits, pull requests) & -- & -- & -- & -- \\
+Quality (testing, review, defects) & -- & -- & -- & -- \\
+Delivery (CI/CD, release) & -- & -- & -- & -- \\
+Operations (incidents, maintenance) & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{RQ4: Integration and gaps}\label{sec:rq4}
+
+Table~\ref{tab:levels} gives the integration levels. Most studies (72.4\%) use a single technique family; 104 combine two; one combines three; none reaches L3.
+
+\begin{table}[t]
+\centering\small
+\caption{Integration levels of the 380 classified studies.}\label{tab:levels}
+\begin{tabularx}{\textwidth}{lXrr}
+\toprule
+Level & Definition & Studies & \% \\
+\midrule
+L0 & At most one technique family & 275 & 72.4 \\
+L1 & Two technique families (\PM{}+\ST{} 9; \PM{}+\FC{} 6; \ST{}+\FC{} 89) & 104 & 27.4 \\
+L2 & Three families; stages evaluated separately & 1 & 0.3 \\
+L3 & Three families coupled through specified interfaces, evaluated end-to-end & 0 & 0.0 \\
+\midrule
+Total & & 380 & 100.0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Process mining with stochastic modelling}
+Ten studies combine \PM{} and \ST{}, eight of them published since 2014. They couple discovered process structure with stochastic reasoning for a single analytical concern. Incerto et al.\ show that variable-length Markov chains outperform eighteen stochastic conformance-checking techniques on ten of eleven benchmark logs~\cite{incerto2025}. López-Pintado and Dumas replace deterministic resource calendars with probabilistic ones discovered from event logs, reproducing empirical cycle-time distributions more closely~\cite{lopezpintado2023}. Jalote and Kamma model programmer task sequences from IDE logs as first-order Markov chains~\cite{jalote2021}. None of these studies uses the stochastic layer to forecast a process metric.
+
+\paragraph{Process mining with forecasting}
+Seven studies combine \PM{} and \FC{}, all published since 2015. They approach prediction through process enhancement rather than an explicit stochastic model. Gupta combines inductive-miner discovery with predictive analytics to identify recurring failure patterns in maintenance workflows~\cite{gupta2017}. SIMPT extracts time-annotated process trees for interactive what-if simulation~\cite{pourbafrani2021}, a line extended with generative models~\cite{buliga2025}. Caldeira et al.\ derive process-complexity metrics from IDE logs and use them to predict product quality~\cite{caldeira2022}. None reports a probability distribution over the completion time or remaining steps of an individual process instance.
+
+\paragraph{The single three-family study}
+PRIMAD~\cite{guinea2025} builds a digital twin of the SDLC from Jira issue flows, combining pm4py-based discovery, an actor-based simulation core, and supervised learning for context-aware prediction. Its evaluation is reported per component: the coupled pipeline is not evaluated as a whole, the hand-offs between stages are not specified, and no forecasting layer propagates uncertainty end-to-end. We therefore classify it as L2.
+
+\pendente{Registrar quem leu o PDF completo do PRIMAD e citar os trechos (seção/página) que mostram a avaliação por componente. Como a conclusão principal se apoia neste estudo, o revisor vai pedir isso.}
+
+\paragraph{Gaps}
+Three gaps follow from Tables~\ref{tab:combos} and~\ref{tab:levels}. First, the gap is one of integration, not of coverage: each family is well represented, but the PM and stochastic lines meet in 10 of 380 studies. Second, forecasting is mostly done with stochastic models fed by aggregate statistics (89 studies), and rarely with structure mined from event logs (7). Third, no study evaluates a multi-stage pipeline end-to-end on SDLC data.
+
+% =================================================================
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Two communities, one data source}
+
+The clearest pattern in the corpus is the succession of two communities over the same kind of data. Stochastic modelling of software processes, rooted in reliability engineering and process simulation, dominates the first two decades. Process mining, rooted in business process management, dominates the last one and increasingly uses repository data. Their methods are complementary: PM yields an empirically grounded structure, stochastic models yield distributions over paths and durations. Yet the corpus contains few studies that use one to feed the other. The PM-and-stochastic studies we found come mostly from the business-process side and are evaluated on generic benchmark logs~\cite{incerto2025,lopezpintado2023}, a line that the stochastic process mining literature continues~\cite{burke2020}.
+
+\subsection{Research agenda}\label{sec:agenda}
+
+\begin{description}
+\item[RA1: Standardised event-log construction for the SDLC.] Frameworks that turn heterogeneous repository data into comparable event logs with cross-tool case correlation. In the corpus, Markov models of repository activity define their states manually and differently from study to study~\cite{jo2023,jo2024,ortu2023}. \pendente{fundamentar com a contagem da Tabela de fontes e construção de logs (RQ3).}
+\item[RA2: Process-aware stochastic forecasting.] Deriving the state space and transition probabilities of a stochastic forecasting model from a discovered process model, instead of from aggregate statistics. This is the least explored combination (\PM{}+\ST{}: 10 studies, none forecasting a process metric).
+\item[RA3: Process-derived features for learned predictors.] Systematic use of conformance, rework, and path-entropy features in software engineering predictors, a direction suggested by~\cite{caldeira2022,gupta2017}. \pendente{fundamentar com a extração de RQ3 ou mover para trabalho futuro.}
+\item[RA4: End-to-end benchmarks.] Shared open-source benchmarks with temporal hold-out, so that multi-stage pipelines can be compared as a whole rather than per component (L2 $\rightarrow$ L3).
+\end{description}
+
+\pendente{Taxonomia SPMF: aplicá-la aos 380 estudos (Analytical Depth $\times$ SDLC Coverage $\times$ Technique Integration), com mapa de bolhas, e reinserir aqui. Se não for aplicada, deixá-la só como proposta de trabalho futuro em uma frase, ou retirar.}
+
+\subsection{Implications for practitioners}
+
+The techniques in the corpus work on logs that already exist in issue trackers and version control, so the entry cost lies in event-log construction rather than in data collection. No study reports an end-to-end pipeline evaluated as one system. A practitioner who chains PM, a stochastic model, and a learned corrector today is combining individually tested parts whose joint behaviour is unknown.
+
+% =================================================================
+\section{Threats to Validity}\label{sec:threats}
+
+\subsection{Search}\label{sec:threats-search}
+
+The strings may miss studies that use non-canonical terminology. The complementary MSR string, the frontier string, and the citation search mitigate this. The control check is weak evidence of completeness: the ten control studies were known when the strings were written, and three Scopus strings include the titles of control studies verbatim. The strings contain no block for learned forecasting on repository data, so studies that predict process metrics with machine learning without PM or stochastic terms are under-represented, and the \FC{} share is likely an underestimate. The review is limited to English, peer-reviewed publications; grey literature, theses, and preprints were not searched. IEEE Xplore exports were run in manual batches whose source string was not recorded.
+
+\subsection{Selection}
+
+The first pass used a language model. The model's Recall on the human-checked sample (0.630) was below the predefined criterion of 0.90. Much of the shortfall comes from the information available to it rather than from the model itself: for 72.4\% of the primary-batch records the first decision was made on the title alone, because the Scopus export lacked abstracts, and the second pass read the PDF for 0.5\% of the records. The model ran at the API's default temperature, so its decisions are not deterministic. For these reasons the first pass was used only to order the work, and every record it did not include was re-screened by humans. The residual threat lies in that human re-screen: agreement between the reviewers was moderate on the sample of the second batch ($\kappa = 0.494$), and the reviewers saw suggested labels while screening, which can anchor their decisions.
+
+\subsection{Classification}
+
+Family codes for the original includes were proposed by the language model and reviewed by the authors for every two-family study; single-family studies were not audited, so a study with a missed family may be under-classified. Seventy-six studies are not classified. If two of them combined all three families, the L2 count would change; an L3 study among them would change the main conclusion. The L2/L3 judgement rests on the reading of one study.
+
+\subsection{Construct}
+
+IC4b and IC4c admit Markov usage models for statistical testing and reliability-growth models of defect rates. These model the product rather than the development process and probably account for many of the 89 \ST{}+\FC{} studies of 1997--2013. The authors are developing an integrated forecasting pipeline; to limit the influence of this interest, the integration levels are defined by generic criteria, and the language-model prompt's reference to the authors' project name is disclosed in the replication package.
+
+% =================================================================
+\section{Conclusion}\label{sec:conclusion}
+
+We mapped 456 studies that apply process mining, stochastic modelling, or forecasting to software development data. The field has been shaped by two communities in succession: stochastic modelling until 2013 and process mining since 2014. They meet in 10 of 380 classified studies. Forecasting is mostly done with stochastic models fed by aggregate statistics, and rarely with process structure mined from event logs. One study combines all three families, with each component evaluated separately; none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. Process-aware stochastic forecasting and end-to-end benchmarks are the two directions with the clearest support in the corpus.
+
+The corpus, the classification, the prompts, and the screening records are available in the replication package (Zenodo, DOI 10.5281/zenodo.21939600).
+
+% =================================================================
+\section*{CRediT authorship contribution statement}
+\textbf{Rodrigo Almeida de Oliveira:} Conceptualization, Methodology, Software, Investigation, Data curation, Formal analysis, Visualization, Writing -- original draft, Writing -- review \& editing.
+\textbf{Juliano de Paulo Ribeiro:} Methodology, Validation, Investigation, Writing -- review \& editing.
+\textbf{Edson Emilio Scalabrin:} Conceptualization, Methodology, Supervision, Writing -- review \& editing, Resources, Funding acquisition.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this article.
+
+\section*{Funding}
+This study was financed in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior -- Brasil (CAPES) -- Finance Code 001, through a doctoral scholarship granted to the corresponding author within the Graduate Program in Informatics at the Pontifícia Universidade Católica do Paraná (PPGIa/PUCPR).
+
+\section*{Declaration of generative AI in the writing process}
+During the preparation of this work the authors used Claude (Anthropic) to restructure and edit the manuscript and to check its arithmetic. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the publication. Separately, a language model was used in the conduct of the study as a first-pass screening aid (Section~\ref{sec:selection-process}).
+
+\section*{Data availability}
+The replication package (Zenodo, DOI 10.5281/zenodo.21939600) contains the search strings, de-duplication and enrichment scripts, screening prompts and schemas, per-record decisions at every step, the human verification and re-screen sheets, the list of included studies with their classification, and the completed SEGRESS checklist.
+\pendente{Renomear \texttt{included\_studies\_506.csv} para \texttt{included\_studies.csv} e incluir \texttt{figs.py} e \texttt{studies.json} no pacote.}
+
+\appendix
+
+\section{Search term lists}\label{app:strings}
+
+\paragraph{Principal string (population $\wedge$ intervention)}
+\begin{footnotesize}\begin{verbatim}
+("software engineering" OR "software development" OR "software process"
+ OR "software lifecycle" OR "software life cycle" OR "SDLC"
+ OR "development lifecycle" OR "development life cycle" OR "DevOps"
+ OR "CI/CD" OR "continuous integration" OR "continuous delivery"
+ OR "agile development" OR "agile process" OR "issue tracking"
+ OR "bug tracking" OR "version control" OR "code review" OR "pull request"
+ OR "software project" OR "software repository" OR "software maintenance"
+ OR "software evolution")
+AND
+("process mining" OR "process discovery" OR "conformance checking"
+ OR "workflow mining" OR "predictive process monitoring"
+ OR "process prediction" OR "remaining time prediction"
+ OR "process forecasting" OR "event log" OR "process simulation"
+ OR "Monte Carlo simulation" OR "Markov chain" OR "Markov model"
+ OR "stochastic process model" OR "transition probability"
+ OR "absorbing chain" OR "lead time prediction" OR "cycle time prediction")
+\end{verbatim}\end{footnotesize}
+
+\paragraph{Complementary string (MSR $\rightarrow$ process modelling)}
+\begin{footnotesize}\begin{verbatim}
+("mining software repositories" OR "software repository mining"
+ OR "GitHub mining" OR "Jira mining")
+AND ("process model" OR "Markov" OR "Monte Carlo" OR "stochastic"
+ OR "lead time" OR "cycle time" OR "throughput" OR "transition matrix")
+\end{verbatim}\end{footnotesize}
+
+\paragraph{Frontier string (stochastic $\wedge$ PM $\wedge$ SE)}
+\begin{footnotesize}\begin{verbatim}
+("Monte Carlo" OR "Markov chain" OR "stochastic simulation"
+ OR "probabilistic forecast" OR "transition matrix")
+AND ("process mining" OR "event log" OR "workflow mining"
+ OR "process model" OR "business process")
+AND ("software development" OR "software engineering" OR "software process"
+ OR "DevOps" OR "SDLC" OR "issue tracker" OR "commit log"
+ OR "build pipeline")
+\end{verbatim}\end{footnotesize}
+
+\section{Included studies}\label{app:studies}
+\input{appendix_studies.tex}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}
