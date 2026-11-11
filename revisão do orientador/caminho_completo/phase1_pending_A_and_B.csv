@@ -1,0 +1,28 @@
+lot,internal_id,year,title,doi,suggest_families,suggest_flags,has_abstract,pdf_available,hint
+A,0b62bf5c,2012,Research and practice reciprocity in software process simulation,10.1109/icssp.2012.6225969,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+A,12343eec,2022,Efficient secure DevOps using process mining and Attack Defense Trees,10.1016/j.procs.2022.09.079,TF-PM,,yes,no,use s se concordar
+A,3691dee1,2015,Constructing hybrid software process simulation models,10.1145/2785592.2785610,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+A,4c4a7770,2003,A ontology-based process modelling for XP,10.1109/APSEC.2003.1254376,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+A,67b85117,2009,Schedule risk management for business M-applications development projects,,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+A,6ef49a7b,2024,Extracting high-level activities from low-level program execution logs,10.1007/s10515-024-00441-0,,,no,yes:6ef49a7b_extracting_high_level_activities_from_low_level_pr.pdf,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+A,6f007eeb,2017,Investigating the significance of bellwether effect to improve software effort estimation,10.1109/QRS.2017.44,TF-ST|TF-FC,,yes,no,use s se concordar
+B,8851bb5e,2026,Improving Learning Analytics from Open-Source Software Data Logs Using Machine Learning and Process Mining Techniques,10.1007/978-981-96-9248-4_5,TF-PM,,yes,no,use s se concordar
+B,88ee1d90,2014,Predicting time range of development based on generalized software reliability model,10.1109/APSEC.2014.59,TF-ST|TF-FC,D2_review,yes,no,D2: provavelmente exclude_other (reliability/product)
+B,8c42d0fe,2014,Agile Development with Software Process Mining,10.1145/2600821.2600842,TF-PM,,yes,yes:8c42d0fe_agile_development_with_software_process_mining.pdf,use s se concordar
+B,8d2c0b03,2021,Modeling and analysis of a software development project with design structure matrix and simulation approach in an Indonesian startup,10.46254/an11.20210314,TF-ST,,yes,no,use s se concordar
+B,8e09bd55,2023,Prioritizing Test Cases with Markov Chains: A Preliminary Investigation,10.1007/978-3-031-43240-8_14,TF-ST,,yes,no,use s se concordar
+B,8e68ae72,2012,Software process simulation is simulation too: what can be learned from other domains of simulation?,,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+B,989891c5,2009,An improved approach to adaptive testing,10.1142/S0218194009004349,TF-ST,,yes,no,use s se concordar
+B,a9bafd0d,2010,Risk assessment on distributed software projects,10.1145/1810295.1810387,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+B,aaef3235,2023,Reviewing and Proposing Approaches for Self-adaptive Testing in the Field,10.1109/ISSREW60843.2023.00035,TF-ST,,yes,no,use s se concordar
+B,b269731f,2016,Stochastic performance analysis of global software development teams,10.1145/2955093,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+B,c4269b60,2011,Empirical validation of human factors in predicting issue lead time in open source projects,10.1145/2020390.2020403,TF-FC,,yes,no,use s se concordar
+B,cd2ca776,2008,Optimal version-upgrade problem based on stochastic differential equations for Open Source Software,,,D2_review,yes,no,D2: provavelmente exclude_other (reliability/product)
+B,d85e3fdf,2016,Introduction to integration of the process mining to the knowledge framework for software processes,10.1007/978-3-319-29504-6_4,TF-PM,,no,yes:d85e3fdf_introduction_to_integration_of_the_process_mining.pdf,use s se concordar
+B,da28afcb,2012,Setting up a stochastic model for teams working in a follow-the-sun environment,10.1109/ICGSE.2012.21,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+B,dea836a1,2023,Study of Effort Calculation and Estimation in Open Source Projects,10.1142/S0218539323500110,,D2_review,yes,no,D2: provavelmente exclude_other (reliability/product)
+B,e3f1f421,2017,Towards a Bayesian Decision Model for Release Planning in Incremental Development,10.1109/RE.2017.32,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude
+B,e3f89404,2023,A Preliminary Study of GitHub Actions Workflow Changes,,TF-MSR,,yes,no,use s se concordar
+B,e5fa7505,2008,Adaptive software testing in the context of an improved controlled Markov chain model,10.1109/COMPSAC.2008.186,TF-ST,,yes,no,use s se concordar
+B,e969d9bd,2011,A note on two-stage software testing by two teams,10.1007/978-3-642-27207-3_35,,D2_review,yes,no,D2: provavelmente exclude_other (reliability/product)
+B,ecd93074,2009,Improving effectiveness of Agile development,,,,yes,no,suggest vazia → 1 + marcar 1-4 ou 4 exclude

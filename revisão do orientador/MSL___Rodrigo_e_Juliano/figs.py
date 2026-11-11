@@ -7,8 +7,10 @@ yrs=list(range(1994,2027))
 cl=collections.Counter(r['year'] for r in S if r['fam']); bl=collections.Counter(r['year'] for r in S if not r['fam'])
 fig,ax=plt.subplots(figsize=(6.6,2.4))
 a=[cl[y] for y in yrs]; b=[bl[y] for y in yrs]
-ax.bar(yrs,a,color='#2b5c8a',width=0.8,label='Classified (n = 380)')
-ax.bar(yrs,b,bottom=a,color='#b9c7d6',width=0.8,label='Title only, not classified (n = 76)')
+n_cl=sum(a); n_bl=sum(b)
+ax.bar(yrs,a,color='#2b5c8a',width=0.8,label=f'Classified (n = {n_cl})')
+if n_bl:
+    ax.bar(yrs,b,bottom=a,color='#b9c7d6',width=0.8,label=f'Title only, not classified (n = {n_bl})')
 ax.set_xlim(1993.3,2026.7); ax.set_ylabel('Studies'); ax.set_xticks(range(1994,2027,2)); ax.tick_params(axis='x',rotation=45)
 ax.legend(frameon=False,loc='lower left',bbox_to_anchor=(0,1.0),ncol=2); ax.grid(axis='y',color='#dddddd',lw=0.5); ax.set_axisbelow(True)
 ax.text(2026,cl[2026]+bl[2026]+0.8,'partial',ha='center',fontsize=6.5,color='#555')

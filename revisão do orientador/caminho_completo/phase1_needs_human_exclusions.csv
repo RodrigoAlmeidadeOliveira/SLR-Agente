@@ -1,0 +1,10 @@
+internal_id,year,title,decision,notes,coder,date
+13983127,2001,Software Process Simulation Modelling,exclude_other,EC4 secondary overview/special-issue intro on SPS; not primary application,Rodrigo,2026-11-11
+1a59bb38,2026,bXES: A Binary Format for Storing and Transferring Software Event Logs,exclude_other,EC5a event-log storage/format infrastructure (bXES); not primary TF-PM/TF-ST/TF-FC/TF-MSR application,Rodrigo,2026-11-11
+1d19dd67,2009,Operational definition and automated inference of test-driven development with Zorro,exclude_other,EC5a TDD compliance recognition (Zorro/Hackystat sensors+rules); not TF-PM/TF-ST/TF-FC/TF-MSR,Rodrigo,2026-11-11
+4b58cb90,2021,Jaskier: A Supporting Software Tool for Continuous Build Outcome Prediction Practice,exclude_other,D2=B SDP/CDP defect-build outcome prediction (tool paper); not TF-PM/TF-ST/TF-FC/TF-MSR,Rodrigo,2026-11-11
+7607982d,2017,Software Process Simulation Modelling for Agile Cloud Software Development Projects: Techniques and Applications,exclude_other,EC4 secondary overview chapter on SPSM techniques/applications; not primary application,Rodrigo,2026-11-11
+83421d8c,2022,Improving the prediction of continuous integration build failures using deep learning,exclude_other,EC4 secondary overview chapter on SPSM techniques/applications; not primary application,Rodrigo,2026-11-11
+e4c752f3,2014,Mining reuse processes,EC5b,search_then_EC5b_if_unavailable,Rodrigo,2026-11-11
+ecc17ad4,2025,Markov model based coverage testing of deep learning software systems,exclude_other,D2=B product reliability (DNN coverage testing via Markov); not software process TF-PM/TF-ST/TF-FC/TF-MSR,Rodrigo,2026-11-11
+fe1cd2ea,2005,"Special issue on ProSim 2004, The 5th International Workshop on Software Process Simulation and Modeling, Edinburgh, Scotland, May 2004",exclude_other,EC4 guest editorial / special-issue intro (ProSim 2004); not primary study,Rodrigo,2026-11-11

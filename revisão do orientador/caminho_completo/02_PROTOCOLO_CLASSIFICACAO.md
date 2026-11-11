@@ -22,17 +22,43 @@ Excluir ou não marcar ST/FC quando o modelo for **confiabilidade do produto** o
 
 ## Fluxo dos 76
 
-1. Abrir `phase1_title_only_ready_to_classify.csv` (tem abstract e/ou PDF local).
-2. Preencher `decision` ∈ {`classify`,`EC5a`,`EC5b`,`exclude_other`}, `families`, `level`, `coder`, `date`.
-3. Para `phase1_title_only_needs_human.csv`: recuperar abstract/PDF via DOI; se impossível → `EC5b`.
-4. Após lote fechado, rodar `scripts/apply_title_only_to_studies.py` (a criar) → atualiza `studies.json` e regenera figuras.
+### Classificação interativa dos 53 ready (recomendado)
 
-## Auditoria L0 (n=55)
+```bash
+cd "revisão do orientador/caminho_completo"
+python3 classify_ready_interactive.py --status
+python3 classify_ready_interactive.py --coder Rodrigo --lot A --pending-only
+python3 classify_ready_interactive.py --coder Juliano --lot B --pending-only
+```
+
+- Lote **A** = 27 primeiros · Lote **B** = 26 últimos (por `internal_id`).
+- Em cada card: lê título/abstract → `decision` → toggle de famílias → `level` calculado → grava no CSV.
+- Atalho `s` / aceitar sugestão usa `suggest_*` só como ponto de partida.
+- `o` abre o DOI no browser · `k` skip · `q` sai (progresso já salvo).
+
+1. Rodar o script acima (ou preencher manualmente o CSV).
+2. Preencher `decision` ∈ {`classify`,`EC5a`,`EC5b`,`exclude_other`}, `families`, `level`, `coder`, `date`.
+3. Para os restantes sem abstract:
+
+```bash
+python3 classify_needs_human_interactive.py --coder Rodrigo --pending-only
+```
+
+Recuperar abstract/PDF via `o` (DOI) ou `p` (colar abstract); se impossível → `3` (EC5b). O script aplica em `studies.json` a cada save.
+
+4. Após fechar a fila, regenerar figuras: `cd ../MSL___Rodrigo_e_Juliano && python3 figs.py && python3 figs_pt.py`.
+
+## Auditoria L0 (n=55) — amostra ainda válida sobre os 323 L0 atuais
 
 Arquivo: `phase1_L0_audit_sample.csv`
 
-1. Codificar `human_families` e `human_level` cego à coluna LLM (ocultar `families_llm` na UI se possível).
-2. Segundo coder em ≥20% da amostra.
+```bash
+python3 classify_L0_audit_interactive.py --status
+python3 classify_L0_audit_interactive.py --coder Rodrigo --pending-only
+```
+
+1. Codificar `human_families` (e `match_llm` y/n vs coluna LLM).
+2. Segundo coder em ≥20% da amostra (reabrir com `--coder Juliano` e campos paralelos, ou duplicar CSV).
 3. Reportar: taxa de erro (família faltando ou sobrando), κ, impacto em L0/L1.
 
 ## PRIMAD

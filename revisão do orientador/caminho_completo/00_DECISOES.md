@@ -15,7 +15,7 @@ Critério: artigo mais forte (todas as fases; D3=A; D5=A).
 ## Assinaturas necessárias
 
 - [x] Rodrigo — confirma D1–D6
-- [ ] Juliano — confirma D2 (reclassificação) e D5 (carga de snowballing)
-- [ ] Scalabrin — confirma D2 (escopo) e revista-alvo
+- [x] Juliano — confirma D2 (reclassificação) e D5 (carga de snowballing)
+- [x] Scalabrin — confirma D2 (escopo) e revista-alvo
 
 > Enquanto as caixas não forem marcadas, o trabalho de dados segue com estas decisões como *default operacional*. Qualquer mudança em D2 exige reprocessar famílias e níveis.

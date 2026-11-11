@@ -1,0 +1,13 @@
+internal_id,year,title,decision,notes,coder,date
+02cc4c2d,2014,Understanding the dynamics of software projects: an introduction to software process simulation (Abstract Only),exclude_other,eu consegui um pdf do artigo,Rodrigo,2026-11-11
+0b62bf5c,2012,Research and practice reciprocity in software process simulation,exclude_other,D2_review (reliability/produto),Rodrigo,2026-11-11
+3691dee1,2015,Constructing hybrid software process simulation models,exclude_other,EC4 secondary study (SLR of hybrid SPS); not primary application,Rodrigo,2026-11-11
+4c4a7770,2003,A ontology-based process modelling for XP,exclude_other,"EC3 ontology/process metamodel for XP; mining only aspirational, no empirical PM/ST/FC/MSR",Rodrigo,2026-11-11
+6ef49a7b,2024,Extracting high-level activities from low-level program execution logs,exclude_other,"EC2 process mining on program runtime (.NET execution), not software development process/SDLC",Rodrigo,2026-11-11
+8e68ae72,2012,Software process simulation is simulation too: what can be learned from other domains of simulation?,exclude_other,D2,Rodrigo,2026-11-11
+a9bafd0d,2010,Risk assessment on distributed software projects,EC5a,,Rodrigo,2026-11-11
+cd2ca776,2008,Optimal version-upgrade problem based on stochastic differential equations for Open Source Software,exclude_other,D2_review,Rodrigo,2026-11-11
+dea836a1,2023,Study of Effort Calculation and Estimation in Open Source Projects,exclude_other,D2_review,Rodrigo,2026-11-11
+e3f1f421,2017,Towards a Bayesian Decision Model for Release Planning in Incremental Development,exclude_other,EC3 doctoral symposium/proposal; no empirical evaluation yet (Monte Carlo planned),Rodrigo,2026-11-11
+e969d9bd,2011,A note on two-stage software testing by two teams,exclude_other,D2 product reliability (remaining faults / SR assessment of testing); not SDLC process model,Rodrigo,2026-11-11
+ecd93074,2009,Improving effectiveness of Agile development,exclude_other,exclude: abstract/PDF do not evidence IC4a-d (HRA estimation; no PM/ST/MSR/FC-from-logs),Rodrigo,2026-11-11

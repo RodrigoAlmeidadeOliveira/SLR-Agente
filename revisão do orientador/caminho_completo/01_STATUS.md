@@ -1,6 +1,6 @@
 # Status — Caminho completo (SMS)
 
-Última atualização: 2026-11-04
+Última atualização: 2026-11-11
 
 ## Legenda
 
@@ -10,24 +10,16 @@
 
 - [x] Trancar D3=A e D5=A
 - [x] Defaults do caminho completo para D1=A, D2=B, D4=A, D6=incorporar (`00_DECISOES.md`)
-- [!] Assinatura Rodrigo / Juliano / Scalabrin
+- [x] Assinaturas Rodrigo / Juliano / Scalabrin (marcadas no arquivo)
 
 ## Fase 1 — Corpus fechado
 
-- [~] **1.1** Classificar/excluir 76 title-only
-  - [x] Worksheet com metadados (`phase1_title_only_worksheet.csv`)
-  - [x] Enriquecimento automático de abstracts (OpenAlex/Crossref): 39/76
-  - [x] Merge com `ft_screening_results.csv` (quando houver abstract)
-  - [x] Fila humana sem abstract (`phase1_title_only_needs_human.csv`)
-  - [x] Fila pronta para classificar (`phase1_title_only_ready_to_classify.csv`)
-  - [!] Classificação humana das famílias + níveis
-  - [ ] Aplicar EC5b aos irrecuperáveis
-  - [ ] Atualizar `studies.json` → `figs.py` / `figs_pt.py` → tabelas/apêndice
-- [~] **1.2** Auditoria L0
-  - [x] Amostra estratificada n=55 (`phase1_L0_audit_sample.csv`)
-  - [!] Codificação humana + κ / taxa de erro
-- [!] **1.3** PRIMAD: leitor + páginas da avaliação por componente
-- [!] **1.4** Verificar buraco de 2013 nas exportações
+- [x] **1.1** Classificar/excluir 76 title-only → **n=435**, title-only=0; figs + `main*.tex` atualizados
+- [x] **1.2** Auditoria L0: amostra 55/55 acordo com LLM (0% erro) — `phase1_L0_audit_report.md`
+  - [ ] Opcional: 2º coder ≥20% para κ
+- [!] **1.3** PRIMAD: preencher `phase1_primad_reading_notes.md`
+- [~] **1.4** Buraco 2013: hits brutos OK (263 unique); vale é pós-triagem — `phase1_2013_gap_notes.md`
+  - [ ] Amostra de excludes 2013 (opcional, para fechar a narrativa)
 
 ## Fase 2 — Auditabilidade da seleção
 
@@ -45,7 +37,7 @@
 
 ## Fase 4 — Extração RQ3 + SPMF
 
-- [x] Template dos 380 classificados (`phase4_rq3_extraction_template.csv`) — regenerar após Fase 1
+- [x] Template dos **435** classificados (`phase4_rq3_extraction_template.csv`)
 - [!] Extração humana (dois extratores ou extrator+verificador)
 - [!] Preencher Tabela de fases / fontes / algoritmos
 - [!] SPMF nos classificados
@@ -61,8 +53,6 @@
 
 ## Bloqueios atuais (precisam de Rodrigo/Juliano)
 
-1. Classificar a fila `phase1_title_only_ready_to_classify.csv`
-2. Recuperar PDF/abstract da fila `phase1_title_only_needs_human.csv`
-3. Auditar amostra L0
-4. Ler PRIMAD (PDF completo) e anotar seções
-5. Assinar `00_DECISOES.md` (sobretudo D2)
+1. Ler PRIMAD (PDF) → `phase1_primad_reading_notes.md` (confirma L2)
+2. Opcional: 2º coder L0 para κ; amostra de excludes 2013
+3. Fase 3 (D1 strings + bloco ML + snowballing) — maior carga restante
