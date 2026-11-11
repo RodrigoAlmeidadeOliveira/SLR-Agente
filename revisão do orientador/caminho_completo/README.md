@@ -15,24 +15,16 @@ Fonte: `../MSL___Rodrigo_e_Juliano/` (`main.tex`, `main_pt.tex`, `studies.json`,
 
 Só atualizar o `.tex` depois que os dados da fase correspondente estiverem fechados (evitar editar `\pendente` “no olho”).
 
-## Próxima ação humana (bloqueante)
+## Próxima ação humana (Fase 2)
 
-1. Assinar `00_DECISOES.md` (em especial **D2=B**).
-2. Classificar os 53 ready com o prompt interativo:
+1. Depositar pré-registro em OSF/Zenodo → `phase2_preregistration_deposit.md`.
+2. Re-triagem cega (amostra 117; começar pelos 47 includes):
 
 ```bash
 cd "revisão do orientador/caminho_completo"
-python3 classify_ready_interactive.py --coder Rodrigo --lot A --pending-only
-# Juliano:
-python3 classify_ready_interactive.py --coder Juliano --lot B --pending-only
+python3 classify_phase2_blind_interactive.py --coder Rodrigo --rater A --includes-only --pending-only
+python3 classify_phase2_blind_interactive.py --coder Juliano --rater B --includes-only --pending-only
+python3 classify_phase2_blind_interactive.py --score
 ```
 
-3. Classificar os **23** restantes (`needs_human`):
-
-```bash
-python3 classify_needs_human_interactive.py --coder Rodrigo --pending-only
-# ou lotes A (12) / B (11):
-python3 classify_needs_human_interactive.py --coder Rodrigo --lot A --pending-only
-```
-
-Atalhos: `o` DOI · `p` colar abstract · `3` EC5b · grava e aplica em `studies.json` a cada item.
+Protocolo: `06_PROTOCOLO_FASE2_AUDITABILIDADE.md`.
