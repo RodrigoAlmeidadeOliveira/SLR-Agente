@@ -1,10 +1,11 @@
 task,source,string_id,date_run,raw_hits,unique_new,included_new,excluded_new,notes,operator
-,,D1_V6,,,,,,,
-,,D1_V8,,,,,,,
-,,D1_V9,,,,,,,
+D6,supplemental_31_10_2026,D6_19,2026-11-11,19,19,0,19,All exclude_other under D2=B (JIT/defect/product); none in studies.json n=435,Rodrigo
+D1,Scopus,D1_V6,2026-11-11,480,16,,,raw after ar+cp+EN; unique_new vs pool 5783 (not vs included only),Rodrigo
+D1,Scopus,D1_V8,2026-11-11,5,0,,,all 5 already in pool 5783 (incl. Rogge-Solti seed),Rodrigo
+D1,Scopus,D1_V9,2026-11-11,187,14,,,unique_new vs pool 5783,Rodrigo
+D1,Scopus,D1_union,2026-11-11,672,30,,,union=668; in_pool_5783=638; in_included_435=22; residual screen phase3_D1_residual_vs_pool_screen.csv (25x2026 post-cutoff),Rodrigo
 ,,ML_IEEE,,,,,,,
 ,,ML_ACM,,,,,,,
 ,,ML_Scopus,,,,,,,
 ,,ML_WoS,,,,,,,
 ,,ML_Springer,,,,,,,
-,,D6_19,,,,,,,

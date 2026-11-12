@@ -21,8 +21,8 @@ Artefatos prontos:
 
 ### Ordem de execução (humano + bases)
 
-1. **D6 (rápido):** decidir os 19 em `phase3_d6_19_screen.csv` (sob D2=B → quase todos exclude defect/JIT).
-2. **D1:** rodar 3 strings Scopus limpas; dedup; triar novos.
+1. **D6 ✅** — 19/19 `exclude_other` (D2=B JIT/defect); 0 no corpus → n=435 inalterado. Ledger preenchido.
+2. **D1 busca ✅** — V6=480, V8=5, V9=187; união 668. Dedup vs pool **5783**: já vistos 638; **residual real=30** (25 de 2026 pós-corte abril) → `phase3_D1_residual_vs_pool_screen.csv` (triagem pendente). Artefato antigo vs-só-435: `phase3_D1_unique_new_vs_corpus435.csv`.
 3. **Bloco ML:** rodar 5 bases; dedup; triar (sem defect prediction).
 4. **Snowballing Wohlin** a partir dos 435 (+ novos includes), até saturação.
 5. Atualizar `studies.json`, figs, `main*.tex`, PRISMA.

@@ -1,0 +1,23 @@
+year,doi,title,sources
+2020,10.1109/issre5003.2020.00022,Connecting software reliability growth models to software defect tracking,D1_V6
+2017,10.1109/qrs.2017.44,Investigating the significance of bellwether effect to improve software effort estimation,D1_V6
+2009,10.1142/s0218194009004349,An improved approach to adaptive testing,D1_V6
+2014,10.1109/tse.2014.2354032,Rate-based queueing simulation model of open source software debugging activities,D1_V6
+2024,10.1109/icacs60934.2024.10473284,A Case Study: To Discuss the Construction of the Finite State Machine and Markov-Chain OP Models for Test Case Generation,D1_V6
+2023,10.1109/issrew60843.2023.00035,Reviewing and Proposing Approaches for Self-adaptive Testing in the Field,D1_V6
+2001,10.1109/24.963126,A stochastic model of fault introduction & removal during software development,D1_V6
+2009,10.1109/compsac.2009.195,Modeling and predicting software failure costs,D1_V6
+2011,10.1016/j.mcm.2011.07.033,Analyzing the effect of imperfect debugging on software fault detection and correction processes via a simulation framework,D1_V6
+2010,10.1007/s13198-011-0034-0,Software safety assessment based on a subordinated Markov chain,D1_V6
+2023,10.1007/978-3-031-43240-8_14,Prioritizing Test Cases with Markov Chains: A Preliminary Investigation,D1_V6
+2008,10.1109/compsac.2008.186,Adaptive software testing in the context of an improved controlled Markov chain model,D1_V6
+2005,10.1191/1471082x05st087oa,Software reliability modelling and prediction with hidden Markov chains,D1_V6
+2016,10.1002/stvr.1600,A general modeling and analysis framework for software fault detection and correction process,D1_V6
+2000,10.1002/1097-024x(200008)30:10<1095::aid-spe328>3.0.co;2-h,Generating transition probabilities to support model-based software testing,D1_V6
+2004,,Jackson networks and Markov processes for resource allocation modeling,D1_V6
+2023,10.1002/qre.3273,A Bayesian model averaging method for software reliability modeling and assessment,D1_V6
+2010,10.1109/iccasm.2010.5620017,Reliability estimation and prediction of SA producing process based on Markov chain,D1_V6
+2017,,A probabilistic approach to building defect prediction model for platform-based product lines,D1_V6
+2008,10.1142/s0218194008003696,On the online parameter estimation problem in adaptive software testing,D1_V6
+2008,10.1016/j.csda.2008.01.010,NHPP models with Markov switching for software reliability,D1_V6
+2021,10.1007/978-3-030-79382-1_8,Extracting Process Features from Event Logs to Learn Coarse-Grained Simulation Models,D1_V9
