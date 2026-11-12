@@ -1,8 +1,13 @@
 # Zenodo — depósito atual
 
-**DOI (usar no artigo):** `10.5281/zenodo.21939600`  
-https://doi.org/10.5281/zenodo.21939600
+**DOI desta versão (n=1710):** `10.5281/zenodo.24173218`  
+https://doi.org/10.5281/zenodo.24173218
 
-Se a página mostrar um segundo número em “Cite all versions?”, mande esse também. O LaTeX agora cita só `21939600`.
+**DOI concept (sempre a latest):** `10.5281/zenodo.21939599`  
+**Versão anterior (n=340):** `10.5281/zenodo.21939600`
 
-Access deve ser **Open**. Teste o download deslogado.
+O manuscrito SMS cita `24173218` + concept `21939599`.
+
+Access = **Open**. Teste o download deslogado.
+
+**Pendente:** editar a Description do record `24173218` (ainda mostra texto n=340). Colar `ZENODO_V3_METADATA.md`.

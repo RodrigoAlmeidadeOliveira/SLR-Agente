@@ -54,7 +54,7 @@
 \item Forecasting (TF-FC) is the largest family in every period; among TF-ST vs TF-PM, stochastic modelling led until 2013 and process mining thereafter.
 \item Process mining and stochastic modelling meet in 14 of 1710 studies.
 \item Two studies combine all three; none couples them with end-to-end evaluation.
-\item An updated replication deposit (corpus $n = 1710$) accompanies submission.
+\item Corpus, classification, and screening records are openly available (Zenodo DOI 10.5281/zenodo.24173218).
 \end{highlights}
 
 \begin{keyword}
@@ -78,7 +78,7 @@ Existing secondary studies each cover one side of this space. Predictive process
 \paragraph{Contributions}
 This article reports a systematic mapping study of that intersection. Its contributions are:
 \begin{enumerate}
-\item a corpus of 1710 primary studies, with screening and classification records released in the replication package (updated deposit accompanies this submission);
+\item a corpus of 1710 primary studies, openly available with the screening and classification records;
 \item a classification of the studies into four technique and data families and into four integration levels, with the evolution of each family over three decades; and
 \item an analysis of the gaps between the three research lines, from which we derive a four-direction research agenda.
 \end{enumerate}
@@ -545,7 +545,7 @@ IC4b and IC4c admit Markov usage models for statistical testing and reliability-
 
 We mapped 1710 studies that apply process mining, stochastic modelling, or forecasting to software development data. Forecasting is the largest family throughout; among \ST{} and \PM{}, stochastic modelling led until 2013 and process mining thereafter, yet the two still meet in only 14 studies. After the Phase-3 ML block and snowballing to saturation, forecasting is common (78.0\%; 1334 studies), largely as FC-only work on repository data, while the PM--forecast link remains rare (10). Two studies carry all three technique families (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, which we read in full for the L2/L3 boundary); none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. In this corpus, process-aware stochastic forecasting of process metrics is unobserved among the 14 \PM{}+\ST{} studies, and no end-to-end multi-stage evaluation appears; those observations motivate the agenda in Section~\ref{sec:agenda}.
 
-An updated replication package for the $n = 1710$ corpus will be published as a new version under the Zenodo concept DOI 10.5281/zenodo.21939599 (the package built for this submission is \texttt{SLR\_PATHCAST\_Replication\_v3.zip}).
+The corpus, the classification, the prompts, and the screening records are available in the replication package (Zenodo DOI~\href{https://doi.org/10.5281/zenodo.24173218}{10.5281/zenodo.24173218}; concept DOI~\href{https://doi.org/10.5281/zenodo.21939599}{10.5281/zenodo.21939599} resolves to the latest version).
 
 % =================================================================
 \section*{CRediT authorship contribution statement}
@@ -563,7 +563,7 @@ This study was financed in part by the Coordenação de Aperfeiçoamento de Pess
 During the preparation of this work the authors used Claude (Anthropic) to restructure and edit the manuscript and to check its arithmetic. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the publication. Separately, a language model was used in the conduct of the study as a first-pass screening aid (Section~\ref{sec:selection-process}).
 
 \section*{Data availability}
-The replication materials for this submission are packaged as \texttt{SLR\_PATHCAST\_Replication\_v3.zip} (search strings; de-duplication and enrichment scripts; screening prompts and schemas; per-record decisions; human verification and re-screen sheets; \texttt{studies.json} for the $n = 1710$ included studies; \texttt{figs.py}; SEGRESS checklist). An updated open deposit will be published as a new version under the Zenodo concept DOI~\href{https://doi.org/10.5281/zenodo.21939599}{10.5281/zenodo.21939599}; until that version is live, the public record may still resolve to the earlier $n = 340$ snapshot. Any CSV export of the included list is derived from \texttt{studies.json} and is no longer versioned as \texttt{included\_studies\_506.csv}.
+The replication package (Zenodo DOI~\href{https://doi.org/10.5281/zenodo.24173218}{10.5281/zenodo.24173218}; concept DOI~\href{https://doi.org/10.5281/zenodo.21939599}{10.5281/zenodo.21939599}) contains the search strings, de-duplication and enrichment scripts, screening prompts and schemas, per-record decisions at every step, the human verification and re-screen sheets, \texttt{studies.json} (canonical classification of the $n = 1710$ included studies), \texttt{figs.py}, the \texttt{caminho\_completo} protocols and sheets, and the completed SEGRESS checklist. Any CSV export of the included list is derived from \texttt{studies.json} and is no longer versioned as \texttt{included\_studies\_506.csv}.
 
 \appendix
 
