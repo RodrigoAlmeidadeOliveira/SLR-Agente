@@ -59,10 +59,10 @@
 
 \begin{highlights}
 \item 1710 estudos aplicam PM, modelos estocásticos ou previsão a dados do SDLC.
-\item A modelagem estocástica predominou até 2013; desde então, a mineração de processos.
+\item A previsão (TF-FC) é a maior família em todos os períodos; entre TF-ST e TF-PM, a modelagem estocástica liderou até 2013 e a mineração de processos depois.
 \item PM e modelagem estocástica se encontram em 14 dos 1710 estudos.
 \item Dois estudos combinam as três; nenhum as acopla com avaliação de ponta a ponta.
-\item Corpus, classificação e registros de triagem estão disponíveis abertamente.
+\item Um depósito de replicação atualizado (corpus $n = 1710$) acompanha a submissão.
 \end{highlights}
 
 \begin{keyword}
@@ -86,7 +86,7 @@ Os estudos secundários existentes cobrem, cada um, um lado desse espaço. O mon
 \paragraph{Contribuições}
 Este artigo relata um estudo de mapeamento sistemático dessa interseção. Suas contribuições são:
 \begin{enumerate}
-\item um corpus de 1710 estudos primários, disponível abertamente junto com os registros de triagem e de classificação;
+\item um corpus de 1710 estudos primários, com registros de triagem e classificação no pacote de replicação (depósito atualizado acompanha esta submissão);
 \item uma classificação dos estudos em quatro famílias de técnica e de dados e em quatro níveis de integração, com a evolução de cada família ao longo de três décadas; e
 \item uma análise das lacunas entre as três linhas de pesquisa, da qual derivamos uma agenda de pesquisa com quatro direções.
 \end{enumerate}
@@ -329,7 +329,7 @@ A queda de 2013 (3 estudos incluídos) não se explica por um ano ausente na col
 \caption{Estudos incluídos por ano de publicação ($n = 1710$).}\label{fig:years}
 \end{figure}
 
-A composição da área mudou bruscamente por volta de 2014 (Figura~\ref{fig:bubble}). Até 2013, o corpus é dominado por modelos estocásticos: 91\% dos estudos de 1994--2005 e 74\% dos de 2006--2013 têm \ST{}. A partir de 2014, a mineração de processos assume a liderança, com \PM{} em 60\% dos estudos de 2014--2019 e em 59\% dos de 2020--2026, enquanto \ST{} cai para cerca de um terço. A mineração de repositórios (\MSR{}) cresce de forma contínua, de 3\% para 39\% dos estudos de cada período. A participação da previsão (\FC{}) permanece aproximadamente estável, entre 22\% e 36\%.
+A composição da área mudou por volta de 2014 (Figura~\ref{fig:bubble}), mas a previsão (\FC{}) é a maior família em todos os períodos (59\% em 1994--2005; 73\% em 2006--2013; 80\% em 2014--2019; 83\% em 2020--2026). Entre as outras duas famílias de técnica, a modelagem estocástica lidera a mineração de processos até 2013 (\ST{} em 56\% e depois 27\% dos estudos do período; \PM{} em 8\% e depois 6\%), e a mineração de processos lidera a modelagem estocástica depois disso (\PM{} em 16\% e depois 12\%; \ST{} em 11\% e depois 8\%). A mineração de repositórios (\MSR{}) cresce de 2\% para 28\% dos estudos de cada período.
 
 \begin{figure}[t]
 \centering
@@ -345,12 +345,12 @@ A composição da área mudou bruscamente por volta de 2014 (Figura~\ref{fig:bub
 \toprule
 Venue & $n$ \\
 \midrule
-Lecture notes in computer science & 38 \\
+Lecture notes in computer science & 39 \\
 Information and Software Technology & 34 \\
 Journal of Systems and Software & 32 \\
 IEEE Access & 32 \\
 arXiv (Cornell University) & 27 \\
-Empirical Software Engineering & 18 \\
+Empirical Software Engineering & 19 \\
 Asia-Pacific Software Engineering Conference (APSEC) & 18 \\
 International Journal of Computer Applications & 18 \\
 IEEE Transactions on Software Engineering & 17 \\
@@ -359,7 +359,7 @@ International Journal of Advanced Computer Science and Applications & 17 \\
 \end{tabular}
 \end{table}
 
-Dos 1710 estudos incluídos, o venue foi recuperado para 1579 (92,4\%) e o tipo de publicação para 1581 (92,6\%) via OpenAlex (DOI ou busca por título) e metadados locais; 127 permanecem desconhecidos (sobretudo sem DOI). Distribuição: periódico 828 (48,5\%), conferência 667 (39,1\%), workshop 27 (1,6\%), outros 59 (3,5\%), desconhecido 127 (7,4\%). Os venues mais frequentes são Information and Software Technology (34), Journal of Systems and Software (32), IEEE Access (32), Lecture Notes in Computer Science (38), Empirical Software Engineering (18) e IEEE Transactions on Software Engineering (17).
+Dos 1710 estudos incluídos, o venue foi recuperado para 1580 (92,4\%) via OpenAlex (DOI ou busca por título) e metadados locais; 130 permanecem sem venue recuperado (sobretudo sem DOI). Distribuição do tipo de publicação: periódico 825 (48,2\%), conferência 664 (38,8\%), workshop 27 (1,6\%), outros 59 (3,5\%), desconhecido 135 (7,9\%). Os venues mais frequentes são Lecture Notes in Computer Science (39), Information and Software Technology (34), Journal of Systems and Software (32), IEEE Access (32), Empirical Software Engineering (19) e IEEE Transactions on Software Engineering (17).
 
 \subsection{RQ2: Famílias de técnica e suas combinações}\label{sec:rq2}
 
@@ -547,14 +547,14 @@ Os códigos de família das inclusões originais foram propostos pelo modelo de 
 
 \subsection{Construto}
 
-IC4b e IC4c admitem modelos de uso Markovianos para teste estatístico e modelos de crescimento de confiabilidade baseados em taxas de defeitos. Esses modelos descrevem o produto, e não o processo de desenvolvimento, e provavelmente respondem por muitos dos 94 estudos \ST{}+\FC{} de 1997--2013. Os autores desenvolvem um pipeline integrado de previsão; para limitar a influência desse interesse, os níveis de integração são definidos por critérios genéricos, e a referência ao nome do projeto dos autores no prompt do modelo de linguagem está declarada no pacote de replicação.
+IC4b e IC4c admitem modelos de uso Markovianos para teste estatístico e modelos de crescimento de confiabilidade baseados em taxas de defeitos. Esses modelos descrevem o produto, e não o processo de desenvolvimento, e provavelmente respondem por muitos dos 60 estudos \ST{}+\FC{} de 1997--2013. Os autores desenvolvem um pipeline integrado de previsão; para limitar a influência desse interesse, os níveis de integração são definidos por critérios genéricos, e a referência ao nome do projeto dos autores no prompt do modelo de linguagem está declarada no pacote de replicação.
 
 % =================================================================
 \section{Conclusão}\label{sec:conclusion}
 
-Mapeamos 1710 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014; elas ainda se encontram em apenas 14 estudos. Após o bloco ML da Fase~3 e o snowballing até saturação, a previsão é comum (78,0\%; 1334 estudos), sobretudo como trabalho só-FC sobre dados de repositório, enquanto o elo PM--previsão permanece raro (10). Dois estudos carregam as três famílias de técnica (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, lido por completo para o limiar L2/L3); nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. Neste corpus, a previsão estocástica orientada a processos de métricas de processo não aparece entre os 14 estudos \PM{}+\ST{}, e não há avaliação ponta a ponta de múltiplas etapas; essas observações motivam a agenda da Seção~\ref{sec:agenda}.
+Mapeamos 1710 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A previsão é a maior família em todo o período; entre \ST{} e \PM{}, a modelagem estocástica liderou até 2013 e a mineração de processos depois, mas as duas ainda se encontram em apenas 14 estudos. Após o bloco ML da Fase~3 e o snowballing até saturação, a previsão é comum (78,0\%; 1334 estudos), sobretudo como trabalho só-FC sobre dados de repositório, enquanto o elo PM--previsão permanece raro (10). Dois estudos carregam as três famílias de técnica (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, lido por completo para o limiar L2/L3); nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. Neste corpus, a previsão estocástica orientada a processos de métricas de processo não aparece entre os 14 estudos \PM{}+\ST{}, e não há avaliação ponta a ponta de múltiplas etapas; essas observações motivam a agenda da Seção~\ref{sec:agenda}.
 
-O corpus, a classificação, os prompts e os registros de triagem estão disponíveis no pacote de replicação (DOI concept do Zenodo 10.5281/zenodo.21939599, que sempre resolve para a versão mais recente).
+Um pacote de replicação atualizado para o corpus $n = 1710$ será publicado como nova versão sob o DOI concept do Zenodo 10.5281/zenodo.21939599 (o artefato desta submissão é \texttt{SLR\_PATHCAST\_Replication\_v3.zip}).
 
 % =================================================================
 \section*{Declaração de contribuição dos autores (CRediT)}
@@ -572,8 +572,7 @@ Este estudo foi financiado em parte pela Coordenação de Aperfeiçoamento de Pe
 Durante a preparação deste trabalho, os autores usaram o Claude (Anthropic) para reestruturar e editar o manuscrito e para verificar sua aritmética. Após o uso dessa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo da publicação. Separadamente, um modelo de linguagem foi usado na condução do estudo como apoio à primeira triagem (Seção~\ref{sec:selection-process}).
 
 \section*{Disponibilidade de dados}
-O pacote de replicação (DOI concept do Zenodo 10.5281/zenodo.21939599) contém as strings de busca, os scripts de remoção de duplicatas e de enriquecimento, os prompts e esquemas de triagem, as decisões por registro em todas as etapas, as planilhas de verificação e de re-triagem humanas, a lista dos estudos incluídos com sua classificação e o checklist SEGRESS preenchido.
-O pacote de replicação inclui \texttt{studies.json} (classificação canônica dos $n = 1710$ estudos incluídos) e \texttt{figs.py}; qualquer exportação CSV da lista de incluídos deriva de \texttt{studies.json} e deixa de ser versionada como \texttt{included\_studies\_506.csv}.
+Os materiais de replicação desta submissão estão empacotados em \texttt{SLR\_PATHCAST\_Replication\_v3.zip} (strings de busca; scripts de remoção de duplicatas e enriquecimento; prompts e esquemas de triagem; decisões por registro; planilhas de verificação e re-triagem humanas; \texttt{studies.json} dos $n = 1710$ estudos incluídos; \texttt{figs.py}; checklist SEGRESS). Um depósito aberto atualizado será publicado como nova versão sob o DOI concept do Zenodo~\href{https://doi.org/10.5281/zenodo.21939599}{10.5281/zenodo.21939599}; até essa versão estar pública, o registro pode ainda resolver para o snapshot anterior com $n = 340$. Qualquer exportação CSV da lista de incluídos deriva de \texttt{studies.json} e deixa de ser versionada como \texttt{included\_studies\_506.csv}.
 
 \appendix
 

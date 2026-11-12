@@ -36,6 +36,9 @@
 - [x] Correções do parecer (L2×2, números, RQ3 calibrado, ameaças ML, RA, κ L0, registro)
 - [x] Macro `\pendente` removido; `LEIA-ME_mudancas.md` atualizado
 - [x] Pacote Zenodo v3 (n=1710) gerado: `article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3.zip`
+- [x] Data availability com hedge até o New version estar live
+- [x] ST∩FC 1997–2013 corrigido para 60; RQ1/highlight calibrados (FC majoritária)
+- [x] Summaries SPMF/venues/RQ3 priority regenerados (n=1710 / 293)
 - [ ] **Publicar** New version em Zenodo (versão atual `21939600`; concept `21939599`) — ver `article_ist/zenodo_upload/UPLOAD_V3.md`
 
 ## Artefatos-chave

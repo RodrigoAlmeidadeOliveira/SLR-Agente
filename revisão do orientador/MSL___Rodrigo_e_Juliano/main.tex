@@ -51,10 +51,10 @@
 
 \begin{highlights}
 \item 1710 studies apply process mining, stochastic models or forecasting to SDLC data.
-\item Stochastic modelling dominated until 2013; process mining has dominated since.
+\item Forecasting (TF-FC) is the largest family in every period; among TF-ST vs TF-PM, stochastic modelling led until 2013 and process mining thereafter.
 \item Process mining and stochastic modelling meet in 14 of 1710 studies.
 \item Two studies combine all three; none couples them with end-to-end evaluation.
-\item Corpus, classification, and screening records are openly available.
+\item An updated replication deposit (corpus $n = 1710$) accompanies submission.
 \end{highlights}
 
 \begin{keyword}
@@ -78,7 +78,7 @@ Existing secondary studies each cover one side of this space. Predictive process
 \paragraph{Contributions}
 This article reports a systematic mapping study of that intersection. Its contributions are:
 \begin{enumerate}
-\item a corpus of 1710 primary studies, openly available with the screening and classification records;
+\item a corpus of 1710 primary studies, with screening and classification records released in the replication package (updated deposit accompanies this submission);
 \item a classification of the studies into four technique and data families and into four integration levels, with the evolution of each family over three decades; and
 \item an analysis of the gaps between the three research lines, from which we derive a four-direction research agenda.
 \end{enumerate}
@@ -320,7 +320,7 @@ The 2013 dip (3 included studies) is not explained by a missing harvest year: th
 \caption{Included studies per publication year ($n = 1710$).}\label{fig:years}
 \end{figure}
 
-The composition of the field changed sharply around 2014 (Figure~\ref{fig:bubble}). Until 2013 the corpus is dominated by stochastic models: 91\% of the studies of 1994--2005 and 74\% of 2006--2013 carry \ST{}. From 2014 process mining takes over, with \PM{} in 60\% of the studies of 2014--2019 and 59\% of 2020--2026, while \ST{} falls to about a third. Repository mining (\MSR{}) grows steadily, from 3\% to 39\% of the studies of each period. The share of forecasting (\FC{}) is roughly stable, between 22\% and 36\%.
+The composition of the field changed around 2014 (Figure~\ref{fig:bubble}), but forecasting (\FC{}) is the largest family in every period (59\% in 1994--2005; 73\% in 2006--2013; 80\% in 2014--2019; 83\% in 2020--2026). Among the other two technique families, stochastic modelling leads process mining until 2013 (\ST{} in 56\% then 27\% of period studies; \PM{} in 8\% then 6\%), and process mining leads stochastic modelling thereafter (\PM{} in 16\% then 12\%; \ST{} in 11\% then 8\%). Repository mining (\MSR{}) grows from 2\% to 28\% of the studies of each period.
 
 \begin{figure}[t]
 \centering
@@ -336,12 +336,12 @@ The composition of the field changed sharply around 2014 (Figure~\ref{fig:bubble
 \toprule
 Venue & $n$ \\
 \midrule
-Lecture notes in computer science & 38 \\
+Lecture notes in computer science & 39 \\
 Information and Software Technology & 34 \\
 Journal of Systems and Software & 32 \\
 IEEE Access & 32 \\
 arXiv (Cornell University) & 27 \\
-Empirical Software Engineering & 18 \\
+Empirical Software Engineering & 19 \\
 Asia-Pacific Software Engineering Conference (APSEC) & 18 \\
 International Journal of Computer Applications & 18 \\
 IEEE Transactions on Software Engineering & 17 \\
@@ -350,7 +350,7 @@ International Journal of Advanced Computer Science and Applications & 17 \\
 \end{tabular}
 \end{table}
 
-Of the 1710 included studies, a host venue was recovered for 1579 (92.4\%) and a publication type for 1581 (92.6\%) via OpenAlex (DOI or title search) and local metadata; 127 remain unknown (mostly records without DOI). Distribution: journal 828 (48.5\%), conference 667 (39.1\%), workshop 27 (1.6\%), other 59 (3.5\%), unknown 127 (7.4\%). The most frequent venues are Information and Software Technology (34), Journal of Systems and Software (32), IEEE Access (32), Lecture Notes in Computer Science (38), Empirical Software Engineering (18), and IEEE Transactions on Software Engineering (17).
+Of the 1710 included studies, a host venue was recovered for 1580 (92.4\%) via OpenAlex (DOI or title search) and local metadata; 130 remain without a recovered venue (mostly records without DOI). Publication-type distribution: journal 825 (48.2\%), conference 664 (38.8\%), workshop 27 (1.6\%), other 59 (3.5\%), unknown 135 (7.9\%). The most frequent venues are Lecture Notes in Computer Science (39), Information and Software Technology (34), Journal of Systems and Software (32), IEEE Access (32), Empirical Software Engineering (19), and IEEE Transactions on Software Engineering (17).
 
 \subsection{RQ2: Technique families and their combinations}\label{sec:rq2}
 
@@ -538,14 +538,14 @@ Family codes for the original includes were proposed by the language model and r
 
 \subsection{Construct}
 
-IC4b and IC4c admit Markov usage models for statistical testing and reliability-growth models of defect rates. These model the product rather than the development process and probably account for many of the 89 \ST{}+\FC{} studies of 1997--2013. The authors are developing an integrated forecasting pipeline; to limit the influence of this interest, the integration levels are defined by generic criteria, and the language-model prompt's reference to the authors' project name is disclosed in the replication package.
+IC4b and IC4c admit Markov usage models for statistical testing and reliability-growth models of defect rates. These model the product rather than the development process and probably account for many of the 60 \ST{}+\FC{} studies of 1997--2013. The authors are developing an integrated forecasting pipeline; to limit the influence of this interest, the integration levels are defined by generic criteria, and the language-model prompt's reference to the authors' project name is disclosed in the replication package.
 
 % =================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-We mapped 1710 studies that apply process mining, stochastic modelling, or forecasting to software development data. The field has been shaped by two communities in succession: stochastic modelling until 2013 and process mining since 2014; they still meet in only 14 studies. After the Phase-3 ML block and snowballing to saturation, forecasting is common (78.0\%; 1334 studies), largely as FC-only work on repository data, while the PM--forecast link remains rare (10). Two studies carry all three technique families (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, which we read in full for the L2/L3 boundary); none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. In this corpus, process-aware stochastic forecasting of process metrics is unobserved among the 14 \PM{}+\ST{} studies, and no end-to-end multi-stage evaluation appears; those observations motivate the agenda in Section~\ref{sec:agenda}.
+We mapped 1710 studies that apply process mining, stochastic modelling, or forecasting to software development data. Forecasting is the largest family throughout; among \ST{} and \PM{}, stochastic modelling led until 2013 and process mining thereafter, yet the two still meet in only 14 studies. After the Phase-3 ML block and snowballing to saturation, forecasting is common (78.0\%; 1334 studies), largely as FC-only work on repository data, while the PM--forecast link remains rare (10). Two studies carry all three technique families (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, which we read in full for the L2/L3 boundary); none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. In this corpus, process-aware stochastic forecasting of process metrics is unobserved among the 14 \PM{}+\ST{} studies, and no end-to-end multi-stage evaluation appears; those observations motivate the agenda in Section~\ref{sec:agenda}.
 
-The corpus, the classification, the prompts, and the screening records are available in the replication package (Zenodo concept DOI 10.5281/zenodo.21939599, which always resolves to the latest version).
+An updated replication package for the $n = 1710$ corpus will be published as a new version under the Zenodo concept DOI 10.5281/zenodo.21939599 (the package built for this submission is \texttt{SLR\_PATHCAST\_Replication\_v3.zip}).
 
 % =================================================================
 \section*{CRediT authorship contribution statement}
@@ -563,8 +563,7 @@ This study was financed in part by the Coordenação de Aperfeiçoamento de Pess
 During the preparation of this work the authors used Claude (Anthropic) to restructure and edit the manuscript and to check its arithmetic. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the publication. Separately, a language model was used in the conduct of the study as a first-pass screening aid (Section~\ref{sec:selection-process}).
 
 \section*{Data availability}
-The replication package (Zenodo concept DOI 10.5281/zenodo.21939599) contains the search strings, de-duplication and enrichment scripts, screening prompts and schemas, per-record decisions at every step, the human verification and re-screen sheets, the list of included studies with their classification, and the completed SEGRESS checklist.
-The replication package ships \texttt{studies.json} (canonical classification of the $n = 1710$ included studies) and \texttt{figs.py}; any CSV export of the included list is derived from \texttt{studies.json} and is no longer versioned as \texttt{included\_studies\_506.csv}.
+The replication materials for this submission are packaged as \texttt{SLR\_PATHCAST\_Replication\_v3.zip} (search strings; de-duplication and enrichment scripts; screening prompts and schemas; per-record decisions; human verification and re-screen sheets; \texttt{studies.json} for the $n = 1710$ included studies; \texttt{figs.py}; SEGRESS checklist). An updated open deposit will be published as a new version under the Zenodo concept DOI~\href{https://doi.org/10.5281/zenodo.21939599}{10.5281/zenodo.21939599}; until that version is live, the public record may still resolve to the earlier $n = 340$ snapshot. Any CSV export of the included list is derived from \texttt{studies.json} and is no longer versioned as \texttt{included\_studies\_506.csv}.
 
 \appendix
 

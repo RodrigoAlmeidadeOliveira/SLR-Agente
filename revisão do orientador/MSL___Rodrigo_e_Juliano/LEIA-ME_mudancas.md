@@ -17,9 +17,16 @@ Status operacional do caminho completo: `../caminho_completo/01_STATUS.md`.
 
 ## Pré-submissão restante (fora do LaTeX)
 
-1. **Publicar** Zenodo v3 (artefato pronto: `../../article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3.zip`; passos em `UPLOAD_V3.md`). DOI concept no paper: `10.5281/zenodo.21939599` (sempre a versão mais recente).
+1. **Publicar** Zenodo v3 (artefato pronto: `../../article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3.zip`; passos em `UPLOAD_V3.md`). Até lá, Data availability declara o hedge (snapshot público ainda pode ser n=340).
 2. Confirmar revista-alvo (`\journal{Information and Software Technology}`).
 3. Opcional de reforço: L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
+
+## Correções 2026-11-12 (pós-parecer)
+
+- ST∩FC 1997–2013: **60** (EN/PT).
+- Highlight/RQ1/conclusão: FC majoritária; ST vs PM só na comparação relativa.
+- Zenodo: linguagem de depósito atualizado (não afirma n=1710 live).
+- Summaries SPMF/venues/RQ3 priority regenerados (n=1710 / 293).
 
 ## Versão em português
 

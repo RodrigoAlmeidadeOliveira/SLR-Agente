@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main_pt"] 1794509983.36679 "main_pt.aux" "main_pt.bbl" "main_pt" 1794511368.92722 0
+["bibtex main_pt"] 1794509983.36679 "main_pt.aux" "main_pt.bbl" "main_pt" 1794512385.99061 0
   "./references.bib" 1794509856.12625 19593 819277f2077540c306ac17c717739790 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/elsarticle/elsarticle-num.bst" 1736456871 29462 3b2a1af2ce1e224a3b46ee048ffd4b98 ""
-  "main_pt.aux" 1794511368.50635 16956 bc3f7b9ac9046866f1aceaec93c3f68b "pdflatex"
+  "main_pt.aux" 1794512385.59455 16956 bc3f7b9ac9046866f1aceaec93c3f68b "pdflatex"
   (generated)
   "main_pt.bbl"
   "main_pt.blg"
   (rewritten before read)
-["pdflatex"] 1794511367.2873 "main_pt.tex" "main_pt.pdf" "main_pt" 1794511368.92746 0
+["pdflatex"] 1794512384.57713 "main_pt.tex" "main_pt.pdf" "main_pt" 1794512385.99103 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
@@ -226,14 +226,14 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1756324578 3345733 694204428cfd41cb2fc8d894e766ef1c ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "appendix_studies_pt.tex" 1794507129.87695 50647 644e1823ecd08db36af058e43d74389f ""
-  "figs/bubble_pt.pdf" 1794507129.7733 15810 526ad5e462c6c1fc3f217d20890f7e26 ""
+  "figs/bubble_pt.pdf" 1794512382.41771 15810 30aa87dec11733ef526e9ed18d97a437 ""
   "figs/spmf_map_pt.pdf" 1794507295.5889 20189 d05b27abcc30fc16b5d96dd30077689f ""
-  "figs/years_pt.pdf" 1794507129.64225 12156 ea494b43d1bfb827f4fbe85a703c9f3c ""
-  "main_pt.aux" 1794511368.50635 16956 bc3f7b9ac9046866f1aceaec93c3f68b "pdflatex"
+  "figs/years_pt.pdf" 1794512382.29781 12156 4f955fe489e92862e1927c52f3e7e2df ""
+  "main_pt.aux" 1794512385.59455 16956 bc3f7b9ac9046866f1aceaec93c3f68b "pdflatex"
   "main_pt.bbl" 1794509983.47089 16364 fa3a104ecf46e2df0719da4bb596e079 "bibtex main_pt"
-  "main_pt.out" 1794511368.50871 4268 841e190b7dda136f0f33c74713023deb "pdflatex"
-  "main_pt.spl" 1794511367.54677 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main_pt.tex" 1794511331.8448 63132 b1ede1e379cbdb58bd9da2b24d7963b7 ""
+  "main_pt.out" 1794512385.5969 4268 841e190b7dda136f0f33c74713023deb "pdflatex"
+  "main_pt.spl" 1794512384.77266 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main_pt.tex" 1794512353.00501 63457 e5dd6953d287321ac73e2a1eb0cac002 ""
   (generated)
   "main_pt.aux"
   "main_pt.log"

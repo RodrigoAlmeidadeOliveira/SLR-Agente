@@ -1,16 +1,16 @@
-# Venues n=1708
+# Venues n=1710
 
-- venue recovered: 1579
-- NA/unknown venue: 129
-- pub_type: {'journal': 828, 'conference': 667, 'unknown': 127, 'workshop': 27, 'other': 59}
+- venue recovered: 1580
+- NA/unknown venue: 130
+- pub_type: {'journal': 825, 'conference': 664, 'unknown': 135, 'workshop': 27, 'other': 59}
 
 ## Top
-- 38 Lecture notes in computer science
+- 39 Lecture notes in computer science
 - 34 Information and Software Technology
 - 32 Journal of Systems and Software
 - 32 IEEE Access
 - 27 arXiv (Cornell University)
-- 18 Empirical Software Engineering
+- 19 Empirical Software Engineering
 - 18 Asia-Pacific Software Engineering Conference (APSEC)
 - 18 International Journal of Computer Applications
 - 17 IEEE Transactions on Software Engineering
@@ -24,4 +24,3 @@
 - 13 Springer eBooks
 - 12 Advances in Intelligent Systems and Computing
 - 11 International Conference on Mining Software Repositories (MSR)
-- 11 Procedia Computer Science
