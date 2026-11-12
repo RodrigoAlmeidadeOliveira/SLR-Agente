@@ -1,0 +1,25 @@
+action,audit_id,internal_id,year,title,families,notes
+remove,F2-004,76a1870d,2023,A Bayesian model averaging method for software reliability modeling and assessment,,F2.3 include→exclude
+remove_skip_absent,F2-008,d327f361,2001,New process for separating propylene and propane by extractive distillation with aqueous acetonitrile,,F2.3 include→exclude
+remove_skip_absent,F2-010,b9ea47c3,2012,Process simulation will soon come of age: Where's the party?,,F2.3 include→exclude
+remove_skip_absent,F2-011,be4c9529,2009,Computation of Performance Bounds for Real-Time Systems Using Time Petri Nets,,F2.3 include→exclude
+remove,F2-020,165593a8,2021,ELS algorithm for estimating open source software reliability with masked data considering both fault detection and correction processes,,F2.3 include→exclude
+remove,F2-025,921e8fc3,2015,A New Framework and Application of Software Reliability Estimation Based on Fault Detection and Correction Processes,,F2.3 include→exclude
+remove_skip_absent,F2-030,bc9498ef,2022,bSTAB: an open-source software for computing the basin stability of multi-stable dynamical systems,,F2.3 include→exclude
+remove_skip_absent,F2-036,b618e568,2021,Learning about learners: Understanding learner behaviours in software conceptual design TELE,,F2.3 include→exclude
+remove_skip_absent,F2-041,58c1d91f,2005,The ALPS Project: Open Source Software for Strongly Correlated Systems,,F2.3 include→exclude
+remove_skip_absent,F2-046,70af59ef,2006,Software Performance Analysis in UML Models,,F2.3 include→exclude
+remove_skip_absent,F2-055,5ee71dfd,2007,Cluster grid based response-time analysis module for the PIPE tool,,F2.3 include→exclude
+remove,F2-057,a31e0556,2005,"Optimal Testing Resource Allocation, and Sensitivity Analysis in Software Development",,F2.3 include→exclude
+remove,F2-062,6e178383,2019,DeepJIT: An End-to-End Deep Learning Framework for Just-in-Time Defect Prediction,,F2.3 include→exclude
+remove_skip_absent,F2-068,227a76af,2024,An empirical study of business process models and model clones on GitHub,,F2.3 include→exclude
+remove,F2-072,9801135d,2007,Quantifying Software Maintainability Based on a Fault-Detection/Correction Model,,F2.3 include→exclude
+remove_skip_absent,F2-081,fe1cd2ea,2005,"Special issue on ProSim 2004, The 5th International Workshop on Software Process Simulation and Modeling, Edinburgh, Scotland, May 2004",,F2.3 include→exclude
+add,F2-001,deb9b604,2025,BPriS: Disciplined Agile Delivery Planning Method Based on Work Items List Pattern Applied to Prioritized Semantically Coupled Software Functions Derived from Business Process Model and Software Functional Pattern,TF-PM,F2.3 exclude→include
+add,F2-049,68fb9a94,2014,You can't tailor what you haven't modeled,TF-PM,F2.3 exclude→include
+add,F2-074,38625f3b,2008,Reflections on 10 Years of Software Process Simulation Modeling: A Systematic Review,TF-ST,F2.3 exclude→include
+add,F2-075,007c42a3,2024,Validation of Scrum Implementation with Knowledge Based Software Process Metamodel – Meta-modeling Support in Scrum Implementation,TF-PM,F2.3 exclude→include
+add,F2-089,3e8a5f46,2009,Automated Process Quality Assurance for Distributed Software Development,TF-MSR,F2.3 exclude→include
+add,F2-099,3d6aeed8,2013,OSMF: A Framework for OSS Process Measurement,TF-MSR,F2.3 exclude→include
+add,F2-100,a5c1650b,2010,SPDW+: a seamless approach for capturing quality metrics in software development environments,TF-MSR,F2.3 exclude→include
+add,F2-112,786d57aa,2015,Experimentation with dynamic simulation models in software engineering: planning and reporting guidelines,TF-ST,F2.3 exclude→include

@@ -15,15 +15,11 @@ Fonte: `../MSL___Rodrigo_e_Juliano/` (`main.tex`, `main_pt.tex`, `studies.json`,
 
 Só atualizar o `.tex` depois que os dados da fase correspondente estiverem fechados (evitar editar `\pendente` “no olho”).
 
-## Fase atual: 3 (busca)
+## Fase atual: 4 (RQ3/SPMF) · Fase 3 ✅ · F5 parcial · n=1708
 
-1. D6 — 19 suplementares: `phase3_d6_19_screen.csv` (D2=B → defect/JIT tende a exclude).
-2. D1 — 3 strings Scopus: `phase3_D1_scopus_strings_cleaned.md`.
-3. Bloco ML — 5 bases: `phase3_ML_block_strings.md`.
-4. Snowballing: `03_PROTOCOLO_SNOWBALLING.md`.
-5. Ledger: `phase3_search_ledger.csv`.
-
-### Paralelo (Fase 2.3)
+1. Extração prioritária: `python3 classify_phase4_rq3_interactive.py --sheet priority --pending-only`
+2. Venues + SPMF no full sheet.
+3. Paralelo F2.3 (cego):
 
 ```bash
 python3 classify_phase2_blind_interactive.py --coder Rodrigo --rater A --includes-only --pending-only

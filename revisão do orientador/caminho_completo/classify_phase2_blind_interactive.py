@@ -122,7 +122,21 @@ def main() -> None:
     dec_col, notes_col, coder_col = rater_key(args.rater)
     queue = pending(sheet, dec_col, args.includes_only, master) if args.pending_only else sheet
     print(f"Coder={args.coder} rater={args.rater.upper()} fila={len(queue)} (includes-only={args.includes_only})")
-    print("Labels: include | exclude | not_assessable | s=skip | q=quit")
+    print("Labels: i/include | e/exclude | n/not_assessable | s=skip | q=quit")
+    print("Enter vazio NÃO grava — digite i, e ou n.\n")
+
+    alias = {
+        "i": "include",
+        "inc": "include",
+        "include": "include",
+        "e": "exclude",
+        "exc": "exclude",
+        "exclude": "exclude",
+        "n": "not_assessable",
+        "na": "not_assessable",
+        "n/a": "not_assessable",
+        "not_assessable": "not_assessable",
+    }
 
     by_m = {r["audit_id"]: r for r in master}
     for i, r in enumerate(queue, 1):
@@ -132,17 +146,17 @@ def main() -> None:
         print(f"DOI: {r.get('doi')}  URL: {r.get('url')}")
         abs_ = (r.get("abstract") or "").strip()
         print(f"Abstract: {abs_[:500] if abs_ else '(vazio)'}")
-        d = ask("decision > ").lower().replace(" ", "_")
+        d = ask("decision [i/e/n] > ").lower().replace(" ", "_")
         if d == "q":
             break
         if d in {"", "s"}:
+            print("  (skip)")
             continue
-        if d in {"na", "n/a"}:
-            d = "not_assessable"
+        d = alias.get(d, d)
         if d not in VALID:
-            print("inválido")
+            print("inválido — use i, e ou n")
             continue
-        notes = ask("notes > ")
+        notes = ask("notes (Enter=vazio) > ")
         r[dec_col] = d
         r[notes_col] = notes
         r[coder_col] = args.coder

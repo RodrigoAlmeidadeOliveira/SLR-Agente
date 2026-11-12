@@ -127,7 +127,13 @@ def main() -> None:
         help="Filtra fila pela sugestão",
     )
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--csv", type=str, default=None, help="Screen CSV (default iter1)")
     args = ap.parse_args()
+    global CSV_PATH
+    path = Path(args.csv) if args.csv else CSV_PATH
+    if not path.is_absolute():
+        path = DIR / path
+    CSV_PATH = path
     rows = load(CSV_PATH)
 
     if args.status:

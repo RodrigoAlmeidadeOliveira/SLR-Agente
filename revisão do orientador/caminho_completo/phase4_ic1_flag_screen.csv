@@ -1,0 +1,8 @@
+internal_id,year,families,title,doi,suggested,decision,notes
+26a59e33,1985,TF-FC,Software Effort Estimation and Productivity,10.1016/s0065-2458(08)60364-2,exclude,exclude,IC1 year<1994; effort estimation (FC) before IC1 cutoff; applied 2026-11-12
+570f73d4,1990,TF-FC,Case-Based Reasoning in Software Effort estimation.,,exclude,exclude,IC1 year<1994; effort estimation (FC) before IC1 cutoff; applied 2026-11-12
+957608bf,1990,TF-FC,Debugging effort estimation using software metrics,10.1109/32.44385,exclude,exclude,IC1 year<1994; effort estimation (FC) before IC1 cutoff; applied 2026-11-12
+3612b0c8,1991,TF-FC,Software-Effort Estimation: An Exploratory Study of Expert Performance,10.1287/isre.2.4.243,exclude,exclude,IC1 year<1994; effort estimation (FC) before IC1 cutoff; applied 2026-11-12
+c84c45e2,1991,TF-ST,"Analysis of a Kanban Discipline for Cell Coordination in Production Lines, II: Stochastic Demands",10.1287/opre.39.5.807,exclude,exclude,"IC1 year<1994; apparently manufacturing Kanban, not SE process; applied 2026-11-12"
+dc30b7c1,1992,TF-ST,Software reliability growth model with continuous error domain—application of a linear stochastic differential equation,10.1002/ecjc.4430750304,exclude,exclude,IC1 year<1994; product reliability growth model (D2=B / EC product); applied 2026-11-12
+d8ae2305,1993,TF-FC,Dimensionality reduction in software development effort estimation,10.1016/0164-1212(93)90041-u,exclude,exclude,IC1 year<1994; effort estimation (FC) before IC1 cutoff; applied 2026-11-12

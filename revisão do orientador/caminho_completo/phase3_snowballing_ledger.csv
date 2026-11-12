@@ -1,2 +1,6 @@
 iteration,date,n_seeds,n_raw,n_union,n_residual,n_gate_pass,n_gate_fail,n_classify,n_exclude,notes
-1,2026-11-12,494,23294,14686,13612,703,12909,,12909,fetch 494/494 OpenAlex+API key; gate fail bulk-accepted; 703 maybe pending triage
+1,2026-11-12,494,23294,14686,13612,703,12909,401,13211,applied; corpus n=962
+2,2026-11-12,378,27384,12352,9802,934,8868,627,9175,applied; corpus n=1589; not saturated
+3,2026-11-12,569,23355,9635,5323,228,5095,120,5203,applied; corpus n=1709; not saturated
+4,2026-11-12,94,2044,1704,736,20,716,6,730,applied; corpus n=1715
+5,2026-11-12,5,231,231,203,0,203,0,203,SATURATION: 0 new includes (0 keyword-gate pass)

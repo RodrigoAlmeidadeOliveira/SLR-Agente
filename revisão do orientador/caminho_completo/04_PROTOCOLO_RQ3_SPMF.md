@@ -1,8 +1,15 @@
 # Protocolo — Extração RQ3 + SPMF (D3=A, D4=A)
 
-## Planilha
+## Planilhas (pós Fase 3, n=1715)
 
-`phase4_rq3_extraction_template.csv` (380 linhas hoje; regenerar após fechar Fase 1).
+| Arquivo | Uso |
+|---------|-----|
+| `phase4_rq3_extraction_template.csv` | corpus completo (**1708**) |
+| `phase4_rq3_priority_sheet.csv` | 291 prioritários (L1/L2 + qualquer PM) |
+| `phase4_ic1_flag_screen.csv` | 7 IC1 — **exclude aplicado** |
+| `classify_phase4_rq3_interactive.py` | extração assistida |
+
+Ordem: (1) ~~IC1~~ ✅ → (2) priority core fields → (3) venues/pub_type no full → (4) SPMF nos classificados.
 
 ## Campos
 

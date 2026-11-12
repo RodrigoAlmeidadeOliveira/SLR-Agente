@@ -1,0 +1,628 @@
+internal_id,year,doi,title,families,level,role
+566e24e8,2014,10.5120/16786-6371,A Bayesian Network Model of the Particle Swarm Optimization for Software Effort Estimation,TF-FC,L0,added
+350880c5,2022,10.1109/ictacs56270.2022.9988123,A CAD System for Software Effort Estimation,TF-FC,L0,added
+fb4ec2ea,2017,10.22159/ajpcr.2017.v10s1.19538,"A CASE Study on Software Project Development Cost, Schedule & Effort Estimation",TF-FC,L0,added
+f047f55e,2011,10.48550/arxiv.1112.3877,A Classical Fuzzy Approach for Software Effort Estimation on Machine Learning Technique,TF-FC,L0,added
+7dcb8ea2,2025,10.1109/cictn64563.2025.10932574,A Comparative Analysis of Different Machine Learning Techniques Used in Software Effort Estimation,TF-FC,L0,added
+68c9082b,2023,10.1109/icit59216.2023.10335868,A Comparative Analysis of Popular Software Effort Estimation Techniques,TF-FC,L0,added
+40b67211,2013,10.1016/j.protcy.2013.04.038,A Comparative Study of Two Fuzzy Logic Models for Software Development Effort Estimation,TF-FC,L0,added
+a090e0ab,2018,10.1109/ccece.2018.8447687,A Comparison Study Between Soft Computing and Statistical Regression Techniques for Software Effort Estimation,TF-FC,L0,added
+db0cbc8e,2017,10.22214/ijraset.2017.9017,A Comprehensive Literature Survey on the Use of Particle Swarm Optimization Technique for Software Effort Estimation,TF-FC,L0,added
+abb41191,2026,10.1007/978-3-032-00972-2_22,A Comprehensive Survey on Software Effort Estimation Using Machine Learning and Optimization Algorithms,TF-FC,L0,added
+de24553f,2011,10.1109/esem.2011.32,A Current Assessment of Software Development Effort Estimation,TF-FC,L0,added
+21974694,2020,10.1007/978-981-15-0630-7_4,A Double-Weighted Parametric Model for Academic Software Project Effort Estimation,TF-FC,L0,added
+7f8fbfcd,2010,10.3923/jse.2011.38.48,A Fine Parameter Tuning for COCOMO 81 Software Effort Estimation using Particle Swarm Optimization,TF-FC,L0,added
+72bbaa1b,2006,10.1109/cic.2006.5,A Fuzzy Logic Model Based upon Reused and New & Changed Code for Software Development Effort Estimation at Personal Level,TF-FC,L0,added
+abc76a20,2006,10.1007/11925231_12,A Fuzzy Logic Model for Software Development Effort Estimation at Personal Level,TF-FC,L0,added
+c415ab5d,2018,10.5815/ijmecs.2018.03.06,A Fuzzy based Parametric Approach for Software Effort Estimation,TF-FC,L0,added
+839eaa6b,2010,10.1109/isda.2010.5687251,A GP effort estimation model utilizing line of code and methodology for NASA software projects,TF-FC,L0,added
+5c2e2dbf,2016,10.4236/cs.2016.76071,A Hybrid Associative Classification Model for Software Development Effort Estimation,TF-FC,L0,added
+c2dae430,2014,10.5121/ijfcst.2014.4505,A Hybrid Fuzzy-Ann Approach for Software Effort Estimation,TF-FC,L0,added
+37e6566e,2024,10.48084/etasr.8890,A Hybrid Metaheuristic Aware Enhanced Deep Learning Approach for Software Effort Estimation,TF-FC,L0,added
+1455b509,2025,10.1109/iceei68459.2025.11330847,A Lifelong Learning Algorithm in Software Effort Estimation,TF-FC,L0,added
+2551d106,2009,,A Method for Selecting Fit Data in Software Effort Estimation,TF-FC,L0,added
+f27bbb48,2014,,A Minimization of Software Cost and Effort Estimation using Code Reusability Concept by Analogy Estimation Technique,TF-FC,L0,added
+4683f278,2020,10.1109/aisp48273.2020.9073163,A Model for Corrective Software Maintenance Effort Estimation after Privacy Leak Detection in Social Network,TF-FC,L0,added
+034cab3c,2018,10.5121/ijsea.2018.9602,A NOVEL EFFORT ESTIMATION MODEL FOR SOFTWARE REQUIREMENT CHANGES DURING SOFTWARE DEVELOPMENT PHASE,TF-FC,L0,added
+d33131d0,2016,,A Neuro Fuzzy Algorithm to Compute Software Effort Estimation,TF-FC,L0,added
+087be32f,2015,10.48550/arxiv.1508.00032,A Neuro-Fuzzy Model with SEER-SEM for Software Effort Estimation,TF-FC,L0,added
+2845d106,2022,10.3390/computers11020015,A New Approach to Calibrating Functional Complexity Weight in Software Development Effort Estimation,TF-FC,L0,added
+c38f2230,2021,10.1109/access.2021.3057807,A New Approach to Software Effort Estimation Using Different Artificial Neural Network Architectures and Taguchi Orthogonal Arrays,TF-FC,L0,added
+1099ff04,2012,10.1049/iet-sen.2011.0210,A New Fuzzy Clustering Based Method to Increase the Accuracy of Software Development Effort Estimation,TF-FC,L0,added
+e39e4f39,2011,,A New Methodology for Quantifying the Impact of Non-Functional Requirements on Software Effort Estimation,TF-FC,L0,added
+4ae03672,2019,10.1109/comitcon.2019.8862256,A Non-Linear Technique for Effective Software Effort Estimation using Multi-Layer Perceptrons,TF-FC,L0,added
+4709960b,2026,10.1142/s0218194026500464,A Novel Framework for Software Project Effort Estimation Using LLMs and RAG,TF-FC,L0,added
+44caeb4b,2025,10.1007/s42979-025-04459-3,A Novel Hybrid Deep Learning Framework with Metaheuristic Optimization for Accurate Software Effort Estimation,TF-FC,L0,added
+34d52a2f,2022,10.1007/978-981-19-1610-6_54,A Novel Software Architecture to Calculate Effort Estimation for Industrial Big Data,TF-FC,L0,added
+c9ee07ba,2012,10.1007/s11219-012-9183-x,A PSO-based model to increase the accuracy of software development effort estimation,TF-FC,L0,added
+328123bc,2015,10.1007/s10515-015-0186-2,A Petri net tool for software performance estimation based on upper throughput bounds,TF-PM|TF-ST|TF-FC,L2,added
+cb68ba73,2008,10.14236/ewic/ease2008.14,A Preliminary Study of Sequence Effects in Judgment-based Software Development Work-Effort Estimation,TF-FC,L0,added
+900def3d,2012,10.33915/etd.3601,A Principled Methodology: A Dozen Principles of Software Effort Estimation,TF-FC,L0,added
+6ff7b033,2020,10.1007/978-3-030-63322-6_62,A Productivity Optimising Model for Improving Software Effort Estimation,TF-FC,L0,added
+9e0287a2,2015,10.14257/ijhit.2015.8.10.07,A Proposed Framework for Software Effort Estimation Using the Combinational Approach of Fuzzy Logic and Neural Networks,TF-FC,L0,added
+38834844,2024,10.15589/znp2024.1(494).15,A REVIEW OF SOFTWARE DEVELOPMENT EFFORT ESTIMATION METHODS,TF-FC,L0,added
+2ce3aaae,2020,10.1145/3419604.3419809,A Review of Open Source Software Maintenance Effort Estimation,TF-FC|TF-MSR,L0,added
+d59e0082,2019,10.1007/978-3-030-31362-3_40,A Review of Software Effort Estimation by Using Functional Points Analysis,TF-FC,L0,added
+69230937,2013,,A Review on Cost and Effort Estimation Approach for Software Development,TF-FC,L0,added
+4748abd8,2014,,A Review on Soft Computing based Software Effort Estimation Models,TF-FC,L0,added
+374c6f47,2021,10.5220/0010405002050212,A Stacking Ensemble-based Approach for Software Effort Estimation,TF-FC,L0,added
+df367e66,2023,,A Study of Evaluation Measures for Software Effort Estimation Using Machine Learning,TF-FC,L0,added
+afb8f80d,2010,10.1109/compsacw.2010.27,A Study of Improving the Accuracy of Software Effort Estimation Using Linearly Weighted Combinations,TF-FC,L0,added
+7e590666,2020,10.1007/978-3-030-40928-9_8,A Study on Application of Soft Computing Techniques for Software Effort Estimation,TF-FC,L0,added
+bc871cea,2014,,A Study on Effort Estimation of Software Development Using Fuzzy Logic,TF-FC,L0,added
+99310b4c,2014,10.1109/ca.2014.13,A Study on the Improvement of Software Effort Estimation,TF-FC,L0,added
+4cdc1a9a,2023,10.1007/978-981-99-4577-1_32,A Survey on Applications of Particle Swarm Optimization Algorithms for Software Effort Estimation,TF-FC,L0,added
+4769150f,2022,10.1109/ccict56684.2022.00093,A Systematic Literature Review of Machine Learning Techniques for Software Effort Estimation Models,TF-FC,L0,added
+2365ec87,2014,10.17705/1cais.03404,A Systematic Mapping of Factors Affecting Accuracy of Software Development Effort Estimation,TF-FC,L0,added
+e51998cc,2022,10.1007/978-981-16-8987-1_11,A Taxonomy of Approaches and Methods for Software Effort Estimation,TF-FC,L0,added
+98c7bb26,2014,10.7763/ijcee.2014.v6.851,A Variant of COCOMO II for Improved Software Effort Estimation,TF-FC,L0,added
+2f707065,2017,10.1007/978-3-319-69926-4_6,A Virtual Study of Moving Windows for Software Effort Estimation Using Finnish Datasets,TF-FC,L0,added
+f516d8b6,2011,10.2298/csis110316068p,A comparative evaluation of effort estimation methods in the software life cycle,TF-FC,L0,added
+e24b6268,2017,10.1109/iciinfs.2017.8300360,A comparative study of hybrid models of selective classification and dynamic selection of analogies for software development effort estimation,TF-FC,L0,added
+f450a0aa,2011,10.1111/j.1468-0394.2011.00607.x,A distributed problem‐solving framework for probabilistic software effort estimation,TF-FC,L0,added
+35cf3bbf,2006,10.1007/s10664-006-7552-4,A flexible method for software effort estimation by analogy,TF-FC,L0,added
+bbc11d56,2020,10.1007/s10479-020-03732-3,A generalized multiple environmental factors software reliability model with stochastic fault detection process,TF-ST,L0,added
+59919e44,2013,10.1145/2463372.2463546,A grammatical evolution approach for software effort estimation,TF-FC,L0,added
+cccf4e66,2011,10.5897/sre11.1736,A hybrid method for increasing the accuracy of software development effort estimation,TF-FC,L0,added
+3726ebce,2014,10.1109/icocs.2014.7060958,A learning adaptation cases technique for Fuzzy Analogy-based software development effort estimation,TF-FC,L0,added
+fe3c7c1f,2026,10.1007/s10586-026-06217-3,A meta-learning-based Reptile-ACO hybrid framework with uncertainty quantification for software effort estimation,TF-FC,L0,added
+c51bae0c,2017,10.1080/1206212x.2017.1395103,A new combinatorial framework for software services development effort estimation,TF-FC,L0,added
+c54c5c70,2018,10.1145/3236024.3236052,A novel automated approach for software effort estimation based on data augmentation,TF-FC,L0,added
+35f7dbe4,2015,10.14257/ijseia.2015.9.1.21,A novel effort estimation approach for requirement changes during software development phase,TF-FC,L0,added
+86c11e29,2013,10.1145/2507288.2507313,A novel fuzzy based approach for effort estimation in software development,TF-FC,L0,added
+7fd7fade,2011,10.1109/icectech.2011.5941882,A novel method for software effort estimation using inverse regression as firing interval in fuzzy logic,TF-FC,L0,added
+d5665995,2013,10.1109/inista.2013.6577643,A novel method for software effort estimation: Estimating with boundaries,TF-FC,L0,added
+12ed94ca,2024,10.1016/j.jss.2024.112302,A novel method to early agile effort estimation through functional initiatives,TF-FC|TF-MSR,L0,added
+db3af2f6,2014,10.7813/2075-4124.2014/6-2/a.12,A novel particle swarm optimization approach for software effort estimation,TF-FC,L0,added
+37582a83,2011,10.1145/2020390.2020399,A principled evaluation of ensembles of learning machines for software effort estimation,TF-FC,L0,added
+6043d87b,2017,10.1109/codit.2017.8102599,A quantum-based approach to error in software development effort estimation,TF-FC,L0,added
+c903b289,2019,,A real time extreme learning machine for software development effort estimation.,TF-FC,L0,added
+e9686368,2003,10.1016/s0164-1212(02)00071-7,A stochastic software reliability model with imperfect-debugging and change-point,TF-ST,L0,added
+6c6e27e2,2016,10.1109/iceeot.2016.7755665,A survey on software effort estimation,TF-FC,L0,added
+33cdea14,2012,10.1504/ijor.2012.048291,A unified scheme for developing software reliability growth models using stochastic differential equations,TF-ST,L0,added
+91493886,2008,10.5220/0001876601270132,ADJUSTING ANALOGY SOFTWARE EFFORT ESTIMATION BASED ON FUZZY LOGIC,TF-FC,L0,added
+0743f004,2002,10.1109/seep.1996.534020,AI tools for software development effort estimation,TF-FC,L0,added
+30a870cb,2025,10.5220/0013218200003929,AI-Based Approaches for Software Tasks Effort Estimation: A Systematic Review of Methods and Trends,TF-FC,L0,added
+49e3cae6,2026,10.1007/978-3-032-23035-5_1,AI-Based Imputation for Missing Data in Software Effort Estimation: A Systematic Literature Review,TF-FC,L0,added
+e6085f88,2021,,AI-assisted Software Development Effort Estimation,TF-FC,L0,added
+5d027dd1,2014,,AN EMPIRICAL STUDY ON SOFTWARE TEST EFFORT ESTIMATION,TF-FC,L0,added
+c5aecde4,2015,10.21917/ijms.2015.0027,AN ENHANCED CLIENT CENTRIC SOFTWARE DEVELOPMENT LIFE CYCLE MODEL WITH COST AND EFFORT ESTIMATION,TF-FC,L0,added
+dd384bd9,2026,10.3390/fi18080424,APCI: A Complexity-Aware Framework for Computational Software Effort Estimation in Machine Learning-Based Intrusion Detection Systems,TF-FC,L0,added
+c64d551d,2015,10.1002/int.21748,Accuracy Comparison of Analogy-Based Software Development Effort Estimation Techniques,TF-FC,L0,added
+ab69dd0d,2024,10.52465/joscex.v5i1.252,Activity-based function point complexity of use case diagrams for software effort estimation,TF-FC,L0,added
+38fae842,2008,,Adequacy Checking of Personal Software Development Effort Estimation Models Based upon Fuzzy Logic: A Replicated Experiment Comprobación de la Adecuación de Modelos de Estimación del Esfuerzo de Desarrollo de Software Personal Basados en Lógica Difusa: Un Experimento Replicado,TF-FC,L0,added
+d556b5d1,2011,10.1007/978-3-642-23863-5_32,Adjusted Case-Based Software Effort Estimation Using Bees Optimization Algorithm,TF-FC,L0,added
+eaddcd7f,2019,10.1016/j.procs.2019.08.215,Adjustment Factor for Use Case Point Software Effort Estimation (Study Case: Student Desk Portal),TF-FC,L0,added
+10d13363,2019,10.1088/1757-899x/551/1/012074,Adoption of Machine Learning Techniques in Software Effort Estimation: An Overview,TF-FC,L0,added
+efafc74a,2024,10.1002/smr.2745,Advancing Software Project Effort Estimation: Leveraging a NIVIM for Enhanced Preprocessing,TF-FC,L0,added
+b888412a,2012,10.1145/2365324.2365333,Alternative methods using similarities in software effort estimation,TF-FC,L0,added
+a83fbf3b,2015,10.1155/2015/919825,An Accurate FFPA‐PSR Estimator Algorithm and Tool for Software Effort Estimation,TF-FC,L0,added
+faa981c4,2013,10.5121/csit.2013.3407,An Approach for Software Effort Estimation Using Fuzzy Numbers and Genetic Algorithm to Deal with Uncertainity,TF-FC,L0,added
+cb6e46b8,2006,10.1109/apsec.2006.20,An Approach of a Technique for Effort Estimation of Iterations in Software Projects,TF-FC,L0,added
+74a0f623,2017,,An Architecture for Effort Estimation of Solutions Based on Open Source,TF-FC|TF-MSR,L0,added
+24d2c572,2022,10.32604/csse.2023.026018,An Artificial Neural Network-Based Model for Effective Software Development Effort Estimation,TF-FC,L0,added
+4aa53bdd,2014,10.1007/978-3-662-44811-3_2,An Autoethnographic Study of HCI Effort Estimation in Outsourced Software Development,TF-FC,L0,added
+b9d7b3e8,2014,10.4304/jsw.9.8.2169-2173,An Early Software Effort Estimation Method Based on Use Cases and Conceptual Classes,TF-FC,L0,added
+a8eb09c1,2019,10.35940/ijitee.j9674.0881019,An Effective Software Effort Estimation based on Functional Points using Soft Computing Techniques,TF-FC,L0,added
+0d56225b,2015,10.5120/20279-2713,An Effort Estimation Model for Software Development using Ensemble Learning,TF-FC,L0,added
+dc9483c1,2006,,An Effort Estimation by UML Points in Early Stage of Software Development.,TF-FC,L0,added
+7d934486,2017,10.1109/qrs.2017.54,An Empirical Analysis of Three-Stage Data-Preprocessing for Analogy-Based Software Effort Estimation on the ISBSG Data,TF-FC,L0,added
+fdbe6c1f,2022,10.1109/access.2022.3172326,An Empirical Study on Software Test Effort Estimation for Defense Projects,TF-FC,L0,added
+5d68fa29,2015,10.1007/978-3-319-17530-0_22,An Evaluation of COCHCOMO Tool for Change Effort Estimation in Software Development Phase,TF-FC,L0,added
+edb05739,2013,,An Evaluation of Neural Networks Approaches used for Software Effort Estimation,TF-FC,L0,added
+b092cf9c,2016,10.17485/ijst/2016/v9i21/95286,An Evolutionary Computation Approach for Project Selection in Analogy based Software Effort Estimation,TF-FC,L0,added
+4cae2d67,2025,10.1109/rivf68649.2025.11365197,An Experimental Study of Walrus Optimization-Based Deep Learning Models for Software Effort Estimation,TF-FC,L0,added
+e8b6d34c,2021,10.5220/0010397700470057,An Extreme Learning Machine based Approach for Software Effort Estimation,TF-FC,L0,added
+a2a5ac24,2021,10.1109/icit52682.2021.9491753,An Integrated Analytical Approach to Mathematical Modelling the Stochastic Behaviour of Software Debugging Phenomenon,TF-ST,L0,added
+d1d1bc53,2017,10.14569/ijacsa.2017.080628,An Investigation into the Suitability of k-Nearest Neighbour (k-NN) for Software Effort Estimation,TF-FC,L0,added
+a8594e55,2013,,An Optimization-Based Method to Increase the Accuracy of Software Development Effort Estimation,TF-FC,L0,added
+14dbc2fa,2013,10.1145/2499393.2499396,An analysis of multi-objective evolutionary algorithms for training ensemble models based on different performance measures in software effort estimation,TF-FC,L0,added
+229f1656,2014,10.1145/2652524.2652571,An approach for effort estimation in incremental software development using cosmic function points,TF-FC,L0,added
+6269e223,2008,10.1145/1370788.1370796,An empirical analysis of software effort estimation with outlier elimination,TF-FC,L0,added
+fc1caae7,2007,10.1016/j.eswa.2007.08.001,An empirical validation of a neural network model for software effort estimation,TF-FC,L0,added
+6659059c,2021,10.1002/spe.3040,An evolutionary ensemble analogy‐based software effort estimation,TF-FC,L0,added
+9e8d5d7d,2004,10.1109/isese.2003.1237971,An experiment on software project size and effort estimation,TF-FC,L0,added
+9fcb4932,2017,10.1109/ubmk.2017.8093382,An experimental comparison of software effort estimation methods of ORM based 4GL software applications,TF-FC,L0,added
+dfe6510c,2024,10.1016/j.eswa.2024.124107,An improved analogy-rule based software effort estimation using HTRR-RNN in software project management,TF-FC,L0,added
+070fae7f,2008,10.1145/1414004.1414064,An over-sampling method for analogy-based software effort estimation,TF-FC,L0,added
+559a576d,2010,10.1109/snpd.2010.47,Analogies and Differences between Machine Learning and Expert Based Software Project Effort Estimation,TF-FC,L0,added
+322484bf,2013,,Analogy based Software Effort Estimation and Accuracy Improvements,TF-FC,L0,added
+337b566a,2019,10.1515/jisys-2019-0023,Analogy-Based Approaches to Improve Software Project Effort Estimation Accuracy,TF-FC,L0,added
+980c26fa,2010,,Analogy-Based Software Project Effort Estimation,TF-FC,L0,added
+633e9aaa,2018,10.26555/ijain.v4i3.266,Analogy-based model for software project effort estimation,TF-FC,L0,added
+b835ddc7,2010,10.1016/j.jss.2010.09.028,Analogy-based software effort estimation using Fuzzy numbers,TF-FC,L0,added
+a59085d5,2019,10.4018/jcit.2019040106,Analysis and Comparison of Neural Network Models for Software Development Effort Estimation,TF-FC,L0,added
+e609510e,2021,10.4018/978-1-6684-3702-5.ch009,Analysis and Comparison of Neural Network Models for Software Development Effort Estimation,TF-FC,L0,added
+3373c0a1,2025,10.1007/978-981-97-9045-6_27,Analysis and Design of Software Effort Estimation Model Using Machine Learning Techniques: A Systematic Literature Review,TF-FC,L0,added
+f1fc3f03,2014,10.1109/itng.2014.116,Analysis of Data Mining Techniques for Software Effort Estimation,TF-FC,L0,added
+58ad8a1d,2019,10.1002/smr.2180,Analysis of cluster center initialization of 2FA‐kprototypes analogy‐based software effort estimation,TF-FC,L0,added
+5b3197ef,2022,10.29070/ccx1xj72,Analysis: The application of different Machine Learning Techniques for Software effort Estimation,TF-FC,L0,added
+27a05621,2015,10.1007/978-81-322-2734-2_22,Analytical Structure of a Fuzzy Logic Controller for Software Development Effort Estimation,TF-FC,L0,added
+903cc52e,2015,10.1109/eesco.2015.7253928,Analytical structure of a fuzzy logic controller for software development effort estimation,TF-FC,L0,added
+977e32e3,2021,10.1109/isitia52817.2021.9502208,Analyze the Datasets of Software Effort Estimation With Particle Swarm Optimization,TF-FC,L0,added
+3919db26,2021,10.1007/978-3-030-90318-3_65,Analyzing Correlation of the Relationship Between Technical Complexity Factors and Environmental Complexity Factors for Software Development Effort Estimation,TF-FC,L0,added
+b96facad,2019,10.1109/services.2019.00116,Analyzing Effect of Ensemble Models on Multi-Layer Perceptron Network for Software Effort Estimation,TF-FC,L0,added
+b661cf9b,2021,10.1109/iccmc51019.2021.9418286,"Analyzing Software Effort Estimation by Applying Static, Single & Multi-Variable Models",TF-FC,L0,added
+58d41ee9,2016,10.1109/tla.2016.7786366,Analyzing the Effect of Variables in the Software Development Effort Estimation,TF-FC,L0,added
+f1c53b74,2022,10.1007/978-3-031-21967-2_21,Analyzing the Effectiveness of the Gaussian Mixture Model Clustering Algorithm in Software Enhancement Effort Estimation,TF-FC,L0,added
+024c9fcd,2014,10.48550/arxiv.1405.1131,Analyzing the Non-Functional Requirements in the Desharnais Dataset for Software Effort Estimation,TF-FC,L0,added
+23754909,2020,10.1142/s0218194020400239,Analyzing the Stationarity Process in Software Effort Estimation Datasets,TF-FC,L0,added
+1f99d374,2015,10.1109/sita.2015.7358402,Analyzing the non-functional requirements to improve accuracy of software effort estimation through case based reasoning,TF-FC,L0,added
+0745f59f,2019,10.1109/services.2019.00094,Applicability of Neural Network Based Models for Software Effort Estimation,TF-FC,L0,added
+1e4da643,2011,10.14569/ijacsa.2011.020515,Application of Fuzzy Logic Approach to Software Effort Estimation,TF-FC,L0,added
+2cdc2aa0,2019,10.5028/jatm.v11.1031,Applying COCOMO II for a DO-178C Safety-Critical Software Effort Estimation,TF-FC,L0,added
+3155ca7a,2011,10.48550/arxiv.1111.0158,Applying Fuzzy ID3 Decision Tree for Software Effort Estimation,TF-FC,L0,added
+7a71754a,2020,10.1007/978-981-15-7486-3_21,Applying Soft Computing Techniques for Software Project Effort Estimation Modelling,TF-FC,L0,added
+5ae29e8c,2012,10.1109/icgec.2012.68,Applying Software Effort Estimation Model Based on Work Breakdown Structure,TF-FC,L0,added
+1519ac67,2026,10.1007/978-3-032-04186-9_9,Approaches for Enhancing Software Development Effort Estimation: Project-Effort-Industry,TF-FC,L0,added
+3730ecc7,2023,10.1007/s10586-023-03967-2,Appropriate number of analogues in analogy based software effort estimation using quality datasets,TF-FC,L0,added
+18ed6f12,2015,10.5430/air.v4n2p45,Automated selection of a software effort estimation model based on accuracy and uncertainty,TF-FC,L0,added
+79eac7e5,2012,10.1145/2384716.2384774,Automated trendline generation for accurate software effort estimation,TF-FC,L0,added
+52ee5271,2008,10.1109/prdc.2008.21,Bayesian Inference Approach for Probabilistic Analogy Based Software Maintenance Effort Estimation,TF-FC,L0,added
+6ecc75bd,2016,10.5829/idosi.jaidm.2016.04.02.04,Bridging the semantic gap for software effort estimation by hierarchical feature selection techniques,TF-FC,L0,added
+3bd2d170,2014,10.3233/978-1-61499-434-3-1029,COCHCOMO: A Change Effort Estimation Tool for Software Development Phase,TF-FC,L0,added
+4deba73b,2003,10.1023/a:1025809010217,COCOMO-Based Effort Estimation for Iterative and Incremental Software Development,TF-FC,L0,added
+a13cfb0c,2014,10.1142/9789814619998_0106,COMPARING THE PERFORMANCE OF RBFN NETWORKS BASED SOFTWARE EFFORT ESTIMATION MODELS,TF-FC,L0,added
+5593f550,2012,10.1145/2365324.2365334,Can cross-company data improve performance in software effort estimation?,TF-FC,L0,added
+a7f05329,2025,10.1007/978-3-031-88188-6_5,Case Studies: Machine Learning Approaches for Software Development Effort Estimation,TF-FC,L0,added
+570f73d4,1990,,Case-Based Reasoning in Software Effort estimation.,TF-FC,L0,added
+e31c5676,2017,10.1007/s00500-017-2985-9,Case-based reasoning with optimized weight derived by particle swarm optimization for software effort estimation,TF-FC,L0,added
+ec78a5a5,2019,10.1109/access.2019.2891878,Categorical Variable Segmentation Model for Software Development Effort Estimation,TF-FC,L0,added
+bc57ea5b,2011,10.5220/0003560600180027,Circumstantial-evidence-based Judgment for Software Effort Estimation,TF-FC,L0,added
+ddc8cc8c,2013,10.1109/icacci.2013.6637167,Class point approach for software effort estimation using soft computing techniques,TF-FC,L0,added
+04867778,2026,10.5753/cibse.2026.42453,Classifier Ensembles for Software Development Team Effort Estimation: A Rapid Systematic Literature Review,TF-FC,L0,added
+00bcab81,2023,10.1109/icse-companion58688.2023.00090,Closing the Loop for Software Remodularisation - REARRANGE: An Effort Estimation Approach for Software Clustering-based Remodularisation,TF-FC,L0,added
+1fb6e8b4,2022,10.1007/978-981-19-5292-0_5,Comparative Analysis of Ensemble Models for Software Effort Estimation,TF-FC,L0,added
+024714bf,2022,10.1007/978-981-19-0252-9_7,Comparative Analysis of Machine Learning Techniques for Software Effort Estimation,TF-FC,L0,added
+6887dcec,2023,10.1109/icraie59459.2023.10468186,Comparative Analysis of Regression Techniques for Software Effort Estimation,TF-FC,L0,added
+a1f34a25,2024,10.5220/0013072300003838,Comparative Analysis of Single and Ensemble Support Vector Regression Methods for Software Development Effort Estimation,TF-FC,L0,added
+1bfc6bec,2012,10.5120/7479-0540,Comparative Analysis of Software Effort Estimation Techniques,TF-FC,L0,added
+2034a3b5,2020,10.2139/ssrn.3565813,Comparative Analysis on Prediction of Software Effort Estimation Using Machine Learning Techniques,TF-FC,L0,added
+9793ac79,2020,10.2139/ssrn.3565822,Comparative Analysis on Prediction of Software Effort Estimation Using Machine Learning Techniques,TF-FC,L0,added
+091fb8d2,2026,10.28991/hij-2026-07-03-022,Comparative Evaluation of LSTM-Based Deep Learning Models for Software Effort Estimation,TF-FC,L0,added
+a7082664,2010,10.1109/icetet.2010.22,Comparative Study of Various Regression Methods for Software Effort Estimation,TF-FC,L0,added
+d4b25a7b,2021,10.1145/3475960.3475986,Comparative study of random search hyper-parameter tuning for software effort estimation,TF-FC,L0,added
+30769647,2007,10.1109/esem.2007.45,Comparing Local and Global Software Effort Estimation Models -- Reflections on a Systematic Review,TF-FC,L0,added
+c89287f2,2006,10.1109/icmit.2006.262302,Comparison and Assessment of Improved Grey Relation Analysis for Software Development Effort Estimation,TF-FC,L0,added
+1e0b13ad,2022,,Comparison between the pre-trained models GPT-3 and BERT in software effort estimation by analogy from text requeriments,TF-FC,L0,added
+2ec898ed,2018,10.14419/ijet.v7i4.6.21195,Comparison of hard limiting and soft computing methods for predicting software effort estimation: In reference to Small Scale Visualization Projects,TF-FC,L0,added
+53bae4bf,2018,10.14419/ijet.v7i4.6.20715,Comparison of hard limiting and soft computing methods for predicting software effort estimation: In reference to Small Scale Visualization Projects,TF-FC,L0,added
+908c0a55,2023,10.1063/5.0128433,Comparison of machine learning algorithm and feature selection particle swarm optimization on software effort estimation,TF-FC,L0,added
+9337fa05,2018,10.1109/siu.2018.8404495,Comparison of machine learning methods for software project effort estimation,TF-FC,L0,added
+5c86719e,2011,10.1145/2020976.2020982,"Comparison of regression model, feed-forward neural network and radial basis neural network for software development effort estimation",TF-FC,L0,added
+4f3ac568,2010,10.1007/s11219-010-9110-y,Comparison of weighted grey relational analysis for software effort estimation,TF-FC,L0,added
+c56db11b,2018,10.22214/ijraset.2018.5171,Comprehensive Analysis of Effort Estimation in Software Development,TF-FC,L0,added
+a175c5ee,2025,10.5120/ijca2025924523,"Comprehensive Analysis of Software Effort Estimation Techniques: Evolving Trends, Key Challenges, and Prospective Directions",TF-FC,L0,added
+4338a60f,2024,10.1007/978-3-031-55048-5_16,Considering Multiplicative Noise in a Software Reliability Growth Model Using Stochastic Differential Equation Approach,TF-ST,L0,added
+2bc341c0,2010,10.4304/jetwi.2.4.282-290,Constraint-Based Recommendation for Software Project Effort Estimation,TF-FC,L0,added
+32aacfa7,2011,10.1016/j.infsof.2011.07.001,Contrasting ideal and realistic conditions as a means to improve judgment-based software development effort estimation,TF-FC,L0,added
+ccca55c1,2018,10.1007/s00542-018-3871-9,Cuckoo search based hybrid models for improving the accuracy of software effort estimation,TF-FC,L0,added
+ba401e38,2019,10.1109/snpd.2019.8935841,Data Smoothing for Software Effort Estimation,TF-FC,L0,added
+c32a03d0,2020,10.1002/smr.2258,Data‐driven benchmarking in software development effort estimation: The few define the bulk,TF-FC,L0,added
+52756657,2010,,Design of Radial Basis Function Neural Networks for Software Effort Estimation,TF-FC,L0,added
+60a31790,2017,10.1109/clei.2017.8226469,Design of software effort estimation models an approach based on linear genetic programming,TF-FC,L0,added
+a2d3ea2d,2007,10.1016/j.ijforecast.2007.05.011,Difficulty and complexity as factors in software effort estimation,TF-FC,L0,added
+fc04d830,2021,10.14569/ijacsa.2021.0120694,Discrete Time-Space Stochastic Mathematical Modelling for Quantitative Description of Software Imperfect Fault-Debugging with Change-Point,TF-ST,L0,added
+eb976a67,2022,10.48550/arxiv.2207.01705,Do Not Take It for Granted: Comparing Open-Source Libraries for Software Development Effort Estimation,TF-FC|TF-MSR,L0,added
+6a71c8cc,2009,10.1109/iscis.2009.5291873,Domain specific phase by phase effort estimation in software projects,TF-FC,L0,added
+edd4c661,2008,10.1145/1453101.1453148,ENNA: software effort estimation using ensemble of neural networks with associative memory,TF-FC,L0,added
+931555f2,2023,10.30696/jac.xvii.1.2023.41-46,ENSEMBLE MACHINE LEARNING AND SOFTWARE DEVELOPMENT EFFORT ESTIMATION,TF-FC,L0,added
+9334b926,2016,10.14445/22315381/ijett-v35p254,Early Phase Software Effort Estimation Model: A Review,TF-FC,L0,added
+c91d8906,2016,10.1109/cdan.2016.7570914,Early phase software effort estimation model,TF-FC,L0,added
+c195758e,2013,10.5120/12130-8506,Effect of Data Preprocessing on Software Effort Estimation,TF-FC,L0,added
+d8fc6aba,2008,10.1109/rivf.2008.4586364,Effects of software process maturity on COCOMO II’s effort estimation from CMMI perspective,TF-FC,L0,added
+b94c32dd,2012,10.5121/ijmit.2012.4303,Efficient Indicators to Evaluate the Status of Software Development Effort Estimation inside the Organizations,TF-FC,L0,added
+9c546e13,2015,,Effort Estimation Factors for Corrective Software Maintenance Projects: A Qualitative Analysis of Estimation Criteria,TF-FC,L0,added
+e389b141,2016,,Effort Estimation Methods in Software Development Using Machine Learning Algorithms,TF-FC,L0,added
+e8241a91,2020,10.1109/incet49848.2020.9154073,Effort Estimation Model for an Enterprise Software Upgrade,TF-FC,L0,added
+97d0c37f,2020,10.1109/icomet48670.2020.9073823,Effort Estimation Problems in Software Maintenance – A Survey,TF-FC,L0,added
+cef0d2f7,2014,,Effort Estimation Techniques used Techniques used Techniques used Techniques used in in Software Project Software Project Software Project Software Projects s s s,TF-FC,L0,added
+08c8604c,2016,10.1109/acit-csii-bcd.2016.058,Effort Estimation for Embedded Software Development Projects by Combining Machine Learning with Classification,TF-FC,L0,added
+989bc0ab,2025,,Effort Estimation in Agile Environments: An Empirical Approach to Understanding Its Application in the Software Industry,TF-FC|TF-MSR,L0,added
+7692b4f3,2010,10.1109/icgse.2010.22,Effort Estimation in Global Software Development Projects: Preliminary Results from a Survey,TF-FC,L0,added
+fb83f759,2024,10.1109/cimps65195.2024.11095950,Effort Estimation in Insourcing Agile Software Development by a Game Theoretical Framework,TF-FC|TF-MSR,L0,added
+a16b863d,2014,10.1007/978-3-319-11629-7_1,Effort Estimation in Software Cost Using Team Characteristics Based on Fuzzy Analogy Method – A Diverse Approach,TF-FC,L0,added
+df4c6ef6,2019,10.5815/ijisa.2019.01.04,Effort Estimation of Back-end Part of Software using Chaotically Modified Genetic Algorithm,TF-FC,L0,added
+a62b80dc,2022,10.1109/ocit56763.2022.00028,Effort Estimation of Software products by using UML Sequence models with Regression Analysis,TF-FC,L0,added
+1703f629,2002,10.1145/568760.568831,Effort estimation for corrective software maintenance,TF-FC,L0,added
+438b86a0,2017,10.2298/csis160229007w,Effort estimation in global software development - a systematic review,TF-FC,L0,added
+22670b24,2016,10.1109/cdan.2016.7570916,Effort estimation models using evolutionary learning algorithms for software development,TF-FC,L0,added
+26b762ac,2014,,Effort estimation of software projects using artificial intelligence techniques,TF-FC,L0,added
+11258fed,2005,10.1145/1062455.1062516,Effort estimation of use cases for incremental large-scale software development,TF-FC,L0,added
+48275fa8,2005,10.1109/icse.2005.1553573,Effort estimation of use cases for incremental large-scale software development,TF-FC,L0,added
+0cb156c2,2020,10.1587/transinf.2019edp7150,Empirical Evaluation of Mimic Software Project Data Sets for Software Effort Estimation,TF-FC,L0,added
+8cb831d9,2014,10.9790/0661-16193438,Empirical Evaluation of machine learning techniques for software effort estimation,TF-FC,L0,added
+74a9a45a,2005,10.1109/metrics.2005.19,Empirical Studies of Software Cost Estimation: Training of Effort Estimation Uncertainty Assessment Skills,TF-FC,L0,added
+a8b7ed5a,2013,10.1155/2013/312067,Empirical Study of Homogeneous and Heterogeneous Ensemble Models for Software Development Effort Estimation,TF-FC,L0,added
+5694f6fa,2017,10.1145/3019612.3019905,Empirical evaluation of fuzzy analogy for software development effort estimation,TF-FC,L0,added
+b2de3ab5,2019,10.1109/icssit46314.2019.8987841,Enhanced Process Model and Analysis of Risk Integration in Software effort estimation,TF-FC,L0,added
+a831d69b,2024,10.1109/access.2024.3399060,Enhancing Software Effort Estimation With Self-Organizing Migration Algorithm: A Comparative Analysis of COCOMO Models,TF-FC,L0,added
+203fc0c2,2024,10.1109/dchpc60845.2024.10454085,Enhancing Software Effort Estimation with Ant Colony Optimization Algorithm and Fuzzy-Neural Networks,TF-FC,L0,added
+ddea72fe,2025,10.1109/iciss63372.2025.11076303,Enhancing Software Effort Estimation with Machine and Deep Learning Strategies,TF-FC,L0,added
+90ce201c,2023,10.1109/ikt62039.2023.10433026,Enhancing Software Effort Estimation with an Integrated Approach of Particle Swarm Optimization and Genetic Algorithms in Analogy-based Method,TF-FC,L0,added
+9c106106,2025,10.61356/smij.2025.12564,Enhancing Software Effort Estimation: A Comparative Analysis of Machine Learning Models with Correlation-Based Feature Selection,TF-FC,L0,added
+c4ee9244,2025,10.1109/emergin67762.2025.11450870,Enhancing Software Project Management with Machine Learning: A Performance Analysis of Effort Estimation Models,TF-FC,L0,added
+832e667e,2024,10.1109/conit61985.2024.10626442,Enhancing Software Test Effort Estimation using Ensemble Learning Algorithms,TF-FC,L0,added
+3ebf579d,2024,10.1080/0954898x.2024.2376703,Enhancing effort estimation in global software development using a unique combination of Neuro Fuzzy Logic and Deep Learning Neural Networks (NFDLNN),TF-FC,L0,added
+3e3ff47d,2025,10.1038/s41598-025-14372-7,Enhancing software effort estimation with random forest tuning and adaptive decision strategies,TF-FC,L0,added
+91e99830,2023,10.1109/synasc61333.2023.00051,Enhancing the performance of software effort estimation through boosting ensemble learning,TF-FC,L0,added
+a8708440,2023,10.14201/adcaij.31206,Ensemble Learning Approach for Effective Software Development Effort Estimation with Future Ranking,TF-FC,L0,added
+9370da82,2022,10.1007/978-981-16-9416-5_46,Ensemble Model of Machine Learning for Integrating Risk in Software Effort Estimation,TF-FC,L0,added
+e5a30f8f,2020,10.1145/3437120.3437307,Ensemble Software Development Effort Estimation Using Data Envelopment Analysis,TF-FC,L0,added
+7642faee,2024,10.1007/s10586-024-04858-w,Ensembling Harmony Search Algorithm with case-based reasoning for software development effort estimation,TF-FC,L0,added
+6b273691,2014,10.5220/0005002600260035,Estimators Characteristics and Effort Estimation of Software Projects,TF-FC,L0,added
+6870a8ba,2023,10.1109/access.2023.3329369,Evaluating Kernel Functions in Software Effort Estimation: A Comparative Study of Moving Window and Spectral Clustering Models Across Diverse Datasets,TF-FC,L0,added
+62a3c724,2024,10.1007/978-3-031-70300-3_30,Evaluating Mean Squared Error as a Fitness Function in SOMA for Software Effort Estimation: Insights from the NASA Dataset,TF-FC,L0,added
+4ee1a8dd,2017,10.1002/smr.1925,Evaluating Pred(p) and standardized accuracy criteria in software development effort estimation,TF-FC,L0,added
+a20d9dec,2018,10.1002/smr.2117,Evaluating filter fuzzy analogy homogenous ensembles for software development effort estimation,TF-FC,L0,added
+d6a2c9f7,2020,10.1145/3416508.3417121,Evaluating hyper-parameter tuning using random search in support vector machines for software effort estimation,TF-FC,L0,added
+81397cc5,2025,10.47065/bit.v6i2.2027,Evaluation Of COCOMO Model Accuracy In Software Effort Estimation,TF-FC,L0,added
+aca3e95b,2025,10.1109/ic3ecsbhi63591.2025.10991190,Evaluation of Software Development Effort Estimation via Computational Intelligence,TF-FC,L0,added
+6f697869,2014,10.1145/2659118.2659141,Evaluation of neural networks for software development effort estimation using a new criterion,TF-FC,L0,added
+bd831ab6,2017,10.5121/ijcsit.2017.9211,Evolutionary Computing Techniques for Software Effort Estimation,TF-FC,L0,added
+65d6ff16,2020,10.1504/ijcaet.2020.107445,Evolutionary neural network classifiers for software effort estimation,TF-FC,L0,added
+009af547,2013,10.14569/ijarai.2013.021207,Evolving Software Effort Estimation Models Using Multigene Symbolic Regression Genetic Programming,TF-FC,L0,added
+9629d7e4,2018,10.1145/3185089.3185137,Extending Function Point Analysis Effort Estimation Method for Software Development Phase,TF-FC,L0,added
+203ec332,2013,,Extending change impact analysis approach for change effort estimation in the software development phase,TF-FC,L0,added
+2ac6a54f,2020,10.1109/scse49731.2020.9313007,Extending use-case point-based software effort estimation for Open Source freelance software development,TF-FC|TF-MSR,L0,added
+da19fc3d,2021,10.1109/access.2021.3091313,Extreme Learning Machine Applied to Software Development Effort Estimation,TF-FC,L0,added
+9eff3fd0,2006,10.1016/j.infsof.2006.09.006,Factors affecting duration and effort estimation errors in software development projects,TF-FC,L0,added
+32a1c395,2019,10.35940/ijrte.c5602.098319,Feature Engineering for Enhanced Model Performance in Software Effort Estimation,TF-FC,L0,added
+9f6781fc,2019,10.1007/978-3-030-30577-2_15,Feature Selection Technique for Effective Software Effort Estimation Using Multi-Layer Perceptrons,TF-FC,L0,added
+3f2701d8,2025,10.1109/sita67914.2025.11273197,Feature Selection in Artificial Neural Network-Based Software Development Effort Estimation: A Systematic Mapping Study,TF-FC,L0,added
+a621685d,2024,10.11591/eei.v13i2.5531,Feature importance for software development effort estimation using multi level ensemble approaches,TF-FC,L0,added
+cd0d0a90,2026,10.1063/5.0318133,Feature selection and distance metric comparison of the k-nearest neighbor algorithm on large software effort estimation datasets,TF-FC,L0,added
+3cd37c66,2018,10.1007/s10586-018-1884-x,Feature selection for software effort estimation with localized neighborhood mutual information,TF-FC,L0,added
+7f7591d0,2014,10.1145/2601248.2613081,Feature weighting for case-based reasoning software project effort estimation,TF-FC,L0,added
+c50ffd51,2014,10.1145/2639490.2639508,Feature weighting techniques for CBR in software effort estimation studies: a review and empirical evaluation,TF-FC,L0,added
+76c610d5,2016,10.1109/apsec.2016.035,Filter-INC: Handling Effort-Inconsistency in Software Effort Estimation Datasets,TF-FC,L0,added
+53c06c4c,2010,10.1109/compsac.2010.56,Filtering of Inconsistent Software Project Data for Analogy-Based Effort Estimation,TF-FC,L0,added
+fea062b9,2023,10.1007/978-3-031-37963-5_35,Finding Suitable Data Mining Techniques for Software Development Effort Estimation,TF-FC,L0,added
+076d92c4,2012,10.1049/ic.2012.0028,First impressions in software development effort estimation: easy to create and difficult to neutralize,TF-FC,L0,added
+52a6ac1d,2021,10.30595/juita.v9i2.10511,Flower Pollination Algorithm for Software Effort Coefficients Optimization to Improve Effort Estimation Accuracy,TF-FC,L0,added
+36f95281,2024,10.1016/j.jksuci.2024.102189,Framework to improve software effort estimation accuracy using novel ensemble rule,TF-FC,L0,added
+d7bc3e1a,2011,10.1007/978-3-642-20573-6_36,Fuzzy Based PSO for Software Effort Estimation,TF-FC,L0,added
+0dbf542b,2019,10.14569/ijacsa.2019.0100465,Fuzzy Delphi Method for Evaluating HyTEE Model (Hybrid Software Change Management Tool with Test Effort Estimation),TF-FC,L0,added
+c0f6c7bd,2009,10.1007/s10664-009-9113-0,Fuzzy grey relational analysis for software effort estimation,TF-FC,L0,added
+3e19e5b7,2010,,GA Based Optimization of Software Development Effort Estimation,TF-FC,L0,added
+36ada7be,2010,10.1016/j.infsof.2010.05.009,GA-based method for feature selection and parameters optimization for machine learning regression applied to software effort estimation,TF-FC,L0,added
+14bd5a7f,2014,10.1007/978-81-322-2119-7_107,General Regression Neural Network for Software Effort Estimation of Small Programs Using a Single Variable,TF-FC,L0,added
+9d1656c1,2025,10.1016/j.sciaf.2025.e03156,Generative adversarial networks-based software development effort estimation for small datasets,TF-FC,L0,added
+d06a1c60,2025,10.1109/cec65147.2025.11042977,Grammar-based Evolutionary Approaches for Software Effort Estimation,TF-FC,L0,added
+19f6b59f,2007,10.1109/icmlc.2007.4370377,Grey Learning Based Software Stage-Effort Estimation,TF-FC,L0,added
+986ed4b1,2011,10.1109/mc.2011.315,Guidelines for Software Development Effort Estimation,TF-FC,L0,added
+3f5f23a9,2011,10.1109/bic-ta.2011.8,Halton Based Initial Distribution in Artificial Bee Colony Algorithm and Its Application in Software Effort Estimation,TF-FC,L0,added
+aef9dbee,2012,10.4018/jncr.2012040105,Halton Based Initial Distribution in Artificial Bee Colony Algorithm and its Application in Software Effort Estimation,TF-FC,L0,added
+8e066a73,2019,10.15439/2019f222,Handling of Categorical Data in Software Development Effort Estimation: A Systematic Mapping Study,TF-FC,L0,added
+b6208d7a,2023,10.1109/access.2023.3256533,Heterogeneous Ensemble Model to Optimize Software Effort Estimation Accuracy,TF-FC,L0,added
+93f4daf3,2011,10.1007/978-3-642-23716-4_28,How Multi-Objective Genetic Programming Is Effective for Software Development Effort Estimation?,TF-FC,L0,added
+8ea2246c,2013,10.1145/2486046.2486051,How to treat timing information for software effort estimation?,TF-FC,L0,added
+3e382653,2026,10.5753/cibse.2026.42458,Hybrid Model for Improving the Accuracy of Software Development Team Effort Estimation with Genetic Algorithm-Optimized Regression Ensembles,TF-FC,L0,added
+214efe16,2012,,Hybrid Neuro-Fuzzy Systems for Software Development Effort Estimation,TF-FC,L0,added
+2dfe2c91,2016,10.12928/telkomnika.v14i1.2812,Hybridizing PSO With SA for Optimizing SVR Applied to Software Effort Estimation,TF-FC,L0,added
+ab4bbb63,2021,10.1007/978-3-030-72660-7_56,Hyper-Parameter Tuning of Classification and Regression Trees for Software Effort Estimation,TF-FC,L0,added
+eb2243dd,2021,10.23919/cisti52073.2021.9476459,Hyper-parameter Tuning using Genetic Algorithms for Software Effort Estimation,TF-FC,L0,added
+6ea37913,2024,10.1109/iciteics61368.2024.10625522,Hyperparameter Tuning and Validation of Neural Network Model for Software Effort Estimation with NCA Based Feature Selection,TF-FC,L0,added
+752d548f,2024,10.33998/mediasisfo.2024.18.2.1985,ICONIX Process Pada Arsitektur Zend Framework 3 (Software Effort Estimation) Menggunakan Case Based Reasoning,TF-FC,L0,added
+fe09a77e,2014,10.1145/2652524.2652550,ISBSG variables most frequently used for software effort estimation: a mapping review,TF-FC,L0,added
+632586c5,2007,10.1109/esem.2007.10,Impact Analysis of Missing Values on the Prediction Accuracy of Analogy-based Software Effort Estimation Method AQUA,TF-FC,L0,added
+01c715f4,2008,10.1007/978-3-540-69566-0_9,Impact of Base Functional Component Types on Software Functional Size Based Effort Estimation,TF-FC,L0,added
+b594fa65,2009,10.1109/tse.2009.18,Impact of Budget and Schedule Pressure on Software Development Cycle Time and Effort,TF-FC,L0,added
+1cd3c3f0,2010,,Impact of CMMI-Based Software Process Maturity on COCOMO II s Effort Estimation,TF-FC,L0,added
+a7346c1d,2015,10.4236/jsea.2015.86028,Impact of Modification Made in Re-UCP on Software Effort Estimation,TF-FC,L0,added
+c94e61ca,2024,10.1002/spe.3333,Impact of competence on agile effort estimation in academic setting,TF-FC|TF-MSR,L0,added
+ad1c626a,2016,10.48550/arxiv.1612.03240,Impacts of Bad ESP (Early Size Predictions) on Software Effort Estimation,TF-FC,L0,added
+5fc630db,2014,,Implementation of Prediction Model for Object Oriented Software Development Effort Estimation using One Hidden Layer Neural Network,TF-FC,L0,added
+d43051f3,2009,10.1109/apsec.2009.40,Improve Analogy-Based Software Effort Estimation Using Principal Components Analysis and Correlation Weighting,TF-FC,L0,added
+e84a95f4,2023,10.1016/j.infsof.2023.107157,Improved measurement of software development effort estimation bias,TF-FC,L0,added
+5357188e,2010,10.1109/icsm.2010.5609554,Improved size and effort estimation models for software maintenance,TF-FC,L0,added
+ebf27b98,2016,,Improvement of effort estimation accuracy in software projects using a feature selection approach,TF-FC,L0,added
+ca6ae0ac,2017,10.23919/cisti.2017.7975928,Improvement proposal of the effort estimation in software projects using use case points,TF-FC,L0,added
+7129d07c,2018,10.1007/978-3-319-91186-1_46,Improving Case Based Software Effort Estimation Using a Multi-criteria Decision Technique,TF-FC,L0,added
+b5349418,2018,10.1109/ceit.2018.8751811,Improving Case Based Software Effort Estimation by an Ant Colony Algorithm,TF-FC,L0,added
+950a0448,2025,10.1007/978-981-96-5214-3_17,Improving Data Quality with Miss Forest Imputation Techniques for Software Effort Estimation,TF-FC,L0,added
+df9a3f24,2007,10.1109/apsec.2007.63,Improving Effort Estimation Accuracy by Weighted Grey Relational Analysis During Software Development,TF-FC,L0,added
+e9d3ec8a,2007,10.1109/aspec.2007.62,Improving Effort Estimation Accuracy by Weighted Grey Relational Analysis During Software Development,TF-FC,L0,added
+30ff5eac,2009,10.1155/2009/829725,Improving Effort Estimation by Voting Software Estimation Models,TF-FC,L0,added
+1282204f,2014,10.1109/apsec.2014.46,Improving Fuzzy Analogy Based Software Development Effort Estimation,TF-FC,L0,added
+c75b7dca,2025,10.1109/ict4da67218.2025.11281974,Improving Object Point Software Effort Estimation Using a Deep Learning Approach,TF-FC,L0,added
+8d5ed3d3,2022,10.1287/inte.2022.1138,Improving Software Development Effort Estimation with a Novel Design Pattern Model,TF-FC,L0,added
+bcf3c5f4,2024,10.5120/ijca2024924349,Improving Software Effort Estimation Accuracy with a Kalman Filter-Driven Ensemble Model,TF-FC,L0,added
+e85ecba6,2023,10.1109/access.2023.3340140,Improving Software Effort Estimation Models Using Grey Wolf Optimization Algorithm,TF-FC,L0,added
+f4801063,2026,10.30871/jaic.v10i4.13378,Improving Software Effort Estimation Through Feature Selection and Optimized SVR,TF-FC,L0,added
+164bff33,2015,10.48550/arxiv.1507.06917,Improving Software Effort Estimation Using Neuro-Fuzzy Model with SEER-SEM,TF-FC,L0,added
+5b785106,2024,10.1109/fit63703.2024.10838423,Improving Software Effort Estimation by Adjusting for Over-Commitment,TF-FC,L0,added
+70f123fd,2023,10.1007/978-3-031-36402-0_41,Improving Software Effort Estimation with Heterogeneous Stacked Ensemble Using SMOTER over ELM and SVR Base Learners,TF-FC,L0,added
+37f008b1,2008,10.1145/1370788.1370805,Improving analogy software effort estimation using fuzzy feature subset selection algorithm,TF-FC,L0,added
+2bb1cf31,2022,10.3233/idt-210110,Improving effort estimation of software products by augmenting class point approach with regression analysis,TF-FC,L0,added
+467b072b,2021,10.1016/j.scico.2021.102621,Improving software effort estimation using bio-inspired algorithms to select relevant features: An empirical study,TF-FC,L0,added
+d12bfa4c,2009,10.1109/apsec.2009.57,Improving the Accuracy of Software Effort Estimation Based on Multiple Least Square Regression Models by Estimation Error-Based Data Partitioning,TF-FC,L0,added
+264019f3,2013,10.1109/soli.2013.6611406,Improving the accuracy in software effort estimation: Using artificial neural network model based on particle swarm optimization,TF-FC,L0,added
+f2ba79cc,2007,10.1109/qsic.2007.4385518,"Increasing Software Effort Estimation Accuracy Using Experience Data, Estimation Models and Checklists",TF-FC,L0,added
+489b63cb,2012,10.1049/iet-sen.2011.0210,Increasing the accuracy of software development effort estimation using projects clustering,TF-FC,L0,added
+237c908d,2025,10.4236/jsea.2025.188018,Industrial Software Effort Estimation Development and Correction Effort,TF-FC,L0,added
+e01b1ee1,2016,10.1109/icis.2016.7550865,Influence of outliers on analogy based software development effort estimation,TF-FC,L0,added
+f126adac,2024,10.1016/j.joitmc.2024.100228,Innovation by integration of Drum-Buffer-Rope (DBR) method with Scrum-Kanban and use of Monte Carlo simulation for maximizing throughput in agile project management,TF-ST|TF-MSR,L0,added
+ce72fe95,2014,10.1007/s11334-014-0242-2,Insightful analogy-based software development effort estimation through selective classification and localization,TF-FC,L0,added
+b1ed1df3,2022,10.1007/s13198-022-01652-y,Integrating software effort estimation with risk management,TF-FC,L0,added
+228961c5,2007,10.1016/j.ejor.2007.07.002,Integration of the grey relational analysis with genetic algorithm for software effort estimation,TF-FC,L0,added
+7afcd1b2,2011,10.1109/iwsm-mensura.2011.41,Internal and External Software Benchmark Repository Utilization for Effort Estimation,TF-FC|TF-MSR,L0,added
+febd37cc,2017,10.1145/3143434.3143456,Investigating heterogeneous ensembles with filter feature selection for software effort estimation,TF-FC,L0,added
+d6475c64,2021,10.52866/ijcsm.2021.02.02.003,Investigating the Use of an Adaptive Neuro-Fuzzy Inference System in Software Development Effort Estimation,TF-FC,L0,added
+3d174d69,2011,10.1117/12.920303,Investigating the effect of software project type on accuracy of software development effort estimation in COCOMO model,TF-FC,L0,added
+a7ff3f61,2009,10.1049/iet-sen.2008.0107,Investigating the use of chronological split for software effort estimation,TF-FC,L0,added
+16656db3,2021,10.1007/s00766-021-00351-7,Is it possible to disregard obsolete requirements? a family of experiments in software effort estimation,TF-FC,L0,added
+181f6213,2002,10.1109/pccc.1995.472476,Issues in software cycle time reduction,TF-FC,L0,added
+b5edbc66,2026,10.1002/smr.70175,KAN‐SEE (Kolmogorov–Arnold Networks for Software Effort Estimation): A Function‐Based Extension of COCOMO,TF-FC,L0,added
+a2cf047c,2020,10.33365/jti.v14i2.647,KOMBINASI MEDIAN WEIGHTED INFORMATION GAIN DENGAN K-NEAREST NEIGHBOR PADA DATASET LABEL MONTHS SOFTWARE EFFORT ESTIMATION,TF-FC,L0,added
+5f6ef939,2019,10.36448/jsit.v10i2.1314,KOMPARASI METODE KOMBINASI SELEKSI FITUR DAN MACHINE LEARNING K-NEAREST NEIGHBOR PADA DATASET LABEL HOURS SOFTWARE EFFORT ESTIMATION,TF-FC,L0,added
+14ddbda5,2018,10.1109/apsec.2018.00065,Kurtosis and Skewness Adjustment for Software Effort Estimation,TF-FC,L0,added
+9611503c,2015,10.1587/transinf.2015edp7237,LSA-X: Exploiting Productivity Factors in Linear Size Adaptation for Analogy-Based Software Effort Estimation,TF-FC,L0,added
+0a594f6b,2026,10.1007/s00766-026-00463-y,Large language models for agile effort estimation: a post-mortem study incorporating developer experience and optimism,TF-FC|TF-MSR,L0,added
+2f74eda5,2021,10.1109/icccnt51525.2021.9579968,Learning Automata based Feature Selection for Duplex Output Software Effort Estimation Model,TF-FC,L0,added
+c63395c8,2017,10.48550/arxiv.1703.04567,Learning best K analogies from data distribution for case-based software effort estimation,TF-FC,L0,added
+971ee8d0,2016,10.1109/icraie.2016.7939524,Least Square Support Vector Machine in Analogy-Based software development effort estimation,TF-FC,L0,added
+dcc44897,2018,10.14569/ijacsa.2018.090972,Level of Confidence in Software Effort Estimation by an Intelligent Fuzzy – Neuro - Genetic Approach,TF-FC,L0,added
+937705ca,2010,10.1007/s11227-010-0525-9,Linear combination of multiple case-based reasoning with optimized weight for software effort estimation,TF-FC,L0,added
+3a0d3e8f,2021,10.1016/j.scico.2021.102744,Locally weighted regression with different kernel smoothers for software effort estimation,TF-FC,L0,added
+5c322411,2011,,METHODS OF EFFORT ESTIMATION IN SOFTWARE ENGINEERING,TF-FC,L0,added
+592cce84,2025,10.1109/cictn64563.2025.10932601,Machine Learning based Effort Estimation Models for Software Development Projects related Datasets with diverse features,TF-FC,L0,added
+cf61d53e,2022,10.5121/csit.2022.120607,Measurement of Software Development Effort Estimation Bias: Avoiding Biased Measures of Estimation Bias,TF-FC,L0,added
+e39da9c5,2020,10.1109/ectidamtncon48261.2020.9090722,Meta Learning and Software Effort Estimation,TF-FC,L0,added
+9a2b3f67,2019,10.1007/978-3-030-33582-3_107,Missing Data Imputation Techniques for Software Effort Estimation: A Study of Recent Issues and Challenges,TF-FC,L0,added
+ce92cc23,2011,10.1109/cit.2011.48,Model Tree Based Adaption Strategy for Software Effort Estimation by Analogy,TF-FC,L0,added
+70c7203e,2014,10.1109/softcom.2014.7039106,Modeling expert effort estimation of software projects,TF-FC,L0,added
+5d242a91,2022,10.1007/s41870-022-00962-5,Modeling of software project effort estimation: a comparative performance evaluation of optimized soft computing-based methods,TF-FC,L0,added
+3a9f3288,2026,10.1109/access.2026.3679475,Multi-Label Text Classification Using Prompting Techniques via LLMs in Software Effort Estimation,TF-FC,L0,added
+9ed217f3,2017,10.5267/j.msl.2017.3.003,Multi-criteria decision making approach for the selection of software effort estimation model,TF-FC,L0,added
+3e27d8d5,2024,10.1038/s41598-024-67197-1,Multi-kernel support vector regression with improved moth-flame optimization algorithm for software effort estimation,TF-FC,L0,added
+477393d4,2014,10.1007/978-3-319-13563-2_23,"Multi-objective Optimisation, Software Effort Estimation and Linear Models",TF-FC,L0,added
+3aed577c,2021,10.1145/3475960.3475988,Multi-stream online transfer learning for software effort estimation: is it necessary?,TF-FC,L0,added
+691474c5,2017,10.24846/v26i2y201710,Natural Language Processing and Machine Learning Methods for Software Development Effort Estimation,TF-FC,L0,added
+47de5b9b,2009,10.1109/icsmc.2009.5346380,Nearest-neighborhood linear regression in an application with software effort estimation,TF-FC,L0,added
+4634263a,2012,,Neural Net Back Propagation and Software Effort Estimation: A comparison based perspective,TF-FC,L0,added
+769bbb49,2015,10.15224/978-1-63248-038-5-06,Neural Network Models for Agile Software Effort Estimation based on Story Points,TF-FC|TF-MSR,L0,added
+0ab0a53e,2010,10.7763/ijcte.2010.v2.109,Neural Network-A Novel Technique for Software Effort Estimation,TF-FC,L0,added
+2b497476,2015,10.5120/ijca2015907052,Neural Network: A better Approach for Software Effort Estimation,TF-FC,L0,added
+15b3a419,2021,10.5220/0010603700002992,Neural Networks based Software Development Effort Estimation: A Systematic Mapping Study,TF-FC,L0,added
+207071d5,2024,10.1002/smr.2756,Neural Networks‐Based Software Development Effort Estimation: A Systematic Literature Review,TF-FC,L0,added
+0132f840,2011,10.1109/iccct.2011.6075192,Neural network based software effort estimation & evaluation criterion MMRE,TF-FC,L0,added
+49a98b58,2025,10.1007/s10664-025-10735-w,"No silver bullets: Why understanding software cycle time is messy, not magic",TF-FC,L0,added
+0d0c0c27,2022,10.1109/icosec54921.2022.9952158,Novel Software Effort Estimation Method using Naive Bayes Technique,TF-FC,L0,added
+5eba4c4b,2015,10.1109/iscbi.2015.21,On Learning Software Effort Estimation,TF-FC,L0,added
+ef286e55,2016,10.1145/2972958.2972968,On the Terms Within- and Cross-Company in Software Effort Estimation,TF-FC,L0,added
+7da8dc01,2026,10.1109/iraset68627.2026.11538604,On the Use of CTGAN Data Augmentation for Enhancing MLP-based Software Development Effort Estimation using small datasets,TF-FC,L0,added
+6be6f20c,2017,10.1007/s41872-017-0009-5,Open source software cost analysis with fault severity levels based on stochastic differential equation models,TF-ST|TF-MSR,L0,added
+6a96f9c9,2023,10.17531/ein/166342,Open-source Software Reliability Modeling with Stochastic Impulsive Differential Equations,TF-ST|TF-MSR,L0,added
+e314074a,2016,10.1504/ijcat.2016.080488,Optimised class point approach for software effort estimation using adaptive neuro-fuzzy inference system model,TF-FC,L0,added
+aa5ff1ea,2018,10.5815/ijigsp.2018.09.02,Optimization of Process Parameters Using GreyTaguchi Method for Software Effort Estimation of Software Project,TF-FC,L0,added
+751c1acd,2025,10.52436/1.jutif.2025.6.6.5465,Optimization of Software Effort Estimation Using Hybrid Consistent Fuzzy Preference Relation and Least Squares Support Vector Machine,TF-FC,L0,added
+63bd2d51,2017,10.1109/icammaet.2017.8186696,Optimization of neural network for software effort estimation,TF-FC,L0,added
+8d53b814,2024,10.1109/icstsn61422.2024.10671053,Optimized Convolutional Neural Network Model for Software Effort Estimation,TF-FC,L0,added
+ffe69110,2010,10.48550/arxiv.1004.3270,Optimized Fuzzy Logic Based Framework for Effort Estimation in Software Development,TF-FC,L0,added
+b2209488,2023,10.1002/smr.2529,Optimized fuzzy clustering‐based k‐nearest neighbors imputation for mixed missing data in software development effort estimation,TF-FC,L0,added
+74b26227,2016,,Optimizing Parameters of Software Effort Estimation Models using Directed Artificial Bee Colony Algorithm,TF-FC,L0,added
+3af0904c,2026,10.1007/978-981-95-3596-5_18,Optimizing Risk Integrated Software Effort Estimation: A Differential Evolution Approach,TF-FC,L0,added
+98d6af64,2016,10.25126/jitecs.2016117,Optimizing SVR using Local Best PSO for Software Effort Estimation,TF-FC,L0,added
+a3a4c18c,2019,10.30534/ijatcse/2019/5181.52019,Optimizing Software Effort Estimation Models Based On Metaheuristic Methods: A Proposed Framework,TF-FC,L0,added
+02f7a03b,2015,10.4236/jsea.2015.83014,Optimizing Software Effort Estimation Models Using Firefly Algorithm,TF-FC,L0,added
+0c80db13,2014,10.9790/0661-162122940,Organizational Strategies and Social Interaction Influence in Software Development Effort Estimation,TF-FC,L0,added
+6bb009be,2019,10.1007/978-3-030-19807-7_43,Outliners Detection Method for Software Effort Estimation Models,TF-FC,L0,added
+ce42bc7b,2020,10.12928/telkomnika.v19i3.16907,Parameter tuning of software effort estimation models using antlion optimization,TF-FC,L0,added
+369baeae,2024,10.61487/jiste.v2i2.69,Particle Swarm Optimization-based Linear Regression for Software Effort Estimation,TF-FC,L0,added
+b42eb4db,2022,10.37859/coscitech.v3i2.3876,Penerapan Seleksi Fitur Median Weighted Information Gain dengan K-NN pada Dataset Label Hours Software Effort Estimation,TF-FC,L0,added
+09363023,2013,10.5815/ijitcs.2013.09.10,Performance Analysis of Software Effort Estimation Models Using Neural Networks,TF-FC,L0,added
+0e197650,2022,10.14569/ijacsa.2022.0131045,Performance Analysis of Software Test Effort Estimation using Genetic Algorithm and Neural Network,TF-FC,L0,added
+51887fec,2018,,Performance analysis of FCM based ANFIS and ELMAN neural network in software effort estimation.,TF-FC,L0,added
+a1642d1a,2021,10.1002/cpe.6358,Polynomial analogy‐based software development effort estimation using combined particle swarm optimization and simulated annealing,TF-FC,L0,added
+aea4d2b9,2018,10.1109/bcd2018.2018.00015,Predictability Classification for Software Effort Estimation,TF-FC,L0,added
+92657c9c,2024,10.2139/ssrn.4902731,Predicting Software Effort Estimation Using the Stacked Ensemble Machine Learning Approach,TF-FC,L0,added
+b550575e,2024,10.1007/978-3-031-47721-8_51,Predicting and Explaining Variations in Software Effort Estimation Using Adaptive Fuzzy-Neural Networks with Clustering,TF-FC,L0,added
+e36fe110,2014,10.1155/2014/284531,Prediction Model for Object Oriented Software Development Effort Estimation Using One Hidden Layer Feed Forward Neural Network with Genetic Algorithm,TF-FC,L0,added
+6069e7b2,2015,10.1186/s40064-015-1555-9,Prediction accuracy measurements as a fitness function for software effort estimation,TF-FC,L0,added
+618f6875,2018,10.1145/3172871.3172876,Preliminary Causal Discovery Results with Software Effort Estimation Data,TF-FC,L0,added
+867a8b8f,2016,10.1007/978-3-662-49851-4_11,Process Mining Software,TF-PM|TF-MSR,L0,added
+15251d5b,2018,10.1002/smr.2110,Project productivity evaluation in early software effort estimation,TF-FC,L0,added
+2c7144d6,2012,10.1007/978-3-642-32615-8_33,Proposing a Novel Artificial Neural Network Prediction Model to Improve the Precision of Software Effort Estimation,TF-FC,L0,added
+4bc22efd,2012,10.1109/cicsyn.2012.39,Proposing an Enhanced Artificial Neural Network Prediction Model to Improve the Accuracy in Software Effort Estimation,TF-FC,L0,added
+49233222,2001,10.1016/s0957-4174(01)00021-5,Quasi-optimal case-selective neural network model for software effort estimation,TF-FC,L0,added
+ab941422,2018,10.1007/s00521-018-3565-3,RETRACTED ARTICLE: Enrichment of accurate software effort estimation using fuzzy-based function point analysis in business data analytics,TF-FC,L0,added
+5eee7a36,2020,10.1007/s12652-020-02277-4,RETRACTED ARTICLE: Hyperparameters tuning of ensemble model for software effort estimation,TF-FC,L0,added
+0db68eab,2021,10.1007/978-981-16-5640-8_39,RETRACTED CHAPTER: Software Effort Estimation of Teacher Engagement Application,TF-FC,L0,added
+0bfa0e7d,2023,10.1063/5.0174699,Random forests for predicting software effort estimation based on use-case points analysis,TF-FC,L0,added
+ee7b6d6f,2015,10.5120/ijca2015906534,Re-UCP Software Effort Estimation Method: A Critical Study,TF-FC,L0,added
+375de3a2,2016,10.1145/2915970.2916005,Realistic assessment of software effort estimation models,TF-FC,L0,added
+4c183d3b,2023,10.48550/arxiv.2303.03482,Recent Advances in Software Effort Estimation using Machine Learning,TF-FC,L0,added
+386325c8,2011,10.1145/1988997.1989016,Recent methods for software effort estimation by analogy,TF-FC,L0,added
+2c44f248,2024,10.3897/jucs.110051,Recommendation of Machine Learning Techniques for Software Effort Estimation using Multi-Criteria Decision Making,TF-FC,L0,added
+f6e8c10c,2017,10.18178/wcse.2017.06.032,Redundancy Weighting for Software Effort Estimation with Case Based Reasoning,TF-FC,L0,added
+dcc5f7a2,2016,10.1142/s0218194016500261,Regression Analysis Based Software Effort Estimation Method,TF-FC,L0,added
+9f26ca4a,2011,,Regression Model for Software Effort Estimation Based on the Use Case Point Method,TF-FC,L0,added
+c03603a2,2004,10.1023/b:emse.0000039881.57613.cb,Regression Models of Software Development Effort Estimation Accuracy and Bias,TF-FC,L0,added
+f28af826,2014,10.1109/icica.2014.79,Regression Techniques in Software Effort Estimation Using COCOMO Dataset,TF-FC,L0,added
+460fa1fc,2011,10.1109/isccs.2011.113,Research on Software Effort Estimation Combined with Genetic Algorithm and Support Vector Regression,TF-FC,L0,added
+18910ceb,2011,,Reusability in Software Effort Estimation model based on Artificial Neural Network for Predicting Effort in Software Development,TF-FC,L0,added
+11ef9e59,2020,10.1007/978-3-030-63322-6_32,Review of Current Data Mining Techniques Used in the Software Effort Estimation,TF-FC,L0,added
+267f242f,2023,10.14569/ijacsa.2023.01407100,Review of Existing Datasets Used for Software Effort Estimation,TF-FC,L0,added
+7a242c5c,2015,10.14569/ijacsa.2015.060310,Revised Use Case Point (Re-UCP) Model for Software Effort Estimation,TF-FC,L0,added
+88b8156e,2013,10.1109/msr.2013.6624059,Revisiting software development effort estimation based on early phase development activities,TF-FC,L0,added
+46540576,2004,10.1080/07408170490507792,S-shaped software reliability growth models derived from stochastic differential equations,TF-ST,L0,added
+991a4fc8,2018,10.1145/3229783.3229805,SEET: Software Development Effort Estimation Using Ensemble Techniques,TF-FC,L0,added
+8f277ea1,2026,10.48084/etasr.15742,SELI: The Stacking-Blending Ensemble Learning and Interpretability Framework for Software Effort Estimation,TF-FC,L0,added
+b58bf16e,2012,10.1080/18756891.2012.718118,SEffEst: Effort estimation in software projects using fuzzy logic and neural networks,TF-FC,L0,added
+09c29b4b,2026,10.3390/info17050431,SHAP-Value-Weighted Case-Based Reasoning Model with Improved Mixup Data Augmentation for Software Effort Estimation,TF-FC,L0,added
+d6d61646,2014,10.1142/s1469026814500138,SOFTWARE DEVELOPMENT EFFORT ESTIMATION USING CLASSICAL AND FUZZY ANALOGY: A CROSS-VALIDATION COMPARATIVE STUDY,TF-FC,L0,added
+e79e6fd6,2019,10.34218/ijcet.10.5.2019.001,SOFTWARE DEVELOPMENT EFFORT ESTIMATION USING SOFT COMPUTING METHODS,TF-FC,L0,added
+2a8b96f3,2008,10.1142/s0218194008003532,SOFTWARE EFFORT ESTIMATION BY ANALOGY USING ATTRIBUTE SELECTION BASED ON ROUGH SET ANALYSIS,TF-FC,L0,added
+582a391e,2015,10.21917/ijsc.2015.0149,SOFTWARE EFFORT ESTIMATION FRAMEWORK TO IMPROVE ORGANIZATION PRODUCTIVITY USING EMOTION RECOGNITION OF SOFTWARE ENGINEERS IN SPONTANEOUS SPEECH,TF-FC,L0,added
+a172dd32,2020,,SOFTWARE EFFORT ESTIMATION USING NEURO-FUZZY APPROACH BASED ON LEVEN-MARQUARDT ALGORITHM,TF-FC,L0,added
+4fc7fbfc,2014,,SOFTWARE EFFORT ESTIMATION USING RADIAL BASIS FUNCTION NEURAL NETWORKS,TF-FC,L0,added
+e49b97e8,2023,10.33965/is2023_202301l019,SOFTWARE EFFORT ESTIMATION WITH METAHEURISTIC OPTIMIZED ENSEMBLE FOR SOFTWARE CROWDSOURCING,TF-FC,L0,added
+9c955068,2019,10.5121/ijsea.2019.10302,SOFTWARE REQUIREMENT CHANGE EFFORT ESTIMATION MODEL PROTOTYPE TOOL FOR SOFTWARE DEVELOPMENT PHASE,TF-FC,L0,added
+edda2671,2013,10.15623/ijret.2013.0205003,SOFTWARE TESTING EFFORT ESTIMATION WITH COBB-DOUGLAS FUNCTION: A PRACTICAL APPLICATION,TF-FC,L0,added
+3eaa4fbe,2018,10.1109/tla.2018.8447378,Safety Critical Software Effort Estimation using COCOMO II: A Case Study in Aeronautical Industry,TF-FC,L0,added
+2528f10d,2011,10.1145/2181101.2181111,Search-based approaches for software development effort estimation,TF-FC,L0,added
+580afeeb,2020,,Selecting Suitable Software Effort Estimation Method.,TF-FC,L0,added
+5c5bc65c,2020,10.1002/smr.2271,Selecting best predictors from large software repositories for highly accurate software effort estimation,TF-FC,L0,added
+6013d8f4,2024,10.1201/9781003471059-12,Selection of effective parameters for optimizing software testing effort estimation,TF-FC,L0,added
+5f6574f2,2023,10.26634/jse.17.3.19246,Significant strategies to assess software effort estimation: A view of functional point,TF-FC,L0,added
+dfe889ba,2012,10.1145/2245276.2231968,Single and Multi Objective Genetic Programming for software development effort estimation,TF-FC,L0,added
+579522da,2018,10.1142/s0218194018500079,Size and Effort Estimation Based on Problem Domain Measures for Object-Oriented Software,TF-FC,L0,added
+46cbe525,2012,10.1145/2365324.2365336,Size doesn't matter? on the value of software size features for effort estimation,TF-FC,L0,added
+81dd5091,2013,10.48550/arxiv.1310.5221,Soft computing techniques for software effort estimation,TF-FC,L0,added
+4f3a0b5e,2025,10.1007/978-3-031-94770-4_25,Software Architecture Influence on Software Effort Estimation,TF-FC,L0,added
+d67f1905,2005,,Software Complexity Assessment using Statistical Technique: Towards Software Testing Effort Estimation.,TF-FC,L0,added
+f1be5299,2022,10.1109/csase51777.2022.9759751,Software Development Effort Estimation Techniques Using Long Short Term Memory,TF-FC,L0,added
+eb071ac6,2022,10.33899/edusj.2022.132274.1201,Software Development Effort Estimation Techniques: A Survey,TF-FC,L0,added
+23b0e415,2018,10.3233/978-1-61499-900-3-439,Software Development Effort Estimation Using Feature Selection Techniques,TF-FC,L0,added
+89fd72e8,2008,10.1109/fskd.2008.370,Software Development Effort Estimation Using Fuzzy Logic - A Survey,TF-FC,L0,added
+a9dd0444,2006,10.1109/enc.2005.47,Software Development Effort Estimation Using Fuzzy Logic: A Case Study,TF-FC,L0,added
+413f6dbf,2021,10.1109/ccge50943.2021.9776394,Software Development Effort Estimation Using Machine Learning Techniques: Multi-linear Regression versus Random Forest,TF-FC,L0,added
+8dac361c,2018,10.22266/ijies2018.1231.30,Software Development Effort Estimation Using Random Forests: An Empirical Study and Evaluation,TF-FC,L0,added
+a694e76a,2024,10.1109/ocit65031.2024.00029,Software Development Effort Estimation Using Regression Models Delve with Explainable Machine Learning (XAI),TF-FC,L0,added
+6dbfdf97,2011,10.7763/ijmlc.2012.v2.186,Software Development Effort Estimation Using Soft Computing,TF-FC,L0,added
+cbb476ba,2016,10.1109/tla.2016.7786379,Software Development Effort Estimation based-on multiple classifier system and Lines of Code,TF-FC,L0,added
+aeae5ed0,2013,10.14569/ijacsa.2013.041115,Software Development Effort Estimation by Means of Genetic Programming,TF-FC,L0,added
+c65a4709,2017,,Software Development Effort Estimation by Using Neural Networks - A Case Study,TF-FC,L0,added
+03b1e525,2020,10.1587/transinf.2019iip0014,Software Development Effort Estimation from Unstructured Software Project Description by Sequence Models,TF-FC,L0,added
+e8e53811,2011,10.1007/978-3-642-21587-2_29,Software Development Effort Estimation in Academic Environments Applying a General Regression Neural Network Involving Size and People Factors,TF-FC,L0,added
+ca97495a,2024,10.1109/icccnt61001.2024.10725750,Software Development Effort Estimation using SNS Algorithm,TF-FC,L0,added
+5e847cf3,2009,10.1007/978-3-642-01156-6_26,Software Development Effort Estimation — Demystifying and Improving Expert Estimation,TF-FC,L0,added
+bca443d4,2024,10.3390/software3040022,Software Development and Maintenance Effort Estimation Using Function Points and Simpler Functional Measures,TF-FC,L0,added
+7101b04e,2026,10.3390/info17090884,Software Development of Business Intelligence Dashboards: Empirical Study of COSMIC ISO/IEC 19761 Size-Based Effort Estimation Using Machine Learning Techniques,TF-FC,L0,added
+2fd41ca7,2020,10.1201/9781003079996-2,Software Effort Estimation,TF-FC,L0,added
+6eb8914e,2023,10.1142/s1469026823500323,Software Effort Estimation Based on Ensemble Extreme Gradient Boosting Algorithm and Modified Jaya Optimization Algorithm,TF-FC,L0,added
+1b145787,2023,10.22214/ijraset.2023.50822,Software Effort Estimation Based on Use Case Reuse (Back Propagation),TF-FC,L0,added
+78f76ab8,2006,10.1109/compsac.2006.77,Software Effort Estimation Based on Use Cases,TF-FC,L0,added
+95fbffdc,2013,10.14569/ijacsa.2013.041127,Software Effort Estimation Inspired by COCOMO and FP Models: A Fuzzy Logic Approach,TF-FC,L0,added
+800ef1a0,2018,10.5539/cis.v11n4p45,Software Effort Estimation Risk Management over Projects Portfolio,TF-FC,L0,added
+2cfeaa56,2017,10.7753/ijcatr0607.1011,Software Effort Estimation Using Adaptive Fuzzy-Neural Approach,TF-FC,L0,added
+2c7ec6c7,2012,,Software Effort Estimation Using Artificial Neural Networks,TF-FC,L0,added
+bd0d0222,2013,10.1109/itng.2013.111,Software Effort Estimation Using Artificial Neural Networks: A Survey of the Current Practices,TF-FC,L0,added
+fed24e09,2013,10.1007/978-3-319-03107-1_10,Software Effort Estimation Using Data Mining Techniques,TF-FC,L0,added
+b505b88f,2023,10.1109/icac57885.2023.10275256,Software Effort Estimation Using Deep Learning and Fuzzy Modelling,TF-FC,L0,added
+81adcdde,2013,10.1007/978-3-319-03756-1_18,Software Effort Estimation Using Functional Link Neural Networks Optimized by Improved Particle Swarm Optimization,TF-FC,L0,added
+a4d8ff91,2015,10.1007/978-3-319-20294-5_20,Software Effort Estimation Using Functional Link Neural Networks Tuned with Active Learning and Optimized with Particle Swarm Optimization,TF-FC,L0,added
+4c5b8652,2013,,Software Effort Estimation Using Fuzzy Logic: A Review,TF-FC,L0,added
+83d16044,2017,10.5815/ijitcs.2017.05.07,Software Effort Estimation Using Grey Relational Analysis,TF-FC,L0,added
+fa34b29b,2022,10.15294/sji.v10i1.39865,Software Effort Estimation Using Logarithmic Fuzzy Preference Programming and Least Squares Support Vector Machines,TF-FC,L0,added
+edffd6bd,2018,10.1515/jisys-2017-0121,Software Effort Estimation Using Modified Fuzzy C Means Clustering and Hybrid ABC-MCS Optimization in Neural Network,TF-FC,L0,added
+b9b3d835,2014,10.33899/csmj.2014.163756,Software Effort Estimation Using Multi Expression Programming,TF-FC,L0,added
+d3689e89,2012,10.1109/iwsm-mensura.2012.28,Software Effort Estimation Using NBC and SWR: A Comparison Based on ISBSG Projects,TF-FC,L0,added
+b47d62ac,2020,10.1007/978-981-15-2449-3_20,Software Effort Estimation Using Particle Swarm Optimization: Advances and Challenges,TF-FC,L0,added
+e2d3c67e,2008,10.5281/zenodo.1077822,Software Effort Estimation Using Soft Computing Techniques,TF-FC,L0,added
+68e93c57,2024,10.1007/s11277-024-11010-9,Software Effort Estimation Using Stacked Ensemble Technique and Hybrid Principal Component Regression and Multivariate Adaptive Regression Splines,TF-FC,L0,added
+43a78099,2022,10.1109/incet54531.2022.9824043,Software Effort Estimation Using Synthetic Minority Over-Sampling Technique for Regression (SMOTER),TF-FC,L0,added
+d58cff57,2026,10.1109/assic70037.2026.11717032,Software Effort Estimation Using UML Sequence Model Metrics and Machine Learning Approaches,TF-FC,L0,added
+28b6c6e9,2019,10.1007/978-3-030-21005-2_7,Software Effort Estimation Using an Optimal Trees Ensemble: An Empirical Comparative Study,TF-FC,L0,added
+d1f084f4,2007,,Software Effort Estimation and Conclusion Stability,TF-FC,L0,added
+307385ce,2006,10.1109/fuzzy.2006.1681711,Software Effort Estimation and Stock Market Prediction Using Takagi-Sugeno Fuzzy Models,TF-FC,L0,added
+02e1bb05,2010,,Software Effort Estimation as Collective Accomplishment: An analysis of estimation practice in a multi-specialist team,TF-FC,L0,added
+dbc78b51,2012,10.5120/9577-4053,Software Effort Estimation by Genetic Algorithm Tuned Parameters of Modified Constructive Cost Model for NASA Software Projects,TF-FC,L0,added
+47b0719c,2022,10.33774/coe-2022-bt2d9,Software Effort Estimation for Improved Decision Making,TF-FC,L0,added
+fe6aee24,2020,10.4018/978-1-7998-1863-2.ch003,Software Effort Estimation for Successful Software Application Development,TF-FC,L0,added
+e221e0e3,2021,10.4018/978-1-6684-3702-5.ch008,Software Effort Estimation for Successful Software Application Development,TF-FC,L0,added
+1078bc2f,2020,10.1109/ccece47787.2020.9255712,Software Effort Estimation from Use Case Diagrams Using Nonlinear Regression Analysis,TF-FC,L0,added
+555f2c80,2012,10.1109/snpd.2012.40,Software Effort Estimation in the Early Stages of the Software Life Cycle Using a Cascade Correlation Neural Network Model,TF-FC,L0,added
+6f0a72fc,2016,10.1145/2905055.2905177,Software Effort Estimation of GSD Projects Using Calibrated Parametric Estimation Models,TF-FC,L0,added
+af6421fb,2023,10.14569/ijacsa.2023.0140222,Software Effort Estimation through Ensembling of Base Models in Machine Learning using a Voting Estimator,TF-FC,L0,added
+d416d272,2023,10.1109/iccmc56507.2023.10084264,Software Effort Estimation using ANN (Back Propagation),TF-FC,L0,added
+40d7717e,2023,10.21203/rs.3.rs-2077635/v1,Software Effort Estimation using Base Ensembled Regression Techniques and Principal Components Regression as Super Learner,TF-FC,L0,added
+ad7beca4,2024,10.20944/preprints202403.0437.v1,Software Effort Estimation using Ensemble Learning,TF-FC,L0,added
+4e1875d9,2022,10.1109/ict4da56482.2022.9971209,Software Effort Estimation using Machine learning Algorithm,TF-FC,L0,added
+a8cee3f0,2020,10.48550/arxiv.2009.01660,Software Effort Estimation using parameter tuned Models,TF-FC,L0,added
+aaa79bcd,2011,,Software Effort Estimation with Different Artificial Neural Network,TF-FC,L0,added
+15d941d7,2010,10.48550/arxiv.1012.5754,Software Effort Estimation with Ridge Regression and Evolutionary Attribute Selection,TF-FC,L0,added
+4852a4fe,2021,10.1109/icecet52533.2021.9698548,Software Effort Estimation with Use Case Points Using Ensemble Machine Learning Models,TF-FC,L0,added
+c1575581,2014,,Software Effort Estimation: A Comparison Based Perspective,TF-FC,L0,added
+c6366ed4,2014,10.5120/18106-9210,Software Effort Estimation: A Fuzzy Logic Approach,TF-FC,L0,added
+5faae738,2014,,Software Effort Estimation: A Survey of Well-known Approaches,TF-FC,L0,added
+576b8543,2011,10.4018/jiit.2011070104,Software Effort Estimation: Harmonizing Algorithms and Domain Knowledge in an Integrated Data Mining Approach,TF-FC,L0,added
+0d306f3b,2012,10.4018/978-1-4666-2047-6.ch012,Software Effort Estimation: Harmonizing Algorithms and Domain Knowledge in an Integrated Data Mining Approach,TF-FC,L0,added
+c35d9539,2003,10.1007/3-540-44870-5_77,Software Effort Estimation: Planning XP Guidelines Compared to Research on Traditional Software Development,TF-FC,L0,added
+86d2ae2d,2010,10.5120/595-688,Software Maintenance Effort Estimation – Neural Network Vs Regression Modeling Approach,TF-FC,L0,added
+fba07e74,2007,10.1007/s11390-007-9043-5,Software Project Effort Estimation Based on Multiple Parametric Models Generated Through Data Clustering,TF-FC,L0,added
+0202e682,2012,,Software Size and Effort Estimation from Use Case Diagrams Using Regression and Soft Computing Models,TF-FC,L0,added
+6c5aae2a,2010,10.1109/cit.2010.76,Software Stage-Effort Estimation Based on Association Rule Mining and Fuzzy Set Theory,TF-FC,L0,added
+5e335d0b,2011,10.1007/978-3-642-27443-5_95,Software Test Effort Estimation Using Particle Swarm Optimization,TF-FC,L0,added
+463ce392,2020,10.11591/ijece.v11i1.pp707-715,Software development effort estimation modeling using a combination of fuzzy-neural network and differential evolution algorithm,TF-FC,L0,added
+2cfc1a72,2022,10.1109/iccitm56309.2022.10031794,Software effort estimation Based on long short term memory and stacked long short term memory,TF-FC,L0,added
+ee3f437e,2007,10.1049/ic:20070756,Software effort estimation and risk analysis - a case study,TF-FC,L0,added
+7cba6857,2025,10.1038/s41598-025-29028-9,Software effort estimation based on inception network optimized by enhanced banyan tree growth optimizer,TF-FC,L0,added
+4a072003,2011,10.1145/2020390.2020396,Software effort estimation based on optimized model tree,TF-FC,L0,added
+d1e0f7ed,2017,10.48550/arxiv.1703.05584,Software effort estimation based on optimized model tree,TF-FC,L0,added
+fd5bab59,2009,10.1145/1540438.1540450,Software effort estimation based on weighted fuzzy grey relational analysis,TF-FC,L0,added
+a7e713c2,2010,10.1109/aiccsa.2010.5586985,Software effort estimation by tuning COOCMO model parameters using differential evolution,TF-FC,L0,added
+9174f5b6,2013,10.9790/0661-1435862,Software effort estimation through clustering techniques of RBFN network,TF-FC,L0,added
+6c89be51,2012,10.1109/conseg.2012.6349465,Software effort estimation using Neuro-fuzzy approach,TF-FC,L0,added
+c9b523c4,2024,10.1007/s00521-024-09855-z,Software effort estimation using convolutional neural network and fuzzy clustering,TF-FC,L0,added
+db0205c3,2015,10.1109/ccaa.2015.7148515,Software effort estimation using enhanced use case point model,TF-FC,L0,added
+a32272a8,2023,10.3233/jifs-230676,Software effort estimation using stacked ensembled techniques and proposed stacking ensemble using principal component regression as super learner,TF-FC,L0,added
+5aa1ae73,2012,10.1049/ic.2012.0027,Software effort estimation with a generalized robust linear regression technique,TF-FC,L0,added
+fb6f87a0,2021,10.1007/s10586-021-03447-5,Software enhancement effort estimation using correlation-based feature selection and stacking ensemble method,TF-FC,L0,added
+b73bdca8,2026,10.1007/s41872-026-00415-z,Software fault prediction modelling with effort and dynamic fault introduction rate: a stochastic approach,TF-ST|TF-FC,L1,added
+dc30b7c1,1992,10.1002/ecjc.4430750304,Software reliability growth model with continuous error domain—application of a linear stochastic differential equation,TF-ST,L0,added
+86be15b0,2002,10.1109/icsm.2001.972734,Software renewal process comprehension using dynamic effort estimation,TF-FC,L0,added
+afb37589,2008,10.1145/1360602.1361211,Software test effort estimation,TF-FC,L0,added
+ab9983cb,2012,10.1504/ijbic.2012.049888,Software test effort estimation: a model based on cuckoo search,TF-FC,L0,added
+3612b0c8,1991,10.1287/isre.2.4.243,Software-Effort Estimation: An Exploratory Study of Expert Performance,TF-FC,L0,added
+812a4b8f,2021,10.3390/sym13112119,Spectral Clustering Effect in Software Development Effort Estimation,TF-FC,L0,added
+d091ea64,2022,10.1007/s00500-021-06564-w,Stacking regularization in analogy-based software effort estimation,TF-FC,L0,added
+329c586c,2015,,Statistical Analysis of The Most Popular Software Service Effort Estimation Datasets,TF-FC,L0,added
+31a8cb54,2009,10.1155/2009/581383,Stochastic Differential Equation‐Based Flexible Software Reliability Growth Model,TF-ST,L0,added
+ff010112,2023,10.1007/s10479-023-05240-6,Stochastic debugging based reliability growth models for Open Source Software project,TF-ST|TF-MSR,L0,added
+1068b753,2019,10.1049/iet-sen.2018.5332,Stochastic gradient boosting for predicting the maintenance effort of software‐intensive systems,TF-ST|TF-FC,L1,added
+8344a4ec,2017,,"Study Of Approaches To Test Effort Estimation , Metrics Used For Software Project Size Estimation And Shortcomings Of Function Point (FP) Metric",TF-FC,L0,added
+b1b1070a,2015,10.1109/iceei.2015.7352539,Study of algorithmic method and model for effort estimation in big data software development case study: Geodatabase,TF-FC,L0,added
+d82592db,2014,10.5120/16748-6902,Survey on Different Machine Learning Techniques for Software Effort Estimation,TF-FC,L0,added
+a3b59291,2025,10.1142/s0218194025500482,Swarm Intelligence for Software Effort Estimation: An Empirical Study,TF-FC,L0,added
+63a55d59,2024,10.1109/isemantic63362.2024.10762707,"Systematic Literature Review of Software Effort Estimation : Research Trends, Methods, and Datasets",TF-FC,L0,added
+856ea57a,2017,10.1109/icngcis.2017.33,Systematic Literature Review on Software Effort Estimation Using Machine Learning Approaches,TF-FC,L0,added
+25969842,2014,,TECHNOLOGY Software Effort Estimation with Data Mining Techniques- A Review,TF-FC,L0,added
+4a2d3698,2005,10.1142/s0218194005002555,THE VIABILITY OF FUZZY LOGIC MODELING IN SOFTWARE DEVELOPMENT EFFORT ESTIMATION: OPINIONS AND EXPECTATIONS OF PROJECT MANAGERS,TF-FC,L0,added
+46453b53,2024,10.1007/s10586-024-04418-2,TSoptEE: two-stage optimization technique for software development effort estimation,TF-FC,L0,added
+c58f7e3f,2017,,The Application of Artificial Neural Networks in Software Effort Estimation,TF-FC,L0,added
+b9d5e49c,2015,10.4018/ijaec.2015100104,The Application of Meta-Heuristic Algorithms to Improve the Performance of Software Development Effort Estimation Models,TF-FC,L0,added
+6d37f6fe,2005,10.1109/metrics.2005.47,The Clients’ Impact on Effort Estimation Accuracy in Software Development Projects,TF-FC,L0,added
+b5a40ee4,2014,10.1109/iwesep.2014.10,The Effect of Moving Windows on Software Effort Estimation: Comparative Study with CART,TF-FC,L0,added
+01fba467,2014,10.1007/978-3-319-13835-0_5,The Effects of Gradual Weighting on Duration-Based Moving Windows for Software Effort Estimation,TF-FC,L0,added
+05b677ed,2015,,The Evaluation of Useful Method of Effort Estimation in Software Projects,TF-FC,L0,added
+1c8ae029,2024,10.23917/khif.v10i1.2803,The Implementation of Machine Learning for Software Effort Estimation: A Literature Review,TF-FC,L0,added
+21ddf169,2022,10.1145/3530019.3531331,The Influence of Cost Drivers on Effort Estimation in Distributed Software Development,TF-FC,L0,added
+4ba174fc,2013,10.4028/www.scientific.net/amr.748.1229,The Selection of Agile Development's Effort Estimation Factors Based on Principal Component Analysis,TF-FC|TF-MSR,L0,added
+a887b16d,2007,10.1109/ijcnn.2007.4371055,The artificial neural networks model for software effort estimation,TF-FC,L0,added
+41a0e151,2005,10.1109/metrics.2005.30,The clients' impact on effort estimation accuracy in software development projects,TF-FC,L0,added
+d892a8fb,2013,10.1145/2499393.2499394,The impact of parameter tuning on software effort estimation using learning machines,TF-FC,L0,added
+bd8b607e,2006,10.1109/soli.2006.328973,The quality of design team factors on software effort estimation,TF-FC,L0,added
+aea9f86e,2012,10.1016/j.infsof.2012.03.002,The role of social interaction in software effort estimation: Unpacking the “magic step” between reasoning and decision-making,TF-FC,L0,added
+4b4df702,2003,10.1002/smr.269,The software maintenance project effort estimation model based on function points,TF-FC,L0,added
+0b91f848,2018,10.1002/smr.1983,The state‐of‐the‐art in software development effort estimation,TF-FC,L0,added
+58475e17,2008,,The value and validity of software effort estimation models built from a multiple organization data set,TF-FC,L0,added
+92e46adb,2017,10.1109/iccsec.2017.8446890,Threshold Based Neighborhood Selection for Case-Based Reasoning in Software Effort Estimation,TF-FC,L0,added
+9cf74956,2015,10.1109/ccaa.2015.7148498,Tools & methods for software effort estimation using use case points model — A review,TF-FC,L0,added
+3be229e7,2022,10.1007/978-3-031-09070-7_30,Toward Applying Agglomerative Hierarchical Clustering in Improving the Software Development Effort Estimation,TF-FC,L0,added
+9434fa58,2022,10.1109/access.2022.3185393,Toward Improving the Efficiency of Software Development Effort Estimation via Clustering Analysis,TF-FC,L0,added
+a0f50bf5,2023,10.1109/icit58056.2023.10225939,Towards Better Software Development Effort Estimation with Analogy-based Approach and Nature-based Algorithms,TF-FC,L0,added
+358ea1c9,2014,10.1142/s0218194014500351,Towards Improvement of Analogy-Based Software Development Effort Estimation: A Review,TF-FC,L0,added
+41265418,2022,10.1007/978-3-031-09070-7_35,Towards a Correction Factors-Based Software Productivity Using Ensemble Approach for Early Software Development Effort Estimation,TF-FC,L0,added
+37bba7f6,2012,10.1109/srii.2012.58,Towards a Formal Model for Optimal Task-Site Allocation and Effort Estimation in Global Software Development,TF-FC,L0,added
+d8102d3e,2022,10.1109/iemcon56893.2022.9946524,Tracking of Hardware Development Schedule based on Software Effort Estimation,TF-FC,L0,added
+87bed8c5,2025,10.38124/ijisrt/25apr1930,Trends of Software Requirements Engineering Process in Pakistan and its Repercussion on Effort Estimation,TF-FC,L0,added
+fcad414a,2022,10.1007/978-3-031-23233-6_5,Tuning Functional Link Artificial Neural Network for Software Development Effort Estimation,TF-FC,L0,added
+b721525d,2013,10.1155/2013/351913,Tuning of Cost Drivers by Significance Occurrences and Their Calibration with Novel Software Effort Estimation Method,TF-FC,L0,added
+5c7a03c0,2012,,UML Based Object Oriented Software Development Effort Estimation Using ANN,TF-FC,L0,added
+a9fb8ce8,2023,10.1109/icacctech61146.2023.00018,Unveiling the Art of Software Testing Effort Estimation: An In-Depth Study of Current Techniques and their Analysis,TF-FC,L0,added
+7ac425f7,2014,10.48550/arxiv.1401.3069,Use Case Point Approach Based Software Effort Estimation using Various Support Vector Regression Kernel Methods,TF-FC,L0,added
+32027321,2015,10.5120/20415-2835,Use Case Point Method of Software Effort Estimation: A Review,TF-FC,L0,added
+602d4cc6,2011,10.4236/jsea.2011.410070,Using Artificial Neural-Networks in Stochastic Differential Equations Based Software Reliability Growth Modeling,TF-ST,L0,added
+4d84ffd3,2003,10.1007/3-540-45110-2_151,Using Genetic Programming to Improve Software Effort Estimation Based on General Data Sets,TF-FC,L0,added
+3bc2adaa,2019,10.1145/3364641.3364670,Using Machine Learning Technique for Effort Estimation in Software Development,TF-FC,L0,added
+9b19cae9,2018,10.48550/arxiv.1805.00090,Using Multi Expression Programming in Software Effort Estimation,TF-FC,L0,added
+81929ce8,2005,10.1109/ictai.2004.119,Using fuzzy theory for effort estimation of object-oriented software,TF-FC,L0,added
+16082053,2019,10.1007/s11277-019-06805-0,Validation of Existing Software Effort Estimation Techniques in Context with Mobile Software Applications,TF-FC,L0,added
+f1a4364c,2022,10.1007/978-981-16-8930-7_7,Value of Random Vector Functional Link Neural Networks in Software Development Effort Estimation,TF-FC,L0,added
+de7755a8,2015,10.1109/ablaze.2015.7154992,Vulnerability discovery model for a software system using stochastic differential equation,TF-ST,L0,added
+b1bc92aa,2021,10.1016/j.infsof.2021.106784,When should we (not) use the mean magnitude of relative error (MMRE) as an error measure in software development effort estimation?,TF-FC,L0,added
+6906f123,2016,10.1007/s10515-016-0209-7,Which models of the past are relevant to the present? A software effort estimation approach to exploiting useful past models,TF-FC,L0,added
+57f648b0,2018,10.48550/arxiv.1804.00626,Why Software Effort Estimation Needs SBSE,TF-FC,L0,added
+c8c6d2de,2024,10.2139/ssrn.5041669,Z-Se2: A Model for Software Effort Estimation Using Llm Gpt3.5,TF-FC,L0,added

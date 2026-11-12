@@ -1,0 +1,7 @@
+internal_id,year,doi,title,directions,n_seeds,seed_ids,families,level,coder,date,notes
+b5b6fcff,2006,10.1080/08874417.2007.11645955,An Empirical Model of Software Size and Work-Effort Estimation for Business Application Software,backward,1,41df3b08,TF-FC,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias
+c84c45e2,1991,10.1287/opre.39.5.807,"Analysis of a Kanban Discipline for Cell Coordination in Production Lines, II: Stochastic Demands",backward,1,3626fef4,TF-ST,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias
+af251ed3,2018,10.1504/ijkms.2019.097122,Knowledge based non-functional software distinguishing quality effort estimation using fuzzy use case point approach,backward,1,440e98e2,TF-FC,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias
+9dd53fdd,2014,,MULTI STAGE SOFTWARE PROJECT EFFORT ESTIMATION,forward,1,7bebca2e,TF-FC,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias
+e8ae50af,2023,10.1504/ijsse.2025.146198,Risk integrated effort estimation of software projects: a comparative analysis of machine learning techniques,backward,1,8c578608,TF-FC,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias
+0448f98d,2013,10.1007/978-3-642-39259-7_37,Software Effort Estimation and Risk Management,backward,1,f1bea788,TF-FC,L0,Rodrigo,2026-11-12,effort/flow + SE — confirmar famílias

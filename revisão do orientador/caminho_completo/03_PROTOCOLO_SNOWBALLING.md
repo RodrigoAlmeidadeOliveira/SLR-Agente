@@ -2,17 +2,23 @@
 
 ## Sementes
 
-Arquivo: `phase3_snowball_seeds.csv` — **n=561** classificados (435 base + 126 bloco ML); **494 com DOI**.
+Arquivo iter1: `phase3_snowball_seeds.csv` (n=561; 494 DOI).  
+Arquivo iter2+: novos includes da iteração anterior (`phase3_snowball_iterN_seeds.csv`).
 
-Não usar os 400 DOIs genéricos da busca antiga.
+Não usar os 400 DOIs genéricos da busca antiga. Preferir `OPENALEX_API_KEY` no `.env`.
 
-### Runner iteração 1 (OpenAlex)
+### Runner (OpenAlex)
 
 ```bash
 cd "revisão do orientador/caminho_completo"
-python3 run_phase3_snowball_iter1.py --status
-python3 run_phase3_snowball_iter1.py --fetch          # retoma; ~494 sementes
-python3 run_phase3_snowball_iter1.py --finalize       # gate + dedup → phase3_snowball_iter1_screen.csv
+# iter 1
+python3 run_phase3_snowball_iter1.py --fetch && python3 run_phase3_snowball_iter1.py --finalize
+# iter 2 (sementes = includes iter1)
+python3 run_phase3_snowball_iter2.py --status
+python3 run_phase3_snowball_iter2.py --fetch
+python3 run_phase3_snowball_iter2.py --finalize
+python3 classify_phase3_snowball_interactive.py --csv phase3_snowball_iter2_screen.csv --bulk-accept-exclude
+python3 classify_phase3_snowball_interactive.py --csv phase3_snowball_iter2_screen.csv --pending-only --only-sug maybe
 ```
 
 ## Procedimento (por iteração *i*)

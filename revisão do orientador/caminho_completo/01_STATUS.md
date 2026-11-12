@@ -5,29 +5,41 @@
 ## Fase 0–1 ✅ · Fase 2.1–2.2 ✅
 
 - Pré-registro: Zenodo **10.5281/zenodo.24148068**
-- [ ] Fase 2.3 re-triagem cega (paralelo)
+- [x] Fase 2.3 **completa n=117**: A+B κ=1.00; vs original 79.3% (16 incl→excl + 8 excl→incl); flips **aplicados** → n=1710 (−6 in-corpus / +8; 10 ie já ausentes)
 
-## Fase 3 — Completude da busca  ← em andamento
+## Fase 3 — Completude da busca  ✅
 
-Artefatos prontos:
+| Item | Resultado |
+|------|-----------|
+| D6 | 19/19 exclude; +0 |
+| D1 | residual 30 exclude; +0; n=435 |
+| Bloco ML | +126 → n=561 |
+| Snowballing Wohlin | iters 1–5: +401+627+120+6+**0** (saturação) → n=1715 bruto |
+| IC1 pós-snowball | **−7** (year&lt;1994) → **corpus final n=1708** |
+| Ledger | `phase3_snowballing_ledger.csv` + `phase3_snowball_SATURATION.md` |
 
-| Item | Arquivo |
-|------|---------|
-| D1 strings limpas | `phase3_D1_scopus_strings_cleaned.md` |
-| Bloco ML (5 bases) | `phase3_ML_block_strings.md` |
-| D6 19 suplementares | `phase3_d6_19_screen.csv` |
-| Ledger | `phase3_search_ledger.csv` |
-| Snowballing | `03_PROTOCOLO_SNOWBALLING.md` |
+Manuscrito EN/PT: prosa Wohlin até saturação; D1/D6/ML/D2 fechados; IC1 aplicado; tabelas/figs/apêndice em **n=1708**.
 
-### Ordem de execução (humano + bases)
+## Fase 4 — RQ3 + SPMF
 
-1. **D6 ✅** — 19/19 `exclude_other` (D2=B JIT/defect); 0 no corpus → n=435 inalterado. Ledger preenchido.
-2. **D1 ✅** — residual 30/30 `exclude_other` vs pool 5783; **included_new=0**; n=435 inalterado. Strings V6/V8/V9 limpas validadas.
-3. **Bloco ML ✅** — 126 includes aplicados; **n=561** em `studies.json`; figs + apêndice + tabelas EN/PT atualizados.
-4. **Snowballing Wohlin iter1 — fetch ✅** — **494/494**, raw 23294 → residual 13612; gate **703 maybe** / 12909 exclude (bulk-accepted). Triar: `classify_phase3_snowball_interactive.py --pending-only --only-sug maybe`.
-5. Atualizar `studies.json`, figs, `main*.tex`, PRISMA após includes do snowball.
+| Artefato | Estado |
+|----------|--------|
+| `phase4_rq3_priority_sheet.csv` | **291/291 core ✅** |
+| `phase4_rq3_priority_summary.md` | crosstabs |
+| `phase4_rq3_extraction_template.csv` | 291/1708 core; resto aberto |
+| Venues OpenAlex | **1523/1708 (89%)** venue; pub_type journal 794 / conf 648 / ws 27 |
+| SPMF | **aplicada** (AD×SC×TI); `figs/spmf_map.pdf`; tab no `main*.tex` |
+| `phase4_ic1_flag_screen.csv` | 7/7 exclude ✅ |
 
+```bash
+# venues (próximo)
+python3 classify_phase4_rq3_interactive.py --sheet full --mode venue --pending-only --compact
+# paralelo F2.3:
+python3 classify_phase2_blind_interactive.py --coder Rodrigo --rater A --includes-only --pending-only
+```
 
-## Fase 4–5
+## Fase 5 — Editorial
 
-Template RQ3 pronto · extração / editorial depois da busca.
+Fechado: Wohlin; D1/D6/ML/D2; IC1; RQ3 priority no `main*.tex` (tabs sdlc/tech + RA1/RA3).
+
+`\pendente{}` no manuscrito: **0** (F2.3 includes κ, venues, RQ3 priority, SPMF fechados). Opcional: 70 excludes da amostra cega.
