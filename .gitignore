@@ -38,3 +38,6 @@ htmlcov/
 
 # round-2 rater package (copyrighted PDFs, shared privately)
 results/human_validation_round2/*.zip
+
+# Zenodo v3 staging tree is rebuildable via pack_zenodo_v3_n1710.sh
+article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3/

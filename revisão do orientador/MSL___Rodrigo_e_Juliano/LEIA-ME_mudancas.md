@@ -17,7 +17,7 @@ Status operacional do caminho completo: `../caminho_completo/01_STATUS.md`.
 
 ## Pré-submissão restante (fora do LaTeX)
 
-1. Atualizar pacote Zenodo de replicação (`10.5281/zenodo.21939600`) com sheets/`studies.json` finais.
+1. **Publicar** Zenodo v3 (artefato pronto: `../../article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3.zip`; passos em `UPLOAD_V3.md`). DOI concept no paper: `10.5281/zenodo.21939599` (sempre a versão mais recente).
 2. Confirmar revista-alvo (`\journal{Information and Software Technology}`).
 3. Opcional de reforço: L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
 

@@ -15,4 +15,4 @@ Fonte: `../MSL___Rodrigo_e_Juliano/` (`main.tex`, `main_pt.tex`, `studies.json`,
 
 ## Estado atual
 
-**Fechado.** Corpus final **n=1710**. RQ3 detalhado no prioritário (291); venues + SPMF no full corpus. Opcionais não bloqueantes: 2º coder L0; RQ3 campo-a-campo nos 1419 restantes.
+**Fechado.** Corpus final **n=1710**. RQ3 prioritário humano **293/293**; full sheet core **1710/1710** (1417 suggestion-assisted). L0 2º coder **11/55**, κ=1,00. Pacote Zenodo v3 local: `article_ist/zenodo_upload/SLR_PATHCAST_Replication_v3.zip` (publish = New version em `10.5281/zenodo.21939600`).
