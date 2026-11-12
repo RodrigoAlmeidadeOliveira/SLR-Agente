@@ -2,44 +2,43 @@
 
 Última atualização: 2026-11-12
 
-## Fase 0–1 ✅ · Fase 2.1–2.2 ✅
+## Corpus final
 
+**n = 1710** (snowball 1715 → IC1 −7 → 1708 → flips F2.3 +2)
+
+## Fase 0–5 — fechadas
+
+| Fase | Estado |
+|------|--------|
+| 0 Decisões D1–D6 | ✅ trancadas e assinadas |
+| 1 title-only / L0 / PRIMAD / 2013 | ✅ |
+| 2 pré-registro + heurística S1/S3 + cego κ | ✅ κ=1,00 (n=117); flips aplicados |
+| 3 D1/D2/D6 + ML + Wohlin saturação + IC1 | ✅ |
+| 4 RQ3 prioritário 291 + venues OpenAlex + SPMF | ✅ |
+| 5 prosa editorial EN/PT | ✅ (Tabela 9 fundida em `tab:rq3-sdlc`; sem `[PENDENTE]` residual) |
+
+## Escopo RQ3 (D3)
+
+- Extração humana **detalhada**: conjunto prioritário **291** (L1/L2 + todo TF-PM).
+- Corpus restante (**1419**): cobertura SDLC via códigos SPMF SC mecânicos; venues/pub_type via OpenAlex no full corpus.
+- Não há segunda passagem humana campo-a-campo nos 1419 nesta versão (limitação declarada no manuscrito).
+
+## Opcionais aceitos como limitação (não bloqueantes)
+
+- [ ] 2º coder independente na auditoria L0 (amostra 55; 1º coder 55/55)
+- Extração RQ3 detalhada dos 1419 restantes (além de SPMF SC)
+
+## Pré-submissão feito
+
+- [x] DOIs: Rama-Maneiro, Panjer, Giger, Burke, Wieringa
+- [x] `README` / este status alinhados a n=1710
+- [x] Tabela `tab:phases` removida (conteúdo em `tab:rq3-sdlc` com MSR)
+
+## Artefatos-chave
+
+- Corpus: `MSL___Rodrigo_e_Juliano/studies.json`
+- RQ3: `phase4_rq3_priority_sheet.csv` + `phase4_rq3_priority_summary.md`
+- Venues: `phase4_venues_summary.md`
+- SPMF: `phase4_spmf_summary.md` + `figs/spmf_map*.pdf`
+- F2.3: `phase2_blind_score_full.md` + `phase2_corpus_flips_applied.csv`
 - Pré-registro: Zenodo **10.5281/zenodo.24148068**
-- [x] Fase 2.3 **completa n=117**: A+B κ=1.00; vs original 79.3% (16 incl→excl + 8 excl→incl); flips **aplicados** → n=1710 (−6 in-corpus / +8; 10 ie já ausentes)
-
-## Fase 3 — Completude da busca  ✅
-
-| Item | Resultado |
-|------|-----------|
-| D6 | 19/19 exclude; +0 |
-| D1 | residual 30 exclude; +0; n=435 |
-| Bloco ML | +126 → n=561 |
-| Snowballing Wohlin | iters 1–5: +401+627+120+6+**0** (saturação) → n=1715 bruto |
-| IC1 pós-snowball | **−7** (year&lt;1994) → **corpus final n=1708** |
-| Ledger | `phase3_snowballing_ledger.csv` + `phase3_snowball_SATURATION.md` |
-
-Manuscrito EN/PT: prosa Wohlin até saturação; D1/D6/ML/D2 fechados; IC1 aplicado; tabelas/figs/apêndice em **n=1708**.
-
-## Fase 4 — RQ3 + SPMF
-
-| Artefato | Estado |
-|----------|--------|
-| `phase4_rq3_priority_sheet.csv` | **291/291 core ✅** |
-| `phase4_rq3_priority_summary.md` | crosstabs |
-| `phase4_rq3_extraction_template.csv` | 291/1708 core; resto aberto |
-| Venues OpenAlex | **1523/1708 (89%)** venue; pub_type journal 794 / conf 648 / ws 27 |
-| SPMF | **aplicada** (AD×SC×TI); `figs/spmf_map.pdf`; tab no `main*.tex` |
-| `phase4_ic1_flag_screen.csv` | 7/7 exclude ✅ |
-
-```bash
-# venues (próximo)
-python3 classify_phase4_rq3_interactive.py --sheet full --mode venue --pending-only --compact
-# paralelo F2.3:
-python3 classify_phase2_blind_interactive.py --coder Rodrigo --rater A --includes-only --pending-only
-```
-
-## Fase 5 — Editorial
-
-Fechado: Wohlin; D1/D6/ML/D2; IC1; RQ3 priority no `main*.tex` (tabs sdlc/tech + RA1/RA3).
-
-`\pendente{}` no manuscrito: **0** (F2.3 includes κ, venues, RQ3 priority, SPMF fechados). Opcional: 70 excludes da amostra cega.

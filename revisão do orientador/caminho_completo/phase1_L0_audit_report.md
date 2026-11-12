@@ -17,8 +17,7 @@ Arquivo: `phase1_L0_audit_sample.csv`
 
 Nesta amostra estratificada dos estudos L0, a codificação humana reproduziu as famílias propostas pelo LLM em todos os casos. Isso reduz a ameaça de subclassificação sistemática nos 323 L0, mas **não substitui** um segundo coder para κ.
 
-## Próximo
+## Fechamento desta versão
 
-- Opcional: Juliano audita ≥11 itens (20%) cego e calcula κ.
-- Atualizar texto de ameaças/classificação no `main.tex` / `main_pt.tex`.
-- Seguir Fase 1.3 PRIMAD e 1.4 buraco 2013.
+- 2º coder / κ: **não executado**; aceito como limitação não bloqueante (manuscrito EN/PT atualizado).
+- PRIMAD e buraco 2013: fechados na Fase 1.

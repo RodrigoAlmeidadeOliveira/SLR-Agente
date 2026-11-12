@@ -31,15 +31,12 @@ Todo texto em **vermelho** no PDF (`\pendente{...}` no .tex) é trabalho que dep
 As pendências abaixo estão sendo executadas em `../caminho_completo/` com decisões D3=A e D5=A (e defaults D1=A, D2=B, D4=A, D6=incorporar). Ver `../caminho_completo/01_STATUS.md`.
 
 ## O que falta (exige trabalho de dados), em ordem de prioridade
-1. **Classificar os 76 estudos lidos só pelo título**, ou excluí-los sob EC5b (M2). Depois, rodar `python3 figs.py` e atualizar as Tabelas 5 e 7. → planilhas `phase1_title_only_*`
-2. **Extração humana para RQ3** (fase do SDLC, fonte e construção do log, algoritmos, alvo de previsão) e para venue/research type (M1). A Tabela 6 está montada e vazia. → `phase4_rq3_extraction_template.csv`
-3. **Tornar a re-triagem humana auditável**: decisão por linha, κ entre revisores, descrição da heurística (M3).
-4. **Bloco de forecasting/ML nas cinco bases** e decisão sobre os 19 da busca suplementar (M7). → `05_PROTOCOLO_BUSCA_ML_E_D1.md`
-5. **Snowballing a partir dos incluídos, até a saturação** (M10). → `03_PROTOCOLO_SNOWBALLING.md`
-6. Auditar uma amostra dos 275 estudos L0 (M8). → `phase1_L0_audit_sample.csv` (n=55)
-7. Decidir sobre os títulos literais nas strings (M6) e sobre o escopo de confiabilidade (M7). → trancado em `00_DECISOES.md` (D1=A, D2=B)
-8. Aplicar a SPMF ou retirá-la (M9). Registrar a leitura completa do PRIMAD. → SPMF=A; PRIMAD ainda humano
-9. Informar o link do pré-registro. Renomear `included_studies_506.csv` no Zenodo.
+
+**Atualização 2026-11-12:** itens 1–9 do caminho completo foram executados (corpus **n=1710**). Ver `../caminho_completo/01_STATUS.md`.
+
+Restam só opcionais/não bloqueantes:
+1. 2º coder independente na auditoria L0 (amostra 55; 1º coder já 55/55).
+2. Extração RQ3 campo-a-campo nos 1\,419 estudos fora do prioritário (hoje cobertos por SPMF SC + venues OpenAlex).
 
 ## Verificar antes de submeter
 - **Referências novas:** conferir volume, páginas e DOI de Rama-Maneiro et al. (2023), Panjer (2007), Giger et al. (2010) e Burke et al. (2021). Coloquei de memória e deixei sem DOI.

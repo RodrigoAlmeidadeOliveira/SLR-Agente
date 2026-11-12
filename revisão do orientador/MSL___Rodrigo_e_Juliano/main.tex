@@ -143,7 +143,7 @@ Total & & & 8,347 & 5,783 \\
 \end{table}
 
 \paragraph{Snowballing}
-Wohlin snowballing~\cite{wohlin2014} was run from the included studies after the Phase-3 ML block ($n = 1710$; 494 with DOI). Each iteration used the new includes of the previous iteration as seeds. OpenAlex supplied both backward references and forward citations. A residual candidate entered title screening only when its title matched at least one process-mining/stochastic/forecasting term and one software-engineering/repository term (same keyword gate as in the protocol). Iterations and new includes: (1)~401; (2)~627; (3)~120; (4)~6; (5)~0. Saturation was reached at iteration~5 (no keyword-gate pass among 203 new residuals). The snowballing block therefore added 1\,154 studies and brought the corpus to $n = 1710$. Seven of those studies had publication year before 1994 (IC1) and were removed, yielding the final corpus of $n = 1710$.
+Wohlin snowballing~\cite{wohlin2014} was run from the included studies after the Phase-3 ML block ($n = 561$; 494 with DOI). Each iteration used the new includes of the previous iteration as seeds. OpenAlex supplied both backward references and forward citations. A residual candidate entered title screening only when its title matched at least one process-mining/stochastic/forecasting term and one software-engineering/repository term (same keyword gate as in the protocol). Iterations and new includes: (1)~401; (2)~627; (3)~120; (4)~6; (5)~0. Saturation was reached at iteration~5 (no keyword-gate pass among 203 new residuals). The snowballing block therefore added 1\,154 studies and brought the corpus to $n = 1715$. Seven of those studies had publication year before 1994 (IC1) and were removed ($n = 1708$); the blind-screen flips then yielded the final corpus of $n = 1710$.
 
 \paragraph{Control set}
 Ten known studies (Table~\ref{tab:control}) were used to check that the strings retrieve relevant work. All ten were retrieved. Because the ten were known when the strings were written, this check does not estimate the sensitivity of the search.
@@ -219,9 +219,9 @@ The success criterion (Recall $\geq 0.90$), the sampling plan, and the escalatio
 \paragraph{Step 3: human re-screen and check of the includes}
 Two reviewers screened all 4,005 records the first pass had excluded or left undecided, including 611 records closed without a decision for lack of an abstract. They also checked every first-pass include against the criteria. The re-screen identified 188 eligible records, which after de-duplication and a final eligibility check added 150 studies. The check of the includes removed 32 studies whose title and abstract did not support inclusion.
 
-For the large auxiliary strata S1 (title/abstract excludes; $n = 1710$ in the escalation sheet) and S3 (records previously closed without an abstract; $n = 1710$), the working spreadsheets carried pre-filled suggestion columns (\texttt{sug\_*}). Suggestions came from two sources: (i)~a typed keyword heuristic aligned with Table~\ref{tab:criteria}, and (ii)~in part of S1 only, batch agent pre-classifications merged as \texttt{preclass\_source=agent\_batches\_*}. These suggestions are \emph{not} the Step~1 Haiku model. In the archived S1 and S3 sheets, however, the official \texttt{decision} column equals \texttt{sug\_decision} on every row (100\%), so rater judgements are not separable from the suggestion and no trustworthy Step~3 $\kappa$ can be computed from those files alone. A stratified blind re-screen without suggestions (all 47 S1/S3 includes plus 70 random excludes; seed 20261111) is under way to report agreement and $\kappa$; see the Phase~2 protocol in the replication materials.
+For the large auxiliary strata S1 (title/abstract excludes) and S3 (records previously closed without an abstract), the working spreadsheets carried pre-filled suggestion columns (\texttt{sug\_*}). Suggestions came from two sources: (i)~a typed keyword heuristic aligned with Table~\ref{tab:criteria}, and (ii)~in part of S1 only, batch agent pre-classifications merged as \texttt{preclass\_source=agent\_batches\_*}. These suggestions are \emph{not} the Step~1 Haiku model. In the archived S1 and S3 sheets, however, the official \texttt{decision} column equals \texttt{sug\_decision} on every row (100\%), so rater judgements are not separable from the suggestion and no trustworthy Step~3 $\kappa$ can be computed from those files alone. We therefore ran a stratified blind re-screen without suggestions (all 47 S1/S3 includes plus 70 random excludes; seed 20261111; Phase~2 protocol in the replication materials).
 
-On the full blind re-screen sample ($n = 1710$: all 47 originally included studies plus 70 originally excluded), two raters applying the locked IC/EC table and decision D2=B agreed on every assessable pair (raw agreement $117/117 = 100\%$; Cohen $\kappa = 1.00$; one study marked \texttt{not\_assessable} by both). Relative to the original decisions, agreement was $92/116 = 79.3\%$ among assessable include/exclude labels: 16 flips were include$\rightarrow$exclude (out-of-domain, product-reliability/defect-only under D2=B, or non-primary items) and 8 were exclude$\rightarrow$include (software process simulation or SE process-measurement papers that the original screen had dropped). The 16+8 flips are logged for corpus cleanup; These flips were applied to the corpus (net $+2$; 6 in-corpus removals and 8 additions; 10 of the 16 include$\rightarrow$exclude flips were already absent from $n = 1710$), yielding $n = 1710$.
+On that blind sample ($n = 117$), two raters applying the locked IC/EC table and decision D2=B agreed on every assessable pair (raw agreement $117/117 = 100\%$; Cohen $\kappa = 1.00$; one study marked \texttt{not\_assessable} by both). Relative to the original decisions, agreement was $92/116 = 79.3\%$ among assessable include/exclude labels: 16 flips were include$\rightarrow$exclude (out-of-domain, product-reliability/defect-only under D2=B, or non-primary items) and 8 were exclude$\rightarrow$include (software process simulation or SE process-measurement papers that the original screen had dropped). The flips were applied to the corpus (net $+2$; 6 in-corpus removals and 8 additions; 10 of the 16 include$\rightarrow$exclude flips were already absent), yielding the final $n = 1710$.
 
 \subsection{Data extraction and classification}\label{sec:classification}
 
@@ -236,9 +236,9 @@ For each included study we recorded the bibliographic data, the families it sati
 
 L0 and L1 follow mechanically from the family codes. Telling L2 from L3 requires reading the study's evaluation; this was needed for one study only (Section~\ref{sec:rq4}).
 
-Families were first proposed by the language model from the title, abstract, and, where available, the PDF. The authors then reviewed them as follows. Every study with two technique families ($n = 1710$) was re-read for a missing third family; a subset was read by two authors with full agreement, and no study changed level. Studies added by the re-screen were classified by the authors. The 76 title-only records from the re-screen were resolved from abstract or PDF: 55 were classified into the corpus and 21 were excluded (out of scope or EC5b), leaving 435 included studies, all classified. The Phase-3 ML/forecasting block then added 126 studies (title/abstract screen under D2=B), and Wohlin snowballing to saturation (iterations~1--5) added 1\,154 studies (401+627+120+6+0), bringing the corpus to 1710, all classified.
+Families were first proposed by the language model from the title, abstract, and, where available, the PDF. The authors then reviewed them as follows. Every study with exactly two technique families ($n = 120$ at the post-snowball corpus) was re-read for a missing third family; a subset was read by two authors with full agreement, and no study changed level. Studies added by the re-screen were classified by the authors. The 76 title-only records from the re-screen were resolved from abstract or PDF: 55 were classified into the corpus and 21 were excluded (out of scope or EC5b), leaving 435 included studies, all classified. The Phase-3 ML/forecasting block then added 126 studies (title/abstract screen under D2=B), and Wohlin snowballing to saturation (iterations~1--5) added 1\,154 studies (401+627+120+6+0); after IC1 and the blind-screen flips, the corpus is 1710, all classified.
 
-A stratified sample of 55 L0 studies (period $\times$ family) was re-coded by one author against title/abstract/PDF. Agreement with the LLM family codes was 55/55 (0\% error on this sample). A second coder for $\kappa$ was not run; that remains an optional strengthening of the audit.
+A stratified sample of 55 L0 studies (period $\times$ family) was re-coded by one author against title/abstract/PDF. Agreement with the LLM family codes was 55/55 (0\% error on this sample). A second independent coder for $\kappa$ was not run; we treat the single-coder audit as a limitation rather than a blocker for this version.
 
 Priority-set extraction for RQ3 (291 studies: L1/L2 and all \PM{}) is complete for SDLC phase, event-log source/construction, PM algorithm, stochastic method, ML technique, forecast target, validation type and research type (Wieringa et~al.~\cite{wieringa2006}). Venue and publication-type coding for the full corpus is complete (OpenAlex host venue); SPMF codes are assigned for all studies (Section~\ref{sec:agenda} / Table~\ref{tab:spmf}).
 
@@ -400,24 +400,24 @@ Human extraction covered a priority set of 291 studies (all L1/L2 studies plus e
 
 \begin{table}[t]
 \centering\small
-\caption{SDLC phase $\times$ technique family in the priority extraction set ($n = 1710$). A study may count in more than one phase.}
+\caption{SDLC phase $\times$ technique family in the priority extraction set ($n = 291$). A study may count in more than one phase.}
 \label{tab:rq3-sdlc}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Phase & Studies & PM & ST & FC \\
+Phase & Studies & \PM{} & \ST{} & \FC{} & \MSR{} \\
 \midrule
-requirements & 8 & 4 & 4 & 5 \\
-development & 253 & 176 & 91 & 87 \\
-quality & 39 & 15 & 24 & 24 \\
-delivery & 7 & 3 & 4 & 4 \\
-operations & 0 & 0 & 0 & 0 \\
+Requirements and design & 8 & 4 & 4 & 5 & 2 \\
+Development (commits, pull requests) & 253 & 176 & 91 & 87 & 70 \\
+Quality (testing, review, defects) & 39 & 15 & 24 & 24 & 5 \\
+Delivery (CI/CD, release) & 7 & 3 & 4 & 4 & 1 \\
+Operations (incidents, maintenance) & 0 & 0 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[t]
 \centering\small
-\caption{Event-log source and construction, process-mining algorithm, stochastic method, and forecast target in the priority set ($n = 1710$).}
+\caption{Event-log source and construction, process-mining algorithm, stochastic method, and forecast target in the priority set ($n = 291$).}
 \label{tab:rq3-tech}
 \footnotesize
 \begin{tabular}{llr}
@@ -443,23 +443,7 @@ Forecast target & NA & 181 \\
 \end{tabular}
 \end{table}
 
-Development dominates (253 of 291). Named repository sources (Jira, GitHub, GitLab, Jenkins, IDE) did not surface as majority labels: 183 studies have no event log, and the remaining 108 were coded \texttt{other}/\texttt{semi} rather than a named ALM tool. Process-mining algorithms are likewise rarely named beyond a generic ``other'' (191); stochastic methods are mostly absent or unspecified, with SPN (9) and DTMC (5) as the only named clusters above three studies. Forecast targets, when present, are seldom the SDLC operational metrics (lead/cycle/remaining time); \texttt{outcome} appears 17 times. Research type (Wieringa et~al.~\cite{wieringa2006}) is concentrated on solution proposals (265), with 18 evaluations and 8 philosophical papers. The remaining 1\,417 corpus studies await the same coding; venues and publication types are reported separately once that pass (or a stratified sample) is complete.
-
-\begin{table}[h]
-\centering\small
-\caption{\textcolor{red}{[PENDENTE]} SDLC phases addressed, by technique family (classified studies). A study may address several phases.}\label{tab:phases}
-\begin{tabular}{lcccc}
-\toprule
-SDLC phase & \PM{} & \ST{} & \FC{} & \MSR{} \\
-\midrule
-Requirements and design & -- & -- & -- & -- \\
-Development (commits, pull requests) & -- & -- & -- & -- \\
-Quality (testing, review, defects) & -- & -- & -- & -- \\
-Delivery (CI/CD, release) & -- & -- & -- & -- \\
-Operations (incidents, maintenance) & -- & -- & -- & -- \\
-\bottomrule
-\end{tabular}
-\end{table}
+Development dominates (253 of 291). Named repository sources (Jira, GitHub, GitLab, Jenkins, IDE) did not surface as majority labels: 183 studies have no event log, and the remaining 108 were coded \texttt{other}/\texttt{semi} rather than a named ALM tool. Process-mining algorithms are likewise rarely named beyond a generic ``other'' (191); stochastic methods are mostly absent or unspecified, with SPN (9) and DTMC (5) as the only named clusters above three studies. Forecast targets, when present, are seldom the SDLC operational metrics (lead/cycle/remaining time); \texttt{outcome} appears 17 times. Research type (Wieringa et~al.~\cite{wieringa2006}) is concentrated on solution proposals (265), with 18 evaluations and 8 philosophical papers. Detailed field extraction (event-log source, PM algorithm, stochastic method, forecast target, research type) was completed for this priority set; for the remaining 1\,419 studies, SDLC coverage is reported through the mechanical SPMF SC codes on the full corpus (Section~\ref{sec:agenda}), and venues/publication types through OpenAlex (Table~\ref{tab:venues}).
 
 \subsection{RQ4: Integration and gaps}\label{sec:rq4}
 

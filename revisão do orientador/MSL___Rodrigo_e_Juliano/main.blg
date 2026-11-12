@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: elsarticle-num.bst
+Database file #1: references.bib
+Warning--empty pages in massitela2018
+You've used 48 entries,
+            2952 wiz_defined-function locations,
+            998 strings with 15957 characters,
+and the built_in function-call counts, 18829 in all, are:
+= -- 1906
+> -- 516
+< -- 23
++ -- 204
+- -- 156
+* -- 1436
+:= -- 2342
+add.period$ -- 95
+call.type$ -- 48
+change.case$ -- 48
+chr.to.int$ -- 0
+cite$ -- 49
+duplicate$ -- 634
+empty$ -- 2106
+format.name$ -- 200
+if$ -- 4910
+int.to.chr$ -- 0
+int.to.str$ -- 48
+missing$ -- 47
+newline$ -- 199
+num.names$ -- 48
+pop$ -- 325
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1285
+stack$ -- 0
+substring$ -- 1168
+swap$ -- 296
+text.length$ -- 23
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 152
+width$ -- 50
+write$ -- 513
+(There was 1 warning)

@@ -152,7 +152,7 @@ Total & & & 8.347 & 5.783 \\
 \end{table}
 
 \paragraph{\emph{Snowballing}}
-O snowballing de Wohlin~\cite{wohlin2014} partiu dos estudos incluídos após o bloco ML da Fase~3 ($n = 1710$; 494 com DOI). Cada iteração usou como sementes os novos includes da iteração anterior. A OpenAlex forneceu referências (backward) e citações (forward). Um residual entrava na triagem de título só quando o título continha ao menos um termo de mineração de processos/estocástico/previsão e um termo de engenharia de software/repositório (mesmo keyword gate do protocolo). Iterações e novos includes: (1)~401; (2)~627; (3)~120; (4)~6; (5)~0. A saturação ocorreu na iteração~5 (nenhum gate-pass entre 203 residuais novos). O bloco de snowballing acrescentou, portanto, 1\,154 estudos e elevou o corpus a $n = 1710$. Sete desses estudos tinham ano de publicação anterior a 1994 (IC1) e foram removidos, produzindo o corpus final de $n = 1710$.
+O snowballing de Wohlin~\cite{wohlin2014} partiu dos estudos incluídos após o bloco ML da Fase~3 ($n = 561$; 494 com DOI). Cada iteração usou como sementes os novos includes da iteração anterior. A OpenAlex forneceu referências (backward) e citações (forward). Um residual entrava na triagem de título só quando o título continha ao menos um termo de mineração de processos/estocástico/previsão e um termo de engenharia de software/repositório (mesmo keyword gate do protocolo). Iterações e novos includes: (1)~401; (2)~627; (3)~120; (4)~6; (5)~0. A saturação ocorreu na iteração~5 (nenhum gate-pass entre 203 residuais novos). O bloco de snowballing acrescentou, portanto, 1\,154 estudos e elevou o corpus a $n = 1715$. Sete desses estudos tinham ano de publicação anterior a 1994 (IC1) e foram removidos ($n = 1708$); os flips da re-triagem cega produziram o corpus final de $n = 1710$.
 
 \paragraph{Conjunto de controle}
 Dez estudos conhecidos (Tabela~\ref{tab:control}) foram usados para verificar se as strings recuperam trabalhos relevantes. Todos os dez foram recuperados. Como os dez já eram conhecidos quando as strings foram escritas, essa verificação não estima a sensibilidade da busca.
@@ -228,9 +228,9 @@ O critério de sucesso (Recall $\geq 0{,}90$), o plano amostral e as regras de e
 \paragraph{Etapa 3: re-triagem humana e verificação das inclusões}
 Dois revisores triaram todos os 4.005 registros que a primeira triagem havia excluído ou deixado sem decisão, incluindo 611 registros encerrados sem decisão por falta de resumo. Eles também verificaram cada inclusão da primeira triagem segundo os critérios. A re-triagem identificou 188 registros elegíveis, que, após a remoção de duplicatas e uma verificação final de elegibilidade, acrescentaram 150 estudos. A verificação das inclusões removeu 32 estudos cujo título e resumo não sustentavam a inclusão.
 
-Nos grandes estratos auxiliares S1 (exclusões por título/resumo; $n = 1710$ na planilha de escalada) e S3 (registros antes encerrados sem resumo; $n = 1710$), as planilhas de trabalho traziam colunas de sugestão pré-preenchidas (\texttt{sug\_*}). As sugestões vieram de duas fontes: (i)~heurística tipada por palavras-chave alinhada à Tabela~\ref{tab:criteria}; (ii)~apenas em parte de S1, pré-classificações por agentes em lotes (\texttt{preclass\_source=agent\_batches\_*}). Essas sugestões \emph{não} são o modelo Haiku da Etapa~1. Nas planilhas arquivadas de S1 e S3, porém, a coluna oficial \texttt{decision} coincide com \texttt{sug\_decision} em todas as linhas (100\%), de modo que o julgamento do revisor não se separa da sugestão e não é possível calcular um $\kappa$ confiável da Etapa~3 a partir desses arquivos. Uma re-triagem cega estratificada, sem sugestões (todos os 47 includes de S1/S3 mais 70 excludes aleatórios; semente 20261111), está em andamento para reportar concordância e $\kappa$; ver o protocolo da Fase~2 nos materiais de replicação.
+Nos grandes estratos auxiliares S1 (exclusões por título/resumo) e S3 (registros antes encerrados sem resumo), as planilhas de trabalho traziam colunas de sugestão pré-preenchidas (\texttt{sug\_*}). As sugestões vieram de duas fontes: (i)~heurística tipada por palavras-chave alinhada à Tabela~\ref{tab:criteria}; (ii)~apenas em parte de S1, pré-classificações por agentes em lotes (\texttt{preclass\_source=agent\_batches\_*}). Essas sugestões \emph{não} são o modelo Haiku da Etapa~1. Nas planilhas arquivadas de S1 e S3, porém, a coluna oficial \texttt{decision} coincide com \texttt{sug\_decision} em todas as linhas (100\%), de modo que o julgamento do revisor não se separa da sugestão e não é possível calcular um $\kappa$ confiável da Etapa~3 a partir desses arquivos. Por isso executamos uma re-triagem cega estratificada, sem sugestões (todos os 47 includes de S1/S3 mais 70 excludes aleatórios; semente 20261111; protocolo da Fase~2 nos materiais de replicação).
 
-Na amostra completa de re-triagem cega ($n = 1710$: os 47 estudos originalmente incluídos mais 70 originalmente excluídos), dois avaliadores aplicando a tabela IC/EC trancada e a decisão D2=B concordaram em todos os pares avaliáveis (concordância bruta $117/117 = 100\%$; Cohen $\kappa = 1{,}00$; um estudo marcado \texttt{not\_assessable} por ambos). Em relação às decisões originais, a concordância foi $92/116 = 79{,}3\%$ entre rótulos include/exclude avaliáveis: 16 inversões foram include$\rightarrow$exclude (fora de domínio, só confiabilidade/defeito de produto sob D2=B, ou itens não primários) e 8 foram exclude$\rightarrow$include (simulação de processo de software ou medição de processo de SE que a triagem original havia descartado). As $16+8$ inversões ficam registradas para limpeza do corpus; Esses flips foram aplicados ao corpus (líquido $+2$; 6 remoções presentes no corpus e 8 inclusões; 10 das 16 inversões include$\rightarrow$exclude já estavam ausentes de $n = 1710$), resultando em $n = 1710$.
+Nessa amostra cega ($n = 117$), dois avaliadores aplicando a tabela IC/EC trancada e a decisão D2=B concordaram em todos os pares avaliáveis (concordância bruta $117/117 = 100\%$; Cohen $\kappa = 1{,}00$; um estudo marcado \texttt{not\_assessable} por ambos). Em relação às decisões originais, a concordância foi $92/116 = 79{,}3\%$ entre rótulos include/exclude avaliáveis: 16 inversões foram include$\rightarrow$exclude (fora de domínio, só confiabilidade/defeito de produto sob D2=B, ou itens não primários) e 8 foram exclude$\rightarrow$include (simulação de processo de software ou medição de processo de SE que a triagem original havia descartado). Os flips foram aplicados ao corpus (líquido $+2$; 6 remoções presentes no corpus e 8 inclusões; 10 das 16 inversões include$\rightarrow$exclude já estavam ausentes), resultando no $n = 1710$ final.
 
 \subsection{Extração e classificação dos dados}\label{sec:classification}
 
@@ -245,9 +245,9 @@ Para cada estudo incluído registramos os dados bibliográficos, as famílias qu
 
 L0 e L1 decorrem mecanicamente dos códigos de família. Distinguir L2 de L3 exige ler a avaliação do estudo; isso foi necessário para um único estudo (Seção~\ref{sec:rq4}).
 
-As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com duas famílias de técnica ($n = 1710$) foi relido em busca de uma terceira família ausente; um subconjunto foi lido por dois autores com concordância total, e nenhum estudo mudou de nível. Os estudos acrescentados pela re-triagem foram classificados pelos autores. Os 76 registros conhecidos apenas pelo título na re-triagem foram resolvidos a partir do abstract ou do PDF: 55 entraram no corpus classificados e 21 foram excluídos (fora de escopo ou EC5b), resultando em 435 estudos incluídos, todos classificados. O bloco ML/previsão da Fase 3 acrescentou depois 126 estudos (triagem título/resumo sob D2=B), e o snowballing de Wohlin até saturação (iterações~1--5) acrescentou 1\,154 estudos (401+627+120+6+0), elevando o corpus a 1710, todos classificados.
+As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com exatamente duas famílias de técnica ($n = 120$ no corpus pós-snowball) foi relido em busca de uma terceira família ausente; um subconjunto foi lido por dois autores com concordância total, e nenhum estudo mudou de nível. Os estudos acrescentados pela re-triagem foram classificados pelos autores. Os 76 registros conhecidos apenas pelo título na re-triagem foram resolvidos a partir do abstract ou do PDF: 55 entraram no corpus classificados e 21 foram excluídos (fora de escopo ou EC5b), resultando em 435 estudos incluídos, todos classificados. O bloco ML/previsão da Fase 3 acrescentou depois 126 estudos (triagem título/resumo sob D2=B), e o snowballing de Wohlin até saturação (iterações~1--5) acrescentou 1\,154 estudos (401+627+120+6+0); após IC1 e os flips da re-triagem cega, o corpus é 1710, todos classificados.
 
-Uma amostra estratificada de 55 estudos L0 (período $\times$ família) foi recodificada por um autor a partir de título/resumo/PDF. A concordância com as famílias do LLM foi 55/55 (0\% de erro nessa amostra). Um segundo coder para $\kappa$ não foi executado; permanece como reforço opcional da auditoria.
+Uma amostra estratificada de 55 estudos L0 (período $\times$ família) foi recodificada por um autor a partir de título/resumo/PDF. A concordância com as famílias do LLM foi 55/55 (0\% de erro nessa amostra). Um segundo coder independente para $\kappa$ não foi executado; tratamos a auditoria com um único coder como limitação, e não como bloqueio, nesta versão.
 
 A extração do conjunto prioritário para a RQ3 (291 estudos: L1/L2 e todo \PM{}) está completa para fase do SDLC, fonte/construção do event log, algoritmo de PM, método estocástico, técnica de ML, alvo de previsão, tipo de validação e research type (Wieringa et~al.~\cite{wieringa2006}). A codificação de venue e tipo de publicação no corpus completo está concluída (venue OpenAlex); os códigos SPMF estão atribuídos a todos os estudos (Tabela~\ref{tab:spmf}).
 
@@ -409,24 +409,24 @@ A extração humana cobriu um conjunto prioritário de 291 estudos (todos os L1/
 
 \begin{table}[t]
 \centering\small
-\caption{Fase do SDLC $\times$ família de técnica no conjunto prioritário de extração ($n = 1710$). Um estudo pode contar em mais de uma fase.}
+\caption{Fase do SDLC $\times$ família de técnica no conjunto prioritário de extração ($n = 291$). Um estudo pode contar em mais de uma fase.}
 \label{tab:rq3-sdlc}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Fase & Estudos & PM & ST & FC \\
+Fase do SDLC & Estudos & \PM{} & \ST{} & \FC{} & \MSR{} \\
 \midrule
-requirements & 8 & 4 & 4 & 5 \\
-development & 253 & 176 & 91 & 87 \\
-quality & 39 & 15 & 24 & 24 \\
-delivery & 7 & 3 & 4 & 4 \\
-operations & 0 & 0 & 0 & 0 \\
+Requisitos e projeto & 8 & 4 & 4 & 5 & 2 \\
+Desenvolvimento (commits, pull requests) & 253 & 176 & 91 & 87 & 70 \\
+Qualidade (teste, revisão, defeitos) & 39 & 15 & 24 & 24 & 5 \\
+Entrega (CI/CD, release) & 7 & 3 & 4 & 4 & 1 \\
+Operação (incidentes, manutenção) & 0 & 0 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[t]
 \centering\small
-\caption{Fonte e construção do event log, algoritmo de PM, método estocástico e alvo de previsão no conjunto prioritário ($n = 1710$).}
+\caption{Fonte e construção do event log, algoritmo de PM, método estocástico e alvo de previsão no conjunto prioritário ($n = 291$).}
 \label{tab:rq3-tech}
 \footnotesize
 \begin{tabular}{llr}
@@ -452,23 +452,7 @@ Alvo de previsão & NA & 181 \\
 \end{tabular}
 \end{table}
 
-O desenvolvimento domina (253 de 291). Fontes nomeadas de repositório (Jira, GitHub, GitLab, Jenkins, IDE) não apareceram como rótulos majoritários: 183 estudos não têm event log, e os 108 restantes foram codificados como \texttt{other}/\texttt{semi} em vez de uma ferramenta ALM nomeada. Algoritmos de mineração de processos raramente são nomeados além de um ``other'' genérico (191); métodos estocásticos estão sobretudo ausentes ou não especificados, com SPN (9) e DTMC (5) como os únicos aglomerados nomeados acima de três estudos. Alvos de previsão, quando presentes, raramente são as métricas operacionais do SDLC (lead/cycle/remaining time); \texttt{outcome} aparece 17 vezes. O \emph{research type} (Wieringa et~al.~\cite{wieringa2006}) concentra-se em propostas de solução (265), com 18 avaliações e 8 artigos filosóficos. Os 1\,417 estudos restantes do corpus aguardam a mesma codificação; venues e tipos de publicação serão reportados quando essa passagem (ou uma amostra estratificada) for concluída.
-
-\begin{table}[h]
-\centering\small
-\caption{\textcolor{red}{[PENDENTE]} Fases do SDLC abordadas, por família de técnica (estudos classificados). Um estudo pode abordar várias fases.}\label{tab:phases}
-\begin{tabular}{lcccc}
-\toprule
-Fase do SDLC & \PM{} & \ST{} & \FC{} & \MSR{} \\
-\midrule
-Requisitos e projeto & -- & -- & -- & -- \\
-Desenvolvimento (commits, pull requests) & -- & -- & -- & -- \\
-Qualidade (teste, revisão, defeitos) & -- & -- & -- & -- \\
-Entrega (CI/CD, release) & -- & -- & -- & -- \\
-Operação (incidentes, manutenção) & -- & -- & -- & -- \\
-\bottomrule
-\end{tabular}
-\end{table}
+O desenvolvimento domina (253 de 291). Fontes nomeadas de repositório (Jira, GitHub, GitLab, Jenkins, IDE) não apareceram como rótulos majoritários: 183 estudos não têm event log, e os 108 restantes foram codificados como \texttt{other}/\texttt{semi} em vez de uma ferramenta ALM nomeada. Algoritmos de mineração de processos raramente são nomeados além de um ``other'' genérico (191); métodos estocásticos estão sobretudo ausentes ou não especificados, com SPN (9) e DTMC (5) como os únicos aglomerados nomeados acima de três estudos. Alvos de previsão, quando presentes, raramente são as métricas operacionais do SDLC (lead/cycle/remaining time); \texttt{outcome} aparece 17 vezes. O \emph{research type} (Wieringa et~al.~\cite{wieringa2006}) concentra-se em propostas de solução (265), com 18 avaliações e 8 artigos filosóficos. A extração detalhada de campos (fonte do event log, algoritmo de PM, método estocástico, alvo de previsão, research type) foi concluída para este conjunto prioritário; para os 1\,419 estudos restantes, a cobertura do SDLC é reportada pelos códigos SPMF SC mecânicos no corpus completo (Seção~\ref{sec:agenda}), e venues/tipos de publicação via OpenAlex (Tabela~\ref{tab:venues}).
 
 \subsection{RQ4: Integração e lacunas}\label{sec:rq4}
 

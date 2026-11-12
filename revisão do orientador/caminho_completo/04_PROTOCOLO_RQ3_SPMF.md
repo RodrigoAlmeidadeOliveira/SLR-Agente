@@ -38,7 +38,7 @@ Ordem: (1) ~~IC1~~ ✅ → (2) priority core fields → (3) venues/pub_type no f
 
 ## Saídas no manuscrito
 
-1. Tabela fase × família (hoje vazia / PENDENTE)
+1. Tabela fase × família → preenchida em `tab:rq3-sdlc` (prioritário n=291; MSR incluído); esqueleto `tab:phases` removido
 2. Tabela fontes + construção do log
 3. Frequências de algoritmos / métodos / alvos
 4. Venues e research types
