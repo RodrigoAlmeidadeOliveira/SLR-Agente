@@ -5,10 +5,12 @@ Uso:
   python3 classify_phase4_rq3_interactive.py --sheet priority --pending-only
   python3 classify_phase4_rq3_interactive.py --sheet priority --pending-only --compact
   python3 classify_phase4_rq3_interactive.py --sheet full --mode venue --pending-only
+  python3 classify_phase4_rq3_interactive.py --sheet full --mode core --non-priority-only --pending-only --compact
   python3 classify_phase4_rq3_interactive.py --sheet priority --status
 
 No modo normal, Enter em branco NÃO grava a linha.
 No modo --compact, uma linha com 9 campos separados por ';' (use - para manter sugestão).
+Enter sozinho no compact = aceitar todas as sugestões mecânicas (família/título).
 """
 from __future__ import annotations
 
@@ -294,16 +296,27 @@ def edit_compact(row: dict[str, str], fields: list[str]) -> tuple[bool, bool]:
     return True, False
 
 
+def priority_ids() -> set[str]:
+    pri = load(SHEETS["priority"])
+    return {r["internal_id"] for r in pri if (r.get("internal_id") or "").strip()}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sheet", choices=sorted(SHEETS), default="priority")
     ap.add_argument("--mode", choices=["all", "core", "venue", "spmf"], default="core")
     ap.add_argument("--extractor", default="Rodrigo")
     ap.add_argument("--pending-only", action="store_true")
+    ap.add_argument(
+        "--non-priority-only",
+        action="store_true",
+        help="só estudos fora do sheet priority (os ~1417 restantes)",
+    )
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--id", help="começar num internal_id específico")
     ap.add_argument("--compact", action="store_true", help="entrada em uma linha com ';'")
     ap.add_argument("--no-suggest", action="store_true", help="não pré-preencher por família/título")
+    ap.add_argument("--limit", type=int, default=0, help="parar após N gravações (lotes)")
     args = ap.parse_args()
 
     path = SHEETS[args.sheet]
@@ -313,11 +326,19 @@ def main() -> None:
 
     if args.status:
         status(rows, fields)
+        if args.non_priority_only or args.sheet == "full":
+            pids = priority_ids()
+            non = [r for r in rows if r["internal_id"] not in pids]
+            pend = sum(1 for r in non if not is_done(r, fields))
+            print(f"Não-prioritário: {len(non)}  |  pendentes ({args.mode}): {pend}")
         return
 
     work = rows
+    if args.non_priority_only:
+        pids = priority_ids()
+        work = [r for r in work if r["internal_id"] not in pids]
     if args.pending_only:
-        work = [r for r in rows if not is_done(r, fields)]
+        work = [r for r in work if not is_done(r, fields)]
     if args.id:
         idx = next((i for i, r in enumerate(work) if r["internal_id"] == args.id), None)
         if idx is None:
@@ -332,6 +353,7 @@ def main() -> None:
         print("Linha só é gravada se algum campo mudar (Enter em branco sem sugestão NÃO grava).\n")
 
     by_id = {r["internal_id"]: r for r in rows}
+    saved = 0
     for i, r in enumerate(work, 1):
         print("=" * 72)
         print(f"[{i}/{len(work)}] {r['internal_id']}  {r['year']}  {r['families']}  {r['level_technique']}")
@@ -370,7 +392,11 @@ def main() -> None:
         save(path, rows)
         if args.sheet == "priority":
             sync_full(rows)
+        saved += 1
         print("  ✓ salvo")
+        if args.limit and saved >= args.limit:
+            print(f"Limite de {args.limit} gravações atingido.")
+            break
 
     status(rows, fields)
 

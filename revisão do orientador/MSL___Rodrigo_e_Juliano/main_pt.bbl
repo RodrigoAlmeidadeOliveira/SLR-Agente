@@ -329,6 +329,13 @@ J.~Caldeira, F.~Brito~e Abreu, J.~Cardoso, J.~Reis, Unveiling process insights
 \newblock \href {https://doi.org/10.1016/j.csi.2021.103587}
   {\path{doi:10.1016/j.csi.2021.103587}}.
 
+\bibitem{rodriguez2017}
+R.~J. Rodr{\'i}guez, A {Petri} net tool for software performance estimation
+  based on upper throughput bounds, Automated Software Engineering 24~(1)
+  (2017) 73--99.
+\newblock \href {https://doi.org/10.1007/s10515-015-0186-2}
+  {\path{doi:10.1007/s10515-015-0186-2}}.
+
 \bibitem{guinea2025}
 M.~A. Guinea-Cabrera, J.~A. Holgado-Terriza, P.~A. Pico-Valencia, {PRIMAD}:
   Building digital twins for software development lifecycle within an

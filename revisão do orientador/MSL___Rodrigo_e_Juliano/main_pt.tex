@@ -18,13 +18,6 @@
 \usepackage{lineno}
 \linenumbers
 
-% ---------------------------------------------------------------
-% Notas dos autores. Cada \pendente{} marca trabalho que ainda
-% depende de dados novos ou de uma decisão dos autores. Remover
-% todos antes da submissão (buscar por "PENDENTE").
-% ---------------------------------------------------------------
-\newcommand{\pendente}[1]{\textcolor{red}{\textbf{[PENDENTE:} #1\textbf{]}}}
-
 \newcommand{\PM}{TF-PM}
 \newcommand{\ST}{TF-ST}
 \newcommand{\FC}{TF-FC}
@@ -59,16 +52,16 @@
 \begin{abstract}\small
 \textbf{Contexto.} Repositórios de software registram o desenvolvimento como eventos com carimbo de tempo. A mineração de processos (PM), a modelagem estocástica e a previsão de métricas de processo exploram esses rastros, em grande parte de forma independente.
 \textbf{Objetivo.} Mapear os estudos primários que aplicam essas técnicas a dados de desenvolvimento de software, caracterizar como as três linhas evoluíram e medir até que ponto elas foram integradas.
-\textbf{Método.} Um estudo de mapeamento sistemático relatado segundo o SEGRESS. Cinco bibliotecas digitais e uma iteração de busca por citações resultaram em 5.783 registros únicos (12 de abril de 2026). Um modelo de linguagem serviu de apoio a uma primeira triagem; todo registro que ele excluiu ou deixou sem decisão foi triado novamente por dois revisores humanos. Os estudos foram classificados em quatro famílias de técnica e de dados e em quatro níveis de integração (L0--L3).
+\textbf{Método.} Um estudo de mapeamento sistemático relatado segundo o SEGRESS. Cinco bibliotecas digitais e snowballing de citações até saturação resultaram em 5.783 registros únicos (12 de abril de 2026). Um modelo de linguagem serviu de apoio a uma primeira triagem; todo registro que ele excluiu ou deixou sem decisão foi triado novamente por dois revisores humanos. Os estudos foram classificados em quatro famílias de técnica e de dados e em quatro níveis de integração (L0--L3). Os campos centrais da RQ3 foram extraídos por humano em um conjunto prioritário de 293 estudos; os 1\,417 restantes receberam codificação assistida por sugestão dos mesmos campos.
 \textbf{Resultados.} O corpus contém 1710 estudos publicados entre 1994 e 2026, todos classificados (435 da busca-base, 126 do bloco ML/previsão da Fase~3 e 1\,154 do snowballing de Wohlin até saturação, menos 7 remoções IC1, com ajuste líquido $+2$ da re-triagem cega F2.3). A modelagem estocástica aparece em 16,9\% e a mineração de processos em 11,3\%; as duas linhas se encontram em 14 estudos. A previsão aparece em 78,0\% (1334 estudos), predominantemente só-FC (1225) após o snowballing e, nos demais casos, sobretudo associada a modelos estocásticos (99) e raramente à mineração de processos (10). Dois estudos carregam as três famílias de técnica (L2); nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta (L3).
-\textbf{Conclusão.} A área está fragmentada segundo as comunidades de pesquisa, e não por falta de técnicas. A previsão estocástica orientada a processos, na qual a estrutura de processo minerada parametriza uma previsão estocástica, é a combinação menos explorada. Propõe-se uma agenda com quatro direções.
+\textbf{Conclusão.} A área está fragmentada segundo as comunidades de pesquisa, e não por falta de técnicas. Neste corpus, a previsão estocástica orientada a processos---estrutura minerada parametrizando uma previsão estocástica de métrica de processo---não aparece entre os 14 estudos \PM{}+\ST{}. Propõe-se uma agenda com quatro direções a partir das lacunas observadas.
 \end{abstract}
 
 \begin{highlights}
 \item 1710 estudos aplicam PM, modelos estocásticos ou previsão a dados do SDLC.
 \item A modelagem estocástica predominou até 2013; desde então, a mineração de processos.
 \item PM e modelagem estocástica se encontram em 14 dos 1710 estudos.
-\item Um estudo combina as três; nenhum as acopla com avaliação de ponta a ponta.
+\item Dois estudos combinam as três; nenhum as acopla com avaliação de ponta a ponta.
 \item Corpus, classificação e registros de triagem estão disponíveis abertamente.
 \end{highlights}
 
@@ -105,7 +98,7 @@ A Seção~\ref{sec:method} descreve o protocolo da revisão; a Seção~\ref{sec:
 % =================================================================
 \section{Protocolo da Revisão}\label{sec:method}
 
-Seguimos as diretrizes de mapeamento de Petersen et al.~\cite{petersen2015}, as diretrizes de Kitchenham e Charters~\cite{kitchenham2007} e o procedimento de \emph{snowballing} de Wohlin~\cite{wohlin2014}, e relatamos segundo o SEGRESS~\cite{segress}. O protocolo do mapeamento não foi registrado previamente. O checklist SEGRESS preenchido está no material suplementar.
+Seguimos as diretrizes de mapeamento de Petersen et al.~\cite{petersen2015}, as diretrizes de Kitchenham e Charters~\cite{kitchenham2007} e o procedimento de \emph{snowballing} de Wohlin~\cite{wohlin2014}, e relatamos segundo o SEGRESS~\cite{segress}. O protocolo do mapeamento como um todo não foi registrado prospectivamente; a verificação de Recall da Etapa~2 contra a triagem do modelo de linguagem foi pré-registrada em 2026-10-06 e depositada no Zenodo (DOI~\href{https://doi.org/10.5281/zenodo.24148068}{10.5281/zenodo.24148068}). O checklist SEGRESS preenchido está no material suplementar.
 
 \subsection{Questões de pesquisa}\label{sec:rqs}
 
@@ -118,7 +111,7 @@ Seguimos as diretrizes de mapeamento de Petersen et al.~\cite{petersen2015}, as 
 
 RQ1 e RQ2 caracterizam o corpus. RQ3 descreve o que os estudos analisam e com quais algoritmos. RQ4 trata da questão que motivou esta revisão.
 
-A RQ3 é respondida sobre um conjunto prioritário de 291 estudos codificados por humano (todos os L1/L2 e todo estudo \PM{}; Seção~\ref{sec:rq3}). A extração anterior por LLM (0\% de concordância exata com um avaliador humano) foi descartada.
+As tabelas e a interpretação detalhada da RQ3 baseiam-se em um conjunto prioritário de 293 estudos com extração humana (todos os L1/L2 e todo estudo \PM{}; Seção~\ref{sec:rq3}); os 1\,417 restantes receberam codificação assistida por sugestão dos mesmos campos centrais. A extração anterior por LLM (0\% de concordância exata com um avaliador humano) foi descartada.
 
 \subsection{Estratégia de busca}\label{sec:search}
 
@@ -243,13 +236,13 @@ Para cada estudo incluído registramos os dados bibliográficos, as famílias qu
 \item[L3] As três famílias de técnica acopladas por meio de interfaces de dados especificadas, em que a saída de cada etapa é a entrada da seguinte, e avaliadas de ponta a ponta em dados de desenvolvimento de software.
 \end{description}
 
-L0 e L1 decorrem mecanicamente dos códigos de família. Distinguir L2 de L3 exige ler a avaliação do estudo; isso foi necessário para um único estudo (Seção~\ref{sec:rq4}).
+L0 e L1 decorrem mecanicamente dos códigos de família. Distinguir L2 de L3 exige ler a avaliação do estudo; fizemos essa leitura completa do PRIMAD, o caso-limite discutido na Seção~\ref{sec:rq4}.
 
 As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com exatamente duas famílias de técnica ($n = 120$ no corpus pós-snowball) foi relido em busca de uma terceira família ausente; um subconjunto foi lido por dois autores com concordância total, e nenhum estudo mudou de nível. Os estudos acrescentados pela re-triagem foram classificados pelos autores. Os 76 registros conhecidos apenas pelo título na re-triagem foram resolvidos a partir do abstract ou do PDF: 55 entraram no corpus classificados e 21 foram excluídos (fora de escopo ou EC5b), resultando em 435 estudos incluídos, todos classificados. O bloco ML/previsão da Fase 3 acrescentou depois 126 estudos (triagem título/resumo sob D2=B), e o snowballing de Wohlin até saturação (iterações~1--5) acrescentou 1\,154 estudos (401+627+120+6+0); após IC1 e os flips da re-triagem cega, o corpus é 1710, todos classificados.
 
-Uma amostra estratificada de 55 estudos L0 (período $\times$ família) foi recodificada por um autor a partir de título/resumo/PDF. A concordância com as famílias do LLM foi 55/55 (0\% de erro nessa amostra). Um segundo coder independente para $\kappa$ não foi executado; tratamos a auditoria com um único coder como limitação, e não como bloqueio, nesta versão.
+Uma amostra estratificada de 55 estudos L0 (período $\times$ família) foi recodificada por um autor a partir de título/resumo/PDF. A concordância com as famílias do LLM foi 55/55 (0\% de erro nessa amostra). Um segundo coder, cego aos rótulos do primeiro mas vendo a sugestão de família do LLM (Enter aceitava a sugestão), codificou uma subamostra aleatória de 20\% ($n = 11$; semente 20261112): concordância com o primeiro coder 11/11 e Cohen $\kappa = 1{,}00$ no rótulo de famílias. Esse $\kappa$ é, portanto, concordância sob sugestão compartilhada, e não uma dupla codificação sem sugestão de todos os 55 L0.
 
-A extração do conjunto prioritário para a RQ3 (291 estudos: L1/L2 e todo \PM{}) está completa para fase do SDLC, fonte/construção do event log, algoritmo de PM, método estocástico, técnica de ML, alvo de previsão, tipo de validação e research type (Wieringa et~al.~\cite{wieringa2006}). A codificação de venue e tipo de publicação no corpus completo está concluída (venue OpenAlex); os códigos SPMF estão atribuídos a todos os estudos (Tabela~\ref{tab:spmf}).
+A extração do conjunto prioritário para a RQ3 (293 estudos: L1/L2 e todo \PM{}) está completa para fase do SDLC, fonte/construção do event log, algoritmo de PM, método estocástico, técnica de ML, alvo de previsão, tipo de validação e research type (Wieringa et~al.~\cite{wieringa2006}). Os 1\,417 restantes receberam codificação assistida por sugestão dos mesmos campos (heurísticas de título/família; Enter aceitava a sugestão). As tabelas e a prosa da Seção~\ref{sec:rq3} reportam o subconjunto prioritário; os códigos da planilha completa apoiam a atribuição SPMF SC. A codificação de venue e tipo de publicação no corpus completo está concluída (venue OpenAlex); os códigos SPMF estão atribuídos a todos os estudos (Tabela~\ref{tab:spmf}).
 
 % =================================================================
 \section{Resultados da Busca e da Seleção}\label{sec:selection}
@@ -405,20 +398,20 @@ Nesses estudos, probabilidades de transição, taxas de disparo e parâmetros de
 
 \subsection{RQ3: Fases do SDLC, fontes de event log e técnicas}\label{sec:rq3}
 
-A extração humana cobriu um conjunto prioritário de 291 estudos (todos os L1/L2 e todo estudo com \PM{}; $17,0\%$ do corpus). Sugestões baseadas em família/título foram aceitas ou editadas estudo a estudo; a extração anterior por LLM não foi reutilizada.
+A extração humana cobriu um conjunto prioritário de 293 estudos (todos os L1/L2 e todo estudo com \PM{}; $17,1\%$ do corpus). Sugestões baseadas em família/título foram aceitas ou editadas estudo a estudo; a extração anterior por LLM não foi reutilizada. Os 1\,417 restantes receberam codificação assistida por sugestão dos mesmos campos (Enter aceitava a sugestão heurística); esses códigos não são tratados como equivalentes em profundidade à extração prioritária.
 
 \begin{table}[t]
 \centering\small
-\caption{Fase do SDLC $\times$ família de técnica no conjunto prioritário de extração ($n = 291$). Um estudo pode contar em mais de uma fase.}
+\caption{Fase do SDLC $\times$ família de técnica no conjunto prioritário de extração ($n = 293$). Um estudo pode contar em mais de uma fase.}
 \label{tab:rq3-sdlc}
 \begin{tabular}{lrrrrr}
 \toprule
 Fase do SDLC & Estudos & \PM{} & \ST{} & \FC{} & \MSR{} \\
 \midrule
 Requisitos e projeto & 8 & 4 & 4 & 5 & 2 \\
-Desenvolvimento (commits, pull requests) & 253 & 176 & 91 & 87 & 70 \\
-Qualidade (teste, revisão, defeitos) & 39 & 15 & 24 & 24 & 5 \\
-Entrega (CI/CD, release) & 7 & 3 & 4 & 4 & 1 \\
+Desenvolvimento (commits, pull requests) & 254 & 177 & 91 & 87 & 70 \\
+Qualidade (teste, revisão, defeitos) & 39 & 16 & 23 & 23 & 5 \\
+Entrega (CI/CD, release) & 8 & 4 & 4 & 4 & 1 \\
 Operação (incidentes, manutenção) & 0 & 0 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
@@ -426,33 +419,33 @@ Operação (incidentes, manutenção) & 0 & 0 & 0 & 0 & 0 \\
 
 \begin{table}[t]
 \centering\small
-\caption{Fonte e construção do event log, algoritmo de PM, método estocástico e alvo de previsão no conjunto prioritário ($n = 291$).}
+\caption{Fonte e construção do event log, algoritmo de PM, método estocástico e alvo de previsão no conjunto prioritário ($n = 293$).}
 \label{tab:rq3-tech}
 \footnotesize
 \begin{tabular}{llr}
 \toprule
 Campo & Valor & $n$ \\
 \midrule
-Fonte do event log & NA & 183 \\
+Fonte do event log & NA & 185 \\
  & other & 108 \\
-Construção do log & NA & 183 \\
+Construção do log & NA & 185 \\
  & semi & 108 \\
-Algoritmo PM & other & 191 \\
- & NA & 100 \\
-Método estocástico & NA & 177 \\
- & other & 93 \\
+Algoritmo PM & other & 194 \\
+ & NA & 99 \\
+Método estocástico & NA & 180 \\
+ & other & 92 \\
  & SPN & 9 \\
  & DTMC & 5 \\
  & Monte Carlo & 4 \\
  & System Dynamics & 3 \\
-Alvo de previsão & NA & 181 \\
+Alvo de previsão & NA & 184 \\
  & other & 93 \\
- & outcome & 17 \\
+ & outcome & 16 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-O desenvolvimento domina (253 de 291). Fontes nomeadas de repositório (Jira, GitHub, GitLab, Jenkins, IDE) não apareceram como rótulos majoritários: 183 estudos não têm event log, e os 108 restantes foram codificados como \texttt{other}/\texttt{semi} em vez de uma ferramenta ALM nomeada. Algoritmos de mineração de processos raramente são nomeados além de um ``other'' genérico (191); métodos estocásticos estão sobretudo ausentes ou não especificados, com SPN (9) e DTMC (5) como os únicos aglomerados nomeados acima de três estudos. Alvos de previsão, quando presentes, raramente são as métricas operacionais do SDLC (lead/cycle/remaining time); \texttt{outcome} aparece 17 vezes. O \emph{research type} (Wieringa et~al.~\cite{wieringa2006}) concentra-se em propostas de solução (265), com 18 avaliações e 8 artigos filosóficos. A extração detalhada de campos (fonte do event log, algoritmo de PM, método estocástico, alvo de previsão, research type) foi concluída para este conjunto prioritário; para os 1\,419 estudos restantes, a cobertura do SDLC é reportada pelos códigos SPMF SC mecânicos no corpus completo (Seção~\ref{sec:agenda}), e venues/tipos de publicação via OpenAlex (Tabela~\ref{tab:venues}).
+O desenvolvimento domina (254 de 293). Fontes nomeadas de repositório (Jira, GitHub, GitLab, Jenkins, IDE) não apareceram como rótulos majoritários: 185 estudos não têm event log, e os 108 restantes foram codificados como \texttt{other}/\texttt{semi} em vez de uma ferramenta ALM nomeada. Algoritmos de mineração de processos raramente são nomeados além de um ``other'' genérico (194); métodos estocásticos estão sobretudo ausentes ou não especificados, com SPN (9) e DTMC (5) como os únicos aglomerados nomeados acima de três estudos. Alvos de previsão, quando presentes, raramente são as métricas operacionais do SDLC (lead/cycle/remaining time); \texttt{outcome} aparece 16 vezes. O \emph{research type} (Wieringa et~al.~\cite{wieringa2006}) concentra-se em propostas de solução (267), com 18 avaliações e 8 artigos filosóficos. As Tabelas~\ref{tab:rq3-sdlc} e~\ref{tab:rq3-tech} reportam o subconjunto prioritário. A cobertura do SDLC no corpus completo é resumida pelos códigos SPMF SC que usam a planilha assistida por sugestão (Seção~\ref{sec:agenda}); venues e tipos de publicação vêm do OpenAlex (Tabela~\ref{tab:venues}).
 
 \subsection{RQ4: Integração e lacunas}\label{sec:rq4}
 
@@ -481,11 +474,11 @@ Total & & 1710 & 100,0 \\
 \paragraph{Mineração de processos com previsão}
 10 estudos combinam \PM{} e \FC{} (8 como combinação de duas famílias, mais os estudos L2), todos publicados a partir de 2015. Eles abordam a predição por meio do aprimoramento de processos, e não de um modelo estocástico explícito. Gupta combina a descoberta com o \emph{inductive miner} e análise preditiva para identificar padrões recorrentes de falha em fluxos de manutenção~\cite{gupta2017}. O SIMPT extrai árvores de processo anotadas com tempo para simulação interativa do tipo ``e se''~\cite{pourbafrani2021}, linha estendida com modelos generativos~\cite{buliga2025}. Caldeira et al.\ derivam métricas de complexidade de processo a partir de logs de IDE e as usam para prever a qualidade do produto~\cite{caldeira2022}. Nenhum relata uma distribuição de probabilidade sobre o tempo de conclusão ou os passos restantes de uma instância individual de processo.
 
-\paragraph{O único estudo com três famílias}
-O PRIMAD~\cite{guinea2025} constrói um gêmeo digital do SDLC a partir de fluxos de issues do Jira, combinando descoberta com pm4py, simulação multiagente em Akka e aprendizado supervisionado (LightGBM). O PDF foi lido por completo (Rodrigo, 2026-11-11). Os autores declaram validação dos componentes de forma independente e adiám o teste de ponta a ponta a um artigo futuro (Conclusions, p.~1684); as interfaces entre etapas estão só em prosa. Classificamos o estudo como L2, não L3. A evidência por componente é assimétrica: a mineração de processos aparece como \emph{profiling} descritivo no dataset público de Jira (Results, p.~1684); o modelo supervisionado é avaliado em produção com 33 times Scrum para \emph{roteamento de time} (acurácia 93\%, $F_1$ macro 0,91), não para métricas temporais de processo e não no log público usado na descoberta; a simulação Akka é proposta e justificada com um \emph{benchmark} de desempenho de terceiros, mas Results não reportam execução própria. Sob o IC4c como está escrito (\emph{lead}/cycle/remaining time, vazão, taxas de defeitos), o alvo preditivo é limítrofe: classificação de próximo estado/recurso ou de responsável, e não previsão de prazo ou vazão. Mantemos a marca \FC{} por consistência com o monitoramento preditivo de processos no corpus, e registramos o desalinhamento explicitamente.
+\paragraph{Os dois estudos com três famílias}
+Dois estudos carregam \PM{}, \ST{} e \FC{} (Tabela~\ref{tab:levels}). Rodr{\'i}guez~\cite{rodriguez2017} transforma modelos UML/MARTE em redes de Petri e estima desempenho de software via cotas de vazão e simulação estocástica; classificamos o estudo como L2 por coocorrência de famílias. Lemos o PRIMAD~\cite{guinea2025} por completo para o limiar L2/L3. O PRIMAD constrói um gêmeo digital do SDLC a partir de fluxos de issues do Jira, combinando descoberta com pm4py, simulação multiagente em Akka e aprendizado supervisionado (LightGBM). Os autores declaram validação dos componentes de forma independente e adiám o teste de ponta a ponta a um artigo futuro (Conclusions, p.~1684); as interfaces entre etapas estão só em prosa. Classificamos o PRIMAD como L2, não L3. A evidência por componente é assimétrica: a mineração de processos aparece como \emph{profiling} descritivo no dataset público de Jira (Results, p.~1684); o modelo supervisionado é avaliado em produção com 33 times Scrum para \emph{roteamento de time} (acurácia 93\%, $F_1$ macro 0,91), não para métricas temporais de processo e não no log público usado na descoberta; a simulação Akka é proposta e justificada com um \emph{benchmark} de desempenho de terceiros, mas Results não reportam execução própria. Sob o IC4c como está escrito (\emph{lead}/cycle/remaining time, vazão, taxas de defeitos), o alvo preditivo é limítrofe: classificação de próximo estado/recurso ou de responsável, e não previsão de prazo ou vazão. Mantemos a marca \FC{} por consistência com o monitoramento preditivo de processos no corpus, e registramos o desalinhamento explicitamente.
 
 \paragraph{Lacunas}
-Três lacunas decorrem das Tabelas~\ref{tab:combos} e~\ref{tab:levels}. Primeiro, a lacuna é de integração, não de cobertura: cada família está bem representada, mas as linhas de PM e estocástica se encontram em 14 de 1710 estudos. Segundo, a previsão é frequente (1341), mas o elo PM--previsão permanece raro (10); modelos estocásticos alimentados por estatísticas agregadas ainda respondem por 100 estudos ST+FC, contra estrutura minerada de logs de eventos (8). Terceiro, nenhum estudo avalia um pipeline de múltiplas etapas de ponta a ponta em dados do SDLC.
+Três lacunas decorrem das Tabelas~\ref{tab:combos} e~\ref{tab:levels}. Primeiro, a lacuna é de integração, não de cobertura: cada família está bem representada, mas as linhas de PM e estocástica se encontram em 14 de 1710 estudos. Segundo, a previsão é frequente (1334), mas o elo PM--previsão permanece raro (10); os estudos L1 ST+FC sem PM são 99, e só os dois L2 combinam ST+FC com PM. Terceiro, nenhum estudo avalia um pipeline de múltiplas etapas de ponta a ponta em dados do SDLC.
 
 % =================================================================
 \section{Discussão}\label{sec:discussion}
@@ -497,10 +490,10 @@ O padrão mais nítido do corpus é a sucessão de duas comunidades sobre o mesm
 \subsection{Agenda de pesquisa}\label{sec:agenda}
 
 \begin{description}
-\item[RA1.] \textbf{Construção padronizada de logs de eventos para o SDLC.} \emph{Frameworks} que transformem dados heterogêneos de repositório em logs de eventos comparáveis, com correlação de casos entre ferramentas. No corpus, os modelos de Markov da atividade em repositórios definem seus estados manualmente e de forma diferente a cada estudo~\cite{jo2023,jo2024,ortu2023}. No conjunto prioritário, 183 de 291 estudos não têm event log (\texttt{NA}), e os 108 que têm foram codificados como \texttt{other}/\texttt{semi}, e não como fonte ALM nomeada (Tabela~\ref{tab:rq3-tech}).
-\item[RA2.] \textbf{Previsão estocástica orientada a processos.} Derivar o espaço de estados e as probabilidades de transição de um modelo estocástico de previsão a partir de um modelo de processo descoberto, em vez de estatísticas agregadas. Esta é a combinação menos explorada (\PM{}+\ST{}: 14 estudos, nenhum prevendo uma métrica de processo).
-\item[RA3.] \textbf{Atributos derivados de processos para preditores aprendidos.} Uso sistemático de atributos de conformidade, retrabalho e entropia de caminhos em preditores de engenharia de software, direção sugerida por~\cite{caldeira2022,gupta2017}. Os alvos de previsão no conjunto prioritário são sobretudo \texttt{NA} (181) ou \texttt{other} genérico (93); alvos operacionais do SDLC (lead/cycle/remaining time) não emergiram como categorias nomeadas nesta passagem.
-\item[RA4.] \textbf{Benchmarks de ponta a ponta.} \emph{Benchmarks} abertos e compartilhados de código aberto, com separação temporal dos dados de teste, para que pipelines de múltiplas etapas possam ser comparados como um todo, e não por componente (L2 $\rightarrow$ L3).
+\item[RA1.] \textbf{Construção padronizada de logs de eventos para o SDLC.} \emph{Frameworks} que transformem dados heterogêneos de repositório em logs de eventos comparáveis, com correlação de casos entre ferramentas. No corpus, os modelos de Markov da atividade em repositórios definem seus estados manualmente e de forma diferente a cada estudo~\cite{jo2023,jo2024,ortu2023}. No conjunto prioritário, 185 de 293 estudos não têm event log (\texttt{NA}), e os 108 que têm foram codificados como \texttt{other}/\texttt{semi}, e não como fonte ALM nomeada (Tabela~\ref{tab:rq3-tech}).
+\item[RA2.] \textbf{Previsão estocástica orientada a processos.} Derivar o espaço de estados e as probabilidades de transição de um modelo estocástico de previsão a partir de um modelo de processo descoberto, em vez de estatísticas agregadas. Neste corpus, 14 estudos combinam \PM{} e \ST{}, e nenhum deles usa a camada estocástica para prever uma métrica de processo; priorizar essa lacuna é escolha de programa, não mandato do mapa.
+\item[RA3.] \textbf{Atributos derivados de processos para preditores aprendidos.} Uso sistemático de atributos de conformidade, retrabalho e entropia de caminhos em preditores de engenharia de software, direção sugerida por~\cite{caldeira2022,gupta2017}. No conjunto prioritário, os alvos de previsão são sobretudo \texttt{NA} (184) ou \texttt{other} genérico (93); alvos operacionais nomeados do SDLC (lead/cycle/remaining time) não emergiram como categorias majoritárias.
+\item[RA4.] \textbf{Benchmarks de ponta a ponta.} \emph{Benchmarks} abertos compartilhados, com separação temporal, permitiriam comparar pipelines de múltiplas etapas como um todo (L2 $\rightarrow$ L3). Nenhum estudo do corpus reporta tal avaliação; este item da agenda segue dessa observação.
 \end{description}
 
 A taxonomia Software Process Mining and Forecasting (SPMF) posiciona os estudos em três eixos: profundidade analítica (AD1 descritivo -- AD4 previsão distribucional), cobertura do SDLC (SC-R/D/Q/C/O) e integração de técnicas (TI-L0--L3, idêntica à escala L0--L3 da Tabela~\ref{tab:levels}). Atribuímos os 1710 estudos mecanicamente: TI a partir das famílias; SC a partir do campo de fase da RQ3 quando disponível, senão por pistas de título/família; AD a partir das famílias, alvos de previsão e título (PRIMAD foi fixado em AD4 após leitura completa).
@@ -530,7 +523,7 @@ Total & 1589 & 119 & 2 & 0 & 1710 \\
 \label{fig:spmf}
 \end{figure}
 
-A maior parte dos estudos está em AD3/TI-L0 (1201; métodos preditivos/de estimativa sem segunda família de técnica). AD1 (195) concentra descoberta de processo; AD2 (173), simulação de processo e análises diagnósticas; AD4 permanece raro (34). Na cobertura do SDLC (multi-rótulo), o desenvolvimento domina (SC-D 1502), seguido da qualidade (SC-Q 224); requisitos, entrega/CI e operações são esparsos (SC-R 24, SC-C 27, SC-O 30). Nenhum estudo alcança TI-L3. O canto superior direito vazio da Figura~\ref{fig:spmf} (AD4$\times$TI-L2/L3) é exatamente a lacuna que RA2--RA4 miram.
+A maior parte dos estudos está em AD3/TI-L0 (1201; métodos preditivos/de estimativa sem segunda família de técnica). AD1 (195) concentra descoberta de processo; AD2 (173), simulação de processo e análises diagnósticas; AD4 permanece raro (34). Na cobertura do SDLC (multi-rótulo), o desenvolvimento domina (SC-D 1502), seguido da qualidade (SC-Q 224); requisitos, entrega/CI e operações são esparsos (SC-R 24, SC-C 27, SC-O 30). Nenhum estudo alcança TI-L3. O canto superior direito vazio da Figura~\ref{fig:spmf} (AD4$\times$TI-L2/L3) é a região descritiva que RA2--RA4 tomam como lacuna observada, não como prova de que essas direções devam ser perseguidas.
 
 
 \subsection{Implicações para profissionais}
@@ -542,7 +535,7 @@ As técnicas do corpus operam sobre logs que já existem em rastreadores de issu
 
 \subsection{Busca}\label{sec:threats-search}
 
-As strings podem deixar de recuperar estudos que usam terminologia não canônica. A string complementar de MSR, a string de fronteira e a busca por citações atenuam esse risco. A verificação com o conjunto de controle é uma evidência fraca de completude: os dez estudos de controle já eram conhecidos quando as strings foram escritas, e três strings do Scopus incluem literalmente os títulos de estudos de controle. As strings não contêm bloco para previsão por aprendizado de máquina em dados de repositório; por isso, estudos que preveem métricas de processo com aprendizado de máquina sem termos de PM ou estocásticos estão sub-representados, e a participação de \FC{} provavelmente está subestimada. A revisão se limita a publicações em inglês revisadas por pares; literatura cinzenta, teses e preprints não foram pesquisados. As exportações do IEEE Xplore foram feitas em lotes manuais cuja string de origem não foi registrada.
+As strings podem deixar de recuperar estudos que usam terminologia não canônica. A string complementar de MSR, a string de fronteira e a busca por citações atenuam esse risco. A verificação com o conjunto de controle é uma evidência fraca de completude: os dez estudos de controle já eram conhecidos quando as strings foram escritas, e três strings do Scopus originalmente embutiam títulos de controle (depois limpas sob D1=A). As strings iniciais subponderavam previsão aprendida em repositórios; a Fase~3 acrescentou um bloco dedicado de ML/previsão ($+126$ includes) e snowballing de Wohlin até saturação, de modo que a participação reportada de \FC{} (1334; 78,0\%) reflete essa recuperação, e não só a primeira passagem de strings. Sub-representação residual de estudos de previsão sem termos de PM/estocástica nem do bloco ML não pode ser descartada. A revisão se limita a publicações em inglês revisadas por pares; literatura cinzenta, teses e preprints não foram pesquisados. As exportações do IEEE Xplore foram feitas em lotes manuais cuja string de origem não foi registrada.
 
 \subsection{Seleção}
 
@@ -550,7 +543,7 @@ A primeira triagem usou um modelo de linguagem. O Recall do modelo na amostra ve
 
 \subsection{Classificação}
 
-Os códigos de família das inclusões originais foram propostos pelo modelo de linguagem e revisados pelos autores em todo estudo com duas famílias. Uma amostra estratificada de 55 estudos L0 foi recodificada por um autor com 0\% de discordância em relação às famílias do LLM nessa amostra; subclassificação residual fora da amostra não pode ser descartada. O julgamento entre L2 e L3 depende da leitura de um único estudo (PRIMAD).
+Os códigos de família das inclusões originais foram propostos pelo modelo de linguagem e revisados pelos autores em todo estudo com duas famílias. Uma amostra estratificada de 55 estudos L0 foi recodificada por um autor com 0\% de discordância em relação às famílias do LLM nessa amostra; um segundo coder em $n = 11$ (20\%), cego ao primeiro mas vendo a sugestão do LLM, concordou plenamente ($\kappa = 1{,}00$). Esse número não afirma dupla codificação sem sugestão de toda a amostra L0. Subclassificação residual fora da amostra não pode ser descartada. O julgamento do limiar L2/L3 apoia-se na leitura completa do PRIMAD; o outro estudo L2 é Rodr{\'i}guez~\cite{rodriguez2017}.
 
 \subsection{Construto}
 
@@ -559,7 +552,7 @@ IC4b e IC4c admitem modelos de uso Markovianos para teste estatístico e modelos
 % =================================================================
 \section{Conclusão}\label{sec:conclusion}
 
-Mapeamos 1710 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014; elas ainda se encontram em apenas 14 estudos. Após o bloco ML da Fase~3 e o snowballing até saturação, a previsão é comum (78,2\%), sobretudo como trabalho só-FC sobre dados de repositório, enquanto o elo PM--previsão permanece raro. Dois estudos carregam as três famílias de técnica (PRIMAD~\cite{guinea2025} é o que lemos por completo para L2/L3); nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. A previsão estocástica orientada a processos e os \emph{benchmarks} de ponta a ponta são as duas direções com apoio mais claro no corpus.
+Mapeamos 1710 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014; elas ainda se encontram em apenas 14 estudos. Após o bloco ML da Fase~3 e o snowballing até saturação, a previsão é comum (78,0\%; 1334 estudos), sobretudo como trabalho só-FC sobre dados de repositório, enquanto o elo PM--previsão permanece raro (10). Dois estudos carregam as três famílias de técnica (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, lido por completo para o limiar L2/L3); nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. Neste corpus, a previsão estocástica orientada a processos de métricas de processo não aparece entre os 14 estudos \PM{}+\ST{}, e não há avaliação ponta a ponta de múltiplas etapas; essas observações motivam a agenda da Seção~\ref{sec:agenda}.
 
 O corpus, a classificação, os prompts e os registros de triagem estão disponíveis no pacote de replicação (Zenodo, DOI 10.5281/zenodo.21939600).
 

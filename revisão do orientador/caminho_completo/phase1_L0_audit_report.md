@@ -1,23 +1,28 @@
 # Relatório — auditoria L0 (amostra n=55)
 
-Data: 2026-11-11  
-Coder: Rodrigo  
+Data: 2026-11-12  
+Pass A: Rodrigo (2026-11-11)  
+Pass B: Juliano (subamostra 20%, semente 20261112)  
 Arquivo: `phase1_L0_audit_sample.csv`
 
 ## Resultado
 
 | Métrica | Valor |
 |---------|-------|
-| Amostra | 55 (estratificada por período × família; ainda 55/55 no L0 do corpus n=435) |
-| Acordo com famílias LLM (`match_llm=yes`) | **55/55 (100%)** |
-| Taxa de erro vs LLM | **0/55 (0%)** |
-| Segundo coder / κ | *não feito* (opcional; protocolo pedia ≥20%) |
+| Amostra A | 55 (estratificada por período × família) |
+| Acordo A vs LLM (`match_llm=yes`) | **55/55 (100%)** |
+| Pass B | **11/55 (20%)** |
+| A vs B (famílias) | **11/11 (100%)** |
+| Cohen κ A↔B (rótulo de famílias) | **1,000** |
+| Cohen κ A↔B (`match_llm` yes/no) | **1,000** |
 
 ## Interpretação
 
-Nesta amostra estratificada dos estudos L0, a codificação humana reproduziu as famílias propostas pelo LLM em todos os casos. Isso reduz a ameaça de subclassificação sistemática nos 323 L0, mas **não substitui** um segundo coder para κ.
+A auditoria com um coder reproduziu as famílias do LLM em toda a amostra estratificada. O segundo coder cego no mínimo protocolar (20%) confirmou κ perfeito nessa subamostra. Isso reduz a ameaça de subclassificação sistemática nos L0, sem eliminar residual fora da amostra.
 
-## Fechamento desta versão
+## Comando
 
-- 2º coder / κ: **não executado**; aceito como limitação não bloqueante (manuscrito EN/PT atualizado).
-- PRIMAD e buraco 2013: fechados na Fase 1.
+```bash
+python3 classify_L0_audit_interactive.py --coder Juliano --pass B --pending-only --sample 11
+python3 classify_L0_audit_interactive.py --pass B --status
+```

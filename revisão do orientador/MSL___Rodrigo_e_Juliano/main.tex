@@ -17,13 +17,6 @@
 \usepackage{lineno}
 \linenumbers
 
-% ---------------------------------------------------------------
-% Author notes. Every \pendente{} marks work that still needs new
-% data or a decision by the authors. Remove all of them before
-% submission (search for "PENDENTE").
-% ---------------------------------------------------------------
-\newcommand{\pendente}[1]{\textcolor{red}{\textbf{[PENDENTE:} #1\textbf{]}}}
-
 \newcommand{\PM}{TF-PM}
 \newcommand{\ST}{TF-ST}
 \newcommand{\FC}{TF-FC}
@@ -51,16 +44,16 @@
 \begin{abstract}\small
 \textbf{Context.} Software repositories record development as time-stamped events. Process mining (PM), stochastic modelling, and forecasting of process metrics exploit such traces, largely independently.
 \textbf{Objective.} To map the primary studies that apply these techniques to software development data, to characterise how the three lines have evolved, and to measure how far they have been integrated.
-\textbf{Method.} A systematic mapping study reported against SEGRESS. Five libraries and one citation-search iteration gave 5,783 unique records (12 April 2026). A language model served as a first-pass screening aid; every record it excluded or left undecided was re-screened by two human reviewers. Studies were classified into four technique and data families and into four integration levels (L0--L3).
+\textbf{Method.} A systematic mapping study reported against SEGRESS. Five libraries and citation snowballing to saturation gave 5,783 unique records (12 April 2026). A language model served as a first-pass screening aid; every record it excluded or left undecided was re-screened by two human reviewers. Studies were classified into four technique and data families and into four integration levels (L0--L3). RQ3 core fields were human-extracted on a priority set of 293 studies; the remaining 1\,417 received suggestion-assisted coding of the same fields.
 \textbf{Results.} The corpus contains 1710 studies published between 1994 and 2026, all classified (435 from the base search, 126 from the Phase-3 ML/forecasting block, and 1\,154 from Wohlin snowballing to saturation, minus 7 IC1 removals, with a net $+2$ adjustment from the F2.3 blind re-screen). Stochastic modelling appears in 16.9\% and process mining in 11.3\%; the two lines meet in 14 studies. Forecasting appears in 78.0\% (1334 studies), predominantly as FC-only work (1225) after snowballing, otherwise mostly paired with stochastic models (99) rather than process mining (10). Two studies carry all three technique families (L2); none couples them through specified interfaces evaluated end-to-end (L3).
-\textbf{Conclusion.} The field is fragmented along community lines rather than short of techniques. Process-aware stochastic forecasting, in which mined process structure parameterises a stochastic forecast, is the least explored combination. A four-direction agenda is proposed.
+\textbf{Conclusion.} The field is fragmented along community lines rather than short of techniques. In this corpus, process-aware stochastic forecasting---mined process structure parameterising a stochastic forecast of a process metric---is unobserved among the 14 \PM{}+\ST{} studies. A four-direction research agenda is proposed from the observed gaps.
 \end{abstract}
 
 \begin{highlights}
 \item 1710 studies apply process mining, stochastic models or forecasting to SDLC data.
 \item Stochastic modelling dominated until 2013; process mining has dominated since.
 \item Process mining and stochastic modelling meet in 14 of 1710 studies.
-\item One study combines all three; none couples them with end-to-end evaluation.
+\item Two studies combine all three; none couples them with end-to-end evaluation.
 \item Corpus, classification, and screening records are openly available.
 \end{highlights}
 
@@ -97,7 +90,7 @@ Section~\ref{sec:method} describes the review protocol, Section~\ref{sec:selecti
 % =================================================================
 \section{Review Protocol}\label{sec:method}
 
-We follow the mapping guidelines of Petersen et al.~\cite{petersen2015}, the guidelines of Kitchenham and Charters~\cite{kitchenham2007}, and the snowballing procedure of Wohlin~\cite{wohlin2014}, and report against SEGRESS~\cite{segress}. The mapping protocol was not registered in advance. The completed SEGRESS checklist is in the supplementary material.
+We follow the mapping guidelines of Petersen et al.~\cite{petersen2015}, the guidelines of Kitchenham and Charters~\cite{kitchenham2007}, and the snowballing procedure of Wohlin~\cite{wohlin2014}, and report against SEGRESS~\cite{segress}. The mapping protocol as a whole was not prospectively registered; the Step~2 recall check against the language-model screen was pre-registered on 2026-10-06 and deposited on Zenodo (DOI~\href{https://doi.org/10.5281/zenodo.24148068}{10.5281/zenodo.24148068}). The completed SEGRESS checklist is in the supplementary material.
 
 \subsection{Research questions}\label{sec:rqs}
 
@@ -110,7 +103,7 @@ We follow the mapping guidelines of Petersen et al.~\cite{petersen2015}, the gui
 
 RQ1 and RQ2 characterise the corpus. RQ3 describes what the studies analyse and with which algorithms. RQ4 addresses the motivating question of this review.
 
-RQ3 is answered on a human-coded priority set of 291 studies (all L1/L2 plus every \PM{} study; Section~\ref{sec:rq3}). The earlier LLM extraction (0\% exact agreement with a human rater) was discarded.
+RQ3 tables and detailed interpretation are based on a human-extracted priority set of 293 studies (all L1/L2 plus every \PM{} study; Section~\ref{sec:rq3}); the remaining 1\,417 studies received suggestion-assisted coding of the same core fields. The earlier LLM extraction (0\% exact agreement with a human rater) was discarded.
 
 \subsection{Search strategy}\label{sec:search}
 
@@ -234,13 +227,13 @@ For each included study we recorded the bibliographic data, the families it sati
 \item[L3] All three technique families coupled through specified data interfaces, in which the output of each stage is the input of the next, and evaluated end-to-end on software development data.
 \end{description}
 
-L0 and L1 follow mechanically from the family codes. Telling L2 from L3 requires reading the study's evaluation; this was needed for one study only (Section~\ref{sec:rq4}).
+L0 and L1 follow mechanically from the family codes. Telling L2 from L3 requires reading the study's evaluation; we did that full-text reading for PRIMAD, the boundary case discussed in Section~\ref{sec:rq4}.
 
 Families were first proposed by the language model from the title, abstract, and, where available, the PDF. The authors then reviewed them as follows. Every study with exactly two technique families ($n = 120$ at the post-snowball corpus) was re-read for a missing third family; a subset was read by two authors with full agreement, and no study changed level. Studies added by the re-screen were classified by the authors. The 76 title-only records from the re-screen were resolved from abstract or PDF: 55 were classified into the corpus and 21 were excluded (out of scope or EC5b), leaving 435 included studies, all classified. The Phase-3 ML/forecasting block then added 126 studies (title/abstract screen under D2=B), and Wohlin snowballing to saturation (iterations~1--5) added 1\,154 studies (401+627+120+6+0); after IC1 and the blind-screen flips, the corpus is 1710, all classified.
 
-A stratified sample of 55 L0 studies (period $\times$ family) was re-coded by one author against title/abstract/PDF. Agreement with the LLM family codes was 55/55 (0\% error on this sample). A second independent coder for $\kappa$ was not run; we treat the single-coder audit as a limitation rather than a blocker for this version.
+A stratified sample of 55 L0 studies (period $\times$ family) was re-coded by one author against title/abstract/PDF. Agreement with the LLM family codes was 55/55 (0\% error on this sample). A second coder, blind to the first coder's labels but shown the LLM family suggestion (Enter accepted the suggestion), coded a random 20\% subsample ($n = 11$; seed 20261112): agreement with the first coder was 11/11 and Cohen $\kappa = 1.00$ on the family-label string. That $\kappa$ is therefore agreement under a shared suggestion, not a fully suggestion-free double coding of all 55 L0 studies.
 
-Priority-set extraction for RQ3 (291 studies: L1/L2 and all \PM{}) is complete for SDLC phase, event-log source/construction, PM algorithm, stochastic method, ML technique, forecast target, validation type and research type (Wieringa et~al.~\cite{wieringa2006}). Venue and publication-type coding for the full corpus is complete (OpenAlex host venue); SPMF codes are assigned for all studies (Section~\ref{sec:agenda} / Table~\ref{tab:spmf}).
+Priority-set extraction for RQ3 (293 studies: L1/L2 and all \PM{}) is complete for SDLC phase, event-log source/construction, PM algorithm, stochastic method, ML technique, forecast target, validation type and research type (Wieringa et~al.~\cite{wieringa2006}). The same core fields were then coded for the remaining 1\,417 studies under a suggestion-assisted interactive protocol (title/family heuristics; Enter accepted the suggestion). Tables and prose interpretation in Section~\ref{sec:rq3} report the priority subset; the full-sheet codes support SPMF SC assignment. Venue and publication-type coding for the full corpus is complete (OpenAlex host venue); SPMF codes are assigned for all studies (Section~\ref{sec:agenda} / Table~\ref{tab:spmf}).
 
 % =================================================================
 \section{Search and Selection Results}\label{sec:selection}
@@ -396,20 +389,20 @@ In these studies, transition probabilities, firing rates, and distribution param
 
 \subsection{RQ3: SDLC phases, event-log sources, and techniques}\label{sec:rq3}
 
-Human extraction covered a priority set of 291 studies (all L1/L2 studies plus every study carrying \PM{}; $17.0\%$ of the corpus). Title- and family-aware suggestions were accepted or edited study by study; the earlier LLM extraction was not reused.
+Human extraction covered a priority set of 293 studies (all L1/L2 studies plus every study carrying \PM{}; $17.1\%$ of the corpus). Title- and family-aware suggestions were accepted or edited study by study; the earlier LLM extraction was not reused. The remaining 1\,417 studies received suggestion-assisted coding of the same core fields (Enter accepted the heuristic suggestion); those codes are not treated as equivalent in depth to the priority extraction.
 
 \begin{table}[t]
 \centering\small
-\caption{SDLC phase $\times$ technique family in the priority extraction set ($n = 291$). A study may count in more than one phase.}
+\caption{SDLC phase $\times$ technique family in the priority extraction set ($n = 293$). A study may count in more than one phase.}
 \label{tab:rq3-sdlc}
 \begin{tabular}{lrrrrr}
 \toprule
 Phase & Studies & \PM{} & \ST{} & \FC{} & \MSR{} \\
 \midrule
 Requirements and design & 8 & 4 & 4 & 5 & 2 \\
-Development (commits, pull requests) & 253 & 176 & 91 & 87 & 70 \\
-Quality (testing, review, defects) & 39 & 15 & 24 & 24 & 5 \\
-Delivery (CI/CD, release) & 7 & 3 & 4 & 4 & 1 \\
+Development (commits, pull requests) & 254 & 177 & 91 & 87 & 70 \\
+Quality (testing, review, defects) & 39 & 16 & 23 & 23 & 5 \\
+Delivery (CI/CD, release) & 8 & 4 & 4 & 4 & 1 \\
 Operations (incidents, maintenance) & 0 & 0 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
@@ -417,33 +410,33 @@ Operations (incidents, maintenance) & 0 & 0 & 0 & 0 & 0 \\
 
 \begin{table}[t]
 \centering\small
-\caption{Event-log source and construction, process-mining algorithm, stochastic method, and forecast target in the priority set ($n = 291$).}
+\caption{Event-log source and construction, process-mining algorithm, stochastic method, and forecast target in the priority set ($n = 293$).}
 \label{tab:rq3-tech}
 \footnotesize
 \begin{tabular}{llr}
 \toprule
 Field & Value & $n$ \\
 \midrule
-Event-log source & NA & 183 \\
+Event-log source & NA & 185 \\
  & other & 108 \\
-Log construction & NA & 183 \\
+Log construction & NA & 185 \\
  & semi & 108 \\
-PM algorithm & other & 191 \\
- & NA & 100 \\
-Stochastic method & NA & 177 \\
- & other & 93 \\
+PM algorithm & other & 194 \\
+ & NA & 99 \\
+Stochastic method & NA & 180 \\
+ & other & 92 \\
  & SPN & 9 \\
  & DTMC & 5 \\
  & Monte Carlo & 4 \\
  & System Dynamics & 3 \\
-Forecast target & NA & 181 \\
+Forecast target & NA & 184 \\
  & other & 93 \\
- & outcome & 17 \\
+ & outcome & 16 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Development dominates (253 of 291). Named repository sources (Jira, GitHub, GitLab, Jenkins, IDE) did not surface as majority labels: 183 studies have no event log, and the remaining 108 were coded \texttt{other}/\texttt{semi} rather than a named ALM tool. Process-mining algorithms are likewise rarely named beyond a generic ``other'' (191); stochastic methods are mostly absent or unspecified, with SPN (9) and DTMC (5) as the only named clusters above three studies. Forecast targets, when present, are seldom the SDLC operational metrics (lead/cycle/remaining time); \texttt{outcome} appears 17 times. Research type (Wieringa et~al.~\cite{wieringa2006}) is concentrated on solution proposals (265), with 18 evaluations and 8 philosophical papers. Detailed field extraction (event-log source, PM algorithm, stochastic method, forecast target, research type) was completed for this priority set; for the remaining 1\,419 studies, SDLC coverage is reported through the mechanical SPMF SC codes on the full corpus (Section~\ref{sec:agenda}), and venues/publication types through OpenAlex (Table~\ref{tab:venues}).
+Development dominates (254 of 293). Named repository sources (Jira, GitHub, GitLab, Jenkins, IDE) did not surface as majority labels: 185 studies have no event log, and the remaining 108 were coded \texttt{other}/\texttt{semi} rather than a named ALM tool. Process-mining algorithms are likewise rarely named beyond a generic ``other'' (194); stochastic methods are mostly absent or unspecified, with SPN (9) and DTMC (5) as the only named clusters above three studies. Forecast targets, when present, are seldom the SDLC operational metrics (lead/cycle/remaining time); \texttt{outcome} appears 16 times. Research type (Wieringa et~al.~\cite{wieringa2006}) is concentrated on solution proposals (267), with 18 evaluations and 8 philosophical papers. Table~\ref{tab:rq3-sdlc} and Table~\ref{tab:rq3-tech} report the priority subset. Full-corpus SDLC coverage is summarised via SPMF SC codes that draw on the suggestion-assisted sheet (Section~\ref{sec:agenda}); venues and publication types come from OpenAlex (Table~\ref{tab:venues}).
 
 \subsection{RQ4: Integration and gaps}\label{sec:rq4}
 
@@ -472,11 +465,11 @@ Total & & 1710 & 100.0 \\
 \paragraph{Process mining with forecasting}
 10 studies combine \PM{} and \FC{} (8 as a two-family combination, plus the L2 studies), all published since 2015. They approach prediction through process enhancement rather than an explicit stochastic model. Gupta combines inductive-miner discovery with predictive analytics to identify recurring failure patterns in maintenance workflows~\cite{gupta2017}. SIMPT extracts time-annotated process trees for interactive what-if simulation~\cite{pourbafrani2021}, a line extended with generative models~\cite{buliga2025}. Caldeira et al.\ derive process-complexity metrics from IDE logs and use them to predict product quality~\cite{caldeira2022}. None reports a probability distribution over the completion time or remaining steps of an individual process instance.
 
-\paragraph{The single three-family study}
-PRIMAD~\cite{guinea2025} builds a digital twin of the SDLC from Jira issue flows, combining pm4py-based discovery, an actor-based simulation core (Akka), and supervised learning (LightGBM). The PDF was read in full (Rodrigo, 2026-11-11). The authors state that they validated components independently and defer a full end-to-end test to a forthcoming article (Conclusions, p.~1684); formal stage interfaces are described only in prose. We therefore classify the study as L2, not L3. The component evidence is asymmetric: process mining is reported as descriptive profiling on a public Jira dataset (Results, p.~1684); the supervised model is evaluated in production on 33 Scrum teams for \emph{team routing} (accuracy 93\%, macro-$F_1$ 0.91), not for temporal process metrics and not on the public Jira log used in discovery; the Akka simulation is proposed and justified with a third-party performance benchmark, but Results report no simulation run of their own. Under IC4c as written (lead/cycle/remaining time, throughput, defect rates), the predictive target is borderline: next-state/resource or assignee classification rather than a duration or throughput forecast. We keep the \FC{} mark for consistency with predictive process monitoring in the corpus, and note the mismatch explicitly.
+\paragraph{The two three-family studies}
+Two studies carry \PM{}, \ST{}, and \FC{} (Table~\ref{tab:levels}). Rodr{\'i}guez~\cite{rodriguez2017} transforms UML/MARTE models into Petri nets and estimates software performance via throughput bounds and stochastic simulation; we classify it as L2 on family co-occurrence. We read PRIMAD~\cite{guinea2025} in full for the L2/L3 boundary. PRIMAD builds a digital twin of the SDLC from Jira issue flows, combining pm4py-based discovery, an actor-based simulation core (Akka), and supervised learning (LightGBM). The authors state that they validated components independently and defer a full end-to-end test to a forthcoming article (Conclusions, p.~1684); formal stage interfaces are described only in prose. We therefore classify PRIMAD as L2, not L3. The component evidence is asymmetric: process mining is reported as descriptive profiling on a public Jira dataset (Results, p.~1684); the supervised model is evaluated in production on 33 Scrum teams for \emph{team routing} (accuracy 93\%, macro-$F_1$ 0.91), not for temporal process metrics and not on the public Jira log used in discovery; the Akka simulation is proposed and justified with a third-party performance benchmark, but Results report no simulation run of their own. Under IC4c as written (lead/cycle/remaining time, throughput, defect rates), the predictive target is borderline: next-state/resource or assignee classification rather than a duration or throughput forecast. We keep the \FC{} mark for consistency with predictive process monitoring in the corpus, and note the mismatch explicitly.
 
 \paragraph{Gaps}
-Three gaps follow from Tables~\ref{tab:combos} and~\ref{tab:levels}. First, the gap is one of integration, not of coverage: each family is well represented, but the PM and stochastic lines meet in 14 of 1710 studies. Second, forecasting is frequent (1341), but the PM--forecast link remains rare (10); stochastic models fed by aggregate statistics still account for 100 ST+FC studies, versus structure mined from event logs (8). Third, no study evaluates a multi-stage pipeline end-to-end on SDLC data.
+Three gaps follow from Tables~\ref{tab:combos} and~\ref{tab:levels}. First, the gap is one of integration, not of coverage: each family is well represented, but the PM and stochastic lines meet in 14 of 1710 studies. Second, forecasting is frequent (1334), but the PM--forecast link remains rare (10); L1 ST+FC studies without PM number 99, and only the two L2 studies combine ST+FC with PM. Third, no study evaluates a multi-stage pipeline end-to-end on SDLC data.
 
 % =================================================================
 \section{Discussion}\label{sec:discussion}
@@ -488,10 +481,10 @@ The clearest pattern in the corpus is the succession of two communities over the
 \subsection{Research agenda}\label{sec:agenda}
 
 \begin{description}
-\item[RA1: Standardised event-log construction for the SDLC.] Frameworks that turn heterogeneous repository data into comparable event logs with cross-tool case correlation. In the corpus, Markov models of repository activity define their states manually and differently from study to study~\cite{jo2023,jo2024,ortu2023}. In the priority set, 183 of 291 studies have no event log (\texttt{NA}), and the 108 that do were coded \texttt{other}/\texttt{semi} rather than a named ALM source (Table~\ref{tab:rq3-tech}).
-\item[RA2: Process-aware stochastic forecasting.] Deriving the state space and transition probabilities of a stochastic forecasting model from a discovered process model, instead of from aggregate statistics. This is the least explored combination (\PM{}+\ST{}: 10 studies, none forecasting a process metric).
-\item[RA3: Process-derived features for learned predictors.] Systematic use of conformance, rework, and path-entropy features in software engineering predictors, a direction suggested by~\cite{caldeira2022,gupta2017}. Forecast targets in the priority set are mostly \texttt{NA} (181) or generic \texttt{other} (93); operational SDLC targets (lead/cycle/remaining time) did not emerge as named categories in this pass.
-\item[RA4: End-to-end benchmarks.] Shared open-source benchmarks with temporal hold-out, so that multi-stage pipelines can be compared as a whole rather than per component (L2 $\rightarrow$ L3).
+\item[RA1: Standardised event-log construction for the SDLC.] Frameworks that turn heterogeneous repository data into comparable event logs with cross-tool case correlation. In the corpus, Markov models of repository activity define their states manually and differently from study to study~\cite{jo2023,jo2024,ortu2023}. In the priority set, 185 of 293 studies have no event log (\texttt{NA}), and the 108 that do were coded \texttt{other}/\texttt{semi} rather than a named ALM source (Table~\ref{tab:rq3-tech}).
+\item[RA2: Process-aware stochastic forecasting.] Deriving the state space and transition probabilities of a stochastic forecasting model from a discovered process model, instead of from aggregate statistics. In this corpus, 14 studies combine \PM{} and \ST{}, and none of those uses the stochastic layer to forecast a process metric; whether that gap should be prioritised is a programme choice, not a mandate of the map.
+\item[RA3: Process-derived features for learned predictors.] Systematic use of conformance, rework, and path-entropy features in software engineering predictors, a direction suggested by~\cite{caldeira2022,gupta2017}. In the priority set, forecast targets are mostly \texttt{NA} (184) or generic \texttt{other} (93); named operational SDLC targets (lead/cycle/remaining time) did not emerge as majority categories.
+\item[RA4: End-to-end benchmarks.] Shared open-source benchmarks with temporal hold-out would let multi-stage pipelines be compared as a whole rather than per component (L2 $\rightarrow$ L3). No study in the corpus reports such an evaluation; this agenda item follows from that observation.
 \end{description}
 
 The Software Process Mining and Forecasting (SPMF) taxonomy positions studies on three axes: Analytical Depth (AD1 descriptive -- AD4 distributional forecasting), SDLC Coverage (SC-R/D/Q/C/O), and Technique Integration (TI-L0--L3, identical to the L0--L3 scale of Table~\ref{tab:levels}). We assigned all 1710 studies mechanically: TI from the family codes; SC from the RQ3 phase field when available, otherwise from title/family cues; AD from technique families, forecast targets, and title cues (PRIMAD was set to AD4 after full-text reading).
@@ -521,7 +514,7 @@ Total & 1589 & 119 & 2 & 0 & 1710 \\
 \label{fig:spmf}
 \end{figure}
 
-Most studies sit at AD3/TI-L0 (1201; predictive/estimation methods without a second technique family). AD1 (195) concentrates process-discovery work; AD2 (173) process simulation and diagnostic analyses; AD4 remains rare (34). On SDLC coverage (multi-label), development dominates (SC-D 1502), followed by quality (SC-Q 224); requirements, delivery/CI, and operations are sparse (SC-R 24, SC-C 27, SC-O 30). No study reaches TI-L3. The empty upper-right of Figure~\ref{fig:spmf} (AD4$\times$TI-L2/L3) is exactly the gap that RA2--RA4 target.
+Most studies sit at AD3/TI-L0 (1201; predictive/estimation methods without a second technique family). AD1 (195) concentrates process-discovery work; AD2 (173) process simulation and diagnostic analyses; AD4 remains rare (34). On SDLC coverage (multi-label), development dominates (SC-D 1502), followed by quality (SC-Q 224); requirements, delivery/CI, and operations are sparse (SC-R 24, SC-C 27, SC-O 30). No study reaches TI-L3. The empty upper-right of Figure~\ref{fig:spmf} (AD4$\times$TI-L2/L3) is the descriptive region that RA2--RA4 take as an observed gap, not as proof that those directions must be pursued.
 
 
 \subsection{Implications for practitioners}
@@ -533,7 +526,7 @@ The techniques in the corpus work on logs that already exist in issue trackers a
 
 \subsection{Search}\label{sec:threats-search}
 
-The strings may miss studies that use non-canonical terminology. The complementary MSR string, the frontier string, and the citation search mitigate this. The control check is weak evidence of completeness: the ten control studies were known when the strings were written, and three Scopus strings include the titles of control studies verbatim. The strings contain no block for learned forecasting on repository data, so studies that predict process metrics with machine learning without PM or stochastic terms are under-represented, and the \FC{} share is likely an underestimate. The review is limited to English, peer-reviewed publications; grey literature, theses, and preprints were not searched. IEEE Xplore exports were run in manual batches whose source string was not recorded.
+The strings may miss studies that use non-canonical terminology. The complementary MSR string, the frontier string, and the citation search mitigate this. The control check is weak evidence of completeness: the ten control studies were known when the strings were written, and three Scopus strings originally embedded control titles verbatim (later cleaned under D1=A). The initial strings under-weighted learned forecasting on repository data; Phase~3 added a dedicated ML/forecasting block ($+126$ includes) and Wohlin snowballing to saturation, so the reported \FC{} share (1334; 78.0\%) reflects that recovery rather than the first string pass alone. Residual under-representation of forecasting studies that use neither PM/stochastic nor the ML-block terms cannot be ruled out. The review is limited to English, peer-reviewed publications; grey literature, theses, and preprints were not searched. IEEE Xplore exports were run in manual batches whose source string was not recorded.
 
 \subsection{Selection}
 
@@ -541,7 +534,7 @@ The first pass used a language model. The model's Recall on the human-checked sa
 
 \subsection{Classification}
 
-Family codes for the original includes were proposed by the language model and reviewed by the authors for every two-family study. A stratified sample of 55 L0 (single-technique-family) studies was re-coded by one author with 0\% disagreement against the LLM codes on that sample; residual under-classification outside the sample cannot be ruled out. The L2/L3 judgement rests on the reading of one study (PRIMAD).
+Family codes for the original includes were proposed by the language model and reviewed by the authors for every two-family study. A stratified sample of 55 L0 (single-technique-family) studies was re-coded by one author with 0\% disagreement against the LLM codes on that sample; a second coder on $n = 11$ (20\%), blind to the first coder but shown the LLM suggestion, agreed perfectly ($\kappa = 1.00$). That figure does not claim suggestion-free double coding of the full L0 sample. Residual under-classification outside the sample cannot be ruled out. The L2/L3 boundary judgement rests on the full-text reading of PRIMAD; the other L2 study is Rodr{\'i}guez~\cite{rodriguez2017}.
 
 \subsection{Construct}
 
@@ -550,7 +543,7 @@ IC4b and IC4c admit Markov usage models for statistical testing and reliability-
 % =================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-We mapped 1710 studies that apply process mining, stochastic modelling, or forecasting to software development data. The field has been shaped by two communities in succession: stochastic modelling until 2013 and process mining since 2014; they still meet in only 14 studies. After the Phase-3 ML block and snowballing to saturation, forecasting is common (78.2\%), largely as FC-only work on repository data, while the PM--forecast link remains rare. Two studies carry all three technique families (PRIMAD~\cite{guinea2025} is the one we read in full for L2/L3); none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. Process-aware stochastic forecasting and end-to-end benchmarks are the two directions with the clearest support in the corpus.
+We mapped 1710 studies that apply process mining, stochastic modelling, or forecasting to software development data. The field has been shaped by two communities in succession: stochastic modelling until 2013 and process mining since 2014; they still meet in only 14 studies. After the Phase-3 ML block and snowballing to saturation, forecasting is common (78.0\%; 1334 studies), largely as FC-only work on repository data, while the PM--forecast link remains rare (10). Two studies carry all three technique families (Rodr{\'i}guez~\cite{rodriguez2017}; PRIMAD~\cite{guinea2025}, which we read in full for the L2/L3 boundary); none couples them through specified interfaces evaluated end-to-end. The gap is therefore one of integration rather than of available techniques. In this corpus, process-aware stochastic forecasting of process metrics is unobserved among the 14 \PM{}+\ST{} studies, and no end-to-end multi-stage evaluation appears; those observations motivate the agenda in Section~\ref{sec:agenda}.
 
 The corpus, the classification, the prompts, and the screening records are available in the replication package (Zenodo, DOI 10.5281/zenodo.21939600).
 

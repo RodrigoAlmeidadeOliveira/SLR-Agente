@@ -14,31 +14,35 @@
 | 1 title-only / L0 / PRIMAD / 2013 | ✅ |
 | 2 pré-registro + heurística S1/S3 + cego κ | ✅ κ=1,00 (n=117); flips aplicados |
 | 3 D1/D2/D6 + ML + Wohlin saturação + IC1 | ✅ |
-| 4 RQ3 prioritário 291 + venues OpenAlex + SPMF | ✅ |
-| 5 prosa editorial EN/PT | ✅ (Tabela 9 fundida em `tab:rq3-sdlc`; sem `[PENDENTE]` residual) |
+| 4 RQ3 + venues OpenAlex + SPMF | ✅ **core 1710/1710**; priority **293/293** |
+| 5 prosa editorial EN/PT | ✅ |
 
-## Escopo RQ3 (D3)
+## RQ3 (D3)
 
-- Extração humana **detalhada**: conjunto prioritário **291** (L1/L2 + todo TF-PM).
-- Corpus restante (**1419**): cobertura SDLC via códigos SPMF SC mecânicos; venues/pub_type via OpenAlex no full corpus.
-- Não há segunda passagem humana campo-a-campo nos 1419 nesta versão (limitação declarada no manuscrito).
+- Prioritário (L1/L2 + TF-PM): **293/293**
+- Não-prioritário: **1417/1417**
+- Full sheet core fields: **1710/1710**
 
-## Opcionais aceitos como limitação (não bloqueantes)
+## Opcionais
 
-- [ ] 2º coder independente na auditoria L0 (amostra 55; 1º coder 55/55)
-- Extração RQ3 detalhada dos 1419 restantes (além de SPMF SC)
+- [x] 2º coder L0: **11/55** (20%); A↔B 11/11; κ=1,00
+- [x] RQ3 core não-prioritário: **1417/1417**
 
-## Pré-submissão feito
+## Pré-submissão
 
-- [x] DOIs: Rama-Maneiro, Panjer, Giger, Burke, Wieringa
+- [x] DOIs: Rama-Maneiro, Panjer, Giger, Burke, Wieringa, Rodríguez (L2)
 - [x] `README` / este status alinhados a n=1710
 - [x] Tabela `tab:phases` removida (conteúdo em `tab:rq3-sdlc` com MSR)
+- [x] Correções do parecer (L2×2, números, RQ3 calibrado, ameaças ML, RA, κ L0, registro)
+- [x] Macro `\pendente` removido; `LEIA-ME_mudancas.md` atualizado
+- [ ] Atualizar Zenodo de replicação (`10.5281/zenodo.21939600`) com artefatos finais
 
 ## Artefatos-chave
 
 - Corpus: `MSL___Rodrigo_e_Juliano/studies.json`
-- RQ3: `phase4_rq3_priority_sheet.csv` + `phase4_rq3_priority_summary.md`
+- RQ3: `phase4_rq3_priority_sheet.csv` (293) + `phase4_rq3_extraction_template.csv` (1710)
 - Venues: `phase4_venues_summary.md`
 - SPMF: `phase4_spmf_summary.md` + `figs/spmf_map*.pdf`
 - F2.3: `phase2_blind_score_full.md` + `phase2_corpus_flips_applied.csv`
+- L0: `phase1_L0_audit_sample.csv` + `phase1_L0_audit_report.md`
 - Pré-registro: Zenodo **10.5281/zenodo.24148068**
