@@ -39,7 +39,7 @@
 - [x] ST∩FC 1997–2013 corrigido para 60; RQ1/highlight calibrados (FC majoritária)
 - [x] Summaries SPMF/venues/RQ3 priority regenerados (n=1710 / 293)
 - [x] Zenodo New version publicado: **10.5281/zenodo.24173218** (concept `21939599`; zip v3 com `corpus_n1710/`)
-- [ ] Atualizar **Description** no Zenodo (ainda cita n=340) — `article_ist/zenodo_upload/ZENODO_V3_METADATA.md`
+- [x] Description Zenodo alinhada a n=1710 (`ZENODO_V3_METADATA.md`)
 
 ## Artefatos-chave
 

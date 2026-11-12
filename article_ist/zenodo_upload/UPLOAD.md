@@ -10,4 +10,4 @@ O manuscrito SMS cita `24173218` + concept `21939599`.
 
 Access = **Open**. Teste o download deslogado.
 
-**Pendente:** editar a Description do record `24173218` (ainda mostra texto n=340). Colar `ZENODO_V3_METADATA.md`.
+Description do record `24173218` atualizada para n=1710 (`ZENODO_V3_METADATA.md`).

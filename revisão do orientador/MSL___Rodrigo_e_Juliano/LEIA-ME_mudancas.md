@@ -17,9 +17,8 @@ Status operacional do caminho completo: `../caminho_completo/01_STATUS.md`.
 
 ## Pré-submissão restante (fora do LaTeX)
 
-1. **Editar Description no Zenodo** `24173218` — a página ainda cola o texto antigo de n=340; usar `../../article_ist/zenodo_upload/ZENODO_V3_METADATA.md`.
-2. Confirmar revista-alvo (`\journal{Information and Software Technology}`).
-3. Opcional: L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
+1. Confirmar revista-alvo (`\journal{Information and Software Technology}`).
+2. Opcional: L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
 
 ## Versão em português
 
