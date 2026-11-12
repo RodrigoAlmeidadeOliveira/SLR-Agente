@@ -40,6 +40,7 @@
 - [x] Summaries SPMF/venues/RQ3 priority regenerados (n=1710 / 293)
 - [x] Zenodo New version publicado: **10.5281/zenodo.24173218** (concept `21939599`; zip v3 com `corpus_n1710/`)
 - [x] Description Zenodo alinhada a n=1710 (`ZENODO_V3_METADATA.md`)
+- [x] Revista-alvo confirmada: **Information and Software Technology** (`\journal{…}` em EN/PT)
 
 ## Artefatos-chave
 

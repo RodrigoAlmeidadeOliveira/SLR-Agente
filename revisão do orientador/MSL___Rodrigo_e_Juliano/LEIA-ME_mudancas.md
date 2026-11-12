@@ -15,10 +15,11 @@ Status operacional do caminho completo: `../caminho_completo/01_STATUS.md`.
 - Parecer: correções aplicadas (L2×2, números, RQ3 calibrado, ST∩FC=60, RQ1/FC majoritária, κ L0).
 - Zenodo v3 publicado: **10.5281/zenodo.24173218** (concept **10.5281/zenodo.21939599**).
 
-## Pré-submissão restante (fora do LaTeX)
+## Pré-submissão
 
-1. Confirmar revista-alvo (`\journal{Information and Software Technology}`).
-2. Opcional: L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
+- Revista-alvo: **Information and Software Technology** (já em `\journal{…}` EN/PT).
+- Zenodo: **10.5281/zenodo.24173218** (concept `21939599`).
+- Opcional (não bloqueante): L0 B nos 55 sem sugestão; QA amostral nos 1417 suggestion-assisted.
 
 ## Versão em português
 
