@@ -1,11 +1,12 @@
 task,source,string_id,date_run,raw_hits,unique_new,included_new,excluded_new,notes,operator
 D6,supplemental_31_10_2026,D6_19,2026-11-11,19,19,0,19,All exclude_other under D2=B (JIT/defect/product); none in studies.json n=435,Rodrigo
-D1,Scopus,D1_V6,2026-11-11,480,16,,,raw after ar+cp+EN; unique_new vs pool 5783 (not vs included only),Rodrigo
-D1,Scopus,D1_V8,2026-11-11,5,0,,,all 5 already in pool 5783 (incl. Rogge-Solti seed),Rodrigo
-D1,Scopus,D1_V9,2026-11-11,187,14,,,unique_new vs pool 5783,Rodrigo
-D1,Scopus,D1_union,2026-11-11,672,30,,,union=668; in_pool_5783=638; in_included_435=22; residual screen phase3_D1_residual_vs_pool_screen.csv (25x2026 post-cutoff),Rodrigo
-,,ML_IEEE,,,,,,,
-,,ML_ACM,,,,,,,
-,,ML_Scopus,,,,,,,
-,,ML_WoS,,,,,,,
-,,ML_Springer,,,,,,,
+D1,Scopus,D1_V6,2026-11-11,480,16,0,16,unique_new vs pool 5783; all residual excludes,Rodrigo
+D1,Scopus,D1_V8,2026-11-11,5,0,0,0,all already in pool 5783,Rodrigo
+D1,Scopus,D1_V9,2026-11-11,187,14,0,14,unique_new vs pool 5783; all residual excludes,Rodrigo
+D1,Scopus,D1_union,2026-11-11,672,30,0,30,union=668 in_pool=638 residual=30 all exclude_other; n=435 inalterado; strings limpas OK sem novos includes,Rodrigo
+D1,Scopus,ML_Scopus,2026-11-11,1120,1110,,,export phase3_exports/ML_Scopus.csv; unique_new vs pool 5783,Rodrigo
+D1,IEEE,ML_IEEE,2026-11-11,538,528,,,export phase3_exports/ML_IEEE.csv; Journals+Conferences; 537 after year filter,Rodrigo
+D1,ACM,ML_ACM,2026-11-12,2548,2521,,,COMPLETE lots A-D (2126 proc+422 jour); BibTeX union=2548; 257 @proceedings volumes excluded from screening set,Rodrigo
+D1,WoS,ML_WoS,2026-11-12,677,667,,,batches 499+178; 675 after dropping year>2026,Rodrigo
+D1,SpringerLink,ML_Springer,2026-11-12,1066,1028,,,COMPLETE union=1066,Rodrigo
+D1,multi,ML_union,2026-11-12,5949,4515,126,4389,residual 4515 screened: classify=126 exclude_other=4389; priority maybe sheet 1015/1015; n=435 pending apply of 126 includes,Rodrigo

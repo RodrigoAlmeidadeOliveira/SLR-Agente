@@ -143,8 +143,19 @@ def main() -> None:
         fams = ""
         level = ""
         if dec == "classify":
-            fams = ask("families (TF-PM|TF-ST|TF-FC|TF-MSR) > ")
-            level = ask("level (L0/L1/L2/L3) > ")
+            while True:
+                fams = ask("families (obrigatório: TF-PM|TF-ST|TF-FC|TF-MSR) > ").strip()
+                if fams:
+                    break
+                print("classify exige ≥1 família. Use 4 se for exclude.")
+            while True:
+                raw_lvl = ask("level (L0/L1/L2/L3) > ").strip().upper()
+                if raw_lvl in {"0", "1", "2", "3"}:
+                    raw_lvl = f"L{raw_lvl}"
+                if raw_lvl in {"L0", "L1", "L2", "L3"}:
+                    level = raw_lvl
+                    break
+                print("nível inválido")
         notes = ask("notes (Enter=manter sugestão) > ")
         r["final_decision"] = dec
         r["families"] = fams

@@ -38,9 +38,12 @@ AND (LIMIT-TO(DOCTYPE,"ar") OR LIMIT-TO(DOCTYPE,"cp")) AND LIMIT-TO(LANGUAGE,"En
 
 Usar Command Search / All Metadata com a faceta canônica; filtrar 1994–2026; Journals + Conferences.
 
-### ACM DL
+### ACM DL — **SKIPPED (2026-11-12)**
 
-`[[All: …]]` com a faceta; Published since 1994.
+Tentativa sob Basic Edition: query `[[All: …]]` retornou 2715 hits; filtros de data/tipo são **Premium**. PUCPR sem convênio ACM. Title-only sem login também não ficou operacional.
+
+**Decisão:** não exportar ACM neste bloco. Mitigação = overlap Scopus/IEEE/WoS/Springer + snowballing Wohlin. Registrar em threats/limitations do manuscrito.
+
 
 ### Web of Science
 

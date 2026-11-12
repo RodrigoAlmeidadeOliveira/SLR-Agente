@@ -1,0 +1,616 @@
+internal_id,year,title,doi,authors,origin,fam
+87bce30b,1995,Automating Process Discovery through Event-Data Analysis,10.1145/225014.225021,"Cook, Jonathan E.; Wolf, Alexander L.",base_435,TF-PM|TF-ST
+6d68591e,1996,Process discovery and validation through event-data analysis,,,base_435,TF-PM
+50144afd,1997,Software-Engineering Process Simulation model (SEPS),10.1016/S0164-1212(96)00156-2,,base_435,TF-FC|TF-ST
+07e55287,1998,Discovering Models of Software Processes from Event-Based Data,10.1145/287000.287001,"Cook, Jonathan E.; Wolf, Alexander L.",base_435,TF-PM|TF-ST
+3f8fd941,1998,"Using software process simulation to assist software development
+organizations in making good enough quality decisions",,,base_435,TF-FC|TF-ST
+f453a92f,1999,A net practice for software project management,10.1109/52.805479,,base_435,TF-ST
+d044ef55,1999,Experience with software process simulation and modeling,10.1016/S0164-1212(99)00011-4,,base_435,TF-ST
+afd1b7aa,1999,Software process simulation for reliability management,10.1016/S0164-1212(99)00010-2,,base_435,TF-FC|TF-ST
+66d00b19,1999,Software process simulation modeling: Why? What? How?,10.1016/S0164-1212(99)00003-5,,base_435,TF-FC|TF-ST
+eb05417e,1999,Software process simulation to achieve higher CMM levels,10.1016/S0164-1212(99)00009-6,,base_435,TF-ST
+eb526806,1999,Software process validation,10.1145/304399.304401,,base_435,TF-PM
+f06ebc31,2000,A model of the software development process using both continuous and discrete models,10.1002/1099-1670(200006/09)5:2/3<147::aid-spip122>3.0.co;2-t,,base_435,TF-ST
+9c255853,2000,Empirical analysis in software process simulation modeling,10.1016/S0164-1212(00)00006-6,Raffo D.M.,base_435,TF-ST
+ab16b112,2000,"Generating transition probabilities to support model-based software
+testing",10.1002/1097-024X(200008)30:10<1095::AID-SPE328>3.0.CO;2-H,Walton G.H.,base_435,TF-ST
+46287754,2000,Using Simulation to Visualise and Analyse Product-Process Dependencies in Software Development Projects,10.1007/978-3-540-45051-1_11,,base_435,TF-FC|TF-ST
+a4f13cb1,2000,"Using simulation to analyse the impact of software requirement
+volatility on project performance",10.1016/S0950-5849(00)00152-X,,base_435,TF-FC|TF-ST
+da2f44fa,2001,A simplified model of software project dynamics,10.1016/S0164-1212(01)00070-X,,base_435,TF-FC|TF-ST
+8ae72547,2001,"A stochastic model of fault introduction & removal during software
+development",10.1109/24.963126,Stutzke M.A.,base_435,TF-FC|TF-ST
+50dda3a0,2001,"Application of a hybrid process simulation model to a software
+development project",10.1016/S0164-1212(01)00065-6,,base_435,TF-FC|TF-ST
+b48dde83,2001,"Behavioral characterization: finding and using the influential factors
+in software process simulation models",10.1016/S0164-1212(01)00067-X,,base_435,TF-ST
+39e47477,2001,"Exploring bottlenecks in market-driven requirements management processes
+with discrete event simulation",10.1016/S0164-1212(01)00072-3,,base_435,TF-FC|TF-ST
+4155a4da,2001,Hybrid simulation modelling of the software process,10.1016/S0164-1212(01)00064-4,,base_435,TF-ST
+f33d3c89,2001,Software maintenance process analysis using discrete-event simulation,10.1109/CSMR.2001.914986,,base_435,TF-ST
+839d520d,2001,"Stochastic simulation of risk factor potential effects for software
+development risk management",10.1016/S0164-1212(01)00066-8,,base_435,TF-FC|TF-ST
+883e1702,2002,A discrete simulation model for assessing software project scheduling policies,10.1002/spip.160,,base_435,TF-FC|TF-ST
+b75d202e,2002,A dynamic integrated framework for software process improvement,10.1023/A:1020580008694,,base_435,TF-FC|TF-ST
+0b759736,2002,"A method for modeling and evaluating software maintenance process
+performances",10.1109/CSMR.2002.995786,,base_435,TF-ST
+ad4f84a7,2002,Simulation-based risk reduction for planning inspections,,,base_435,TF-MSR|TF-ST
+b1aabe94,2002,"Using process simulation to compare scheduling strategies for software
+projects",10.1109/APSEC.2002.1183094,,base_435,TF-FC|TF-ST
+78969f65,2003,Decision support for using software inspections,10.1109/SEW.2003.1270720,,base_435,TF-ST
+39157e2c,2003,Simulating human resources in software development processes,,,base_435,TF-ST
+6e4114dc,2003,"Using empirical knowledge from, replicated experiments for software
+process simulation:: A practical example",10.1109/ISESE.2003.1237961,,base_435,TF-FC|TF-ST
+58996946,2004,A comprehensive simulation study on optimal scheduling for software projects,10.1049/ic:20040457,,base_435,TF-ST
+64c03c8d,2004,Assessing staffing needs for a software maintenance project through queuing simulation,10.1109/tse.2004.1265735,,base_435,TF-FC|TF-ST
+ab99a53e,2004,Data mining for software process discovery in open source software development communities,10.1049/ic:20040484,,base_435,TF-MSR|TF-PM
+3c810db6,2004,Linking software process modeling with Markov decision theory,,Padberg F.,base_435,TF-ST
+c9512bbb,2004,"Using simulation to facilitate the study of software product line
+evolution",10.1109/IWPSE.2004.1334774,,base_435,TF-FC|TF-ST
+b37c10c1,2004,Using software process simulation to assess the impact of IV&amp;V activities,10.1049/ic:20040459,,base_435,TF-FC|TF-ST
+2fbf6d36,2005,Computing Optimal Scheduling Policies for Software Projects,10.1109/apsec.2004.39,,base_435,TF-FC|TF-ST
+3cc5a1cb,2005,Coordinate metrics and process model to manage software project risk,10.1109/iemc.2004.1407505,,base_435,TF-ST
+a20e7c58,2005,Modeling distributed software defect removal effectiveness in the presence of code churn,10.1016/j.mcm.2004.10.021,Tian L.,base_435,TF-FC|TF-ST
+5b51a065,2005,SIMULATION-BASED SOFTWARE PROCESS MODELING AND EVALUATION,10.1142/9789812775245_0012,,base_435,TF-ST
+557b4102,2005,Scheduling software projects to minimize the development time and cost with a given staff,10.1109/apsec.2001.991476,,base_435,TF-ST
+c94fc209,2005,"Software project management using PROMPT: A hybrid metrics, modeling and
+utility framework",10.1016/j.infsof.2005.09.004,,base_435,TF-FC|TF-ST
+df3ad75a,2006,A Systematic Approach to Process Enactment Analysis as Input to Software Process Improvement or Tailoring,10.1109/APSEC.2006.14,"Huo, Ming; Zhang, He; Jeffery, Ross",base_435,TF-MSR|TF-PM
+8888cfdc,2006,A study on optimal scheduling for software projects,10.1002/spip.254,,base_435,TF-ST
+48e69187,2006,Activity mining for discovering software process models,,,base_435,TF-MSR|TF-PM
+cdf1f104,2006,An exploratory study of process enactment as input to software process improvement,10.1145/1137702.1137711,Huo M.,base_435,TF-MSR|TF-PM
+9f8b9dba,2006,"Analysis of software-intensive system acquisition using hybrid software
+process simulation",,,base_435,TF-MSR|TF-ST
+be942093,2006,"Discovering, modeling, and re-enacting open source software development processes: A case study",10.1142/9789812774460_0001,Jensen C.,base_435,TF-PM
+8e0eec4d,2006,Evaluating the impact of test-first programming and pair programming through software process simulation,10.1002/spip.286,,base_435,TF-FC|TF-ST
+2c280053,2006,"Experiences in discovering, modeling, and reenacting open source software development processes",10.1007/11608035_36,Jensen C.,base_435,TF-MSR|TF-PM
+7766e7b4,2006,"Exploring the impact of task allocation strategies for global software
+development using simulation",,,base_435,TF-ST
+53434e77,2006,"Modeling and simulation of open source development using an agile
+practice",10.1016/j.sysarc.2006.06.005,,base_435,TF-MSR|TF-ST
+ae4f4926,2006,Modeling uncertainties involved with software development with a stochastic Petri net,10.1111/j.1468-0394.2006.00411.x,Li X.M.,base_435,TF-ST
+dbcd2435,2006,On the Potential of Process Simulation in Software Project Schedule Optimization,10.1109/compsac.2005.115,,base_435,TF-FC|TF-ST
+b5b1402b,2006,Planning and improving global software development process using simulation,10.1145/1138506.1138510,Siri-on Setamanit; Wayne Wakeland; David Raffo,base_435,TF-FC|TF-ST
+c3683c28,2006,"Project replayer - An investigation tool to revisit processes of past
+projects",,,base_435,TF-MSR|TF-PM
+d50fcf26,2006,SIMKIT – a software process simulation model construction kit in support of empirical research,,,base_435,TF-ST
+416c979c,2006,Semi-quantitative simulation modeling of software engineering process,,,base_435,TF-FC|TF-ST
+836b5ef0,2006,Simulation-based stability analysis for software release plans,,,base_435,TF-FC|TF-ST
+ec94ba4d,2006,Spiral lifecycle increment modeling for new hybrid processes,,,base_435,TF-FC|TF-ST
+747fc068,2007,"A project management approach to using simulation for cost estimation on
+large, complex software development projects",10.1080/10429247.2007.11431746,,base_435,TF-FC|TF-ST
+3ddbfd94,2007,Process mining framework for software processes,10.1007/978-3-540-72426-1_15,Rubin V.,base_435,TF-PM
+d7b22f54,2007,Quantitative analysis of value-based software processes using decision-based stochastic object petri-nets,10.1109/APSEC.2007.78,Yin R.,base_435,TF-ST
+ac05d867,2007,Software Process Dynamics,10.1002/9780470192719,,base_435,TF-ST
+e9a40e7a,2007,The economic impact of software process variations,10.1007/978-3-540-72426-1_22,Deissenboeck F.,base_435,TF-ST
+9870248b,2007,Using Simulation to Evaluate the Impact of New Requirements Analysis Tools,10.1109/PICMET.2007.4349581,,base_435,TF-ST
+0fcd5ece,2008,A method for stochastic modeling the software development process in constrained resource environments,10.1109/SIEDS.2008.4559698,Ferreira F.M.L.,base_435,TF-ST
+e080b18d,2008,"DEFINING THE IMPLEMENTATION ORDER OF SOFTWARE PROJECTS IN UNCERTAIN
+ENVIRONMENTS",,,base_435,TF-FC|TF-ST
+deae809b,2008,"Dynamics of innovation in an ``open source″ collaboration
+environment: lurking, laboring, and launching FLOSS projects on
+SourceForge",10.1093/icc/dtn026,David P.A.,base_435,TF-MSR|TF-ST
+863bae01,2008,"GENSIM 2.0: A customizable process simulation model for software process
+evaluation",,,base_435,TF-FC|TF-ST
+b8b834e2,2008,Hybrid modeling of test-and-fix processes in incremental development,,,base_435,TF-ST
+5c43edc7,2008,"Identifying key success factors for Globally Distributed Software
+Development project using simulation: A case study",,,base_435,TF-FC|TF-ST
+2fb4f513,2008,NHPP models with Markov switching for software reliability,10.1016/j.csda.2008.01.010,Ravishanker N.,base_435,TF-ST
+40bc718e,2008,Probabilistic analysis of process economics,10.1002/spip.362,Deissenboeck F.,base_435,TF-ST
+3c0dd1ad,2008,"RVSim: A simulation approach to predict the impact of requirements
+volatility on software project plans",,,base_435,TF-FC|TF-ST
+7e6b3f9f,2008,Uma Experiência em Mineração de Processos de Manutenção de Software,10.1145/1809980.1810047,"Cruz, John Igor B. da; Ruiz, Duncan",base_435,TF-PM
+70af8211,2009,A Process Optimization Method Based on Process Performance Models,10.1109/ICMSS.2009.5303022,,base_435,TF-FC|TF-ST
+917f238d,2009,Applicability of Process Discovery Algorithms for Software Organizations,10.1109/SEAA.2009.87,"Akman, Burcu; Demirörs, Onur",base_435,TF-PM
+ee5ccaa2,2009,Discovering changes of the change control board process during a software development project using process mining,10.1007/978-3-642-04133-4_11,Šamalíková J.,base_435,TF-PM
+fc8f325d,2009,"Dynamic project performance estimation by combining static estimation
+models with system dynamics",10.1016/j.infsof.2008.03.001,,base_435,TF-FC|TF-ST
+e856dbe4,2009,Mining objective process metrics from repository data,,VanHilst M.,base_435,TF-MSR|TF-PM
+b2c57fd3,2009,Modeling Software Testing Process Using HTCPN,10.1109/FCST.2009.53,,base_435,TF-FC|TF-ST
+beb83053,2009,Modeling and Predicting Software Failure Costs,10.1109/COMPSAC.2009.195,Grottke M.,base_435,TF-FC|TF-ST
+008caf63,2009,Simulation of the defect removal process with queuing theory,10.1109/ESEM.2009.5316005,,base_435,TF-FC|TF-ST
+fcc830f6,2009,Software development of a globally distributed multicomponent project: A theoretical model and simulations,10.1080/1097198X.2009.10856496,Ghosh J.,base_435,TF-ST
+3b4591cd,2009,"Understanding the effects of requirements volatility in software
+engineering by using analytical modeling and software process simulation",10.1016/j.jss.2009.03.014,,base_435,TF-FC|TF-ST
+ddeca0e6,2009,Using process mining metrics to measure noisy process fidelity,10.14236/ewic/ease2009.16,Thomson C.,base_435,TF-PM
+ba2ff831,2010,A stochastic model for optimizing the patching time of software bugs,,Wang Y.,base_435,TF-ST
+d96a3161,2010,Are developers complying with the process,10.1145/1852786.1852805,,base_435,TF-MSR|TF-PM
+0ef6a5b4,2010,Bayesian Network Based XP Process Modelling,10.5121/ijsea.2010.1301,,base_435,TF-FC|TF-ST
+a222ef2c,2010,Foundations for Event-Based Process Analysis in Heterogeneous Software Engineering Environments,10.1109/SEAA.2010.52,"Sunindyo, Wikan Danar; Moser, Thomas; Winkler, Dietmar; Biffl, Stefan",base_435,TF-MSR|TF-PM
+6354fc81,2010,"Modeling a Resource-Constrained Test-and-Fix Cycle and Test Phase
+Duration",,,base_435,TF-FC|TF-ST
+bafb58a0,2010,Process Mining Opportunities for CMMI Assessments,,,base_435,TF-MSR|TF-PM
+c72f823c,2010,"Software Development Process Simulation: Multi Agent-Based Simulation
+versus System Dynamics",,,base_435,TF-ST
+c113bf1b,2010,Software Process Recovery: Recovering Process from Artifacts,10.1109/WCRE.2010.46,"Hindle, Abram",base_435,TF-MSR|TF-PM
+7f497573,2010,Software Process Simulation Modeling: An Extended Systematic Review,10.1007/978-3-642-14347-2_27,,base_435,TF-FC|TF-ST
+62936834,2010,Software process deviation threshold analysis by system dynamics,10.1109/ICIME.2010.5477522,,base_435,TF-FC|TF-ST
+26582491,2010,Software safety assessment based on a subordinated Markov chain,10.1007/s13198-011-0034-0,Okamura H.,base_435,TF-ST
+3476b5db,2010,"Studying the impact of uncertainty in operational release planning - An
+integrated method and its initial evaluation",10.1016/j.infsof.2009.11.003,Al-Emran A.,base_435,TF-FC|TF-ST
+57d2445c,2011,"A Discrete Event Simulation Model to Evaluate Changes to a Software
+Project Delivery Process",10.1109/CEC.2011.19,,base_435,TF-FC|TF-ST
+266210a7,2011,A simulation model for process-centered software engineering environments using sensitivity analysis,10.1109/WEIT.2011.21,Dertzbacher J.,base_435,TF-ST
+b61ea92e,2011,Assessing Software Quality Using the Markov Decision Processes,10.1002/hfm.20355,,base_435,TF-FC|TF-ST
+4316248d,2011,Conformance analysis on software development: An experience with process mining,10.1504/IJBPIM.2011.040203,Da Cruz J.I.B.,base_435,TF-PM
+917d9592,2011,Follow-the-sun methodology in a stochastic modeling perspective,10.1109/ICGSE-W.2011.26,Czekster R.,base_435,TF-ST
+47ed5bf0,2011,Generalizing evolutionary coupling with stochastic dependencies,10.1109/ASE.2011.6100065,Wong S.,base_435,TF-MSR|TF-ST
+2de8a9af,2011,Handling Estimation Uncertainty with Bootstrapping: Empirical Evaluation in the Context of Hybrid Prediction Methods,10.1109/ESEM.2011.33,,base_435,TF-FC
+84315802,2011,Monte Carlo simulation based estimations: Case from a global outsourcing company,10.1109/ITMC.2011.5996034,Dasgupta J.,base_435,TF-ST
+51b4ae2b,2011,Performance Evaluation of Software Development Teams: A Practical Case Study,10.1016/j.entcs.2011.09.006,Fernandes P.,base_435,TF-FC|TF-ST
+7eaf7eb3,2011,Petri Net Based Simulation for SPI,,,base_435,TF-ST
+c517c93f,2011,Process Mining Software Repositories,10.1109/CSMR.2011.5,"Poncin, Wouter; Serebrenik, Alexander; Brand, Mark van den",base_435,TF-MSR|TF-PM
+c7682ec2,2011,Software process discovery using link analysis,10.1109/ICCSN.2011.6014218,"Duan, Beichen; Shen, Beijun",base_435,TF-MSR|TF-PM
+c24db118,2011,Toward objective software process information: Experiences from a case study,10.1007/s11219-010-9105-8,Samalikova J.,base_435,TF-PM
+d098c91d,2011,Using process mining in software development process management: A case study,10.1109/ICSMC.2011.6083858,"Lemos, Artini M.; Sabino, Caio C.; Lima, Ricardo M. F.; Oliveira, Cesar A. L.",base_435,TF-PM
+ca00050f,2012,"A Comparative Study of Scrum and Kanban Approaches on a Real Case Study
+Using Simulation",,,base_435,TF-MSR|TF-ST
+326da20f,2012,A stochastic simulation model for risk management process,10.1109/APSEC.2012.12,Zhou P.,base_435,TF-ST
+f5151d89,2012,Agent-based simulation of the software development process: A case study at AVL,10.1109/wsc.2012.6465117,,base_435,TF-FC|TF-ST
+ae20e68e,2012,Egidio: A non-invasive approach for synthesizing organizational models,10.1109/ICSE.2012.6227062,Astromskis S.,base_435,TF-PM
+d4601a2f,2012,Issue handling performance in proprietary software projects,10.1109/MSR.2012.6224282,,base_435,TF-MSR
+66a32124,2012,Predicting defect numbers based on defect state transition models,10.1145/2372251.2372287,,base_435,TF-FC|TF-ST
+bbc13de4,2012,Process mining application in software process assessment,10.6100/ir739990,,base_435,TF-MSR|TF-PM
+0c10d633,2012,Risk-Based Intelligent Software Release Planning,10.1109/UIC-ATC.2012.109,,base_435,TF-FC|TF-ST
+23ec55bd,2012,SHARING LIMITED RESOURCES IN SOFTWARE PROCESS SIMULATIONS,,,base_435,TF-ST
+a3c061ae,2012,Simulation-Based Management for Software Dynamic Testing Processes,,,base_435,TF-FC|TF-ST
+3b614f91,2013,"Simulation of software maintenance process, with and without a
+work-in-process limit",10.1002/smr.1599,,base_435,TF-FC|TF-ST
+2a7de581,2014,"A Model and System for Applying Lean Six Sigma to Agile Software
+Development Using Hybrid Simulation",,,base_435,TF-FC|TF-ST
+542728fe,2014,"A Risk Emergency Management Model for Software Project Based on
+Stochastic Petri Nets",,,base_435,TF-ST
+c9cdb64d,2014,A process mining approach in Software Development and Testing Process: A case study,,Sayiam R.,base_435,TF-PM
+e58074e0,2014,Applied process mining in software development,10.1109/SACI.2014.6840098,"Sebu, Maria Laura; Ciocârlie, Horia",base_435,TF-PM
+c8ea828e,2014,Applied process mining in software development Case Study,,,base_435,TF-PM
+4cff6b4d,2014,Kashvi: a framework for software process intelligence,,,base_435,TF-MSR|TF-PM
+829f8c13,2014,"Nirikshan: Mining Bug Report History for Discovering Process Maps, Inefficiencies and Inconsistencies",10.1145/2590748.2590749,"Gupta, Monika; Sureka, Ashish",base_435,TF-MSR|TF-PM
+d1ed6154,2014,"Nirikshan: Process Mining Software Repositories to Identify Inefficiencies, Imperfections, and Enhance Existing Process Capabilities",10.1145/2591062.2591080,"Gupta, Monika",base_435,TF-MSR|TF-PM
+1363926c,2014,Predicting release time based on Generalized Software Reliability Model (GSRM),10.1109/COMPSAC.2014.86,Honda K.,base_435,TF-FC|TF-ST
+1de657c1,2014,Process Cube for Software Defect Resolution,10.1109/APSEC.2014.45,"Gupta, Monika; Sureka, Ashish",base_435,TF-MSR|TF-PM
+3231578f,2014,Process Mining Multiple Repositories for Software Defect Resolution from Control and Organizational Perspective,10.1145/2597073.2597081,"Gupta, Monika; Sureka, Ashish; Padmanabhuni, Srinivas",base_435,TF-PM
+6fd30d7e,2014,Process Mining Software Repositories from Student Projects in an Undergraduate Software Engineering Course,10.1145/2591062.2591152,"Mittal, Megha; Sureka, Ashish",base_435,TF-MSR|TF-PM
+932f2a18,2014,"Process mining support for Capability Maturity Model Integration-based software process assessment, in principle and in practice",10.1002/smr.1645,Samalikova J.,base_435,TF-PM
+f6edde4a,2014,Rate-based queueing simulation model of open source software debugging activities,10.1109/TSE.2014.2354032,Lin C.T.,base_435,TF-ST
+e722b1cf,2014,Software Process Simulation based on Mining Software Repositories,10.1109/ICDMW.2014.35,,base_435,TF-MSR|TF-PM|TF-ST
+ad250ae5,2014,Unsupervised discovery of intentional process models from event logs,10.1145/2597073.2597101,Khodabandelou G.,base_435,TF-PM
+c7ed395a,2015,"A procedure to detect problems of processes in software development
+projects using Bayesian networks",10.1016/j.eswa.2014.08.015,,base_435,TF-ST
+2ee3dc10,2015,Ahaan: Software Process Intelligence: Mining Software Process Data for Extracting Actionable Information,10.1145/2723742.2723763,"Sureka, Ashish; Kumar, Atul; Gupta, Shrinath",base_435,TF-MSR|TF-PM
+d2e1b306,2015,"An Approach to the Discovery of Accurate and Expressive Fix-Time
+Prediction Models",10.1007/978-3-319-22348-3_7,Folino F.,base_435,TF-FC|TF-MSR|TF-PM
+2647ea07,2015,An integrated infrastructure using process mining techniques for software process verification,10.4018/978-1-4666-7456-1.ch036,Gürgen T.,base_435,TF-PM
+aa3ce899,2015,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models generated by Mining Event-Log Data in Issue Tracking System,10.48550/arxiv.1511.07023,,base_435,TF-MSR|TF-PM
+508f3b5b,2015,Business activity monitoring solution to detect deviations in business process execution,10.1109/SACI.2015.7208243,Sebu M.,base_435,TF-PM
+3d379233,2015,Comparison of software repositories for their usability in software process reconstruction,10.1109/rcis.2015.7128890,,base_435,TF-MSR|TF-PM
+927817d5,2015,"Evaluation of simulation-assisted value stream mapping for software
+product development: Two industrial cases",10.1016/j.infsof.2015.08.005,,base_435,TF-FC|TF-ST
+3ad9cd69,2015,Increase Return on Investment of Software Development Life Cycle by Managing the Risk - A Case Study,,,base_435,TF-FC|TF-ST
+e23bbc10,2015,Mining Software Development Process Variations,10.1145/2695664.2696046,"Santos, Renata M. S.; Oliveira, Toacy C.; Abreu, Fernando Brito e",base_435,TF-PM
+ee562777,2015,Mining project-oriented business processes,10.1007/978-3-319-23063-4_28,Bala S.,base_435,TF-MSR|TF-PM
+f356af5c,2015,Predicting Release Time for Open Source Software Based on the Generalized Software Reliability Model,10.1109/Agile.2015.19,Washizaki H.,base_435,TF-FC|TF-ST
+b8b5b64e,2015,Probabilistic Approach to Predicting Risk in Software Projects Using Software Repository Data,10.1142/S0218194015500151,Jeon C.,base_435,TF-FC|TF-MSR|TF-ST
+82b3401d,2015,Process mining event logs from FLOSS data: State of the art and perspectives,10.1007/978-3-319-15201-1_12,Mukala P.,base_435,TF-PM
+fa561e12,2015,Software process line discovery,10.1145/2785592.2785605,Blum F.,base_435,TF-MSR|TF-PM
+efbaa4df,2015,"Statistical Learning and Software Mining for Agent Based Simulation of
+Software Evolution",10.1109/ICSE.2015.279,,base_435,TF-FC|TF-MSR
+eea29299,2015,"Supporting Rule-Based Process Mining by User-Guided Discovery of
+Resource-Aware Frequent Patterns",10.1007/978-3-319-22885-3_10,,base_435,TF-PM
+261f6383,2015,The economic impact of software development process choice - Cycle-time analysis and Monte Carlo simulation results,10.1109/HICSS.2015.599,Magennis T.,base_435,TF-FC|TF-ST
+3ac74336,2015,The research on software project schedule prediction and controlling,,,base_435,TF-FC|TF-ST
+4541f643,2016,"A Longitudinal Study of Community-Oriented Open Source Software
+Development",10.1007/978-3-319-39696-5_31,Neulinger K.,base_435,TF-PM
+c42be0aa,2016,A review on software process mining using petri nets,10.3923/ajaps.2016.131.142,Thamizharasan R.,base_435,TF-PM|TF-ST
+00ce8cfe,2016,Anvaya: An Algorithm and Case-Study on Improving the Goodness of Software Process Models Generated by Mining Event-Log Data in Issue Tracking Systems,10.1109/COMPSAC.2016.64,Juneja P.,base_435,TF-PM
+b0f56a95,2016,"Comparing Pre Commit Reviews and Post Commit Reviews Using Process
+Simulation",10.1145/2904354.2904362,,base_435,TF-FC|TF-ST
+b7fd840a,2016,High productivity programmers use effective task processes in unit-testing,10.1109/APSEC.2015.31,Kamma D.,base_435,TF-ST
+eefc7305,2016,Interactive Exploration of Developer Interaction Traces using a Hidden Markov Model,,,base_435,TF-PM|TF-ST
+37b22a16,2016,Mining Software Process Lines,10.1145/2889160.2889267,"Rojas Blum, Fabian",base_435,TF-PM
+2b343650,2016,Process mining for project management,10.1109/SAPIENCE.2016.7684142,"Joe, Jeni; Emmatty, Tanya; Ballal, Yasha; Kulkarni, Snehal",base_435,TF-MSR|TF-PM
+4f816525,2016,"Software Development Process Mining: Discovery, Conformance Checking and Enhancement",10.1109/QUATIC.2016.061,"Caldeira, João; Abreu, Fernando Brito e",base_435,TF-PM
+4dc479a6,2016,The Discovery of the Implemented Software Engineering Process Using Process Mining Techniques,10.14569/ijacsa.2016.070239,,base_435,TF-PM
+7ab40121,2016,The Potential of Key Process/Performance Indicators (KPIs) in Automotive Software Quality Management,10.4271/2016-01-0046,Ernst M.,base_435,TF-FC|TF-ST
+16e31373,2016,The v-algorithm for discovering software process lines,10.1002/smr.1778,Rojas Blum F.,base_435,TF-PM
+632737fb,2016,Verification of lean-kanban processes with probabilistic model checking,10.1504/IJCAT.2016.076799,Zhang L.,base_435,TF-ST
+3d967450,2017,A probabilistic approach to building defect prediction model for platform-based product lines,,Jeon C.K.,base_435,TF-FC|TF-ST
+2e76e921,2017,An exploratory study on usage of process mining in agile software development,10.1007/978-3-319-67383-7_14,Erdem S.,base_435,TF-PM
+0d31db29,2017,Applying process mining techniques in software process appraisals,10.1016/j.infsof.2017.01.004,M. Valle A.,base_435,TF-PM
+fbc469cf,2017,Change-Aware Build Prediction Model for Stall Avoidance in Continuous Integration,10.1109/ESEM.2017.23,Hassan F.,base_435,TF-FC|TF-MSR
+4fd2327e,2017,"Comparing pre-commit reviews and post-commit reviews using process
+simulation",10.1002/smr.1865,,base_435,TF-ST
+1145c10d,2017,Cost-Effective Build Outcome Prediction Using Cascaded Classifiers,10.1109/MSR.2017.26,Ni A.,base_435,TF-FC
+20c17d18,2017,"Evaluation of Project Architecture in Software Development Mixing
+Waterfall and Agile by Using Process Simulation",10.1142/S2424862217500075,,base_435,TF-FC|TF-ST
+ec38f0ba,2017,Extracting and Conserving Production Data as Test Cases in Executable Business Process Architectures,10.1016/j.procs.2017.11.130,Lübke D.,base_435,TF-MSR|TF-PM
+dcbf27d8,2017,Improving Software Maintenance Using Process Mining and Predictive Analytics,10.1109/ICSME.2017.39,"Gupta, Monika; Serebrenik, Alexander; Jalote, Pankaj",base_435,TF-FC|TF-MSR|TF-PM
+bc54c3b6,2017,Information Systems Security Risk,10.4018/978-1-5225-2703-9.ch005,,base_435,TF-FC|TF-ST
+08d64489,2017,Mining Collaboration Patterns of Software Development Processes Based on Trace Alignment,10.1145/3084100.3084103,"Yu, Dongjin; Wang, Jiaojiao",base_435,TF-PM
+d0e040e1,2017,Mining Handover Process in Open Source Development: An Exploratory Study,10.1109/APSEC.2017.44,,base_435,TF-MSR|TF-PM
+d4a1d75c,2017,Mining projects from structured and unstructured data,,Bala S.,base_435,TF-MSR
+b5ea4fdd,2017,Modeling of software development process with the Markov processes,10.15587/1729-4061.2017.103340,Savchuk T.,base_435,TF-ST
+160fface,2017,On the Differences between Unit and Integration Testing in the TravisTorrent Dataset,10.1109/MSR.2017.25,,base_435,TF-MSR|TF-PM
+4c73b15f,2017,Predicting the unpredictable: Using monte carlo simulation to predict project completion date,10.1007/978-3-319-55907-0_11,Colucci L.,base_435,TF-FC
+3ef399e6,2017,Process mining applications in software engineering,10.1007/978-3-319-48523-2_5,Keith B.,base_435,TF-PM
+ca6989c0,2017,Test Case Generation and Prioritization: A Process-Mining Approach,10.1109/ICSTW.2017.11,"Janes, Andrea",base_435,TF-PM
+b940a63a,2017,"Understanding Student Interactions in Capstone Courses to Improve
+Learning Experiences",10.1145/3017680.3017716,,base_435,TF-PM
+9e341b7f,2018,A structured stochastic model for software project estimation in Waterfall models,10.18293/SEKE2018-033,Massitela I.,base_435,TF-FC|TF-ST
+223a62e3,2018,Analysis of software repositories using process mining,10.1007/978-981-10-5547-8_65,Arora R.,base_435,TF-MSR|TF-PM
+4082a5b1,2018,Application of process mining in project management context: An exploratory case study in software development projects,,Archanjo M.A.,base_435,TF-PM
+04ab260e,2018,Assessing Agile Software Development Processes with Process Mining: A Case Study,10.1109/CBI.2018.00021,"Marques, Rita; Mira da Silva, Miguel; R. Ferreira, Diogo",base_435,TF-PM
+d0c47271,2018,Automatic Discovery of Behavioral Models From Software Execution Data,10.1109/TASE.2018.2844725,Liu C.,base_435,TF-PM
+0a07a816,2018,Hierarchical performance analysis for process mining,10.1145/3202710.3203151,Leemans M.,base_435,TF-PM
+4cb686b6,2018,Investigating the Significance of the Bellwether Effect to Improve Software Effort Prediction: Further Empirical Study,10.1109/TR.2018.2839718,,base_435,TF-FC|TF-ST
+50d875ff,2018,Kanban and Process Mining in the Task Management,10.1145/3275245.3275286,"Mendes, Vitor; Faria Junior, Elio Ribeiro; Garcia, Cleiton; Malucelli, Andreia",base_435,TF-FC|TF-PM
+6f9a5a08,2018,Monitoring the Software Development Process with Process Mining,10.1007/978-3-319-94214-8_34,Bala S.,base_435,TF-PM
+4409efef,2018,Predicting bug-fixing time: A replication study using an open source software project,10.1016/j.jss.2017.02.021,Akbarinasaji S.,base_435,TF-FC
+e12fff7c,2018,"Process Mining for Process Conformance Checking in an OSS Project: An
+Empirical Research",10.1007/978-3-319-92375-8_7,,base_435,TF-MSR|TF-PM
+4e01ae35,2018,Software process analysis methodology-a methodology based on lessons learned in embracing legacy software,10.1109/ICSME.2018.00076,Leemans M.,base_435,TF-PM
+5c4c0e7f,2018,Studying Developer Build Issues and Debugger Usage via Timeline Analysis in Visual Studio IDE,,,base_435,TF-FC|TF-MSR|TF-PM
+608b005d,2018,"Using simulation for understanding and reproducing distributed software
+development processes in the cloud",10.1016/j.infsof.2018.07.004,,base_435,TF-FC|TF-ST
+94e88f90,2019,A Point Process Approach of Bug Fixing Analysis in Open Source Software Projects,10.1109/qrs.2019.00024,,base_435,TF-FC|TF-ST
+6cb59310,2019,A User Evaluation of Process Discovery Algorithms in a Software Engineering Company,10.1109/EDOC.2019.00026,"Agostinelli, Simone; Maggi, Fabrizio Maria; Marrella, Andrea; Milani, Fredrik",base_435,TF-PM
+588a19f5,2019,Assessing Software Development Teams' Efficiency using Process Mining,10.1109/ICPM.2019.00020,"Caldeira, João; Brito e Abreu, Fernando; Reis, José; Cardoso, Jorge",base_435,TF-PM
+f16294f2,2019,Automatic Real-Time Mining Software Process Activities From SVN Logs Using a Naive Bayes Classifier,10.1109/ACCESS.2019.2945608,"Zhu, Rui; Dai, Yichao; Li, Tong; Ma, Zifei; Zheng, Ming; Tang, Yahui; Yuan, Jiayi; Huang, Yue",base_435,TF-MSR|TF-PM
+2d369fe9,2019,Detecting Bottleneck and Fraud in Agile Development by using Petri net Performance and Trace Clustering,10.1109/ISEMANTIC.2019.8884226,"Razi, Muhammad Ar; Sungkono, Kelly Rossa; Sarno, Riyanarto; Wahyuni, Cahyaningtyas Sekar",base_435,TF-PM|TF-ST
+c0352476,2019,Detection of Bottleneck and Social Network in Business Process of Agile Development,10.1109/ISEMANTIC.2019.8884341,Raitubu N.,base_435,TF-PM
+d5aff523,2019,"Do as I Do, Not as I Say: Do Contribution Guidelines Match the GitHub Contribution Process?",10.1109/icsme.2019.00043,,base_435,TF-MSR|TF-PM
+e6f42f43,2019,Evaluating Coding Behavior in Software Development Processes: A Process Mining Approach,10.1109/ICSSP.2019.00020,"Ardimento, Pasquale; Bernardi, Mario Luca; Cimitile, Marta; Maggi, Fabrizio Maria",base_435,TF-PM
+be899615,2019,Extracting a Collaboration Model from VCS Logs Based on Process Mining Techniques,10.1007/978-3-030-37453-2_18,Jooken L.,base_435,TF-PM
+542c0019,2019,Learning analytics to improve coding abilities: a fuzzy-based process mining approach,10.1109/FUZZ-IEEE.2019.8859009,"Ardimento, Pasquale; Bernardi, Mario Luca; Cimitile, Marta; Ruvo, Giuseppe De",base_435,TF-PM
+6464a4f1,2019,Method for Building UML Activity Diagrams from Event Logs,10.15514/ispras-2019-31(4)-9,,base_435,TF-MSR|TF-PM
+9662854d,2019,Mining Software Repositories for Predictive Modelling of Defects in SDN Controller,,,base_435,TF-MSR|TF-ST
+8ea46c1d,2019,Monitoring the Software Bug-Fixing Process Through the Process Mining Approach,10.1002/smr.2162,,base_435,TF-PM
+e627756c,2019,Predicting Issue Handling Process using Case Attributes and Categorical Variable Encoding Techniques,10.1109/ICoDSE48700.2019.9092617,"Baskoro, Sangaji; Sunindyo, Wikan Danar",base_435,TF-FC|TF-MSR
+537bbfd0,2019,Process-Driven Incremental Effort Estimation,10.1109/ICSSP.2019.00030,,base_435,TF-FC|TF-ST
+c0a779ae,2019,Time Performance Evaluation of Agile Software Development,10.1109/ISEMANTIC.2019.8884304,"Shani, Asadul Haq Muhammad; Sarno, Riyanarto; Sungkono, Kelly Rossa; Wahyuni, Cahyaningtyas Sekar",base_435,TF-MSR|TF-PM
+73df5473,2019,"Using a Systematic Literature Review to Strengthen the Evidence
+Supporting a Simulation Model of Distributed Software Projects",10.1109/SEAA.2019.00063,,base_435,TF-ST
+b788b176,2019,Using constraint mining to analyze software development processes,10.1109/ICSSP.2019.00021,Krismayer T.,base_435,TF-MSR|TF-PM
+8de6dcfa,2020,Connecting software reliability growth models to software defect tracking,10.1109/ISSRE5003.2020.00022,Nafreen M.,base_435,TF-FC|TF-ST
+8a97d0cf,2020,Constructing a Hybrid Software Process Simulation Model in Practice: An Exemplar from Industry,10.1145/3379177.3388906,Yue Li; He Zhang; Liming Dong; Bohan Liu; Jinyu Ma,base_435,TF-FC|TF-ST
+99736057,2020,Control-Flow based Anomaly Detection in the Bug-Fixing Process of Open-Source Projects,10.1145/3385032.3385038,,base_435,TF-MSR|TF-PM
+15c9808b,2020,DEVELOPMENT OF A TOOLKIT FOR ANALYZING SOFTWARE DEBUGGING PROCESSES USING THE CONSTRUCTIVE APPROACH,10.15587/1729-4061.2020.215090,Shynkarenko V.,base_435,TF-PM
+5029f905,2020,Detecting Sudden Drift for Single-Instance Log in Software Development Process,10.1109/PHM-Besancon49106.2020.00069,"Yuan, Jiayi; Li, Tong; Zhu, Rui; Ma, Zifei; Peng, Jiayuan; Huang, Yue",base_435,TF-MSR|TF-PM
+6e572cbb,2020,Exploration of Process Mining Opportunities In Educational Software Engineering - The GitLab Analyser,,Dumbach P.,base_435,TF-MSR|TF-PM
+7cf00385,2020,Mining Software Repositories for the Characterization of Continuous Integration and Delivery,10.1145/3422392.3422503,Destro G.A.,base_435,TF-MSR|TF-PM
+340c0c24,2020,"Research on Software Project Schedule Management Method based on Monte
+Carlo Simulation",,,base_435,TF-FC|TF-ST
+b7022ac2,2020,Understanding What Software Engineers Are Working on: The Work-Item Prediction Challenge,10.1145/3387904.3389294,"Lämmel, Ralf; Kerber, Alvin; Praza, Liane",base_435,TF-MSR|TF-PM
+77fa80cd,2021,A cluster analysis method of software development activities based on event log,10.2174/2666255813666191204144931,Tang M.,base_435,TF-PM
+e89188a6,2021,Agile Planning and Tracking of Software Projects Using the State-Space Approach,10.1007/978-981-16-0404-1_26,Tyagi M.K.,base_435,TF-FC|TF-ST
+b123faf2,2021,An analysis of Monte Carlo simulations for forecasting software projects,10.1145/3412841.3442030,Miranda P.,base_435,TF-FC
+9e450f55,2021,Application of Constructive Modeling and Process Mining Approaches to the Study of Source Code Development in Software Engineering Courses,10.24138/JCOMSS-2021-0046,Shynkarenko V.,base_435,TF-PM|TF-ST
+f36a08fe,2021,Assessing the risk of software development in agile methodologies using simulation,10.1109/ACCESS.2021.3115941,Lunesu M.I.,base_435,TF-FC|TF-ST
+abfd6b2e,2021,Business process analysis of programmer job role in software development using process mining,10.1016/j.procs.2021.12.191,Fauzi R.,base_435,TF-PM
+38694b4e,2021,Code Change Sniffer: Predicting Future Code Changes with Markov Chain,10.1109/COMPSAC51774.2021.00137,Ufuktepe E.,base_435,TF-FC|TF-ST
+f59b10d5,2021,Continuous Build Outcome Prediction: A Small-N Experiment in Settings of a Real Software Project,10.1007/978-3-030-79463-7_35,Kawalerowicz M.,base_435,TF-FC
+483d7725,2021,DevOps workflow verification and duration prediction using non-Markovian stochastic Petri nets,10.1002/smr.2329,Ben Mesmia W.,base_435,TF-FC|TF-ST
+db43c22c,2021,Evaluating the Effectiveness of Software Development Processes Based on Probabilistic Causal Models,10.1109/SUMMA53307.2021.9632118,Nasyrov R.,base_435,TF-ST
+9c4cc898,2021,Extracting Process Features from Event Logs to Learn Coarse-Grained Simulation Models,10.1007/978-3-030-79382-1_8,Pourbafrani M.,base_435,TF-PM|TF-ST
+2d2d29ea,2021,Investigation and prediction of open source software evolution using automated parameter mining for agent-based simulation,10.1007/s10515-021-00280-3,,base_435,TF-FC|TF-MSR
+16644fb0,2021,"Mining Treatment-Outcome Constructs from Sequential Software Engineering
+Data",10.1109/TSE.2019.2892956,Nayebi M.,base_435,TF-MSR|TF-PM
+c894f613,2021,Monitoring a CI/CD Workflow Using Process Mining,10.1007/s42979-021-00830-2,Nogueira A.F.,base_435,TF-PM
+2f713568,2021,Partially observable Markov Decision Process to prioritize software defects,10.32920/ryerson.14638470.v1,,base_435,TF-MSR|TF-ST
+61e62f9d,2021,Process Mining bei hybriden Vorgehensmodellen zur Umsetzung von Unternehmenssoftware,10.1007/s00287-021-01359-7,,base_435,TF-PM
+a86b1042,2021,Profiling Software Developers with Process Mining and N-Gram Language Models,10.48550/arxiv.2101.06733,,base_435,TF-PM
+7b0b22ea,2021,Studying Task Processes for Improving Programmer Productivity,10.1109/TSE.2019.2904230,Jalote P.,base_435,TF-PM|TF-ST
+6f295ec6,2021,Using process mining for Git log analysis of projects in a software development course,10.1007/s10639-021-10564-6,Macak M.,base_435,TF-MSR|TF-PM
+ffa8885e,2021,Експериментальні дослідження процесів налагодження комп'ютерних програм студентами з використанням Process Mining,10.35546/kntu2078-4481.2021.3.9,,base_435,TF-MSR|TF-PM
+0587b264,2022,A Data-Centric Approach to Evaluate Requirements Engineering in Multidisciplinary Projects,10.1109/SMC53654.2022.9945270,"Salmani, Ali; Imani, Alireza; Bahrehvar, Majid; Duffett-Leger, Linda; Moshirpour, Mohammad",base_435,TF-MSR|TF-PM
+ae9983fa,2022,A Stochastic Petri net Model of Continuous Integration and Continuous Delivery,10.1109/ISSREW55968.2022.00050,Bhadra S.,base_435,TF-FC|TF-ST
+e4f9257c,2022,An Intelligent Methodology to Enhance Requirements Engineering in Multidisciplinary Projects,10.1109/CCECE49351.2022.9918286,"Salmani, Ali; Imani, Alireza; Bahrehvar, Majid; Duffett-Leger, Linda; Moshirpour, Mohammad",base_435,TF-FC|TF-PM
+eeee1fa8,2022,Identifying Possible Improvements of Software Development Life Cycle (SDLC) Process of a Bank by Using Process Mining,10.1142/S0218194022400010,Taskesenlioglu S.,base_435,TF-PM
+f52cb3e1,2022,Intervention of knowledge flows in software process mining projects,10.1109/ENC56672.2022.9882931,"Urrea-Contreras, Silvia Jaqueline; Astorga-Vargas, María Angélica; Flores-Rios, Brenda L.; Ibarra-Esquer, Jorge E.; González-Navarro, Félix Fernando",base_435,TF-MSR|TF-PM
+b5ffb64d,2022,Mining Fork-Including Software Development Traces,10.1007/978-3-031-07481-3_12,Reinhartz-Berger I.,base_435,TF-PM
+68dbd881,2022,Moscow Rules: A Quantitative Expose,10.1007/978-3-031-08169-9_2,,base_435,TF-FC|TF-ST
+7eebcd00,2022,"Process Mining Model Integrated with Control Flow, Case, Organizational and Time Perspectives in a Software Development Project",10.1109/CONISOFT55708.2022.00022,"Urrea-Contreras, Silvia Jaqueline; Flores-Rios, Brenda L.; González-Navarro, Félix Fernando; Astorga-Vargas, María Angélica; Ibarra-Esquer, Jorge Eduardo; Pacheco, Iván A. García; Agüero, Carla L. Pacheco",base_435,TF-PM
+fde0a3b4,2022,Process Mining Model Quality in Software Development Case Studies,10.30844/akwi_2022_9,,base_435,TF-PM
+e941deda,2022,Process Mining Model Quality in Software Development Case Studies: An Analysis,10.30844/akwi_2022_09,,base_435,TF-MSR|TF-PM
+fbe93e3d,2022,Software Process Evaluation from User Perceptions and Log Data,10.1002/smr.2438,Vavpotič D.,base_435,TF-PM
+ff916fb9,2022,"Studying the Impact of Continuous Delivery Adoption on Bug-Fixing Time
+in Apache's Open-Source Projects",10.1145/3524842.3528049,De Almeida C.D.A.,base_435,TF-FC|TF-MSR
+88087b27,2022,Understanding Coding Behavior: An Incremental Process Mining Approach,10.3390/electronics11030389,Ardimento P.,base_435,TF-PM
+b8fc130d,2022,Unearthing open source decision-making processes: A case study of python enhancement proposals,10.1002/spe.3128,Nand Sharma P.,base_435,TF-MSR|TF-PM
+4b34f7a5,2022,Unveiling process insights from refactoring practices,10.1016/j.csi.2021.103587,Caldeira J.,base_435,TF-FC|TF-PM
+548627c6,2023,A Novel Technique to Assess Agile Systems for Stability,10.1007/978-3-031-33976-9_2,,base_435,TF-MSR|TF-ST
+d65695c6,2023,A stochastic petri net model of continuous integration and continuous delivery,10.1109/RAMS51473.2023.10088212,Bhadra S.,base_435,TF-FC|TF-ST
+667f1705,2023,ADPTriage: Approximate Dynamic Programming for Bug Triage,10.1109/tse.2023.3307243,,base_435,TF-MSR|TF-ST
+82ce5370,2023,An AI-Enhanced Process Mining Framework for Software Process Insights,10.1109/KSE59128.2023.10299475,"Nguyen, Minh Khoi; Tran, Hanh Nhi; Abualsaud, Razan; Ober, Ileana",base_435,TF-MSR|TF-PM
+b68e0602,2023,An Exploration of Learning Processes as Process Maps in FLOSS Repositories,10.48550/arxiv.2307.07841,,base_435,TF-MSR|TF-PM
+472e7acc,2023,Enterprise Information Management Systems Development: Two Cases of Mining for Process Conformance,10.1016/j.jjimei.2022.100141,,base_435,TF-PM
+e45c53bb,2023,Evaluating Learning-to-Rank Models for Prioritizing Code Review Requests using Process Simulation,10.1109/SANER56733.2023.00050,,base_435,TF-FC|TF-ST
+21851bba,2023,Exploring Collaboration Patterns in GitHub Using Discrete Time Markov Chain,10.1109/APSEC60848.2023.00090,Jo S.,base_435,TF-MSR|TF-ST
+56342950,2023,Fault-insertion and fault-fixing behavioural patterns in Apache Software Foundation Projects,10.1016/j.infsof.2023.107187,Ortu M.,base_435,TF-MSR|TF-ST
+140e67e6,2023,Macrosimulation Model of Software Development Process,10.1016/j.procs.2023.10.061,,base_435,TF-FC|TF-ST
+5b7858a6,2023,Mapping Process Mining Techniques to Agile Software Development Perspectives,10.5220/0011850500003464,Feres C.,base_435,TF-PM
+bbfaa5a6,2023,Mathematical model of the software development process according to the 'outsource' scheme,10.1109/DESSERT61349.2023.10416494,Hlushko S.,base_435,TF-ST
+f512f749,2023,"On Preparing and Assessing Data for Process Simulation Modeling: An
+Industrial Report",10.1109/ICSSP59042.2023.00016,,base_435,TF-MSR|TF-ST
+a88acaff,2023,Process Mining Applied in a Software Project Development with SCRUM and ProM,10.24018/ejeng.2023.8.5.3089,,base_435,TF-MSR|TF-PM
+1b7688b7,2023,Process Mining from Jira Issues at a Large Company,10.1109/ICSME58846.2023.00055,Coremans B.,base_435,TF-PM
+df1bee14,2023,"The Why, When, What, and How About Predictive Continuous Integration: A Simulation-Based Investigation",10.1109/TSE.2023.3330510,,base_435,TF-FC|TF-ST
+61cb2257,2023,Transforming Cognitive Maps into Markov Process Models for Software Development Projects,10.1109/SIST58284.2023.10223535,Kolesnikova K.,base_435,TF-ST
+12484962,2023,Using Process Mining to Leverage the Development of a Family of Mobile Applications,10.15514/ispras-2023-35(3)-13,,base_435,TF-PM
+3430f3d0,2024,A Stochastic Approach Based on Rational Decision-Making for Analyzing Software Engineering Project Status,10.1007/978-3-031-49266-2_12,Salin H.,base_435,TF-ST
+373ad20e,2024,Applying Process Mining: The Reality of a Software Development SME,10.3390/app14041402,Urrea-Contreras S.J.,base_435,TF-PM
+9ffa3123,2024,Comparative Study of Reinforcement Learning in GitHub Pull Request Outcome Predictions,10.1109/SANER60148.2024.00057,Joshi R.,base_435,TF-FC|TF-MSR|TF-ST
+7f6a881a,2024,Declarative Process Mining for Software Processes: The RuM Toolkit and the Declare4Py Python Library,10.1007/978-3-031-49269-3_2,Alman A.,base_435,TF-PM
+c7d555aa,2024,Mining Pull Requests to Detect Process Anomalies in Open Source Software Development,10.1145/3597503.3639196,"Liu, Bohan; Zhang, He; Ma, Weigang; Kuang, Hongyu; Yang, Yi; Xu, Jinwei; Gao, Shan; Gao, Jian",base_435,TF-PM
+63bfddbd,2024,Multi-Dimensional Process Analysis of Software Development Projects,10.5220/0012372100003645,Nguyen T.,base_435,TF-MSR|TF-PM
+98edc5c2,2024,"Prioritizing code review requests to improve review efficiency: a
+simulation study",10.1007/s10664-024-10575-0,,base_435,TF-MSR|TF-ST
+6ff2b7f2,2024,Probabilistic Model Checking GitHub Repositories for Software Project Analysis,10.3390/app14031260,Jo S.,base_435,TF-MSR|TF-ST
+2349bd7b,2024,"Process mining software engineering practices: A case study for
+deployment pipelines",10.1016/j.infsof.2023.107392,,base_435,TF-MSR|TF-PM
+7434525f,2025,Comparative Analysis of AI Software and Traditional Software GitHub Repositories Using Process Mining,10.15439/2025F3421,"Tasci, Oguzhan; Erdogan, Tugba Gurgen",base_435,TF-MSR|TF-PM
+f2c6bd74,2025,GHALogs: Large-Scale Dataset of GitHub Actions Runs,10.1109/MSR66628.2025.00104,,base_435,TF-MSR|TF-PM
+bf72ff27,2025,Mining and Assessing Issue Resolution Processes in Open Source Software Repositories,10.1109/CSCWD64889.2025.11033176,Sang B.,base_435,TF-MSR|TF-PM
+ed0ab009,2025,PRIMAD: Building Digital Twins for Software Development Lifecycle within an Evolutionary Architecture,10.1109/SWC65939.2025.00261,"Guinea-Cabrera, Miguel Ángel; Holgado-Terriza, Juan Antonio; Pico-Valencia, Pablo A.",base_435,TF-FC|TF-PM|TF-ST
+69029db6,2025,Process mining for agile software process assessment and improvement,10.1016/j.infsof.2025.107680,da Silva K.O.A.,base_435,TF-PM
+e3d6d00e,2025,Towards Streamlining Auditing for Compliance with Requirements in Open-Source Software at NASA,10.1109/DASC66011.2025.11257352,"Paradis, Carlos; Perez, Ivan; Davies, Misty",base_435,TF-MSR|TF-PM
+03fb6812,2026,"Analyzing Side-Tracking of Developers Using Object-Centric Process
+Mining",10.1007/978-3-031-96841-9_2,Bala S.,base_435,TF-MSR|TF-PM
+f7a54d4c,2026,Architecting software monitors for control-flow anomaly detection through large language models and conformance checking,10.1016/j.infsof.2026.108133,Vitale F.,base_435,TF-PM
+2c1f1193,2026,Continuous software monitoring backed by process mining: a systematic literature review,10.1007/s41060-025-01000-w,Stepanov E.,base_435,TF-MSR|TF-PM
+9ea592cd,2026,“Bottleneck Analysis in Software Development: A Case Study Using Process Mining”,10.1007/978-3-032-03708-4_22,de Oliveira R.A.,base_435,TF-PM
+c815bcc6,2011,Software reliability,10.1002/wics.159,,base_435,TF-ST
+0d4ebe86,2018,Systematic mapping study on process mining in agile software development,10.1007/978-3-030-00623-5_20,,base_435,TF-MSR|TF-PM
+6217173e,2017,An Empirical Analysis of Build Failures in the Continuous Integration Workflows of Java-Based Open-Source Software,10.1109/MSR.2017.54,,base_435,TF-MSR
+063967eb,2006,Detection and correction process modeling considering the time dependency,10.1109/PRDC.2006.27,,base_435,TF-FC|TF-ST
+ed81f924,2016,A general modeling and analysis framework for software fault detection and correction process,10.1002/stvr.1600,,base_435,TF-FC|TF-ST
+6d83b874,2005,Software reliability modelling and prediction with hidden Markov chains,10.1191/1471082X05st087oa,,base_435,TF-FC|TF-ST
+2f1e25da,2014,A business process simulation method supporting resource evolution,10.1145/2600821.2600827,,base_435,TF-ST
+140c9afd,2023,Continuous build outcome prediction: an experimental evaluation and acceptance modelling,10.1007/s10489-023-04523-6,,base_435,TF-FC
+bce026ce,2016,Cross-company collaboration analyzed through process mining: A method for analyzing the working environment and measuring impacts of change,,,base_435,TF-MSR|TF-PM
+9a40c123,2018,Cutting the software building efforts in continuous integration by semi-supervised online AUC optimization,10.24963/ijcai.2018/399,,base_435,TF-FC
+8e41b716,2007,Effects of architecture and technical development process on micro-process,10.1007/978-3-540-72426-1_5,,base_435,TF-PM
+e07c6819,2007,Guiding the discovery of open source software processes with a reference model,10.1007/978-0-387-72486-7_26,,base_435,TF-MSR
+20a00ebf,1999,Stochastic model of human errors in software development: Impact of repair times,,,base_435,TF-FC
+6795e33c,2006,Discovering the software process by means of stochastic workflow analysis,10.1016/j.sysarc.2006.06.012,,base_435,TF-ST
+3ae2f9fd,2008,On the online parameter estimation problem in adaptive software testing,10.1142/S0218194008003696,,base_435,TF-ST
+fb4a2cb3,2008,Complementing approaches in ERP effort estimation practice: An industrial study,10.1145/1370788.1370808,,base_435,TF-ST|TF-FC
+e5fa7505,2008,Adaptive software testing in the context of an improved controlled Markov chain model,10.1109/COMPSAC.2008.186,,base_435,TF-ST
+6f5e6f89,2008,Agile estimation with monte carlo simulation,10.1007/978-3-540-68255-4_17,,base_435,TF-ST
+ba328b1c,2008,Chapter 4 The Use of Simulation Techniques for Hybrid Software Cost Estimation and Risk Analysis,10.1016/S0065-2458(08)00604-9,,base_435,TF-ST
+989891c5,2009,An improved approach to adaptive testing,10.1142/S0218194009004349,,base_435,TF-ST
+67b85117,2009,Schedule risk management for business M-applications development projects,,,base_435,TF-ST|TF-FC
+0906c3aa,2009,Project scheduling problem for software development with random fuzzy activity duration times,10.1007/978-3-642-01510-6_8,,base_435,TF-ST
+5f66b602,2010,Reliability estimation and prediction of SA producing process based on Markov chain,10.1109/ICCASM.2010.5620017,,base_435,TF-ST|TF-FC
+c4269b60,2011,Empirical validation of human factors in predicting issue lead time in open source projects,10.1145/2020390.2020403,,base_435,TF-FC|TF-MSR
+04e0e983,2011,Optimal scheduling of software projects using reinforcement learning,10.1109/APSEC.2011.39,,base_435,TF-ST
+7a18f4ee,2011,Software development process animation,10.1145/2016039.2016098,,base_435,TF-FC
+9ae84d72,2011,Analyzing the effect of imperfect debugging on software fault detection and correction processes via a simulation framework,10.1016/j.mcm.2011.07.033,,base_435,TF-PM
+0e708ae8,2012,How Distributed Version Control Systems impact open source software projects,10.1109/MSR.2012.6224297,,base_435,TF-MSR
+1303e41e,2012,Scheduling quality related activities in incremental software development projects based on Monte Carlo simulation,10.3923/itj.2012.751.759,,base_435,TF-ST
+da28afcb,2012,Setting up a stochastic model for teams working in a follow-the-sun environment,10.1109/ICGSE.2012.21,,base_435,TF-ST
+60e4fba6,2013,Exploring collaboration networks in open-source projects,10.1007/978-3-642-38928-3_7,,base_435,TF-MSR
+8c42d0fe,2014,Agile Development with Software Process Mining,10.1145/2600821.2600842,,base_435,TF-PM
+e8daaada,2014,A framework for applying process mining techniques in software process assessments,,,base_435,TF-PM
+5fe2fe46,2014,A novel approach to software quality risk management,10.1002/stvr.1488,,base_435,TF-ST
+e69d723f,2014,Process mining can be applied to software too!,10.1145/2652524.2652583,,base_435,TF-PM
+88ee1d90,2014,Predicting time range of development based on generalized software reliability model,10.1109/APSEC.2014.59,,base_435,TF-ST|TF-FC
+ed17c20e,2014,Structure and content of a framework to apply process mining techniques in scampi assessments,,,base_435,TF-PM
+f2c78b19,2015,Dependability approach for evaluating software development risks,10.1049/iet-sen.2013.0196,,base_435,TF-ST
+4eeb076b,2015,Big software on the run: In vivo software analytics based on process mining (Keynote),10.1145/2785592.2785593,,base_435,TF-PM|TF-FC
+b269731f,2016,Stochastic performance analysis of global software development teams,10.1145/2955093,,base_435,TF-ST
+d85e3fdf,2016,Introduction to integration of the process mining to the knowledge framework for software processes,10.1007/978-3-319-29504-6_4,,base_435,TF-PM
+6f007eeb,2017,Investigating the significance of bellwether effect to improve software effort estimation,10.1109/QRS.2017.44,,base_435,TF-ST|TF-FC
+01f8cab1,2017,Examining the attributes of transitions between team roles in the software development projects,10.15587/1729-4061.2017.91597,,base_435,TF-ST
+a21c9dff,2017,Simkan: Training kanban practices through stochastic simulation,10.1007/978-3-319-55907-0_10,,base_435,TF-ST
+56fcb7c7,2018,Enterprise Level Integration of Ontology Engineering and Process Mining for Management of Complex Data and Processes to improve Decision System,10.1016/j.ifacol.2018.11.200,,base_435,TF-PM
+0bb6f873,2021,Extending the Space of Software Test Monitoring: Practical Experience,10.1109/ACCESS.2021.3136138,,base_435,TF-PM|TF-MSR
+8d2c0b03,2021,Modeling and analysis of a software development project with design structure matrix and simulation approach in an Indonesian startup,,,base_435,TF-ST
+12343eec,2022,Efficient secure DevOps using process mining and Attack Defense Trees,10.1016/j.procs.2022.09.079,,base_435,TF-PM
+61048559,2022,Predicting build outcomes in continuous integration using textual analysis of source code commits,10.1145/3558489.3559070,,base_435,TF-FC
+1fd95ebc,2022,Process Mining in Project Management for Smart Cities,10.1109/E-TEMS53558.2022.9944415,,base_435,TF-PM
+92fa0290,2022,Development of a Tool for Extracting and Analyzing Software Development Process Models,10.1007/978-3-030-95120-7_23,,base_435,TF-PM
+aaef3235,2023,Reviewing and Proposing Approaches for Self-adaptive Testing in the Field,10.1109/ISSREW60843.2023.00035,,base_435,TF-ST
+1efe6b8c,2023,Finding Behavioral Indicators from Contextualized Commits in Software Engineering Courses with Process Mining,10.1007/978-3-031-48639-5_5,,base_435,TF-PM|TF-FC|TF-MSR
+8e09bd55,2023,Prioritizing Test Cases with Markov Chains: A Preliminary Investigation,10.1007/978-3-031-43240-8_14,,base_435,TF-ST
+e3f89404,2023,A Preliminary Study of GitHub Actions Workflow Changes,,,base_435,TF-MSR
+44d6a32e,2023,An Approach Based on Process Mining Techniques to Support Software Development,10.1007/978-3-031-08246-7_2,,base_435,TF-PM
+2c9ac8c4,2024,LPMSAEF: Lightweight process mining-based software architecture evaluation framework for security and performance analysis,10.1016/j.heliyon.2024.e26969,,base_435,TF-PM
+063986d6,2024,Using Logs to Reduce the Impact of Process Variability and Dependence on Practitioners in Requirements Engineering for Traditional Business Process Automation Software,10.1109/ACCESS.2024.3514801,,base_435,TF-PM
+d36b0adf,2024,Layered Mixing Miner: A Process Mining Algorithm for Complex Programming Debugging Data,10.1109/ACAI63924.2024.10899496,,base_435,TF-PM
+08a023e2,2024,Towards Automating Model-Based Systems Engineering in Industry - An Experience Report,10.1109/SysCon61195.2024.10553610,,base_435,TF-PM
+6ffcab24,2024,A dataset of GitHub Actions workflow histories,10.1145/3643991.3644867,,base_435,TF-MSR
+7221e872,2024,A Case Study: To Discuss the Construction of the Finite State Machine and Markov-Chain OP Models for Test Case Generation,10.1109/ICACS60934.2024.10473284,,base_435,TF-ST
+8851bb5e,2026,Improving Learning Analytics from Open-Source Software Data Logs Using Machine Learning and Process Mining Techniques,10.1007/978-981-96-9248-4_5,,base_435,TF-PM
+04657923,2022,Monitoring of Microservices Architecture based Applications using Process Mining,10.23919/INDIACom54597.2022.9763155,,base_435,TF-PM
+85002ffb,1998,Using simulation to build inspection efficiency benchmarks for development projects,10.1109/ICSE.1998.671387,,base_435,TF-ST
+fbf7e330,2008,A Framework for Simulation of Requirements Engineering Processes,10.1109/SEAA.2008.26,,base_435,TF-ST
+0999fe57,2021,On CMMN Model for Software System Project Simulation,10.1109/eStream53087.2021.9431516,,base_435,TF-ST
+f27117e2,2012,Estimate of the Appropriate Iteration Length in Agile Development by Conducting Simulation,10.1109/Agile.2012.16,,base_435,TF-ST
+0e15e613,2012,Simulation modeling of a large-scale formal verification process,10.1109/ICSSP.2012.6225979,,base_435,TF-MSR
+8dea6481,1997,Using influence diagrams for PERT,10.1109/PICMET.1997.653430,,base_435,TF-ST
+6115d05e,1997,Using belief networks for PERT,10.1109/PICMET.1997.653431,,base_435,TF-ST
+1c928aae,2003,Simulating an Automated Approach to Discovery and Modeling of Open Source Software Development Processes,,,base_435,TF-PM
+0232276d,2005,Software Process Modeling Support for Management Planning and Control,10.1109/icsp.1991.664337,,base_435,TF-ST
+a401497c,2007,Deriving Software Process Simulation Model from SPEM-based Software Process Model,10.1109/apsec.2007.40,,base_435,TF-ST
+24059629,2006,An approach to a hybrid software process simulation using the DEVS formalism,10.1002/spip.284,,base_435,TF-ST
+368dc22f,2003,Creating an Advanced Software Engineering Laboratory by Combining Empirical Studies with Process Simulation,,,base_435,TF-ST
+3487bbf5,2003,SUPPORTING DECISION-MAKING IN SOFTWARE ENGINEERING WITH PROCESS SIMULATION AND EMPIRICAL STUDIES,10.1142/s0218194003001391,,base_435,TF-ST
+66c95d97,2006,Qualitative simulation model for software engineering process,10.1109/aswec.2006.42,,base_435,TF-ST
+dcf53abb,2002,Systematically combining process simulation and empirical data in support of decision analysis in software development,10.1145/568760.568901,,base_435,TF-ST
+190c11c4,2005,The Allocation of Software Development Resources in Open Source Production Mode,10.7551/mitpress/5326.003.0023,,base_435,TF-ST
+e620e55e,2002,Model-based tests of truisms,10.1109/ase.2002.1115012,,base_435,TF-ST
+050fa5cf,2013,Learning Project Management Decisions: A Case Study with Case-Based Reasoning versus Data Farming,10.1109/tse.2013.43,,base_435,TF-ST
+d8591f96,2020,Mining Decision-Making Processes in Open Source Software Development - A Study of Python Enhancement Proposals (PEPs) using Email Repositories,10.1145/3383219.3383240,,base_435,TF-PM
+b78523e4,2006,Automated recognition of low-level process: A pilot validation study of Zorro for test-driven development,,,base_435,TF-PM
+12f7f992,1998,A stochastic model of human error during software development,,,base_435,TF-FC|TF-ST
+f822c54d,2015,Using SAN formalism to evaluate Follow-The-Sun project scenarios,10.1016/j.jss.2014.10.046,,base_435,TF-ST
+8f1fb42b,2009,A Hybrid Model for Dynamic Simulation of Custom Software Projects in a Multiproject Environment,10.1007/978-3-642-01680-6_17,,base_435,TF-ST
+e6075fca,2008,Software Process Simulation over the Past Decade: Trends Discovery from A Systematic Review,10.1007/978-3-540-85156-1_173,,base_435,TF-ST
+5c3f99ea,2011,SOFTWARE DEVELOPMENT PROCESS SIMULATION FOR TEACHER EDUCATION REPOSITORY SYSTEM,,,base_435,TF-ST
+e3a9143c,2002,Learning and understanding a software process through simulation of its underlying model,,,base_435,TF-ST
+cc618a37,2021,Towards a Taxonomy of Bug Tracking Process Smells: A Quantitative Analysis,10.1109/SEAA53835.2021.00026,,base_435,TF-MSR|TF-PM
+fd7ca261,2004,Jackson networks and Markov processes for resource allocation modeling,10.1109/RAMS.2004.1285458,,base_435,TF-ST
+704a0d34,2011,Intelligent Behavior Simulation Module for Software Process Elements,10.1109/SBGAMES.2011.29,,base_435,TF-ST
+e24af4e7,2001,An experiment for evaluating the effectiveness of using a system dynamics simulation model in software project management education,10.1109/METRIC.2001.915519,,base_435,TF-ST
+aa0da064,2007,Adjustable Cost Estimation Model for COTS-Based Development,10.1109/ASWEC.2007.10,,base_435,TF-FC|TF-ST
+f48e9319,2019,System Test Architecture Evaluation: A Probabilistic Modeling Approach,10.1109/JSYST.2019.2899697,,base_435,TF-ST
+6e178383,2019,DeepJIT: An End-to-End Deep Learning Framework for Just-in-Time Defect Prediction,10.1109/MSR.2019.00016,,base_435,TF-FC
+22412f71,2022,Code Smell Prioritization with Business Process Mining and Static Code Analysis: A Case Study,10.3390/electronics11121880,,base_435,TF-MSR|TF-PM
+a31e0556,2005,"Optimal Testing Resource Allocation, and Sensitivity Analysis in Software Development",10.1109/tr.2005.858099,,base_435,TF-ST
+ca22bfe7,2010,A Software Process Simulator Machine for Software Engineering Simulation Games,10.1109/sbgames.2010.35,,base_435,TF-ST
+e82e259b,2000,Case studies in software process modeling with system dynamics,10.1002/1099-1670(200006/09)5:2/3<133::aid-spip117>3.0.co;2-m,,base_435,TF-ST
+165593a8,2021,ELS algorithm for estimating open source software reliability with masked data considering both fault detection and correction processes,10.1080/03610926.2020.1866610,,base_435,TF-ST
+9801135d,2007,Quantifying Software Maintainability Based on a Fault-Detection/Correction Model,10.1109/prdc.2007.46,,base_435,TF-FC|TF-ST
+921e8fc3,2015,A New Framework and Application of Software Reliability Estimation Based on Fault Detection and Correction Processes,10.1109/qrs.2015.20,,base_435,TF-ST
+86f0c466,2010,An improved method to simplify software metric models constructed with incomplete data samples,10.1109/fskd.2010.5569384,,base_435,TF-ST
+76a1870d,2023,A Bayesian model averaging method for software reliability modeling and assessment,10.1002/qre.3273,,base_435,TF-ST
+33361b00,2005,Design and evaluation of an educational software process simulation environment and associated model,10.1109/CSEET.2005.16,,base_435,TF-ST
+1d754c2e,2010,Software Project Portfolio Selection A Modern Portfolio Theory Based Technique,,,base_435,TF-ST
+72329237,2001,A CBT module with integrated simulation component for software project management education and training,10.1016/S0164-1212(01)00069-3,,base_435,TF-ST
+6b16f9de,2003,An externally replicated experiment for evaluating the learning effectiveness of using simulations in software project management education,10.1023/A:1025320418915,,base_435,TF-ST
+dd3b63a3,2024,gawd: A Differencing Tool for GitHub Actions Workflows,10.1145/3643991.3644873,,base_435,TF-MSR
+4ba3e996,2026,An empirical study of the evolution of GitHub actions workflows,10.1016/j.jss.2026.112824,,base_435,TF-MSR
+4d088b6b,2011,Studying Lean-Kanban Approach Using Software Process Simulation,10.1007/978-3-642-20677-1_2,,base_435,TF-ST
+fe75ced8,2006,ProSim/RA — Software Process Simulation in Support of Risk Assessment,10.1007/3-540-29263-2_13,,base_435,TF-ST
+c7a601d8,1994,A β-distributed stochastic petri net model for software project time/cost management,10.1016/0164-1212(94)90085-x,,base_435,TF-ST
+eeed2f5d,2009,Investigating the Gap between Quantitative and Qualitative/Semi-quantitative Software Process Simulation Models: An Explorative Study,10.1007/978-3-642-01680-6_19,,base_435,TF-ST
+171085b9,2007,A Framework for Adopting Software Process Simulation in CMMI Organizations,10.1007/978-3-540-72426-1_27,,base_435,TF-ST
+16a201ed,2007,Software process simulation frameworks in support of packaging and transferring empirical evidence,,,base_435,TF-ST
+3f09473c,2012,Simulation modeling of evolving software processes,10.5555/2664360.2664396,,base_435,TF-ST
+cd860b9f,2010,Towards an Approach to Support Software Process Simulation in Small and Medium Enterprises,10.1109/SEAA.2010.67,,base_435,TF-ST
+780addad,2022,Taxonomy of bug tracking process smells: Perceptions of practitioners and an empirical analysis,10.1016/j.infsof.2022.106972,,base_435,TF-MSR
+7a92806a,2022,Workflow analysis of data science code in public GitHub repositories,10.1007/s10664-022-10229-z,,base_435,TF-MSR|TF-ST
+7f8d2b91,2002,Toward metrics for process validation,10.1109/spcon.1994.344426,,base_435,TF-PM
+a98f6c54,2009,How to avoid drastic software process change (using stochastic stability),10.1109/ICSE.2009.5070552,,base_435,TF-ST
+a210fdd3,2010,A Hidden Markov Model of Developer Learning Dynamics in Open Source Software Projects,10.1287/isre.1100.0308,,base_435,TF-ST
+65e5d58c,2018,Modeling and Performance Analysis of Scrumban with Test-Driven Development using Discrete Event and Fuzzy Logic,10.1109/CONISOFT.2018.00029,,base_435,TF-ST
+10bdcff6,2024,TraceJIT: Evaluating the Impact of Behavioral Code Change on Just-In-Time Defect Prediction,10.1109/SANER60148.2024.00065,,base_435,TF-FC
+dfb2398b,2008,Using process simulation to assess the test design effort reduction of a model-based testing approach,,,base_435,TF-ST
+117db759,2006,Users and developers: An agent-based simulation of open source software evolution,,,base_435,TF-ST
+4f2424db,2011,Bug-fix time prediction models: Can we do better?,10.1145/1985441.1985472,Bhattacharya P.; Neamtiu I.,ml_block,TF-FC|TF-MSR
+2784f4ea,2013,Cycle time variance minimization for WIP balance approaches in wafer fabs,,"Zhou, Zhugen and Rose, Oliver",ml_block,TF-FC
+76e991ee,2014,On the influence of maintenance activity types on the issue resolution time,10.1145/2639490.2639506,Murgia A.; Concas G.; Tonelli R.; Ortu M.; Demeyer S.; Marchesi M.,ml_block,TF-FC|TF-MSR
+2bd5a9ab,2016,Improving expert prediction of issue resolution time,10.1145/2915970.2916004,Pfahl D.; Karus S.; Stavnycha M.,ml_block,TF-FC|TF-MSR
+a63597c8,2017,Multi-objective search-based approach to estimate issue resolution time,10.1145/3127005.3127011,"Al-Zubaidi, Wisam Haitham Abbood and Dam, Hoa Khanh and Ghose, Aditya and Li, Xiaodong",ml_block,TF-FC|TF-MSR
+f7839de6,2019,Manufacturing Lead Time Classification Using Support Vector Machine,10.1007/978-3-030-34032-2_25,Zhong Heng LimUmi Kalsom YusofHaziqah Shamsudin,ml_block,TF-FC
+68f7fbe6,2020,Bug-Fix Time Prediction Using Non-Linear Regression Through Neural Network,10.1049/icp.2021.0871,Mahfoodh H.; Hammad M.,ml_block,TF-FC|TF-MSR
+25b131a4,2020,Continual Prediction of Bug-Fix Time Using Deep Learning-Based Activity Stream Embedding,10.1109/access.2020.2965627,Lee Y.; Lee S.; Lee C.-G.; Yeom I.; Woo H.,ml_block,TF-FC|TF-MSR
+c5691b87,2020,Prediction of ocean import shipment lead time using machine learning methods,10.1007/s42452-020-2951-5,Saraswathi HathikalSung Hoon ChungMartin Karczewski,ml_block,TF-FC
+99403a03,2020,Software Risk Estimation through Bug Reports Analysis and Bug-fix Time Predictions,10.1109/3ict51146.2020.9312003,Mahfoodh H.; Obediat Q.,ml_block,TF-FC|TF-MSR
+346e6a05,2021,Well Begun Is Half Done: How First Respondeners Affect Issue Resolution Process in Open Source Software Development?,10.1007/978-981-16-2540-4_46,Yiran WangJian Cao,ml_block,TF-FC|TF-MSR
+acedf9ea,2023,Remaining cycle time prediction with Graph Neural Networks for Predictive Process Monitoring,10.1145/3589883.3589897,"Duong, Le Toan and Trav{\'e}-Massuy{\`e}s, Louise and Subias, Audine and Merle, Christophe",ml_block,TF-FC
+ce3171f1,2024,A Digital Twin for Production Control Based on Remaining Cycle Time Prediction,,"Lugaresi, Giovanni and Santos, Pedro Lu{\'i}s Bacelar Dos and Lona, Alex Chalissery and Rossi, Monica and Matta, Andrea and Zancul, Eduardo",ml_block,TF-FC
+e14e8301,2024,A machine learning method for predicting telescope cycle time applied to the Cerro Murphy Observatory,10.1007/s10686-024-09970-8,Mirosław KiciaMikołaj KałuszyńskiMarek GórskiRolf ChiniGrzegorz Pietrzyński,ml_block,TF-FC
+2d33203f,2024,Build Issue Resolution from the Perspective of Non-Contributors,10.1145/3691620.3695304,"Huang, Sunzhou and Wang, Xiaoyin",ml_block,TF-FC|TF-MSR
+031c45b7,2025,Mining Discriminative Issue Resolution Temporal Sequential Patterns in Open Source Software Repositories,10.1145/3755881.3755903,Wang Y.; Wang L.; Hu H.; Tao X.,ml_block,TF-FC|TF-MSR
+94839c20,2025,OmniGIRL: A Multilingual and Multimodal Benchmark for GitHub Issue Resolution,10.1145/3728871,"Guo, Lianghong and Tao, Wei and Jiang, Runhan and Wang, Yanlin and Chen, Jiachi and Liu, Xilin and Ma, Yuchi and Mao, Mingzhi and Zhang, Hongyu and Zheng, Zibin",ml_block,TF-FC|TF-MSR
+77700179,2025,Rapid Estimation of Truck Cycle Time in Open-Pit Mine Haulage Based on Feature-Optimized Machine Learning,10.1007/s42461-025-01225-0,Chengkai FanNa ZhangBei JiangWei Victor Liu,ml_block,TF-FC
+dc25441a,2026,Agentic Software Issue Resolution with Large Language Models: A Survey,10.1145/3849702,"Jiang, Zhonghao and Lo, David and Liu, Zhongxin",ml_block,TF-FC|TF-MSR
+70db1749,2026,Beyond Single-PR Issues: Understanding Multi-PR Issue Resolution in Game Development,10.1145/3803437.3806367,"Weeraddana, Nimmi",ml_block,TF-FC|TF-MSR
+8429db43,2026,Evaluating and Improving Automated Repository-Level Rust Issue Resolution with LLM-based Agents,10.1145/3744916.3773108,"Xiang, Jiahong and He, Wenxiao and Wang, Xihua and Tian, Hongliang and Zhang, Yuqun",ml_block,TF-FC|TF-MSR
+4b2c7904,2015,Wait for it: determinants of pull request evaluation latency on GitHub,,"Yu, Yue and Wang, Huaimin and Filkov, Vladimir and Devanbu, Premkumar and Vasilescu, Bogdan",ml_block,TF-FC|TF-MSR
+06d23f4b,2018,Studying pull request merges: a case study of shopify's active merchant,10.1145/3183519.3183542,"Kononenko, Oleksii and Rose, Tresa and Baysal, Olga and Godfrey, Michael and Theisen, Dennis and de Water, Bart",ml_block,TF-FC|TF-MSR
+13473087,2019,A Study on the Interplay between Pull Request Review and Continuous Integration Builds,10.1109/saner.2019.8667996,F. Zampetti; G. Bavota; G. Canfora; M. D. Penta,ml_block,TF-FC|TF-MSR
+b311ac54,2019,Duplicate Pull Request Detection: When Time Matters,10.1145/3361242.3361254,"Wang, Qingye and Xu, Bowen and Xia, Xin and Wang, Ting and Li, Shanping",ml_block,TF-FC|TF-MSR
+363f7789,2019,Predicting pull request completion time: a case study on large scale cloud services,10.1145/3338906.3340457,"Maddila, Chandra and Bansal, Chetan and Nagappan, Nachiappan",ml_block,TF-FC|TF-MSR
+f302d687,2019,Programming Style Analysis with Recurrent Neural Network to Automatic Pull Request Approval,10.1109/ijcnn.2019.8852255,L. Roque; A. Dantas; C. G. Camilo-Junior,ml_block,TF-FC|TF-MSR
+78f41a8b,2019,Replication can improve prior results: a GitHub study of pull request acceptance,10.1109/icpc.2019.00037,"Chen, Di and Stolee, Kathryn T. and Menzies, Tim",ml_block,TF-FC|TF-MSR
+b0bb5025,2020,Automatic generation of pull request descriptions,10.1109/ase.2019.00026,"Liu, Zhongxin and Xia, Xin and Treude, Christoph and Lo, David and Li, Shanping",ml_block,TF-FC|TF-MSR
+5ba2549e,2020,Bot or not? Detecting bots in GitHub pull request activity based on comment similarity,10.1145/3387940.3391503,"Golzadeh, Mehdi and Legay, Damien and Decan, Alexandre and Mens, Tom",ml_block,TF-FC|TF-MSR
+ead7253c,2020,Effect of Technical and Social Factors on Pull Request Quality for the NPM Ecosystem,10.1145/3382494.3410685,"Dey, Tapajit and Mockus, Audris",ml_block,TF-FC|TF-MSR
+544adfb9,2020,Pull Request Prioritization Algorithm based on Acceptance and Response Probability,10.1109/qrs51102.2020.00041,Azeem M.I.; Peng Q.; Wang Q.,ml_block,TF-FC|TF-MSR
+0f428f0c,2021,"""@alex, this fixes #9"": Analysis of Referencing Patterns in Pull Request Discussions",10.1145/3479529,"Chopra, Ashish and Mo, Morgan and Dodson, Samuel and Beschastnikh, Ivan and Fels, Sidney S. and Yoon, Dongwook",ml_block,TF-FC|TF-MSR
+0dd5604d,2021,Does code quality affect pull request acceptance? An empirical study,10.1016/j.jss.2020.110806,Lenarduzzi V.; Nikkola V.; Saarimäki N.; Taibi D.,ml_block,TF-FC|TF-MSR
+ea1c9c15,2021,Identifying bot activity in GitHub pull request and issue comments,10.1109/botse52550.2021.00012,M. Golzadeh; A. Decan; E. Constantinou; T. Mens,ml_block,TF-FC|TF-MSR
+acf05afb,2021,Temporal analysis on pull request patterns: an approach with sliding window,10.1145/3483899.3483906,"Gon{\c c}alves, Silvana and Soares, Daric{\'e}lio and Silva, Daniel",ml_block,TF-FC|TF-MSR
+5211dc1a,2022,Identifying Sexism and Misogyny in Pull Request Comments,10.1145/3551349.3559515,Sultana S.,ml_block,TF-FC|TF-MSR
+f21127d8,2023,<span>GitHub Actions</span>: The Impact on the Pull Request Process,10.1007/s10664-023-10369-w,Mairieli WesselJoseph VargovichMarco A. GerosaChristoph Treude,ml_block,TF-FC|TF-MSR
+ee8c15e8,2023,Aide-m{\'e}moire: Improving a Project’s Collective Memory via Pull Request–Issue Links,10.1145/3542937,"P{\^a}r{\c t}achi, Profir-Petru and White, David R. and Barr, Earl T.",ml_block,TF-FC|TF-MSR
+a567272e,2023,Beyond the Code: Investigating the Effects of Pull Request Conversations on Design Decay,10.1109/esem56168.2023.10304805,C. Barbosa; A. Uchôa; D. Coutinho; W. K. G. Assunção; A. Oliveira; A. Garcia; B. Fonseca; M. Rabelo; J. E. Coelho; E. Carvalho; H. Santos,ml_block,TF-FC|TF-MSR
+d7848304,2023,Enhancing Code Review Efficiency – Automated Pull Request Evaluation Using Natural Language Processing and Machine Learning,10.12913/22998624/169576,Zydroń P.W.; Protasiewicz J.,ml_block,TF-FC|TF-MSR
+e28b86a2,2024,"""Looks Good To Me ;-)"": Assessing Sentiment Analysis Tools for Pull Request Discussions",10.1145/3661167.3661189,"Coutinho, Daniel and Cito, Luisa and Lima, Maria Vit{\'o}ria and Arantes, Beatriz and Alves Pereira, Juliana and Arriel, Johny and Godinho, Jo{\~a}o and Martins, Vinicius and Lib{\'o}rio, Paulo V{\'i}",ml_block,TF-FC|TF-MSR
+36ecb914,2024,"Generative AI for Pull Request Descriptions: Adoption, Impact, and Developer Interventions",10.1145/3643773,"Xiao, Tao and Hata, Hideaki and Treude, Christoph and Matsumoto, Kenichi",ml_block,TF-FC|TF-MSR
+03d99e0d,2025,E-PRedictor: an approach for early prediction of pull request acceptance,10.1007/s11432-022-3953-4,Chen K.; Bao L.; Hu X.; Xia X.; Yang X.,ml_block,TF-FC|TF-MSR
+6d57047b,2025,Improving Merge Pipeline Throughput in Continuous Integration via Pull Request Prioritization,10.1109/icsme64153.2025.00057,M. Jungwirth; M. Gruber; G. Fraser,ml_block,TF-FC|TF-MSR
+22fb98ad,2025,Turbocharging Pull Request Reviews: Exploring Generative AI for Code Review,10.1007/978-3-031-91340-2_12,Dutta S.; Sharma A.; Rajgor J.,ml_block,TF-FC|TF-MSR
+94593884,2026,Beyond Production Code: A Pull Request–Based Study of Technical Debt in Test Code,10.1145/3794915.3795781,"Neto, Jos{\'e} Rocha do Amaral and Alves, Everton L. G. and Ara{\'u}jo, Eliane C.",ml_block,TF-FC|TF-MSR
+24733309,2026,"Change And Cover: Last-Mile, Pull Request-Based Regression Test Augmentation",10.1145/3744916.3787768,"Zhou, Zitong and Paltenghi, Matteo and Kim, Miryung and Pradel, Michael",ml_block,TF-FC|TF-MSR
+92b0645a,2026,Collaborator or Assistant? How AI Coding Agents Partition Work across Pull Request Lifecycles,10.1145/3805760.3814893,"Chung, Young Jo and Hassan, Safwat",ml_block,TF-FC|TF-MSR
+0d2439ef,2026,Predictive Pull Request Batching to Accelerate Merge Pipelines in Continuous Integration at Scale,10.1109/icst69053.2026.00087,Jungwirth M.; Gruber M.; Fraser G.,ml_block,TF-FC|TF-MSR
+18cb4bcb,2026,Why Are My Pull Request Descriptions Constantly Revised? Understanding Modifying Descriptions and Reviewer Suggestions,10.1145/3797880,"Jiang, Jing and Chen, Hang and Tan, Xin and Liu, Zihao and Zhang, Li",ml_block,TF-FC|TF-MSR
+8c928c6a,2014,"Comparison of Functional Size Based Estimation and Story Points, Based on Effort Estimation Effectiveness in SCRUM Projects",10.1109/seaa.2014.83,E. Ungan; N. Çizmeli; O. Demirörs,ml_block,TF-FC|TF-MSR
+49527f55,2014,Effort estimation in agile software development: a systematic literature review,10.1145/2639490.2639503,"Usman, Muhammad and Mendes, Emilia and Weidt, Francila and Britto, Ricardo",ml_block,TF-FC|TF-MSR
+fe225f50,2014,Story point approach based agile software effort estimation using various SVR kernel methods,,Satapathy S.M.; Panda A.; Rath S.K.,ml_block,TF-FC|TF-MSR
+80efe394,2015,Empirical Validation of Neural Network Models for Agile Software Effort Estimation based on Story Points,10.1016/j.procs.2015.07.474,Panda A.; Satapathy S.M.; Rath S.K.,ml_block,TF-FC|TF-MSR
+c77dd795,2016,Cost-Effective Supervised Learning Models for Software Effort Estimation in Agile Environments,10.1109/compsac.2016.85,Moharreri K.; Sapre A.V.; Ramanathan J.; Ramnath R.,ml_block,TF-FC|TF-MSR
+68eeccd7,2016,Understanding and improving effort estimation in Agile software development: an industrial case study,10.1145/2904354.2904373,"Tanveer, Binish and Guzm{\'a}n, Liliana and Engel, Ulf Martin",ml_block,TF-FC|TF-MSR
+c5bdca77,2017,An Effort Estimation Taxonomy for Agile Software Development,10.1142/s0218194017500243,Usman M.; Börstler J.; Petersen K.,ml_block,TF-FC|TF-MSR
+5b014261,2017,Effort estimation for agile software development: comparative case studies using COSMIC functional size measurement and story points,10.1145/3143434.3143450,"Salmanoglu, Murat and Hacaloglu, Tuna and Demirors, Onur",ml_block,TF-FC|TF-MSR
+9061a5a2,2017,Empirical assessment of machine learning models for agile software development effort estimation using story points,10.1007/s11334-017-0288-z,Satapathy S.M.; Rath S.K.,ml_block,TF-FC|TF-MSR
+25217fd5,2017,Operationalizing the Experience Factory for Effort Estimation in Agile Processes,10.1145/3084226.3084240,"Taibi, D. and Lenarduzzi, V. and Diebold, P. and Lunesu, I.",ml_block,TF-FC|TF-MSR
+59674b80,2017,Risk Aware and Quality Enriched Effort Estimation for Mobile Applications in Distributed Agile Software Development,10.6688/jise.2017.33.6.6,Aslam W.; Ijaz F.; Lali M.I.; Mehmood W.,ml_block,TF-FC|TF-MSR
+f858387d,2017,Software effort estimation based on open source projects: Case study of Github,10.1016/j.infsof.2017.07.015,Qi F.; Jing X.-Y.; Zhu X.; Xie X.; Xu B.; Ying S.,ml_block,TF-FC|TF-MSR
+5d16be8a,2018,A hybrid methodology for effort estimation in Agile development: an industrial evaluation,10.1145/3202710.3203152,"Tanveer, Binish and Vollmer, Anna Maria and Braun, Stefan",ml_block,TF-FC|TF-MSR
+8962430e,2018,An agile effort estimation based on story points using machine learning techniques,10.1007/978-981-10-8228-3_20,Prasada Rao C.; Siva Kumar P.; Rama Sree S.; Devi J.,ml_block,TF-FC|TF-MSR
+d3493587,2018,Effort Estimation in Agile Software Development: An Updated Review,10.1142/s0218194018400302,Dantas E.; Perkusich M.; Dilorenzo E.; Santos D.F.S.; Almeida H.; Perkusich A.,ml_block,TF-FC|TF-MSR
+e44d70d5,2018,Effort Estimation of Agile Development using Fuzzy Logic,10.1109/icrito.2018.8748381,A. Saini; L. Ahuja; S. K. Khatri,ml_block,TF-FC|TF-MSR
+0970e7c6,2018,Effort estimation in agile software development: An updated review,10.18293/seke2018-003,Dantas E.; Perkusich M.; Dilorenzo E.; Santos D.F.S.; Almeida H.; Perkusich A.,ml_block,TF-FC|TF-MSR
+660247e6,2018,Revisiting the conclusion instability issue in software effort estimation,10.18293/seke2018-126,Bosu M.F.; Mensah S.; Bennin K.; Abuaiadah D.,ml_block,TF-FC|TF-MSR
+66d2eceb,2019,A Comparative Analysis on Effort Estimation for Agile and Non-agile Software Projects Using DBN-ALO,10.1007/s13369-019-04250-6,Anupama KaushikDevendra Kr. TayalKalpana Yadav,ml_block,TF-FC|TF-MSR
+78ba0cbb,2019,An effort estimation support tool for agile software development: An empirical evaluation,10.18293/seke2019-141,Dantas E.; Costa A.; Vinicius M.; Perkusich M.; Almeida H.; Perkusich A.,ml_block,TF-FC|TF-MSR
+964ce123,2019,BlackSheep: Dynamic effort estimation in agile software development using machine learning,,Mas’ad R.; Ñanculef R.; Astudillo H.,ml_block,TF-FC|TF-MSR
+391cd760,2019,Effort Estimation using Bayesian Networks for Agile Development,10.1109/cais.2019.8769455,C. Ratke; H. H. Hoffmann; T. Gaspar; P. E. Floriani,ml_block,TF-FC|TF-MSR
+c8595f37,2019,Effort estimation in agile software development using experimental validation of neural network models,10.1007/s41870-018-0131-2,Bilgaiyan S.; Mishra S.; Das M.,ml_block,TF-FC|TF-MSR
+dea8a64d,2019,Ontology-Oriented Software Effort Estimation System for E-commerce Applications Based on Extreme Programming and Scrum Methodologies,10.1093/comjnl/bxy141,Adnan M.; Afzal M.; Asif K.H.,ml_block,TF-FC|TF-MSR
+4bf3a2b2,2020,A Pair Estimation Technique of Effort Estimation in Mobile App Development for Agile Process: Case Study,10.1145/3388176.3388212,"Altaleb, Abdullah and Altherwi, Muna and Gravell, Andy",ml_block,TF-FC|TF-MSR
+662f2b61,2020,A comparative study on measuring software functional size to support effort estimation in agile,,Ugalde F.; Quesada-López C.; Martínez A.; Jenkins M.,ml_block,TF-FC|TF-MSR
+bc5255b3,2020,An Update on Effort Estimation in Agile Software Development: A Systematic Literature Review,10.1109/access.2020.3021664,M. Fernández-Diego; E. R. Méndez; F. González-Ladrón-De-Guevara; S. Abrahão; E. Insfran,ml_block,TF-FC|TF-MSR
+bc63ae20,2020,Factors Affecting Sprint Effort Estimation,10.1007/978-981-15-1483-8_43,Melvina Autar RamessurSoulakshmee Devi Nagowah,ml_block,TF-FC|TF-MSR
+dce632c6,2020,Story Point-Based Effort Estimation Model with Machine Learning Techniques,10.1142/s0218194020500035,Gultekin M.; Kalipsiz O.,ml_block,TF-FC
+6bc47fa4,2020,The role of neural networks and metaheuristics in agile software development effort estimation,10.4018/ijitpm.2020040104,Kaushik A.; Tayal D.K.; Yadav K.,ml_block,TF-FC|TF-MSR
+90a81935,2021,A State of the Art Regressor Model's comparison for Effort Estimation of Agile software,10.1109/iciem51511.2021.9445345,Arora M.; Sharma A.; Katoch S.; Malviya M.; Chopra S.,ml_block,TF-FC|TF-MSR
+ce26be47,2021,Impact Factors and Best Practices to Improve Effort Estimation Strategies and Practices in DevOps,10.1145/3484399.3484401,"Meedeniya, Dulani and Thennakoon, Harshanika",ml_block,TF-FC
+45e9a7c0,2021,Investigating documented information for accurate effort estimation in agile software development,10.1145/3468264.3473106,"Pasuksmit, Jirat",ml_block,TF-FC|TF-MSR
+81a1d12d,2021,Story Point Based Effort Estimation Model with Machine Learning Techniques in Healthcare,10.1007/978-981-16-1480-4_50,Shanu VermaRashmi PopliHarish KumarRohit Tanwar,ml_block,TF-FC
+cd664b7e,2022,A Review of Effort Estimation in Agile Software Development using Machine Learning Techniques,10.1109/icirca54612.2022.9985542,Kumar S.; Arora M.; Sakshi; Chopra S.,ml_block,TF-FC|TF-MSR
+fc1c3397,2022,A novel approach for optimization of effort estimation of agile projects using SVC_RBF along with neural network backpropagation,10.1080/02522667.2022.2133216,"Vyas, M Hemrajani, N",ml_block,TF-FC|TF-MSR
+7c4d9287,2022,Analysis of Software Effort Estimation Based on Story Point and Lines of Code using Machine Learning,10.12785/ijcds/120112,Sharma A.; Chaudhary N.,ml_block,TF-FC
+1ad50ad1,2022,Automated software effort estimation for agile development system by heuristically improved hybrid learning,10.1002/cpe.7267,Gupta N.; Mahapatra R.P.,ml_block,TF-FC|TF-MSR
+c9f2efbb,2022,Data-driven effort estimation techniques of agile user stories: a systematic literature review,10.1007/s10462-021-10132-x,Alsaadi B.; Saeedi K.,ml_block,TF-FC|TF-MSR
+a82a1e30,2022,Project Management Effort Estimation Using Agile Manager game platform,10.1109/icics55353.2022.9811211,Tashtoush Y.M.; Doulat W.; Banat S.; Alkhdour N.; Darweesh D.; Darwish O.,ml_block,TF-FC|TF-MSR
+83f25bf6,2022,Software Effort Estimation for Agile Software Development Using a Strategy Based on k-Nearest Neighbors Algorithm,10.1109/enc56672.2022.9882947,Sanchez E.R.; Maceda H.C.; Santacruz E.V.,ml_block,TF-FC|TF-MSR
+7e76d2d6,2022,Software Enhancement Effort Estimation using Stacking Ensemble Model within the Scrum Projects: A Proposed Web Interface,10.5220/0011321000003266,"Sakhrawi, Z Sellami, A Bouassida, N",ml_block,TF-FC|TF-MSR
+a798b338,2023,Agile Effort Estimation: Have We Solved the Problem Yet? Insights From a Replication Study,10.1109/tse.2022.3228739,Tawosi V.; Moussa R.; Sarro F.,ml_block,TF-FC|TF-MSR
+016e6976,2023,Agile Software Development Effort Estimation based on Product Backlog Items,10.1016/j.procs.2023.10.516,Meiliana; Daniella G.; Wijaya N.; Putra N.G.E.; Efata R.,ml_block,TF-FC|TF-MSR
+7bd8613e,2023,Efficacy of Reported Issue Times as a Means for Effort Estimation,10.1109/csce60160.2023.00417,P. MacLean; T. Devine; D. Dzielski; J. Hernandez,ml_block,TF-FC|TF-MSR
+f3e95989,2023,Efficient Shapely Explanation of Support Vector Regression for Agile and Non-agile Software Effort Estimation,10.1007/978-981-19-7663-6_67,Najm A.; Zakrani A.; Marzak A.,ml_block,TF-FC|TF-MSR
+d2a25a62,2023,Effort Estimation in Agile Software Development Using Autoencoders,10.1109/cimps61323.2023.10528839,Sanchez E.R.; Santacruz E.V.; MacEda H.C.,ml_block,TF-FC|TF-MSR
+26709b6a,2023,Effort Estimation in Agile Software Development: A Systematic Map Study,10.17981/ingecuc.19.1.2023.03,"Rodriguez, CAP Martinez, LMS Ordonez, DHP Pena, JAT",ml_block,TF-FC|TF-MSR
+94673f4e,2023,IFEJM: New Intuitionistic Fuzzy Expert Judgment Method for Effort Estimation in Agile Software Development,10.1007/s13369-023-07711-1,Omar El Beggar,ml_block,TF-FC|TF-MSR
+3e1a2f38,2023,"Identification of methods, approaches, and factors in effort estimation for DevOps projects: a systematic literature mapping",10.1109/enc60556.2023.10508603,B. D. V. Robles; I. L. A. Lara; R. S. Salgado; M. Hidalgo-Reyes,ml_block,TF-FC
+236649dc,2023,Machine Learning Based Software Effort Estimation of Suggestive Agile and Scrumban Methodologies,10.1007/978-3-031-27524-1_48,Srikanth B.V.; Reddy P.V.B.; Kamesh D.B.K.,ml_block,TF-FC|TF-MSR
+78e7e7f1,2023,Optimizing Effort Estimation in Agile Software Development: Traditional vs. Advanced ML Methods,10.1109/iccsai59793.2023.10421235,Sunda N.; Sinha R.R.,ml_block,TF-FC|TF-MSR
+578e606b,2024,A Review on Improving the Accuracy of Effort Estimation in Software Development with Agile Method,10.1109/icitacee62763.2024.10761956,Moechtar H.R.; Sulistyo S.; Ferdiana R.,ml_block,TF-FC|TF-MSR
+d85e760e,2024,Agile Effort Estimation: Have We Solved the Problem Yet? Insights from the Replication of the GPT2SP Study,10.1109/saner60148.2024.00111,Tawosi V.; Moussa R.; Sarro F.,ml_block,TF-FC|TF-MSR
+34a0c931,2024,Agile Software Development Effort Estimation: A Comprehensive Survey,10.1109/emergin63207.2024.10961288,Malik V.; Arora R.; Mehrotra D.; Singh H.,ml_block,TF-FC|TF-MSR
+5b1213ef,2024,Correlation of Traditional Technique and ML-Based Technique for Efficient Effort Estimation: In Agile Frameworks,10.1007/978-981-97-3810-6_21,Neelam SundaRipu Ranjan Sinha,ml_block,TF-FC|TF-MSR
+046b1117,2024,Enhancing Agile Effort Estimation: An NLP Approach for Software Requirements Analysis,10.1109/hora61326.2024.10550870,Catak T.; Durdu P.O.; Omurca S.I.,ml_block,TF-FC|TF-MSR
+7ff45655,2024,Enhancing Software Effort Estimation with Pre-Trained Word Embeddings: A Small-Dataset Solution for Accurate Story Point Prediction,10.3390/electronics13234843,Atoum I.; Otoom A.A.,ml_block,TF-FC
+30b595d9,2025,A Novel Gradient Boosting Model for Effort Estimation in Scrum Projects,10.1109/ietacs68750.2025.11385416,Arora M.; Chopra S.; Sahu P.; Singh B.; Singh M.,ml_block,TF-FC|TF-MSR
+4153811a,2025,An LLM-based multi-agent framework for agile effort estimation,10.1109/ase63991.2025.00090,Bui T.-L.; Dam H.K.; Hoda R.,ml_block,TF-FC|TF-MSR
+ae916708,2025,An examination of software costs and effort estimation methods for the Agile development process,10.1063/5.0279674,Katragadda S.R.; Rampay V.R.,ml_block,TF-FC|TF-MSR
+1553ff8e,2025,Constructing a Github-Based Dataset for Machine Learning Driven Software Effort Estimation,10.1109/idaacs68557.2025.11322078,Aratovskyi O.; Liubchenko V.,ml_block,TF-FC|TF-MSR
+115736e7,2025,Deep Learning for Agile Effort Estimation,10.1063/5.0240907,Singh D.; Sharma A.; Rakhra M.; Singh A.; Bhoite O.; Kumar R.; Saini V.,ml_block,TF-FC|TF-MSR
+9cdd9f13,2025,EGPT-SPE: story point effort estimation using improved GPT-2 by removing inefficient attention heads,10.1007/s10489-025-06824-4,Cheemaa A.S.; Azhar M.; Arif F.; ul haq Q.M.; Sohail M.; Iqbal A.,ml_block,TF-FC
+1452baec,2025,Effort Estimation in Agile and DevOps: A Systematic Literature Review of Stakeholder Dissatisfaction,10.1109/access.2025.3600321,S. A. Ruk; Y. Mahmood; A. Azmi; N. Firdaus Mohd Azmi; S. Gul,ml_block,TF-FC|TF-MSR
+e69978df,2025,"Hybrid Models for Agile Software Effort Estimation: Integrating LSTM, Ensemble Learning, and Genetic Algorithms",10.1007/978-981-96-7131-1_40,Gill S.; Kaushik A.; Singh Y.,ml_block,TF-FC|TF-MSR
+fac7d426,2026,A novel stacking-based ensemble machine learning model for accurate user story effort estimation in scrum,10.1186/s40537-026-01414-8,Fatima I.; Rasheed M.; Fatima D.; Hamid M.; Jaghdam I.H.; Zahary A.T.,ml_block,TF-FC|TF-MSR
+cabfb00c,2026,Combining Textual Embeddings and Graph Neural Networks for Agile Software Effort Estimation,10.1145/3748522.3780007,Bitencourt C.; Santos Turine M.A.; Araujo Borges V.; Nogueira B.M.,ml_block,TF-FC|TF-MSR
+49ea6c22,2026,Effort Estimation in&#xa0;Agile Software Development Context: A Systematic Mapping Study,10.1007/978-3-032-08977-9_19,Saif Ur Rehman KhanSyed Abu SaeedHabib Un NisaMuhammad JavedKashif Manzer,ml_block,TF-FC|TF-MSR
+d1f15950,2026,Effort estimation in scrum using AI,10.1007/s10515-026-00607-y,Rasheed M.; Fatima I.; Fatima D.; Hamid M.; Hajjej F.,ml_block,TF-FC|TF-MSR
+c490ecb0,2026,Enhancing Software Effort Estimation Accuracy through a COCOMO II and Agile-based Hybrid Model,,Turukmane A.V.; Bafna M.; Thete S.; Gaikwad A.; Jadhao V.,ml_block,TF-FC|TF-MSR
+1c0f8c27,2026,HEEEM: A Hybrid Ensemble Effort Estimation Model for Agile and DevOps Development,10.1109/access.2026.3693745,Ruk S.A.; Mahmood Y.; Azmi A.; Azmi N.F.M.; Bouktif S.; Gul S.,ml_block,TF-FC|TF-MSR
+65a5d62c,2026,Machine Learning Based Software Effort Estimation In Agile Based Projects By Using Scrumban Methodologies,,Srikanth B.V.; Reddy P.V.B.,ml_block,TF-FC|TF-MSR
+5169e68d,2026,Machine Learning for Effort Estimation in Agile: A Systematic Literature Review,10.1007/978-3-032-04725-0_31,Duong N.A.T.; Silhavy R.; Silhavy P.,ml_block,TF-FC|TF-MSR
+84779229,2026,The Model of Software Effort Estimation in the Context of Methodology Agile and Software Development,10.58346/jisis.2026.i1.004,Khattab S.W.A.; Alneamy J.S.,ml_block,TF-FC|TF-MSR

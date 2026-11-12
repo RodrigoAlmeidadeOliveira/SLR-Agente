@@ -60,14 +60,14 @@
 \textbf{Contexto.} Repositórios de software registram o desenvolvimento como eventos com carimbo de tempo. A mineração de processos (PM), a modelagem estocástica e a previsão de métricas de processo exploram esses rastros, em grande parte de forma independente.
 \textbf{Objetivo.} Mapear os estudos primários que aplicam essas técnicas a dados de desenvolvimento de software, caracterizar como as três linhas evoluíram e medir até que ponto elas foram integradas.
 \textbf{Método.} Um estudo de mapeamento sistemático relatado segundo o SEGRESS. Cinco bibliotecas digitais e uma iteração de busca por citações resultaram em 5.783 registros únicos (12 de abril de 2026). Um modelo de linguagem serviu de apoio a uma primeira triagem; todo registro que ele excluiu ou deixou sem decisão foi triado novamente por dois revisores humanos. Os estudos foram classificados em quatro famílias de técnica e de dados e em quatro níveis de integração (L0--L3).
-\textbf{Resultados.} O corpus contém 435 estudos publicados entre 1994 e 2026, todos classificados. A modelagem estocástica (55,4\%) predominou até 2013; a mineração de processos (39,8\%) predomina desde 2014. As duas linhas se encontram em 10 estudos. A previsão aparece em 28,0\% dos estudos, quase sempre associada a modelos estocásticos (95 estudos) e raramente à mineração de processos (9). Um estudo combina as três famílias (L2), e nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta (L3).
+\textbf{Resultados.} O corpus contém 561 estudos publicados entre 1994 e 2026, todos classificados (435 da busca-base mais 126 do bloco ML/previsão da Fase 3). A modelagem estocástica aparece em 43,0\% e a mineração de processos em 30,8\%; as duas linhas ainda se encontram em 10 estudos. A previsão aparece em 44,2\% (248 estudos), frequentemente sozinha sobre dados de repositório após o bloco ML (145 só-FC) e, nos demais casos, sobretudo associada a modelos estocásticos (95) e raramente à mineração de processos (9). Um estudo combina as três famílias (L2), e nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta (L3).
 \textbf{Conclusão.} A área está fragmentada segundo as comunidades de pesquisa, e não por falta de técnicas. A previsão estocástica orientada a processos, na qual a estrutura de processo minerada parametriza uma previsão estocástica, é a combinação menos explorada. Propõe-se uma agenda com quatro direções.
 \end{abstract}
 
 \begin{highlights}
-\item 435 estudos aplicam PM, modelos estocásticos ou previsão a dados do SDLC.
+\item 561 estudos aplicam PM, modelos estocásticos ou previsão a dados do SDLC.
 \item A modelagem estocástica predominou até 2013; desde então, a mineração de processos.
-\item PM e modelagem estocástica se encontram em 10 dos 435 estudos.
+\item PM e modelagem estocástica se encontram em 10 dos 561 estudos.
 \item Um estudo combina as três; nenhum as acopla com avaliação de ponta a ponta.
 \item Corpus, classificação e registros de triagem estão disponíveis abertamente.
 \end{highlights}
@@ -93,7 +93,7 @@ Os estudos secundários existentes cobrem, cada um, um lado desse espaço. O mon
 \paragraph{Contribuições}
 Este artigo relata um estudo de mapeamento sistemático dessa interseção. Suas contribuições são:
 \begin{enumerate}
-\item um corpus de 435 estudos primários, disponível abertamente junto com os registros de triagem e de classificação;
+\item um corpus de 561 estudos primários, disponível abertamente junto com os registros de triagem e de classificação;
 \item uma classificação dos estudos em quatro famílias de técnica e de dados e em quatro níveis de integração, com a evolução de cada família ao longo de três décadas; e
 \item uma análise das lacunas entre as três linhas de pesquisa, da qual derivamos uma agenda de pesquisa com quatro direções.
 \end{enumerate}
@@ -154,7 +154,7 @@ Total & & & 8.347 & 5.783 \\
 \paragraph{\emph{Snowballing}}
 Uma iteração de \emph{snowballing} para trás e para a frente foi executada sobre 400 DOIs de origem e recuperou 595 registros. Um candidato era mantido quando seu título ou resumo continha um termo de PM ou estocástico e um termo de engenharia de software.
 
-\pendente{O procedimento acima não segue Wohlin~\cite{wohlin2014}: os 400 DOIs-fonte não são os estudos incluídos, backward e forward não estão separados e não houve critério de saturação. Refazer o snowballing a partir dos 435 estudos, separando backward e forward e iterando até nenhum estudo novo aparecer, e informar as contagens por iteração. Sem isso, descrever o procedimento como ``uma iteração de busca por citações'' e não como snowballing de Wohlin.}
+\pendente{O procedimento acima não segue Wohlin~\cite{wohlin2014}: os 400 DOIs-fonte não são os estudos incluídos, backward e forward não estão separados e não houve critério de saturação. Refazer o snowballing a partir dos 561 estudos, separando backward e forward e iterando até nenhum estudo novo aparecer, e informar as contagens por iteração. Sem isso, descrever o procedimento como ``uma iteração de busca por citações'' e não como snowballing de Wohlin.}
 
 \paragraph{Conjunto de controle}
 Dez estudos conhecidos (Tabela~\ref{tab:control}) foram usados para verificar se as strings recuperam trabalhos relevantes. Todos os dez foram recuperados. Como os dez já eram conhecidos quando as strings foram escritas, essa verificação não estima a sensibilidade da busca.
@@ -247,7 +247,7 @@ Para cada estudo incluído registramos os dados bibliográficos, as famílias qu
 
 L0 e L1 decorrem mecanicamente dos códigos de família. Distinguir L2 de L3 exige ler a avaliação do estudo; isso foi necessário para um único estudo (Seção~\ref{sec:rq4}).
 
-As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com duas famílias de técnica ($n = 111$) foi relido em busca de uma terceira família ausente; um subconjunto foi lido por dois autores com concordância total, e nenhum estudo mudou de nível. Os estudos acrescentados pela re-triagem foram classificados pelos autores. Os 76 registros conhecidos apenas pelo título na re-triagem foram resolvidos a partir do abstract ou do PDF: 55 entraram no corpus classificados e 21 foram excluídos (fora de escopo ou EC5b), resultando em 435 estudos incluídos, todos classificados.
+As famílias foram inicialmente propostas pelo modelo de linguagem a partir do título, do resumo e, quando disponível, do PDF. Em seguida, os autores as revisaram da seguinte forma. Todo estudo com duas famílias de técnica ($n = 111$) foi relido em busca de uma terceira família ausente; um subconjunto foi lido por dois autores com concordância total, e nenhum estudo mudou de nível. Os estudos acrescentados pela re-triagem foram classificados pelos autores. Os 76 registros conhecidos apenas pelo título na re-triagem foram resolvidos a partir do abstract ou do PDF: 55 entraram no corpus classificados e 21 foram excluídos (fora de escopo ou EC5b), resultando em 435 estudos incluídos, todos classificados. O bloco ML/previsão da Fase 3 acrescentou depois 126 estudos (triagem título/resumo sob D2=B), elevando o corpus a 561, todos classificados.
 
 Uma amostra estratificada de 55 estudos L0 (período $\times$ família) foi recodificada por um autor a partir de título/resumo/PDF. A concordância com as famílias do LLM foi 55/55 (0\% de erro nessa amostra). Um segundo coder para $\kappa$ não foi executado; permanece como reforço opcional da auditoria.
 
@@ -280,7 +280,9 @@ Re-triados por humanos (Etapa 3) & \multicolumn{2}{c}{4.005} \\
 \midrule
 Incluídos na triagem antes da resolução título-only & \multicolumn{2}{c}{306 + 150 = 456} \\
 \quad removidos ao resolver título-only (fora de escopo / EC5b) & \multicolumn{2}{c}{21} \\
-Estudos incluídos (todos classificados) & \multicolumn{2}{c}{435} \\
+Estudos incluídos após resolução título-only & \multicolumn{2}{c}{435} \\
+Bloco ML/previsão Fase 3 (novos includes) & \multicolumn{2}{c}{126} \\
+Estudos incluídos (todos classificados) & \multicolumn{2}{c}{561} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -297,7 +299,7 @@ Estudos incluídos (todos classificados) & \multicolumn{2}{c}{435} \\
 \node[box, below=of s1] (inc1) {Inclusões da primeira triagem: 340 distintas};
 \node[box, below=of inc1] (chk) {Após verificação humana das inclusões: 306};
 \node[box, below=10mm of chk] (add) {Acrescentados pela re-triagem humana: 150};
-\node[box, below=of add, fill=gray!15] (fin) {Estudos incluídos: 435\\ \scriptsize todos classificados; 21 removidos ao resolver título-only};
+\node[box, below=of add, fill=gray!15] (fin) {Estudos incluídos: 561\\ \scriptsize 435 + 126 bloco ML; todos classificados};
 \node[side, right=6mm of dd] (dup) {Duplicatas removidas: 2.564};
 \node[side, right=6mm of inc1] (ex1) {Não incluídos pela primeira triagem: 4.005 registros, todos triados novamente por dois humanos (Etapa 3)};
 \node[side, right=6mm of chk] (rm) {Removidos: 2 publicados antes de 1994 (IC1); 32 que não atendem aos critérios};
@@ -315,18 +317,18 @@ As exclusões da segunda passagem no lote principal ($n = 717$) foram motivadas 
 % =================================================================
 \section{Resultados}\label{sec:results}
 
-O corpus contém 435 estudos, todos classificados. Todos os percentuais a seguir são calculados sobre esses 435 estudos. A lista completa está no \ref{app:studies}.
+O corpus contém 561 estudos, todos classificados. Todos os percentuais a seguir são calculados sobre esses 561 estudos. A lista completa está no \ref{app:studies}.
 
 \subsection{RQ1: Evolução ao longo do tempo}\label{sec:rq1}
 
-Os 435 estudos abrangem o período de 1994 a 2026 (Figura~\ref{fig:years}). Desde 2006, a maioria dos anos contribui com 13 a 26 estudos, com quedas em 2013 (3), 2020 (10) e 2025 (6); 2026 é um ano parcial. No total, 213 estudos (49,0\%) foram publicados entre 2015 e 2026.
+Os 561 estudos abrangem o período de 1994 a 2026 (Figura~\ref{fig:years}). O bloco ML da Fase 3 eleva as contagens recentes (sobretudo previsão de esforço/lead time). No total, 333 estudos (59,4\%) foram publicados entre 2015 e 2026.
 
 A queda de 2013 (3 estudos incluídos) não se explica por um ano ausente na colheita: o pool de registros únicos contém 263 com year=2013, comparável a 227 (2012) e 249 (2014). O vale é, portanto, posterior à busca (triagem/elegibilidade). Uma auditoria dedicada dos excludes de 2013 continua desejável, mas não é necessária para descartar falha de indexação.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figs/years_pt.pdf}
-\caption{Estudos incluídos por ano de publicação ($n = 435$).}\label{fig:years}
+\caption{Estudos incluídos por ano de publicação ($n = 561$).}\label{fig:years}
 \end{figure}
 
 A composição da área mudou bruscamente por volta de 2014 (Figura~\ref{fig:bubble}). Até 2013, o corpus é dominado por modelos estocásticos: 91\% dos estudos de 1994--2005 e 74\% dos de 2006--2013 têm \ST{}. A partir de 2014, a mineração de processos assume a liderança, com \PM{} em 60\% dos estudos de 2014--2019 e em 59\% dos de 2020--2026, enquanto \ST{} cai para cerca de um terço. A mineração de repositórios (\MSR{}) cresce de forma contínua, de 3\% para 39\% dos estudos de cada período. A participação da previsão (\FC{}) permanece aproximadamente estável, entre 22\% e 36\%.
@@ -334,37 +336,37 @@ A composição da área mudou bruscamente por volta de 2014 (Figura~\ref{fig:bub
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figs/bubble_pt.pdf}
-\caption{Famílias de técnica e de dados por período ($n = 435$). A área de cada bolha é proporcional ao número de estudos; o percentual é a parcela dos estudos do período que têm a família. As famílias não são mutuamente exclusivas.}\label{fig:bubble}
+\caption{Famílias de técnica e de dados por período ($n = 561$). A área de cada bolha é proporcional ao número de estudos; o percentual é a parcela dos estudos do período que têm a família. As famílias não são mutuamente exclusivas.}\label{fig:bubble}
 \end{figure}
 
 \pendente{Acrescentar a distribuição por tipo de publicação (periódico, conferência, workshop) e os venues mais frequentes, a partir da extração da Seção~\ref{sec:classification}.}
 
 \subsection{RQ2: Famílias de técnica e suas combinações}\label{sec:rq2}
 
-Dos 435 estudos, 241 (55,4\%) têm \ST{}, 173 (39,8\%) \PM{}, 122 (28,0\%) \FC{} e 104 (23,9\%) \MSR{}. A Tabela~\ref{tab:combos} mostra como as três famílias de técnica se combinam.
+Dos 561 estudos, 241 (43,0\%) têm \ST{}, 173 (30,8\%) \PM{}, 248 (44,2\%) \FC{} e 216 (38,5\%) \MSR{}. A Tabela~\ref{tab:combos} mostra como as três famílias de técnica se combinam.
 
 \begin{table}[t]
 \centering\small
-\caption{Combinações das três famílias de técnica nos 435 estudos. Cada estudo aparece em exatamente uma linha. A coluna \MSR{} conta os estudos da linha que também mineram repositórios.}\label{tab:combos}
+\caption{Combinações das três famílias de técnica nos 561 estudos. Cada estudo aparece em exatamente uma linha. A coluna \MSR{} conta os estudos da linha que também mineram repositórios.}\label{tab:combos}
 \begin{tabular}{lrrrc}
 \toprule
 Combinação & Estudos & \% & com \MSR{} & Ano mediano \\
 \midrule
-Apenas \PM{} & 155 & 35,6 & 63 & 2018 \\
-Apenas \ST{} & 137 & 31,5 & 16 & 2009 \\
-\ST{} + \FC{} & 94 & 21,6 & 2 & 2010 \\
-Apenas \FC{} & 19 & 4,4 & 6 & 2018 \\
-\PM{} + \ST{} & 9 & 2,1 & 1 & 2016 \\
-Nenhuma (apenas \MSR{}) & 12 & 2,8 & 12 & 2017 \\
-\PM{} + \FC{} & 8 & 1,8 & 4 & 2018 \\
+Apenas \PM{} & 155 & 27,6 & 63 & 2018 \\
+Apenas \FC{} & 145 & 25,8 & 118 & 2021 \\
+Apenas \ST{} & 137 & 24,4 & 16 & 2009 \\
+\ST{} + \FC{} & 94 & 16,8 & 2 & 2010 \\
+Nenhuma (apenas \MSR{}) & 12 & 2,1 & 12 & 2017 \\
+\PM{} + \ST{} & 9 & 1,6 & 1 & 2016 \\
+\PM{} + \FC{} & 8 & 1,4 & 4 & 2018 \\
 \PM{} + \ST{} + \FC{} & 1 & 0,2 & 0 & 2025 \\
 \midrule
-Total & 435 & 100,0 & 104 & \\
+Total & 561 & 100,0 & 216 & \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Dois agrupamentos respondem por 89\% do corpus e quase não se sobrepõem. O primeiro é a mineração de processos, frequentemente sobre dados de repositório: 155 estudos usam PM sem modelagem estocástica nem previsão, e 63 deles mineram repositórios. O segundo é a modelagem estocástica, isolada (137) ou usada para prever (94), quase nunca sobre eventos minerados de repositórios (18 de 231).
+Três agrupamentos estruturam agora o corpus. A mineração de processos sem modelagem estocástica nem previsão permanece grande (155; 63 com repositórios). A modelagem estocástica, isolada (137) ou pareada à previsão (94), ainda raramente usa eventos minerados de repositórios (18 de 231). O bloco ML da Fase 3 acrescenta um terceiro agrupamento: previsão isolada (145), sobretudo sobre dados de repositório ou de issues (118 com \MSR{}).
 
 \paragraph{Mineração de processos}
 O arco seminal de \PM{} vai da descoberta, por Cook e Wolf, de modelos de processo de estados finitos a partir de rastros de eventos, que já usava modelos de Markov~\cite{cook1995,cook1998}, à aplicação, por Rubin et al., do framework ProM a logs de gerência de código-fonte~\cite{rubin2007}. Trabalhos posteriores estenderam a descoberta a múltiplos repositórios e perspectivas.
@@ -396,21 +398,21 @@ Operação (incidentes, manutenção) & -- & -- & -- & -- \\
 
 \subsection{RQ4: Integração e lacunas}\label{sec:rq4}
 
-A Tabela~\ref{tab:levels} apresenta os níveis de integração. A maioria dos estudos (74,3\%) usa uma única família de técnica; 111 combinam duas; um combina três; nenhum atinge L3.
+A Tabela~\ref{tab:levels} apresenta os níveis de integração. A maioria dos estudos (80,0\%) usa no máximo uma família de técnica; 111 combinam duas; um combina três; nenhum atinge L3.
 
 \begin{table}[t]
 \centering\small
-\caption{Níveis de integração dos 435 estudos.}\label{tab:levels}
+\caption{Níveis de integração dos 561 estudos.}\label{tab:levels}
 \begin{tabularx}{\textwidth}{lXrr}
 \toprule
 Nível & Definição & Estudos & \% \\
 \midrule
-L0 & No máximo uma família de técnica & 323 & 74,3 \\
-L1 & Duas famílias de técnica (\PM{}+\ST{} 9; \PM{}+\FC{} 8; \ST{}+\FC{} 94) & 111 & 25,5 \\
+L0 & No máximo uma família de técnica & 449 & 80,0 \\
+L1 & Duas famílias de técnica (\PM{}+\ST{} 9; \PM{}+\FC{} 8; \ST{}+\FC{} 94) & 111 & 19,8 \\
 L2 & Três famílias; etapas avaliadas separadamente & 1 & 0,2 \\
 L3 & Três famílias acopladas por interfaces especificadas, avaliadas de ponta a ponta & 0 & 0,0 \\
 \midrule
-Total & & 435 & 100,0 \\
+Total & & 561 & 100,0 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -425,7 +427,7 @@ Nove estudos combinam \PM{} e \FC{} (oito como combinação de duas famílias, m
 O PRIMAD~\cite{guinea2025} constrói um gêmeo digital do SDLC a partir de fluxos de issues do Jira, combinando descoberta com pm4py, simulação multiagente em Akka e aprendizado supervisionado (LightGBM). O PDF foi lido por completo (Rodrigo, 2026-11-11). Os autores declaram validação dos componentes de forma independente e adiám o teste de ponta a ponta a um artigo futuro (Conclusions, p.~1684); as interfaces entre etapas estão só em prosa. Classificamos o estudo como L2, não L3. A evidência por componente é assimétrica: a mineração de processos aparece como \emph{profiling} descritivo no dataset público de Jira (Results, p.~1684); o modelo supervisionado é avaliado em produção com 33 times Scrum para \emph{roteamento de time} (acurácia 93\%, $F_1$ macro 0,91), não para métricas temporais de processo e não no log público usado na descoberta; a simulação Akka é proposta e justificada com um \emph{benchmark} de desempenho de terceiros, mas Results não reportam execução própria. Sob o IC4c como está escrito (\emph{lead}/cycle/remaining time, vazão, taxas de defeitos), o alvo preditivo é limítrofe: classificação de próximo estado/recurso ou de responsável, e não previsão de prazo ou vazão. Mantemos a marca \FC{} por consistência com o monitoramento preditivo de processos no corpus, e registramos o desalinhamento explicitamente.
 
 \paragraph{Lacunas}
-Três lacunas decorrem das Tabelas~\ref{tab:combos} e~\ref{tab:levels}. Primeiro, a lacuna é de integração, não de cobertura: cada família está bem representada, mas as linhas de PM e estocástica se encontram em 10 de 435 estudos. Segundo, a previsão é feita sobretudo com modelos estocásticos alimentados por estatísticas agregadas (94 estudos) e raramente com estrutura minerada de logs de eventos (8). Terceiro, nenhum estudo avalia um pipeline de múltiplas etapas de ponta a ponta em dados do SDLC.
+Três lacunas decorrem das Tabelas~\ref{tab:combos} e~\ref{tab:levels}. Primeiro, a lacuna é de integração, não de cobertura: cada família está bem representada, mas as linhas de PM e estocástica se encontram em 10 de 561 estudos. Segundo, após o bloco ML a previsão é frequente (248), mas o elo PM--previsão permanece raro (9); modelos estocásticos alimentados por estatísticas agregadas ainda respondem por 94 estudos ST+FC, contra estrutura minerada de logs de eventos (8). Terceiro, nenhum estudo avalia um pipeline de múltiplas etapas de ponta a ponta em dados do SDLC.
 
 % =================================================================
 \section{Discussão}\label{sec:discussion}
@@ -443,7 +445,7 @@ O padrão mais nítido do corpus é a sucessão de duas comunidades sobre o mesm
 \item[RA4.] \textbf{Benchmarks de ponta a ponta.} \emph{Benchmarks} abertos e compartilhados de código aberto, com separação temporal dos dados de teste, para que pipelines de múltiplas etapas possam ser comparados como um todo, e não por componente (L2 $\rightarrow$ L3).
 \end{description}
 
-\pendente{Taxonomia SPMF: aplicá-la aos 435 estudos (Analytical Depth $\times$ SDLC Coverage $\times$ Technique Integration), com mapa de bolhas, e reinserir aqui. Se não for aplicada, deixá-la só como proposta de trabalho futuro em uma frase, ou retirar.}
+\pendente{Taxonomia SPMF: aplicá-la aos 561 estudos (Analytical Depth $\times$ SDLC Coverage $\times$ Technique Integration), com mapa de bolhas, e reinserir aqui. Se não for aplicada, deixá-la só como proposta de trabalho futuro em uma frase, ou retirar.}
 
 \subsection{Implicações para profissionais}
 
@@ -471,7 +473,7 @@ IC4b e IC4c admitem modelos de uso Markovianos para teste estatístico e modelos
 % =================================================================
 \section{Conclusão}\label{sec:conclusion}
 
-Mapeamos 435 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014. Elas se encontram em 10 dos 435 estudos. A previsão é feita sobretudo com modelos estocásticos alimentados por estatísticas agregadas, e raramente com estrutura de processo minerada de logs de eventos. Um estudo combina as três famílias, com cada componente avaliado separadamente; nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. A previsão estocástica orientada a processos e os \emph{benchmarks} de ponta a ponta são as duas direções com apoio mais claro no corpus.
+Mapeamos 561 estudos que aplicam mineração de processos, modelagem estocástica ou previsão a dados de desenvolvimento de software. A área foi moldada por duas comunidades em sucessão: a modelagem estocástica até 2013 e a mineração de processos desde 2014; elas ainda se encontram em apenas 10 estudos. O bloco ML da Fase 3 torna a previsão comum (44,2\%), sobretudo como trabalho só-FC sobre dados de repositório, enquanto o elo PM--previsão permanece raro. Um estudo combina as três famílias, com cada componente avaliado separadamente; nenhum as acopla por meio de interfaces especificadas e avaliadas de ponta a ponta. A lacuna é, portanto, de integração, e não de técnicas disponíveis. A previsão estocástica orientada a processos e os \emph{benchmarks} de ponta a ponta são as duas direções com apoio mais claro no corpus.
 
 O corpus, a classificação, os prompts e os registros de triagem estão disponíveis no pacote de replicação (Zenodo, DOI 10.5281/zenodo.21939600).
 

@@ -1,0 +1,2 @@
+iteration,date,n_seeds,n_raw,n_union,n_residual,n_gate_pass,n_gate_fail,n_classify,n_exclude,notes
+1,2026-11-12,494,23294,14686,13612,703,12909,,12909,fetch 494/494 OpenAlex+API key; gate fail bulk-accepted; 703 maybe pending triage
