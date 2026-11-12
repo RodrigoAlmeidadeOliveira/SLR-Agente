@@ -2,47 +2,31 @@
 
 Última atualização: 2026-11-11
 
-## Legenda
+## Fase 0–1 ✅ · Fase 2.1–2.2 ✅
 
-- `[ ]` pendente · `[~]` em andamento · `[x]` concluído · `[!]` bloqueado (precisa humano)
+- Pré-registro: Zenodo **10.5281/zenodo.24148068**
+- [ ] Fase 2.3 re-triagem cega (paralelo)
 
-## Fase 0 — Escopo ✅
+## Fase 3 — Completude da busca  ← em andamento
 
-## Fase 1 — Corpus fechado ✅ (n=435)
+Artefatos prontos:
 
-## Fase 2 — Auditabilidade da seleção  ← em andamento
+| Item | Arquivo |
+|------|---------|
+| D1 strings limpas | `phase3_D1_scopus_strings_cleaned.md` |
+| Bloco ML (5 bases) | `phase3_ML_block_strings.md` |
+| D6 19 suplementares | `phase3_d6_19_screen.csv` |
+| Ledger | `phase3_search_ledger.csv` |
+| Snowballing | `03_PROTOCOLO_SNOWBALLING.md` |
 
-- [~] **2.1** Pré-registro
-  - [x] Arquivo local 2026-10-06 identificado
-  - [!] Depositar OSF/Zenodo → preencher `phase2_preregistration_deposit.md`
-- [x] **2.2** Heurística S1/S3 descrita (`phase2_S1_S3_heuristics.md`) + texto no `main*.tex`
-  - Achado: `decision == sug_decision` em **100%** das linhas S1/S3
-- [~] **2.3** Re-triagem cega
-  - [x] Amostra n=117 (47 includes + 70 excludes) — `phase2_blind_rescreen_*.csv`
-  - [x] Script `classify_phase2_blind_interactive.py`
-  - [!] Codificar (começar pelos 47 includes) + κ
-- Protocolo: `06_PROTOCOLO_FASE2_AUDITABILIDADE.md`
+### Ordem de execução (humano + bases)
 
-## Fase 3 — Completude da busca
+1. **D6 (rápido):** decidir os 19 em `phase3_d6_19_screen.csv` (sob D2=B → quase todos exclude defect/JIT).
+2. **D1:** rodar 3 strings Scopus limpas; dedup; triar novos.
+3. **Bloco ML:** rodar 5 bases; dedup; triar (sem defect prediction).
+4. **Snowballing Wohlin** a partir dos 435 (+ novos includes), até saturação.
+5. Atualizar `studies.json`, figs, `main*.tex`, PRISMA.
 
-- [ ] D1 Scopus · bloco ML · 19 suplementares · snowballing Wohlin
+## Fase 4–5
 
-## Fase 4 — RQ3 + SPMF
-
-- [x] Template 435 · [!] extração humana
-
-## Fase 5 — Editorial
-
-- [ ] `\pendente{}` · Zenodo · compilar
-
-## Ação humana agora (Fase 2)
-
-```bash
-cd "revisão do orientador/caminho_completo"
-# 1) Depositar pré-registro (OSF/Zenodo) e anotar DOI em phase2_preregistration_deposit.md
-
-# 2) Re-triagem cega — começar pelos includes:
-python3 classify_phase2_blind_interactive.py --coder Rodrigo --rater A --includes-only --pending-only
-python3 classify_phase2_blind_interactive.py --coder Juliano --rater B --includes-only --pending-only
-python3 classify_phase2_blind_interactive.py --score
-```
+Template RQ3 pronto · extração / editorial depois da busca.

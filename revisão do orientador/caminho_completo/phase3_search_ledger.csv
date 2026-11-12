@@ -1,0 +1,10 @@
+task,source,string_id,date_run,raw_hits,unique_new,included_new,excluded_new,notes,operator
+,,D1_V6,,,,,,,
+,,D1_V8,,,,,,,
+,,D1_V9,,,,,,,
+,,ML_IEEE,,,,,,,
+,,ML_ACM,,,,,,,
+,,ML_Scopus,,,,,,,
+,,ML_WoS,,,,,,,
+,,ML_Springer,,,,,,,
+,,D6_19,,,,,,,
